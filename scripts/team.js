@@ -22,7 +22,7 @@ async function loadTeamData(jsonUrl) {
         <td>${match.date}</td>
         <td>${match.time}</td>
         <td>
-          <a href="team.html?team=${getTeamParamFromFile(match.opponent.file)}" class="team-link">${match.opponent.name}</a>
+          <a href="${match.opponent.file}" class="team-link">${match.opponent.name}</a>
         </td>
         <td>${match.courts}</td>
       `;
@@ -46,19 +46,6 @@ async function loadTeamData(jsonUrl) {
     tableBody.innerHTML = "<tr><td colspan='5'>Could not load match data.</td></tr>";
     rosterBody.innerHTML = "<tr><td colspan='3'>Could not load roster data.</td></tr>";
   }
-}
-
-// Helper: convert the opponent name in json to a URL
-function getTeamParamFromFile(file) {
-  let fileLocation = "../data/";
-  // assumes you pass ?team=tuesday_team2
-  if (window.location.search.includes("tuesday")) {
-    return "tuesday_" + file.replace(".html", "");
-  } else if (window.location.search.includes("wednesday")) {
-    return "wednesday_" + file.replace(".html", "");
-  }
-  // fallback: just the filename without .html
-  return file.replace(".html", "");
 }
 
 // Highlight the upcoming match row

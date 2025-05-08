@@ -1,10 +1,10 @@
 header {
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   padding: 1rem;
   text-align: center;
   width: 100%;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   position: relative;
   z-index: 10;
 }
@@ -31,7 +31,6 @@ header {
   cursor: pointer;
   display: none;
 }
-
 
 /* Navbar mobile menu */
 .navbar-menu {
