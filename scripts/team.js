@@ -1,21 +1,107 @@
-// This script highlights the next match in the table by adding a class to the corresponding row
-// It assumes that the date is in the second cell of each row and is formatted as "YYYY-MM-DD"
-document.addEventListener("DOMContentLoaded", () => {
-  const rows = document.querySelectorAll("tbody tr");
-  const today = new Date();
+// This script dynamically loads match and roster data into tables and highlights the next match
 
+async function loadTeamData(jsonUrl) {
+  const tableBody = document.querySelector("#matches-table tbody");
+  const rosterBody = document.querySelector("table:not(#matches-table) tbody");
+  const header = document.querySelector("header h1");
+  if (!tableBody || !rosterBody) return;
+
+  try {
+    const response = await fetch(jsonUrl);
+    const data = await response.json();
+
+    // Update header with team name if available
+    if (header && data.name) header.textContent = data.name;
+
+    // Populate matches table
+    tableBody.innerHTML = "";
+    (data.matches || []).forEach(match => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${match.week}</td>
+        <td>${match.date}</td>
+        <td>${match.time}</td>
+        <td>
+          <a href="team.html?team=${getTeamParamFromFile(match.opponent.file)}" class="team-link">${match.opponent.name}</a>
+        </td>
+        <td>${match.courts}</td>
+      `;
+      tableBody.appendChild(tr);
+    });
+
+    // Populate roster table
+    rosterBody.innerHTML = "";
+    (data.roster || []).forEach(player => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${player.position}</td>
+        <td>${player.name}</td>
+        <td>${player.captain || ""}</td>
+      `;
+      rosterBody.appendChild(tr);
+    });
+
+    highlightNextMatch();
+  } catch (err) {
+    tableBody.innerHTML = "<tr><td colspan='5'>Could not load match data.</td></tr>";
+    rosterBody.innerHTML = "<tr><td colspan='3'>Could not load roster data.</td></tr>";
+  }
+}
+
+// Helper: convert the opponent name in json to a URL
+function getTeamParamFromFile(file) {
+  let fileLocation = "../data/";
+  // assumes you pass ?team=tuesday_team2
+  if (window.location.search.includes("tuesday")) {
+    return "tuesday_" + file.replace(".html", "");
+  } else if (window.location.search.includes("wednesday")) {
+    return "wednesday_" + file.replace(".html", "");
+  }
+  // fallback: just the filename without .html
+  return file.replace(".html", "");
+}
+
+// Highlight the upcoming match row
+function highlightNextMatch() {
+  const rows = document.querySelectorAll("#matches-table tbody tr");
+  const today = new Date();
   let nextMatchRow = null;
 
-  rows.forEach(row => {
-    const dateCell = row.cells[1]; // The second cell contains the date
+  rows.forEach((row) => {
+    const dateCell = row.cells[1];
     const matchDate = new Date(dateCell.textContent.trim());
-
-    if (matchDate >= today && (!nextMatchRow || matchDate < new Date(nextMatchRow.cells[1].textContent.trim()))) {
+    if (
+      matchDate >= today &&
+      (!nextMatchRow ||
+        matchDate < new Date(nextMatchRow.cells[1].textContent.trim()))
+    ) {
       nextMatchRow = row;
     }
   });
 
   if (nextMatchRow) {
     nextMatchRow.classList.add("highlight");
+  }
+}
+
+// Get team from URL, e.g. ?team=team1
+function getTeamFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("team");
+}
+
+// Get daye from URL, e.g. ?day=tuesday
+function getDayFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("day");
+}
+
+// Usage: call this with the correct JSON file for the team
+document.addEventListener("DOMContentLoaded", () => {
+  const team = getTeamFromUrl();
+  const day = getDayFromUrl();
+  if (team && day) {
+    // Adjust path as needed for your structure
+    loadTeamData(`../data/${day}/${team}.json`);
   }
 });
