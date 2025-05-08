@@ -185,3 +185,8 @@ html, body {
     min-width: 0;
   }
 }
+
+.highlight {
+  background-color: #ffeb3b; /* Yellow highlight */
+  font-weight: bold;
+}
