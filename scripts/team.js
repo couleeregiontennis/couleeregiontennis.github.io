@@ -3,7 +3,7 @@
 async function loadTeamData(jsonUrl) {
   const tableBody = document.querySelector("#matches-table tbody");
   const rosterBody = document.querySelector("table:not(#matches-table) tbody");
-  const header = document.querySelector("header h1");
+  const header = document.getElementById("team-name");
   if (!tableBody || !rosterBody) return;
 
   try {
