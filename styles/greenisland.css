@@ -6,13 +6,6 @@ body {
   line-height: 1.6;
 }
 
-header {
-  background-color: #007BFF;
-  color: white;
-  padding: 1rem;
-  text-align: center;
-}
-
 h1, h2 {
   margin: 0.5rem 0;
 }

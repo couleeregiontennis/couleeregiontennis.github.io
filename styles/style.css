@@ -37,7 +37,7 @@ table {
     border-collapse: collapse;
     margin-top: 0.5rem;
 }
-  
+
 th, td {
     border: 1px solid #ccc;
     padding: 0.5rem;
@@ -46,10 +46,10 @@ th, td {
   
 thead {
 }
-
+rgb(190, 22, 22)
 .nav-placeholder {
     width: 100%;
-    height: 50px; /* Adjust this value to match the height of your header */
+    height: 50px;
 }
 
 .team-list a {
@@ -99,7 +99,6 @@ thead {
 }
 
 .team-list {
-  list-style: none; /* Removes the dots */
   padding: 0;
 }
 
@@ -121,7 +120,6 @@ thead {
   background-color: #0056b3;
 }
 
-/* Make sure the body and html don't overflow */
 html, body {
   width: 100%;
   max-width: 100vw;
@@ -130,7 +128,24 @@ html, body {
   padding: 0;
 }
 
-/* Responsive table container */
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+
+.header {
+  background-color: #007BFF;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1000;
+  border-bottom: 2px solid #0056b3;
+}
+
 .table-responsive {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -138,7 +153,6 @@ html, body {
     margin-bottom: 1rem;
   }
   
-  /* Optional: make table rows more compact on mobile */
   @media (max-width: 768px) {
     table {
       font-size: 0.9rem;
@@ -149,7 +163,6 @@ html, body {
     }
   }
   
-/* Mobile Styles */
 @media (max-width: 768px) {
     .navbar-toggle {
         display: block;
@@ -187,6 +200,6 @@ html, body {
 }
 
 .highlight {
-  background-color: #ffeb3b; /* Yellow highlight */
+  background-color: #ffeb3b;
   font-weight: bold;
 }
