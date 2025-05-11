@@ -214,3 +214,64 @@ ul {
   height: auto;
   border-radius: 5px;
 }
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #181a1b;
+    color: #e0e0e0;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: #c9e1ff;
+  }
+  .schedule-table,
+  table {
+    background: #23272a;
+    color: #e0e0e0;
+  }
+  th, td,
+  .schedule-table th, .schedule-table td {
+    border-color: #444;
+    background: #23272a;
+    color: #e0e0e0;
+  }
+  .date-row {
+    background-color: #222e3c !important;
+    color: #c9e1ff !important;
+  }
+  .court-header,
+  .time-header {
+    background: #1a1f23 !important;
+    color: #c9e1ff !important;
+    border-right: 2px solid #2a4d69;
+  }
+  .match-cell {
+    background: #23272a;
+  }
+  .team-num {
+    background: #2a4d69 !important;
+    color: #fff !important;
+  }
+  .navbar {
+    background-color: #111 !important;
+    color: #c9e1ff !important;
+  }
+  .navbar-menu {
+    background-color: #23272a !important;
+  }
+  .navbar-menu a {
+    color: #c9e1ff !important;
+  }
+  .navbar-menu a:hover {
+    background: #2a4d69 !important;
+    color: #fff !important;
+  }
+  .highlight {
+    background-color: #333c4d !important;
+    color: #fff !important;
+  }
+  footer {
+    background: #23272a;
+    color: #c9e1ff;
+  }
+}
