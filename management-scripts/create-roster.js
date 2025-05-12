@@ -9,6 +9,7 @@ function createRostersFromCSV(csvPath) {
   // Group by team
   const rosters = {};
   records.forEach(row => {
+    if (!row.Team || !row.Name) return; // Skip incomplete rows
     const team = row.Team.trim();
     if (!rosters[team]) rosters[team] = [];
     rosters[team].push({
@@ -27,5 +28,4 @@ function createRostersFromCSV(csvPath) {
   }
 }
 
-// Usage:
 createRostersFromCSV(path.join(__dirname, '..', 'ltta.csv'));
