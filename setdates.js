@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // ---- CONFIGURE THESE ----
-const startDate = '2025-06-05'; // YYYY-MM-DD, must be a Tuesday
+const startDate = '2025-06-05'; // YYYY-MM-DD, must day after target day of week
 const numWeeks = 11;            // Number of weeks to update
 const dir = path.join(__dirname, 'data', 'wednesday');
 // -------------------------

@@ -1,0 +1,136 @@
+const fs = require('fs');
+const path = require('path');
+
+const dataDir = path.join(__dirname, 'data', 'tuesday');
+const outputFile = path.join(dataDir, 'all.html');
+
+// Helper to format date as D-MMM (e.g., 3-Jun)
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  const day = d.getDate();
+  const month = d.toLocaleString('en-US', { month: 'short' });
+  return `${day}-${month}`;
+}
+
+// Only use these court groups, in this order
+const allCourts = [
+  "Courts 1–5",
+  "Courts 6–9",
+  "Courts 10–13"
+];
+
+// Only use these times, in this order
+const allTimes = [
+  "5:30pm",
+  "7:00pm"
+];
+
+// Read all team files
+const teamFiles = fs.readdirSync(dataDir)
+  .filter(f => /^\d+\.json$/.test(f))
+  .sort((a, b) => parseInt(a) - parseInt(b));
+
+const teams = {};
+const matchesByWeek = {};
+
+// Load team names and matches
+teamFiles.forEach(file => {
+  const data = JSON.parse(fs.readFileSync(path.join(dataDir, file), 'utf8'));
+  const teamNum = parseInt(file);
+  teams[teamNum] = data.name.replace(/^Team \d+ – /, '');
+  data.matches.forEach(match => {
+    const week = match.week;
+    if (!matchesByWeek[week]) matchesByWeek[week] = [];
+    matchesByWeek[week].push({
+      team: teamNum,
+      opponent: parseInt(match.opponent.file.match(/team=(\d+)/)[1]),
+      time: match.time,
+      courts: match.courts,
+      date: match.date
+    });
+  });
+});
+
+// Get unique weeks sorted
+const weeks = Object.keys(matchesByWeek).map(Number).sort((a, b) => a - b);
+
+// Get dates for each week
+const weekDates = {};
+weeks.forEach(week => {
+  const match = matchesByWeek[week][0];
+  weekDates[week] = formatDate(match.date);
+});
+
+// Build schedule: week -> court -> time -> [matches]
+const schedule = {};
+weeks.forEach(week => {
+  schedule[week] = {};
+  allCourts.forEach(court => {
+    schedule[week][court] = {};
+    allTimes.forEach(time => {
+      schedule[week][court][time] = [];
+    });
+  });
+  matchesByWeek[week].forEach(match => {
+    // Only include matches for the specified courts and times
+    if (allCourts.includes(match.courts) && allTimes.includes(match.time)) {
+      schedule[week][match.courts][match.time].push({
+        team: match.team,
+        opponent: match.opponent
+      });
+    }
+  });
+});
+
+// Generate HTML
+let html = `<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>TUESDAY NIGHT SCHEDULE 2025 - LTTA</title>
+    <style>
+      body { font-family: "Segoe UI", Arial, sans-serif; margin: 24px; background: #f9f9fb; color: #222; }
+      h1 { font-size: 22px; text-align: center; margin-bottom: 10px; letter-spacing: 1px; color: #2a4d69; }
+      .schedule-table { width: 100%; border-collapse: collapse; margin-top: 18px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-radius: 8px; overflow: hidden; }
+      .schedule-table th, .schedule-table td { border: 1px solid #e0e0e0; }
+      .date-row { background-color: #e3ecf7; font-weight: bold; border-top: 2px solid #b3c6e0; border-bottom: 1px solid #b3c6e0; font-size: 1.08em; text-align: center; }
+      .court-row { border-bottom: 1px solid #e0e0e0; }
+      .time-header { text-align: left; font-weight: bold; padding: 10px 12px; border-bottom: 2px solid #b3c6e0; background: #f5f8fb; font-size: 1.04em; }
+      .court-header { font-weight: bold; padding: 10px 12px; width: 22%; vertical-align: top; text-align: left; background: #f5f8fb; border-right: 2px solid #b3c6e0; }
+      .match-cell { padding: 10px 12px; vertical-align: top; line-height: 1.5; width: 39%; font-size: 1.01em; }
+      .team-num { color: #2a4d69; font-weight: bold; background: #eaf2fa; border-radius: 3px; padding: 1px 5px; margin-right: 4px; font-size: 0.97em; }
+    </style>
+  </head>
+  <body>
+    <h1>TUESDAY NIGHT SCHEDULE - LTTA</h1>
+    <table class="schedule-table">
+      <tr>
+        <th class="court-header">Court Group</th>
+        ${allTimes.map(t => `<th class="time-header">${t}</th>`).join('')}
+      </tr>
+`;
+
+weeks.forEach(week => {
+  html += `      <tr class="date-row"><td colspan="${1 + allTimes.length}">${weekDates[week]}</td></tr>\n`;
+  allCourts.forEach(court => {
+    html += `      <tr class="court-row">\n`;
+    html += `        <td class="court-header">${court}</td>\n`;
+    allTimes.forEach(time => {
+      const matchups = schedule[week][court][time];
+      html += `        <td class="match-cell">`;
+      // Only show up to 1 match per team per slot, but allow 2 matches per court/time
+      if (matchups && matchups.length > 0) {
+        matchups.slice(0, 2).forEach(m => {
+          html += `<span class="team-num">${m.team}</span>${teams[m.team]} vs <span class="team-num">${m.opponent}</span>${teams[m.opponent]}<br>`;
+        });
+      }
+      html += `</td>\n`;
+    });
+    html += `      </tr>\n`;
+  });
+});
+
+html += `    </table>\n  </body>\n</html>\n`;
+
+fs.writeFileSync(outputFile, html);
+console.log('all.html generated!');
