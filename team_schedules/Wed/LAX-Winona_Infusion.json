@@ -1,0 +1,50 @@
+{
+  "team": "LAX-Winona Infusion",
+  "night": "Wed",
+  "schedule": [
+    {
+      "week": 1,
+      "vs": "Nothing But Net"
+    },
+    {
+      "week": 2,
+      "vs": "Simply Smashing"
+    },
+    {
+      "week": 3,
+      "vs": "Backhand Bandits"
+    },
+    {
+      "week": 4,
+      "vs": "Baseliners"
+    },
+    {
+      "week": 5,
+      "vs": "Not My Fault"
+    },
+    {
+      "week": 6,
+      "vs": "Serve Aces"
+    },
+    {
+      "week": 7,
+      "vs": "Howie's Team"
+    },
+    {
+      "week": 8,
+      "vs": "Glory Days"
+    },
+    {
+      "week": 9,
+      "vs": "Hot Shots"
+    },
+    {
+      "week": 10,
+      "vs": "Hit Squad"
+    },
+    {
+      "week": 11,
+      "vs": "Rally Monkeys"
+    }
+  ]
+}

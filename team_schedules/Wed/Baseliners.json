@@ -1,0 +1,50 @@
+{
+  "team": "Baseliners",
+  "night": "Wed",
+  "schedule": [
+    {
+      "week": 1,
+      "vs": "Hot Shots"
+    },
+    {
+      "week": 2,
+      "vs": "Rally Monkeys"
+    },
+    {
+      "week": 3,
+      "vs": "Simply Smashing"
+    },
+    {
+      "week": 4,
+      "vs": "LAX-Winona Infusion"
+    },
+    {
+      "week": 5,
+      "vs": "Serve Aces"
+    },
+    {
+      "week": 6,
+      "vs": "Glory Days"
+    },
+    {
+      "week": 7,
+      "vs": "Hit Squad"
+    },
+    {
+      "week": 8,
+      "vs": "Nothing But Net"
+    },
+    {
+      "week": 9,
+      "vs": "Backhand Bandits"
+    },
+    {
+      "week": 10,
+      "vs": "Not My Fault"
+    },
+    {
+      "week": 11,
+      "vs": "Howie's Team"
+    }
+  ]
+}

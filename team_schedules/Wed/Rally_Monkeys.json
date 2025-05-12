@@ -1,0 +1,50 @@
+{
+  "team": "Rally Monkeys",
+  "night": "Wed",
+  "schedule": [
+    {
+      "week": 1,
+      "vs": "Simply Smashing"
+    },
+    {
+      "week": 2,
+      "vs": "Baseliners"
+    },
+    {
+      "week": 3,
+      "vs": "Serve Aces"
+    },
+    {
+      "week": 4,
+      "vs": "Glory Days"
+    },
+    {
+      "week": 5,
+      "vs": "Hit Squad"
+    },
+    {
+      "week": 6,
+      "vs": "Nothing But Net"
+    },
+    {
+      "week": 7,
+      "vs": "Backhand Bandits"
+    },
+    {
+      "week": 8,
+      "vs": "Not My Fault"
+    },
+    {
+      "week": 9,
+      "vs": "Howie's Team"
+    },
+    {
+      "week": 10,
+      "vs": "Hot Shots"
+    },
+    {
+      "week": 11,
+      "vs": "LAX-Winona Infusion"
+    }
+  ]
+}

@@ -1,8 +1,13 @@
+// This script generates the html file for the Tuesday or Wednesday night schedule from the JSON files in the specified directory.
 const fs = require('fs');
 const path = require('path');
 
-const dataDir = path.join(__dirname, 'data', 'tuesday');
+const day = "wednesday"; // Change to "wednesday" to generate for Wednesday
+const year = 2025;     // Change if needed
+
+const dataDir = path.join(__dirname, '..', 'data', day);
 const outputFile = path.join(dataDir, 'all.html');
+const scheduleTitle = `${day.charAt(0).toUpperCase() + day.slice(1)} NIGHT SCHEDULE ${year} - LTTA`;
 
 // Helper to format date as D-MMM (e.g., 3-Jun)
 function formatDate(dateStr) {
@@ -87,7 +92,7 @@ let html = `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>TUESDAY NIGHT SCHEDULE 2025 - LTTA</title>
+    <title>${scheduleTitle}</title>
     <style>
       body { font-family: "Segoe UI", Arial, sans-serif; margin: 24px; background: #f9f9fb; color: #222; }
       h1 { font-size: 22px; text-align: center; margin-bottom: 10px; letter-spacing: 1px; color: #2a4d69; }
@@ -102,7 +107,7 @@ let html = `<!DOCTYPE html>
     </style>
   </head>
   <body>
-    <h1>TUESDAY NIGHT SCHEDULE - LTTA</h1>
+    <h1>${scheduleTitle}</h1>
     <table class="schedule-table">
       <tr>
         <th class="court-header">Court Group</th>

@@ -1,10 +1,11 @@
+// This script updates the date of all matches in the JSON files in the specified directory.
 const fs = require('fs');
 const path = require('path');
 
 // ---- CONFIGURE THESE ----
-const startDate = '2025-06-05'; // YYYY-MM-DD, must day after target day of week
+const startDate = '2025-06-04'; // YYYY-MM-DD, must day after target day of week
 const numWeeks = 11;            // Number of weeks to update
-const dir = path.join(__dirname, 'data', 'wednesday');
+const dir = path.join(__dirname, 'data', 'tuesday');
 // -------------------------
 
 function getNextTuesdays(start, count) {

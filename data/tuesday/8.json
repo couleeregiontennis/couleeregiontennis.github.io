@@ -3,7 +3,7 @@
   "matches": [
     {
       "week": 1,
-      "date": "2025-06-04",
+      "date": "2025-06-03",
       "time": "5:30pm",
       "opponent": {
         "name": "Team 7 – Good Ol' Boys",
@@ -13,7 +13,7 @@
     },
     {
       "week": 2,
-      "date": "2025-06-11",
+      "date": "2025-06-10",
       "time": "7:00pm",
       "opponent": {
         "name": "Team 9 – Bounce It",
@@ -23,7 +23,7 @@
     },
     {
       "week": 3,
-      "date": "2025-06-18",
+      "date": "2025-06-17",
       "time": "7:00pm",
       "opponent": {
         "name": "Team 10 – Jetsetters",
@@ -33,7 +33,7 @@
     },
     {
       "week": 4,
-      "date": "2025-06-25",
+      "date": "2025-06-24",
       "time": "7:00pm",
       "opponent": {
         "name": "Team 5 – Racquet Scientists",
@@ -43,7 +43,7 @@
     },
     {
       "week": 5,
-      "date": "2025-07-02",
+      "date": "2025-07-01",
       "time": "7:00pm",
       "opponent": {
         "name": "Team 4 – Approach Shots",
@@ -53,7 +53,7 @@
     },
     {
       "week": 6,
-      "date": "2025-07-09",
+      "date": "2025-07-08",
       "time": "7:00pm",
       "opponent": {
         "name": "Team 3 – Zoomers",
@@ -63,7 +63,7 @@
     },
     {
       "week": 7,
-      "date": "2025-07-16",
+      "date": "2025-07-15",
       "time": "5:30pm",
       "opponent": {
         "name": "Team 2 – Tennis the Menace",
@@ -73,7 +73,7 @@
     },
     {
       "week": 8,
-      "date": "2025-07-23",
+      "date": "2025-07-22",
       "time": "7:00pm",
       "opponent": {
         "name": "Team 1 – Spin Doctors",
@@ -83,7 +83,7 @@
     },
     {
       "week": 9,
-      "date": "2025-07-30",
+      "date": "2025-07-29",
       "time": "5:30pm",
       "opponent": {
         "name": "Team 12 – Easy Overhead",
@@ -93,7 +93,7 @@
     },
     {
       "week": 10,
-      "date": "2025-08-06",
+      "date": "2025-08-05",
       "time": "5:30pm",
       "opponent": {
         "name": "Team 11 – Full Metal Racquet",
@@ -103,7 +103,7 @@
     },
     {
       "week": 11,
-      "date": "2025-08-13",
+      "date": "2025-08-12",
       "time": "5:30pm",
       "opponent": {
         "name": "Team 6 – Rascals",

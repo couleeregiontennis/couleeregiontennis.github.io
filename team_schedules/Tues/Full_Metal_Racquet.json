@@ -1,0 +1,50 @@
+{
+  "team": "Full Metal Racquet",
+  "night": "Tues",
+  "schedule": [
+    {
+      "week": 1,
+      "vs": "Tennis the Menace"
+    },
+    {
+      "week": 2,
+      "vs": "Spin Doctors"
+    },
+    {
+      "week": 3,
+      "vs": "Bounce It"
+    },
+    {
+      "week": 4,
+      "vs": "Good Ol' Boys"
+    },
+    {
+      "week": 5,
+      "vs": "Racquet Scientists"
+    },
+    {
+      "week": 6,
+      "vs": "Zoomers"
+    },
+    {
+      "week": 7,
+      "vs": "Easy Overhead"
+    },
+    {
+      "week": 8,
+      "vs": "Jetsetters"
+    },
+    {
+      "week": 9,
+      "vs": "Return to Sender with Love"
+    },
+    {
+      "week": 10,
+      "vs": "Rascals"
+    },
+    {
+      "week": 11,
+      "vs": "Approach Shots"
+    }
+  ]
+}

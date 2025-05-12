@@ -1,0 +1,50 @@
+{
+  "team": "Rascals",
+  "night": "Tues",
+  "schedule": [
+    {
+      "week": 1,
+      "vs": "Good Ol' Boys"
+    },
+    {
+      "week": 2,
+      "vs": "Racquet Scientists"
+    },
+    {
+      "week": 3,
+      "vs": "Zoomers"
+    },
+    {
+      "week": 4,
+      "vs": "Easy Overhead"
+    },
+    {
+      "week": 5,
+      "vs": "Jetsetters"
+    },
+    {
+      "week": 6,
+      "vs": "Return to Sender with Love"
+    },
+    {
+      "week": 7,
+      "vs": "Spin Doctors"
+    },
+    {
+      "week": 8,
+      "vs": "Approach Shots"
+    },
+    {
+      "week": 9,
+      "vs": "Tennis the Menace"
+    },
+    {
+      "week": 10,
+      "vs": "Full Metal Racquet"
+    },
+    {
+      "week": 11,
+      "vs": "Bounce It"
+    }
+  ]
+}

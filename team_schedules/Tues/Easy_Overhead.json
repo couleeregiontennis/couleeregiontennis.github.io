@@ -1,0 +1,50 @@
+{
+  "team": "Easy Overhead",
+  "night": "Tues",
+  "schedule": [
+    {
+      "week": 1,
+      "vs": "Spin Doctors"
+    },
+    {
+      "week": 2,
+      "vs": "Jetsetters"
+    },
+    {
+      "week": 3,
+      "vs": "Return to Sender with Love"
+    },
+    {
+      "week": 4,
+      "vs": "Rascals"
+    },
+    {
+      "week": 5,
+      "vs": "Approach Shots"
+    },
+    {
+      "week": 6,
+      "vs": "Tennis the Menace"
+    },
+    {
+      "week": 7,
+      "vs": "Full Metal Racquet"
+    },
+    {
+      "week": 8,
+      "vs": "Bounce It"
+    },
+    {
+      "week": 9,
+      "vs": "Good Ol' Boys"
+    },
+    {
+      "week": 10,
+      "vs": "Racquet Scientists"
+    },
+    {
+      "week": 11,
+      "vs": "Zoomers"
+    }
+  ]
+}

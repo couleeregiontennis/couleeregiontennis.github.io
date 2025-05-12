@@ -1,0 +1,1886 @@
+[
+  {
+    "name": "Team 1 – LAX-Winona Infusion",
+    "matches": [
+      {
+        "week": 1,
+        "date": "2025-06-04",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 2 – Rally Monkeys",
+          "file": "team.html?day=wednesday&team=2"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 2,
+        "date": "2025-06-11",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 3 – Hit Squad",
+          "file": "team.html?day=wednesday&team=3"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 3,
+        "date": "2025-06-18",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 4 – Hot Shots",
+          "file": "team.html?day=wednesday&team=4"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 4,
+        "date": "2025-06-25",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 5 – Glory Days",
+          "file": "team.html?day=wednesday&team=5"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 5,
+        "date": "2025-07-02",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 6 – Howie's Team",
+          "file": "team.html?day=wednesday&team=6"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 6,
+        "date": "2025-07-09",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 7 – Serve Aces",
+          "file": "team.html?day=wednesday&team=7"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 7,
+        "date": "2025-07-16",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 8 – Not My Fault",
+          "file": "team.html?day=wednesday&team=8"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 8,
+        "date": "2025-07-23",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 9 – Baseliners",
+          "file": "team.html?day=wednesday&team=9"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 9,
+        "date": "2025-07-30",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 10 – Backhand Bandits",
+          "file": "team.html?day=wednesday&team=10"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 10,
+        "date": "2025-08-06",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 11 – Simply Smashing",
+          "file": "team.html?day=wednesday&team=11"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 11,
+        "date": "2025-08-13",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 12 – Nothing But Net",
+          "file": "team.html?day=wednesday&team=12"
+        },
+        "courts": "Courts 1–5"
+      }
+    ],
+    "roster": [
+      {
+        "position": 1,
+        "name": "Ruben Anderson",
+        "captain": ""
+      },
+      {
+        "position": 2,
+        "name": "Dan Lewis",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Joe Heer",
+        "captain": "✓"
+      },
+      {
+        "position": 3,
+        "name": "Janice Hoeschler",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Eric Rowekamp",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Nikki Nakano",
+        "captain": ""
+      },
+      {
+        "position": 4,
+        "name": "Lora Cadwell",
+        "captain": ""
+      },
+      {
+        "position": 5,
+        "name": "Barb Buswell",
+        "captain": ""
+      }
+    ]
+  },
+  {
+    "name": "Team 10 – Backhand Bandits",
+    "matches": [
+      {
+        "week": 1,
+        "date": "2025-06-04",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 9 – Baseliners",
+          "file": "team.html?day=wednesday&team=9"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 2,
+        "date": "2025-06-11",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 11 – Simply Smashing",
+          "file": "team.html?day=wednesday&team=11"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 3,
+        "date": "2025-06-18",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 8 – Not My Fault",
+          "file": "team.html?day=wednesday&team=8"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 4,
+        "date": "2025-06-25",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 2 – Rally Monkeys",
+          "file": "team.html?day=wednesday&team=2"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 5,
+        "date": "2025-07-02",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 1 – LAX-Winona Infusion",
+          "file": "team.html?day=wednesday&team=1"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 6,
+        "date": "2025-07-09",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 5 – Glory Days",
+          "file": "team.html?day=wednesday&team=5"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 7,
+        "date": "2025-07-16",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 4 – Hot Shots",
+          "file": "team.html?day=wednesday&team=4"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 8,
+        "date": "2025-07-23",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 3 – Hit Squad",
+          "file": "team.html?day=wednesday&team=3"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 9,
+        "date": "2025-07-30",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 6 – Howie's Team",
+          "file": "team.html?day=wednesday&team=6"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 10,
+        "date": "2025-08-06",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 7 – Serve Aces",
+          "file": "team.html?day=wednesday&team=7"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 11,
+        "date": "2025-08-13",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 12 – Nothing But Net",
+          "file": "team.html?day=wednesday&team=12"
+        },
+        "courts": "Courts 10–13"
+      }
+    ],
+    "roster": [
+      {
+        "position": 1,
+        "name": "Quentin Lamers",
+        "captain": ""
+      },
+      {
+        "position": 2,
+        "name": "Leah Fortun",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Jennifer Carr",
+        "captain": "✓"
+      },
+      {
+        "position": 3,
+        "name": "Amy Marcou",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Michael Ojelabi",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Eli Carr",
+        "captain": ""
+      },
+      {
+        "position": 4,
+        "name": "Eli De Leon",
+        "captain": ""
+      },
+      {
+        "position": 5,
+        "name": "Irene Johnson-Salvador",
+        "captain": ""
+      }
+    ]
+  },
+  {
+    "name": "Team 11 – Simply Smashing",
+    "matches": [
+      {
+        "week": 1,
+        "date": "2025-06-04",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 12 – Nothing But Net",
+          "file": "team.html?day=wednesday&team=12"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 2,
+        "date": "2025-06-11",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 10 – Backhand Bandits",
+          "file": "team.html?day=wednesday&team=10"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 3,
+        "date": "2025-06-18",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 9 – Baseliners",
+          "file": "team.html?day=wednesday&team=9"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 4,
+        "date": "2025-06-25",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 1 – LAX-Winona Infusion",
+          "file": "team.html?day=wednesday&team=1"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 5,
+        "date": "2025-07-02",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 2 – Rally Monkeys",
+          "file": "team.html?day=wednesday&team=2"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 6,
+        "date": "2025-07-09",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 6 – Howie's Team",
+          "file": "team.html?day=wednesday&team=6"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 7,
+        "date": "2025-07-16",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 5 – Glory Days",
+          "file": "team.html?day=wednesday&team=5"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 8,
+        "date": "2025-07-23",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 4 – Hot Shots",
+          "file": "team.html?day=wednesday&team=4"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 9,
+        "date": "2025-07-30",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 7 – Serve Aces",
+          "file": "team.html?day=wednesday&team=7"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 10,
+        "date": "2025-08-06",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 8 – Not My Fault",
+          "file": "team.html?day=wednesday&team=8"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 11,
+        "date": "2025-08-13",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 3 – Hit Squad",
+          "file": "team.html?day=wednesday&team=3"
+        },
+        "courts": "Courts 10–13"
+      }
+    ],
+    "roster": [
+      {
+        "position": 1,
+        "name": "Kurt Gutknecht",
+        "captain": ""
+      },
+      {
+        "position": 2,
+        "name": "Therese Waltz",
+        "captain": "✓"
+      },
+      {
+        "position": 3,
+        "name": "Kacey Nomland",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Tyler Thomas",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "David Yao",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Kris Bartley",
+        "captain": ""
+      },
+      {
+        "position": 4,
+        "name": "Jenna Dinkel",
+        "captain": ""
+      },
+      {
+        "position": 5,
+        "name": "Logan Dzielinski",
+        "captain": ""
+      }
+    ]
+  },
+  {
+    "name": "Team 12 – Nothing But Net",
+    "matches": [
+      {
+        "week": 1,
+        "date": "2025-06-04",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 11 – Simply Smashing",
+          "file": "team.html?day=wednesday&team=11"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 2,
+        "date": "2025-06-11",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 1 – LAX-Winona Infusion",
+          "file": "team.html?day=wednesday&team=1"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 3,
+        "date": "2025-06-18",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 2 – Rally Monkeys",
+          "file": "team.html?day=wednesday&team=2"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 4,
+        "date": "2025-06-25",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 9 – Baseliners",
+          "file": "team.html?day=wednesday&team=9"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 5,
+        "date": "2025-07-02",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 8 – Not My Fault",
+          "file": "team.html?day=wednesday&team=8"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 6,
+        "date": "2025-07-09",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 7 – Serve Aces",
+          "file": "team.html?day=wednesday&team=7"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 7,
+        "date": "2025-07-16",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 6 – Howie's Team",
+          "file": "team.html?day=wednesday&team=6"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 8,
+        "date": "2025-07-23",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 5 – Glory Days",
+          "file": "team.html?day=wednesday&team=5"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 9,
+        "date": "2025-07-30",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 3 – Hit Squad",
+          "file": "team.html?day=wednesday&team=3"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 10,
+        "date": "2025-08-06",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 4 – Hot Shots",
+          "file": "team.html?day=wednesday&team=4"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 11,
+        "date": "2025-08-13",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 10 – Backhand Bandits",
+          "file": "team.html?day=wednesday&team=10"
+        },
+        "courts": "Courts 10–13"
+      }
+    ],
+    "roster": [
+      {
+        "position": 1,
+        "name": "Alex Hiller",
+        "captain": "✓"
+      },
+      {
+        "position": 2,
+        "name": "Tom Londergan",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Lewis Kuhlman",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Sarah Wengerter",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Brittney DeChambeau",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Kevin LeQue",
+        "captain": ""
+      },
+      {
+        "position": 4,
+        "name": "Amy Harter",
+        "captain": ""
+      },
+      {
+        "position": 5,
+        "name": "Joe Hurley",
+        "captain": ""
+      }
+    ]
+  },
+  {
+    "name": "Team 2 – Rally Monkeys",
+    "matches": [
+      {
+        "week": 1,
+        "date": "2025-06-04",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 1 – LAX-Winona Infusion",
+          "file": "team.html?day=wednesday&team=1"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 2,
+        "date": "2025-06-11",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 12 – Nothing But Net",
+          "file": "team.html?day=wednesday&team=12"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 3,
+        "date": "2025-06-18",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 11 – Simply Smashing",
+          "file": "team.html?day=wednesday&team=11"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 4,
+        "date": "2025-06-25",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 10 – Backhand Bandits",
+          "file": "team.html?day=wednesday&team=10"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 5,
+        "date": "2025-07-02",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 9 – Baseliners",
+          "file": "team.html?day=wednesday&team=9"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 6,
+        "date": "2025-07-09",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 8 – Not My Fault",
+          "file": "team.html?day=wednesday&team=8"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 7,
+        "date": "2025-07-16",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 7 – Serve Aces",
+          "file": "team.html?day=wednesday&team=7"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 8,
+        "date": "2025-07-23",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 6 – Howie's Team",
+          "file": "team.html?day=wednesday&team=6"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 9,
+        "date": "2025-07-30",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 5 – Glory Days",
+          "file": "team.html?day=wednesday&team=5"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 10,
+        "date": "2025-08-06",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 4 – Hot Shots",
+          "file": "team.html?day=wednesday&team=4"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 11,
+        "date": "2025-08-13",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 3 – Hit Squad",
+          "file": "team.html?day=wednesday&team=3"
+        },
+        "courts": "Courts 6–9"
+      }
+    ],
+    "roster": [
+      {
+        "position": 1,
+        "name": "Brett Meddaugh",
+        "captain": "✓"
+      },
+      {
+        "position": 2,
+        "name": "Greg Jameson",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Pam Jameson",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Andy Seithamer",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Bette Smith",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Rick Moody",
+        "captain": ""
+      },
+      {
+        "position": 4,
+        "name": "Greg Smith",
+        "captain": ""
+      },
+      {
+        "position": 5,
+        "name": "Hailey Kincaid",
+        "captain": ""
+      }
+    ]
+  },
+  {
+    "name": "Team 3 – Hit Squad",
+    "matches": [
+      {
+        "week": 1,
+        "date": "2025-06-04",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 4 – Hot Shots",
+          "file": "team.html?day=wednesday&team=4"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 2,
+        "date": "2025-06-11",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 1 – LAX-Winona Infusion",
+          "file": "team.html?day=wednesday&team=1"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 3,
+        "date": "2025-06-18",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 2 – Rally Monkeys",
+          "file": "team.html?day=wednesday&team=2"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 4,
+        "date": "2025-06-25",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 12 – Nothing But Net",
+          "file": "team.html?day=wednesday&team=12"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 5,
+        "date": "2025-07-02",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 11 – Simply Smashing",
+          "file": "team.html?day=wednesday&team=11"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 6,
+        "date": "2025-07-09",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 10 – Backhand Bandits",
+          "file": "team.html?day=wednesday&team=10"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 7,
+        "date": "2025-07-16",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 9 – Baseliners",
+          "file": "team.html?day=wednesday&team=9"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 8,
+        "date": "2025-07-23",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 8 – Not My Fault",
+          "file": "team.html?day=wednesday&team=8"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 9,
+        "date": "2025-07-30",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 7 – Serve Aces",
+          "file": "team.html?day=wednesday&team=7"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 10,
+        "date": "2025-08-06",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 6 – Howie's Team",
+          "file": "team.html?day=wednesday&team=6"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 11,
+        "date": "2025-08-13",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 5 – Glory Days",
+          "file": "team.html?day=wednesday&team=5"
+        },
+        "courts": "Courts 10–13"
+      }
+    ],
+    "roster": [
+      {
+        "position": 1,
+        "name": "Sheldon Lee",
+        "captain": "✓"
+      },
+      {
+        "position": 2,
+        "name": "Kyle Deyo",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Michael Current",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Christine Lee",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Bennet Myers",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Madan Mohan",
+        "captain": ""
+      },
+      {
+        "position": 4,
+        "name": "Michelle Ottum",
+        "captain": ""
+      },
+      {
+        "position": 5,
+        "name": "Amanda Waters",
+        "captain": ""
+      }
+    ]
+  },
+  {
+    "name": "Team 4 – Hot Shots",
+    "matches": [
+      {
+        "week": 1,
+        "date": "2025-06-04",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 3 – Hit Squad",
+          "file": "team.html?day=wednesday&team=3"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 2,
+        "date": "2025-06-11",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 5 – Glory Days",
+          "file": "team.html?day=wednesday&team=5"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 3,
+        "date": "2025-06-18",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 6 – Howie's Team",
+          "file": "team.html?day=wednesday&team=6"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 4,
+        "date": "2025-06-25",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 7 – Serve Aces",
+          "file": "team.html?day=wednesday&team=7"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 5,
+        "date": "2025-07-02",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 8 – Not My Fault",
+          "file": "team.html?day=wednesday&team=8"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 6,
+        "date": "2025-07-09",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 9 – Baseliners",
+          "file": "team.html?day=wednesday&team=9"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 7,
+        "date": "2025-07-16",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 10 – Backhand Bandits",
+          "file": "team.html?day=wednesday&team=10"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 8,
+        "date": "2025-07-23",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 11 – Simply Smashing",
+          "file": "team.html?day=wednesday&team=11"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 9,
+        "date": "2025-07-30",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 12 – Nothing But Net",
+          "file": "team.html?day=wednesday&team=12"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 10,
+        "date": "2025-08-06",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 2 – Rally Monkeys",
+          "file": "team.html?day=wednesday&team=2"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 11,
+        "date": "2025-08-13",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 1 – LAX-Winona Infusion",
+          "file": "team.html?day=wednesday&team=1"
+        },
+        "courts": "Courts 1–5"
+      }
+    ],
+    "roster": [
+      {
+        "position": 1,
+        "name": "Laura Reutlinger",
+        "captain": ""
+      },
+      {
+        "position": 2,
+        "name": "Roxie Anderson",
+        "captain": "✓"
+      },
+      {
+        "position": 3,
+        "name": "Chris Kahlow",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Taylor Nelson",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Bryan Spier",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Gracie Miller",
+        "captain": ""
+      },
+      {
+        "position": 4,
+        "name": "Mike Leonard",
+        "captain": ""
+      },
+      {
+        "position": 5,
+        "name": "John Noble",
+        "captain": ""
+      }
+    ]
+  },
+  {
+    "name": "Team 4 – Hot Shots",
+    "matches": [
+      {
+        "week": 1,
+        "date": "2025-06-04",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 3 – Hit Squad",
+          "file": "team.html?day=wednesday&team=3"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 2,
+        "date": "2025-06-11",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 5 – Glory Days",
+          "file": "team.html?day=wednesday&team=5"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 3,
+        "date": "2025-06-18",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 6 – Howie's Team",
+          "file": "team.html?day=wednesday&team=6"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 4,
+        "date": "2025-06-25",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 7 – Serve Aces",
+          "file": "team.html?day=wednesday&team=7"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 5,
+        "date": "2025-07-02",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 8 – Not My Fault",
+          "file": "team.html?day=wednesday&team=8"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 6,
+        "date": "2025-07-09",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 9 – Baseliners",
+          "file": "team.html?day=wednesday&team=9"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 7,
+        "date": "2025-07-16",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 10 – Backhand Bandits",
+          "file": "team.html?day=wednesday&team=10"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 8,
+        "date": "2025-07-23",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 11 – Simply Smashing",
+          "file": "team.html?day=wednesday&team=11"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 9,
+        "date": "2025-07-30",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 12 – Nothing But Net",
+          "file": "team.html?day=wednesday&team=12"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 10,
+        "date": "2025-08-06",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 2 – Rally Monkeys",
+          "file": "team.html?day=wednesday&team=2"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 11,
+        "date": "2025-08-13",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 1 – LAX-Winona Infusion",
+          "file": "team.html?day=wednesday&team=1"
+        },
+        "courts": "Courts 1–5"
+      }
+    ],
+    "roster": [
+      {
+        "position": 1,
+        "name": "Laura Reutlinger",
+        "captain": ""
+      },
+      {
+        "position": 2,
+        "name": "Roxie Anderson",
+        "captain": "✓"
+      },
+      {
+        "position": 3,
+        "name": "Chris Kahlow",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Taylor Nelson",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Bryan Spier",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Gracie Miller",
+        "captain": ""
+      },
+      {
+        "position": 4,
+        "name": "Mike Leonard",
+        "captain": ""
+      },
+      {
+        "position": 5,
+        "name": "John Noble",
+        "captain": ""
+      }
+    ]
+  },
+  {
+    "name": "Team 6 – Howie's Team",
+    "matches": [
+      {
+        "week": 1,
+        "date": "2025-06-04",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 5 – Glory Days",
+          "file": "team.html?day=wednesday&team=5"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 2,
+        "date": "2025-06-11",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 7 – Serve Aces",
+          "file": "team.html?day=wednesday&team=7"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 3,
+        "date": "2025-06-18",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 4 – Hot Shots",
+          "file": "team.html?day=wednesday&team=4"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 4,
+        "date": "2025-06-25",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 3 – Hit Squad",
+          "file": "team.html?day=wednesday&team=3"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 5,
+        "date": "2025-07-02",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 2 – Rally Monkeys",
+          "file": "team.html?day=wednesday&team=2"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 6,
+        "date": "2025-07-09",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 1 – LAX-Winona Infusion",
+          "file": "team.html?day=wednesday&team=1"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 7,
+        "date": "2025-07-16",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 12 – Nothing But Net",
+          "file": "team.html?day=wednesday&team=12"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 8,
+        "date": "2025-07-23",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 11 – Simply Smashing",
+          "file": "team.html?day=wednesday&team=11"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 9,
+        "date": "2025-07-30",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 10 – Backhand Bandits",
+          "file": "team.html?day=wednesday&team=10"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 10,
+        "date": "2025-08-06",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 9 – Baseliners",
+          "file": "team.html?day=wednesday&team=9"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 11,
+        "date": "2025-08-13",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 8 – Not My Fault",
+          "file": "team.html?day=wednesday&team=8"
+        },
+        "courts": "Courts 6–9"
+      }
+    ],
+    "roster": [
+      {
+        "position": 1,
+        "name": "Mike Meyers",
+        "captain": ""
+      },
+      {
+        "position": 2,
+        "name": "Brian Day",
+        "captain": "✓"
+      },
+      {
+        "position": 3,
+        "name": "Shira Busch",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Janeen Day",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Paul Holman",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Austin Stalsberg",
+        "captain": ""
+      },
+      {
+        "position": 4,
+        "name": "Lisa Flottmeyer",
+        "captain": ""
+      },
+      {
+        "position": 5,
+        "name": "Gretchen Coleman",
+        "captain": ""
+      }
+    ]
+  },
+  {
+    "name": "Team 7 – Serve Aces",
+    "matches": [
+      {
+        "week": 1,
+        "date": "2025-06-04",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 8 – Not My Fault",
+          "file": "team.html?day=wednesday&team=8"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 2,
+        "date": "2025-06-11",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 6 – Howie's Team",
+          "file": "team.html?day=wednesday&team=6"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 3,
+        "date": "2025-06-18",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 5 – Glory Days",
+          "file": "team.html?day=wednesday&team=5"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 4,
+        "date": "2025-06-25",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 4 – Hot Shots",
+          "file": "team.html?day=wednesday&team=4"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 5,
+        "date": "2025-07-02",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 3 – Hit Squad",
+          "file": "team.html?day=wednesday&team=3"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 6,
+        "date": "2025-07-09",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 2 – Rally Monkeys",
+          "file": "team.html?day=wednesday&team=2"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 7,
+        "date": "2025-07-16",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 1 – LAX-Winona Infusion",
+          "file": "team.html?day=wednesday&team=1"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 8,
+        "date": "2025-07-23",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 12 – Nothing But Net",
+          "file": "team.html?day=wednesday&team=12"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 9,
+        "date": "2025-07-30",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 11 – Simply Smashing",
+          "file": "team.html?day=wednesday&team=11"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 10,
+        "date": "2025-08-06",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 10 – Backhand Bandits",
+          "file": "team.html?day=wednesday&team=10"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 11,
+        "date": "2025-08-13",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 9 – Baseliners",
+          "file": "team.html?day=wednesday&team=9"
+        },
+        "courts": "Courts 6–9"
+      }
+    ],
+    "roster": [
+      {
+        "position": 1,
+        "name": "Mark Hoff",
+        "captain": "✓"
+      },
+      {
+        "position": 2,
+        "name": "Gina Nelms",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Luke Bussiere",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Franklin Greene",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Nicole Hoff",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Michelle Rank",
+        "captain": ""
+      },
+      {
+        "position": 4,
+        "name": "Sharon Harter",
+        "captain": ""
+      },
+      {
+        "position": 5,
+        "name": "Asa Harter",
+        "captain": ""
+      }
+    ]
+  },
+  {
+    "name": "Team 8 – Not My Fault",
+    "matches": [
+      {
+        "week": 1,
+        "date": "2025-06-04",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 7 – Serve Aces",
+          "file": "team.html?day=wednesday&team=7"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 2,
+        "date": "2025-06-11",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 9 – Baseliners",
+          "file": "team.html?day=wednesday&team=9"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 3,
+        "date": "2025-06-18",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 10 – Backhand Bandits",
+          "file": "team.html?day=wednesday&team=10"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 4,
+        "date": "2025-06-25",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 5 – Glory Days",
+          "file": "team.html?day=wednesday&team=5"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 5,
+        "date": "2025-07-02",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 4 – Hot Shots",
+          "file": "team.html?day=wednesday&team=4"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 6,
+        "date": "2025-07-09",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 3 – Hit Squad",
+          "file": "team.html?day=wednesday&team=3"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 7,
+        "date": "2025-07-16",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 2 – Rally Monkeys",
+          "file": "team.html?day=wednesday&team=2"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 8,
+        "date": "2025-07-23",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 1 – LAX-Winona Infusion",
+          "file": "team.html?day=wednesday&team=1"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 9,
+        "date": "2025-07-30",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 12 – Nothing But Net",
+          "file": "team.html?day=wednesday&team=12"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 10,
+        "date": "2025-08-06",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 11 – Simply Smashing",
+          "file": "team.html?day=wednesday&team=11"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 11,
+        "date": "2025-08-13",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 6 – Howie's Team",
+          "file": "team.html?day=wednesday&team=6"
+        },
+        "courts": "Courts 6–9"
+      }
+    ],
+    "roster": [
+      {
+        "position": 1,
+        "name": "Joe O'Flaherty",
+        "captain": ""
+      },
+      {
+        "position": 2,
+        "name": "Ran Ikeyama",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Dan Grilley",
+        "captain": "✓"
+      },
+      {
+        "position": 3,
+        "name": "Ben Haenni",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Tamara Byrne",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Josh Neukom",
+        "captain": ""
+      },
+      {
+        "position": 4,
+        "name": "Basu Bhattacharyya",
+        "captain": ""
+      },
+      {
+        "position": 5,
+        "name": "John May",
+        "captain": ""
+      }
+    ]
+  },
+  {
+    "name": "Team 9 – Baseliners",
+    "matches": [
+      {
+        "week": 1,
+        "date": "2025-06-04",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 10 – Backhand Bandits",
+          "file": "team.html?day=wednesday&team=10"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 2,
+        "date": "2025-06-11",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 8 – Not My Fault",
+          "file": "team.html?day=wednesday&team=8"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 3,
+        "date": "2025-06-18",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 11 – Simply Smashing",
+          "file": "team.html?day=wednesday&team=11"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 4,
+        "date": "2025-06-25",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 12 – Nothing But Net",
+          "file": "team.html?day=wednesday&team=12"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 5,
+        "date": "2025-07-02",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 5 – Glory Days",
+          "file": "team.html?day=wednesday&team=5"
+        },
+        "courts": "Courts 10–13"
+      },
+      {
+        "week": 6,
+        "date": "2025-07-09",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 4 – Hot Shots",
+          "file": "team.html?day=wednesday&team=4"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 7,
+        "date": "2025-07-16",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 3 – Hit Squad",
+          "file": "team.html?day=wednesday&team=3"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 8,
+        "date": "2025-07-23",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 2 – Rally Monkeys",
+          "file": "team.html?day=wednesday&team=2"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 9,
+        "date": "2025-07-30",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 1 – LAX-Winona Infusion",
+          "file": "team.html?day=wednesday&team=1"
+        },
+        "courts": "Courts 6–9"
+      },
+      {
+        "week": 10,
+        "date": "2025-08-06",
+        "time": "5:30pm",
+        "opponent": {
+          "name": "Team 6 – Howie's Team",
+          "file": "team.html?day=wednesday&team=6"
+        },
+        "courts": "Courts 1–5"
+      },
+      {
+        "week": 11,
+        "date": "2025-08-13",
+        "time": "7:00pm",
+        "opponent": {
+          "name": "Team 7 – Serve Aces",
+          "file": "team.html?day=wednesday&team=7"
+        },
+        "courts": "Courts 6–9"
+      }
+    ],
+    "roster": [
+      {
+        "position": 1,
+        "name": "John Hildebrandt",
+        "captain": ""
+      },
+      {
+        "position": 2,
+        "name": "Dan Bodelson",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Dick Deml",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Al Graewin",
+        "captain": "✓"
+      },
+      {
+        "position": 3,
+        "name": "Mark Schlafer",
+        "captain": ""
+      },
+      {
+        "position": 3,
+        "name": "Joey Endrizzi",
+        "captain": ""
+      },
+      {
+        "position": 4,
+        "name": "Terri Kaiser",
+        "captain": ""
+      },
+      {
+        "position": 5,
+        "name": "Jill Graewin",
+        "captain": ""
+      }
+    ]
+  }
+]

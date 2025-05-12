@@ -1,0 +1,50 @@
+{
+  "team": "Bounce It",
+  "night": "Tues",
+  "schedule": [
+    {
+      "week": 1,
+      "vs": "Approach Shots"
+    },
+    {
+      "week": 2,
+      "vs": "Tennis the Menace"
+    },
+    {
+      "week": 3,
+      "vs": "Full Metal Racquet"
+    },
+    {
+      "week": 4,
+      "vs": "Spin Doctors"
+    },
+    {
+      "week": 5,
+      "vs": "Good Ol' Boys"
+    },
+    {
+      "week": 6,
+      "vs": "Racquet Scientists"
+    },
+    {
+      "week": 7,
+      "vs": "Zoomers"
+    },
+    {
+      "week": 8,
+      "vs": "Easy Overhead"
+    },
+    {
+      "week": 9,
+      "vs": "Jetsetters"
+    },
+    {
+      "week": 10,
+      "vs": "Return to Sender with Love"
+    },
+    {
+      "week": 11,
+      "vs": "Rascals"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "team": "Serve Aces",
+  "night": "Wed",
+  "schedule": [
+    {
+      "week": 1,
+      "vs": "Howie's Team"
+    },
+    {
+      "week": 2,
+      "vs": "Hot Shots"
+    },
+    {
+      "week": 3,
+      "vs": "Rally Monkeys"
+    },
+    {
+      "week": 4,
+      "vs": "Simply Smashing"
+    },
+    {
+      "week": 5,
+      "vs": "Baseliners"
+    },
+    {
+      "week": 6,
+      "vs": "LAX-Winona Infusion"
+    },
+    {
+      "week": 7,
+      "vs": "Glory Days"
+    },
+    {
+      "week": 8,
+      "vs": "Hit Squad"
+    },
+    {
+      "week": 9,
+      "vs": "Nothing But Net"
+    },
+    {
+      "week": 10,
+      "vs": "Backhand Bandits"
+    },
+    {
+      "week": 11,
+      "vs": "Not My Fault"
+    }
+  ]
+}
