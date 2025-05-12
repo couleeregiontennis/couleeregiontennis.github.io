@@ -5,88 +5,153 @@
       "week": 1,
       "date": "2025-06-03",
       "time": "7:00pm",
-      "opponent": { "name": "Team 10 – Jetsetters", "file": "team.html?day=tuesday&team=10" },
+      "opponent": {
+        "name": "Team 10 – Jetsetters",
+        "file": "team.html?day=tuesday&team=10"
+      },
       "courts": "Courts 1–5"
     },
     {
       "week": 2,
-      "date": "2025-06-08",
+      "date": "2025-06-10",
       "time": "7:00pm",
-      "opponent": { "name": "Team 11 – Full Metal Racquet", "file": "team.html?day=tuesday&team=11" },
+      "opponent": {
+        "name": "Team 11 – Full Metal Racquet",
+        "file": "team.html?day=tuesday&team=11"
+      },
       "courts": "Courts 6–9"
     },
     {
       "week": 3,
-      "date": "2025-06-13",
+      "date": "2025-06-17",
       "time": "7:00pm",
-      "opponent": { "name": "Team 12 – Easy Overhead", "file": "team.html?day=tuesday&team=12" },
+      "opponent": {
+        "name": "Team 12 – Easy Overhead",
+        "file": "team.html?day=tuesday&team=12"
+      },
       "courts": "Courts 10–13"
     },
     {
       "week": 4,
-      "date": "2025-06-18",
+      "date": "2025-06-24",
       "time": "5:30pm",
-      "opponent": { "name": "Team 3 – Zoomers", "file": "team.html?day=tuesday&team=3" },
+      "opponent": {
+        "name": "Team 3 – Zoomers",
+        "file": "team.html?day=tuesday&team=3"
+      },
       "courts": "Courts 10–13"
     },
     {
       "week": 5,
-      "date": "2025-06-23",
+      "date": "2025-07-01",
       "time": "7:00pm",
-      "opponent": { "name": "Team 2 – Tennis the Menace", "file": "team.html?day=tuesday&team=2" },
+      "opponent": {
+        "name": "Team 2 – Tennis the Menace",
+        "file": "team.html?day=tuesday&team=2"
+      },
       "courts": "Courts 6–9"
     },
     {
       "week": 6,
-      "date": "2025-06-28",
+      "date": "2025-07-08",
       "time": "5:30pm",
-      "opponent": { "name": "Team 1 – Spin Doctors", "file": "team.html?day=tuesday&team=1" },
+      "opponent": {
+        "name": "Team 1 – Spin Doctors",
+        "file": "team.html?day=tuesday&team=1"
+      },
       "courts": "Courts 10–13"
     },
     {
       "week": 7,
-      "date": "2025-07-03",
+      "date": "2025-07-15",
       "time": "7:00pm",
-      "opponent": { "name": "Team 6 – Rascals", "file": "team.html?day=tuesday&team=6" },
+      "opponent": {
+        "name": "Team 6 – Rascals",
+        "file": "team.html?day=tuesday&team=6"
+      },
       "courts": "Courts 6–9"
     },
     {
       "week": 8,
-      "date": "2025-07-08",
+      "date": "2025-07-22",
       "time": "7:00pm",
-      "opponent": { "name": "Team 8 – Return to Sender With Love", "file": "team.html?day=tuesday&team=8" },
+      "opponent": {
+        "name": "Team 8 – Return to Sender With Love",
+        "file": "team.html?day=tuesday&team=8"
+      },
       "courts": "Courts 10–13"
     },
     {
       "week": 9,
-      "date": "2025-07-13",
+      "date": "2025-07-29",
       "time": "5:30pm",
-      "opponent": { "name": "Team 9 – Bounce It", "file": "team.html?day=tuesday&team=9" },
+      "opponent": {
+        "name": "Team 9 – Bounce It",
+        "file": "team.html?day=tuesday&team=9"
+      },
       "courts": "Courts 1–5"
     },
     {
       "week": 10,
-      "date": "2025-07-18",
+      "date": "2025-08-05",
       "time": "5:30pm",
-      "opponent": { "name": "Team 5 – Racquet Scientists", "file": "team.html?day=tuesday&team=5" },
+      "opponent": {
+        "name": "Team 5 – Racquet Scientists",
+        "file": "team.html?day=tuesday&team=5"
+      },
       "courts": "Courts 6–9"
     },
     {
       "week": 11,
-      "date": "2025-07-23",
+      "date": "2025-08-12",
       "time": "5:30pm",
-      "opponent": { "name": "Team 4 – Approach Shots", "file": "team.html?day=tuesday&team=4" },
+      "opponent": {
+        "name": "Team 4 – Approach Shots",
+        "file": "team.html?day=tuesday&team=4"
+      },
       "courts": "Courts 6–9"
     }
   ],
   "roster": [
-    { "position": 1, "name": "Paul Jacobson", "captain": "✓" },
-    { "position": 2, "name": "Dave Bentz", "captain": "" },
-    { "position": 3, "name": "Don Harvey", "captain": "" },
-    { "position": 3, "name": "David Lange", "captain": "" },
-    { "position": 3, "name": "Larry Ruff", "captain": "" },
-    { "position": 3, "name": "Cory Ruud", "captain": "" },
-    { "position": 4, "name": "Pennie Pierce-Jorgeson", "captain": "" },
-    { "position": 5, "name": "Sally Ruud", "captain": "✓" }
+    {
+      "position": 1,
+      "name": "Paul Jacobson",
+      "captain": "✓"
+    },
+    {
+      "position": 2,
+      "name": "Dave Bentz",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Don Harvey",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "David Lange",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Larry Ruff",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Cory Ruud",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Pennie Pierce-Jorgeson",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "Sally Ruud",
+      "captain": "✓"
+    }
   ]
 }
