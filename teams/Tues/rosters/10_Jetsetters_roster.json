@@ -1,0 +1,44 @@
+{
+  "roster": [
+    {
+      "position": 1,
+      "name": "Julio Bird",
+      "captain": ""
+    },
+    {
+      "position": 2,
+      "name": "Elia Romano",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Jada Brunkow",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Dan Petersen",
+      "captain": "✓"
+    },
+    {
+      "position": 3,
+      "name": "Shirley Yuan",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Ryan Mullaney",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Kim Hardy",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "Leonardo Silva",
+      "captain": ""
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "roster": [
+    {
+      "position": 1,
+      "name": "Laura Reutlinger",
+      "captain": ""
+    },
+    {
+      "position": 2,
+      "name": "Roxie Anderson",
+      "captain": "✓"
+    },
+    {
+      "position": 3,
+      "name": "Chris Kahlow",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Taylor Nelson",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Bryan Spier",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Gracie Miller",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Mike Leonard",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "John Noble",
+      "captain": ""
+    }
+  ]
+}

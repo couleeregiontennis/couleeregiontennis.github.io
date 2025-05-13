@@ -1,0 +1,44 @@
+{
+  "roster": [
+    {
+      "position": 1,
+      "name": "Rob Jordan",
+      "captain": "✓"
+    },
+    {
+      "position": 2,
+      "name": "Jake Schweitzer",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Mike Allen",
+      "captain": "✓"
+    },
+    {
+      "position": 3,
+      "name": "Dave Mills",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "John Sullivan",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Madan Mohan",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Haley Skinner",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "Meg Jelen",
+      "captain": ""
+    }
+  ]
+}

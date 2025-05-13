@@ -1,0 +1,44 @@
+{
+  "roster": [
+    {
+      "position": 1,
+      "name": "Kurt Gutknecht",
+      "captain": ""
+    },
+    {
+      "position": 2,
+      "name": "Therese Waltz",
+      "captain": "✓"
+    },
+    {
+      "position": 3,
+      "name": "Kacey Nomland",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Tyler Thomas",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "David Yao",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Kris Bartley",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Jenna Dinkel",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "Logan Dzielinski",
+      "captain": ""
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "roster": [
+    {
+      "position": 1,
+      "name": "Paul Jacobson",
+      "captain": "✓"
+    },
+    {
+      "position": 2,
+      "name": "Dave Bentz",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Don Harvey",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "David Lange",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Larry Ruff",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Cory Ruud",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Pennie Pierce-Jorgeson",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "Sally Ruud",
+      "captain": "✓"
+    }
+  ]
+}
