@@ -9,14 +9,14 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
     const scheduleResponse = await fetch(scheduleUrl);
     const scheduleData = await scheduleResponse.json();
     const rosterResponse = await fetch(rosterUrl);
-    const rosterData = await scheduleResponse.json();
+    const rosterData = await rosterResponse.json();
 
     // Update header with team name if available
-    if (header && scheduleData.teamName) header.textContent = scheduleData.teamName;
+    if (header && rosterData.teamName) header.textContent = rosterData.teamName;
 
     // Populate matches table
     tableBody.innerHTML = "";
-    (scheduleData.matches || []).forEach(match => {
+    (scheduleData.schedule || []).forEach(match => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${match.week}</td>
@@ -32,7 +32,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
 
     // Populate roster table
     rosterBody.innerHTML = "";
-    (scheduleData.roster || []).forEach(player => {
+    (rosterData.roster || []).forEach(player => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${player.position}</td>
@@ -90,6 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const day = getDayFromUrl();
   if (team && day) {
     // Adjust path as needed for your structure
-    loadTeamData(`../teams/${day}/schedule/${team}.json`, `../teams/${day}/roster/${team}.json`);
+    loadTeamData(`../teams/${day}/schedules/${team}.json`, `../teams/${day}/rosters/${team}.json`);
   }
 });
