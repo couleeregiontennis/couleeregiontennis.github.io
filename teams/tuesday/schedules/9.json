@@ -1,0 +1,83 @@
+{
+  "team": "9",
+  "night": "Tues",
+  "schedule": [
+    {
+      "week": 1,
+      "date": "2025-06-03",
+      "time": "7:00pm",
+      "courts": "Courts 6–9",
+      "opponent": "4"
+    },
+    {
+      "week": 2,
+      "date": "2025-06-10",
+      "time": "5:30pm",
+      "courts": "Courts 10–13",
+      "opponent": "2"
+    },
+    {
+      "week": 3,
+      "date": "2025-06-17",
+      "time": "5:30pm",
+      "courts": "Courts 6–9",
+      "opponent": "11"
+    },
+    {
+      "week": 4,
+      "date": "2025-06-24",
+      "time": "7:00pm",
+      "courts": "Courts 10–13",
+      "opponent": "1"
+    },
+    {
+      "week": 5,
+      "date": "2025-07-01",
+      "time": "7:00pm",
+      "courts": "Courts 1–5",
+      "opponent": "7"
+    },
+    {
+      "week": 6,
+      "date": "2025-07-08",
+      "time": "7:00pm",
+      "courts": "Courts 1–5",
+      "opponent": "5"
+    },
+    {
+      "week": 7,
+      "date": "2025-07-15",
+      "time": "7:00pm",
+      "courts": "Courts 1–5",
+      "opponent": "3"
+    },
+    {
+      "week": 8,
+      "date": "2025-07-22",
+      "time": "5:30pm",
+      "courts": "Courts 6–9",
+      "opponent": "12"
+    },
+    {
+      "week": 9,
+      "date": "2025-07-29",
+      "time": "7:00pm",
+      "courts": "Courts 10–13",
+      "opponent": "10"
+    },
+    {
+      "week": 10,
+      "date": "2025-08-05",
+      "time": "5:30pm",
+      "courts": "Courts 1–5",
+      "opponent": "8"
+    },
+    {
+      "week": 11,
+      "date": "2025-08-12",
+      "time": "7:00pm",
+      "courts": "Courts 10–13",
+      "opponent": "6"
+    }
+  ]
+}

@@ -1,0 +1,530 @@
+[
+  {
+    "week": 1,
+    "date": "2025-06-03",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": "1",
+    "teamB": "12"
+  },
+  {
+    "week": 1,
+    "date": "2025-06-03",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": "2",
+    "teamB": "11"
+  },
+  {
+    "week": 1,
+    "date": "2025-06-03",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": "3",
+    "teamB": "10"
+  },
+  {
+    "week": 1,
+    "date": "2025-06-03",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": "4",
+    "teamB": "9"
+  },
+  {
+    "week": 1,
+    "date": "2025-06-03",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": "5",
+    "teamB": "8"
+  },
+  {
+    "week": 1,
+    "date": "2025-06-03",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": "6",
+    "teamB": "7"
+  },
+  {
+    "week": 2,
+    "date": "2025-06-10",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": "1",
+    "teamB": "11"
+  },
+  {
+    "week": 2,
+    "date": "2025-06-10",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": "12",
+    "teamB": "10"
+  },
+  {
+    "week": 2,
+    "date": "2025-06-10",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": "2",
+    "teamB": "9"
+  },
+  {
+    "week": 2,
+    "date": "2025-06-10",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": "3",
+    "teamB": "8"
+  },
+  {
+    "week": 2,
+    "date": "2025-06-10",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": "4",
+    "teamB": "7"
+  },
+  {
+    "week": 2,
+    "date": "2025-06-10",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": "5",
+    "teamB": "6"
+  },
+  {
+    "week": 3,
+    "date": "2025-06-17",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": "1",
+    "teamB": "10"
+  },
+  {
+    "week": 3,
+    "date": "2025-06-17",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": "11",
+    "teamB": "9"
+  },
+  {
+    "week": 3,
+    "date": "2025-06-17",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": "12",
+    "teamB": "8"
+  },
+  {
+    "week": 3,
+    "date": "2025-06-17",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": "2",
+    "teamB": "7"
+  },
+  {
+    "week": 3,
+    "date": "2025-06-17",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": "3",
+    "teamB": "6"
+  },
+  {
+    "week": 3,
+    "date": "2025-06-17",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": "4",
+    "teamB": "5"
+  },
+  {
+    "week": 4,
+    "date": "2025-06-24",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": "1",
+    "teamB": "9"
+  },
+  {
+    "week": 4,
+    "date": "2025-06-24",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": "10",
+    "teamB": "8"
+  },
+  {
+    "week": 4,
+    "date": "2025-06-24",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": "11",
+    "teamB": "7"
+  },
+  {
+    "week": 4,
+    "date": "2025-06-24",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": "12",
+    "teamB": "6"
+  },
+  {
+    "week": 4,
+    "date": "2025-06-24",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": "2",
+    "teamB": "5"
+  },
+  {
+    "week": 4,
+    "date": "2025-06-24",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": "3",
+    "teamB": "4"
+  },
+  {
+    "week": 5,
+    "date": "2025-07-01",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": "1",
+    "teamB": "8"
+  },
+  {
+    "week": 5,
+    "date": "2025-07-01",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": "9",
+    "teamB": "7"
+  },
+  {
+    "week": 5,
+    "date": "2025-07-01",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": "10",
+    "teamB": "6"
+  },
+  {
+    "week": 5,
+    "date": "2025-07-01",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": "11",
+    "teamB": "5"
+  },
+  {
+    "week": 5,
+    "date": "2025-07-01",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": "12",
+    "teamB": "4"
+  },
+  {
+    "week": 5,
+    "date": "2025-07-01",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": "2",
+    "teamB": "3"
+  },
+  {
+    "week": 6,
+    "date": "2025-07-08",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": "1",
+    "teamB": "7"
+  },
+  {
+    "week": 6,
+    "date": "2025-07-08",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": "8",
+    "teamB": "6"
+  },
+  {
+    "week": 6,
+    "date": "2025-07-08",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": "9",
+    "teamB": "5"
+  },
+  {
+    "week": 6,
+    "date": "2025-07-08",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": "10",
+    "teamB": "4"
+  },
+  {
+    "week": 6,
+    "date": "2025-07-08",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": "11",
+    "teamB": "3"
+  },
+  {
+    "week": 6,
+    "date": "2025-07-08",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": "12",
+    "teamB": "2"
+  },
+  {
+    "week": 7,
+    "date": "2025-07-15",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": "1",
+    "teamB": "6"
+  },
+  {
+    "week": 7,
+    "date": "2025-07-15",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": "7",
+    "teamB": "5"
+  },
+  {
+    "week": 7,
+    "date": "2025-07-15",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": "8",
+    "teamB": "4"
+  },
+  {
+    "week": 7,
+    "date": "2025-07-15",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": "9",
+    "teamB": "3"
+  },
+  {
+    "week": 7,
+    "date": "2025-07-15",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": "10",
+    "teamB": "2"
+  },
+  {
+    "week": 7,
+    "date": "2025-07-15",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": "11",
+    "teamB": "12"
+  },
+  {
+    "week": 8,
+    "date": "2025-07-22",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": "1",
+    "teamB": "5"
+  },
+  {
+    "week": 8,
+    "date": "2025-07-22",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": "6",
+    "teamB": "4"
+  },
+  {
+    "week": 8,
+    "date": "2025-07-22",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": "7",
+    "teamB": "3"
+  },
+  {
+    "week": 8,
+    "date": "2025-07-22",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": "8",
+    "teamB": "2"
+  },
+  {
+    "week": 8,
+    "date": "2025-07-22",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": "9",
+    "teamB": "12"
+  },
+  {
+    "week": 8,
+    "date": "2025-07-22",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": "10",
+    "teamB": "11"
+  },
+  {
+    "week": 9,
+    "date": "2025-07-29",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": "1",
+    "teamB": "4"
+  },
+  {
+    "week": 9,
+    "date": "2025-07-29",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": "5",
+    "teamB": "3"
+  },
+  {
+    "week": 9,
+    "date": "2025-07-29",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": "6",
+    "teamB": "2"
+  },
+  {
+    "week": 9,
+    "date": "2025-07-29",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": "7",
+    "teamB": "12"
+  },
+  {
+    "week": 9,
+    "date": "2025-07-29",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": "8",
+    "teamB": "11"
+  },
+  {
+    "week": 9,
+    "date": "2025-07-29",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": "9",
+    "teamB": "10"
+  },
+  {
+    "week": 10,
+    "date": "2025-08-05",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": "1",
+    "teamB": "3"
+  },
+  {
+    "week": 10,
+    "date": "2025-08-05",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": "4",
+    "teamB": "2"
+  },
+  {
+    "week": 10,
+    "date": "2025-08-05",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": "5",
+    "teamB": "12"
+  },
+  {
+    "week": 10,
+    "date": "2025-08-05",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": "6",
+    "teamB": "11"
+  },
+  {
+    "week": 10,
+    "date": "2025-08-05",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": "7",
+    "teamB": "10"
+  },
+  {
+    "week": 10,
+    "date": "2025-08-05",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": "8",
+    "teamB": "9"
+  },
+  {
+    "week": 11,
+    "date": "2025-08-12",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": "1",
+    "teamB": "2"
+  },
+  {
+    "week": 11,
+    "date": "2025-08-12",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": "3",
+    "teamB": "12"
+  },
+  {
+    "week": 11,
+    "date": "2025-08-12",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": "4",
+    "teamB": "11"
+  },
+  {
+    "week": 11,
+    "date": "2025-08-12",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": "5",
+    "teamB": "10"
+  },
+  {
+    "week": 11,
+    "date": "2025-08-12",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": "6",
+    "teamB": "9"
+  },
+  {
+    "week": 11,
+    "date": "2025-08-12",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": "7",
+    "teamB": "8"
+  }
+]

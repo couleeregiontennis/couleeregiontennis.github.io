@@ -1,5 +1,4 @@
 // This script dynamically loads match and roster data into tables and highlights the next match
-
 async function loadTeamData(jsonUrl) {
   const tableBody = document.querySelector("#matches-table tbody");
   const rosterBody = document.querySelector("table:not(#matches-table) tbody");
@@ -89,6 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const day = getDayFromUrl();
   if (team && day) {
     // Adjust path as needed for your structure
-    loadTeamData(`../data/${day}/${team}.json`);
+    loadTeamData(`../teams/${day}/${team}.json`);
   }
 });
