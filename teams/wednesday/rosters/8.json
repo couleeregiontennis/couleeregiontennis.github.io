@@ -1,0 +1,45 @@
+{
+  "teamName": "Not My Fault",
+  "roster": [
+    {
+      "position": 1,
+      "name": "Joe O'Flaherty",
+      "captain": ""
+    },
+    {
+      "position": 2,
+      "name": "Ran Ikeyama",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Dan Grilley",
+      "captain": "✓"
+    },
+    {
+      "position": 3,
+      "name": "Ben Haenni",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Tamara Byrne",
+      "captain": "✓"
+    },
+    {
+      "position": 3,
+      "name": "Josh Neukom",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Basu Bhattacharyya",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "John May",
+      "captain": ""
+    }
+  ]
+}

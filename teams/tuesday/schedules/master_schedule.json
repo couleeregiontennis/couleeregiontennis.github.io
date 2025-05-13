@@ -1,0 +1,926 @@
+[
+  {
+    "week": 1,
+    "date": "2025-06-03",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "1",
+      "name": "Spin Doctors"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Easy Overhead"
+    }
+  },
+  {
+    "week": 1,
+    "date": "2025-06-03",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "2",
+      "name": "Tennis the Menace"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Full Metal Racquet"
+    }
+  },
+  {
+    "week": 1,
+    "date": "2025-06-03",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "3",
+      "name": "Zoomers"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Jetsetters"
+    }
+  },
+  {
+    "week": 1,
+    "date": "2025-06-03",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "4",
+      "name": "Approach Shots"
+    },
+    "teamB": {
+      "number": "9",
+      "name": "Bounce It"
+    }
+  },
+  {
+    "week": 1,
+    "date": "2025-06-03",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "5",
+      "name": "Racquet Scientists"
+    },
+    "teamB": {
+      "number": "8",
+      "name": "Return to Sender with Love"
+    }
+  },
+  {
+    "week": 1,
+    "date": "2025-06-03",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "6",
+      "name": "Rascals"
+    },
+    "teamB": {
+      "number": "7",
+      "name": "Good Ol' Boys"
+    }
+  },
+  {
+    "week": 2,
+    "date": "2025-06-10",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "1",
+      "name": "Spin Doctors"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Full Metal Racquet"
+    }
+  },
+  {
+    "week": 2,
+    "date": "2025-06-10",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "12",
+      "name": "Easy Overhead"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Jetsetters"
+    }
+  },
+  {
+    "week": 2,
+    "date": "2025-06-10",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "2",
+      "name": "Tennis the Menace"
+    },
+    "teamB": {
+      "number": "9",
+      "name": "Bounce It"
+    }
+  },
+  {
+    "week": 2,
+    "date": "2025-06-10",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "3",
+      "name": "Zoomers"
+    },
+    "teamB": {
+      "number": "8",
+      "name": "Return to Sender with Love"
+    }
+  },
+  {
+    "week": 2,
+    "date": "2025-06-10",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "4",
+      "name": "Approach Shots"
+    },
+    "teamB": {
+      "number": "7",
+      "name": "Good Ol' Boys"
+    }
+  },
+  {
+    "week": 2,
+    "date": "2025-06-10",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "5",
+      "name": "Racquet Scientists"
+    },
+    "teamB": {
+      "number": "6",
+      "name": "Rascals"
+    }
+  },
+  {
+    "week": 3,
+    "date": "2025-06-17",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "1",
+      "name": "Spin Doctors"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Jetsetters"
+    }
+  },
+  {
+    "week": 3,
+    "date": "2025-06-17",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "11",
+      "name": "Full Metal Racquet"
+    },
+    "teamB": {
+      "number": "9",
+      "name": "Bounce It"
+    }
+  },
+  {
+    "week": 3,
+    "date": "2025-06-17",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "12",
+      "name": "Easy Overhead"
+    },
+    "teamB": {
+      "number": "8",
+      "name": "Return to Sender with Love"
+    }
+  },
+  {
+    "week": 3,
+    "date": "2025-06-17",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "2",
+      "name": "Tennis the Menace"
+    },
+    "teamB": {
+      "number": "7",
+      "name": "Good Ol' Boys"
+    }
+  },
+  {
+    "week": 3,
+    "date": "2025-06-17",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "3",
+      "name": "Zoomers"
+    },
+    "teamB": {
+      "number": "6",
+      "name": "Rascals"
+    }
+  },
+  {
+    "week": 3,
+    "date": "2025-06-17",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "4",
+      "name": "Approach Shots"
+    },
+    "teamB": {
+      "number": "5",
+      "name": "Racquet Scientists"
+    }
+  },
+  {
+    "week": 4,
+    "date": "2025-06-24",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "1",
+      "name": "Spin Doctors"
+    },
+    "teamB": {
+      "number": "9",
+      "name": "Bounce It"
+    }
+  },
+  {
+    "week": 4,
+    "date": "2025-06-24",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "10",
+      "name": "Jetsetters"
+    },
+    "teamB": {
+      "number": "8",
+      "name": "Return to Sender with Love"
+    }
+  },
+  {
+    "week": 4,
+    "date": "2025-06-24",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "11",
+      "name": "Full Metal Racquet"
+    },
+    "teamB": {
+      "number": "7",
+      "name": "Good Ol' Boys"
+    }
+  },
+  {
+    "week": 4,
+    "date": "2025-06-24",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "12",
+      "name": "Easy Overhead"
+    },
+    "teamB": {
+      "number": "6",
+      "name": "Rascals"
+    }
+  },
+  {
+    "week": 4,
+    "date": "2025-06-24",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "2",
+      "name": "Tennis the Menace"
+    },
+    "teamB": {
+      "number": "5",
+      "name": "Racquet Scientists"
+    }
+  },
+  {
+    "week": 4,
+    "date": "2025-06-24",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "3",
+      "name": "Zoomers"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Approach Shots"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2025-07-01",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "1",
+      "name": "Spin Doctors"
+    },
+    "teamB": {
+      "number": "8",
+      "name": "Return to Sender with Love"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2025-07-01",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "9",
+      "name": "Bounce It"
+    },
+    "teamB": {
+      "number": "7",
+      "name": "Good Ol' Boys"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2025-07-01",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "10",
+      "name": "Jetsetters"
+    },
+    "teamB": {
+      "number": "6",
+      "name": "Rascals"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2025-07-01",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "11",
+      "name": "Full Metal Racquet"
+    },
+    "teamB": {
+      "number": "5",
+      "name": "Racquet Scientists"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2025-07-01",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "12",
+      "name": "Easy Overhead"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Approach Shots"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2025-07-01",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "2",
+      "name": "Tennis the Menace"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Zoomers"
+    }
+  },
+  {
+    "week": 6,
+    "date": "2025-07-08",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "1",
+      "name": "Spin Doctors"
+    },
+    "teamB": {
+      "number": "7",
+      "name": "Good Ol' Boys"
+    }
+  },
+  {
+    "week": 6,
+    "date": "2025-07-08",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "8",
+      "name": "Return to Sender with Love"
+    },
+    "teamB": {
+      "number": "6",
+      "name": "Rascals"
+    }
+  },
+  {
+    "week": 6,
+    "date": "2025-07-08",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "9",
+      "name": "Bounce It"
+    },
+    "teamB": {
+      "number": "5",
+      "name": "Racquet Scientists"
+    }
+  },
+  {
+    "week": 6,
+    "date": "2025-07-08",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "10",
+      "name": "Jetsetters"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Approach Shots"
+    }
+  },
+  {
+    "week": 6,
+    "date": "2025-07-08",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "11",
+      "name": "Full Metal Racquet"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Zoomers"
+    }
+  },
+  {
+    "week": 6,
+    "date": "2025-07-08",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "12",
+      "name": "Easy Overhead"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Tennis the Menace"
+    }
+  },
+  {
+    "week": 7,
+    "date": "2025-07-15",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "1",
+      "name": "Spin Doctors"
+    },
+    "teamB": {
+      "number": "6",
+      "name": "Rascals"
+    }
+  },
+  {
+    "week": 7,
+    "date": "2025-07-15",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "7",
+      "name": "Good Ol' Boys"
+    },
+    "teamB": {
+      "number": "5",
+      "name": "Racquet Scientists"
+    }
+  },
+  {
+    "week": 7,
+    "date": "2025-07-15",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "8",
+      "name": "Return to Sender with Love"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Approach Shots"
+    }
+  },
+  {
+    "week": 7,
+    "date": "2025-07-15",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "9",
+      "name": "Bounce It"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Zoomers"
+    }
+  },
+  {
+    "week": 7,
+    "date": "2025-07-15",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "10",
+      "name": "Jetsetters"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Tennis the Menace"
+    }
+  },
+  {
+    "week": 7,
+    "date": "2025-07-15",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "11",
+      "name": "Full Metal Racquet"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Easy Overhead"
+    }
+  },
+  {
+    "week": 8,
+    "date": "2025-07-22",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "1",
+      "name": "Spin Doctors"
+    },
+    "teamB": {
+      "number": "5",
+      "name": "Racquet Scientists"
+    }
+  },
+  {
+    "week": 8,
+    "date": "2025-07-22",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "6",
+      "name": "Rascals"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Approach Shots"
+    }
+  },
+  {
+    "week": 8,
+    "date": "2025-07-22",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "7",
+      "name": "Good Ol' Boys"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Zoomers"
+    }
+  },
+  {
+    "week": 8,
+    "date": "2025-07-22",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "8",
+      "name": "Return to Sender with Love"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Tennis the Menace"
+    }
+  },
+  {
+    "week": 8,
+    "date": "2025-07-22",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "9",
+      "name": "Bounce It"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Easy Overhead"
+    }
+  },
+  {
+    "week": 8,
+    "date": "2025-07-22",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "10",
+      "name": "Jetsetters"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Full Metal Racquet"
+    }
+  },
+  {
+    "week": 9,
+    "date": "2025-07-29",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "1",
+      "name": "Spin Doctors"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Approach Shots"
+    }
+  },
+  {
+    "week": 9,
+    "date": "2025-07-29",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "5",
+      "name": "Racquet Scientists"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Zoomers"
+    }
+  },
+  {
+    "week": 9,
+    "date": "2025-07-29",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "6",
+      "name": "Rascals"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Tennis the Menace"
+    }
+  },
+  {
+    "week": 9,
+    "date": "2025-07-29",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "7",
+      "name": "Good Ol' Boys"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Easy Overhead"
+    }
+  },
+  {
+    "week": 9,
+    "date": "2025-07-29",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "8",
+      "name": "Return to Sender with Love"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Full Metal Racquet"
+    }
+  },
+  {
+    "week": 9,
+    "date": "2025-07-29",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "9",
+      "name": "Bounce It"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Jetsetters"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2025-08-05",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "1",
+      "name": "Spin Doctors"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Zoomers"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2025-08-05",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "4",
+      "name": "Approach Shots"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Tennis the Menace"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2025-08-05",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "5",
+      "name": "Racquet Scientists"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Easy Overhead"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2025-08-05",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "6",
+      "name": "Rascals"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Full Metal Racquet"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2025-08-05",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "7",
+      "name": "Good Ol' Boys"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Jetsetters"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2025-08-05",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "8",
+      "name": "Return to Sender with Love"
+    },
+    "teamB": {
+      "number": "9",
+      "name": "Bounce It"
+    }
+  },
+  {
+    "week": 11,
+    "date": "2025-08-12",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "1",
+      "name": "Spin Doctors"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Tennis the Menace"
+    }
+  },
+  {
+    "week": 11,
+    "date": "2025-08-12",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "3",
+      "name": "Zoomers"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Easy Overhead"
+    }
+  },
+  {
+    "week": 11,
+    "date": "2025-08-12",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "4",
+      "name": "Approach Shots"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Full Metal Racquet"
+    }
+  },
+  {
+    "week": 11,
+    "date": "2025-08-12",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "5",
+      "name": "Racquet Scientists"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Jetsetters"
+    }
+  },
+  {
+    "week": 11,
+    "date": "2025-08-12",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "6",
+      "name": "Rascals"
+    },
+    "teamB": {
+      "number": "9",
+      "name": "Bounce It"
+    }
+  },
+  {
+    "week": 11,
+    "date": "2025-08-12",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "7",
+      "name": "Good Ol' Boys"
+    },
+    "teamB": {
+      "number": "8",
+      "name": "Return to Sender with Love"
+    }
+  }
+]

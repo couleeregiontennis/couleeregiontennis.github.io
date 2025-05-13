@@ -1,0 +1,45 @@
+{
+  "teamName": "Full Metal Racquet",
+  "roster": [
+    {
+      "position": 1,
+      "name": "Tayler Garves Nelson",
+      "captain": ""
+    },
+    {
+      "position": 2,
+      "name": "Todd Garves",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Martin Frank",
+      "captain": "✓"
+    },
+    {
+      "position": 3,
+      "name": "Regina Jones",
+      "captain": "✓"
+    },
+    {
+      "position": 3,
+      "name": "Stephen Sinur",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Hannah Exner",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Kim Garves",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "Jane Frank",
+      "captain": ""
+    }
+  ]
+}

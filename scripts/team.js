@@ -1,21 +1,22 @@
 // This script dynamically loads match and roster data into tables and highlights the next match
-
-async function loadTeamData(jsonUrl) {
+async function loadTeamData(scheduleUrl, rosterUrl) {
   const tableBody = document.querySelector("#matches-table tbody");
   const rosterBody = document.querySelector("table:not(#matches-table) tbody");
   const header = document.getElementById("team-name");
   if (!tableBody || !rosterBody) return;
 
   try {
-    const response = await fetch(jsonUrl);
-    const data = await response.json();
+    const scheduleResponse = await fetch(scheduleUrl);
+    const scheduleData = await scheduleResponse.json();
+    const rosterResponse = await fetch(rosterUrl);
+    const rosterData = await rosterResponse.json();
 
     // Update header with team name if available
-    if (header && data.name) header.textContent = data.name;
+    if (header && rosterData.teamName) header.textContent = rosterData.teamName;
 
     // Populate matches table
     tableBody.innerHTML = "";
-    (data.matches || []).forEach(match => {
+    (scheduleData.schedule || []).forEach(match => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${match.week}</td>
@@ -31,7 +32,7 @@ async function loadTeamData(jsonUrl) {
 
     // Populate roster table
     rosterBody.innerHTML = "";
-    (data.roster || []).forEach(player => {
+    (rosterData.roster || []).forEach(player => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${player.position}</td>
@@ -89,6 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const day = getDayFromUrl();
   if (team && day) {
     // Adjust path as needed for your structure
-    loadTeamData(`../data/${day}/${team}.json`);
+    loadTeamData(`../teams/${day}/schedules/${team}.json`, `../teams/${day}/rosters/${team}.json`);
   }
 });
