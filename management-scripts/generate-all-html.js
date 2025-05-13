@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const day = "wednesday"; // Change to "wednesday" to generate for Wednesday
+const day = "tuesday"; // Change to day of week to generate schedule for
 const year = 2025;     // Change if needed
 
 const dataDir = path.join(__dirname, '..', 'data', day);
@@ -17,14 +17,14 @@ function formatDate(dateStr) {
   return `${day}-${month}`;
 }
 
-// Only use these court groups, in this order
+// use these court groups, in this order
 const allCourts = [
   "Courts 1–5",
   "Courts 6–9",
   "Courts 10–13"
 ];
 
-// Only use these times, in this order
+// use these times, in this order
 const allTimes = [
   "5:30pm",
   "7:00pm"
