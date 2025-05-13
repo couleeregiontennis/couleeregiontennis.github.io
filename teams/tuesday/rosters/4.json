@@ -1,0 +1,45 @@
+{
+  "teamName": "Approach Shots",
+  "roster": [
+    {
+      "position": 1,
+      "name": "Greg Schibbelhut",
+      "captain": ""
+    },
+    {
+      "position": 2,
+      "name": "Dillon Eddingsaas",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "John Aschenbrenner",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Mary Aschenbrenner",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Dale Barclay",
+      "captain": "✓"
+    },
+    {
+      "position": 3,
+      "name": "Rich Levinger",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Judith Engen",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "Amanda Wilke",
+      "captain": ""
+    }
+  ]
+}

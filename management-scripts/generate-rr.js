@@ -28,14 +28,17 @@ function groupByNight(rows) {
   const groups = {};
   rows.forEach(row => {
     const night = row.Night && row.Night.trim();
-    const team = row.Team != null ? String(row.Team).trim() : null;
-    if (!night || !team) return;
-    if (!groups[night]) groups[night] = new Set();
-    groups[night].add(team);
+    const number = row.Team != null ? String(row.Team).trim() : null;
+    const name = row['TEAM NAME'] ? row['TEAM NAME'].trim() : null;
+    if (!night || !number) return;
+    if (!groups[night]) groups[night] = new Map();
+    if (!groups[night].has(number)) {
+      groups[night].set(number, { number, name });
+    }
   });
-  // Convert sets to arrays
+  // Convert maps to arrays
   Object.keys(groups).forEach(night => {
-    groups[night] = Array.from(groups[night]);
+    groups[night] = Array.from(groups[night].values());
   });
   return groups;
 }
@@ -79,7 +82,8 @@ function assignSlotsToMatches(matchesByWeek, teams) {
   matchesByWeek.forEach((matches, weekIdx) => {
     // Shuffle slots for fairness
     const weekSlots = [...slots];
-    // Optionally: rotate slots for variety
+    
+    // Rotate slots for variety
     if (weekIdx % 2 === 1) weekSlots.reverse();
 
     const assignments = [];
@@ -104,6 +108,15 @@ function assignSlotsToMatches(matchesByWeek, teams) {
 // Main
 function main() {
   const rows = loadSheet(INPUT_FILE);
+
+  // Normalize Night field to "tuesday" or "wednesday"
+  rows.forEach(row => {
+    if (row.Night) {
+      const n = row.Night.trim().toLowerCase();
+      if (n.startsWith('tue')) row.Night = 'tuesday';
+      else if (n.startsWith('wed')) row.Night = 'wednesday';
+    }
+  });
   const groups = groupByNight(rows);
 
   if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR);
@@ -147,32 +160,46 @@ function main() {
 
     // Write per-team schedules
     const schedules = {};
-    teams.forEach(t => schedules[t] = []);
+    teams.forEach(t => schedules[t.number] = []);
     weekAssignments.forEach((matches, weekIdx) => {
       matches.forEach(match => {
-        if (!schedules[match.teamA]) schedules[match.teamA] = [];
-        if (!schedules[match.teamB]) schedules[match.teamB] = [];
+        // Find team objects for A and B
+        const teamA = teams.find(t => t.number === match.teamA.number);
+        const teamB = teams.find(t => t.number === match.teamB.number);
         const entry = {
           week: weekIdx + 1,
           date: weekDates[weekIdx],
           time: match.time,
           courts: match.court,
-          opponent: match.teamB
+          opponent: {
+            name: teamB.name,
+            number: teamB.number,
+            file: `/pages/team.html?day=${night}&team=${teamB.number}`
+          }
         };
-        const entryB = { ...entry, opponent: match.teamA };
-        schedules[match.teamA].push(entry);
-        schedules[match.teamB].push(entryB);
+        const entryB = {
+          week: weekIdx + 1,
+          date: weekDates[weekIdx],
+          time: match.time,
+          courts: match.court,
+          opponent: {
+            name: teamA.name,
+            number: teamA.number,
+            file: `/pages/team.html?day=${night}&team=${teamA.number}`
+          }
+        };
+        schedules[teamA.number].push(entry);
+        schedules[teamB.number].push(entryB);
       });
     });
 
     // Write JSON files
-    const jsonFileFolderNight = night == "Tues" ? "tuesday" : "wednesday";
-    const groupDir = path.join(OUTPUT_DIR, jsonFileFolderNight, "schedules");
+    const groupDir = path.join(OUTPUT_DIR, night, "schedules");
     if (!fs.existsSync(groupDir)) fs.mkdirSync(groupDir, { recursive: true });
     for (const [team, sched] of Object.entries(schedules)) {
       fs.writeFileSync(
         path.join(groupDir, `${team.replace(/\s+/g, '_')}.json`),
-        JSON.stringify({ team, night: jsonFileFolderNight, schedule: sched }, null, 2)
+        JSON.stringify({ team, night: night, schedule: sched }, null, 2)
       );
     }
     console.log(`✅ Generated ${teams.length} team schedules for '${night}'`);

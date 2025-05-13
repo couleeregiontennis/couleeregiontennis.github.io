@@ -27,10 +27,11 @@ function createRostersFromCSV(csvPath) {
   // Write one file per team, in subfolders by night
   for (const [key, teamObj] of Object.entries(rosters)) {
     const { night, teamNum, teamName, roster } = teamObj;
-    const outDir = path.join(__dirname, '..', 'teams', night, 'rosters');
+    const jsonFileFolderNight = night == "Tues" ? "tuesday" : "wednesday";
+    const outDir = path.join(__dirname, '..', 'teams', jsonFileFolderNight, 'rosters');
     fs.mkdirSync(outDir, { recursive: true });
-    const outPath = path.join(outDir, `${teamNum}_${teamName.replace(/\s+/g, '_')}_roster.json`);
-    fs.writeFileSync(outPath, JSON.stringify({ roster }, null, 2));
+    const outPath = path.join(outDir, `${teamNum}.json`);
+    fs.writeFileSync(outPath, JSON.stringify({ teamName, roster }, null, 2));
     console.log(`Wrote roster for ${night} team ${teamNum} (${teamName})`);
   }
 }
