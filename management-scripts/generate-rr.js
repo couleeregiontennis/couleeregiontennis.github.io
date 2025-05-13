@@ -166,13 +166,13 @@ function main() {
     });
 
     // Write JSON files
-    night = night == "Tues" ? "tuesday" : "wednesday";
-    const groupDir = path.join(OUTPUT_DIR, night, "schedules");
+    const jsonFileFolderNight = night == "Tues" ? "tuesday" : "wednesday";
+    const groupDir = path.join(OUTPUT_DIR, jsonFileFolderNight, "schedules");
     if (!fs.existsSync(groupDir)) fs.mkdirSync(groupDir, { recursive: true });
     for (const [team, sched] of Object.entries(schedules)) {
       fs.writeFileSync(
         path.join(groupDir, `${team.replace(/\s+/g, '_')}.json`),
-        JSON.stringify({ team, night, schedule: sched }, null, 2)
+        JSON.stringify({ team, night: jsonFileFolderNight, schedule: sched }, null, 2)
       );
     }
     console.log(`✅ Generated ${teams.length} team schedules for '${night}'`);
