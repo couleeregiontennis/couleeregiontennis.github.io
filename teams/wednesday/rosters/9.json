@@ -1,0 +1,45 @@
+{
+  "teamName": "Baseliners",
+  "roster": [
+    {
+      "position": 1,
+      "name": "John Hildebrandt",
+      "captain": ""
+    },
+    {
+      "position": 2,
+      "name": "Dan Bodelson",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Dick Deml",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Al Graewin",
+      "captain": "✓"
+    },
+    {
+      "position": 3,
+      "name": "Mark Schlafer",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Joey Endrizzi",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Terri Kaiser",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "Jill Graewin",
+      "captain": ""
+    }
+  ]
+}

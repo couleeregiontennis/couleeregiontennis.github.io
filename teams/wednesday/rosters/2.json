@@ -1,0 +1,45 @@
+{
+  "teamName": "Rally Monkeys",
+  "roster": [
+    {
+      "position": 1,
+      "name": "Brett Meddaugh",
+      "captain": "✓"
+    },
+    {
+      "position": 2,
+      "name": "Greg Jameson",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Pam Jameson",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Andy Seithamer",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Bette Smith",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Rick Moody",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Greg Smith",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "Hailey Kincaid",
+      "captain": ""
+    }
+  ]
+}
