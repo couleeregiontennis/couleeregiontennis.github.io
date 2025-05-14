@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-tuesday-12-week8@couleeregiontennis.org
+DTSTAMP:20250722T190000Z
+DTSTART;TZID=America/Chicago:20250722T190000
+DTEND;TZID=America/Chicago:20250722T203000
+SUMMARY:LTTA Tennis: vs Bounce It
+DESCRIPTION:LTTA Tennis match: 12 vs Bounce It at Courts 1–5\nOpponent Roster: Yubo Nian (1); Matt Diehl (2); Tom Dwyer (3); Joe Kotnour Sr. (3); Sean O'Flaherty (3); Dan Skemp (3); Aziz Bhetasiwala (4); Mike Roskos (5)
+LOCATION:Courts 1–5
+END:VEVENT
+END:VCALENDAR

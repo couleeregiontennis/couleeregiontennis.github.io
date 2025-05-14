@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-wednesday-5-week1@couleeregiontennis.org
+DTSTAMP:20250604T173000Z
+DTSTART;TZID=America/Chicago:20250604T173000
+DTEND;TZID=America/Chicago:20250604T190000
+SUMMARY:LTTA Tennis: vs Not My Fault
+DESCRIPTION:LTTA Tennis match: 5 vs Not My Fault at Courts 10–13\nOpponent Roster: Joe O'Flaherty (1); Ran Ikeyama (2); Dan Grilley (3); Ben Haenni (3); Tamara Byrne (3); Josh Neukom (3); Basu Bhattacharyya (4); John May (5)
+LOCATION:Courts 10–13
+END:VEVENT
+END:VCALENDAR

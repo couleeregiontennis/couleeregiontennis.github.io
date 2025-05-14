@@ -11,7 +11,8 @@
         "name": "Glory Days",
         "number": "5",
         "file": "/pages/team.html?day=wednesday&team=5"
-      }
+      },
+      "ics": "/teams/wednesday/ics/8/week1.ics"
     },
     {
       "week": 2,
@@ -22,7 +23,8 @@
         "name": "Hit Squad",
         "number": "3",
         "file": "/pages/team.html?day=wednesday&team=3"
-      }
+      },
+      "ics": "/teams/wednesday/ics/8/week2.ics"
     },
     {
       "week": 3,
@@ -33,7 +35,8 @@
         "name": "Nothing But Net",
         "number": "12",
         "file": "/pages/team.html?day=wednesday&team=12"
-      }
+      },
+      "ics": "/teams/wednesday/ics/8/week3.ics"
     },
     {
       "week": 4,
@@ -44,7 +47,8 @@
         "name": "Backhand Bandits",
         "number": "10",
         "file": "/pages/team.html?day=wednesday&team=10"
-      }
+      },
+      "ics": "/teams/wednesday/ics/8/week4.ics"
     },
     {
       "week": 5,
@@ -55,7 +59,8 @@
         "name": "LAX-Winona Infusion",
         "number": "1",
         "file": "/pages/team.html?day=wednesday&team=1"
-      }
+      },
+      "ics": "/teams/wednesday/ics/8/week5.ics"
     },
     {
       "week": 6,
@@ -66,7 +71,8 @@
         "name": "Howie's Team",
         "number": "6",
         "file": "/pages/team.html?day=wednesday&team=6"
-      }
+      },
+      "ics": "/teams/wednesday/ics/8/week6.ics"
     },
     {
       "week": 7,
@@ -77,7 +83,8 @@
         "name": "Hot Shots",
         "number": "4",
         "file": "/pages/team.html?day=wednesday&team=4"
-      }
+      },
+      "ics": "/teams/wednesday/ics/8/week7.ics"
     },
     {
       "week": 8,
@@ -88,7 +95,8 @@
         "name": "Rally Monkeys",
         "number": "2",
         "file": "/pages/team.html?day=wednesday&team=2"
-      }
+      },
+      "ics": "/teams/wednesday/ics/8/week8.ics"
     },
     {
       "week": 9,
@@ -99,7 +107,8 @@
         "name": "Simply Smashing",
         "number": "11",
         "file": "/pages/team.html?day=wednesday&team=11"
-      }
+      },
+      "ics": "/teams/wednesday/ics/8/week9.ics"
     },
     {
       "week": 10,
@@ -110,7 +119,8 @@
         "name": "Baseliners",
         "number": "9",
         "file": "/pages/team.html?day=wednesday&team=9"
-      }
+      },
+      "ics": "/teams/wednesday/ics/8/week10.ics"
     },
     {
       "week": 11,
@@ -121,7 +131,8 @@
         "name": "Serve Aces",
         "number": "7",
         "file": "/pages/team.html?day=wednesday&team=7"
-      }
+      },
+      "ics": "/teams/wednesday/ics/8/week11.ics"
     }
   ]
 }

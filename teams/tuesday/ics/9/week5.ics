@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-tuesday-9-week5@couleeregiontennis.org
+DTSTAMP:20250701T190000Z
+DTSTART;TZID=America/Chicago:20250701T190000
+DTEND;TZID=America/Chicago:20250701T203000
+SUMMARY:LTTA Tennis: vs Good Ol' Boys
+DESCRIPTION:LTTA Tennis match: 9 vs Good Ol' Boys at Courts 1–5\nOpponent Roster: Paul Jacobson (1); Dave Bentz (2); Don Harvey (3); David Lange (3); Larry Ruff (3); Cory Ruud (3); Pennie Pierce-Jorgeson (4); Sally Ruud (5)
+LOCATION:Courts 1–5
+END:VEVENT
+END:VCALENDAR

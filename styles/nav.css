@@ -46,6 +46,7 @@
 .navbar-menu li {
   border: none;
   width: auto;
+  list-style: none;
 }
 
 .navbar-menu a {

@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-wednesday-11-week4@couleeregiontennis.org
+DTSTAMP:20250625T173000Z
+DTSTART;TZID=America/Chicago:20250625T173000
+DTEND;TZID=America/Chicago:20250625T190000
+SUMMARY:LTTA Tennis: vs Serve Aces
+DESCRIPTION:LTTA Tennis match: 11 vs Serve Aces at Courts 6–9\nOpponent Roster: Mark Hoff (1); Gina Nelms (2); Luke Bussiere (3); Franklin Greene (3); Nicole Hoff (3); Michelle Rank (3); Sharon Harter (4); Asa Harter (5)
+LOCATION:Courts 6–9
+END:VEVENT
+END:VCALENDAR

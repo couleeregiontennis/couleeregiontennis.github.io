@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-tuesday-12-week2@couleeregiontennis.org
+DTSTAMP:20250610T173000Z
+DTSTART;TZID=America/Chicago:20250610T173000
+DTEND;TZID=America/Chicago:20250610T190000
+SUMMARY:LTTA Tennis: vs Jetsetters
+DESCRIPTION:LTTA Tennis match: 12 vs Jetsetters at Courts 10–13\nOpponent Roster: Julio Bird (1); Elia Romano (2); Jada Brunkow (3); Dan Petersen (3); Shirley Yuan (3); Ryan Mullaney (3); Kim Hardy (4); Leonardo Silva (5)
+LOCATION:Courts 10–13
+END:VEVENT
+END:VCALENDAR
