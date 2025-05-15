@@ -11,7 +11,8 @@
         "name": "Tennis the Menace",
         "number": "2",
         "file": "/pages/team.html?day=tuesday&team=2"
-      }
+      },
+      "ics": "/teams/tuesday/ics/11/week1.ics"
     },
     {
       "week": 2,
@@ -22,7 +23,8 @@
         "name": "Spin Doctors",
         "number": "1",
         "file": "/pages/team.html?day=tuesday&team=1"
-      }
+      },
+      "ics": "/teams/tuesday/ics/11/week2.ics"
     },
     {
       "week": 3,
@@ -33,7 +35,8 @@
         "name": "Bounce It",
         "number": "9",
         "file": "/pages/team.html?day=tuesday&team=9"
-      }
+      },
+      "ics": "/teams/tuesday/ics/11/week3.ics"
     },
     {
       "week": 4,
@@ -44,7 +47,8 @@
         "name": "Good Ol' Boys",
         "number": "7",
         "file": "/pages/team.html?day=tuesday&team=7"
-      }
+      },
+      "ics": "/teams/tuesday/ics/11/week4.ics"
     },
     {
       "week": 5,
@@ -55,7 +59,8 @@
         "name": "Racquet Scientists",
         "number": "5",
         "file": "/pages/team.html?day=tuesday&team=5"
-      }
+      },
+      "ics": "/teams/tuesday/ics/11/week5.ics"
     },
     {
       "week": 6,
@@ -66,7 +71,8 @@
         "name": "Zoomers",
         "number": "3",
         "file": "/pages/team.html?day=tuesday&team=3"
-      }
+      },
+      "ics": "/teams/tuesday/ics/11/week6.ics"
     },
     {
       "week": 7,
@@ -77,7 +83,8 @@
         "name": "Easy Overhead",
         "number": "12",
         "file": "/pages/team.html?day=tuesday&team=12"
-      }
+      },
+      "ics": "/teams/tuesday/ics/11/week7.ics"
     },
     {
       "week": 8,
@@ -88,7 +95,8 @@
         "name": "Jetsetters",
         "number": "10",
         "file": "/pages/team.html?day=tuesday&team=10"
-      }
+      },
+      "ics": "/teams/tuesday/ics/11/week8.ics"
     },
     {
       "week": 9,
@@ -99,7 +107,8 @@
         "name": "Return to Sender with Love",
         "number": "8",
         "file": "/pages/team.html?day=tuesday&team=8"
-      }
+      },
+      "ics": "/teams/tuesday/ics/11/week9.ics"
     },
     {
       "week": 10,
@@ -110,7 +119,8 @@
         "name": "Rascals",
         "number": "6",
         "file": "/pages/team.html?day=tuesday&team=6"
-      }
+      },
+      "ics": "/teams/tuesday/ics/11/week10.ics"
     },
     {
       "week": 11,
@@ -121,7 +131,8 @@
         "name": "Approach Shots",
         "number": "4",
         "file": "/pages/team.html?day=tuesday&team=4"
-      }
+      },
+      "ics": "/teams/tuesday/ics/11/week11.ics"
     }
   ]
 }

@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-tuesday-11-week11@couleeregiontennis.org
+DTSTAMP:20250812T190000Z
+DTSTART;TZID=America/Chicago:20250812T190000
+DTEND;TZID=America/Chicago:20250812T203000
+SUMMARY:LTTA Tennis: vs Approach Shots
+DESCRIPTION:LTTA Tennis match: 11 vs Approach Shots at Courts 6–9\nOpponent Roster: Greg Schibbelhut (1); Dillon Eddingsaas (2); John Aschenbrenner (3); Mary Aschenbrenner (3); Dale Barclay (3); Rich Levinger (3); Judith Engen (4); Amanda Wilke (5)
+LOCATION:Courts 6–9
+END:VEVENT
+END:VCALENDAR

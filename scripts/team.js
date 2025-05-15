@@ -17,6 +17,9 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
     // Populate matches table
     tableBody.innerHTML = "";
     (scheduleData.schedule || []).forEach(match => {
+      const icsLink = match.ics
+        ? `<a href="${match.ics}" download="LTTA-Match-Week${match.week}.ics" title="Add to calendar">📅</a>`
+        : '';
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${match.week}</td>
@@ -26,6 +29,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
           <a href="${match.opponent.file}" class="team-link">${match.opponent.name}</a>
         </td>
         <td>${match.courts}</td>
+        <td style="text-align:center">${icsLink}</td>
       `;
       tableBody.appendChild(tr);
     });

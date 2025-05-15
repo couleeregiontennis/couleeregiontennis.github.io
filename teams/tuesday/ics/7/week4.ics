@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-tuesday-7-week4@couleeregiontennis.org
+DTSTAMP:20250624T173000Z
+DTSTART;TZID=America/Chicago:20250624T173000
+DTEND;TZID=America/Chicago:20250624T190000
+SUMMARY:LTTA Tennis: vs Full Metal Racquet
+DESCRIPTION:LTTA Tennis match: 7 vs Full Metal Racquet at Courts 6–9\nOpponent Roster: Tayler Garves Nelson (1); Todd Garves (2); Martin Frank (3); Regina Jones (3); Stephen Sinur (3); Hannah Exner (3); Kim Garves (4); Jane Frank (5)
+LOCATION:Courts 6–9
+END:VEVENT
+END:VCALENDAR

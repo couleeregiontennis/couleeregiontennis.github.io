@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-tuesday-11-week9@couleeregiontennis.org
+DTSTAMP:20250729T173000Z
+DTSTART;TZID=America/Chicago:20250729T173000
+DTEND;TZID=America/Chicago:20250729T190000
+SUMMARY:LTTA Tennis: vs Return to Sender with Love
+DESCRIPTION:LTTA Tennis match: 11 vs Return to Sender with Love at Courts 10–13\nOpponent Roster: Denny Kreuser (1); Paul Leithold (2); Sara Bieneman (3); Kate Skaar (3); Julie Kamla (3); Leah Bower (3); Catherine Roraff (4); Mary Leithold (5)
+LOCATION:Courts 10–13
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-wednesday-7-week4@couleeregiontennis.org
+DTSTAMP:20250625T173000Z
+DTSTART;TZID=America/Chicago:20250625T173000
+DTEND;TZID=America/Chicago:20250625T190000
+SUMMARY:LTTA Tennis: vs Simply Smashing
+DESCRIPTION:LTTA Tennis match: 7 vs Simply Smashing at Courts 6–9\nOpponent Roster: Kurt Gutknecht (1); Therese Waltz (2); Kacey Nomland (3); Tyler Thomas (3); David Yao (3); Kris Bartley (3); Jenna Dinkel (4); Logan Dzielinski (5)
+LOCATION:Courts 6–9
+END:VEVENT
+END:VCALENDAR

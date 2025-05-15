@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-wednesday-12-week5@couleeregiontennis.org
+DTSTAMP:20250702T173000Z
+DTSTART;TZID=America/Chicago:20250702T173000
+DTEND;TZID=America/Chicago:20250702T190000
+SUMMARY:LTTA Tennis: vs Hot Shots
+DESCRIPTION:LTTA Tennis match: 12 vs Hot Shots at Courts 10–13\nOpponent Roster: Laura Reutlinger (1); Roxie Anderson (2); Chris Kahlow (3); Taylor Nelson (3); Bryan Spier (3); Gracie Miller (3); Mike Leonard (4); John Noble (5)
+LOCATION:Courts 10–13
+END:VEVENT
+END:VCALENDAR

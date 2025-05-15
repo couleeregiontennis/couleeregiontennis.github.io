@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-wednesday-6-week4@couleeregiontennis.org
+DTSTAMP:20250625T190000Z
+DTSTART;TZID=America/Chicago:20250625T190000
+DTEND;TZID=America/Chicago:20250625T203000
+SUMMARY:LTTA Tennis: vs Nothing But Net
+DESCRIPTION:LTTA Tennis match: 6 vs Nothing But Net at Courts 6–9\nOpponent Roster: Alex Hiller (1); Tom Londergan (2); Lewis Kuhlman (3); Sarah Wengerter (3); Brittney DeChambeau (3); Kevin LeQue (3); Amy Harter (4); Joe Hurley (5)
+LOCATION:Courts 6–9
+END:VEVENT
+END:VCALENDAR

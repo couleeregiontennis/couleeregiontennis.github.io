@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-tuesday-7-week1@couleeregiontennis.org
+DTSTAMP:20250603T190000Z
+DTSTART;TZID=America/Chicago:20250603T190000
+DTEND;TZID=America/Chicago:20250603T203000
+SUMMARY:LTTA Tennis: vs Rascals
+DESCRIPTION:LTTA Tennis match: 7 vs Rascals at Courts 10–13\nOpponent Roster: Peter Coppola (1); Laura Coppola (2); Ellen Seithamer (3); Pete  Thomson (3); Craig Hanson (3); Jason Herbert (3); Dan Russell (4); Becky Rauch (5)
+LOCATION:Courts 10–13
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-tuesday-6-week7@couleeregiontennis.org
+DTSTAMP:20250715T173000Z
+DTSTART;TZID=America/Chicago:20250715T173000
+DTEND;TZID=America/Chicago:20250715T190000
+SUMMARY:LTTA Tennis: vs Spin Doctors
+DESCRIPTION:LTTA Tennis match: 6 vs Spin Doctors at Courts 1–5\nOpponent Roster: Tung Ouy (1); Rich Puent (2); Sai Mathi (3); Sakura Ikeyama (3); Molly Stenger (3); Mohammad (3); Jim Brieske (4); Kalyan Satydeep (5)
+LOCATION:Courts 1–5
+END:VEVENT
+END:VCALENDAR

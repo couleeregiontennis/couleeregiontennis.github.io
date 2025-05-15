@@ -105,6 +105,38 @@ function assignSlotsToMatches(matchesByWeek, teams) {
   return weekAssignments;
 }
 
+// Helper to create ICS event content
+function createICSEvent({summary, description, location, startDate, startTime, endTime, uid}) {
+  // startDate: 'YYYY-MM-DD', startTime: 'HH:MM', endTime: 'HH:MM'
+  const dtStart = `${startDate.replace(/-/g, '')}T${startTime.replace(':', '')}00`;
+  const dtEnd = `${startDate.replace(/-/g, '')}T${endTime.replace(':', '')}00`;
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Coulee Region Tennis//LTTA//EN',
+    'BEGIN:VEVENT',
+    `UID:${uid}`,
+    `DTSTAMP:${dtStart}Z`,
+    `DTSTART;TZID=America/Chicago:${dtStart}`,
+    `DTEND;TZID=America/Chicago:${dtEnd}`,
+    `SUMMARY:${summary}`,
+    `DESCRIPTION:${description}`,
+    `LOCATION:${location}`,
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+}
+
+// Helper to get end time (assume 1.5 hours for each match)
+function getEndTime(startTime) {
+  const [h, m] = startTime.split(':').map(Number);
+  let hour = h, min = m;
+  min += 90;
+  hour += Math.floor(min / 60);
+  min = min % 60;
+  return `${hour.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}`;
+}
+
 // Main
 function main() {
   const rows = loadSheet(INPUT_FILE);
@@ -125,6 +157,16 @@ function main() {
     if (teams.length < 2) {
       console.log(`Skipping '${night}' (only ${teams.length} team)`);
       continue;
+    }
+
+    const rosterDir = path.join(OUTPUT_DIR, night, "rosters");
+    const rosters = {};
+    if (fs.existsSync(rosterDir)) {
+      fs.readdirSync(rosterDir).forEach(file => {
+        const teamNum = file.replace(/\.json$/, '');
+        const data = JSON.parse(fs.readFileSync(path.join(rosterDir, file)));
+        rosters[teamNum] = data.roster || [];
+      });
     }
 
     const matchesByWeek = generateRoundRobin(teams);
@@ -202,6 +244,44 @@ function main() {
         JSON.stringify({ team, night: night, schedule: sched }, null, 2)
       );
     }
+
+    // Write ICS files
+    const icsDirBase = path.join(OUTPUT_DIR, night, "ics");
+    for (const [team, sched] of Object.entries(schedules)) {
+      const icsDir = path.join(icsDirBase, team.replace(/\s+/g, '_'));
+      if (!fs.existsSync(icsDir)) fs.mkdirSync(icsDir, { recursive: true });
+      sched.forEach(match => {
+        const startTime = match.time.replace('pm', '') === '7:00' ? '19:00' : '17:30';
+        const endTime = getEndTime(startTime);
+        const summary = `LTTA Tennis: vs ${match.opponent.name}`;
+        const opponentNum = match.opponent.number;
+        const opponentRoster = rosters[opponentNum] || [];
+        const rosterText = opponentRoster.length
+          ? '\\nOpponent Roster: ' + opponentRoster.map(p => `${p.name} (${p.position})`).join('; ')
+          : '';
+        const description = `LTTA Tennis match: ${team} vs ${match.opponent.name} at ${match.courts}${rosterText}`;
+        const location = match.courts;
+        const uid = `ltta-${night}-${team}-week${match.week}@couleeregiontennis.org`;
+        const icsContent = createICSEvent({
+          summary,
+          description,
+          location,
+          startDate: match.date,
+          startTime,
+          endTime,
+          uid
+        });
+        const icsPath = path.join(icsDir, `week${match.week}.ics`);
+        fs.writeFileSync(icsPath, icsContent);
+        match.ics = `/teams/${night}/ics/${team.replace(/\s+/g, '_')}/week${match.week}.ics`;
+      });
+      // Overwrite JSON with ICS links included
+      fs.writeFileSync(
+        path.join(groupDir, `${team.replace(/\s+/g, '_')}.json`),
+        JSON.stringify({ team, night: night, schedule: sched }, null, 2)
+      );
+    }
+
     console.log(`✅ Generated ${teams.length} team schedules for '${night}'`);
 
     // Write master schedule for this night
