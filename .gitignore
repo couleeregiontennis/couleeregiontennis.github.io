@@ -19,3 +19,4 @@ Gemfile.lock
 .DS_Store
 ltta.csv
 /node_modules
+output_emails/*
