@@ -74,10 +74,9 @@ fs.createReadStream(INPUT_CSV)
         return;
       }
 
-      const subject = `LTTA ${night} Team ${teamNumber} ${teamName} – Summer 2025 Season Details`;
       const fileName = path.join(
         OUTPUT_DIR,
-        `${night}_Team_${teamNumber}_${teamName.replace(/\s+/g, '_')}.txt`
+        `${night}_Team_${teamNumber}_${teamName.replace(/\s+/g, '_')}.html`
       );
 
 const coCaptain = team.coCaptain;
@@ -98,85 +97,115 @@ ${coCaptain.name}
 
 const nightCoordinatorSection = `
 Your Night Coordinator  
-#1 ${nightCoordinator.name}  
+${nightCoordinator.name}  
 📞 ${nightCoordinator.phone}
 `;
 
 
-      const body = `
-Hi ${teamName} Team,
+const body = `
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body style="font-family: Arial, sans-serif; color: #333333; line-height: 1.6; padding: 20px; max-width: 700px; margin: auto; background-color: #ffffff;">
+    
+    <h2 style="color: #004080; margin-bottom: 0;">Hello LTTA ${night} Team ${teamNumber} ${teamName}:</h2>
+    <p style="margin-top: 5px;">Here we go – our 42nd year for La Crosse Team Tennis Association (LTTA) tennis league.</p>
 
-Welcome to the 42nd year of the La Crosse Team Tennis Association (LTTA) league!
+    <hr style="border: none; border-top: 1px solid #cccccc; margin: 20px 0;" />
 
-We’re trying a few new things this summer. Visit our website:  
-👉 https://couleeregiontennis.github.io
+    <p>We're trying something a little different this year. Visit:</p>
+    <p><a href="https://couleeregiontennis.github.io" style="color: #0066cc;">https://couleeregiontennis.github.io</a></p>
 
-You'll find:
-- Team and full league schedules (printable)
-- Team rosters
-- League rules
-- Info on Green Island Tennis Courts
-- GroupMe links to help you find a sub
+    <p>There you’ll find:</p>
+    <ul style="margin-top: 0; padding-left: 20px;">
+      <li>Your team schedule</li>
+      <li>Printable schedule for all teams</li>
+      <li>The ability to add matches to your calendar</li>
+      <li>Team rosters</li>
+      <li>Rules</li>
+      <li>Green Island info</li>
+      <li>GroupMe chats to help find a sub</li>
+    </ul>
 
-I plan to add team standings once the season starts. If you run into any issues, let me know. Feedback is welcome.
+    <p>Once the season starts, we’ll add team standings. Feel free to send any feedback.</p>
 
----
+    <hr style="border: none; border-top: 1px solid #cccccc; margin: 20px 0;" />
 
-${captainSection}${coCaptainSection}${nightCoordinatorSection}
+    <p><strong>Your Team Captain</strong><br>
+    #3 ${captain.name}<br>
+    📞 ${captain.phone}</p>
 
----
+    ${coCaptain ? `
+    <p><strong>Your Co-Captain</strong><br>
+    ${coCaptain.name}<br>
+    📞 ${coCaptain.phone}</p>
+    ` : ''}
 
-Key Info
+    <p><span style="font-size:0.50em; color:#666;">(see Rules area of website for info on On-Site Coordinator)</span><br>
+    <strong>On-Site Coordinator</strong><br>
+    ${nightCoordinator.name}<br>
+    📞 ${nightCoordinator.phone}</p>
 
-- Start Date: Tuesday, June 3 and Wednesday, June 4  
-- Start Times: 5:30 PM or 7:00 PM (check your team schedule)  
-- Location: Green Island Park Tennis Courts, La Crosse  
-- Fee: $25 – Providate payment to ${captain.name} within the first two weeks. If paying by check, make it out to LTTA (confirm with ${captain.name} first).
+    <hr style="border: none; border-top: 1px solid #cccccc; margin: 20px 0;" />
 
----
+    <p><strong>League Start:</strong> ${night === 'Tues' ? 'Tuesday, June 3' : 'Wednesday, June 4'} at 5:30 PM or 7:00 PM<br>
+    Some courts at 5:30 may be in use by Aquinas tennis. If it affects your team, we’ll let you know.</p>
+    
+    <p><strong>Location:</strong> Green Island Park Tennis Courts</p>
 
-Court Scheduling Notes
+    <p><strong>Player Fee:</strong> $25 – Pay your captain within the first two weeks.<br>
+    Checks payable to <em>LTTA</em> (confirm preferred method with your captain).</p>
 
-- Match times don’t always alternate each week (some weeks may repeat the same time).
-- Over the season, match times balance out across teams (or close to it).
-- Start matches on time, a maximum of 10 minutes warm-up is allowed.
-- 5:30 matches should finish by 7:00 PM. If your match is still ongoing, you may choose to move locations to finish your match, or split the points as outlined in our rules.
-- Some early 5:30 courts may be unavailable due to Aquinas tennis. We’ll notify you if it affects your team.
+    <hr style="border: none; border-top: 1px solid #cccccc; margin: 20px 0;" />
 
----
+    <p><strong>Scheduling Note:</strong> Match times don't always alternate between 5:30 and 7:00 PM. Some teams may have the same time multiple weeks in a row. It should even out (or close to) by season’s end.</p>
 
-Sub Policy
+    <hr style="border: none; border-top: 1px solid #cccccc; margin: 20px 0;" />
 
-- Let your team captain ${captain.name} know if you can’t make a week.
-- Try to use a sub from the GroupMe list before asking players from the other league night.
-- Feedback shows subbing is one of the biggest challenges—GroupMe should help.
+    <p><strong>Sub Policy:</strong></p>
+    <ul style="padding-left: 20px;">
+      <li>Tell your captain if you can’t make a match</li>
+      <li>Try using a roster sub before asking players from the other night</li>
+      <li>Use GroupMe – it makes finding subs easier</li>
+    </ul>
 
----
+    <p>Players reported that subbing was hard in past seasons. Use GroupMe early if you’ll miss a match.</p>
 
-What’s New This Summer
+    <hr style="border: none; border-top: 1px solid #cccccc; margin: 20px 0;" />
 
-1. 8-player teams with doubles format (as in the past). Pairs 1 & 2 can opt to play singles (courts 1–5 only, all must agree).
-2. Teams earn a bonus point if they play all matches with rostered players (no subs).
-3. We’re planning a Singles Night. Interested? Sign up here:  
-   https://forms.gle/mUgE38YeV7rNLduR8
+    <p><strong>What’s New This Season:</strong></p>
+    <ol style="padding-left: 20px;">
+      <li>8-player teams as in the past, playing doubles. Players #1 & #2 can play singles (if all agree and courts 1–5 are available).</li>
+      <li>Bonus point for teams playing with all roster players (no subs) that week.</li>
+      <li>There will be a Singles Night. If you’re interested, sign up:
+        <br><a href="https://forms.gle/mUgE38YeV7rNLduR8" style="color: #0066cc;">https://forms.gle/mUgE38YeV7rNLduR8</a>
+      </li>
+    </ol>
 
----
+    <hr style="border: none; border-top: 1px solid #cccccc; margin: 20px 0;" />
 
-Stay Connected
+    <p><strong>Thanks to Roxie Anderson</strong> (Wed Team 4 Captain) for updating our Facebook page.</p>
 
-- Facebook: https://www.facebook.com/couleeregiontennis  
-  (Thanks to Roxie Anderson – Wed Team 4 Captain – for keeping it current!)
-- Website: https://www.couleeregiontennis.com
+    <p>Follow us:<br>
+    <a href="https://facebook.com/couleeregiontennis" style="color: #0066cc;">facebook.com/couleeregiontennis</a><br>
+    <a href="https://www.couleeregiontennis.com" style="color: #0066cc;">www.couleeregiontennis.com</a></p>
 
----
+    <hr style="border: none; border-top: 1px solid #cccccc; margin: 20px 0;" />
 
-See you on the courts,  
-${coordinator.name}  
-LTTA Coordinator  
-📱 ${coordinator.phone}
+    <p>See you on the courts,</p>
+
+    <p><strong>${coordinator.name}</strong><br>
+    LTTA Coordinator<br>
+    📞 ${coordinator.phone}</p>
+  </body>
+</html>
 `;
 
-      const emailContent = `${subject}\n\n${body}`;
+
+
+      const emailContent = `${body}`;
       fs.writeFileSync(fileName, emailContent, 'utf8');
       console.log(`✅ Created email for ${night} Team ${teamNumber} – ${fileName}`);
     });
