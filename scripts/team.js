@@ -23,7 +23,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${match.week}</td>
-        <td>${match.date}</td>
+        <td>${formatDateUS(match.date)}</td>
         <td>${match.time}</td>
         <td>
           <a href="${match.opponent.file}" class="team-link">${match.opponent.name}</a>
@@ -45,6 +45,9 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
       `;
       rosterBody.appendChild(tr);
     });
+
+    // After loading the team data and knowing the ICS path:
+    document.getElementById('add-all-ics').href = scheduleData.teamIcsPath || `/teams/${scheduleData.night}/ics/${scheduleData.team.replace(/\s+/g, '_')}/team.ics`;
 
     highlightNextMatch();
   } catch (err) {
@@ -86,6 +89,13 @@ function getTeamFromUrl() {
 function getDayFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("day");
+}
+
+// Format date to US format MM/DD/YYYY
+function formatDateUS(dateStr) {
+  // Expects dateStr in 'YYYY-MM-DD'
+  const [y, m, d] = dateStr.split('-');
+  return `${m}/${d}/${y}`;
 }
 
 // Usage: call this with the correct JSON file for the team

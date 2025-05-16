@@ -250,6 +250,53 @@ function main() {
     for (const [team, sched] of Object.entries(schedules)) {
       const icsDir = path.join(icsDirBase, team.replace(/\s+/g, '_'));
       if (!fs.existsSync(icsDir)) fs.mkdirSync(icsDir, { recursive: true });
+
+      // Collect all VEVENTs for this team
+      const vevents = sched.map(match => {
+        const startTime = match.time.replace('pm', '') === '7:00' ? '19:00' : '17:30';
+        const endTime = getEndTime(startTime);
+        const summary = `LTTA Tennis: vs ${match.opponent.name}`;
+        const opponentNum = match.opponent.number;
+        const opponentRoster = rosters[opponentNum] || [];
+        const rosterText = opponentRoster.length
+          ? '\\nOpponent Roster: ' + opponentRoster.map(p => `${p.name} (${p.position})`).join('; ')
+          : '';
+        const description = `LTTA Tennis match: ${team} vs ${match.opponent.name} at ${match.courts}${rosterText}`;
+        const location = match.courts;
+        const uid = `ltta-${night}-${team}-week${match.week}@couleeregiontennis.org`;
+        // Only return the VEVENT block (not the full VCALENDAR)
+        return [
+          'BEGIN:VEVENT',
+          `UID:${uid}`,
+          `DTSTAMP:${match.date.replace(/-/g, '')}T${startTime.replace(':', '')}00Z`,
+          `DTSTART;TZID=America/Chicago:${match.date.replace(/-/g, '')}T${startTime.replace(':', '')}00`,
+          `DTEND;TZID=America/Chicago:${match.date.replace(/-/g, '')}T${endTime.replace(':', '')}00`,
+          `SUMMARY:${summary}`,
+          `DESCRIPTION:${description}`,
+          `LOCATION:${location}`,
+          'BEGIN:VALARM',
+          `TRIGGER:-PT4H`,
+          'ACTION:DISPLAY',
+          'DESCRIPTION:LTTA Tennis Match Reminder',
+          'END:VALARM',
+          'END:VEVENT'
+        ].join('\r\n');
+      });
+
+      // Write the single .ics file for this team
+      const teamIcsContent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Coulee Region Tennis//LTTA//EN',
+        ...vevents,
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      fs.writeFileSync(
+        path.join(icsDir, `team.ics`),
+        teamIcsContent
+      );
+
       sched.forEach(match => {
         const startTime = match.time.replace('pm', '') === '7:00' ? '19:00' : '17:30';
         const endTime = getEndTime(startTime);

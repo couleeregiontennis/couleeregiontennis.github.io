@@ -1,0 +1,158 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-wednesday-10-week1@couleeregiontennis.org
+DTSTAMP:20250604T190000Z
+DTSTART;TZID=America/Chicago:20250604T190000
+DTEND;TZID=America/Chicago:20250604T203000
+SUMMARY:LTTA Tennis: vs Hit Squad
+DESCRIPTION:LTTA Tennis match: 10 vs Hit Squad at Courts 6–9\nOpponent Roster: Sheldon Lee (1); Kyle Deyo (2); Michael Current (3); Christine Lee (3); Bennet Myers (3); Madan Mohan (3); Michelle Ottum (4); Amanda Waters (5)
+LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT4H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-wednesday-10-week2@couleeregiontennis.org
+DTSTAMP:20250611T173000Z
+DTSTART;TZID=America/Chicago:20250611T173000
+DTEND;TZID=America/Chicago:20250611T190000
+SUMMARY:LTTA Tennis: vs Nothing But Net
+DESCRIPTION:LTTA Tennis match: 10 vs Nothing But Net at Courts 10–13\nOpponent Roster: Alex Hiller (1); Tom Londergan (2); Lewis Kuhlman (3); Sarah Wengerter (3); Brittney DeChambeau (3); Kevin LeQue (3); Amy Harter (4); Joe Hurley (5)
+LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT4H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-wednesday-10-week3@couleeregiontennis.org
+DTSTAMP:20250618T173000Z
+DTSTART;TZID=America/Chicago:20250618T173000
+DTEND;TZID=America/Chicago:20250618T190000
+SUMMARY:LTTA Tennis: vs LAX-Winona Infusion
+DESCRIPTION:LTTA Tennis match: 10 vs LAX-Winona Infusion at Courts 1–5\nOpponent Roster: Ruben Anderson (1); Dan Lewis (2); Joe Heer (3); Janice Hoeschler (3); Eric Rowekamp (3); Nikki Nakano (3); Lora Cadwell (4); Barb Buswell (5)
+LOCATION:Courts 1–5
+BEGIN:VALARM
+TRIGGER:-PT4H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-wednesday-10-week4@couleeregiontennis.org
+DTSTAMP:20250625T173000Z
+DTSTART;TZID=America/Chicago:20250625T173000
+DTEND;TZID=America/Chicago:20250625T190000
+SUMMARY:LTTA Tennis: vs Not My Fault
+DESCRIPTION:LTTA Tennis match: 10 vs Not My Fault at Courts 10–13\nOpponent Roster: Joe O'Flaherty (1); Ran Ikeyama (2); Dan Grilley (3); Ben Haenni (3); Tamara Byrne (3); Josh Neukom (3); Basu Bhattacharyya (4); John May (5)
+LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT4H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-wednesday-10-week5@couleeregiontennis.org
+DTSTAMP:20250702T190000Z
+DTSTART;TZID=America/Chicago:20250702T190000
+DTEND;TZID=America/Chicago:20250702T203000
+SUMMARY:LTTA Tennis: vs Howie's Team
+DESCRIPTION:LTTA Tennis match: 10 vs Howie's Team at Courts 6–9\nOpponent Roster: Mike Meyers (1); Brian Day (2); Shira Busch (3); Janeen Day (3); Paul Holman (3); Austin Stalsberg (3); Lisa Flottmeyer (4); Gretchen Coleman (5)
+LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT4H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-wednesday-10-week6@couleeregiontennis.org
+DTSTAMP:20250709T190000Z
+DTSTART;TZID=America/Chicago:20250709T190000
+DTEND;TZID=America/Chicago:20250709T203000
+SUMMARY:LTTA Tennis: vs Hot Shots
+DESCRIPTION:LTTA Tennis match: 10 vs Hot Shots at Courts 6–9\nOpponent Roster: Laura Reutlinger (1); Roxie Anderson (2); Chris Kahlow (3); Taylor Nelson (3); Bryan Spier (3); Gracie Miller (3); Mike Leonard (4); John Noble (5)
+LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT4H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-wednesday-10-week7@couleeregiontennis.org
+DTSTAMP:20250716T173000Z
+DTSTART;TZID=America/Chicago:20250716T173000
+DTEND;TZID=America/Chicago:20250716T190000
+SUMMARY:LTTA Tennis: vs Rally Monkeys
+DESCRIPTION:LTTA Tennis match: 10 vs Rally Monkeys at Courts 10–13\nOpponent Roster: Brett Meddaugh (1); Greg Jameson (2); Pam Jameson (3); Andy Seithamer (3); Bette Smith (3); Rick Moody (3); Greg Smith (4); Hailey Kincaid (5)
+LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT4H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-wednesday-10-week8@couleeregiontennis.org
+DTSTAMP:20250723T173000Z
+DTSTART;TZID=America/Chicago:20250723T173000
+DTEND;TZID=America/Chicago:20250723T190000
+SUMMARY:LTTA Tennis: vs Simply Smashing
+DESCRIPTION:LTTA Tennis match: 10 vs Simply Smashing at Courts 1–5\nOpponent Roster: Kurt Gutknecht (1); Therese Waltz (2); Kacey Nomland (3); Tyler Thomas (3); David Yao (3); Kris Bartley (3); Jenna Dinkel (4); Logan Dzielinski (5)
+LOCATION:Courts 1–5
+BEGIN:VALARM
+TRIGGER:-PT4H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-wednesday-10-week9@couleeregiontennis.org
+DTSTAMP:20250730T190000Z
+DTSTART;TZID=America/Chicago:20250730T190000
+DTEND;TZID=America/Chicago:20250730T203000
+SUMMARY:LTTA Tennis: vs Baseliners
+DESCRIPTION:LTTA Tennis match: 10 vs Baseliners at Courts 10–13\nOpponent Roster: John Hildebrandt (1); Dan Bodelson (2); Dick Deml (3); Al Graewin (3); Mark Schlafer (3); Joey Endrizzi (3); Terri Kaiser (4); Jill Graewin (5)
+LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT4H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-wednesday-10-week10@couleeregiontennis.org
+DTSTAMP:20250806T190000Z
+DTSTART;TZID=America/Chicago:20250806T190000
+DTEND;TZID=America/Chicago:20250806T203000
+SUMMARY:LTTA Tennis: vs Serve Aces
+DESCRIPTION:LTTA Tennis match: 10 vs Serve Aces at Courts 1–5\nOpponent Roster: Mark Hoff (1); Gina Nelms (2); Luke Bussiere (3); Franklin Greene (3); Nicole Hoff (3); Michelle Rank (3); Sharon Harter (4); Asa Harter (5)
+LOCATION:Courts 1–5
+BEGIN:VALARM
+TRIGGER:-PT4H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-wednesday-10-week11@couleeregiontennis.org
+DTSTAMP:20250813T173000Z
+DTSTART;TZID=America/Chicago:20250813T173000
+DTEND;TZID=America/Chicago:20250813T190000
+SUMMARY:LTTA Tennis: vs Glory Days
+DESCRIPTION:LTTA Tennis match: 10 vs Glory Days at Courts 6–9\nOpponent Roster: Mike O'Neill (1); Mike Fahey (2); Zach Acklin (3); Laura O'Neill (3); Amy Valentine (3); Tim Acklin (3); Eric Marr (4); Samantha Marr (5)
+LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT4H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR
