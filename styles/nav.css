@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   max-width: none;
@@ -8,9 +8,19 @@
   z-index: 2000;
   color: blue;
   background-color: black;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding-left: 10%;
   padding-right: 10%;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;
 }
 
 .navbar-brand {
@@ -71,6 +81,11 @@
 @media (max-width: 768px) {
    .navbar {
     position: relative;
+  }
+
+  .navbar-container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   .navbar-toggle {
