@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250716T203000
 SUMMARY:LTTA Tennis: vs Serve Aces
 DESCRIPTION:LTTA Tennis match: 5 vs Serve Aces at Courts 1–5\nOpponent Roster: Mark Hoff (1); Gina Nelms (2); Luke Bussiere (3); Franklin Greene (3); Nicole Hoff (3); Michelle Rank (3); Sharon Harter (4); Asa Harter (5)
 LOCATION:Courts 1–5
+BEGIN:VALARM
+TRIGGER:-PT11H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

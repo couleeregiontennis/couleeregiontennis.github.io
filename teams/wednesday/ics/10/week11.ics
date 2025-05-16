@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250813T190000
 SUMMARY:LTTA Tennis: vs Glory Days
 DESCRIPTION:LTTA Tennis match: 10 vs Glory Days at Courts 6–9\nOpponent Roster: Mike O'Neill (1); Mike Fahey (2); Zach Acklin (3); Laura O'Neill (3); Amy Valentine (3); Tim Acklin (3); Eric Marr (4); Samantha Marr (5)
 LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

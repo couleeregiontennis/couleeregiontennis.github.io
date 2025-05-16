@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250603T190000
 SUMMARY:LTTA Tennis: vs Racquet Scientists
 DESCRIPTION:LTTA Tennis match: 8 vs Racquet Scientists at Courts 10–13\nOpponent Roster: Mark Harris (1); Nathan Tunks (2); Gavin Goss (3); Dale Ralph (3); Nancy Winberg (3); Karie Johnson (3); Kim Thurk (4); Ronghui Chen (5)
 LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

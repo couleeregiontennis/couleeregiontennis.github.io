@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250624T203000
 SUMMARY:LTTA Tennis: vs Bounce It
 DESCRIPTION:LTTA Tennis match: 1 vs Bounce It at Courts 10–13\nOpponent Roster: Yubo Nian (1); Matt Diehl (2); Tom Dwyer (3); Joe Kotnour Sr. (3); Sean O'Flaherty (3); Dan Skemp (3); Aziz Bhetasiwala (4); Mike Roskos (5)
 LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT11H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

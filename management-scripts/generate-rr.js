@@ -108,6 +108,7 @@ function assignSlotsToMatches(matchesByWeek, teams) {
 // Helper to create ICS event content
 function createICSEvent({summary, description, location, startDate, startTime, endTime, uid}) {
   // startDate: 'YYYY-MM-DD', startTime: 'HH:MM', endTime: 'HH:MM'
+  const alarmTime = `${startDate.replace(/-/g, '')}T080000`;
   const dtStart = `${startDate.replace(/-/g, '')}T${startTime.replace(':', '')}00`;
   const dtEnd = `${startDate.replace(/-/g, '')}T${endTime.replace(':', '')}00`;
   return [
@@ -122,6 +123,13 @@ function createICSEvent({summary, description, location, startDate, startTime, e
     `SUMMARY:${summary}`,
     `DESCRIPTION:${description}`,
     `LOCATION:${location}`,
+    'BEGIN:VALARM',
+    (startTime === '19:00'
+      ? 'TRIGGER:-PT11H'
+      : 'TRIGGER:-PT9H30M'),
+    'ACTION:DISPLAY',
+    'DESCRIPTION:LTTA Tennis Match Reminder',
+    'END:VALARM',
     'END:VEVENT',
     'END:VCALENDAR'
   ].join('\r\n');
@@ -264,6 +272,7 @@ function main() {
         const description = `LTTA Tennis match: ${team} vs ${match.opponent.name} at ${match.courts}${rosterText}`;
         const location = match.courts;
         const uid = `ltta-${night}-${team}-week${match.week}@couleeregiontennis.org`;
+        const alarmTime = `${match.date.replace(/-/g, '')}T080000`;
         // Only return the VEVENT block (not the full VCALENDAR)
         return [
           'BEGIN:VEVENT',
@@ -275,7 +284,9 @@ function main() {
           `DESCRIPTION:${description}`,
           `LOCATION:${location}`,
           'BEGIN:VALARM',
-          `TRIGGER:-PT4H`,
+          (startTime === '19:00'
+            ? 'TRIGGER:-PT11H'
+            : 'TRIGGER:-PT9H30M'),
           'ACTION:DISPLAY',
           'DESCRIPTION:LTTA Tennis Match Reminder',
           'END:VALARM',
@@ -309,6 +320,7 @@ function main() {
         const description = `LTTA Tennis match: ${team} vs ${match.opponent.name} at ${match.courts}${rosterText}`;
         const location = match.courts;
         const uid = `ltta-${night}-${team}-week${match.week}@couleeregiontennis.org`;
+        const alarmTime = `${match.date.replace(/-/g, '')}T080000`;
         const icsContent = createICSEvent({
           summary,
           description,

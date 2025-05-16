@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250729T190000
 SUMMARY:LTTA Tennis: vs Full Metal Racquet
 DESCRIPTION:LTTA Tennis match: 8 vs Full Metal Racquet at Courts 10–13\nOpponent Roster: Tayler Garves Nelson (1); Todd Garves (2); Martin Frank (3); Regina Jones (3); Stephen Sinur (3); Hannah Exner (3); Kim Garves (4); Jane Frank (5)
 LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

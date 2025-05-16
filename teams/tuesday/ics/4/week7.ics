@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250715T203000
 SUMMARY:LTTA Tennis: vs Return to Sender with Love
 DESCRIPTION:LTTA Tennis match: 4 vs Return to Sender with Love at Courts 6–9\nOpponent Roster: Denny Kreuser (1); Paul Leithold (2); Sara Bieneman (3); Kate Skaar (3); Julie Kamla (3); Leah Bower (3); Catherine Roraff (4); Mary Leithold (5)
 LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT11H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

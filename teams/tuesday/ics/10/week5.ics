@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250701T203000
 SUMMARY:LTTA Tennis: vs Rascals
 DESCRIPTION:LTTA Tennis match: 10 vs Rascals at Courts 6–9\nOpponent Roster: Peter Coppola (1); Laura Coppola (2); Ellen Seithamer (3); Pete  Thomson (3); Craig Hanson (3); Jason Herbert (3); Dan Russell (4); Becky Rauch (5)
 LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT11H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250702T190000
 SUMMARY:LTTA Tennis: vs Simply Smashing
 DESCRIPTION:LTTA Tennis match: 5 vs Simply Smashing at Courts 6–9\nOpponent Roster: Kurt Gutknecht (1); Therese Waltz (2); Kacey Nomland (3); Tyler Thomas (3); David Yao (3); Kris Bartley (3); Jenna Dinkel (4); Logan Dzielinski (5)
 LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

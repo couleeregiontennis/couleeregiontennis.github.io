@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250611T190000
 SUMMARY:LTTA Tennis: vs Baseliners
 DESCRIPTION:LTTA Tennis match: 2 vs Baseliners at Courts 6–9\nOpponent Roster: John Hildebrandt (1); Dan Bodelson (2); Dick Deml (3); Al Graewin (3); Mark Schlafer (3); Joey Endrizzi (3); Terri Kaiser (4); Jill Graewin (5)
 LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250610T203000
 SUMMARY:LTTA Tennis: vs Spin Doctors
 DESCRIPTION:LTTA Tennis match: 11 vs Spin Doctors at Courts 10–13\nOpponent Roster: Tung Ouy (1); Rich Puent (2); Sai Mathi (3); Sakura Ikeyama (3); Molly Stenger (3); Mohammad (3); Jim Brieske (4); Kalyan Satydeep (5)
 LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT11H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

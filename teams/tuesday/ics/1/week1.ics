@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250603T190000
 SUMMARY:LTTA Tennis: vs Easy Overhead
 DESCRIPTION:LTTA Tennis match: 1 vs Easy Overhead at Courts 1–5\nOpponent Roster: Brian Mansky (1); Isabel Ploessl (2); Heidi Barreyro (3); Shanon Torgerud (3); Odessa Barreyro (3); Peter Thompson (3); Tyler Benson (4); Amit Mishra (5)
 LOCATION:Courts 1–5
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

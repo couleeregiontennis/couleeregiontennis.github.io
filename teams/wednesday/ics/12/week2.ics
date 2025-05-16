@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250611T190000
 SUMMARY:LTTA Tennis: vs Backhand Bandits
 DESCRIPTION:LTTA Tennis match: 12 vs Backhand Bandits at Courts 10–13\nOpponent Roster: Quentin Lamers (1); Leah Fortun (2); Jennifer Carr (3); Amy Marcou (3); Michael Ojelabi (3); Eli Carr (3); Eli De Leon (4); Irene Johnson-Salvador (5)
 LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

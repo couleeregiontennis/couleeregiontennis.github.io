@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250611T190000
 SUMMARY:LTTA Tennis: vs Nothing But Net
 DESCRIPTION:LTTA Tennis match: 10 vs Nothing But Net at Courts 10–13\nOpponent Roster: Alex Hiller (1); Tom Londergan (2); Lewis Kuhlman (3); Sarah Wengerter (3); Brittney DeChambeau (3); Kevin LeQue (3); Amy Harter (4); Joe Hurley (5)
 LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250716T190000
 SUMMARY:LTTA Tennis: vs Rally Monkeys
 DESCRIPTION:LTTA Tennis match: 10 vs Rally Monkeys at Courts 10–13\nOpponent Roster: Brett Meddaugh (1); Greg Jameson (2); Pam Jameson (3); Andy Seithamer (3); Bette Smith (3); Rick Moody (3); Greg Smith (4); Hailey Kincaid (5)
 LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

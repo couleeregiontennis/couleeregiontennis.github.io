@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250730T203000
 SUMMARY:LTTA Tennis: vs Howie's Team
 DESCRIPTION:LTTA Tennis match: 2 vs Howie's Team at Courts 6–9\nOpponent Roster: Mike Meyers (1); Brian Day (2); Shira Busch (3); Janeen Day (3); Paul Holman (3); Austin Stalsberg (3); Lisa Flottmeyer (4); Gretchen Coleman (5)
 LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT11H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

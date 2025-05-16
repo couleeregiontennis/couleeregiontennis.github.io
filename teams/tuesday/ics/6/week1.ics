@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250603T203000
 SUMMARY:LTTA Tennis: vs Good Ol' Boys
 DESCRIPTION:LTTA Tennis match: 6 vs Good Ol' Boys at Courts 10–13\nOpponent Roster: Paul Jacobson (1); Dave Bentz (2); Don Harvey (3); David Lange (3); Larry Ruff (3); Cory Ruud (3); Pennie Pierce-Jorgeson (4); Sally Ruud (5)
 LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT11H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

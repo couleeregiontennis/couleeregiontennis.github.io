@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250701T190000
 SUMMARY:LTTA Tennis: vs Approach Shots
 DESCRIPTION:LTTA Tennis match: 12 vs Approach Shots at Courts 10–13\nOpponent Roster: Greg Schibbelhut (1); Dillon Eddingsaas (2); John Aschenbrenner (3); Mary Aschenbrenner (3); Dale Barclay (3); Rich Levinger (3); Judith Engen (4); Amanda Wilke (5)
 LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR

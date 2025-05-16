@@ -9,5 +9,10 @@ DTEND;TZID=America/Chicago:20250603T203000
 SUMMARY:LTTA Tennis: vs Jetsetters
 DESCRIPTION:LTTA Tennis match: 3 vs Jetsetters at Courts 6–9\nOpponent Roster: Julio Bird (1); Elia Romano (2); Jada Brunkow (3); Dan Petersen (3); Shirley Yuan (3); Ryan Mullaney (3); Kim Hardy (4); Leonardo Silva (5)
 LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT11H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
 END:VEVENT
 END:VCALENDAR
