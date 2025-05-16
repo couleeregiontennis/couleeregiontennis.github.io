@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const day = "tuesday"; // Change to "tuesday" or "wednesday"
+const day = "wednesday"; // Change to "tuesday" or "wednesday"
 const year = 2025;       // Change if needed
 
 const teamsDir = path.join(__dirname, '..', 'teams', day);
@@ -11,12 +11,16 @@ const rostersDir = path.join(teamsDir, 'rosters');
 const outputFile = path.join(teamsDir, 'all.html');
 const scheduleTitle = `${day.charAt(0).toUpperCase() + day.slice(1)} NIGHT SCHEDULE ${year} - LTTA`;
 
-// Helper to format date as D-MMM (e.g., 3-Jun)
+// Helper to format date as D-MMM (e.g., 3-Jun), and shift by +1 day for Wednesday
 function formatDate(dateStr) {
   const d = new Date(dateStr);
-  const day = d.getDate();
+  // If this is a Wednesday schedule, shift date by +1 day
+  if (day.toLowerCase().startsWith('wednes')) {
+    d.setDate(d.getDate() + 1);
+  }
+  const dayNum = d.getDate();
   const month = d.toLocaleString('en-US', { month: 'short' });
-  return `${day}-${month}`;
+  return `${dayNum}-${month}`;
 }
 
 // use these court groups, in this order
