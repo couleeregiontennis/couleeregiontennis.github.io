@@ -1,9 +1,25 @@
 // This script dynamically loads match and roster data into tables and highlights the next match
+function isMobile() {
+  return window.innerWidth <= 600;
+}
+
 async function loadTeamData(scheduleUrl, rosterUrl) {
   const tableBody = document.querySelector("#matches-table tbody");
   const rosterBody = document.querySelector("table:not(#matches-table) tbody");
   const header = document.getElementById("team-name");
+  const headerRow = document.getElementById("matches-header-row");
   if (!tableBody || !rosterBody) return;
+
+  // Remove any existing calendar column
+  while (headerRow.cells.length > 5) headerRow.deleteCell(-1);
+
+  // Add calendar column only if not mobile
+  if (!isMobile()) {
+    const th = document.createElement("th");
+    th.className = "calendar-col";
+    th.title = "Add to Calendar";
+    headerRow.appendChild(th);
+  }
 
   try {
     const scheduleResponse = await fetch(scheduleUrl);
@@ -18,7 +34,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
     tableBody.innerHTML = "";
     (scheduleData.schedule || []).forEach(match => {
       const icsLink = match.ics
-        ? `<a href="${match.ics}" download="LTTA-Match-Week${match.week}.ics" title="Add to calendar">📅</a>`
+        ? `<a href="${match.ics}" download="LTTA-Match-Week${match.week}.ics" title="Add to calendar" class="calendar-col-link">📅</a>`
         : '';
       const tr = document.createElement("tr");
       tr.innerHTML = `
@@ -29,9 +45,19 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
           <a href="${match.opponent.file}" class="team-link">${match.opponent.name}</a>
         </td>
         <td>${match.courts}</td>
-        <td style="text-align:center">${icsLink}</td>
+        ${!isMobile() ? `<td class="calendar-col" style="text-align:center">${icsLink}</td>` : ''}
       `;
       tableBody.appendChild(tr);
+
+      // Mobile: Add a separate row for the calendar link
+      if (isMobile() && match.ics) {
+        const mobileRow = document.createElement("tr");
+        mobileRow.className = "calendar-row-mobile";
+        mobileRow.innerHTML = `<td colspan="6" style="text-align:center">
+          <a href="${match.ics}" download="LTTA-Match-Week${match.week}.ics" title=" Add to calendar" class="calendar-mobile-link">📅 Add to Calendar</a>
+        </td>`;
+        tableBody.appendChild(mobileRow);
+      }
     });
 
     // Populate roster table
@@ -63,6 +89,8 @@ function highlightNextMatch() {
   let nextMatchRow = null;
 
   rows.forEach((row) => {
+    // Only check main match rows (not mobile calendar rows)
+    if (row.classList.contains("calendar-row-mobile")) return;
     const dateCell = row.cells[1];
     const matchDate = new Date(dateCell.textContent.trim());
     if (
@@ -85,7 +113,7 @@ function getTeamFromUrl() {
   return params.get("team");
 }
 
-// Get daye from URL, e.g. ?day=tuesday
+// Get day from URL, e.g. ?day=tuesday
 function getDayFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("day");
