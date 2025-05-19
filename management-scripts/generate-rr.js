@@ -108,13 +108,35 @@ function assignSlotsToMatches(matchesByWeek, teams) {
 // Helper to create ICS event content
 function createICSEvent({summary, description, location, startDate, startTime, endTime, uid}) {
   // startDate: 'YYYY-MM-DD', startTime: 'HH:MM', endTime: 'HH:MM'
-  const alarmTime = `${startDate.replace(/-/g, '')}T080000`;
   const dtStart = `${startDate.replace(/-/g, '')}T${startTime.replace(':', '')}00`;
   const dtEnd = `${startDate.replace(/-/g, '')}T${endTime.replace(':', '')}00`;
+  // VTIMEZONE for America/Chicago (CDT/CST)
+  const vtimezone = [
+    'BEGIN:VTIMEZONE',
+    'TZID:America/Chicago',
+    'X-LIC-LOCATION:America/Chicago',
+    'BEGIN:DAYLIGHT',
+    'TZOFFSETFROM:-0600',
+    'TZOFFSETTO:-0500',
+    'TZNAME:CDT',
+    'DTSTART:19700308T020000',
+    'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU',
+    'END:DAYLIGHT',
+    'BEGIN:STANDARD',
+    'TZOFFSETFROM:-0500',
+    'TZOFFSETTO:-0600',
+    'TZNAME:CST',
+    'DTSTART:19701101T020000',
+    'RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU',
+    'END:STANDARD',
+    'END:VTIMEZONE'
+  ].join('\r\n');
+
   return [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
     'PRODID:-//Coulee Region Tennis//LTTA//EN',
+    vtimezone,
     'BEGIN:VEVENT',
     `UID:${uid}`,
     `DTSTAMP:${dtStart}Z`,
