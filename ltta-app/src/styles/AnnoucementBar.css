@@ -1,0 +1,25 @@
+.announcement-bar {
+  background: linear-gradient(90deg, #eaf2fa 0%, #d2e6fa 100%);
+  color: #1a3557;
+  font-size: 1.13em;
+  padding: 0.7em 1.2em;
+  text-align: center;
+  border-bottom: 2px solid #007BFF;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 8px rgba(42,77,105,0.04);
+  margin-bottom: 1.2em;
+}
+
+.announcement-bar strong {
+  color: #007BFF;
+}
+
+@media (max-width: 600px) {
+  .announcement-bar {
+    font-size: 1em;
+    padding: 0.7em 0.5em;
+    margin-bottom: 0.7em;
+    border-radius: 0;
+  }
+}
