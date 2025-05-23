@@ -42,18 +42,24 @@ p {
 }
 .groupme-link {
   display: inline-block;
-  margin-bottom: 8px;
-  font-size: 1.05em;
-  color: #0073e6;
-  word-break: break-all;
-  background: #eaf2fa;
-  padding: 3px 8px;
-  border-radius: 4px;
+  background: #00b2ff;
+  color: #fff !important;
+  padding: 0.6em 1.4em;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1.08em;
   text-decoration: none;
-  transition: background 0.2s;
+  box-shadow: 0 2px 6px rgba(0,178,255,0.10);
+  transition: background 0.2s, box-shadow 0.2s;
+  border: none;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  cursor: pointer;
 }
-.groupme-link:hover {
-  background: #d2e6fa;
+.groupme-link:hover,
+.groupme-link:focus {
+  background: #008fcc;
+  box-shadow: 0 4px 12px rgba(0,178,255,0.18);
   text-decoration: underline;
 }
 .qr-img {
