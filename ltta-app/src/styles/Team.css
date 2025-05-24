@@ -1,0 +1,159 @@
+.teams-container {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.teams-column {
+  flex: 1;
+  min-width: 300px;
+}
+
+.team-list-header {
+  margin: 1rem 0;
+}
+
+.all-matches-link {
+  color: #007BFF;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.all-matches-link:hover {
+  text-decoration: underline;
+}
+
+.team-list-info {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.team-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.team-list li {
+  margin-bottom: 0.5rem;
+}
+
+.team-list a {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: #333;
+  text-decoration: none;
+  background: #f8f9fa;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.team-list a:hover {
+  background: #e9ecef;
+  color: #007BFF;
+}
+
+.team-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.team-name {
+  color: #1a3557;
+  margin-bottom: 1.5rem;
+}
+
+.schedule-section,
+.roster-section {
+  margin-bottom: 2rem;
+}
+
+.calendar-download {
+  margin: 1rem 0;
+}
+
+.calendar-link {
+  display: inline-block;
+  background: #eaf2fa;
+  color: #007BFF;
+  padding: 0.6em 1.2em;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.calendar-link:hover {
+  background: #d2e6fa;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.schedule-table,
+.roster-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.schedule-table th,
+.roster-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  text-align: left;
+}
+
+.schedule-table td,
+.schedule-table th,
+.roster-table td,
+.roster-table th {
+  padding: 0.8rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.team-link {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.team-link:hover {
+  text-decoration: underline;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+@media (max-width: 800px) {
+  .teams-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .teams-column {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .schedule-table,
+  .roster-table {
+    font-size: 0.9em;
+  }
+  
+  .schedule-table td,
+  .schedule-table th,
+  .roster-table td,
+  .roster-table th {
+    padding: 0.6rem;
+  }
+}

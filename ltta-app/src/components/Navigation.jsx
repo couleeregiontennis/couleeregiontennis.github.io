@@ -1,8 +1,13 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import './Navigation.css';
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <header>
@@ -14,7 +19,7 @@ export function Navigation() {
           <button 
             className="navbar-toggle" 
             aria-label="Toggle navigation"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={toggleMenu}
           >
             ☰
           </button>

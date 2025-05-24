@@ -1,0 +1,87 @@
+.green-island-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.court-info,
+.court-details,
+.court-rules {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.map-link {
+  margin-top: 1rem;
+}
+
+.map-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #007BFF;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  background: #eaf2fa;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.map-link a:hover {
+  background: #d2e6fa;
+}
+
+.court-details ul,
+.court-rules ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.court-details li,
+.court-rules li {
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.court-details li::before,
+.court-rules li::before {
+  content: "•";
+  color: #007BFF;
+  position: absolute;
+  left: 0;
+}
+
+.image-section {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.image-caption {
+  margin-top: 0.5rem;
+  color: #666;
+  font-style: italic;
+}
+
+@media (min-width: 768px) {
+  .green-island-page {
+    padding: 2rem;
+  }
+
+  .court-info,
+  .court-details,
+  .court-rules {
+    padding: 2rem;
+  }
+}
