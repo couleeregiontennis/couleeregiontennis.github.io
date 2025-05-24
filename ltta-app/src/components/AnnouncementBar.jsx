@@ -1,4 +1,4 @@
-import './AnnouncementBar.css';
+import '../styles/AnnouncementBar.css';
 
 export function AnnouncementBar() {
   return (

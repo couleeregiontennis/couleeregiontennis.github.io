@@ -26,16 +26,25 @@ p {
   transition: opacity 0.3s;
   margin: 0 0 12px 0;
   padding: 18px 10px 12px 10px;
-  background: #f5f8fb;
+
+  background: #f8f9fa;
   border: 1px solid #b3c6e0;
-  border-radius: 10px;
-  box-shadow: 0 1px 6px rgba(42, 77, 105, 0.06);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   gap: 18px;
   flex-wrap: wrap;
   width: 100%;
   max-width: 380px;
   margin-left: auto;
   margin-right: auto;
+}
+.groupme-section h2 {
+  color: #1a3557;
+  margin-bottom: 1rem;
+}
+.groupme-section p {
+  margin-bottom: 1.5rem;
+  color: #666;
 }
 .groupme-info {
   min-width: 180px;
@@ -44,17 +53,20 @@ p {
   display: inline-block;
   margin-bottom: 8px;
   font-size: 1.05em;
-  color: #0073e6;
+  color: #fff;
   word-break: break-all;
-  background: #eaf2fa;
-  padding: 3px 8px;
-  border-radius: 4px;
+  background: #00b2ff;
+  padding: 0.8em 1.6em;
+  border-radius: 6px;
+  font-weight: 600;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,178,255,0.2);
 }
 .groupme-link:hover {
-  background: #d2e6fa;
-  text-decoration: underline;
+  background: #009ce0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,178,255,0.3);
 }
 .qr-img {
   display: block;
@@ -122,6 +134,41 @@ p {
 .carousel-btn:hover {
   background: #007BFF;
 }
+.subs-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.groupme-container {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.sub-rules {
+  background: #eaf2fa;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+.sub-rules h2 {
+  color: #1a3557;
+  margin-bottom: 1rem;
+}
+.sub-rules ul {
+  list-style-type: none;
+  padding: 0;
+}
+.sub-rules li {
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+.sub-rules li::before {
+  content: "•";
+  color: #007BFF;
+  position: absolute;
+  left: 0;
+}
 @media (max-width: 600px) {
   main {
     padding: 8px 0vw 12px 0vw;
@@ -156,5 +203,13 @@ p {
   .carousel-nav {
     gap: 1rem;
     margin-bottom: 0.4rem;
+  }
+}
+@media (min-width: 768px) {
+  .groupme-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .sub-rules {
+    grid-column: 1 / -1;
   }
 }

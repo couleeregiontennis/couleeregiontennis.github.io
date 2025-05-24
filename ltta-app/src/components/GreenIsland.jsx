@@ -1,76 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Green Island</title>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="../styles/style.css">
-  <link rel="stylesheet" href="../styles/nav.css">
+import '../styles/GreenIsland.css';
 
-</head>
-<body>
-  <div id="nav-placeholder"></div>
-  <main>
-    <div>
-      <h1>Green Island</h1>
+export function GreenIsland() {
+  return (
+    <div className="green-island-page">
+      <h1>Green Island Tennis Courts</h1>
+
+      <section className="court-info">
+        <h2>Location</h2>
+        <p>2312 7th Street South<br />La Crosse, WI 54601</p>
+        <div className="map-link">
+          <a 
+            href="https://maps.google.com/?q=Green+Island+Tennis+Courts+La+Crosse+WI" 
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📍 Open in Google Maps
+          </a>
+        </div>
+      </section>
+
+      <section className="court-details">
+        <h2>Court Information</h2>
+        <ul>
+          <li>8 courts total (numbered 1-8)</li>
+          <li>Courts 1-5 have lighting for evening play</li>
+          <li>Water fountain available</li>
+          <li>Restrooms on-site</li>
+          <li>Parking available in adjacent lot</li>
+        </ul>
+      </section>
+
+      <section className="court-rules">
+        <h2>Court Rules & Etiquette</h2>
+        <ul>
+          <li>Courts are first-come, first-served outside of league play</li>
+          <li>LTTA matches have priority during league nights (Tues/Wed)</li>
+          <li>Please keep courts clean and dispose of trash properly</li>
+          <li>Be mindful of noise levels during play</li>
+          <li>Report any court damage to Parks & Recreation: (608) 789-7533</li>
+        </ul>
+      </section>
+
+      <section className="image-section">
+        <img 
+          src="/images/green-island-courts.jpg" 
+          alt="Green Island Tennis Courts"
+          className="responsive-image"
+        />
+        <p className="image-caption">Green Island Tennis Courts - La Crosse, WI</p>
+      </section>
     </div>
-    <section class="intro">
-    <h2>Tennis Courts</h2>
-      <p>
-
-        The Green Island Tennis Courts are located at 
-                <a href="https://www.google.com/maps/place/2312+7th+St+S,+La+Crosse,+WI+54601/@43.7892534,-91.2536261,17z/data=!3m1!4b1!4m6!3m5!1s0x87f955820572ab03:0x58c826c87fb5b4db!8m2!3d43.7892534!4d-91.2510512!16s%2Fg%2F11b8v7kp8h?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D">
-        2312 7th St S, La Crosse, WI 54601, 
-        </a>
-        and are a popular destination for tennis enthusiasts in the area. The facility features multiple courts that are well-maintained and open to the public. These courts are used for recreational play, league matches, and tournaments.
-      </p>
-      <p>When we have conflicts with Green Island court times we often make use of courts nearby, usually Central High School - 
-       <a href="https://www.google.com/maps/place/1801+Losey+Blvd+S,+La+Crosse,+WI+54601/@43.7931869,-91.2214665,17z/data=!3m1!4b1!4m6!3m5!1s0x87f95551c55d0f1b:0x3cb7a094d7959bb3!8m2!3d43.7931869!4d-91.2188916!16s%2Fg%2F11c2h9x25h?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D">
-        1801 Losey Blvd S, La Crosse, WI 54601-6866 
-        </a>
-      </p>
-    </section>
-
-    <section class="court-numbering">
-      <h2>Court Numbering</h2>
-      <p>
-        The courts at Green Island are numbered sequentially from 1 to 13. 
-        Court 1 is the court by itself, closest to the ice arena. The courts are then grouped in pairs, with court 13 being on the far left side of the facility in the photo.
-    </p>
-        <h3>LTTA Court Assignments</h3>
-        <p>
-            The teams will be assigned a group of courts for their matches. The groups are as follows:
-            <ul>
-                <li>Courts 1-5:</li>
-                <li>Courts 6-9:</li>
-                <li>Courts 10-13:</li>
-            </ul>
-            The team assigned to the courts 1-5 have the ability to use court 1 and court 2 both, which gives them the option to play
-            singles or doubles matches at the 1&2 position. Please consult your team captain for details.
-            <br> <br>
-            Teams play on the courts in ascending order. In the case of teams playing  at courts 6-9: 
-            <ul>
-              <li>Courts 6: #1/#2 Doubles</li>
-              <li>Courts 7: #3 Doubles</li>
-              <li>Courts 8: #3 Doubles</li>
-              <li>Courts 9: #4/#5 Doubles </li>
-            </ul>
-          </p>
-    </section>
-
-    <section class="image-section">
-      <h2>Facility Overview</h2>
-      <img src="../resources/greenisland.jpg" alt="Green Island Tennis Courts" class="responsive-image">
-      <p class="image-description">
-        A view of the Green Island Tennis Courts in La Crosse, Wisconsin. Courts 1- 7 are lighted, and come on automatically at dusk. Courts 8-13 are not lighted.
-      </p>
-    </section>
-  </main>
-
-  <footer>
-   </footer>
-
-  <script src="../scripts/nav.js"></script>
-</body>
-</html>
+  );
+}
