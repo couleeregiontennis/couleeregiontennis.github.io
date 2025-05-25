@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import '../styles/Team.css';
 
-export function Teams() {
+export function Team() {
   const [teamData, setTeamData] = useState(null);
   const [rosterData, setRosterData] = useState(null);
   const { day, teamId } = useParams();

@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { AnnouncementBar } from './components/AnnouncementBar';
-import { Teams } from './components/Teams';
+import { Team } from './components/Team';
+import { TeamSelect } from './components/TeamSelect';
 import { Subs } from './components/Subs';
 import { GreenIsland } from './components/GreenIsland';
 import { Rules } from './components/Rules';
@@ -16,7 +17,7 @@ function App() {
         <AnnouncementBar />
         <main>
           <Routes>
-            <Route path="/" element={<Teams />} />
+            <Route path="/" element={<TeamSelect />} />
             <Route path="/teams" element={<Navigate to="/" replace />} />
             <Route path="/team/:day/:teamId" element={<Team />} />
             <Route path="/subs" element={<Subs />} />
