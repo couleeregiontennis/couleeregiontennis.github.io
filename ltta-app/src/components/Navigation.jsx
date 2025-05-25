@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Navigation.css';
+import '../styles/Navigation.css';
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,12 +9,16 @@ export function Navigation() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <header>
       <nav className="navbar">
         <div className="navbar-container">
           <div className="navbar-brand">
-            <Link to="/">LTTA</Link>
+            <Link to="/" onClick={closeMenu}>LTTA</Link>
           </div>
           <button 
             className="navbar-toggle" 
@@ -25,15 +29,16 @@ export function Navigation() {
           </button>
           <div className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
             <ul>
-              <li><Link to="/">Teams</Link></li>
-              <li><Link to="/subs">Find a Sub</Link></li>
-              <li><Link to="/greenisland">Green Island</Link></li>
-              <li><Link to="/rules">Rules</Link></li>
+              <li><Link to="/" onClick={closeMenu}>Teams</Link></li>
+              <li><Link to="/subs" onClick={closeMenu}>Find a Sub</Link></li>
+              <li><Link to="/greenisland" onClick={closeMenu}>Green Island</Link></li>
+              <li><Link to="/rules" onClick={closeMenu}>Rules</Link></li>
               <li>
                 <a 
                   href="http://www.couleeregiontennis.com" 
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={closeMenu}
                 >
                   CRTA Website
                 </a>

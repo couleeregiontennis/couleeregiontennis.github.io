@@ -64,6 +64,10 @@ thead {
     transition: background-color 0.3s;
 }
 
+li {
+  list-style: none;
+}
+
 .team-list ul {
     list-style: none;
 }
