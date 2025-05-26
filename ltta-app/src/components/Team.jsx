@@ -51,9 +51,7 @@ export function Team() {
           <table className="schedule-table">
             <thead>
               <tr>
-                <th>Week</th>
-                <th>Date</th>
-                <th>Time</th>
+                <th>Date/Time</th>
                 <th>Opponent</th>
                 <th>Courts</th>
               </tr>
@@ -61,9 +59,22 @@ export function Team() {
             <tbody>
               {teamData.schedule.map(match => (
                 <tr key={match.week}>
-                  <td>{match.week}</td>
-                  <td>{formatDateUS(match.date)}</td>
-                  <td>{match.time}</td>
+                  <td>
+                    <div className="date-time">
+                      <div className="date">{formatDateUS(match.date)}</div>
+                      <div className="time-container">
+                        <span className="time">{match.time}</span>
+                        <a 
+                          href={teamData.teamIcsPath || `/teams/${day}/ics/${teamId}/week${match.week}.ics`}
+                          download={`match-date-${match.date}.ics`}
+                          className="calendar-icon"
+                          title="Add this match to calendar"
+                        >
+                          📅
+                        </a>
+                      </div>
+                    </div>
+                  </td>
                   <td>
                     <a href={match.opponent.file} className="team-link">
                       {match.opponent.name}

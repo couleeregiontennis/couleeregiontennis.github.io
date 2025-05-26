@@ -6,7 +6,6 @@ const path = require('path');
 const INPUT_FILE = 'ltta.csv';
 const OUTPUT_DIR = 'teams';
 const START_DATE = '2025-06-03'; // Change as needed
-const NUM_WEEKS = 11; // Or set dynamically
 const COURT_GROUPS = ["Courts 1–5", "Courts 6–9", "Courts 10–13"];
 const TIMES = ["5:30pm", "7:00pm"];
 
@@ -157,7 +156,7 @@ function createICSEvent({summary, description, location, startDate, startTime, e
   ].join('\r\n');
 }
 
-// Helper to get end time (assume 1.5 hours for each match)
+// Helper to get end time (assuming 1.5 hours for each match)
 function getEndTime(startTime) {
   const [h, m] = startTime.split(':').map(Number);
   let hour = h, min = m;
@@ -246,7 +245,7 @@ function main() {
           opponent: {
             name: teamB.name,
             number: teamB.number,
-            file: `/pages/team.html?day=${night}&team=${teamB.number}`
+            file: `/public/team/${night}/{teamB.number}`
           }
         };
         const entryB = {
@@ -257,7 +256,7 @@ function main() {
           opponent: {
             name: teamA.name,
             number: teamA.number,
-            file: `/pages/team.html?day=${night}&team=${teamA.number}`
+            file: `/public/team/${night}/${teamA.number}`
           }
         };
         schedules[teamA.number].push(entry);

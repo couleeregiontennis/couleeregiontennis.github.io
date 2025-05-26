@@ -57,21 +57,25 @@
 }
 
 .image-section {
-  margin-top: 2rem;
   text-align: center;
+  margin: 2rem auto;
+}
+
+.image-container {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .responsive-image {
-  max-width: 100%;
+  width: 100%;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 1rem;
 }
 
 .image-caption {
-  margin-top: 0.5rem;
   color: #666;
-  font-style: italic;
+  line-height: 1.5;
 }
 
 @media (min-width: 768px) {
