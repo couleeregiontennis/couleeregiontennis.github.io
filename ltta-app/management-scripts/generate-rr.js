@@ -1,26 +1,38 @@
-const XLSX = require('xlsx');
 const fs = require('fs');
 const path = require('path');
 
 // CONFIG
-const INPUT_FILE = 'ltta.csv';
-const OUTPUT_DIR = 'teams';
+const INPUT_FILE = '../ltta.csv';
+const OUTPUT_DIR = '../public/teams';
 const START_DATE = '2025-06-03'; // Change as needed
 const COURT_GROUPS = ["Courts 1–5", "Courts 6–9", "Courts 10–13"];
 const TIMES = ["5:30pm", "7:00pm"];
+
+// Load CSV directly
+function loadCSV(filePath) {
+  const content = fs.readFileSync(filePath, 'utf-8');
+  const lines = content.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim());
+  
+  return lines.slice(1).map(line => {
+    const values = line.split(',').map(v => v.trim());
+    return headers.reduce((obj, header, index) => {
+      obj[header] = values[index];
+      return obj;
+    }, {});
+  });
+}
+
+// Replace existing loadSheet function with new CSV loader
+function loadSheet(filePath) {
+  return loadCSV(filePath);
+}
 
 // Helper to add days to a date
 function addDays(dateStr, days) {
   const d = new Date(dateStr);
   d.setDate(d.getDate() + days);
   return d.toISOString().slice(0, 10);
-}
-
-// Load CSV or Excel
-function loadSheet(filePath) {
-  const wb = XLSX.readFile(filePath);
-  const ws = wb.Sheets[wb.SheetNames[0]];
-  return XLSX.utils.sheet_to_json(ws);
 }
 
 function groupByNight(rows) {
