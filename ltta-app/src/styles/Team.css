@@ -132,6 +132,40 @@
   color: #666;
 }
 
+.date-time {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.date {
+  font-weight: 500;
+}
+
+.time {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.time-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.calendar-icon {
+  font-size: 0.9em;
+  color: #007BFF;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.calendar-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
 @media (max-width: 800px) {
   .teams-container {
     flex-direction: column;

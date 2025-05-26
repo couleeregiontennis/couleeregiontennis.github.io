@@ -208,11 +208,6 @@ ul {
   font-weight: bold;
 }
 
-.image-section {
-  text-align: center;
-  margin: 1rem 0;
-}
-
 .responsive-image {
   max-width: 100%;
   height: auto;
