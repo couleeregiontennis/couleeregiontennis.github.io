@@ -1,3 +1,5 @@
+// Creates emails to send out to ltta teams at the beginning of the season.
+
 const fs = require('fs');
 const path = require('path');
 const csv = require('csv-parser');

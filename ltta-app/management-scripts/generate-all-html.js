@@ -1,4 +1,6 @@
 // This script generates the html file for the Tuesday or Wednesday night schedule from the JSON files in the teams folder.
+// NEEDS TO BE RUN AFTER 'generate-rr'
+
 const fs = require('fs');
 const path = require('path');
 
