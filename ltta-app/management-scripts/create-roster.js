@@ -1,3 +1,5 @@
+// Creates JSON files for each team's roster from a CSV file.
+
 const fs = require('fs');
 const path = require('path');
 const parse = require('csv-parse/sync');
