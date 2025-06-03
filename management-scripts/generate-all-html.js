@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const day = "tuesday"; // Change to "tuesday" or "wednesday"
+const day = "wednesday"; // Change to "tuesday" or "wednesday"
 const year = 2025;       // Change if needed
 
 const teamsDir = path.join(__dirname, '..', 'teams', day);
