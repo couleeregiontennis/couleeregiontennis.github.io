@@ -1,13 +1,14 @@
+import React from 'react'; 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { AnnouncementBar } from './components/AnnouncementBar';
 import { Team } from './components/Team';
-import { Teams } from './components/Teams';
+import { TeamSelect } from './components/TeamSelect';
 import { Subs } from './components/Subs';
 import { GreenIsland } from './components/GreenIsland';
 import { Rules } from './components/Rules';
-import './styles/Style.css';
-import './styles/nav.css';
+import './styles/style.css';
+import './styles/navigation.css';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         <AnnouncementBar />
         <main>
           <Routes>
-            <Route path="/" element={<Teams />} />
+            <Route path="/" element={<TeamSelect />} />
             <Route path="/team/:day/:teamId" element={<Team />} />
             <Route path="/subs" element={<Subs />} />
             <Route path="/greenisland" element={<GreenIsland />} />
