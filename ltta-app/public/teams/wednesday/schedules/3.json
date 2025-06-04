@@ -10,7 +10,7 @@
       "opponent": {
         "name": "Backhand Bandits",
         "number": "10",
-        "file": "/pages/team.html?day=wednesday&team=10"
+        "file": "/public/team/wednesday/10"
       },
       "ics": "/teams/wednesday/ics/3/week1.ics"
     },
@@ -22,7 +22,7 @@
       "opponent": {
         "name": "Not My Fault",
         "number": "8",
-        "file": "/pages/team.html?day=wednesday&team=8"
+        "file": "/public/team/wednesday/8"
       },
       "ics": "/teams/wednesday/ics/3/week2.ics"
     },
@@ -34,7 +34,7 @@
       "opponent": {
         "name": "Howie's Team",
         "number": "6",
-        "file": "/pages/team.html?day=wednesday&team=6"
+        "file": "/public/team/wednesday/6"
       },
       "ics": "/teams/wednesday/ics/3/week3.ics"
     },
@@ -46,7 +46,7 @@
       "opponent": {
         "name": "Hot Shots",
         "number": "4",
-        "file": "/pages/team.html?day=wednesday&team=4"
+        "file": "/public/team/wednesday/4"
       },
       "ics": "/teams/wednesday/ics/3/week4.ics"
     },
@@ -58,7 +58,7 @@
       "opponent": {
         "name": "Rally Monkeys",
         "number": "2",
-        "file": "/pages/team.html?day=wednesday&team=2"
+        "file": "/public/team/wednesday/2"
       },
       "ics": "/teams/wednesday/ics/3/week5.ics"
     },
@@ -70,7 +70,7 @@
       "opponent": {
         "name": "Simply Smashing",
         "number": "11",
-        "file": "/pages/team.html?day=wednesday&team=11"
+        "file": "/public/team/wednesday/11"
       },
       "ics": "/teams/wednesday/ics/3/week6.ics"
     },
@@ -82,7 +82,7 @@
       "opponent": {
         "name": "Baseliners",
         "number": "9",
-        "file": "/pages/team.html?day=wednesday&team=9"
+        "file": "/public/team/wednesday/9"
       },
       "ics": "/teams/wednesday/ics/3/week7.ics"
     },
@@ -94,7 +94,7 @@
       "opponent": {
         "name": "Serve Aces",
         "number": "7",
-        "file": "/pages/team.html?day=wednesday&team=7"
+        "file": "/public/team/wednesday/7"
       },
       "ics": "/teams/wednesday/ics/3/week8.ics"
     },
@@ -106,7 +106,7 @@
       "opponent": {
         "name": "Glory Days",
         "number": "5",
-        "file": "/pages/team.html?day=wednesday&team=5"
+        "file": "/public/team/wednesday/5"
       },
       "ics": "/teams/wednesday/ics/3/week9.ics"
     },
@@ -118,7 +118,7 @@
       "opponent": {
         "name": "LAX-Winona Fusion",
         "number": "1",
-        "file": "/pages/team.html?day=wednesday&team=1"
+        "file": "/public/team/wednesday/1"
       },
       "ics": "/teams/wednesday/ics/3/week10.ics"
     },
@@ -130,7 +130,7 @@
       "opponent": {
         "name": "Nothing But Net",
         "number": "12",
-        "file": "/pages/team.html?day=wednesday&team=12"
+        "file": "/public/team/wednesday/12"
       },
       "ics": "/teams/wednesday/ics/3/week11.ics"
     }
