@@ -1,26 +1,24 @@
 const fs = require('fs');
 const path = require('path');
+const { parse } = require('csv-parse/sync');
 
 // CONFIG
-const INPUT_FILE = '../ltta.csv';
+const INPUT_FILE = '../../ltta.csv';
 const OUTPUT_DIR = '../public/teams';
 const START_DATE = '2025-06-03'; // Change as needed
 const COURT_GROUPS = ["Courts 1–5", "Courts 6–9", "Courts 10–13"];
 const TIMES = ["5:30pm", "7:00pm"];
 
-// Load CSV directly
 function loadCSV(filePath) {
+  console.log(`Loading CSV from ${filePath}`);
   const content = fs.readFileSync(filePath, 'utf-8');
-  const lines = content.trim().split('\n');
-  const headers = lines[0].split(',').map(h => h.trim());
-  
-  return lines.slice(1).map(line => {
-    const values = line.split(',').map(v => v.trim());
-    return headers.reduce((obj, header, index) => {
-      obj[header] = values[index];
-      return obj;
-    }, {});
+  const records = parse(content, {
+    columns: true,
+    skip_empty_lines: true,
+    trim: true
   });
+  console.log(`Loaded ${records.length} records from CSV`);
+  return records;
 }
 
 // Replace existing loadSheet function with new CSV loader
@@ -257,7 +255,7 @@ function main() {
           opponent: {
             name: teamB.name,
             number: teamB.number,
-            file: `/public/team/${night}/{teamB.number}`
+            file: `/public/team/${night}/${teamB.number}`
           }
         };
         const entryB = {
