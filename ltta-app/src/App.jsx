@@ -7,8 +7,8 @@ import { TeamSelect } from './components/TeamSelect';
 import { Subs } from './components/Subs';
 import { GreenIsland } from './components/GreenIsland';
 import { Rules } from './components/Rules';
-import './styles/style.css';
-import './styles/navigation.css';
+import './styles/Style.css';
+import './styles/Navigation.css';
 
 function App() {
   return (
