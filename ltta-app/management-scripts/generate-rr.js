@@ -1,13 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 const { parse } = require('csv-parse/sync');
+const seedrandom = require('seedrandom');
 
 // CONFIG
 const INPUT_FILE = '../../ltta.csv';
 const OUTPUT_DIR = '../public/teams';
-const START_DATE = '2025-06-03'; // Change as needed
+const START_DATE = '2025-06-03'; // Change per year!
 const COURT_GROUPS = ["Courts 1–5", "Courts 6–9", "Courts 10–13"];
 const TIMES = ["5:30pm", "7:00pm"];
+const SEED = 2025; // Seed for randomization, can be any number- using year so easy to regenerate and keep consistent
 
 function loadCSV(filePath) {
   console.log(`Loading CSV from ${filePath}`);
@@ -52,11 +54,19 @@ function groupByNight(rows) {
   return groups;
 }
 
-// Standard round robin generator
-function generateRoundRobin(teams) {
+function generateRoundRobin(teams, seed = SEED) {
   if (teams.length < 2) return [];
+  const rng = seedrandom(seed);
+
+  // Shuffle teams in deterministic order using seed
   const localTeams = [...teams];
+  for (let i = localTeams.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [localTeams[i], localTeams[j]] = [localTeams[j], localTeams[i]];
+  }
+
   if (localTeams.length % 2 !== 0) localTeams.push('BYE');
+
   const schedule = [];
   const half = localTeams.length / 2;
   for (let round = 0; round < localTeams.length - 1; round++) {
@@ -69,11 +79,13 @@ function generateRoundRobin(teams) {
       }
     }
     schedule.push(matches);
-    // Rotate
+
+    // Rotate the array (keep index 0 fixed)
     const fixed = localTeams[0];
     const rotated = [fixed, localTeams[localTeams.length - 1], ...localTeams.slice(1, -1)];
     for (let j = 0; j < localTeams.length; j++) localTeams[j] = rotated[j];
   }
+
   return schedule;
 }
 
@@ -82,33 +94,98 @@ function assignSlotsToMatches(matchesByWeek, teams) {
   const slots = [];
   COURT_GROUPS.forEach(court => TIMES.forEach(time => slots.push({ court, time })));
 
-  // Track how many times each team has played at each time
-  const teamTimeCounts = {};
-  teams.forEach(t => teamTimeCounts[t] = { "5:30pm": 0, "7:00pm": 0 });
+  // Track counts for both time slots and courts for each team
+  const teamStats = {};
+  teams.forEach(t => {
+    teamStats[t.number] = {
+      times: { "5:30pm": 0, "7:00pm": 0 },
+      courts: COURT_GROUPS.reduce((acc, court) => ({ ...acc, [court]: 0 }), {})
+    };
+  });
 
   const weekAssignments = [];
 
   matchesByWeek.forEach((matches, weekIdx) => {
-    // Shuffle slots for fairness
     const weekSlots = [...slots];
-    
-    // Rotate slots for variety
-    if (weekIdx % 2 === 1) weekSlots.reverse();
-
     const assignments = [];
-    matches.forEach(([a, b], i) => {
-      // Try to balance time slots for teams
-      weekSlots.sort((s1, s2) => {
-        const t1 = teamTimeCounts[a][s1.time] + teamTimeCounts[b][s1.time];
-        const t2 = teamTimeCounts[a][s2.time] + teamTimeCounts[b][s2.time];
-        return t1 - t2;
-      });
-      const slot = weekSlots.shift();
-      teamTimeCounts[a][slot.time]++;
-      teamTimeCounts[b][slot.time]++;
-      assignments.push({ teamA: a, teamB: b, court: slot.court, time: slot.time });
+    
+    // Sort matches by teams with most unbalanced time slots
+    const sortedMatches = [...matches].sort(([a1, b1], [a2, b2]) => {
+      const timeDiff1 = Math.abs(
+        teamStats[a1.number].times["5:30pm"] - teamStats[a1.number].times["7:00pm"]
+      ) + Math.abs(
+        teamStats[b1.number].times["5:30pm"] - teamStats[b1.number].times["7:00pm"]
+      );
+      const timeDiff2 = Math.abs(
+        teamStats[a2.number].times["5:30pm"] - teamStats[a2.number].times["7:00pm"]
+      ) + Math.abs(
+        teamStats[b2.number].times["5:30pm"] - teamStats[b2.number].times["7:00pm"]
+      );
+      return timeDiff2 - timeDiff1;
     });
+
+    sortedMatches.forEach(([teamA, teamB]) => {
+      // First prioritize time balance
+      weekSlots.sort((s1, s2) => {
+        const timeBalance1 = Math.abs(
+          teamStats[teamA.number].times[s1.time] - teamStats[teamA.number].times[s2.time]
+        ) + Math.abs(
+          teamStats[teamB.number].times[s1.time] - teamStats[teamB.number].times[s2.time]
+        );
+        const timeBalance2 = Math.abs(
+          teamStats[teamA.number].times[s2.time] - teamStats[teamA.number].times[s1.time]
+        ) + Math.abs(
+          teamStats[teamB.number].times[s2.time] - teamStats[teamB.number].times[s1.time]
+        );
+        
+        if (timeBalance1 !== timeBalance2) {
+          return timeBalance1 - timeBalance2;
+        }
+
+        // If time balance is equal, consider court balance
+        const courtBalance1 = Math.abs(
+          teamStats[teamA.number].courts[s1.court] - teamStats[teamA.number].courts[s2.court]
+        ) + Math.abs(
+          teamStats[teamB.number].courts[s1.court] - teamStats[teamB.number].courts[s2.court]
+        );
+        const courtBalance2 = Math.abs(
+          teamStats[teamA.number].courts[s2.court] - teamStats[teamA.number].courts[s1.court]
+        ) + Math.abs(
+          teamStats[teamB.number].courts[s2.court] - teamStats[teamB.number].courts[s1.court]
+        );
+        
+        return courtBalance1 - courtBalance2;
+      });
+
+      const slot = weekSlots.shift();
+      
+      // Update stats
+      teamStats[teamA.number].times[slot.time]++;
+      teamStats[teamB.number].times[slot.time]++;
+      teamStats[teamA.number].courts[slot.court]++;
+      teamStats[teamB.number].courts[slot.court]++;
+      
+      assignments.push({ 
+        teamA, 
+        teamB, 
+        court: slot.court, 
+        time: slot.time 
+      });
+    });
+
     weekAssignments.push(assignments);
+  });
+
+  // Log final distribution
+  console.log('\nTime slot distribution:');
+  Object.entries(teamStats).forEach(([team, stats]) => {
+    console.log(`Team ${team}: 5:30pm=${stats.times['5:30pm']}, 7:00pm=${stats.times['7:00pm']}`);
+  });
+
+  console.log('\nCourt distribution:');
+  Object.entries(teamStats).forEach(([team, stats]) => {
+    console.log(`Team ${team}: ${Object.entries(stats.courts).map(([court, count]) => 
+      `${court}=${count}`).join(', ')}`);
   });
 
   return weekAssignments;
@@ -208,7 +285,7 @@ function main() {
       });
     }
 
-    const matchesByWeek = generateRoundRobin(teams);
+    const matchesByWeek = generateRoundRobin(teams, SEED);
 
     // Check that each week has exactly as many matches as slots
     const slotsPerWeek = COURT_GROUPS.length * TIMES.length;
