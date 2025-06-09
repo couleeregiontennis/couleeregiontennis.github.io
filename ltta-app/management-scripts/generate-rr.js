@@ -255,7 +255,7 @@ function main() {
           opponent: {
             name: teamB.name,
             number: teamB.number,
-            file: `/public/team/${night}/${teamB.number}`
+            file: `/team/${night}/${teamB.number}`
           }
         };
         const entryB = {
@@ -266,7 +266,7 @@ function main() {
           opponent: {
             name: teamA.name,
             number: teamA.number,
-            file: `/public/team/${night}/${teamA.number}`
+            file: `/team/${night}/${teamA.number}`
           }
         };
         schedules[teamA.number].push(entry);
