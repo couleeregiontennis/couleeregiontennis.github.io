@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>LTTA Scoresheet</title>
+    <style>
+      @media print {
+        body {
+          margin: 0.25in;
+          font-size: 10px;
+        }
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        margin: 0.25in;
+      }
+
+      h2,
+      h3 {
+        margin: 6px 0;
+        text-align: center;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 6px 0;
+        table-layout: fixed; /* Forces equal column widths */
+      }
+
+      td,
+      th {
+        border: 1px solid #000;
+        padding: 2px 4px;
+        vertical-align: top;
+        overflow: hidden; /* Prevents content from breaking layout */
+        white-space: nowrap; /* Keeps content on one line */
+      }
+
+      /* Match tables specific styling */
+      table tr:first-child td {
+        white-space: normal; /* Allow wrapping in header rows */
+      }
+
+      /* Column widths for match tables */
+      table:not(.no-border) tr td:nth-child(1) {
+        width: 20%;
+      } /* First player */
+      table:not(.no-border) tr td:nth-child(2) {
+        width: 20%;
+      } /* Second player */
+      table:not(.no-border) tr td:nth-child(3) {
+        width: 5%;
+      } /* Empty space */
+      table:not(.no-border) tr td:nth-child(4) {
+        width: 10%;
+        text-align: center;
+        padding: 2px;
+      } /* VS column */
+      table:not(.no-border) tr td:nth-child(5) {
+        width: 5%;
+      } /* First opponent */
+      table:not(.no-border) tr td:nth-child(6) {
+        width: 20%;
+      } /* Second opponent */
+      table:not(.no-border) tr td:nth-child(7) {
+        width: 5%;
+      } /* Empty space */
+
+      /* Header row styling */
+      table:not(.no-border) tr td[colspan="3"] {
+        width: 45%; /* Combined width of first three columns */
+      }
+
+      table:not(.no-border) tr td[colspan="4"] {
+        width: 100%;
+        white-space: normal; /* Allow team names to wrap */
+      }
+
+      /* Team header table specific */
+      table:not(.no-border) tr td[colspan="4"] {
+        font-size: 10px;
+        padding: 4px;
+        line-height: 1.2;
+      }
+
+      .no-border td {
+        border: none;
+        padding: 2px 8px;
+        width: auto;
+      }
+
+      .section-title {
+        background: #f0f0f0;
+        font-weight: bold;
+        text-align: center;
+        font-size: 11px;
+        padding: 2px 0;
+        margin: 6px 0;
+      }
+
+      .checkbox {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border: 1px solid #000;
+        margin-right: 4px;
+        vertical-align: middle;
+      }
+
+      /* Score area styling */
+      td[colspan="3"] {
+        white-space: normal; /* Allow wrapping in score areas */
+      }
+
+      ul {
+        padding-left: 1.2em;
+        margin: 4px 0;
+      }
+
+      li {
+        margin-bottom: 2px;
+      }
+
+      p {
+        margin: 4px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>COULEE REGION TENNIS ASSOCIATION MATCH SCORE SHEET – LTTA LEAGUE</h2>
+
+    <table class="no-border">
+      <tr>
+        <td>TUES ✓</td>
+        <td>WED </td>
+        <td>DATE 2025-07-22</td>
+        <td>COURTS Courts 1–5</td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <td colspan="4">
+          TEAM # / NAME: 9 / Bounce It            VS TEAM # / NAME: 12 / Easy Overhead
+          ____________________
+        </td>
+      </tr>
+    </table>
+
+    <div class="section-title">DOUBLES</div>
+
+    <!-- Repeat match blocks -->
+    <!-- Match 1 -->
+    <table>
+      <tr>
+        <td colspan="3">Position # / Player Names:</td>
+        <td>VS</td>
+        <td colspan="3">Position # / Player Names:</td>
+      </tr>
+      <tr>
+        <td>1 / Yubo Nian</td>
+        <td>2 / Matt Diehl</td>
+        <td></td>
+        <td></td>
+        <td>1 / Brian Mansky</td>
+        <td>2 / Randy Moseng</td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____<br />
+          Score: ____ ____ ____
+        </td>
+        <td></td>
+        <td colspan="3">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____
+        </td>
+      </tr>
+    </table>
+
+    <!-- Match 2 -->
+    <table>
+      <tr>
+        <td colspan="3">Position # / Player Names (circle 1):</td>
+        <td>VS</td>
+        <td colspan="3">Position # / Player Names (circle 1):</td>
+      </tr>
+      <tr>
+        <td>3 / Tom Dwyer (C), <br/>Joe Kotnour Sr. (C), <br/>Sean O'Flaherty, <br/>Dan Skemp</td>
+        <td>3 / Tom Dwyer (C), <br/>Joe Kotnour Sr. (C), <br/>Sean O'Flaherty, <br/>Dan Skemp</td>
+        <td></td>
+        <td></td>
+        <td>3 / Heidi Barreyro (C), <br/>Shanon Torgerud, <br/>Odessa Barreyro, <br/>Peter Thompson</td>
+        <td>3 / Heidi Barreyro (C), <br/>Shanon Torgerud, <br/>Odessa Barreyro, <br/>Peter Thompson</td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____<br />
+          Score: ____ ____ ____
+        </td>
+        <td></td>
+        <td colspan="3">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____
+        </td>
+      </tr>
+    </table>
+
+    <!-- Match 3 -->
+    <table>
+      <tr>
+        <td colspan="3">Position # / Player Names (circle 1):</td>
+        <td>VS</td>
+        <td colspan="3">Position # / Player Names (circle 1):</td>
+      </tr>
+      <tr>
+        <td>3 / Tom Dwyer (C), <br/>Joe Kotnour Sr. (C), <br/>Sean O'Flaherty, <br/>Dan Skemp</td>
+        <td>3 / Tom Dwyer (C), <br/>Joe Kotnour Sr. (C), <br/>Sean O'Flaherty, <br/>Dan Skemp</td>
+        <td></td>
+        <td></td>
+        <td>3 / Heidi Barreyro (C), <br/>Shanon Torgerud, <br/>Odessa Barreyro, <br/>Peter Thompson</td>
+        <td>3 / Heidi Barreyro (C), <br/>Shanon Torgerud, <br/>Odessa Barreyro, <br/>Peter Thompson</td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____<br />
+          Score: ____ ____ ____
+        </td>
+        <td></td>
+        <td colspan="3">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____
+        </td>
+      </tr>
+    </table>
+
+    <!-- Match 4 -->
+    <table>
+      <tr>
+        <td colspan="3">Position # / Player Names:</td>
+        <td>VS</td>
+        <td colspan="3">Position # / Player Names:</td>
+      </tr>
+      <tr>
+        <td>4 / Aziz Bhetasiwala</td>
+        <td>5 / Mike Roskos</td>
+        <td></td>
+        <td></td>
+        <td>4 / Tyler Benson</td>
+        <td>5 / Amit Mishra</td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____<br />
+          Score: ____ ____ ____
+        </td>
+        <td></td>
+        <td colspan="3">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____
+        </td>
+      </tr>
+    </table>
+
+    <!-- Team totals -->
+    <table>
+      <tr>
+        <td>TEAM POINTS _____ TOTAL</td>
+        <td>TEAM POINTS _____ TOTAL</td>
+      </tr>
+    </table>
+
+    <!-- Signatures -->
+    <table class="no-border">
+      <tr>
+        <td>__________________________________________</td>
+        <td>__________________________________________</td>
+      </tr>
+      <tr>
+        <td>TEAM CAPTAIN / REP SIGNATURE</td>
+        <td>TEAM CAPTAIN / REP SIGNATURE</td>
+      </tr>
+    </table>
+
+    <div class="section-title">TEAM SCORING</div>
+    <ul>
+      <li>A. 10 points to match winner.</li>
+      <li>B. 8 points to split set loser.</li>
+      <li>C. 8 points each if tied halted match.</li>
+      <li>D. 8 points to loser in halted match (fewer games).</li>
+      <li>E. 6 points to regular set loser.</li>
+      <li>F. 6 points to 3rd set retiree; winner gets 10.</li>
+      <li>G. 4 points to 2nd set retiree; winner gets 10.</li>
+      <li>H. 4 points if using higher rated player; opponent gets 10.</li>
+      <li>I. 2 points to 1st set retiree; winner gets 10.</li>
+      <li>J. 1 point for non-sanctioned player; opponent gets 10.</li>
+      <li>K. 0 points for no-show/late; opponent gets 10.</li>
+    </ul>
+
+    <p>
+      <strong
+        >Leave clipboards & score sheets on red tote until scores are
+        posted.</strong
+      >
+    </p>
+    <p><em>Rev 5/30/25</em></p>
+  </body>
+</html>
