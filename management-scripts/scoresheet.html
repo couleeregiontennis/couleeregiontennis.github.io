@@ -44,30 +44,54 @@
         white-space: normal; /* Allow wrapping in header rows */
       }
 
-      /* Column widths for match tables */
-      table:not(.no-border) tr td:nth-child(1) {
-        width: 20%;
-      } /* First player */
+      /* Updated column widths for match tables */
+      table:not(.no-border) {
+        width: 100%;
+        table-layout: fixed;
+      }
+
+      /* Player columns for team 1 */
+      table:not(.no-border) tr td:nth-child(1),
       table:not(.no-border) tr td:nth-child(2) {
-        width: 20%;
-      } /* Second player */
+        width: 30%;
+      }
+
+      /* VS column and its empty cells */
       table:not(.no-border) tr td:nth-child(3) {
-        width: 5%;
-      } /* Empty space */
-      table:not(.no-border) tr td:nth-child(4) {
         width: 10%;
         text-align: center;
         padding: 2px;
-      } /* VS column */
+      }
+
+      /* Keep empty VS column cells visible */
+      table:not(.no-border) tr td:nth-child(3):empty {
+        display: table-cell;
+      }
+
+      /* Player columns for team 2 */
+      table:not(.no-border) tr td:nth-child(4),
       table:not(.no-border) tr td:nth-child(5) {
-        width: 5%;
-      } /* First opponent */
-      table:not(.no-border) tr td:nth-child(6) {
-        width: 20%;
-      } /* Second opponent */
-      table:not(.no-border) tr td:nth-child(7) {
-        width: 5%;
-      } /* Empty space */
+        width: 30%;
+      }
+
+      /* Remove display:none from empty cells */
+      table:not(.no-border) tr td:empty {
+        visibility: hidden; /* Hide content but keep spacing */
+      }
+
+      /* Score area styling */
+      table:not(.no-border) tr td[colspan="3"] {
+        width: 45%;
+        visibility: visible !important; /* Ensure score areas remain visible */
+      }
+
+      /* Adjust header cells with colspan */
+      table:not(.no-border) tr td[colspan="2"] {
+        width: 45%;
+        text-align: left; /* Force left alignment */
+        white-space: normal; /* Allow text to wrap */
+        vertical-align: top;
+      }
 
       /* Header row styling */
       table:not(.no-border) tr td[colspan="3"] {
@@ -108,9 +132,17 @@
         border: 1px solid #000;
         margin-right: 4px;
         vertical-align: middle;
+        float: left; /* Align checkbox to the left */
       }
 
-      /* Score area styling */
+      /* Clear float after checkbox */
+      td[colspan="2"]::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      /* Score area styling for both teams */
       td[colspan="3"] {
         white-space: normal; /* Allow wrapping in score areas */
       }
@@ -127,6 +159,16 @@
       p {
         margin: 4px 0;
       }
+
+      /* Add page break styles */
+      .match-sheet {
+        page-break-after: always;
+      }
+
+      /* Last sheet shouldn't have a page break */
+      .match-sheet:last-child {
+        page-break-after: auto;
+      }
     </style>
   </head>
   <body>
@@ -134,19 +176,16 @@
 
     <table class="no-border">
       <tr>
-        <td>TUES ____</td>
-        <td>WED ____</td>
-        <td>DATE ________</td>
-        <td>COURTS __________</td>
+        <td>TUES [TUES]</td>
+        <td>WED [WED]</td>
+        <td>DATE [DATE]</td>
+        <td>COURTS [COURTS]</td>
       </tr>
     </table>
 
     <table>
       <tr>
-        <td colspan="4">
-          TEAM # / NAME: ____ / ____________________ VS TEAM # / NAME: ____ /
-          ____________________
-        </td>
+        <td colspan="4">TEAM [T1NUM] / [T1NAME] VS TEAM [T2NUM] / [T2NAME]</td>
       </tr>
     </table>
 
@@ -156,27 +195,26 @@
     <!-- Match 1 -->
     <table>
       <tr>
-        <td colspan="3">Position # / Player Names:</td>
+        <td colspan="2">Position # / Player Names:</td>
         <td>VS</td>
-        <td colspan="3">Position # / Player Names:</td>
+        <td colspan="2">Position # / Player Names:</td>
       </tr>
       <tr>
-        <td>1 / ____________</td>
-        <td>2 / ____________</td>
+        <td>1 / [P1T1]</td>
+        <td>2 / [P2T1]</td>
         <td></td>
-        <td></td>
-        <td>1 / ____________</td>
-        <td>2 / ____________</td>
+        <td>1 / [P1T2]</td>
+        <td>2 / [P2T2]</td>
       </tr>
       <tr>
-        <td colspan="3">
+        <td colspan="2">
           <div class="checkbox"></div>
           Win<br />
           Points _____<br />
           Score: ____ ____ ____
         </td>
         <td></td>
-        <td colspan="3">
+        <td colspan="2">
           <div class="checkbox"></div>
           Win<br />
           Points _____
@@ -187,27 +225,26 @@
     <!-- Match 2 -->
     <table>
       <tr>
-        <td colspan="3">Position # / Player Names (circle 1):</td>
+        <td colspan="2">Position # / Player Names (circle 1):</td>
         <td>VS</td>
-        <td colspan="3">Position # / Player Names (circle 1):</td>
+        <td colspan="2">Position # / Player Names (circle 1):</td>
       </tr>
       <tr>
-        <td>3 / ____________</td>
-        <td>3 / ____________</td>
+        <td>3 / [P3T1A]<br />[P3T1B]<br />[P3T1C]<br />[P3T1D]</td>
+        <td>3 / [P3T1A]<br />[P3T1B]<br />[P3T1C]<br />[P3T1D]</td>
         <td></td>
-        <td></td>
-        <td>3 / ____________</td>
-        <td>3 / ____________</td>
+        <td>3 / [P3T2A]<br />[P3T2B]<br />[P3T2C]<br />[P3T2D]</td>
+        <td>3 / [P3T2A]<br />[P3T2B]<br />[P3T2C]<br />[P3T2D]</td>
       </tr>
       <tr>
-        <td colspan="3">
+        <td colspan="2">
           <div class="checkbox"></div>
           Win<br />
           Points _____<br />
           Score: ____ ____ ____
         </td>
         <td></td>
-        <td colspan="3">
+        <td colspan="2">
           <div class="checkbox"></div>
           Win<br />
           Points _____
@@ -218,27 +255,26 @@
     <!-- Match 3 -->
     <table>
       <tr>
-        <td colspan="3">Position # / Player Names (circle 1):</td>
+        <td colspan="2">Position # / Player Names (circle 1):</td>
         <td>VS</td>
-        <td colspan="3">Position # / Player Names (circle 1):</td>
+        <td colspan="2">Position # / Player Names (circle 1):</td>
       </tr>
       <tr>
-        <td>3 / ____________</td>
-        <td>3 / ____________</td>
+        <td>3 / [P3T1A]<br />[P3T1B]<br />[P3T1C]<br />[P3T1D]</td>
+        <td>3 / [P3T1A]<br />[P3T1B]<br />[P3T1C]<br />[P3T1D]</td>
         <td></td>
-        <td></td>
-        <td>3 / ____________</td>
-        <td>3 / ____________</td>
+        <td>3 / [P3T2A]<br />[P3T2B]<br />[P3T2C]<br />[P3T2D]</td>
+        <td>3 / [P3T2A]<br />[P3T2B]<br />[P3T2C]<br />[P3T2D]</td>
       </tr>
       <tr>
-        <td colspan="3">
+        <td colspan="2">
           <div class="checkbox"></div>
           Win<br />
           Points _____<br />
           Score: ____ ____ ____
         </td>
         <td></td>
-        <td colspan="3">
+        <td colspan="2">
           <div class="checkbox"></div>
           Win<br />
           Points _____
@@ -249,27 +285,26 @@
     <!-- Match 4 -->
     <table>
       <tr>
-        <td colspan="3">Position # / Player Names:</td>
+        <td colspan="2">Position # / Player Names:</td>
         <td>VS</td>
-        <td colspan="3">Position # / Player Names:</td>
+        <td colspan="2">Position # / Player Names:</td>
       </tr>
       <tr>
-        <td>4 / ____________</td>
-        <td>5 / ____________</td>
+        <td>4 / [P4T1]</td>
+        <td>5 / [P5T1]</td>
         <td></td>
-        <td></td>
-        <td>4 / ____________</td>
-        <td>5 / ____________</td>
+        <td>4 / [P4T2]</td>
+        <td>5 / [P5T2]</td>
       </tr>
       <tr>
-        <td colspan="3">
+        <td colspan="2">
           <div class="checkbox"></div>
           Win<br />
           Points _____<br />
           Score: ____ ____ ____
         </td>
         <td></td>
-        <td colspan="3">
+        <td colspan="2">
           <div class="checkbox"></div>
           Win<br />
           Points _____
@@ -280,8 +315,8 @@
     <!-- Team totals -->
     <table>
       <tr>
-        <td>TEAM POINTS _____ TOTAL</td>
-        <td>TEAM POINTS _____ TOTAL</td>
+        <td>TEAM POINTS [T1POINTS] TOTAL</td>
+        <td>TEAM POINTS [T2POINTS] TOTAL</td>
       </tr>
     </table>
 
