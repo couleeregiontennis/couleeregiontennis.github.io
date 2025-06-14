@@ -94,14 +94,15 @@ This folder contains scripts to help you manage the Coulee Region Tennis Associa
 
 ---
 
-## 📝 Typical Workflow
+## 📝 Typical Workflow (order matters)
 
-1. **Update `ltta.csv`** with the latest player/team info.
-2. **Run `generate-roster.js`** to create team rosters.
-3. **Run `generate-rr.js`** to create the season schedule.
-4. **Run `generate-all-html.js`** to create the all-teams schedule for each night.
-5. **Run `create-emails.js`** to generate team emails.
-6. **Run `generate-scoresheet.js`** to generate printable scoresheets.
+1. **Update the Google Sheet** with the latest player/team info
+   - The sheet will automatically publish changes to the CSV URL
+2. **Run `generate-roster.js`** to create team rosters
+3. **Run `generate-rr.js`** to create the season schedule
+4. **Run `generate-all-html.js`** to create the all-teams schedule for each night
+5. **Run `create-emails.js`** to generate team emails
+6. **Run `generate-scoresheet.js`** to generate printable scoresheets
 
 ---
 
@@ -125,10 +126,10 @@ This folder contains scripts to help you manage the Coulee Region Tennis Associa
 
 ## ℹ️ Notes & Tips
 
-- If you change the structure of `ltta.csv`, you may need to update the scripts.
-- For any issues, check the console output for error messages.
-- You can re-run any script as needed; files will be overwritten with the latest data.
-- If you want to use Google Sheets directly, you may need to update the scripts to fetch data from the sheet.
+- The scripts now pull data directly from the published Google Sheet
+- Don't change the website data google sheet format
+- For any issues, check the console output for error messages
+- You can re-run any script as needed; files will be overwritten with the latest data
 
 ---
 

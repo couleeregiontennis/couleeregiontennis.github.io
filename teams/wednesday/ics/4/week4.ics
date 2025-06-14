@@ -25,7 +25,7 @@ DTSTAMP:20250625T173000Z
 DTSTART;TZID=America/Chicago:20250625T173000
 DTEND;TZID=America/Chicago:20250625T190000
 SUMMARY:LTTA Tennis: vs Hit Squad
-DESCRIPTION:LTTA Tennis match: 4 vs Hit Squad at Courts 1–5\nOpponent Roster: Sheldon Lee (1); Kyle Deyo (2); Michael Current (3); Christine Lee (3); Bennet Myers (3); Madan Mohan (3); Michelle Ottum (4); Amanda Waters (5)
+DESCRIPTION:LTTA Tennis match: 4 vs Hit Squad at Courts 1–5\nOpponent Roster: Sheldon Lee (1); Kyle Deyo (2); Michael Current (3); Christine Lee (3); Bennet Myers (3); Kayla Holman (3); Michelle Ottum (4); Amanda Waters (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M
