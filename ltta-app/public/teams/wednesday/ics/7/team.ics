@@ -35,7 +35,7 @@ DTSTAMP:20250618T173000Z
 DTSTART;TZID=America/Chicago:20250618T173000
 DTEND;TZID=America/Chicago:20250618T190000
 SUMMARY:LTTA Tennis: vs Rally Monkeys
-DESCRIPTION:LTTA Tennis match: 7 vs Rally Monkeys at Courts 6–9\nOpponent Roster: Brett Meddaugh (1); Greg Jameson (2); Pam Jameson (3); Andy Seithamer (3); Bette Smith (3); Rick Moody (3); Greg Smith (4); Hailey Kincaid (5)
+DESCRIPTION:LTTA Tennis match: 7 vs Rally Monkeys at Courts 6–9\nOpponent Roster: Brett Meddaugh (1); Greg Jameson (2); Pam Jameson (3); Andy Seithamer (3); Bette Smith (3); Rick Moody (3); Greg Smith (4); Sui Wang (5)
 LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -105,7 +105,7 @@ DTSTAMP:20250723T173000Z
 DTSTART;TZID=America/Chicago:20250723T173000
 DTEND;TZID=America/Chicago:20250723T190000
 SUMMARY:LTTA Tennis: vs Hit Squad
-DESCRIPTION:LTTA Tennis match: 7 vs Hit Squad at Courts 6–9\nOpponent Roster: Sheldon Lee (1); Kyle Deyo (2); Michael Current (3); Christine Lee (3); Bennet Myers (3); Madan Mohan (3); Michelle Ottum (4); Amanda Waters (5)
+DESCRIPTION:LTTA Tennis match: 7 vs Hit Squad at Courts 6–9\nOpponent Roster: Sheldon Lee (1); Kyle Deyo (2); Michael Current (3); Christine Lee (3); Bennet Myers (3); Kayla Holman (3); Michelle Ottum (4); Amanda Waters (5)
 LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT9H30M

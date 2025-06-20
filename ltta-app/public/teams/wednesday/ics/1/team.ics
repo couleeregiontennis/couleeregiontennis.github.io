@@ -133,7 +133,7 @@ DTSTAMP:20250806T190000Z
 DTSTART;TZID=America/Chicago:20250806T190000
 DTEND;TZID=America/Chicago:20250806T203000
 SUMMARY:LTTA Tennis: vs Hit Squad
-DESCRIPTION:LTTA Tennis match: 1 vs Hit Squad at Courts 10–13\nOpponent Roster: Sheldon Lee (1); Kyle Deyo (2); Michael Current (3); Christine Lee (3); Bennet Myers (3); Madan Mohan (3); Michelle Ottum (4); Amanda Waters (5)
+DESCRIPTION:LTTA Tennis match: 1 vs Hit Squad at Courts 10–13\nOpponent Roster: Sheldon Lee (1); Kyle Deyo (2); Michael Current (3); Christine Lee (3); Bennet Myers (3); Kayla Holman (3); Michelle Ottum (4); Amanda Waters (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT11H
@@ -147,7 +147,7 @@ DTSTAMP:20250813T173000Z
 DTSTART;TZID=America/Chicago:20250813T173000
 DTEND;TZID=America/Chicago:20250813T190000
 SUMMARY:LTTA Tennis: vs Rally Monkeys
-DESCRIPTION:LTTA Tennis match: 1 vs Rally Monkeys at Courts 1–5\nOpponent Roster: Brett Meddaugh (1); Greg Jameson (2); Pam Jameson (3); Andy Seithamer (3); Bette Smith (3); Rick Moody (3); Greg Smith (4); Hailey Kincaid (5)
+DESCRIPTION:LTTA Tennis match: 1 vs Rally Monkeys at Courts 1–5\nOpponent Roster: Brett Meddaugh (1); Greg Jameson (2); Pam Jameson (3); Andy Seithamer (3); Bette Smith (3); Rick Moody (3); Greg Smith (4); Sui Wang (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M

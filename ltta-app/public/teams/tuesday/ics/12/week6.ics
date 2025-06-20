@@ -25,7 +25,7 @@ DTSTAMP:20250708T173000Z
 DTSTART;TZID=America/Chicago:20250708T173000
 DTEND;TZID=America/Chicago:20250708T190000
 SUMMARY:LTTA Tennis: vs Tennis the Menace
-DESCRIPTION:LTTA Tennis match: 12 vs Tennis the Menace at Courts 1–5\nOpponent Roster: Rob Jordan (1); Jake Schweitzer (2); Mike Allen (3); Dave Mills (3); John Sullivan (3); Madan Mohan (3); Haley Skinner (4); Meg Jelen (5)
+DESCRIPTION:LTTA Tennis match: 12 vs Tennis the Menace at Courts 1–5\nOpponent Roster: Robert Jordan (1); Jake Schweitzer (2); Mike Allen (3); Dave Mills (3); John Sullivan (3); Madan Mohan (3); Hailey Kincaid (4); Meg Jelen (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M
