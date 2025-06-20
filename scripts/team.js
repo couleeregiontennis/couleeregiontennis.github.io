@@ -56,27 +56,28 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
   }
 }
 
-// Highlight the upcoming match row
 function highlightNextMatch() {
-  const rows = document.querySelectorAll("#matches-table tbody tr");
-  const today = new Date();
-  let nextMatchRow = null;
-
-  rows.forEach((row) => {
-    const dateCell = row.cells[1];
-    const matchDate = new Date(dateCell.textContent.trim());
-    if (
-      matchDate >= today &&
-      (!nextMatchRow ||
-        matchDate < new Date(nextMatchRow.cells[1].textContent.trim()))
-    ) {
-      nextMatchRow = row;
+    const rows = document.querySelectorAll("#matches-table tbody tr");
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set to start of today
+    
+    let nextMatchRow = null;
+    let nextMatchDate = null;
+    
+    rows.forEach((row) => {
+        const dateCell = row.cells[1];
+        const matchDate = new Date(dateCell.textContent.trim());
+        matchDate.setHours(0, 0, 0, 0); // Set to start of match day
+        
+        if (matchDate >= today && (!nextMatchDate || matchDate < nextMatchDate)) {
+            nextMatchRow = row;
+            nextMatchDate = matchDate;
+        }
+    });
+    
+    if (nextMatchRow) {
+        nextMatchRow.classList.add("highlight");
     }
-  });
-
-  if (nextMatchRow) {
-    nextMatchRow.classList.add("highlight");
-  }
 }
 
 // Get team from URL, e.g. ?team=team1
