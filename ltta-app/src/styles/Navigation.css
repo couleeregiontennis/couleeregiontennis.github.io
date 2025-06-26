@@ -55,6 +55,48 @@
 .navbar-menu li {
   border: none;
   width: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.navbar-auth {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.navbar-user-icon {
+  font-size: 1.3em;
+  vertical-align: middle;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+.navbar-login-icon {
+  font-size: 1.3em;
+  color: #2a4d69;
+  margin-left: 4px;
+  vertical-align: middle;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar-logout-btn {
+  background: none;
+  border: none;
+  color: #2a4d69;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1em;
+  padding: 0;
+  margin-left: 2px;
+  text-decoration: underline;
+}
+
+.navbar-logout-btn:hover,
+.navbar-login-icon:hover {
+  color: #007BFF;
 }
 
 .navbar-menu a {
@@ -124,7 +166,15 @@
 
   .navbar-menu li {
     width: 100%;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+  }
+
+  .navbar-auth {
+    margin-left: 0;
+    justify-content: flex-start;
   }
 
   .navbar-menu a {
