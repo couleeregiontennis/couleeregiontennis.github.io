@@ -166,6 +166,45 @@
   transform: scale(1.1);
 }
 
+.groupme-link {
+  display: inline-block;
+  padding: 0.25em 0.75em;
+  background: #00aff0;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+.groupme-link:hover {
+  background: #007caa;
+}
+
+.find-sub-mobile {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .find-sub-mobile {
+    display: inline-block;
+    margin-left: 0.5em;
+  }
+}
+
+/* Style the icon if you want */
+.find-sub-icon {
+  font-size: 1.2em;
+  margin-left: 0.1em;
+  color: #00aff0;
+  text-decoration: none;
+  vertical-align: middle;
+  transition: color 0.2s;
+}
+.find-sub-icon:hover {
+  color: #007caa;
+}
+
 @media (max-width: 800px) {
   .teams-container {
     flex-direction: column;
@@ -190,4 +229,53 @@
   .roster-table th {
     padding: 0.6rem;
   }
+}
+
+.find-sub-modal {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.find-sub-modal-content {
+  background: #fff;
+  color: #222;
+  padding: 1.5em;
+  border-radius: 8px;
+  max-width: 90vw;
+  width: 350px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  text-align: center;
+}
+.find-sub-modal-content textarea {
+  font-size: 1em;
+  padding: 0.5em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  resize: none;
+}
+.copy-btn, .close-btn {
+  margin: 0.5em 0.5em 0 0.5em;
+  padding: 0.5em 1.2em;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+}
+.copy-btn {
+  background: #00aff0;
+  color: #fff;
+}
+.copy-btn:hover {
+  background: #007caa;
+}
+.close-btn {
+  background: #eee;
+  color: #333;
+}
+.close-btn:hover {
+  background: #ccc;
 }
