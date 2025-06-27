@@ -7,6 +7,9 @@ import { TeamSelect } from './components/TeamSelect';
 import { Subs } from './components/Subs';
 import { GreenIsland } from './components/GreenIsland';
 import { Rules } from './components/Rules';
+import { Login } from './components/Login';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import { AddScore } from './components/AddScore';
 import './styles/Style.css';
 import './styles/Navigation.css';
 
@@ -23,6 +26,15 @@ function App() {
             <Route path="/subs" element={<Subs />} />
             <Route path="/greenisland" element={<GreenIsland />} />
             <Route path="/rules" element={<Rules />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/add-score"
+              element={
+                <ProtectedRoute>
+                  <AddScore />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
       </div>
