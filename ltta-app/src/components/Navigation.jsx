@@ -57,6 +57,20 @@ export function Navigation() {
                   CRTA Website
                 </a>
               </li>
+              {user && (
+                <li>
+                  <Link to="/add-score" onClick={closeMenu}>
+                    Add Score
+                  </Link>
+                </li>
+              )}
+              {user && (
+                <li>
+                  <Link to="/user" onClick={closeMenu}>
+                    User
+                  </Link>
+                </li>
+              )}
               <li className="navbar-auth">
                 {user ? (
                   <>

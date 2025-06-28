@@ -1,8 +1,10 @@
+/* ----- LIGHT MODE (default) ----- */
 .navbar {
   background: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   position: relative;
   z-index: 1000;
+  color: #222;
 }
 
 .navbar-container {
@@ -55,9 +57,23 @@
 .navbar-menu li {
   border: none;
   width: auto;
-  display: flex;
-  align-items: center;
-  gap: 0.3em;
+  background: none;
+}
+
+.navbar-menu a {
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+  background: none;
+  color: #222;
+  display: block;
+}
+
+.navbar-menu a:hover {
+  color: #007BFF;
+  background: #f0f6ff;
 }
 
 .navbar-auth {
@@ -71,6 +87,7 @@
   vertical-align: middle;
   margin-right: 4px;
   cursor: pointer;
+  color: #2a4d69;
 }
 
 .navbar-login-icon {
@@ -99,22 +116,7 @@
   color: #007BFF;
 }
 
-.navbar-menu a {
-  color: #333;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background 0.2s, color 0.2s;
-  background: none;
-  display: block;
-}
-
-.navbar-menu a:hover {
-  color: #007BFF;
-}
-
-/* Mobile Styles */
+/* ----- MOBILE LIGHT MODE ----- */
 @media (max-width: 768px) {
   .navbar {
     position: relative;
@@ -147,7 +149,7 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: #fff;
+    background: lightsteelblue;
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     z-index: 999;
@@ -166,15 +168,8 @@
 
   .navbar-menu li {
     width: 100%;
-    border-top: 1px solid rgba(0,0,0,0.05);
-    display: flex;
-    align-items: center;
-    gap: 0.3em;
-  }
-
-  .navbar-auth {
-    margin-left: 0;
-    justify-content: flex-start;
+    border-top: 1px solid #e0e0e0;
+    background: none;
   }
 
   .navbar-menu a {
@@ -182,5 +177,66 @@
     text-align: center;
     border-radius: 0;
     background: none;
+    color: #222;
+  }
+
+  .navbar-menu a:hover {
+    background: #f0f6ff;
+    color: #007BFF;
+  }
+
+  .navbar-user-icon {
+    padding-left: 40%;
+    color: #2a4d69;
+  }
+}
+
+/* ----- DARK MODE ----- */
+@media (prefers-color-scheme: dark) {
+  .navbar {
+    background-color: #111;
+    color: #c9e1ff;
+  }
+
+  .navbar-brand a {
+    color: #7bb6ff;
+  }
+
+  .navbar-menu {
+    background-color: #23272a !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  .navbar-menu ul {
+    background: none;
+  }
+
+  .navbar-menu li {
+    background: none;
+    border-top: 1px solid #222e3c;
+  }
+
+  .navbar-menu a {
+    color: #c9e1ff;
+    background: none;
+  }
+
+  .navbar-menu a:hover {
+    background: #2a4d69;
+    color: #fff;
+  }
+
+  .navbar-user-icon,
+  .navbar-login-icon {
+    color: #c9e1ff;
+  }
+
+  .navbar-logout-btn {
+    color: #c9e1ff;
+  }
+
+  .navbar-logout-btn:hover,
+  .navbar-login-icon:hover {
+    color: #7bb6ff;
   }
 }

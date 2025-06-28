@@ -8,8 +8,9 @@ import { Subs } from './components/Subs';
 import { GreenIsland } from './components/GreenIsland';
 import { Rules } from './components/Rules';
 import { Login } from './components/Login';
-import { ProtectedRoute } from './components/ProtectedRoute';
+import { ProtectedRoute } from './scripts/ProtectedRoute';
 import { AddScore } from './components/AddScore';
+import { User } from './components/User';
 import './styles/Style.css';
 import './styles/Navigation.css';
 
@@ -32,6 +33,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <AddScore />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/user"
+              element={
+                <ProtectedRoute>
+                  <User />
                 </ProtectedRoute>
               }
             />

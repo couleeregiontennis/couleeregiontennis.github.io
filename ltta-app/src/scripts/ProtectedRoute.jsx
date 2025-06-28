@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { supabase } from '../scripts/supabaseClient';
+import { supabase } from './supabaseClient';
 
 export function ProtectedRoute({ children }) {
   const [loading, setLoading] = useState(true);

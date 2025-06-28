@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import usePlatform from '../scripts/PlatformDetector';
+import useCopyToClipboard from '../scripts/CopyToClipboard';
 import '../styles/Team.css';
 
 export function Team() {
   const [teamData, setTeamData] = useState(null);
   const [rosterData, setRosterData] = useState(null);
   const { day, teamId } = useParams();
-  const copyToClipboard = useCopyToClipboard();
+  const { copyToClipboard, copied } = useCopyToClipboard();
+  const platform = usePlatform();
 
   useEffect(() => {
     const loadTeamData = async () => {
@@ -62,7 +65,14 @@ export function Team() {
                 const icsUrl = teamData.teamIcsPath || `/teams/${day}/ics/${teamId}/week${match.week}.ics`;
                 // TODO: Make this have more detail once user logged in
                 const message = `Hi! ${rosterData.teamName} needs a sub for ${day.charAt(0).toUpperCase() + day.slice(1)} ${match.date} at ${match.time} on ${match.courts}. Add to calendar: ${window.location.origin}${icsUrl}`;
-                const groupMeUrl = `groupme://share?text=${encodeURIComponent(message)}`;
+                let groupMeUrl = '';
+                if(platform === 'ios' || platform === 'android') {
+                  // Use GroupMe URL scheme for mobile platforms
+                  groupMeUrl = `groupme://share?text=${encodeURIComponent(message)}`;
+                } else {
+                  // Use a web URL for desktop
+                  groupMeUrl = `https://web.groupme.com/share?text=${encodeURIComponent(message)}`;
+                }
 
                 return (
                   <tr key={match.week}>
@@ -143,32 +153,3 @@ function formatDateUS(dateStr) {
   const [year, month, day] = dateStr.split('-');
   return `${month}/${day}/${year}`;
 }
-
-const useCopyToClipboard = () => {
-  return (message) => {
-    const textarea = document.createElement('textarea');
-    textarea.value = message;
-    textarea.setAttribute('readonly', '');
-    textarea.style.position = 'fixed';
-    textarea.style.left = '-9999px';
-    document.body.appendChild(textarea);
-
-    // Select the text
-    textarea.focus();
-    textarea.select();
-
-    let copied = false;
-    try {
-      copied = document.execCommand('copy');
-    } catch (err) {
-      copied = false;
-    }
-
-    document.body.removeChild(textarea);
-
-    // Fallback: Show prompt if copy failed
-    if (!copied) {
-      window.prompt('Copy this message:', message);
-    }
-  };
-};
