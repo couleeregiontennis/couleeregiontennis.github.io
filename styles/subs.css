@@ -164,7 +164,7 @@ p {
     margin-bottom: 0.4rem;
   }
 }
-/* Add at the end of subs.css for improved dark mode contrast */
+
 @media (prefers-color-scheme: dark) {
   main {
     background: #181a1b;
