@@ -1,0 +1,241 @@
+/* Light mode defaults */
+.login-page {
+  max-width: 380px;
+  margin: 56px auto 0 auto;
+  padding: 36px 32px 32px 32px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 32px rgba(42, 77, 105, 0.15), 0 1.5px 4px rgba(42,77,105,0.07);
+  display: flex;
+  flex-direction: column;
+}
+
+.login-page h2 {
+  color: #2a4d69;
+  text-align: center;
+  margin-bottom: 1.2em;
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.login-page form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  margin-bottom: 1.2em;
+}
+
+.login-page label {
+  color: #2a4d69;
+  font-weight: 500;
+  margin-bottom: 0.2em;
+}
+
+.login-page input[type="email"],
+.login-page input[type="password"] {
+  width: 100%;
+  margin-bottom: 0.5em;
+  padding: 12px 14px;
+  border: 1px solid #b3c2d1;
+  border-radius: 6px;
+  font-size: 1.08em;
+  background: #f6fafd;
+  color: #222;
+  transition: border 0.2s;
+}
+
+.login-page input[type="email"]:focus,
+.login-page input[type="password"]:focus {
+  border: 1.5px solid #00aff0;
+  outline: none;
+  background: #f0f7fa;
+}
+
+.login-page button[type="submit"] {
+  width: 100%;
+  padding: 0.8em 0;
+  background: #00aff0;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.12em;
+  font-weight: 600;
+  margin-top: 0.5em;
+  margin-bottom: 0.7em;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(42, 77, 105, 0.08);
+}
+
+.login-page button[type="submit"]:hover,
+.login-page button[type="submit"]:focus {
+  background: #007caa;
+}
+
+.login-page .error {
+  color: #c0392b;
+  background: #ffeaea;
+  border-radius: 4px;
+  padding: 0.5em 0.8em;
+  margin-bottom: 0.7em;
+  text-align: center;
+  font-size: 1em;
+}
+
+.login-page > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: center;
+  margin-bottom: 0.7em;
+}
+
+.login-page button[type="button"] {
+  width: 100%;
+  padding: 0.7em 0;
+  background: #f6fafd;
+  color: #2a4d69;
+  border: 1px solid #b3c2d1;
+  border-radius: 6px;
+  font-size: 1.08em;
+  font-weight: 500;
+  margin-bottom: 0.2em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  box-shadow: 0 1px 4px rgba(42, 77, 105, 0.06);
+}
+
+.login-page button[type="button"]:hover,
+.login-page button[type="button"]:focus {
+  background: #e6f7ff;
+  color: #007caa;
+}
+
+.login-page .apple-btn {
+  background: #111;
+  color: #fff;
+  border: none;
+}
+
+.login-page .apple-btn:hover,
+.login-page .apple-btn:focus {
+  background: #222;
+}
+
+.login-page .copy-btn,
+.login-page .close-btn {
+  margin: 0.5em 0.5em 0 0.5em;
+  padding: 0.5em 1.2em;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.login-page .copy-btn {
+  background: #00aff0;
+  color: #fff;
+}
+.login-page .copy-btn:hover {
+  background: #007caa;
+}
+.login-page .close-btn {
+  background: #eee;
+  color: #333;
+}
+.login-page .close-btn:hover {
+  background: #ccc;
+}
+
+.login-page .switch-link {
+  background: none;
+  border: none;
+  color: #00aff0;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1em;
+  margin-left: 0.3em;
+  padding: 0;
+}
+
+.login-page .switch-link:hover {
+  color: #007caa;
+}
+
+/* --- DARK MODE SUPPORT --- */
+@media (prefers-color-scheme: dark) {
+  .login-page {
+    background: #181a1b;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  .login-page h2 {
+    color: #b3d1ff;
+  }
+  .login-page label {
+    color: #e0e0e0;
+  }
+  .login-page input[type="email"],
+  .login-page input[type="password"] {
+    background: #23272a;
+    color: #e0e0e0;
+    border: 1px solid #444;
+  }
+  .login-page input[type="email"]:focus,
+  .login-page input[type="password"]:focus {
+    background: #23272a;
+    border: 1.5px solid #00aff0;
+  }
+  .login-page button[type="submit"] {
+    background: #2a4d69;
+    color: #fff;
+  }
+  .login-page button[type="submit"]:hover,
+  .login-page button[type="submit"]:focus {
+    background: #1a3557;
+  }
+  .login-page button[type="button"] {
+    background: #23272a;
+    color: #b3d1ff;
+    border: 1px solid #444;
+  }
+  .login-page button[type="button"]:hover,
+  .login-page button[type="button"]:focus {
+    background: #1a3557;
+    color: #fff;
+  }
+  .login-page .apple-btn {
+    background: #111;
+    color: #fff;
+    border: none;
+  }
+  .login-page .apple-btn:hover,
+  .login-page .apple-btn:focus {
+    background: #222;
+  }
+  .login-page .copy-btn {
+    background: #007caa;
+    color: #fff;
+  }
+  .login-page .copy-btn:hover {
+    background: #005f7a;
+  }
+  .login-page .close-btn {
+    background: #23272a;
+    color: #e0e0e0;
+  }
+  .login-page .close-btn:hover {
+    background: #333;
+  }
+  .login-page .error {
+    background: #3a2323;
+    color: #ffb3b3;
+  }
+}

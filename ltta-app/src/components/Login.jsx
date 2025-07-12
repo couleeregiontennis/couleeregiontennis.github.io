@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { supabase } from '../scripts/supabaseClient';
+import '../styles/Login.css';
 
 export function Login({ onLogin }) {
   const [email, setEmail] = useState('');
@@ -33,7 +34,7 @@ export function Login({ onLogin }) {
   };
 
   return (
-    <div className="login-page" style={{ maxWidth: 340, margin: '40px auto', padding: 24, background: '#fff', borderRadius: 8, boxShadow: '0 2px 8px #0001' }}>
+    <div className="login-page">
       <h2>{isSignUp ? "Sign Up" : "Login"}</h2>
       <form onSubmit={handleAuth}>
         <label>
@@ -43,7 +44,6 @@ export function Login({ onLogin }) {
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
-            style={{ width: '100%', marginBottom: 12, padding: 8 }}
           />
         </label>
         <label>
@@ -53,29 +53,17 @@ export function Login({ onLogin }) {
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
-            style={{ width: '100%', marginBottom: 12, padding: 8 }}
           />
         </label>
-        <button type="submit" disabled={loading} style={{ width: '100%', padding: 10, background: '#2a4d69', color: '#fff', border: 'none', borderRadius: 4 }}>
+        <button type="submit" disabled={loading}>
           {loading ? (isSignUp ? 'Signing up...' : 'Logging in...') : (isSignUp ? 'Sign Up' : 'Login')}
         </button>
-        {error && <div style={{ color: 'red', marginTop: 12 }}>{error}</div>}
+        {error && <div className="error">{error}</div>}
       </form>
-      <div style={{ margin: '24px 0 8px 0', textAlign: 'center' }}>
+      <div>
         <button
           type="button"
           onClick={() => handleOAuth('google')}
-          style={{
-            width: '100%',
-            padding: 10,
-            background: '#fff',
-            color: '#222',
-            border: '1px solid #888',
-            borderRadius: 4,
-            marginBottom: 10,
-            cursor: 'pointer',
-            fontWeight: 500
-          }}
         >
           <span style={{ marginRight: 8, verticalAlign: 'middle' }}>🔵</span>
           Continue with Google
@@ -83,16 +71,7 @@ export function Login({ onLogin }) {
         <button
           type="button"
           onClick={() => handleOAuth('apple')}
-          style={{
-            width: '100%',
-            padding: 10,
-            background: '#111',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 4,
-            cursor: 'pointer',
-            fontWeight: 500
-          }}
+          className="apple-btn"
         >
           <span style={{ marginRight: 8, verticalAlign: 'middle' }}></span>
           Continue with Apple
@@ -102,14 +81,14 @@ export function Login({ onLogin }) {
         {isSignUp ? (
           <>
             Already have an account?{' '}
-            <button type="button" onClick={() => setIsSignUp(false)} style={{ color: '#2a4d69', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
+            <button type="button" onClick={() => setIsSignUp(false)} className="switch-link">
               Login
             </button>
           </>
         ) : (
           <>
             New user?{' '}
-            <button type="button" onClick={() => setIsSignUp(true)} style={{ color: '#2a4d69', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
+            <button type="button" onClick={() => setIsSignUp(true)} className="switch-link">
               Sign Up
             </button>
           </>

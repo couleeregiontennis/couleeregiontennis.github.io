@@ -81,7 +81,7 @@ export function Navigation() {
                   </>
                 ) : (
                   <Link to="/login" title="Login" className="navbar-login-icon" onClick={closeMenu}>
-                    🔑
+                    🔑 Login
                   </Link>
                 )}
               </li>
