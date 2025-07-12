@@ -164,3 +164,55 @@ p {
     margin-bottom: 0.4rem;
   }
 }
+/* Add at the end of subs.css for improved dark mode contrast */
+@media (prefers-color-scheme: dark) {
+  main {
+    background: #181a1b;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.5);
+  }
+  h1 {
+    color: #b3d1ff;
+  }
+  p {
+    color: #e0e0e0;
+  }
+  .groupme-section {
+    background: #23272a;
+    border: 1px solid #3a4a60;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  .groupme-info {
+    color: #e0e0e0;
+  }
+  .groupme-link {
+    background: #007caa;
+    color: #fff !important;
+    box-shadow: 0 2px 6px rgba(0,178,255,0.12);
+  }
+  .groupme-link:hover,
+  .groupme-link:focus {
+    background: #005f7a;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(0,178,255,0.18);
+  }
+  .qr-img {
+    background: #23272a;
+    border: 1px solid #3a4a60;
+  }
+  .carousel-container,
+  .carousel-track {
+    background: #23272a;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+  .carousel-btn {
+    background: #23272a;
+    color: #b3d1ff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  }
+  .carousel-btn:active,
+  .carousel-btn:focus,
+  .carousel-btn:hover {
+    background: #1a3557;
+    color: #fff;
+  }
+}
