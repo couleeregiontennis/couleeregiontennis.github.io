@@ -15,7 +15,10 @@ fetch(CSV_URL)
       <button class="night-filter" data-night="Tuesday">Tuesday</button>
       <button class="night-filter" data-night="Wednesday">Wednesday</button>
     `;
-    document.querySelector('main').insertBefore(filterContainer, document.getElementById('standings-table'));
+    const tableResponsive = document.querySelector('.table-responsive');
+    if (tableResponsive && tableResponsive.parentNode) {
+      tableResponsive.parentNode.insertBefore(filterContainer, tableResponsive);
+    }
 
     // Header
     thead.innerHTML = '<tr>' + rows[0].map(h => `<th>${h}</th>`).join('') + '</tr>';

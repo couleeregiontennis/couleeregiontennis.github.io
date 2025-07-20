@@ -22,15 +22,6 @@ body {
     padding-left: 0.5rem;
   }
   
-  section {
-    background: #fff;
-    margin: 1rem auto;
-    padding: 1rem 1.2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    max-width: 600px;
-  }
-  
   ul {
     padding-left: 1.2rem;
     margin: 0.5rem 0 0 0;
