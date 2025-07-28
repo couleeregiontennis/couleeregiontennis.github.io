@@ -39,7 +39,9 @@ fetch(CSV_URL)
         return aVal - bVal;
       });
       tbody.innerHTML = sortedRows.map(row =>
-        '<tr>' + row.map(cell => `<td>${cell}</td>`).join('') + '</tr>'
+        `<tr data-night="${row[nightIdx].toLowerCase()}">` + 
+        row.map(cell => `<td>${cell}</td>`).join('') + 
+        '</tr>'
       ).join('');
     }
 

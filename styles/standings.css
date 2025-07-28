@@ -10,6 +10,28 @@
   border-collapse: collapse;
 }
 
+#standings-table tr[data-night="tuesday"] {
+  background-color: rgba(0, 123, 255, 0.04);
+  border-left: 3px solid rgba(0, 123, 255, 0.2);
+}
+
+#standings-table tr[data-night="wednesday"] {
+  background-color: rgba(255, 193, 7, 0.04);
+  border-left: 3px solid rgba(255, 193, 7, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  #standings-table tr[data-night="tuesday"] {
+    background-color: rgba(0, 123, 255, 0.1);
+    border-left: 3px solid rgba(0, 123, 255, 0.3);
+  }
+  
+  #standings-table tr[data-night="wednesday"] {
+    background-color: rgba(255, 193, 7, 0.1);
+    border-left: 3px solid rgba(255, 193, 7, 0.3);
+  }
+}
+
 @media (max-width: 600px) {
   #standings-table th, #standings-table td {
     font-size: 0.97em;
