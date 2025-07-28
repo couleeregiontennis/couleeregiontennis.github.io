@@ -36,7 +36,7 @@ fetch(CSV_URL)
       const sortedRows = filteredRows.sort((a, b) => {
         const aVal = parseFloat(a[totalIdx]) || 0;
         const bVal = parseFloat(b[totalIdx]) || 0;
-        return bVal - aVal;
+        return aVal - bVal;
       });
       tbody.innerHTML = sortedRows.map(row =>
         '<tr>' + row.map(cell => `<td>${cell}</td>`).join('') + '</tr>'
