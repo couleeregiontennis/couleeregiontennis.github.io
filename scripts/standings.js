@@ -23,8 +23,8 @@ fetch(CSV_URL)
     // Header
     thead.innerHTML = '<tr>' + rows[0].map(h => `<th>${h}</th>`).join('') + '</tr>';
 
-    // Find the "Total" and "Night" column indices (case-insensitive)
-    const totalIdx = rows[0].findIndex(h => h.trim().toLowerCase() === "total");
+    // Find the "ranks" and "Night" column indices (case-insensitive)
+    const totalIdx = rows[0].findIndex(h => h.trim().toLowerCase() === "rank");
     const nightIdx = rows[0].findIndex(h => h.trim().toLowerCase() === "night");
 
     // Render function with filter
