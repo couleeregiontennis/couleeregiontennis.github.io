@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Style.css';
-import '../styles/nav.css';
 
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ09FIuDMkX5mmdp9e-szR15pWx2cp-YyqsYxoNBL4FM0y8v3Q_LKboCjAEcUyobbgwCCGQpSMT3bXh/pub?output=csv";
 

@@ -1,0 +1,158 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Coulee Region Tennis//LTTA//EN
+BEGIN:VEVENT
+UID:ltta-tuesday-10-week1@couleeregiontennis.org
+DTSTAMP:20250603T190000Z
+DTSTART;TZID=America/Chicago:20250603T190000
+DTEND;TZID=America/Chicago:20250603T203000
+SUMMARY:LTTA Tennis: vs Zoomers
+DESCRIPTION:LTTA Tennis match: 10 vs Zoomers at Courts 6–9\nOpponent Roster: Jacob Schafer (1); Joe Gregas (2); Madeline Loh (3); Adrienne Loh (3); Stanton Loh (3); Malakai Berget (3); Kaitlyn Northrup (4); Learoy Daryl Joseph (5)
+LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT11H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-tuesday-10-week2@couleeregiontennis.org
+DTSTAMP:20250610T173000Z
+DTSTART;TZID=America/Chicago:20250610T173000
+DTEND;TZID=America/Chicago:20250610T190000
+SUMMARY:LTTA Tennis: vs Easy Overhead
+DESCRIPTION:LTTA Tennis match: 10 vs Easy Overhead at Courts 10–13\nOpponent Roster: Brian Mansky (1); Randy Moseng (2); Heidi Barreyro (3); Shanon Torgerud (3); Odessa Barreyro (3); Peter Thomson (3); Tyler Benson (4); Amit Mishra (5)
+LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-tuesday-10-week3@couleeregiontennis.org
+DTSTAMP:20250617T173000Z
+DTSTART;TZID=America/Chicago:20250617T173000
+DTEND;TZID=America/Chicago:20250617T190000
+SUMMARY:LTTA Tennis: vs Spin Doctors
+DESCRIPTION:LTTA Tennis match: 10 vs Spin Doctors at Courts 1–5\nOpponent Roster: Tung Ouy (1); Rich Puent (2); Sai Mathi (3); Isaac Puent (3); Molly Stenger (3); Mohammad (3); Jim Brieske (4); Kalyan Satydeep (5)
+LOCATION:Courts 1–5
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-tuesday-10-week4@couleeregiontennis.org
+DTSTAMP:20250624T173000Z
+DTSTART;TZID=America/Chicago:20250624T173000
+DTEND;TZID=America/Chicago:20250624T190000
+SUMMARY:LTTA Tennis: vs Return to Sender with Love
+DESCRIPTION:LTTA Tennis match: 10 vs Return to Sender with Love at Courts 10–13\nOpponent Roster: Denny Kreuser (1); Paul Leithold (2); Sara Bieneman (3); Kate Skaar (3); Julie Kamla (3); Leah Bower (3); Catherine Roraff (4); Mary Leithold (5)
+LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-tuesday-10-week5@couleeregiontennis.org
+DTSTAMP:20250701T190000Z
+DTSTART;TZID=America/Chicago:20250701T190000
+DTEND;TZID=America/Chicago:20250701T203000
+SUMMARY:LTTA Tennis: vs Rascals
+DESCRIPTION:LTTA Tennis match: 10 vs Rascals at Courts 6–9\nOpponent Roster: Peter Coppola (1); Laura Coppola (2); Ellen Seithamer (3); Pete  Thomson (3); Craig Hanson (3); Jason Herbert (3); Dan Russell (4); Becky Rauch (5)
+LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT11H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-tuesday-10-week6@couleeregiontennis.org
+DTSTAMP:20250708T190000Z
+DTSTART;TZID=America/Chicago:20250708T190000
+DTEND;TZID=America/Chicago:20250708T203000
+SUMMARY:LTTA Tennis: vs Approach Shots
+DESCRIPTION:LTTA Tennis match: 10 vs Approach Shots at Courts 6–9\nOpponent Roster: Greg Schibbelhut (1); Dillon Eddingsaas (2); John Aschenbrenner (3); Mary Aschenbrenner (3); Dale Barclay (3); Rich Levinger (3); Judith Engen (4); Amanda Wilke (5)
+LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT11H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-tuesday-10-week7@couleeregiontennis.org
+DTSTAMP:20250715T173000Z
+DTSTART;TZID=America/Chicago:20250715T173000
+DTEND;TZID=America/Chicago:20250715T190000
+SUMMARY:LTTA Tennis: vs Tennis the Menace
+DESCRIPTION:LTTA Tennis match: 10 vs Tennis the Menace at Courts 10–13\nOpponent Roster: Robert Jordan (1); Jake Schweitzer (2); Mike Allen (3); Dave Mills (3); John Sullivan (3); Madan Mohan (3); Hailey Kincaid (4); Meg Jelen (5)
+LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-tuesday-10-week8@couleeregiontennis.org
+DTSTAMP:20250722T173000Z
+DTSTART;TZID=America/Chicago:20250722T173000
+DTEND;TZID=America/Chicago:20250722T190000
+SUMMARY:LTTA Tennis: vs Full Metal Racquet
+DESCRIPTION:LTTA Tennis match: 10 vs Full Metal Racquet at Courts 1–5\nOpponent Roster: Tayler Garves Nelson (1); Todd Garves (2); Martin Frank (3); Regina Jones (3); Stephen Sinur (3); Hannah Exner (3); Kim Garves (4); Jane Frank (5)
+LOCATION:Courts 1–5
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-tuesday-10-week9@couleeregiontennis.org
+DTSTAMP:20250729T190000Z
+DTSTART;TZID=America/Chicago:20250729T190000
+DTEND;TZID=America/Chicago:20250729T203000
+SUMMARY:LTTA Tennis: vs Bounce It
+DESCRIPTION:LTTA Tennis match: 10 vs Bounce It at Courts 10–13\nOpponent Roster: Yubo Nian (1); Matt Diehl (2); Tom Dwyer (3); Joe Kotnour Sr. (3); Sean O'Flaherty (3); Dan Skemp (3); Aziz Bhetasiwala (4); Mike Roskos (5)
+LOCATION:Courts 10–13
+BEGIN:VALARM
+TRIGGER:-PT11H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-tuesday-10-week10@couleeregiontennis.org
+DTSTAMP:20250805T190000Z
+DTSTART;TZID=America/Chicago:20250805T190000
+DTEND;TZID=America/Chicago:20250805T203000
+SUMMARY:LTTA Tennis: vs Good Ol' Boys
+DESCRIPTION:LTTA Tennis match: 10 vs Good Ol' Boys at Courts 1–5\nOpponent Roster: Paul Jacobson (1); Dave Bentz (2); Don Harvey (3); David Lange (3); Larry Ruff (3); Cory Ruud (3); Pennie Pierce-Jorgeson (4); Sally Ruud (5)
+LOCATION:Courts 1–5
+BEGIN:VALARM
+TRIGGER:-PT11H
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ltta-tuesday-10-week11@couleeregiontennis.org
+DTSTAMP:20250812T173000Z
+DTSTART;TZID=America/Chicago:20250812T173000
+DTEND;TZID=America/Chicago:20250812T190000
+SUMMARY:LTTA Tennis: vs Racquet Scientists
+DESCRIPTION:LTTA Tennis match: 10 vs Racquet Scientists at Courts 6–9\nOpponent Roster: Mark Harris (1); Nathan Tunks (2); Gavin Goss (3); Dale Ralph (3); Nancy Winberg (3); Karie Johnson (3); Kim Thurk (4); Ronghui Chen (5)
+LOCATION:Courts 6–9
+BEGIN:VALARM
+TRIGGER:-PT9H30M
+ACTION:DISPLAY
+DESCRIPTION:LTTA Tennis Match Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR

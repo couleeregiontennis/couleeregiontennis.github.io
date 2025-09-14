@@ -1,0 +1,138 @@
+{
+  "team": "12",
+  "night": "wednesday",
+  "schedule": [
+    {
+      "week": 1,
+      "date": "2025-06-04",
+      "time": "5:30pm",
+      "courts": "Courts 1–5",
+      "opponent": {
+        "name": "LAX-Winona Fusion",
+        "number": "1",
+        "file": "/public/team/wednesday/1"
+      },
+      "ics": "/teams/wednesday/ics/12/week1.ics"
+    },
+    {
+      "week": 2,
+      "date": "2025-06-11",
+      "time": "5:30pm",
+      "courts": "Courts 10–13",
+      "opponent": {
+        "name": "Backhand Bandits",
+        "number": "10",
+        "file": "/public/team/wednesday/10"
+      },
+      "ics": "/teams/wednesday/ics/12/week2.ics"
+    },
+    {
+      "week": 3,
+      "date": "2025-06-18",
+      "time": "7:00pm",
+      "courts": "Courts 6–9",
+      "opponent": {
+        "name": "Not My Fault",
+        "number": "8",
+        "file": "/public/team/wednesday/8"
+      },
+      "ics": "/teams/wednesday/ics/12/week3.ics"
+    },
+    {
+      "week": 4,
+      "date": "2025-06-25",
+      "time": "7:00pm",
+      "courts": "Courts 6–9",
+      "opponent": {
+        "name": "Howie's Team",
+        "number": "6",
+        "file": "/public/team/wednesday/6"
+      },
+      "ics": "/teams/wednesday/ics/12/week4.ics"
+    },
+    {
+      "week": 5,
+      "date": "2025-07-02",
+      "time": "5:30pm",
+      "courts": "Courts 10–13",
+      "opponent": {
+        "name": "Hot Shots",
+        "number": "4",
+        "file": "/public/team/wednesday/4"
+      },
+      "ics": "/teams/wednesday/ics/12/week5.ics"
+    },
+    {
+      "week": 6,
+      "date": "2025-07-09",
+      "time": "5:30pm",
+      "courts": "Courts 1–5",
+      "opponent": {
+        "name": "Rally Monkeys",
+        "number": "2",
+        "file": "/public/team/wednesday/2"
+      },
+      "ics": "/teams/wednesday/ics/12/week6.ics"
+    },
+    {
+      "week": 7,
+      "date": "2025-07-16",
+      "time": "7:00pm",
+      "courts": "Courts 10–13",
+      "opponent": {
+        "name": "Simply Smashing",
+        "number": "11",
+        "file": "/public/team/wednesday/11"
+      },
+      "ics": "/teams/wednesday/ics/12/week7.ics"
+    },
+    {
+      "week": 8,
+      "date": "2025-07-23",
+      "time": "7:00pm",
+      "courts": "Courts 1–5",
+      "opponent": {
+        "name": "Baseliners",
+        "number": "9",
+        "file": "/public/team/wednesday/9"
+      },
+      "ics": "/teams/wednesday/ics/12/week8.ics"
+    },
+    {
+      "week": 9,
+      "date": "2025-07-30",
+      "time": "5:30pm",
+      "courts": "Courts 6–9",
+      "opponent": {
+        "name": "Serve Aces",
+        "number": "7",
+        "file": "/public/team/wednesday/7"
+      },
+      "ics": "/teams/wednesday/ics/12/week9.ics"
+    },
+    {
+      "week": 10,
+      "date": "2025-08-06",
+      "time": "5:30pm",
+      "courts": "Courts 6–9",
+      "opponent": {
+        "name": "Glory Days",
+        "number": "5",
+        "file": "/public/team/wednesday/5"
+      },
+      "ics": "/teams/wednesday/ics/12/week10.ics"
+    },
+    {
+      "week": 11,
+      "date": "2025-08-13",
+      "time": "7:00pm",
+      "courts": "Courts 1–5",
+      "opponent": {
+        "name": "Hit Squad",
+        "number": "3",
+        "file": "/public/team/wednesday/3"
+      },
+      "ics": "/teams/wednesday/ics/12/week11.ics"
+    }
+  ]
+}

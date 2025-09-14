@@ -11,6 +11,7 @@ import { Login } from './components/Login';
 import { ProtectedRoute } from './scripts/ProtectedRoute';
 import { AddScore } from './components/AddScore';
 import { User } from './components/User';
+import Standings from './components/Standings';
 import './styles/Style.css';
 import './styles/Navigation.css';
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/subs" element={<Subs />} />
             <Route path="/greenisland" element={<GreenIsland />} />
             <Route path="/rules" element={<Rules />} />
+            <Route path="/standings" element={<Standings />} />
             <Route path="/login" element={<Login />} />
             <Route
               path="/add-score"

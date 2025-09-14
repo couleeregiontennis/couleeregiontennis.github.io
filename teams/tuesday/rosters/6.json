@@ -1,0 +1,45 @@
+{
+  "teamName": "Rascals",
+  "roster": [
+    {
+      "position": 1,
+      "name": "Peter Coppola",
+      "captain": "✓"
+    },
+    {
+      "position": 2,
+      "name": "Laura Coppola",
+      "captain": "✓"
+    },
+    {
+      "position": 3,
+      "name": "Ellen Seithamer",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Pete  Thomson",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Craig Hanson",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Jason Herbert",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Dan Russell",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "Becky Rauch",
+      "captain": ""
+    }
+  ]
+}

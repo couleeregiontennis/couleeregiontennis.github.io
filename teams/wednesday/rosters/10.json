@@ -1,0 +1,45 @@
+{
+  "teamName": "Backhand Bandits",
+  "roster": [
+    {
+      "position": 1,
+      "name": "Quentin Lamers",
+      "captain": ""
+    },
+    {
+      "position": 2,
+      "name": "Leah Fortun",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Jennifer Carr",
+      "captain": "✓"
+    },
+    {
+      "position": 3,
+      "name": "Amy Marcou",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Michael Ojelabi",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Eli Carr",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Eli De Leon",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "Irene Johnson-Salvador",
+      "captain": ""
+    }
+  ]
+}

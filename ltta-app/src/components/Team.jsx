@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import usePlatform from '../scripts/PlatformDetector';
 import useCopyToClipboard from '../scripts/CopyToClipboard';
+import { MatchResults } from './MatchResults';
 import '../styles/Team.css';
 
 export function Team() {
   const [teamData, setTeamData] = useState(null);
   const [rosterData, setRosterData] = useState(null);
   const { day, teamId } = useParams();
-  const { copyToClipboard, copied } = useCopyToClipboard();
+  const { copyToClipboard } = useCopyToClipboard();
   const platform = usePlatform();
 
   useEffect(() => {
@@ -144,6 +145,10 @@ export function Team() {
             </tbody>
           </table>
         </div>
+      </section>
+
+      <section className="results-section">
+        <MatchResults teamNumber={teamId} teamNight={day} />
       </section>
     </div>
   );

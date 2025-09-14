@@ -81,7 +81,6 @@ export function User() {
       ranking: Number(form.ranking),
     };
 
-    let result;
     if (player) {
       // Update
       const { error: updateError } = await supabase

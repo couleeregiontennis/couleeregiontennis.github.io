@@ -47,6 +47,7 @@ export function Navigation() {
               <li><Link to="/subs" onClick={closeMenu}>Find a Sub</Link></li>
               <li><Link to="/greenisland" onClick={closeMenu}>Green Island</Link></li>
               <li><Link to="/rules" onClick={closeMenu}>Rules</Link></li>
+              <li><Link to="/standings" onClick={closeMenu}>Standings</Link></li>
               <li>
                 <a
                   href="http://www.couleeregiontennis.com"

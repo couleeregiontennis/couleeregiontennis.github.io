@@ -6,34 +6,21 @@
     "@supabase/auth-ui-react": "^0.4.7",
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/supabase-js": "^2.50.2",
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
     "csv-parse": "^5.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.1",
-    "react-scripts": "^5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-router-dom": "^6.21.1"
   },
   "devDependencies": {
+    "@darkobits/nr": "^0.18.8",
     "@vitejs/plugin-react": "^4.2.1",
     "vite": "^6.3.5"
   },
   "scripts": {
     "dev": "vite",
-    "start": "react-scripts --openssl-legacy-provider start",
     "build": "vite build",
-    "test": "react-scripts test",
     "preview": "vite preview",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "deploy": "npm run build && cp -r build/* ../ && echo 'Deployed to root directory'"
   },
   "browserslist": {
     "production": [
