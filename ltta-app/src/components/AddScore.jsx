@@ -15,6 +15,7 @@ export function AddScore() {
   const [homeTeamRoster, setHomeTeamRoster] = useState([]);
   const [awayTeamRoster, setAwayTeamRoster] = useState([]);
   const [playerIdMap, setPlayerIdMap] = useState({});
+  const [existingScores, setExistingScores] = useState([]);
   
   const [formData, setFormData] = useState({
     matchId: '',
@@ -117,12 +118,202 @@ export function AddScore() {
     return roster; // Default to all if line not specified
   };
 
+  const loadExistingScores = async (matchId) => {
+    try {
+      const { data: scores, error } = await supabase
+        .from('line_results')
+        .select(`
+          *,
+          home_player_1:player!home_player_1_id(first_name, last_name),
+          home_player_2:player!home_player_2_id(first_name, last_name),
+          away_player_1:player!away_player_1_id(first_name, last_name),
+          away_player_2:player!away_player_2_id(first_name, last_name)
+        `)
+        .eq('match_id', matchId)
+        .order('line_number');
+      
+      if (error) throw error;
+      
+      setExistingScores(scores || []);
+      
+      // If there's a score for the current line, populate the form
+      const currentLineScore = scores?.find(s => s.line_number === formData.lineNumber);
+      if (currentLineScore) {
+        populateFormWithExistingScore(currentLineScore);
+      }
+    } catch (err) {
+      console.error('Error loading existing scores:', err);
+    }
+  };
+
+  const populateFormWithExistingScore = (score) => {
+    const homePlayers = [
+      score.home_player_1 ? `${score.home_player_1.first_name} ${score.home_player_1.last_name}` : '',
+      score.home_player_2 ? `${score.home_player_2.first_name} ${score.home_player_2.last_name}` : ''
+    ];
+    
+    const awayPlayers = [
+      score.away_player_1 ? `${score.away_player_1.first_name} ${score.away_player_1.last_name}` : '',
+      score.away_player_2 ? `${score.away_player_2.first_name} ${score.away_player_2.last_name}` : ''
+    ];
+
+    setFormData(prev => ({
+      ...prev,
+      matchType: score.match_type,
+      homePlayers,
+      awayPlayers,
+      homeSet1: score.home_set_1?.toString() || '',
+      awaySet1: score.away_set_1?.toString() || '',
+      homeSet2: score.home_set_2?.toString() || '',
+      awaySet2: score.away_set_2?.toString() || '',
+      homeSet3: score.home_set_3?.toString() || '',
+      awaySet3: score.away_set_3?.toString() || '',
+      notes: score.notes || ''
+    }));
+  };
+
+  const getPlayersWhoActuallyPlayed = (homeRoster, awayRoster) => {
+    // Get all unique players who actually played in this match
+    const playersWhoPlayed = new Set();
+    
+    existingScores.forEach(score => {
+      if (score.home_player_1) {
+        playersWhoPlayed.add(`${score.home_player_1.first_name} ${score.home_player_1.last_name}`);
+      }
+      if (score.home_player_2) {
+        playersWhoPlayed.add(`${score.home_player_2.first_name} ${score.home_player_2.last_name}`);
+      }
+      if (score.away_player_1) {
+        playersWhoPlayed.add(`${score.away_player_1.first_name} ${score.away_player_1.last_name}`);
+      }
+      if (score.away_player_2) {
+        playersWhoPlayed.add(`${score.away_player_2.first_name} ${score.away_player_2.last_name}`);
+      }
+    });
+    
+    // Filter rosters to prioritize players who actually played
+    const homePlayersWhoPlayed = homeRoster.filter(p => playersWhoPlayed.has(p.name));
+    const awayPlayersWhoPlayed = awayRoster.filter(p => playersWhoPlayed.has(p.name));
+    
+    return { homePlayersWhoPlayed, awayPlayersWhoPlayed, playersWhoPlayed };
+  };
+
+  const getDisplayPlayers = (roster, lineNumber) => {
+    const eligiblePlayers = getEligiblePlayers(roster, lineNumber);
+    const { playersWhoPlayed } = getPlayersWhoActuallyPlayed(homeTeamRoster, awayTeamRoster);
+    
+    // Mark players who actually played and sort them to the top
+    const playersWithStatus = eligiblePlayers.map(player => ({
+      ...player,
+      actuallyPlayed: playersWhoPlayed.has(player.name)
+    }));
+    
+    // Sort: players who actually played first, then by position
+    return playersWithStatus.sort((a, b) => {
+      if (a.actuallyPlayed && !b.actuallyPlayed) return -1;
+      if (!a.actuallyPlayed && b.actuallyPlayed) return 1;
+      return a.position - b.position;
+    });
+  };
+
+  const autoSelectPlayers = (homeRoster, awayRoster, lineNumber, matchType) => {
+    // Don't auto-select if there's already existing score data for this line
+    const existingScore = existingScores.find(s => s.line_number === parseInt(lineNumber));
+    if (existingScore) return;
+    
+    let homeEligible, awayEligible;
+    
+    // If match has existing scores, prioritize players who actually played
+    if (existingScores.length > 0) {
+      const { homePlayersWhoPlayed, awayPlayersWhoPlayed } = getPlayersWhoActuallyPlayed(homeRoster, awayRoster);
+      
+      // Use players who actually played, filtered by line eligibility
+      homeEligible = getEligiblePlayers(homePlayersWhoPlayed, lineNumber);
+      awayEligible = getEligiblePlayers(awayPlayersWhoPlayed, lineNumber);
+      
+      // If no eligible players from those who played, fall back to all eligible players
+      if (homeEligible.length === 0) {
+        homeEligible = getEligiblePlayers(homeRoster, lineNumber);
+      }
+      if (awayEligible.length === 0) {
+        awayEligible = getEligiblePlayers(awayRoster, lineNumber);
+      }
+    } else {
+      // No existing scores, use normal eligibility rules
+      homeEligible = getEligiblePlayers(homeRoster, lineNumber);
+      awayEligible = getEligiblePlayers(awayRoster, lineNumber);
+    }
+    
+    const newHomePlayers = ['', ''];
+    const newAwayPlayers = ['', ''];
+    
+    // Auto-select home players
+    if (homeEligible.length >= 1) {
+      newHomePlayers[0] = homeEligible[0].name;
+    }
+    if (matchType === 'doubles' && homeEligible.length >= 2) {
+      newHomePlayers[1] = homeEligible[1].name;
+    }
+    
+    // Auto-select away players
+    if (awayEligible.length >= 1) {
+      newAwayPlayers[0] = awayEligible[0].name;
+    }
+    if (matchType === 'doubles' && awayEligible.length >= 2) {
+      newAwayPlayers[1] = awayEligible[1].name;
+    }
+    
+    // Update form data if any players were auto-selected
+    if (newHomePlayers[0] || newAwayPlayers[0]) {
+      setFormData(prev => ({
+        ...prev,
+        homePlayers: newHomePlayers,
+        awayPlayers: newAwayPlayers
+      }));
+    }
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+    
+    // If line number changes, load existing score for that line or auto-select
+    if (name === 'lineNumber') {
+      setTimeout(() => {
+        const existingScore = existingScores.find(s => s.line_number === parseInt(value));
+        if (existingScore) {
+          populateFormWithExistingScore(existingScore);
+        } else {
+          // Clear form and auto-select for new line
+          setFormData(prev => ({
+            ...prev,
+            homePlayers: ['', ''],
+            awayPlayers: ['', ''],
+            homeSet1: '',
+            awaySet1: '',
+            homeSet2: '',
+            awaySet2: '',
+            homeSet3: '',
+            awaySet3: '',
+            notes: ''
+          }));
+          autoSelectPlayers(homeTeamRoster, awayTeamRoster, value, formData.matchType);
+        }
+      }, 0);
+    }
+    
+    // If match type changes, re-run auto-selection (unless there's existing data)
+    if (name === 'matchType') {
+      setTimeout(() => {
+        const existingScore = existingScores.find(s => s.line_number === parseInt(formData.lineNumber));
+        if (!existingScore) {
+          autoSelectPlayers(homeTeamRoster, awayTeamRoster, formData.lineNumber, value);
+        }
+      }, 0);
+    }
   };
 
   const handlePlayerChange = (team, position, value) => {
@@ -219,6 +410,12 @@ export function AddScore() {
       
       setHomeTeamRoster(homeRoster);
       setAwayTeamRoster(awayRoster);
+      
+      // Load existing scores for this match
+      await loadExistingScores(matchId);
+      
+      // Auto-select players if there are few options
+      autoSelectPlayers(homeRoster, awayRoster, formData.lineNumber, formData.matchType);
     }
   };
 
@@ -260,29 +457,63 @@ export function AddScore() {
       const home_player_2_id = formData.matchType === 'doubles' ? playerIdMap[formData.homePlayers[1]] || null : null;
       const away_player_1_id = playerIdMap[formData.awayPlayers[0]] || null;
       const away_player_2_id = formData.matchType === 'doubles' ? playerIdMap[formData.awayPlayers[1]] || null : null;
-      // Create line result
-      const { error: lineError } = await supabase
-        .from('line_results')
-        .insert([{
-          match_id: selectedMatch.id,
-          line_number: Number(formData.lineNumber),
-          match_type: formData.matchType,
-          home_player_1_id,
-          home_player_2_id,
-          away_player_1_id,
-          away_player_2_id,
-          home_set_1: parseInt(formData.homeSet1),
-          away_set_1: parseInt(formData.awaySet1),
-          home_set_2: parseInt(formData.homeSet2),
-          away_set_2: parseInt(formData.awaySet2),
-          home_set_3: formData.homeSet3 ? parseInt(formData.homeSet3) : null,
-          away_set_3: formData.awaySet3 ? parseInt(formData.awaySet3) : null,
-          home_won: homeWon >= 2,
-          submitted_by: user.id,
-          notes: formData.notes
-        }]);
-      if (lineError) throw lineError;
-      setSuccess('Scores submitted successfully!');
+      // Check if score already exists for this line
+      const existingScore = existingScores.find(s => s.line_number === Number(formData.lineNumber));
+      
+      if (existingScore) {
+        // Update existing score
+        const { error: lineError } = await supabase
+          .from('line_results')
+          .update({
+            match_type: formData.matchType,
+            home_player_1_id,
+            home_player_2_id,
+            away_player_1_id,
+            away_player_2_id,
+            home_set_1: parseInt(formData.homeSet1),
+            away_set_1: parseInt(formData.awaySet1),
+            home_set_2: parseInt(formData.homeSet2),
+            away_set_2: parseInt(formData.awaySet2),
+            home_set_3: formData.homeSet3 ? parseInt(formData.homeSet3) : null,
+            away_set_3: formData.awaySet3 ? parseInt(formData.awaySet3) : null,
+            home_won: homeWon >= 2,
+            submitted_by: user.id,
+            notes: formData.notes,
+            submitted_at: new Date().toISOString()
+          })
+          .eq('id', existingScore.id);
+        
+        if (lineError) throw lineError;
+      } else {
+        // Create new line result
+        const { error: lineError } = await supabase
+          .from('line_results')
+          .insert([{
+            match_id: selectedMatch.id,
+            line_number: Number(formData.lineNumber),
+            match_type: formData.matchType,
+            home_player_1_id,
+            home_player_2_id,
+            away_player_1_id,
+            away_player_2_id,
+            home_set_1: parseInt(formData.homeSet1),
+            away_set_1: parseInt(formData.awaySet1),
+            home_set_2: parseInt(formData.homeSet2),
+            away_set_2: parseInt(formData.awaySet2),
+            home_set_3: formData.homeSet3 ? parseInt(formData.homeSet3) : null,
+            away_set_3: formData.awaySet3 ? parseInt(formData.awaySet3) : null,
+            home_won: homeWon >= 2,
+            submitted_by: user.id,
+            notes: formData.notes
+          }]);
+        
+        if (lineError) throw lineError;
+      }
+      
+      setSuccess(existingScore ? 'Scores updated successfully!' : 'Scores submitted successfully!');
+      
+      // Reload existing scores to reflect changes
+      await loadExistingScores(selectedMatch.id);
       // Reset form
       setFormData(prev => ({
         ...prev,
@@ -334,6 +565,22 @@ export function AddScore() {
               ))}
             </select>
           </div>
+          
+          {existingScores.length > 0 && (
+            <div className="existing-scores-summary">
+              <h4>Existing Scores for this Match:</h4>
+              <div className="scores-grid">
+                {existingScores.map(score => (
+                  <div key={score.id} className="score-summary">
+                    <strong>Line {score.line_number}</strong> ({score.match_type}): 
+                    {score.home_set_1}-{score.away_set_1}, {score.home_set_2}-{score.away_set_2}
+                    {score.home_set_3 && `, ${score.home_set_3}-${score.away_set_3}`}
+                    {score.home_won ? ' (Home Won)' : ' (Away Won)'}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           {selectedMatch && (
             <div className="match-details">
               <h3>Match Details</h3>
@@ -384,9 +631,9 @@ export function AddScore() {
                 required
               >
                 <option value="">Select Player 1</option>
-                {getEligiblePlayers(homeTeamRoster, formData.lineNumber).map((player, index) => (
+                {getDisplayPlayers(homeTeamRoster, formData.lineNumber).map((player, index) => (
                   <option key={index} value={player.name}>
-                    {player.position}. {player.name} {player.captain ? '(C)' : ''}
+                    {player.position}. {player.name} {player.captain ? '(C)' : ''} {player.actuallyPlayed ? '✓' : ''}
                   </option>
                 ))}
               </select>
@@ -397,9 +644,9 @@ export function AddScore() {
                   required
                 >
                   <option value="">Select Player 2</option>
-                  {getEligiblePlayers(homeTeamRoster, formData.lineNumber).map((player, index) => (
+                  {getDisplayPlayers(homeTeamRoster, formData.lineNumber).map((player, index) => (
                     <option key={index} value={player.name}>
-                      {player.position}. {player.name} {player.captain ? '(C)' : ''}
+                      {player.position}. {player.name} {player.captain ? '(C)' : ''} {player.actuallyPlayed ? '✓' : ''}
                     </option>
                   ))}
                 </select>
@@ -413,9 +660,9 @@ export function AddScore() {
                 required
               >
                 <option value="">Select Player 1</option>
-                {getEligiblePlayers(awayTeamRoster, formData.lineNumber).map((player, index) => (
+                {getDisplayPlayers(awayTeamRoster, formData.lineNumber).map((player, index) => (
                   <option key={index} value={player.name}>
-                    {player.position}. {player.name} {player.captain ? '(C)' : ''}
+                    {player.position}. {player.name} {player.captain ? '(C)' : ''} {player.actuallyPlayed ? '✓' : ''}
                   </option>
                 ))}
               </select>
@@ -426,9 +673,9 @@ export function AddScore() {
                   required
                 >
                   <option value="">Select Player 2</option>
-                  {getEligiblePlayers(awayTeamRoster, formData.lineNumber).map((player, index) => (
+                  {getDisplayPlayers(awayTeamRoster, formData.lineNumber).map((player, index) => (
                     <option key={index} value={player.name}>
-                      {player.position}. {player.name} {player.captain ? '(C)' : ''}
+                      {player.position}. {player.name} {player.captain ? '(C)' : ''} {player.actuallyPlayed ? '✓' : ''}
                     </option>
                   ))}
                 </select>
