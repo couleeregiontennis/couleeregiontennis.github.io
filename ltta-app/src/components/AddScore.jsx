@@ -14,6 +14,7 @@ export function AddScore() {
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [homeTeamRoster, setHomeTeamRoster] = useState([]);
   const [awayTeamRoster, setAwayTeamRoster] = useState([]);
+  const [playerIdMap, setPlayerIdMap] = useState({});
   
   const [formData, setFormData] = useState({
     matchId: '',
@@ -30,108 +31,91 @@ export function AddScore() {
     notes: ''
   });
 
-  // Load user data
+  // Load user, player, and team data
   useEffect(() => {
-    const loadUserData = async () => {
+    const loadInitialData = async () => {
+      // 1. Get User
       const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        setUser(user);
-        
-        // Load player profile
-        const { data: playerData } = await supabase
-          .from('player')
-          .select('*')
-          .eq('user_id', user.id)
-          .single();
-        
-        if (playerData) {
-          setPlayer(playerData);
-        }
+      if (!user) return;
+      setUser(user);
+
+      // 2. Get Player Profile
+      const { data: playerData, error: playerError } = await supabase
+        .from('player')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+      
+      if (playerError || !playerData) {
+        console.error('Error fetching player data:', playerError);
+        return;
       }
+      setPlayer(playerData);
+
+      // 3. Get Player's Team
+      const { data: teamLink, error: teamLinkError } = await supabase
+        .from('player_to_team')
+        .select('team')
+        .eq('player', playerData.id)
+        .single();
+
+      if (teamLinkError || !teamLink) {
+        console.error('Error fetching player team link:', teamLinkError);
+        return;
+      }
+
+      const { data: teamData, error: teamError } = await supabase
+        .from('team')
+        .select('*')
+        .eq('id', teamLink.team)
+        .single();
+      
+      if (teamError || !teamData) {
+        console.error('Error fetching team data:', teamError);
+        return;
+      }
+      setUserTeam(teamData);
     };
-    loadUserData();
+
+    loadInitialData();
   }, []);
 
-  // Load teams data
+  // Load available matches once the user's team is known
   useEffect(() => {
-    const loadTeams = async () => {
+    if (!userTeam) return;
+
+    const loadMatches = async () => {
       try {
-        // Load Tuesday teams
-        const tuesdayResponse = await fetch('/teams/tuesday/schedules/master_schedule.json');
-        const tuesdayData = await tuesdayResponse.json();
+        const { data: matches, error } = await supabase
+          .from('matches')
+          .select('*')
+          .or(`home_team_number.eq.${userTeam.number},away_team_number.eq.${userTeam.number}`)
+          .order('date', { ascending: true });
         
-        // Load Wednesday teams  
-        const wednesdayResponse = await fetch('/teams/wednesday/schedules/master_schedule.json');
-        const wednesdayData = await wednesdayResponse.json();
-        
-        // Extract unique teams from the master schedule data
-        const tuesdayTeams = new Map();
-        const wednesdayTeams = new Map();
-        
-        tuesdayData.forEach(match => {
-          if (match.teamA) {
-            tuesdayTeams.set(match.teamA.number, { ...match.teamA, night: 'tuesday' });
-          }
-          if (match.teamB) {
-            tuesdayTeams.set(match.teamB.number, { ...match.teamB, night: 'tuesday' });
-          }
-        });
-        
-        wednesdayData.forEach(match => {
-          if (match.teamA) {
-            wednesdayTeams.set(match.teamA.number, { ...match.teamA, night: 'wednesday' });
-          }
-          if (match.teamB) {
-            wednesdayTeams.set(match.teamB.number, { ...match.teamB, night: 'wednesday' });
-          }
-        });
-        
-        const allTeams = [
-          ...Array.from(tuesdayTeams.values()),
-          ...Array.from(wednesdayTeams.values())
-        ];
-        setTeams(allTeams);
+        if (error) throw error;
+        setAvailableMatches(matches || []);
       } catch (err) {
-        console.error('Error loading teams:', err);
+        console.error('Error loading matches:', err);
       }
     };
-    loadTeams();
-  }, []);
 
-  // Auto-populate user's team and load available matches
-  useEffect(() => {
-    const loadUserMatches = async () => {
-      if (teams.length > 0 && player) {
-        // Find the user's team based on their player profile
-        const userTeam = teams.find(team => 
-          team.name.toLowerCase().includes(player.first_name?.toLowerCase() || '') ||
-          team.name.toLowerCase().includes(player.last_name?.toLowerCase() || '')
-        );
-        
-        if (userTeam) {
-          setUserTeam(userTeam);
-          
-          // Load available matches for this team
-          try {
-            const { data: matches, error } = await supabase
-              .from('matches')
-              .select('*')
-              .or(`home_team_number.eq.${userTeam.number},away_team_number.eq.${userTeam.number}`)
-              .eq('status', 'scheduled')
-              .order('date', { ascending: true });
-            
-            if (error) throw error;
-            
-            setAvailableMatches(matches || []);
-          } catch (err) {
-            console.error('Error loading matches:', err);
-          }
-        }
-      }
-    };
-    
-    loadUserMatches();
-  }, [teams, player]);
+    loadMatches();
+  }, [userTeam]);
+
+  const getEligiblePlayers = (roster, lineNumber) => {
+    if (!roster || roster.length === 0) return [];
+    const line = parseInt(lineNumber);
+    if (line === 1) {
+      return roster.filter(p => p.position >= 1 && p.position <= 2);
+    }
+    if (line === 2) {
+      return roster.filter(p => p.position >= 3 && p.position <= 3);
+    }
+    if (line === 3) {
+      return roster.filter(p => p.position >= 5 && p.position <= 5);
+    }
+    return roster; // Default to all if line not specified
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -167,12 +151,47 @@ export function AddScore() {
     return options;
   };
 
+  // Load roster and fetch player IDs from Supabase
   const loadTeamRoster = async (teamNumber, night) => {
     try {
-      const response = await fetch(`/teams/${night}/rosters/${teamNumber}.json`);
-      if (response.ok) {
-        const data = await response.json();
-        return data.roster || [];
+      const { data: team, error: teamError } = await supabase
+        .from('team')
+        .select('id')
+        .eq('number', teamNumber)
+        .single();
+
+      if (teamError || !team) throw new Error(`Team ${teamNumber} on ${night} not found.`);
+
+      // Get player IDs from junction table
+      const { data: playerLinks, error: linksError } = await supabase
+        .from('player_to_team')
+        .select('player')
+        .eq('team', team.id);
+
+      if (linksError) throw linksError;
+      const playerIds = playerLinks.map(link => link.player);
+
+      // Get player details
+      if (playerIds.length > 0) {
+        const { data: players, error: playersError } = await supabase
+          .from('player')
+          .select('id, first_name, last_name, ranking')
+          .in('id', playerIds);
+        
+        if (playersError) throw playersError;
+
+        // Build name to ID map and roster list, assigning positions
+        const idMap = {};
+        const roster = players
+          .sort((a, b) => a.ranking - b.ranking) // Sort by ranking
+          .map((p) => {
+            const fullName = `${p.first_name} ${p.last_name}`;
+            idMap[fullName] = p.id;
+            return { name: fullName, position: p.ranking };
+          });
+
+        setPlayerIdMap(prev => ({ ...prev, ...idMap }));
+        return roster;
       }
       return [];
     } catch (err) {
@@ -225,33 +244,33 @@ export function AddScore() {
     e.preventDefault();
     setError('');
     setSuccess('');
-    
     if (!validateForm()) return;
-    
     setLoading(true);
-    
     try {
       if (!selectedMatch) {
         throw new Error('No match selected');
       }
-      
       // Calculate winner
       const homeWon = (parseInt(formData.homeSet1) > parseInt(formData.awaySet1) ? 1 : 0) +
-                     (parseInt(formData.homeSet2) > parseInt(formData.awaySet2) ? 1 : 0) +
-                     (formData.homeSet3 && formData.awaySet3 ? 
-                      (parseInt(formData.homeSet3) > parseInt(formData.awaySet3) ? 1 : 0) : 0);
-      
+        (parseInt(formData.homeSet2) > parseInt(formData.awaySet2) ? 1 : 0) +
+        (formData.homeSet3 && formData.awaySet3 ?
+          (parseInt(formData.homeSet3) > parseInt(formData.awaySet3) ? 1 : 0) : 0);
+      // Get player IDs from name
+      const home_player_1_id = playerIdMap[formData.homePlayers[0]] || null;
+      const home_player_2_id = formData.matchType === 'doubles' ? playerIdMap[formData.homePlayers[1]] || null : null;
+      const away_player_1_id = playerIdMap[formData.awayPlayers[0]] || null;
+      const away_player_2_id = formData.matchType === 'doubles' ? playerIdMap[formData.awayPlayers[1]] || null : null;
       // Create line result
       const { error: lineError } = await supabase
         .from('line_results')
         .insert([{
           match_id: selectedMatch.id,
-          line_number: formData.lineNumber,
+          line_number: Number(formData.lineNumber),
           match_type: formData.matchType,
-          home_player_1_id: formData.homePlayers[0] || null,
-          home_player_2_id: formData.matchType === 'doubles' ? formData.homePlayers[1] : null,
-          away_player_1_id: formData.awayPlayers[0] || null,
-          away_player_2_id: formData.matchType === 'doubles' ? formData.awayPlayers[1] : null,
+          home_player_1_id,
+          home_player_2_id,
+          away_player_1_id,
+          away_player_2_id,
           home_set_1: parseInt(formData.homeSet1),
           away_set_1: parseInt(formData.awaySet1),
           home_set_2: parseInt(formData.homeSet2),
@@ -262,11 +281,8 @@ export function AddScore() {
           submitted_by: user.id,
           notes: formData.notes
         }]);
-      
       if (lineError) throw lineError;
-      
       setSuccess('Scores submitted successfully!');
-      
       // Reset form
       setFormData(prev => ({
         ...prev,
@@ -279,9 +295,7 @@ export function AddScore() {
         awaySet3: '',
         notes: ''
       }));
-      
       setSelectedMatch(null);
-      
     } catch (err) {
       setError('Error submitting scores: ' + err.message);
     } finally {
@@ -296,17 +310,14 @@ export function AddScore() {
   return (
     <div className="add-score-page">
       <h1>Submit Match Scores</h1>
-      
       {userTeam && (
         <div className="user-info">
-          <p>Submitting scores for: <strong>{userTeam.name}</strong> ({userTeam.night})</p>
+          <p>Submitting scores for: <strong>{userTeam.name}</strong></p>
         </div>
       )}
-      
       <form onSubmit={handleSubmit} className="score-form">
         <div className="form-section">
           <h2>Select Match</h2>
-          
           <div className="form-group">
             <label>Available Matches</label>
             <select 
@@ -323,7 +334,6 @@ export function AddScore() {
               ))}
             </select>
           </div>
-          
           {selectedMatch && (
             <div className="match-details">
               <h3>Match Details</h3>
@@ -336,10 +346,8 @@ export function AddScore() {
             </div>
           )}
         </div>
-
         <div className="form-section">
           <h2>Line Information</h2>
-          
           <div className="form-row">
             <div className="form-group">
               <label>Line Number</label>
@@ -350,11 +358,10 @@ export function AddScore() {
                 required
               >
                 <option value={1}>Line 1 (Players #1 & #2)</option>
-                <option value={2}>Line 2 (Players #3 & #4)</option>
-                <option value={3}>Line 3 (Players #5-#8)</option>
+                <option value={2}>Line 2 (Players #3)</option>
+                <option value={3}>Line 3 (Players #4-#5)</option>
               </select>
             </div>
-            
             <div className="form-group">
               <label>Match Type</label>
               <select 
@@ -368,7 +375,6 @@ export function AddScore() {
               </select>
             </div>
           </div>
-          
           <div className="form-row">
             <div className="form-group">
               <label>Home Players</label>
@@ -378,9 +384,9 @@ export function AddScore() {
                 required
               >
                 <option value="">Select Player 1</option>
-                {homeTeamRoster.map((player, index) => (
+                {getEligiblePlayers(homeTeamRoster, formData.lineNumber).map((player, index) => (
                   <option key={index} value={player.name}>
-                    {player.name} {player.captain ? '(C)' : ''}
+                    {player.position}. {player.name} {player.captain ? '(C)' : ''}
                   </option>
                 ))}
               </select>
@@ -391,15 +397,14 @@ export function AddScore() {
                   required
                 >
                   <option value="">Select Player 2</option>
-                  {homeTeamRoster.map((player, index) => (
+                  {getEligiblePlayers(homeTeamRoster, formData.lineNumber).map((player, index) => (
                     <option key={index} value={player.name}>
-                      {player.name} {player.captain ? '(C)' : ''}
+                      {player.position}. {player.name} {player.captain ? '(C)' : ''}
                     </option>
                   ))}
                 </select>
               )}
             </div>
-            
             <div className="form-group">
               <label>Away Players</label>
               <select 
@@ -408,9 +413,9 @@ export function AddScore() {
                 required
               >
                 <option value="">Select Player 1</option>
-                {awayTeamRoster.map((player, index) => (
+                {getEligiblePlayers(awayTeamRoster, formData.lineNumber).map((player, index) => (
                   <option key={index} value={player.name}>
-                    {player.name} {player.captain ? '(C)' : ''}
+                    {player.position}. {player.name} {player.captain ? '(C)' : ''}
                   </option>
                 ))}
               </select>
@@ -421,9 +426,9 @@ export function AddScore() {
                   required
                 >
                   <option value="">Select Player 2</option>
-                  {awayTeamRoster.map((player, index) => (
+                  {getEligiblePlayers(awayTeamRoster, formData.lineNumber).map((player, index) => (
                     <option key={index} value={player.name}>
-                      {player.name} {player.captain ? '(C)' : ''}
+                      {player.position}. {player.name} {player.captain ? '(C)' : ''}
                     </option>
                   ))}
                 </select>
@@ -431,10 +436,8 @@ export function AddScore() {
             </div>
           </div>
         </div>
-
         <div className="form-section">
           <h2>Match Scores</h2>
-          
           <div className="score-row">
             <div className="score-group">
               <label>Set 1</label>
@@ -458,7 +461,6 @@ export function AddScore() {
                 </select>
               </div>
             </div>
-            
             <div className="score-group">
               <label>Set 2</label>
               <div className="score-inputs">
@@ -481,7 +483,6 @@ export function AddScore() {
                 </select>
               </div>
             </div>
-            
             <div className="score-group">
               <label>Set 3 (Tiebreak)</label>
               <div className="score-inputs">
@@ -504,7 +505,6 @@ export function AddScore() {
             </div>
           </div>
         </div>
-
         <div className="form-section">
           <div className="form-group">
             <label>Notes (Optional)</label>
@@ -517,10 +517,8 @@ export function AddScore() {
             />
           </div>
         </div>
-
         {error && <div className="error-message">{error}</div>}
         {success && <div className="success-message">{success}</div>}
-
         <button type="submit" disabled={loading} className="submit-button">
           {loading ? 'Submitting...' : 'Submit Scores'}
         </button>

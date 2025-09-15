@@ -32,11 +32,11 @@ export function User() {
         return;
       }
       setUser(user);
-      // Fetch player row by user_id
+      // Fetch player row by id (user's UUID)
       const { data, error: playerError } = await supabase
         .from('player')
         .select('*')
-        .eq('user_id', user.id)
+        .eq('id', user.id)
         .single();
       if (!ignore && data) {
         setPlayer(data);
@@ -75,10 +75,10 @@ export function User() {
     setLoading(true);
 
     const payload = {
-      ...form,
-      user_id: user.id,
-      email: form.email || user.email,
-      ranking: Number(form.ranking),
+  ...form,
+  id: user.id,
+  email: form.email || user.email,
+  ranking: Number(form.ranking),
     };
 
     if (player) {
