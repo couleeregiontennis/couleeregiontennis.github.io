@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 
-export function MatchResults({ teamNumber, teamNight }) {
+export const MatchResults = ({ teamNumber, teamNight }) => {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -125,4 +125,4 @@ export function MatchResults({ teamNumber, teamNight }) {
       </div>
     </div>
   );
-}
+};

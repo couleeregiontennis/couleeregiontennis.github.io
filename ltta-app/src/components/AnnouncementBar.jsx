@@ -1,6 +1,6 @@
 import '../styles/AnnouncementBar.css';
 
-export function AnnouncementBar() {
+export const AnnouncementBar = () => {
   return (
     <div className="announcement-bar" id="announcement-bar">
       <span>
@@ -10,4 +10,4 @@ export function AnnouncementBar() {
       </span>
     </div>
   );
-}
+};

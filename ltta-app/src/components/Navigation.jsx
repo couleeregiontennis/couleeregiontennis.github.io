@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../scripts/supabaseClient';
 import '../styles/Navigation.css';
 
-export function Navigation() {
+export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -48,6 +48,8 @@ export function Navigation() {
               <li><Link to="/greenisland" onClick={closeMenu}>Green Island</Link></li>
               <li><Link to="/rules" onClick={closeMenu}>Rules</Link></li>
               <li><Link to="/standings" onClick={closeMenu}>Standings</Link></li>
+              <li><Link to="/schedule" onClick={closeMenu}>Schedule</Link></li>
+              <li><Link to="/league-stats" onClick={closeMenu}>League Stats</Link></li>
               <li>
                 <a
                   href="http://www.couleeregiontennis.com"
@@ -62,6 +64,20 @@ export function Navigation() {
                 <li>
                   <Link to="/add-score" onClick={closeMenu}>
                     Add Score
+                  </Link>
+                </li>
+              )}
+              {user && (
+                <li>
+                  <Link to="/captain-dashboard" onClick={closeMenu}>
+                    Captain Dashboard
+                  </Link>
+                </li>
+              )}
+              {user && (
+                <li>
+                  <Link to="/player-profile" onClick={closeMenu}>
+                    My Profile
                   </Link>
                 </li>
               )}
@@ -92,4 +108,4 @@ export function Navigation() {
       </nav>
     </header>
   );
-}
+};

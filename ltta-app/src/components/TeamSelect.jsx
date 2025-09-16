@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 import '../styles/TeamSelect.css';
 
-export function TeamSelect() {
+export const TeamSelect = () => {
   const [tuesdayTeams, setTuesdayTeams] = useState([]);
   const [wednesdayTeams, setWednesdayTeams] = useState([]);
 
@@ -69,4 +69,4 @@ export function TeamSelect() {
       </section>
     </div>
   );
-}
+};

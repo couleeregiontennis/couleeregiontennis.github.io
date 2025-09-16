@@ -46,4 +46,4 @@ const useCopyToClipboard = () => {
   return { copyToClipboard, copied };
 };
 
-export default useCopyToClipboard;
+export { useCopyToClipboard as default };

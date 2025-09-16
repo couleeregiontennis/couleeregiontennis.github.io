@@ -1,6 +1,6 @@
 import '../styles/GreenIsland.css';
 
-export function GreenIsland() {
+export const GreenIsland = () => {
   return (
     <main className="green-island-page">
       <h1>Green Island</h1>
@@ -65,4 +65,4 @@ export function GreenIsland() {
       </section>
     </main>
   );
-}
+};

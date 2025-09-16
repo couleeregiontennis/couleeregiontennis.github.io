@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { supabase } from '../scripts/supabaseClient';
+import '../styles/User.css';
 
-export function User() {
+export const User = () => {
   const [loading, setLoading] = useState(true);
   const [player, setPlayer] = useState(null);
   const [form, setForm] = useState({
@@ -200,6 +201,4 @@ export function User() {
       </form>
     </div>
   );
-}
-
-export default User;
+};

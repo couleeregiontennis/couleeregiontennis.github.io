@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 import '../styles/Login.css';
 
-export function Login({ onLogin }) {
+export const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
@@ -96,4 +96,4 @@ export function Login({ onLogin }) {
       </div>
     </div>
   );
-}
+};

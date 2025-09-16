@@ -24,4 +24,4 @@ function usePlatform() {
  return platform;
 }
 
-export default usePlatform;
+export { usePlatform as default };

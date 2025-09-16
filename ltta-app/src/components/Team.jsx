@@ -6,7 +6,7 @@ import useCopyToClipboard from '../scripts/CopyToClipboard';
 import { MatchResults } from './MatchResults';
 import '../styles/Team.css';
 
-export function Team() {
+export const Team = () => {
   const [schedule, setSchedule] = useState([]);
   const [teamName, setTeamName] = useState('');
   const [roster, setRoster] = useState([]);
@@ -191,7 +191,7 @@ export function Team() {
       </section>
     </div>
   );
-}
+};
 
 function formatDateUS(dateStr) {
   if (!dateStr) return '';

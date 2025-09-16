@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { supabase } from './supabaseClient';
 
-export function ProtectedRoute({ children }) {
+export const ProtectedRoute = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [session, setSession] = useState(null);
 
@@ -22,4 +22,4 @@ export function ProtectedRoute({ children }) {
   if (loading) return <div>Loading...</div>;
   if (!session) return <Navigate to="/login" replace />;
   return children;
-}
+};

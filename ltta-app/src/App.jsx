@@ -11,7 +11,12 @@ import { Login } from './components/Login';
 import { ProtectedRoute } from './scripts/ProtectedRoute';
 import { AddScore } from './components/AddScore';
 import { User } from './components/User';
-import Standings from './components/Standings';
+import { Standings } from './components/Standings';
+import { CaptainDashboard } from './components/CaptainDashboard';
+import { LeagueStats } from './components/LeagueStats';
+import { PlayerProfile } from './components/PlayerProfile';
+import { MatchSchedule } from './components/MatchSchedule';
+import './styles/colors.css';
 import './styles/Style.css';
 import './styles/Navigation.css';
 
@@ -46,6 +51,24 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/captain-dashboard"
+              element={
+                <ProtectedRoute>
+                  <CaptainDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/league-stats" element={<LeagueStats />} />
+            <Route
+              path="/player-profile"
+              element={
+                <ProtectedRoute>
+                  <PlayerProfile />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/schedule" element={<MatchSchedule />} />
           </Routes>
         </main>
       </div>

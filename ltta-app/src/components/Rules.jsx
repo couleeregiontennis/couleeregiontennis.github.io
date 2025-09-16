@@ -1,6 +1,6 @@
 import '../styles/Rules.css';
 
-export function Rules() {
+export const Rules = () => {
   return (
     <div className="rules-page">
       <h1>LTTA Rules & Guidelines</h1>
@@ -56,4 +56,4 @@ export function Rules() {
       </section>
     </div>
   );
-}
+};

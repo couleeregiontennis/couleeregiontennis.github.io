@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import '../styles/Style.css';
 
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ09FIuDMkX5mmdp9e-szR15pWx2cp-YyqsYxoNBL4FM0y8v3Q_LKboCjAEcUyobbgwCCGQpSMT3bXh/pub?output=csv";
 
-function Standings() {
+const Standings = () => {
   const [data, setData] = useState([]);
   const [nightFilter, setNightFilter] = useState("All");
   const [header, setHeader] = useState([]);
@@ -22,7 +22,7 @@ function Standings() {
   const totalIdx = header.findIndex(h => h?.trim().toLowerCase() === "total");
   const nightIdx = header.findIndex(h => h?.trim().toLowerCase() === "night");
 
-  const filteredRows = React.useMemo(() => {
+  const filteredRows = useMemo(() => {
     let filtered = data;
     if (nightFilter !== "All" && nightIdx !== -1) {
       filtered = data.filter(row => row[nightIdx]?.toLowerCase() === nightFilter.toLowerCase());
@@ -86,4 +86,4 @@ function Standings() {
   );
 }
 
-export default Standings;
+export { Standings };

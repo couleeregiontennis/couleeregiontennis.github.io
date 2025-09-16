@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../styles/Subs.css';
 
-export function Subs() {
+export const Subs = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = [
     '/images/sub-1.jpeg',
@@ -69,4 +69,4 @@ export function Subs() {
       </section>
     </div>
   );
-}
+};

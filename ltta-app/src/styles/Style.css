@@ -1,58 +1,88 @@
 /* ----- LIGHT MODE (default) ----- */
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font-family);
     margin: 0;
     padding: 0;
-    background: #fdfdfd;
-    color: #222;
+    background: var(--bg-primary);
+    color: var(--text-primary);
     line-height: 1.6;
 }
 
 footer {
-    padding: 1rem;
-    background: #eee;
+    padding: var(--space-lg);
+    background: var(--bg-secondary);
     text-align: center;
-    color: #222;
+    color: var(--text-primary);
+    border-top: 2px solid var(--border-primary);
 }
 
 main {
     max-width: 900px;
     margin: auto;
-    padding: 1rem;
+    padding: var(--space-lg);
+    box-sizing: border-box;
 }
 
 details {
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    background: #fafafa;
-    padding: 0.5rem;
+    margin-bottom: var(--space-lg);
+    border: 2px solid var(--border-primary);
+    background: var(--bg-secondary);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
 }
 
 summary {
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: var(--font-size-lg);
     cursor: pointer;
+    color: var(--primary-green);
+    transition: var(--transition-fast);
+}
+
+summary:hover {
+    color: var(--primary-green-hover);
 }
 
 table,
 .schedule-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 0.5rem;
-    background: #fff;
-    color: #222;
+    margin-top: var(--space-md);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
 }
 
 th, td,
 .schedule-table th, .schedule-table td {
-    border: 1px solid #ccc;
-    padding: 0.5rem;
+    border: 1px solid var(--border-primary);
+    padding: var(--space-md);
     text-align: left;
-    background: #fff;
-    color: #222;
+    background: var(--bg-primary);
+    color: var(--text-primary);
 }
 
-thead {}
+th,
+.schedule-table th {
+    background: var(--primary-green);
+    color: var(--text-white);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: var(--font-size-sm);
+}
+
+tr:nth-child(even) td {
+    background: var(--bg-secondary);
+}
+
+tr:hover td {
+    background: var(--bg-tertiary);
+}
+
 
 .nav-placeholder {
     width: 100%;
@@ -62,13 +92,16 @@ thead {}
 .team-list a {
     display: block;
     text-align: center;
-    padding: 0.75rem;
-    margin: 0.5rem 0;
-    background-color: #007BFF;
-    color: white;
+    padding: var(--space-md);
+    margin: var(--space-sm) 0;
+    background-color: var(--primary-green);
+    color: var(--text-white);
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    border-radius: var(--radius-md);
+    transition: var(--transition-fast);
+    border: 2px solid var(--primary-green);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
 }
 
 li {
@@ -80,28 +113,38 @@ li {
 }
 
 .team-list a:hover {
-    background-color: #0056b3;
+    background-color: var(--primary-green-hover);
+    border-color: var(--primary-green-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .team-link {
     display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: #007BFF;
-    color: white;
+    padding: var(--space-sm) var(--space-lg);
+    background-color: var(--primary-green);
+    color: var(--text-white);
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    border-radius: var(--radius-md);
+    transition: var(--transition-fast);
+    border: 2px solid var(--primary-green);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
 }
 
 .team-link:hover {
-    background-color: #0056b3;
+    background-color: var(--primary-green-hover);
+    border-color: var(--primary-green-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .teams-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
+    gap: var(--space-xl);
+    padding: var(--space-xl);
+    box-sizing: border-box;
 }
 
 .teams-column {
@@ -128,7 +171,10 @@ li {
 }
 
 .team-list a:hover {
-    background-color: #0056b3;
+    background-color: var(--primary-green-hover);
+    border-color: var(--primary-green-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 html, body {
@@ -149,15 +195,16 @@ ul {
 }
 
 .header {
-    background-color: #007BFF;
-    color: white;
-    padding: 1rem 0;
+    background-color: var(--primary-green);
+    color: var(--text-white);
+    padding: var(--space-lg) 0;
     text-align: center;
     width: 100%;
     box-sizing: border-box;
     position: relative;
     z-index: 1000;
-    border-bottom: 2px solid #0056b3;
+    border-bottom: 3px solid var(--primary-green-dark);
+    box-shadow: var(--shadow-md);
 }
 
 .table-responsive {
@@ -168,12 +215,14 @@ ul {
 }
 
 .highlight {
-    background-color: #ffe066;
-    color: #23272a;
+    background-color: var(--accent-yellow-light);
+    color: var(--text-primary);
     font-weight: bold;
-    transition: background 0.2s, color 0.2s;
-    border: 2px solid #fff176;
-    box-shadow: 0 0 0 2px #bfa80044;
+    transition: var(--transition-fast);
+    border: 2px solid var(--accent-yellow);
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-sm);
+    padding: var(--space-xs);
 }
 
 .responsive-image {
@@ -183,20 +232,21 @@ ul {
 }
 
 .announcement-bar {
-    background: linear-gradient(90deg, #eaf2fa 0%, #d2e6fa 100%);
-    color: #1a3557;
-    font-size: 1.13em;
-    padding: 0.7em 1.2em;
+    background: linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    color: var(--text-primary);
+    font-size: var(--font-size-lg);
+    padding: var(--space-md) var(--space-xl);
     text-align: center;
-    border-bottom: 2px solid #007BFF;
-    font-weight: 500;
+    border-bottom: 3px solid var(--primary-green);
+    font-weight: 600;
     letter-spacing: 0.01em;
-    box-shadow: 0 2px 8px rgba(42,77,105,0.04);
-    margin-bottom: 1.2em;
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--space-xl);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
 .announcement-bar strong {
-    color: #007BFF;
+    color: var(--primary-green);
 }
 
 /* Responsive styles */

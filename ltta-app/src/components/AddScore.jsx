@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 import '../styles/AddScore.css';
 
-export function AddScore() {
+export const AddScore = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -16,7 +16,7 @@ export function AddScore() {
   const [awayTeamRoster, setAwayTeamRoster] = useState([]);
   const [playerIdMap, setPlayerIdMap] = useState({});
   const [existingScores, setExistingScores] = useState([]);
-  
+
   const [formData, setFormData] = useState({
     matchId: '',
     lineNumber: 1,
@@ -46,7 +46,7 @@ export function AddScore() {
         .select('*')
         .eq('id', user.id)
         .single();
-      
+
       if (playerError || !playerData) {
         console.error('Error fetching player data:', playerError);
         return;
@@ -70,7 +70,7 @@ export function AddScore() {
         .select('*')
         .eq('id', teamLink.team)
         .single();
-      
+
       if (teamError || !teamData) {
         console.error('Error fetching team data:', teamError);
         return;
@@ -92,7 +92,7 @@ export function AddScore() {
           .select('*')
           .or(`home_team_number.eq.${userTeam.number},away_team_number.eq.${userTeam.number}`)
           .order('date', { ascending: true });
-        
+
         if (error) throw error;
         setAvailableMatches(matches || []);
       } catch (err) {
@@ -131,11 +131,11 @@ export function AddScore() {
         `)
         .eq('match_id', matchId)
         .order('line_number');
-      
+
       if (error) throw error;
-      
+
       setExistingScores(scores || []);
-      
+
       // If there's a score for the current line, populate the form
       const currentLineScore = scores?.find(s => s.line_number === formData.lineNumber);
       if (currentLineScore) {
@@ -151,7 +151,7 @@ export function AddScore() {
       score.home_player_1 ? `${score.home_player_1.first_name} ${score.home_player_1.last_name}` : '',
       score.home_player_2 ? `${score.home_player_2.first_name} ${score.home_player_2.last_name}` : ''
     ];
-    
+
     const awayPlayers = [
       score.away_player_1 ? `${score.away_player_1.first_name} ${score.away_player_1.last_name}` : '',
       score.away_player_2 ? `${score.away_player_2.first_name} ${score.away_player_2.last_name}` : ''
@@ -175,7 +175,7 @@ export function AddScore() {
   const getPlayersWhoActuallyPlayed = (homeRoster, awayRoster) => {
     // Get all unique players who actually played in this match
     const playersWhoPlayed = new Set();
-    
+
     existingScores.forEach(score => {
       if (score.home_player_1) {
         playersWhoPlayed.add(`${score.home_player_1.first_name} ${score.home_player_1.last_name}`);
@@ -190,24 +190,24 @@ export function AddScore() {
         playersWhoPlayed.add(`${score.away_player_2.first_name} ${score.away_player_2.last_name}`);
       }
     });
-    
+
     // Filter rosters to prioritize players who actually played
     const homePlayersWhoPlayed = homeRoster.filter(p => playersWhoPlayed.has(p.name));
     const awayPlayersWhoPlayed = awayRoster.filter(p => playersWhoPlayed.has(p.name));
-    
+
     return { homePlayersWhoPlayed, awayPlayersWhoPlayed, playersWhoPlayed };
   };
 
   const getDisplayPlayers = (roster, lineNumber) => {
     const eligiblePlayers = getEligiblePlayers(roster, lineNumber);
     const { playersWhoPlayed } = getPlayersWhoActuallyPlayed(homeTeamRoster, awayTeamRoster);
-    
+
     // Mark players who actually played and sort them to the top
     const playersWithStatus = eligiblePlayers.map(player => ({
       ...player,
       actuallyPlayed: playersWhoPlayed.has(player.name)
     }));
-    
+
     // Sort: players who actually played first, then by position
     return playersWithStatus.sort((a, b) => {
       if (a.actuallyPlayed && !b.actuallyPlayed) return -1;
@@ -220,17 +220,17 @@ export function AddScore() {
     // Don't auto-select if there's already existing score data for this line
     const existingScore = existingScores.find(s => s.line_number === parseInt(lineNumber));
     if (existingScore) return;
-    
+
     let homeEligible, awayEligible;
-    
+
     // If match has existing scores, prioritize players who actually played
     if (existingScores.length > 0) {
       const { homePlayersWhoPlayed, awayPlayersWhoPlayed } = getPlayersWhoActuallyPlayed(homeRoster, awayRoster);
-      
+
       // Use players who actually played, filtered by line eligibility
       homeEligible = getEligiblePlayers(homePlayersWhoPlayed, lineNumber);
       awayEligible = getEligiblePlayers(awayPlayersWhoPlayed, lineNumber);
-      
+
       // If no eligible players from those who played, fall back to all eligible players
       if (homeEligible.length === 0) {
         homeEligible = getEligiblePlayers(homeRoster, lineNumber);
@@ -243,10 +243,10 @@ export function AddScore() {
       homeEligible = getEligiblePlayers(homeRoster, lineNumber);
       awayEligible = getEligiblePlayers(awayRoster, lineNumber);
     }
-    
+
     const newHomePlayers = ['', ''];
     const newAwayPlayers = ['', ''];
-    
+
     // Auto-select home players
     if (homeEligible.length >= 1) {
       newHomePlayers[0] = homeEligible[0].name;
@@ -254,7 +254,7 @@ export function AddScore() {
     if (matchType === 'doubles' && homeEligible.length >= 2) {
       newHomePlayers[1] = homeEligible[1].name;
     }
-    
+
     // Auto-select away players
     if (awayEligible.length >= 1) {
       newAwayPlayers[0] = awayEligible[0].name;
@@ -262,7 +262,7 @@ export function AddScore() {
     if (matchType === 'doubles' && awayEligible.length >= 2) {
       newAwayPlayers[1] = awayEligible[1].name;
     }
-    
+
     // Update form data if any players were auto-selected
     if (newHomePlayers[0] || newAwayPlayers[0]) {
       setFormData(prev => ({
@@ -279,7 +279,7 @@ export function AddScore() {
       ...prev,
       [name]: value
     }));
-    
+
     // If line number changes, load existing score for that line or auto-select
     if (name === 'lineNumber') {
       setTimeout(() => {
@@ -304,7 +304,7 @@ export function AddScore() {
         }
       }, 0);
     }
-    
+
     // If match type changes, re-run auto-selection (unless there's existing data)
     if (name === 'matchType') {
       setTimeout(() => {
@@ -319,7 +319,7 @@ export function AddScore() {
   const handlePlayerChange = (team, position, value) => {
     setFormData(prev => ({
       ...prev,
-      [`${team}Players`]: prev[`${team}Players`].map((p, i) => 
+      [`${team}Players`]: prev[`${team}Players`].map((p, i) =>
         i === position ? value : p
       )
     }));
@@ -334,12 +334,57 @@ export function AddScore() {
 
   const generateScoreOptions = () => {
     const options = [];
-    for (let i = 0; i <= 6; i++) {
-      options.push(
-        <option key={i} value={i}>{i}</option>
-      );
+    for (let i = 0; i <= 7; i++) {
+      options.push(<option key={i} value={i}>{i}</option>);
     }
     return options;
+  };
+
+  // Calculate match winner based on current scores
+  const calculateMatchWinner = () => {
+    const homeSet1 = parseInt(formData.homeSet1) || 0;
+    const awaySet1 = parseInt(formData.awaySet1) || 0;
+    const homeSet2 = parseInt(formData.homeSet2) || 0;
+    const awaySet2 = parseInt(formData.awaySet2) || 0;
+    const homeSet3 = parseInt(formData.homeSet3) || 0;
+    const awaySet3 = parseInt(formData.awaySet3) || 0;
+
+    let homeSetsWon = 0;
+    let awaySetsWon = 0;
+
+    // Count sets won (need to win by 2 games or win 7-6)
+    if (homeSet1 > awaySet1 && (homeSet1 >= 6 && (homeSet1 - awaySet1 >= 2 || homeSet1 === 7))) homeSetsWon++;
+    else if (awaySet1 > homeSet1 && (awaySet1 >= 6 && (awaySet1 - homeSet1 >= 2 || awaySet1 === 7))) awaySetsWon++;
+
+    if (homeSet2 > awaySet2 && (homeSet2 >= 6 && (homeSet2 - awaySet2 >= 2 || homeSet2 === 7))) homeSetsWon++;
+    else if (awaySet2 > homeSet2 && (awaySet2 >= 6 && (awaySet2 - homeSet2 >= 2 || awaySet2 === 7))) awaySetsWon++;
+
+    // Set 3 is a tiebreak (first to 10, win by 2)
+    if (homeSet3 && awaySet3) {
+      if (homeSet3 >= 10 && homeSet3 - awaySet3 >= 2) homeSetsWon++;
+      else if (awaySet3 >= 10 && awaySet3 - homeSet3 >= 2) awaySetsWon++;
+    }
+
+    if (homeSetsWon > awaySetsWon) return 'home';
+    if (awaySetsWon > homeSetsWon) return 'away';
+    return null;
+  };
+
+  // Get display names for players
+  const getPlayerDisplayNames = () => {
+    let homeNames, awayNames;
+
+    if (formData.matchType === 'singles') {
+      // For singles, only show the first player
+      homeNames = formData.homePlayers[0] || '';
+      awayNames = formData.awayPlayers[0] || '';
+    } else {
+      // For doubles, show both players joined with ' / '
+      homeNames = formData.homePlayers.filter(p => p).join(' / ');
+      awayNames = formData.awayPlayers.filter(p => p).join(' / ');
+    }
+
+    return { homeNames, awayNames };
   };
 
   // Load roster and fetch player IDs from Supabase
@@ -368,7 +413,7 @@ export function AddScore() {
           .from('player')
           .select('id, first_name, last_name, ranking')
           .in('id', playerIds);
-        
+
         if (playersError) throw playersError;
 
         // Build name to ID map and roster list, assigning positions
@@ -401,19 +446,19 @@ export function AddScore() {
         homePlayers: ['', ''],
         awayPlayers: ['', '']
       }));
-      
+
       // Load rosters for both teams
       const [homeRoster, awayRoster] = await Promise.all([
         loadTeamRoster(match.home_team_number, match.home_team_night),
         loadTeamRoster(match.away_team_number, match.away_team_night)
       ]);
-      
+
       setHomeTeamRoster(homeRoster);
       setAwayTeamRoster(awayRoster);
-      
+
       // Load existing scores for this match
       await loadExistingScores(matchId);
-      
+
       // Auto-select players if there are few options
       autoSelectPlayers(homeRoster, awayRoster, formData.lineNumber, formData.matchType);
     }
@@ -424,16 +469,16 @@ export function AddScore() {
       setError('Please select a match');
       return false;
     }
-    
+
     // Validate that we have complete scores for the selected line
-    const hasCompleteScores = formData.homeSet1 && formData.awaySet1 && 
-                             formData.homeSet2 && formData.awaySet2;
-    
+    const hasCompleteScores = formData.homeSet1 && formData.awaySet1 &&
+      formData.homeSet2 && formData.awaySet2;
+
     if (!hasCompleteScores) {
       setError('Please enter complete scores for both sets');
       return false;
     }
-    
+
     return true;
   };
 
@@ -459,7 +504,7 @@ export function AddScore() {
       const away_player_2_id = formData.matchType === 'doubles' ? playerIdMap[formData.awayPlayers[1]] || null : null;
       // Check if score already exists for this line
       const existingScore = existingScores.find(s => s.line_number === Number(formData.lineNumber));
-      
+
       if (existingScore) {
         // Update existing score
         const { error: lineError } = await supabase
@@ -482,7 +527,7 @@ export function AddScore() {
             submitted_at: new Date().toISOString()
           })
           .eq('id', existingScore.id);
-        
+
         if (lineError) throw lineError;
       } else {
         // Create new line result
@@ -506,12 +551,12 @@ export function AddScore() {
             submitted_by: user.id,
             notes: formData.notes
           }]);
-        
+
         if (lineError) throw lineError;
       }
-      
+
       setSuccess(existingScore ? 'Scores updated successfully!' : 'Scores submitted successfully!');
-      
+
       // Reload existing scores to reflect changes
       await loadExistingScores(selectedMatch.id);
       // Reset form
@@ -551,9 +596,9 @@ export function AddScore() {
           <h2>Select Match</h2>
           <div className="form-group">
             <label>Available Matches</label>
-            <select 
-              name="matchId" 
-              value={formData.matchId} 
+            <select
+              name="matchId"
+              value={formData.matchId}
               onChange={(e) => handleMatchSelect(e.target.value)}
               required
             >
@@ -565,14 +610,14 @@ export function AddScore() {
               ))}
             </select>
           </div>
-          
+
           {existingScores.length > 0 && (
             <div className="existing-scores-summary">
               <h4>Existing Scores for this Match:</h4>
               <div className="scores-grid">
                 {existingScores.map(score => (
                   <div key={score.id} className="score-summary">
-                    <strong>Line {score.line_number}</strong> ({score.match_type}): 
+                    <strong>Line {score.line_number}</strong> ({score.match_type}):
                     {score.home_set_1}-{score.away_set_1}, {score.home_set_2}-{score.away_set_2}
                     {score.home_set_3 && `, ${score.home_set_3}-${score.away_set_3}`}
                     {score.home_won ? ' (Home Won)' : ' (Away Won)'}
@@ -598,9 +643,9 @@ export function AddScore() {
           <div className="form-row">
             <div className="form-group">
               <label>Line Number</label>
-              <select 
-                name="lineNumber" 
-                value={formData.lineNumber} 
+              <select
+                name="lineNumber"
+                value={formData.lineNumber}
                 onChange={handleInputChange}
                 required
               >
@@ -611,9 +656,9 @@ export function AddScore() {
             </div>
             <div className="form-group">
               <label>Match Type</label>
-              <select 
-                name="matchType" 
-                value={formData.matchType} 
+              <select
+                name="matchType"
+                value={formData.matchType}
                 onChange={handleInputChange}
                 required
               >
@@ -625,8 +670,8 @@ export function AddScore() {
           <div className="form-row">
             <div className="form-group">
               <label>Home Players</label>
-              <select 
-                value={formData.homePlayers[0]} 
+              <select
+                value={formData.homePlayers[0]}
                 onChange={(e) => handlePlayerChange('home', 0, e.target.value)}
                 required
               >
@@ -638,8 +683,8 @@ export function AddScore() {
                 ))}
               </select>
               {formData.matchType === 'doubles' && (
-                <select 
-                  value={formData.homePlayers[1]} 
+                <select
+                  value={formData.homePlayers[1]}
                   onChange={(e) => handlePlayerChange('home', 1, e.target.value)}
                   required
                 >
@@ -654,8 +699,8 @@ export function AddScore() {
             </div>
             <div className="form-group">
               <label>Away Players</label>
-              <select 
-                value={formData.awayPlayers[0]} 
+              <select
+                value={formData.awayPlayers[0]}
                 onChange={(e) => handlePlayerChange('away', 0, e.target.value)}
                 required
               >
@@ -667,8 +712,8 @@ export function AddScore() {
                 ))}
               </select>
               {formData.matchType === 'doubles' && (
-                <select 
-                  value={formData.awayPlayers[1]} 
+                <select
+                  value={formData.awayPlayers[1]}
                   onChange={(e) => handlePlayerChange('away', 1, e.target.value)}
                   required
                 >
@@ -685,25 +730,50 @@ export function AddScore() {
         </div>
         <div className="form-section">
           <h2>Match Scores</h2>
+          {(() => {
+            const { homeNames, awayNames } = getPlayerDisplayNames();
+            const winner = calculateMatchWinner();
+
+            return (
+              <div className="match-info">
+                {homeNames && awayNames && (
+                  <div className="player-names">
+                    <div className={`home-players ${winner === 'home' ? 'winner' : ''}`}>
+                      {homeNames} {winner === 'home' ? '🏆' : ''}
+                    </div>
+                    <div className="vs">vs</div>
+                    <div className={`away-players ${winner === 'away' ? 'winner' : ''}`}>
+                      {awayNames} {winner === 'away' ? '🏆' : ''}
+                    </div>
+                  </div>
+                )}
+                {winner && (
+                  <div className="match-winner">
+                    Winner: {winner === 'home' ? homeNames || 'Home Team' : awayNames || 'Away Team'}
+                  </div>
+                )}
+              </div>
+            );
+          })()}
           <div className="score-row">
             <div className="score-group">
               <label>Set 1</label>
               <div className="score-inputs">
-                <select 
-                  value={formData.homeSet1} 
+                <select
+                  value={formData.homeSet1}
                   onChange={(e) => handleScoreChange('home', 1, e.target.value)}
                   required
                 >
-                  <option value="">Home</option>
+                  <option value="">{getPlayerDisplayNames().homeNames || 'Home'}</option>
                   {generateScoreOptions()}
                 </select>
                 <span>-</span>
-                <select 
-                  value={formData.awaySet1} 
+                <select
+                  value={formData.awaySet1}
                   onChange={(e) => handleScoreChange('away', 1, e.target.value)}
                   required
                 >
-                  <option value="">Away</option>
+                  <option value="">{getPlayerDisplayNames().awayNames || 'Away'}</option>
                   {generateScoreOptions()}
                 </select>
               </div>
@@ -711,21 +781,21 @@ export function AddScore() {
             <div className="score-group">
               <label>Set 2</label>
               <div className="score-inputs">
-                <select 
-                  value={formData.homeSet2} 
+                <select
+                  value={formData.homeSet2}
                   onChange={(e) => handleScoreChange('home', 2, e.target.value)}
                   required
                 >
-                  <option value="">Home</option>
+                  <option value="">{getPlayerDisplayNames().homeNames || 'Home'}</option>
                   {generateScoreOptions()}
                 </select>
                 <span>-</span>
-                <select 
-                  value={formData.awaySet2} 
+                <select
+                  value={formData.awaySet2}
                   onChange={(e) => handleScoreChange('away', 2, e.target.value)}
                   required
                 >
-                  <option value="">Away</option>
+                  <option value="">{getPlayerDisplayNames().awayNames || 'Away'}</option>
                   {generateScoreOptions()}
                 </select>
               </div>
@@ -733,19 +803,19 @@ export function AddScore() {
             <div className="score-group">
               <label>Set 3 (Tiebreak)</label>
               <div className="score-inputs">
-                <select 
-                  value={formData.homeSet3} 
+                <select
+                  value={formData.homeSet3}
                   onChange={(e) => handleScoreChange('home', 3, e.target.value)}
                 >
-                  <option value="">Home</option>
+                  <option value="">{getPlayerDisplayNames().homeNames || 'Home'}</option>
                   {generateScoreOptions()}
                 </select>
                 <span>-</span>
-                <select 
-                  value={formData.awaySet3} 
+                <select
+                  value={formData.awaySet3}
                   onChange={(e) => handleScoreChange('away', 3, e.target.value)}
                 >
-                  <option value="">Away</option>
+                  <option value="">{getPlayerDisplayNames().awayNames || 'Away'}</option>
                   {generateScoreOptions()}
                 </select>
               </div>
@@ -755,9 +825,9 @@ export function AddScore() {
         <div className="form-section">
           <div className="form-group">
             <label>Notes (Optional)</label>
-            <textarea 
-              name="notes" 
-              value={formData.notes} 
+            <textarea
+              name="notes"
+              value={formData.notes}
               onChange={handleInputChange}
               placeholder="Any additional notes about the match..."
               rows="3"
@@ -772,4 +842,4 @@ export function AddScore() {
       </form>
     </div>
   );
-}
+};
