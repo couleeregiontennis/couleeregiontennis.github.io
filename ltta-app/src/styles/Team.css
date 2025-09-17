@@ -77,17 +77,33 @@
 
 .calendar-link {
   display: inline-block;
-  background: #eaf2fa;
-  color: #007BFF;
+  background: var(--primary-green);
+  color: var(--text-white);
   padding: 0.6em 1.2em;
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.2s ease;
+  transition: var(--transition-fast);
+  border: 2px solid var(--primary-green);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
 }
 
-.calendar-link:hover {
-  background: #d2e6fa;
+.calendar-link:hover:not(:disabled) {
+  background: var(--bg-primary);
+  color: var(--primary-green);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.calendar-link:disabled {
+  background: var(--text-secondary);
+  color: var(--bg-primary);
+  border-color: var(--text-secondary);
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.6;
 }
 
 .table-responsive {

@@ -103,6 +103,14 @@
   transform: translateY(-1px);
 }
 
+.current-date {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  color: var(--text-primary);
+  min-width: 200px;
+  text-align: center;
+}
+
 .date-range {
   font-size: 1.1rem;
   font-weight: bold;
@@ -117,21 +125,33 @@
   gap: 10px;
 }
 
-.team-filter {
-  padding: 8px 12px;
-  border: 2px solid #ddd;
-  border-radius: 6px;
-  font-size: 1rem;
-  background: white;
-  color: #333;
-  cursor: pointer;
-  transition: border-color 0.2s ease;
+.fil.team-filter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
 }
 
-.team-filter:focus {
+.team-filter label {
+  font-weight: bold;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+}
+
+.team-filter select {
+  padding: var(--space-sm) var(--space-md);
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.team-filter select:focus {
   outline: none;
-  border-color: #2c5530;
-  box-shadow: 0 0 0 3px rgba(44, 85, 48, 0.1);
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px var(--primary-green-alpha);
 }
 
 /* Schedule Content */
@@ -337,12 +357,12 @@
 }
 
 .schedule-summary {
-  background: white;
-  border: 2px solid #333;
-  border-radius: 8px;
-  padding: 25px;
-  margin-bottom: 30px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--bg-primary);
+  border: 2px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  box-shadow: var(--shadow-md);
 }
 
 .summary-stats {
@@ -381,20 +401,21 @@
 }
 
 .refresh-btn, .retry-btn {
-  background: #2c5530;
-  color: white;
-  border: 2px solid #2c5530;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-size: 1rem;
+  background: var(--primary-green);
+  color: var(--text-white);
+  border: 2px solid var(--primary-green);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition-fast);
 }
 
 .refresh-btn:hover, .retry-btn:hover {
   background: white;
   color: #2c5530;
+  transform: translateY(-1px);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }

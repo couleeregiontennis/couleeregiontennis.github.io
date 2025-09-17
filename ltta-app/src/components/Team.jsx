@@ -4,12 +4,15 @@ import { supabase } from '../scripts/supabaseClient';
 import usePlatform from '../scripts/PlatformDetector';
 import useCopyToClipboard from '../scripts/CopyToClipboard';
 import { MatchResults } from './MatchResults';
+import { generateFullSeasonICS, downloadICSFile } from '../scripts/icsGenerator';
 import '../styles/Team.css';
 
 export const Team = () => {
   const [schedule, setSchedule] = useState([]);
   const [teamName, setTeamName] = useState('');
   const [roster, setRoster] = useState([]);
+  const [opponentRosters, setOpponentRosters] = useState({});
+  const [isGeneratingICS, setIsGeneratingICS] = useState(false);
   const { day, teamId } = useParams();
   const { copyToClipboard } = useCopyToClipboard();
   const platform = usePlatform();
@@ -61,6 +64,9 @@ export const Team = () => {
           if (rosterError) throw rosterError;
           setRoster(rosterData || []);
         }
+
+        // 5. Fetch opponent rosters for all matches
+        await fetchOpponentRosters(scheduleData || []);
       } catch (err) {
         console.error('Error loading team data:', err);
       }
@@ -70,6 +76,88 @@ export const Team = () => {
       loadTeamData();
     }
   }, [day, teamId]);
+
+  const fetchOpponentRosters = async (matches) => {
+    try {
+      const opponentTeamNumbers = [...new Set(
+        matches.map(match => {
+          const isHome = match.home_team_number === parseInt(teamId);
+          return isHome ? match.away_team_number : match.home_team_number;
+        })
+      )];
+
+      const rostersData = {};
+
+      for (const opponentNumber of opponentTeamNumbers) {
+        // Get opponent team details
+        const { data: opponentTeam, error: teamError } = await supabase
+          .from('team')
+          .select('id, name')
+          .eq('number', opponentNumber)
+          .eq('play_night', day)
+          .single();
+
+        if (teamError || !opponentTeam) continue;
+
+        // Get opponent player IDs
+        const { data: opponentPlayerLinks, error: linksError } = await supabase
+          .from('player_to_team')
+          .select('player')
+          .eq('team', opponentTeam.id);
+
+        if (linksError || !opponentPlayerLinks) continue;
+
+        const opponentPlayerIds = opponentPlayerLinks.map(link => link.player);
+
+        // Get opponent player details
+        if (opponentPlayerIds.length > 0) {
+          const { data: opponentRosterData, error: rosterError } = await supabase
+            .from('player')
+            .select('id, first_name, last_name, is_captain')
+            .in('id', opponentPlayerIds);
+
+          if (!rosterError && opponentRosterData) {
+            rostersData[opponentNumber] = opponentRosterData;
+          }
+        }
+      }
+
+      setOpponentRosters(rostersData);
+    } catch (err) {
+      console.error('Error fetching opponent rosters:', err);
+    }
+  };
+
+  const handleDownloadFullSeason = async () => {
+    if (schedule.length === 0) {
+      alert('No matches found to export.');
+      return;
+    }
+
+    setIsGeneratingICS(true);
+    try {
+      // Add current team ID to matches for ICS generation
+      const matchesWithTeamId = schedule.map(match => ({
+        ...match,
+        current_team_id: teamId
+      }));
+
+      const icsContent = generateFullSeasonICS(
+        matchesWithTeamId,
+        teamName,
+        roster,
+        opponentRosters
+      );
+
+      const filename = `${teamName.replace(/[^a-zA-Z0-9]/g, '_')}_Full_Season.ics`;
+      downloadICSFile(icsContent, filename);
+    } catch (error) {
+      console.error('Error generating ICS file:', error);
+      alert('Error generating calendar file. Please try again.');
+    } finally {
+      setIsGeneratingICS(false);
+    }
+  };
 
   if (!teamName) {
     return <div className="loading">Loading...</div>;
@@ -82,13 +170,14 @@ export const Team = () => {
       <section className="schedule-section">
         <h2>Match Schedule</h2>
         <div className="calendar-download">
-          <a
-            href={`/teams/${day}/ics/${teamId}/team.ics`}
-            download="team.ics"
+          <button
+            onClick={handleDownloadFullSeason}
+            disabled={isGeneratingICS || schedule.length === 0}
             className="calendar-link"
+            title="Download complete season calendar with opponent rosters"
           >
-            📅 Download Full Season
-          </a>
+            {isGeneratingICS ? '⏳ Generating...' : '📅 Download Full Season'}
+          </button>
         </div>
 
         <div className="table-responsive">
