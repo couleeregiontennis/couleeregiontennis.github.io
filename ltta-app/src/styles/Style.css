@@ -301,7 +301,7 @@ body[data-theme="dark"] h3,
 body[data-theme="dark"] h4,
 body[data-theme="dark"] h5,
 body[data-theme="dark"] h6 {
-    color: var(--info-bg);
+    color: rgba(255, 255, 255, 0.92);
 }
 
 body[data-theme="dark"] .schedule-table,
@@ -321,13 +321,13 @@ body[data-theme="dark"] td {
 
 body[data-theme="dark"] .date-row {
     background-color: var(--bg-dark);
-    color: var(--info-bg);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 body[data-theme="dark"] .court-header,
 body[data-theme="dark"] .time-header {
     background: var(--bg-dark);
-    color: var(--info-bg);
+    color: rgba(255, 255, 255, 0.85);
     border-right: 2px solid var(--secondary);
 }
 
@@ -342,7 +342,7 @@ body[data-theme="dark"] .team-num {
 
 body[data-theme="dark"] footer {
     background: var(--bg-dark);
-    color: var(--info-bg);
+    color: rgba(255, 255, 255, 0.82);
 }
 
 body[data-theme="dark"] .highlight {
@@ -359,7 +359,7 @@ body[data-theme="dark"] details {
 }
 
 body[data-theme="dark"] summary {
-    color: var(--info-bg);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 body[data-theme="dark"] .announcement-bar {
