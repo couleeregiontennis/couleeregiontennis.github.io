@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import '../styles/Style.css';
+import '../styles/Standings.css';
 
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ09FIuDMkX5mmdp9e-szR15pWx2cp-YyqsYxoNBL4FM0y8v3Q_LKboCjAEcUyobbgwCCGQpSMT3bXh/pub?output=csv";
 
@@ -39,49 +40,53 @@ const Standings = () => {
   };
 
   return (
-    <main>
+    <main className="standings-page">
       <h1>Standings</h1>
-      <div style={{ textAlign: "center", marginBottom: "1em" }}>
-        <button
-          className={`night-filter ${nightFilter === "All" ? "active" : ""}`}
-          data-night="All"
-          onClick={() => handleFilterClick("All")}
-        >
-          All
-        </button>
-        <button
-          className={`night-filter ${nightFilter === "Tuesday" ? "active" : ""}`}
-          data-night="Tuesday"
-          onClick={() => handleFilterClick("Tuesday")}
-        >
-          Tuesday
-        </button>
-        <button
-          className={`night-filter ${nightFilter === "Wednesday" ? "active" : ""}`}
-          data-night="Wednesday"
-          onClick={() => handleFilterClick("Wednesday")}
-        >
-          Wednesday
-        </button>
-      </div>
-      <table id="standings-table">
-        <thead>
-          <tr>
-            {header.map((h, index) => (
-              <th key={index}>{h}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {filteredRows.map((row, index) => (
-            <tr key={index}>
-              {row.map((cell, index) => (
-                <td key={index}>{cell}</td>
+      <div className="standings-card">
+        <div className="standings-filters">
+          <button
+            className={`night-filter ${nightFilter === "All" ? "active" : ""}`}
+            data-night="All"
+            onClick={() => handleFilterClick("All")}
+          >
+            All
+          </button>
+          <button
+            className={`night-filter ${nightFilter === "Tuesday" ? "active" : ""}`}
+            data-night="Tuesday"
+            onClick={() => handleFilterClick("Tuesday")}
+          >
+            Tuesday
+          </button>
+          <button
+            className={`night-filter ${nightFilter === "Wednesday" ? "active" : ""}`}
+            data-night="Wednesday"
+            onClick={() => handleFilterClick("Wednesday")}
+          >
+            Wednesday
+          </button>
+        </div>
+        <div className="standings-table-wrapper">
+          <table id="standings-table">
+            <thead>
+              <tr>
+                {header.map((h, index) => (
+                  <th key={index}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {filteredRows.map((row, rowIndex) => (
+                <tr key={rowIndex}>
+                  {row.map((cell, cellIndex) => (
+                    <td key={cellIndex}>{cell}</td>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </main>
   );
 }

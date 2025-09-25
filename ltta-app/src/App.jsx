@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React, { useEffect, useMemo, useState } from 'react'; 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { AnnouncementBar } from './components/AnnouncementBar';
@@ -10,7 +10,6 @@ import { Rules } from './components/Rules';
 import { Login } from './components/Login';
 import { ProtectedRoute } from './scripts/ProtectedRoute';
 import { AddScore } from './components/AddScore';
-import { User } from './components/User';
 import { Standings } from './components/Standings';
 import { CaptainDashboard } from './components/CaptainDashboard';
 import { LeagueStats } from './components/LeagueStats';
@@ -20,11 +19,46 @@ import './styles/colors.css';
 import './styles/Style.css';
 import './styles/Navigation.css';
 
+const THEME_STORAGE_KEY = 'ltta-theme-preference';
+
 function App() {
+  const prefersDarkScheme = useMemo(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) {
+      return false;
+    }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }, []);
+
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') {
+      return 'light';
+    }
+
+    const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
+    if (stored === 'light' || stored === 'dark') {
+      return stored;
+    }
+    return prefersDarkScheme ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
+    document.documentElement.setAttribute('data-theme', theme);
+    document.body.setAttribute('data-theme', theme);
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
   return (
     <Router>
-      <div className="App">
-        <Navigation />
+      <div className={`App theme-${theme}`}>
+        <Navigation theme={theme} onToggleTheme={toggleTheme} />
         <AnnouncementBar />
         <main>
           <Routes>
@@ -40,14 +74,6 @@ function App() {
               element={
                 <ProtectedRoute>
                   <AddScore />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/user"
-              element={
-                <ProtectedRoute>
-                  <User />
                 </ProtectedRoute>
               }
             />

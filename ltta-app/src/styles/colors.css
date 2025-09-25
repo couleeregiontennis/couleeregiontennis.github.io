@@ -1,95 +1,103 @@
-/* Unified Color Scheme for LTTA Tennis League App */
 :root {
-  /* Primary Colors - Tennis Green Theme */
-  --primary-green: #2c5530;
-  --primary-green-light: #4a7c59;
-  --primary-green-dark: #1a3a1d;
-  --primary-green-hover: #3d6b42;
-  
-  /* Secondary Colors */
-  --secondary-blue: #1e3a8a;
-  --secondary-blue-light: #3b82f6;
-  --secondary-blue-dark: #1e40af;
-  
-  /* Accent Colors */
-  --accent-orange: #ea580c;
-  --accent-orange-light: #fb923c;
-  --accent-yellow: #eab308;
-  --accent-yellow-light: #fbbf24;
-  
-  /* Neutral Colors */
-  --white: #ffffff;
-  --gray-50: #f9fafb;
-  --gray-100: #f3f4f6;
-  --gray-200: #e5e7eb;
-  --gray-300: #d1d5db;
-  --gray-400: #9ca3af;
-  --gray-500: #6b7280;
-  --gray-600: #4b5563;
-  --gray-700: #374151;
-  --gray-800: #1f2937;
-  --gray-900: #111827;
-  --black: #000000;
-  
-  /* Status Colors */
-  --success: #059669;
+  /* Core palette (~10 colors) */
+  --color-primary: #2c5530;
+  --color-primary-light: #4a7c59;
+  --color-primary-dark: #1a3a1d;
+
+  --color-secondary: #1e3a8a;
+  --color-secondary-light: #3b82f6;
+  --color-secondary-dark: #162f72;
+
+  --color-surface: #ffffff;
+  --color-surface-muted: #f8fafc;
+  --color-surface-alt: #e2e8f0;
+
+  --color-border: #cbd5e1;
+  --color-border-strong: #475569;
+
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
+  --color-text-inverse: #ffffff;
+
+  --color-success: #059669;
+  --color-warning: #f59e0b;
+  --color-error: #dc2626;
+
+  /* RGB helpers for translucent backgrounds */
+  --color-primary-rgb: 44, 85, 48;
+  --color-secondary-rgb: 30, 58, 138;
+  --color-success-rgb: 5, 150, 105;
+  --color-warning-rgb: 245, 158, 11;
+  --color-error-rgb: 220, 38, 38;
+  --color-surface-rgb: 255, 255, 255;
+  --color-surface-muted-rgb: 248, 250, 252;
+  --color-surface-alt-rgb: 226, 232, 240;
+  --color-border-rgb: 203, 213, 225;
+  --color-text-rgb: 15, 23, 42;
+  --color-text-muted-rgb: 71, 85, 105;
+  --color-black-rgb: 0, 0, 0;
+
+  /* Semantic aliases */
+  --primary: var(--color-primary);
+  --primary-light: var(--color-primary-light);
+  --primary-dark: var(--color-primary-dark);
+  --primary-green: var(--color-primary);
+  --primary-green-light: var(--color-primary-light);
+  --primary-green-dark: var(--color-primary-dark);
+  --primary-green-hover: var(--color-primary-light);
+  --primary-green-alpha: rgba(var(--color-primary-rgb), 0.1);
+
+  --secondary: var(--color-secondary);
+  --secondary-light: var(--color-secondary-light);
+  --secondary-dark: var(--color-secondary-dark);
+
+  --bg-primary: var(--color-surface);
+  --bg-secondary: var(--color-surface-muted);
+  --bg-tertiary: var(--color-surface-alt);
+  --bg-dark: #1f2937;
+
+  --text-primary: var(--color-text);
+  --text-secondary: #1f2937;
+  --text-muted: var(--color-text-muted);
+  --text-inverse: var(--color-text-inverse);
+  --text-white: var(--text-inverse);
+
+  --border-primary: var(--color-border);
+  --border-secondary: var(--color-border);
+  --border-dark: var(--color-border-strong);
+  --border-accent: var(--color-primary);
+
+  --success: var(--color-success);
   --success-light: #10b981;
-  --success-bg: #d1fae5;
-  --warning: #d97706;
-  --warning-light: #f59e0b;
-  --warning-bg: #fef3c7;
-  --error: #dc2626;
+  --success-bg: rgba(var(--color-success-rgb), 0.14);
+  --warning: var(--color-warning);
+  --warning-bg: rgba(var(--color-warning-rgb), 0.18);
+  --error: var(--color-error);
   --error-light: #ef4444;
-  --error-bg: #fee2e2;
-  --info: #2563eb;
-  --info-light: #3b82f6;
-  --info-bg: #dbeafe;
-  
-  /* Background Colors */
-  --bg-primary: var(--white);
-  --bg-secondary: var(--gray-50);
-  --bg-tertiary: var(--gray-100);
-  --bg-dark: var(--gray-800);
-  
-  /* Text Colors */
-  --text-primary: var(--gray-900);
-  --text-secondary: var(--gray-700);
-  --text-muted: var(--gray-500);
-  --text-light: var(--gray-400);
-  --text-white: var(--white);
-  
-  /* Border Colors */
-  --border-primary: var(--gray-300);
-  --border-secondary: var(--gray-200);
-  --border-dark: var(--gray-600);
-  --border-accent: var(--primary-green);
-  
-  /* Shadow Colors */
+  --error-bg: rgba(var(--color-error-rgb), 0.16);
+  --info: var(--color-secondary);
+  --info-bg: rgba(var(--color-secondary-rgb), 0.12);
+
+  --white: var(--color-surface);
+  --black: #000000;
+
+  /* Shadow tokens */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  
-  /* Interactive States */
-  --hover-overlay: rgba(0, 0, 0, 0.05);
-  --active-overlay: rgba(0, 0, 0, 0.1);
-  --focus-ring: 0 0 0 3px rgba(44, 85, 48, 0.1);
-  
-  /* Spacing Scale */
+
+  /* Layout scale */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 1.5rem;
   --space-xl: 2rem;
   --space-2xl: 3rem;
-  
-  /* Border Radius */
+
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  
-  /* Typography */
+
   --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
@@ -99,40 +107,74 @@
   --font-size-2xl: 1.5rem;
   --font-size-3xl: 1.875rem;
   --font-size-4xl: 2.25rem;
-  
-  /* Transitions */
+
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 250ms ease-in-out;
   --transition-slow: 350ms ease-in-out;
+  --focus-ring: 0 0 0 3px rgba(var(--color-primary-rgb), 0.22);
 }
 
-/* Dark mode overrides */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: var(--gray-900);
-    --bg-secondary: var(--gray-800);
-    --bg-tertiary: var(--gray-700);
-    --bg-dark: var(--gray-900);
-    
-    --text-primary: var(--gray-100);
-    --text-secondary: var(--gray-300);
-    --text-muted: var(--gray-400);
-    --text-light: var(--gray-500);
-    
-    --border-primary: var(--gray-600);
-    --border-secondary: var(--gray-700);
-    --border-dark: var(--gray-500);
-    
-    --primary-green: #4a9d4e;
-    --primary-green-light: #6bb96f;
-    --primary-green-dark: #2d5f31;
+  :root:not([data-theme]) {
+    --bg-primary: #111827;
+    --bg-secondary: #182132;
+    --bg-tertiary: #1f2937;
+    --bg-dark: #0f172a;
+
+    --text-primary: var(--color-text-inverse);
+    --text-secondary: rgba(255, 255, 255, 0.72);
+    --text-muted: rgba(255, 255, 255, 0.6);
+
+    --border-primary: rgba(255, 255, 255, 0.18);
+    --border-secondary: rgba(255, 255, 255, 0.12);
+    --border-dark: rgba(0, 0, 0, 0.6);
+
+    --success-bg: rgba(var(--color-success-rgb), 0.22);
+    --warning-bg: rgba(var(--color-warning-rgb), 0.26);
+    --error-bg: rgba(var(--color-error-rgb), 0.24);
+    --info-bg: rgba(var(--color-secondary-rgb), 0.22);
   }
 }
 
-/* Utility classes for common patterns */
+:root[data-theme="dark"] {
+  --bg-primary: #111827;
+  --bg-secondary: #182132;
+  --bg-tertiary: #1f2937;
+  --bg-dark: #0f172a;
+
+  --text-primary: var(--color-text-inverse);
+  --text-secondary: rgba(255, 255, 255, 0.72);
+  --text-muted: rgba(255, 255, 255, 0.6);
+
+  --border-primary: rgba(255, 255, 255, 0.18);
+  --border-secondary: rgba(255, 255, 255, 0.12);
+  --border-dark: rgba(0, 0, 0, 0.6);
+
+  --success-bg: rgba(var(--color-success-rgb), 0.22);
+  --warning-bg: rgba(var(--color-warning-rgb), 0.26);
+  --error-bg: rgba(var(--color-error-rgb), 0.24);
+  --info-bg: rgba(var(--color-secondary-rgb), 0.22);
+}
+
 .text-primary { color: var(--text-primary); }
 .text-secondary { color: var(--text-secondary); }
 .text-muted { color: var(--text-muted); }
+.text-white { color: var(--text-inverse); }
+
+.bg-primary { background-color: var(--bg-primary); }
+.bg-secondary { background-color: var(--bg-secondary); }
+.bg-tertiary { background-color: var(--bg-tertiary); }
+
+.border-primary { border-color: var(--border-primary); }
+.border-accent { border-color: var(--border-accent); }
+
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+
+.transition-fast { transition: all var(--transition-fast); }
+.transition-normal { transition: all var(--transition-normal); }
+.transition-slow { transition: all var(--transition-slow); }
 .text-white { color: var(--text-white); }
 
 .bg-primary { background-color: var(--bg-primary); }

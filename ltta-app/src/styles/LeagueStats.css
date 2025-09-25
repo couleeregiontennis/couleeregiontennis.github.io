@@ -1,13 +1,29 @@
 /* League Statistics Page Styles */
-.league-stats {
+.league-stats-page {
+  --stats-page-bg: var(--bg-primary);
+  --stats-card-bg: var(--bg-secondary);
+  --stats-card-border: var(--border-primary);
+  --stats-card-text: var(--text-primary);
+  --stats-card-muted: var(--text-secondary);
+  --stats-accent: var(--primary-green);
+  --stats-accent-strong: var(--primary-green-dark);
+  padding: 2.5rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--space-xl);
+  background: var(--stats-page-bg);
+  color: var(--stats-card-text);
   font-family: var(--font-family);
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+:root[data-theme="dark"] .league-stats-page {
+  --stats-page-bg: var(--bg-dark);
+  --stats-card-bg: var(--bg-secondary);
+  --stats-card-border: var(--border-primary);
+  --stats-card-text: var(--text-primary);
+  --stats-card-muted: var(--text-muted);
+  --stats-accent: var(--secondary-light);
+  --stats-accent-strong: var(--secondary);
 }
 
 .stats-header {
@@ -16,14 +32,14 @@
 }
 
 .stats-header h1 {
-  color: var(--text-primary);
+  color: var(--stats-accent);
   font-size: var(--font-size-4xl);
   font-weight: bold;
   margin-bottom: var(--space-sm);
 }
 
 .stats-header p {
-  color: var(--text-secondary);
+  color: var(--stats-card-muted);
   font-size: var(--font-size-lg);
   margin: 0;
 }
@@ -37,31 +53,30 @@
 }
 
 .stat-card {
-  background: var(--bg-primary);
-  border: 2px solid var(--border-accent);
+  background: var(--stats-card-bg);
   border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  text-align: center;
-  box-shadow: var(--shadow-md);
-  transition: var(--transition-fast);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--stats-card-border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--stats-card-text);
 }
 
 .stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--primary-green);
+  border-color: var(--stats-accent);
 }
 
 .stat-number {
   font-size: var(--font-size-4xl);
   font-weight: bold;
-  color: var(--primary-green);
+  color: var(--stats-accent);
   margin-bottom: var(--space-sm);
 }
 
 .stat-label {
   font-size: var(--font-size-base);
-  color: var(--text-secondary);
+  color: var(--stats-card-muted);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -73,17 +88,17 @@
 }
 
 .stats-section h2 {
-  color: var(--text-primary);
+  color: var(--stats-accent);
   font-size: var(--font-size-2xl);
   margin-bottom: var(--space-xl);
-  border-bottom: 3px solid var(--primary-green);
+  border-bottom: 3px solid var(--stats-accent);
   padding-bottom: var(--space-sm);
 }
 
 /* Team Standings Table */
 .team-standings {
-  background: var(--bg-primary);
-  border: 2px solid var(--border-accent);
+  background: var(--stats-card-bg);
+  border: 1px solid var(--stats-card-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-md);
@@ -92,12 +107,12 @@
 .team-standings table {
   width: 100%;
   border-collapse: collapse;
-  background: var(--bg-primary);
+  background: var(--stats-card-bg);
 }
 
 .team-standings th {
-  background: var(--primary-green);
-  color: var(--text-white);
+  background: var(--stats-accent);
+  color: var(--text-inverse);
   padding: var(--space-md);
   text-align: left;
   font-weight: bold;
@@ -108,25 +123,25 @@
 
 .team-standings td {
   padding: var(--space-md) var(--space-md);
-  border-bottom: 1px solid var(--border-light);
-  color: var(--text-primary);
+  border-bottom: 1px solid var(--stats-card-border);
+  color: var(--stats-card-text);
   font-weight: 500;
 }
 
 .team-standings tr:nth-child(even) {
-  background: var(--bg-secondary);
+  background: var(--stats-page-bg);
 }
 
 .team-standings tr:hover {
-  background: var(--bg-tertiary);
+  background: rgba(var(--color-secondary-rgb), 0.12);
 }
 
 .team-standings .top-performer {
-  background: #fff3cd !important;
+  background: var(--warning-bg) !important;
 }
 
 .team-standings .top-performer:hover {
-  background: #ffeaa7 !important;
+  background: var(--warning-bg) !important;
 }
 
 .rank {
@@ -137,16 +152,16 @@
 
 .team-name {
   font-weight: bold;
-  color: #2c5530;
+  color: var(--primary-green);
 }
 
 .wins {
-  color: #28a745;
+  color: var(--success);
   font-weight: bold;
 }
 
 .losses {
-  color: #dc3545;
+  color: var(--error);
   font-weight: bold;
 }
 
@@ -157,8 +172,8 @@
 
 /* Recent Matches */
 .recent-matches {
-  background: var(--bg-primary);
-  border: 2px solid var(--border-accent);
+  background: var(--stats-card-bg);
+  border: 1px solid var(--stats-card-border);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   box-shadow: var(--shadow-md);
@@ -172,39 +187,39 @@
 
 .match-item {
   padding: var(--space-md);
-  border: 1px solid var(--border-light);
+  border: 1px solid var(--stats-card-border);
   border-radius: var(--radius-md);
-  background: var(--bg-secondary);
+  background: var(--stats-card-bg);
   transition: var(--transition-fast);
 }
 
 .match-item:hover {
-  background: var(--bg-tertiary);
-  border-color: var(--primary-green-light);
+  background: rgba(var(--color-secondary-rgb), 0.12);
+  border-color: var(--stats-accent);
 }
 
 .match-date {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--stats-card-muted);
   font-weight: 500;
   margin-bottom: var(--space-xs);
 }
 
 .match-result {
   font-weight: bold;
-  color: var(--text-primary);
+  color: var(--stats-card-text);
   margin-bottom: var(--space-xs);
 }
 
 .match-score {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--stats-card-muted);
 }
 
 /* Activity Chart */
 .activity-chart {
-  background: var(--bg-primary);
-  border: 2px solid var(--border-accent);
+  background: var(--stats-card-bg);
+  border: 1px solid var(--stats-card-border);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   box-shadow: var(--shadow-md);
@@ -217,7 +232,7 @@
   justify-content: space-between;
   gap: var(--space-sm);
   padding: var(--space-xl) 0;
-  border-bottom: 2px solid var(--border-accent);
+  border-bottom: 2px solid var(--stats-card-border);
   position: relative;
 }
 
@@ -230,7 +245,7 @@
 }
 
 .bar {
-  background: linear-gradient(to top, var(--primary-green), var(--primary-green-light));
+  background: linear-gradient(to top, var(--stats-accent), var(--stats-accent-strong));
   border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   min-height: 10px;
   flex: 1;
@@ -240,7 +255,7 @@
 }
 
 .bar:hover {
-  background: linear-gradient(to top, var(--primary-green-hover), var(--primary-green));
+  background: linear-gradient(to top, var(--stats-accent-strong), var(--stats-accent));
   transform: scaleY(1.05);
 }
 
@@ -249,7 +264,7 @@
   justify-content: space-between;
   margin-top: var(--space-sm);
   font-size: var(--font-size-xs);
-  color: var(--text-secondary);
+  color: var(--stats-card-muted);
 }
 
 /* Action Buttons */
@@ -259,9 +274,9 @@
 }
 
 .refresh-btn, .retry-btn {
-  background: #2c5530;
+  background: var(--stats-accent);
   color: white;
-  border: 2px solid #2c5530;
+  border: 2px solid var(--stats-accent);
   padding: 12px 24px;
   border-radius: 6px;
   font-size: 1rem;
@@ -272,7 +287,7 @@
 
 .refresh-btn:hover, .retry-btn:hover {
   background: white;
-  color: #2c5530;
+  color: var(--stats-accent);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -280,109 +295,47 @@
 /* Loading and Error States */
 .loading, .error {
   text-align: center;
-  color: var(--text-secondary);
+  color: var(--stats-card-muted);
   padding: var(--space-2xl);
   font-size: var(--font-size-lg);
 }
 
 .error {
-  color: #dc3545;
+  color: var(--error);
   font-weight: bold;
 }
 
 .no-data {
   text-align: center;
-  color: var(--text-secondary);
+  color: var(--stats-card-muted);
   font-style: italic;
   padding: var(--space-2xl);
 }
 
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
-  .league-stats {
-    background: #1a1a1a;
-    color: #e0e0e0;
-  }
-
-  .stats-header h1 {
-    color: #e0e0e0;
-  }
-
-  .stats-header p {
-    color: #b0b0b0;
-  }
-
-  .stat-card {
-    background: #2d2d2d;
-    border-color: #555;
-    color: #e0e0e0;
-  }
-
-  .stat-number {
-    color: #4a9d4e;
-  }
-
-  .stat-label {
-    color: #b0b0b0;
-  }
-
-  .stats-section h2 {
-    color: #e0e0e0;
-    border-bottom-color: #4a9d4e;
-  }
-
-  .team-standings {
-    background: #2d2d2d;
-    border-color: #555;
-  }
-
-  .team-standings th {
-    background: #4a9d4e;
-  }
-
-  .team-standings td {
-    color: #e0e0e0;
-    border-bottom-color: #555;
-  }
-
-  .team-standings tr:nth-child(even) {
-    background: #333;
-  }
-
-  .team-standings tr:hover {
-    background: #3a5a3a;
-  }
-
-  .recent-matches, .activity-chart {
-    background: #2d2d2d;
-    border-color: #555;
-  }
-
-  .match-item {
-    background: #333;
-    border-color: #555;
-  }
-
-  .match-item:hover {
-    background: #3a5a3a;
-  }
-
-  .match-date {
-    color: #b0b0b0;
+  .league-stats-page {
+    --stats-page-bg: var(--bg-dark);
+    --stats-card-bg: rgba(30, 41, 59, 0.92);
+    --stats-card-border: rgba(148, 163, 184, 0.3);
+    --stats-card-text: var(--text-primary);
+    --stats-card-muted: rgba(226, 232, 240, 0.75);
+    --stats-accent: var(--secondary-light);
+    --stats-accent-strong: var(--secondary);
   }
 
   .match-result {
-    color: #e0e0e0;
+    color: var(--border-primary);
   }
 
   .match-score {
-    color: #4a9d4e;
+    color: var(--stats-card-muted);
   }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .league-stats {
+  .league-stats-page {
     padding: 15px;
   }
 

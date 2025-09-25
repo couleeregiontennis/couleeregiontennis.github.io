@@ -1,12 +1,29 @@
 .captain-dashboard {
+  --captain-page-bg: var(--bg-primary);
+  --captain-card-bg: var(--bg-secondary);
+  --captain-card-border: var(--border-primary);
+  --captain-card-text: var(--text-primary);
+  --captain-card-muted: var(--text-secondary);
+  --captain-accent: var(--primary-green);
+  --captain-accent-strong: var(--primary-green-dark);
   max-width: 1400px;
   margin: 0 auto;
   padding: var(--space-lg);
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--captain-page-bg);
+  color: var(--captain-card-text);
   font-family: var(--font-family);
   min-height: 100vh;
   box-sizing: border-box;
+}
+
+:root[data-theme="dark"] .captain-dashboard {
+  --captain-page-bg: var(--bg-dark);
+  --captain-card-bg: var(--bg-secondary);
+  --captain-card-border: var(--border-primary);
+  --captain-card-text: var(--text-primary);
+  --captain-card-muted: var(--text-muted);
+  --captain-accent: var(--secondary-light);
+  --captain-accent-strong: var(--secondary);
 }
 
 .captain-dashboard h1 {
@@ -18,24 +35,24 @@
 }
 
 .team-info {
-  background: var(--bg-secondary);
+  background: var(--captain-card-bg);
   padding: var(--space-xl);
   border-radius: var(--radius-lg);
-  border: 2px solid var(--border-accent);
+  border: 1px solid var(--captain-card-border);
   margin-bottom: var(--space-2xl);
   text-align: center;
   box-shadow: var(--shadow-sm);
 }
 
 .team-info h2 {
-  color: var(--primary-green);
+  color: var(--captain-accent);
   margin: 0 0 var(--space-sm) 0;
   font-weight: bold;
   font-size: var(--font-size-2xl);
 }
 
 .team-info p {
-  color: var(--text-secondary);
+  color: var(--captain-card-muted);
   margin: 0;
   font-weight: 600;
   font-size: var(--font-size-lg);
@@ -51,10 +68,10 @@
 .roster-section,
 .matches-section,
 .tools-section {
-  background: var(--bg-primary);
+  background: var(--captain-card-bg);
   padding: var(--space-xl);
   border-radius: var(--radius-lg);
-  border: 2px solid var(--border-accent);
+  border: 1px solid var(--captain-card-border);
   box-shadow: var(--shadow-md);
   width: 100%;
   box-sizing: border-box;
@@ -64,11 +81,11 @@
 .roster-section h3,
 .matches-section h3,
 .tools-section h3 {
-  color: var(--text-primary);
+  color: var(--captain-card-text);
   margin-bottom: var(--space-lg);
   font-weight: bold;
   font-size: var(--font-size-2xl);
-  border-bottom: 3px solid var(--primary-green);
+  border-bottom: 3px solid var(--captain-accent);
   padding-bottom: var(--space-sm);
 }
 
@@ -76,8 +93,8 @@
   overflow-x: auto;
   width: 100%;
   border-radius: var(--radius-md);
-  border: 2px solid var(--border-primary);
-  background: var(--bg-primary);
+  border: 1px solid var(--captain-card-border);
+  background: var(--captain-card-bg);
 }
 
 .roster-table table {
@@ -91,14 +108,15 @@
 .roster-table td {
   padding: var(--space-md);
   text-align: left;
-  border: 1px solid var(--border-primary);
+  border: 1px solid var(--captain-card-border);
   font-weight: 500;
   white-space: nowrap;
+  color: var(--captain-card-text);
 }
 
 .roster-table th {
-  background: var(--primary-green);
-  color: var(--text-white);
+  background: var(--captain-accent);
+  color: var(--text-inverse);
   font-weight: bold;
   font-size: var(--font-size-sm);
   text-transform: uppercase;
@@ -106,39 +124,38 @@
 }
 
 .roster-table td {
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--captain-card-bg);
 }
 
 .roster-table tr:nth-child(even) td {
-  background: var(--bg-secondary);
+  background: var(--captain-page-bg);
 }
 
 .roster-table tr:hover td {
-  background: var(--bg-tertiary);
+  background: rgba(var(--color-secondary-rgb), 0.12);
 }
 
 .roster-table select {
   padding: var(--space-xs) var(--space-sm);
-  border: 1px solid var(--border-primary);
+  border: 1px solid var(--captain-card-border);
   border-radius: var(--radius-sm);
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--captain-page-bg);
+  color: var(--captain-card-text);
   font-weight: 500;
   transition: var(--transition-fast);
 }
 
 .roster-table select:focus {
   outline: none;
-  border-color: var(--primary-green);
+  border-color: var(--captain-accent);
   box-shadow: var(--focus-ring);
 }
 
 .btn-small {
   padding: var(--space-xs) var(--space-md);
-  background: var(--primary-green);
-  color: var(--text-white);
-  border: 2px solid var(--primary-green);
+  background: var(--captain-accent);
+  color: var(--text-inverse);
+  border: 1px solid var(--captain-accent);
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-weight: bold;
@@ -147,8 +164,8 @@
 }
 
 .btn-small:hover {
-  background: var(--primary-green-hover);
-  border-color: var(--primary-green-hover);
+  background: var(--captain-accent-strong);
+  border-color: var(--captain-accent-strong);
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
 }
@@ -160,10 +177,10 @@
 }
 
 .match-card {
-  background: var(--bg-secondary);
+  background: var(--captain-card-bg);
   padding: var(--space-lg);
   border-radius: var(--radius-lg);
-  border: 2px solid var(--border-primary);
+  border: 1px solid var(--captain-card-border);
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
@@ -173,25 +190,25 @@
 }
 
 .match-card:hover {
-  border-color: var(--primary-green);
+  border-color: var(--captain-accent);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 
 .match-date {
   font-weight: bold;
-  color: var(--primary-green);
+  color: var(--captain-accent);
   font-size: var(--font-size-lg);
 }
 
 .match-teams {
-  color: var(--text-primary);
+  color: var(--captain-card-text);
   font-weight: 600;
   font-size: var(--font-size-lg);
 }
 
 .match-time {
-  color: var(--text-secondary);
+  color: var(--captain-card-muted);
   font-weight: 500;
   font-size: var(--font-size-base);
 }
@@ -211,8 +228,8 @@
 }
 
 .tool-button {
-  background: var(--bg-primary);
-  border: 2px solid var(--border-primary);
+  background: var(--captain-page-bg);
+  border: 1px solid var(--captain-card-border);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   cursor: pointer;
@@ -222,21 +239,21 @@
 }
 
 .tool-button:hover {
-  background: var(--bg-secondary);
-  border-color: var(--primary-green);
+  background: var(--captain-card-bg);
+  border-color: var(--captain-accent);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 
 .tool-button h4 {
-  color: var(--primary-green);
+  color: var(--captain-accent);
   margin: 0 0 var(--space-sm) 0;
   font-weight: bold;
   font-size: var(--font-size-xl);
 }
 
 .tool-button p {
-  color: var(--text-secondary);
+  color: var(--captain-card-muted);
   margin: 0;
   font-weight: 500;
   font-size: var(--font-size-base);
@@ -246,7 +263,7 @@
 .loading {
   text-align: center;
   padding: var(--space-2xl);
-  color: var(--text-primary);
+  color: var(--captain-card-text);
   font-size: var(--font-size-lg);
   font-weight: 600;
 }
@@ -258,30 +275,30 @@
   font-size: var(--font-size-lg);
   font-weight: bold;
   background: var(--error-bg);
-  border: 2px solid var(--error);
+  border: 1px solid var(--error);
   border-radius: var(--radius-lg);
 }
 
 .success-message {
-  background: var(--success);
-  color: var(--text-white);
+  background: var(--success-bg);
+  color: var(--success);
   padding: var(--space-lg);
   border-radius: var(--radius-md);
   margin-top: var(--space-lg);
   font-weight: bold;
   text-align: center;
-  border: 2px solid var(--success-light);
+  border: 1px solid var(--success);
 }
 
 .error-message {
-  background: var(--error);
-  color: var(--text-white);
+  background: var(--error-bg);
+  color: var(--error);
   padding: var(--space-lg);
   border-radius: var(--radius-md);
   margin-top: var(--space-lg);
   font-weight: bold;
   text-align: center;
-  border: 2px solid var(--error-light);
+  border: 1px solid var(--error);
 }
 
 @media (max-width: 1024px) {

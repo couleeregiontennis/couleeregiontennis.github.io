@@ -98,3 +98,4 @@ To enable score submission, run the SQL commands in `supabase-schema.sql` in you
 - Admin interface for score management
 - Tournament bracket generation
 - Advanced statistics and analytics
+

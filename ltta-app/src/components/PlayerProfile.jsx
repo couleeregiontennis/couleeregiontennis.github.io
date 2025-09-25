@@ -2,32 +2,70 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 import '../styles/PlayerProfile.css';
 
+const getDefaultAvailability = () => ({
+  monday: false,
+  tuesday: false,
+  wednesday: false,
+  thursday: false,
+  friday: false,
+  saturday: false,
+  sunday: false
+});
+
+const createEmptyProfile = () => ({
+  id: '',
+  name: '',
+  email: '',
+  phone: '',
+  emergency_contact: '',
+  emergency_phone: '',
+  ranking: 3,
+  is_captain: false,
+  is_active: true,
+  availability: getDefaultAvailability(),
+  preferred_position: '',
+  notes: ''
+});
+
+const normalizeProfile = (data, user = null) => {
+  if (!data) {
+    return {
+      ...createEmptyProfile(),
+      id: user?.id || '',
+      name: user?.user_metadata?.full_name || '',
+      email: user?.email || ''
+    };
+  }
+
+  const firstName = data.first_name || '';
+  const lastName = data.last_name || '';
+
+  return {
+    id: data.id || user?.id || '',
+    name: `${firstName} ${lastName}`.trim(),
+    email: data.email || user?.email || '',
+    phone: data.phone || '',
+    emergency_contact: data.emergency_contact || '',
+    emergency_phone: data.emergency_phone || '',
+    ranking: data.ranking ?? 3,
+    is_captain: data.is_captain ?? false,
+    is_active: data.is_active ?? true,
+    availability: {
+      ...getDefaultAvailability(),
+      ...(typeof data.availability === 'object' && data.availability ? data.availability : {})
+    },
+    preferred_position: data.preferred_position || '',
+    notes: data.notes || ''
+  };
+};
+
 export const PlayerProfile = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [user, setUser] = useState(null);
-  const [profile, setProfile] = useState({
-    id: '',
-    name: '',
-    email: '',
-    phone: '',
-    emergency_contact: '',
-    emergency_phone: '',
-    skill_level: '',
-    availability: {
-      monday: false,
-      tuesday: false,
-      wednesday: false,
-      thursday: false,
-      friday: false,
-      saturday: false,
-      sunday: false
-    },
-    preferred_position: '',
-    notes: ''
-  });
+  const [profile, setProfile] = useState(createEmptyProfile());
   const [matchHistory, setMatchHistory] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -40,7 +78,7 @@ export const PlayerProfile = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         setUser(user);
-        await fetchPlayerProfile(user.id);
+        await fetchPlayerProfile(user.id, user);
         await fetchMatchHistory(user.id);
       } else {
         setError('Please log in to view your profile');
@@ -53,7 +91,7 @@ export const PlayerProfile = () => {
     }
   };
 
-  const fetchPlayerProfile = async (userId) => {
+  const fetchPlayerProfile = async (userId, authUser = null) => {
     try {
       const { data, error } = await supabase
         .from('player')
@@ -65,23 +103,9 @@ export const PlayerProfile = () => {
         throw error;
       }
 
-      if (data) {
-        setProfile({
-          ...profile,
-          id: data.id,
-          name: `${data.first_name} ${data.last_name}`,
-          email: data.email,
-          phone: data.phone,
-          notes: data.notes,
-          // Map other fields as needed
-        });
-      } else {
-        // Create a new profile with user's email
-        setProfile({
-          ...profile,
-          email: user?.email || '',
-          name: user?.user_metadata?.full_name || ''
-        });
+      const normalized = normalizeProfile(data, authUser || user);
+      setProfile(normalized);
+      if (!data) {
         setIsEditing(true);
       }
     } catch (err) {
@@ -124,9 +148,10 @@ export const PlayerProfile = () => {
         }
       }));
     } else {
+      const nextValue = field === 'ranking' ? Number(value) : value;
       setProfile(prev => ({
         ...prev,
-        [field]: value
+        [field]: nextValue
       }));
     }
   };
@@ -137,41 +162,51 @@ export const PlayerProfile = () => {
       setError(null);
       setSuccess(null);
 
-      // Split name into first and last name
-      const nameParts = profile.name.split(' ');
+      const nameString = (profile.name || '').trim();
+      const nameParts = nameString ? nameString.split(/\s+/) : [];
       const firstName = nameParts[0] || '';
-      const lastName = nameParts.slice(1).join(' ') || '';
+      const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
+
+      const parsedRanking = Number(profile.ranking);
+      const rankingValue = Number.isNaN(parsedRanking) ? 3 : parsedRanking;
 
       const profileData = {
         id: user.id,
         first_name: firstName,
         last_name: lastName,
-        email: profile.email,
-        phone: profile.phone,
-        notes: profile.notes
+        email: profile.email || user.email || '',
+        phone: profile.phone || '',
+        emergency_contact: profile.emergency_contact || '',
+        emergency_phone: profile.emergency_phone || '',
+        ranking: rankingValue,
+        is_captain: Boolean(profile.is_captain),
+        is_active: Boolean(profile.is_active),
+        availability: profile.availability || getDefaultAvailability(),
+        preferred_position: profile.preferred_position || '',
+        notes: profile.notes || ''
       };
 
-      let result;
+      let savedData;
       if (profile.id) {
-        // Update existing profile
-        result = await supabase
+        const { data: updatedData, error: updateError } = await supabase
           .from('player')
           .update(profileData)
           .eq('id', profile.id)
           .select()
           .single();
+        if (updateError) throw updateError;
+        savedData = updatedData;
       } else {
-        // Create new profile
-        result = await supabase
+        const { data: insertedData, error: insertError } = await supabase
           .from('player')
           .insert(profileData)
           .select()
           .single();
+        if (insertError) throw insertError;
+        savedData = insertedData;
       }
 
-      if (result.error) throw result.error;
-
-      setProfile(result.data);
+      setProfile(normalizeProfile(savedData, user));
       setSuccess('Profile saved successfully!');
       setIsEditing(false);
 
@@ -191,7 +226,7 @@ export const PlayerProfile = () => {
     setError(null);
     setSuccess(null);
     // Reset form to original values
-    fetchPlayerProfile(user.id);
+    fetchPlayerProfile(user.id, user);
   };
 
   const formatDate = (dateString) => {
@@ -234,7 +269,7 @@ export const PlayerProfile = () => {
           <div className="section-header">
             <h2>Basic Information</h2>
             {!isEditing && (
-              <button 
+              <button
                 className="edit-btn"
                 onClick={() => setIsEditing(true)}
               >
@@ -279,22 +314,6 @@ export const PlayerProfile = () => {
                 placeholder="(555) 123-4567"
               />
             </div>
-
-            <div className="form-group">
-              <label htmlFor="skill_level">Skill Level</label>
-              <select
-                id="skill_level"
-                value={profile.skill_level}
-                onChange={(e) => handleInputChange('skill_level', e.target.value)}
-                disabled={!isEditing}
-              >
-                <option value="">Select skill level</option>
-                <option value="beginner">Beginner</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="advanced">Advanced</option>
-                <option value="expert">Expert</option>
-              </select>
-            </div>
           </div>
         </div>
 
@@ -331,7 +350,7 @@ export const PlayerProfile = () => {
         <div className="profile-section">
           <h2>Weekly Availability</h2>
           <div className="availability-grid">
-            {Object.entries(profile.availability).map(([day, available]) => (
+            {profile.availability && Object.entries(profile.availability).map(([day, available]) => (
               <div key={day} className="availability-item">
                 <label className="checkbox-label">
                   <input
@@ -353,6 +372,22 @@ export const PlayerProfile = () => {
           <h2>Tennis Preferences</h2>
           <div className="form-grid">
             <div className="form-group">
+              <label htmlFor="ranking">Player Ranking</label>
+              <select
+                id="ranking"
+                value={profile.ranking}
+                onChange={(e) => handleInputChange('ranking', e.target.value)}
+                disabled={!isEditing}
+              >
+                <option value={1}>1 - Beginner</option>
+                <option value={2}>2 - Novice</option>
+                <option value={3}>3 - Intermediate</option>
+                <option value={4}>4 - Advanced</option>
+                <option value={5}>5 - Expert</option>
+              </select>
+            </div>
+
+            <div className="form-group">
               <label htmlFor="preferred_position">Preferred Position</label>
               <select
                 id="preferred_position"
@@ -365,6 +400,32 @@ export const PlayerProfile = () => {
                 <option value="doubles">Doubles</option>
                 <option value="both">Both Singles & Doubles</option>
               </select>
+            </div>
+
+            <div className="form-group">
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={profile.is_captain}
+                  onChange={(e) => handleInputChange('is_captain', e.target.checked)}
+                  disabled={!isEditing}
+                />
+                <span className="checkmark"></span>
+                Team Captain
+              </label>
+            </div>
+
+            <div className="form-group">
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={profile.is_active}
+                  onChange={(e) => handleInputChange('is_active', e.target.checked)}
+                  disabled={!isEditing}
+                />
+                <span className="checkmark"></span>
+                Active Player
+              </label>
             </div>
 
             <div className="form-group full-width">
@@ -384,14 +445,14 @@ export const PlayerProfile = () => {
         {/* Action Buttons */}
         {isEditing && (
           <div className="profile-actions">
-            <button 
+            <button
               className="save-btn"
               onClick={handleSave}
               disabled={saving}
             >
               {saving ? 'Saving...' : '💾 Save Profile'}
             </button>
-            <button 
+            <button
               className="cancel-btn"
               onClick={handleCancel}
               disabled={saving}

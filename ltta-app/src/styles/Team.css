@@ -16,7 +16,7 @@
 }
 
 .all-matches-link {
-  color: #007BFF;
+  color: var(--secondary-light);
   text-decoration: none;
   font-weight: 500;
 }
@@ -26,7 +26,7 @@
 }
 
 .team-list-info {
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 1rem;
 }
 
@@ -43,16 +43,16 @@
 .team-list a {
   display: block;
   padding: 0.8rem 1rem;
-  color: #333;
+  color: var(--text-primary);
   text-decoration: none;
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   border-radius: 4px;
   transition: all 0.2s ease;
 }
 
 .team-list a:hover {
-  background: #e9ecef;
-  color: #007BFF;
+  background: var(--bg-tertiary);
+  color: var(--secondary-light);
 }
 
 .team-page {
@@ -62,7 +62,7 @@
 }
 
 .team-name {
-  color: #1a3557;
+  color: var(--secondary);
   margin-bottom: 1.5rem;
 }
 
@@ -78,7 +78,7 @@
 .calendar-link {
   display: inline-block;
   background: var(--primary-green);
-  color: var(--text-white);
+  color: var(--text-inverse);
   padding: 0.6em 1.2em;
   border-radius: var(--radius-md);
   text-decoration: none;
@@ -120,7 +120,7 @@
 
 .schedule-table th,
 .roster-table th {
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   font-weight: 600;
   text-align: left;
 }
@@ -130,11 +130,11 @@
 .roster-table td,
 .roster-table th {
   padding: 0.8rem;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .team-link {
-  color: #007BFF;
+  color: var(--secondary-light);
   text-decoration: none;
 }
 
@@ -145,7 +145,7 @@
 .loading {
   text-align: center;
   padding: 2rem;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .date-time {
@@ -159,7 +159,7 @@
 }
 
 .time {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.9em;
 }
 
@@ -171,7 +171,7 @@
 
 .calendar-icon {
   font-size: 0.9em;
-  color: #007BFF;
+  color: var(--secondary-light);
   text-decoration: none;
   opacity: 0.7;
   transition: all 0.2s ease;
@@ -185,8 +185,8 @@
 .groupme-link {
   display: inline-block;
   padding: 0.25em 0.75em;
-  background: #00aff0;
-  color: #fff;
+  background: var(--secondary-light);
+  color: var(--white);
   border-radius: 4px;
   text-decoration: none;
   font-weight: bold;
@@ -194,7 +194,7 @@
 }
 
 .groupme-link:hover {
-  background: #007caa;
+  background: var(--secondary);
 }
 
 .find-sub-mobile {
@@ -212,13 +212,13 @@
 .find-sub-icon {
   font-size: 1.2em;
   margin-left: 0.1em;
-  color: #00aff0;
+  color: var(--secondary-light);
   text-decoration: none;
   vertical-align: middle;
   transition: color 0.2s;
 }
 .find-sub-icon:hover {
-  color: #007caa;
+  color: var(--secondary);
 }
 
 @media (max-width: 800px) {
@@ -257,8 +257,8 @@
   justify-content: center;
 }
 .find-sub-modal-content {
-  background: #fff;
-  color: #222;
+  background: var(--white);
+  color: var(--text-primary);
   padding: 1.5em;
   border-radius: 8px;
   max-width: 90vw;
@@ -270,7 +270,7 @@
   font-size: 1em;
   padding: 0.5em;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-primary);
   resize: none;
 }
 .copy-btn, .close-btn {
@@ -282,34 +282,34 @@
   cursor: pointer;
 }
 .copy-btn {
-  background: #00aff0;
-  color: #fff;
+  background: var(--secondary-light);
+  color: var(--white);
 }
 .copy-btn:hover {
-  background: #007caa;
+  background: var(--secondary);
 }
 .close-btn {
-  background: #eee;
-  color: #333;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 .close-btn:hover {
-  background: #ccc;
+  background: var(--border-primary);
 }
 
 /* Match Results Styles */
 .results-section {
   margin-top: 2rem;
   padding: 1.5rem;
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--bg-tertiary);
 }
 
 .match-results h3 {
-  color: #2a4d69;
+  color: var(--secondary);
   margin-bottom: 1rem;
   font-size: 1.5rem;
-  border-bottom: 2px solid #2a4d69;
+  border-bottom: 2px solid var(--secondary);
   padding-bottom: 0.5rem;
 }
 
@@ -327,7 +327,7 @@
 }
 
 .results-table th {
-  background: #2a4d69;
+  background: var(--secondary);
   color: white;
   padding: 12px;
   text-align: left;
@@ -336,19 +336,19 @@
 
 .results-table td {
   padding: 12px;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--bg-tertiary);
 }
 
 .results-table tr:hover {
-  background: #f8f9fa;
+  background: var(--bg-secondary);
 }
 
 .results-table tr.win {
-  background: #d4edda;
+  background: var(--success-bg);
 }
 
 .results-table tr.loss {
-  background: #f8d7da;
+  background: var(--error-bg);
 }
 
 .result {
@@ -360,12 +360,12 @@
 }
 
 .result.win {
-  background: #28a745;
+  background: var(--success);
   color: white;
 }
 
 .result.loss {
-  background: #dc3545;
+  background: var(--error);
   color: white;
 }
 
@@ -374,14 +374,14 @@
 .match-results-empty {
   text-align: center;
   padding: 2rem;
-  color: #6c757d;
+  color: var(--text-secondary);
   font-style: italic;
 }
 
 .match-results-error {
-  color: #dc3545;
-  background: #f8d7da;
-  border: 1px solid #f5c6cb;
+  color: var(--error);
+  background: var(--error-bg);
+  border: 1px solid var(--error-bg);
   border-radius: 4px;
 }
 

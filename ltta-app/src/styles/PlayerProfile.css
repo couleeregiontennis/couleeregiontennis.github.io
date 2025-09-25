@@ -1,13 +1,29 @@
 /* Player Profile Page Styles */
 .player-profile {
+  --profile-page-bg: var(--bg-primary);
+  --profile-card-bg: var(--bg-secondary);
+  --profile-card-border: var(--border-primary);
+  --profile-card-text: var(--text-primary);
+  --profile-card-muted: var(--text-secondary);
+  --profile-highlight: var(--primary-green);
   max-width: 800px;
   margin: 0 auto;
   padding: var(--space-xl);
   font-family: var(--font-family);
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--profile-page-bg);
+  color: var(--profile-card-text);
   min-height: 100vh;
   box-sizing: border-box;
+}
+
+:root[data-theme="dark"] .player-profile {
+  --profile-page-bg: var(--bg-dark);
+  --profile-card-bg: rgba(30, 41, 59, 0.92);
+  --profile-card-border: rgba(148, 163, 184, 0.35);
+  --profile-card-text: var(--text-primary);
+  --profile-card-muted: rgba(226, 232, 240, 0.72);
+  --profile-highlight: var(--primary);
+  box-shadow: none;
 }
 
 .profile-header {
@@ -16,14 +32,14 @@
 }
 
 .profile-header h1 {
-  color: var(--text-primary);
+  color: var(--profile-card-text);
   font-size: var(--font-size-4xl);
   font-weight: bold;
   margin-bottom: var(--space-sm);
 }
 
 .profile-header p {
-  color: var(--text-secondary);
+  color: var(--profile-card-muted);
   font-size: var(--font-size-lg);
   margin: 0;
 }
@@ -31,22 +47,22 @@
 /* Message Styles */
 .error-message, .success-message {
   padding: 15px;
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   margin-bottom: 20px;
   font-weight: bold;
   text-align: center;
 }
 
 .error-message {
-  background: #f8d7da;
-  color: #721c24;
-  border: 2px solid #f5c6cb;
+  background: var(--error-bg);
+  color: var(--error);
+  border: 1px solid var(--error-bg);
 }
 
 .success-message {
-  background: #d4edda;
-  color: #155724;
-  border: 2px solid #c3e6cb;
+  background: var(--success-bg);
+  color: var(--profile-highlight);
+  border: 1px solid var(--success-bg);
 }
 
 /* Profile Content */
@@ -58,12 +74,13 @@
 
 /* Profile Sections */
 .profile-section {
-  background: var(--bg-primary);
-  border: 2px solid var(--border-accent);
+  background: var(--profile-card-bg);
+  border: 1px solid var(--profile-card-border);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   margin-bottom: var(--space-xl);
   box-shadow: var(--shadow-md);
+  color: var(--profile-card-text);
 }
 
 .section-header {
@@ -74,17 +91,17 @@
 }
 
 .profile-section h2 {
-  color: var(--text-primary);
+  color: var(--profile-card-text);
   font-size: var(--font-size-xl);
   margin-bottom: var(--space-xl);
-  border-bottom: 2px solid var(--primary-green);
+  border-bottom: 2px solid var(--profile-highlight);
   padding-bottom: var(--space-sm);
 }
 
 .edit-btn {
-  background: var(--primary-green);
-  color: var(--text-white);
-  border: 2px solid var(--primary-green);
+  background: var(--profile-highlight);
+  color: var(--text-inverse);
+  border: 1px solid var(--profile-highlight);
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-md);
   font-size: var(--font-size-sm);
@@ -94,8 +111,8 @@
 }
 
 .edit-btn:hover {
-  background: white;
-  color: #2c5530;
+  background: var(--text-inverse);
+  color: var(--profile-highlight);
   transform: translateY(-1px);
 }
 
@@ -120,7 +137,7 @@
 .form-group label {
   display: block;
   font-weight: bold;
-  color: var(--text-primary);
+  color: var(--profile-card-text);
   margin-bottom: var(--space-sm);
   font-size: var(--font-size-sm);
 }
@@ -130,30 +147,30 @@
 .form-group textarea {
   width: 100%;
   padding: var(--space-md);
-  border: 2px solid var(--border-light);
+  border: 1px solid var(--profile-card-border);
   border-radius: var(--radius-md);
   font-size: var(--font-size-base);
   transition: var(--transition-fast);
   box-sizing: border-box;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--profile-page-bg);
+  color: var(--profile-card-text);
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--primary-green);
+  border-color: var(--profile-highlight);
   box-shadow: 0 0 0 3px var(--primary-green-alpha);
 }
 
 .form-group input:disabled,
 .form-group select:disabled,
 .form-group textarea:disabled {
-  background: #f8f9fa;
-  color: #666;
+  background: var(--bg-secondary);
+  color: var(--profile-card-muted);
   cursor: not-allowed;
-  border-color: #e9ecef;
+  border-color: var(--bg-tertiary);
 }
 
 .form-group textarea {
@@ -179,7 +196,7 @@
   align-items: center;
   cursor: pointer;
   font-weight: 500;
-  color: #333;
+  color: var(--profile-card-text);
   user-select: none;
 }
 
@@ -190,19 +207,19 @@
 .checkmark {
   width: 20px;
   height: 20px;
-  border: 2px solid #333;
+  border: 2px solid var(--profile-card-border);
   border-radius: 4px;
   margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
-  background: white;
+  background: var(--profile-page-bg);
 }
 
 .checkbox-label input[type="checkbox"]:checked + .checkmark {
-  background: #2c5530;
-  border-color: #2c5530;
+  background: var(--profile-highlight);
+  border-color: var(--profile-highlight);
 }
 
 .checkbox-label input[type="checkbox"]:checked + .checkmark::after {
@@ -213,14 +230,14 @@
 }
 
 .checkbox-label input[type="checkbox"]:disabled + .checkmark {
-  background: #f8f9fa;
-  border-color: #e9ecef;
+  background: var(--bg-secondary);
+  border-color: var(--bg-tertiary);
   cursor: not-allowed;
 }
 
 .checkbox-label:has(input[type="checkbox"]:disabled) {
   cursor: not-allowed;
-  color: #666;
+  color: var(--profile-card-muted);
 }
 
 /* Action Buttons */
@@ -230,12 +247,12 @@
   justify-content: center;
   margin-top: 30px;
   padding-top: 20px;
-  border-top: 2px solid #eee;
+  border-top: 1px solid var(--profile-card-border);
 }
 
 .save-btn, .cancel-btn {
   padding: var(--space-md) var(--space-lg);
-  border: 2px solid;
+  border: 1px solid;
   border-radius: var(--radius-md);
   font-size: var(--font-size-base);
   font-weight: bold;
@@ -245,41 +262,41 @@
 }
 
 .save-btn {
-  background: var(--primary-green);
-  color: var(--text-white);
-  border-color: var(--primary-green);
+  background: var(--profile-highlight);
+  color: var(--text-inverse);
+  border-color: var(--profile-highlight);
 }
 
 .save-btn:hover:not(:disabled) {
-  background: white;
-  color: #28a745;
+  background: var(--text-inverse);
+  color: var(--profile-highlight);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .save-btn:disabled {
-  background: #6c757d;
-  border-color: #6c757d;
+  background: var(--profile-card-muted);
+  border-color: var(--profile-card-muted);
   cursor: not-allowed;
   transform: none;
 }
 
 .cancel-btn {
-  background: var(--bg-primary);
-  color: var(--text-secondary);
-  border-color: var(--border-light);
+  background: var(--profile-page-bg);
+  color: var(--profile-card-muted);
+  border-color: var(--profile-card-border);
 }
 
 .cancel-btn:hover:not(:disabled) {
-  background: var(--bg-primary);
-  color: var(--primary-green);
+  background: var(--profile-page-bg);
+  color: var(--profile-highlight);
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
 
 .cancel-btn:disabled {
-  background: #6c757d;
-  border-color: #6c757d;
+  background: var(--profile-card-muted);
+  border-color: var(--profile-card-muted);
   cursor: not-allowed;
   transform: none;
 }
@@ -294,32 +311,33 @@
 
 .match-item {
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--profile-card-border);
   border-radius: 6px;
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   transition: background 0.2s ease;
+  color: var(--profile-card-text);
 }
 
 .match-item:hover {
-  background: #e8f5e8;
+  background: var(--success-bg);
 }
 
 .match-date {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--profile-card-muted);
   font-weight: 500;
   margin-bottom: 5px;
 }
 
 .match-details {
   font-weight: bold;
-  color: #333;
+  color: var(--profile-card-text);
   margin-bottom: 5px;
 }
 
 .match-score {
   font-size: 0.95rem;
-  color: #2c5530;
+  color: var(--profile-highlight);
   font-weight: 500;
 }
 
@@ -328,119 +346,19 @@
   text-align: center;
   padding: 40px 20px;
   font-size: 1.2rem;
-  color: #666;
+  color: var(--profile-card-muted);
 }
 
 .error {
-  color: #dc3545;
+  color: var(--error);
   font-weight: bold;
 }
 
 .no-data {
   text-align: center;
-  color: #666;
+  color: var(--profile-card-muted);
   font-style: italic;
   padding: 20px;
-}
-
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .player-profile {
-    background: #1a1a1a;
-    color: #e0e0e0;
-  }
-
-  .profile-header h1 {
-    color: #e0e0e0;
-  }
-
-  .profile-header p {
-    color: #b0b0b0;
-  }
-
-  .error-message {
-    background: #2d1b1e;
-    color: #f8d7da;
-    border-color: #842029;
-  }
-
-  .success-message {
-    background: #1a2e1a;
-    color: #d4edda;
-    border-color: #0f5132;
-  }
-
-  .profile-section {
-    background: #2d2d2d;
-    border-color: #555;
-  }
-
-  .profile-section h2 {
-    color: #e0e0e0;
-    border-bottom-color: #4a9d4e;
-  }
-
-  .form-group label {
-    color: #e0e0e0;
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    background: #333;
-    border-color: #555;
-    color: #e0e0e0;
-  }
-
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: #4a9d4e;
-    box-shadow: 0 0 0 3px rgba(74, 157, 78, 0.1);
-  }
-
-  .form-group input:disabled,
-  .form-group select:disabled,
-  .form-group textarea:disabled {
-    background: #444;
-    color: #999;
-    border-color: #666;
-  }
-
-  .checkbox-label {
-    color: #e0e0e0;
-  }
-
-  .checkmark {
-    border-color: #555;
-    background: #333;
-  }
-
-  .checkbox-label input[type="checkbox"]:checked + .checkmark {
-    background: #4a9d4e;
-    border-color: #4a9d4e;
-  }
-
-  .match-item {
-    background: #333;
-    border-color: #555;
-  }
-
-  .match-item:hover {
-    background: #3a5a3a;
-  }
-
-  .match-date {
-    color: #b0b0b0;
-  }
-
-  .match-details {
-    color: #e0e0e0;
-  }
-
-  .match-score {
-    color: #4a9d4e;
-  }
 }
 
 /* Responsive Design */
