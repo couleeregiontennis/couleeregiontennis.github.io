@@ -35,6 +35,67 @@ export const GreenIsland = () => {
     { court: 'Court 9', usage: '#4/#5 Doubles' }
   ];
 
+  const projectHighlights = [
+    {
+      title: 'Master Plan',
+      detail:
+        '19-court complex anchored by 13 outdoor lighted courts (Phase 1) with 6 indoor courts planned inside a year-round dome for Phase 2.'
+    },
+    {
+      title: 'Collaborative Partners',
+      detail:
+        'City of La Crosse, Coulee Region Tennis Association (CRTA), University of Wisconsin-La Crosse, and La Crosse Aquinas Catholic Schools.'
+    },
+    {
+      title: 'Funding Snapshot',
+      detail:
+        'Phase 1 construction launched in April 2020 and finished September 2020 at a cost of $1.3M. CRTA is raising $250,000 locally to support the project and future maintenance.'
+    },
+    {
+      title: 'Next Milestone',
+      detail:
+        'Phase 2 indoor dome and six courts remain on hold pending $4.5M in additional funding.'
+    }
+  ];
+
+  const communityBenefits = [
+    'Home base for LTTA adult leagues, USTA adult competition, USTA Junior Team Tennis, and local social tennis groups.',
+    'Enhances scholastic tennis for area middle schools, high schools, UW-La Crosse NCAA Division III teams, and La Crosse Aquinas Catholic Schools with a shared facility.',
+    'Unlocks year-round play with planned indoor dome plus lighted outdoor courts, supporting adapted, wheelchair, and veterans programs in addition to standard play.',
+    'Positions La Crosse to host invitationals, regional events, and national-caliber tournaments while driving new visitors to local hotels, restaurants, and businesses.'
+  ];
+
+  const supportActions = [
+    {
+      label: 'Mail a Donation',
+      description: 'Checks payable to Coulee Region Tennis Association · PO Box 191, La Crosse, WI 54602-0191.',
+      href: null
+    },
+    {
+      label: 'Give Online',
+      description: 'Donate through the CRTA Facebook page to support the complex buildout.',
+      href: ''
+    }
+  ];
+
+  const facilityResources = [
+    {
+      label: 'Green Island Tennis Courts Contact',
+      value: 'Nikki Hansen · City of La Crosse Parks & Recreation',
+      href: 'mailto:hansenn@cityoflacrosse.org?subject=Green%20Island%20Tennis%20Courts%20Inquiry'
+    },
+    {
+      label: 'Tennis Courts Calendar',
+      value: 'Reserve court time and monitor scheduled events.',
+      href: 'https://www.cityoflacrosse.org/?splash=https%3a%2f%2fteamup.com%2fkssd3w9kyz9cin87zt&____isexternal=true'
+    },
+    {
+      label: 'Complex Address',
+      value: '2300–2312 7th Street South, La Crosse, WI 54601',
+      href: 'https://www.google.com/maps/place/2312+7th+St+S,+La+Crosse,+WI+54601/'
+    }
+  ];
+
   return (
     <main className="green-island-page">
       <div className="green-island-header">
@@ -44,19 +105,19 @@ export const GreenIsland = () => {
 
       <div className="gi-overview-cards">
         <div className="gi-card">
-          <div className="gi-card-label">Primary Complex</div>
-          <div className="gi-card-value">13 Courts</div>
-          <div className="gi-card-subtitle">6 lighted courts · Seasonal restrooms · Parking near ice arena</div>
+          <div className="gi-card-label">Phase 1 Complete</div>
+          <div className="gi-card-value">13 Outdoor Courts</div>
+          <div className="gi-card-subtitle">Hard-surface courts opened September 2020 with north bank lighting and expanded parking.</div>
         </div>
         <div className="gi-card">
-          <div className="gi-card-label">Availability</div>
-          <div className="gi-card-value">Open Daily</div>
-          <div className="gi-card-subtitle">Public access with priority for LTTA matches and scheduled events</div>
+          <div className="gi-card-label">Total Vision</div>
+          <div className="gi-card-value">19 Courts</div>
+          <div className="gi-card-subtitle">Phase 2 plans include a six-court indoor dome to deliver uninterrupted year-round tennis.</div>
         </div>
         <div className="gi-card">
-          <div className="gi-card-label">Backup Courts</div>
-          <div className="gi-card-value">Central HS</div>
-          <div className="gi-card-subtitle">Used during weather delays or scheduling conflicts</div>
+          <div className="gi-card-label">Financial Goal</div>
+          <div className="gi-card-value">$250K</div>
+          <div className="gi-card-subtitle">CRTA community fundraising target for Phase 1 support, maintenance, and momentum toward the dome.</div>
         </div>
         <div className="gi-card">
           <div className="gi-card-label">Lighting</div>
@@ -129,6 +190,71 @@ export const GreenIsland = () => {
               Courts 1-7 feature lighting for evening play. Courts 8-13 are optimal for daytime matches and drills.
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className="gi-section">
+        <div className="section-intro">
+          <h2>Project Vision & Partners</h2>
+          <p>Understand how the Green Island expansion came together and where the project is heading next.</p>
+        </div>
+        <div className="project-highlights">
+          {projectHighlights.map((highlight) => (
+            <article className="highlight-card" key={highlight.title}>
+              <h3>{highlight.title}</h3>
+              <p>{highlight.detail}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="gi-section">
+        <div className="section-intro">
+          <h2>Community Impact</h2>
+          <p>The complex is designed to elevate tennis across the Coulee Region while creating new economic and recreational opportunities.</p>
+        </div>
+        <ul className="gi-list">
+          {communityBenefits.map((benefit) => (
+            <li key={benefit}>{benefit}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="gi-section">
+        <div className="section-intro">
+          <h2>Support the Project</h2>
+          <p>CRTA is a 501(c)(3) nonprofit. Every contribution keeps the courts thriving and moves the dome closer to reality.</p>
+        </div>
+        <div className="support-grid">
+          {supportActions.map((action) => (
+            <article className="support-card" key={action.label}>
+              <h3>{action.label}</h3>
+              <p>{action.description}</p>
+              {action.href && (
+                <a className="gi-cta-link" href={action.href} target="_blank" rel="noreferrer">
+                  Learn More
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="gi-section">
+        <div className="section-intro">
+          <h2>Facility Contacts & Resources</h2>
+          <p>Use these quick links to coordinate scheduling, connect with city staff, and share location details with your team.</p>
+        </div>
+        <div className="resources-grid">
+          {facilityResources.map((resource) => (
+            <article className="resource-card" key={resource.label}>
+              <h3>{resource.label}</h3>
+              <p>{resource.value}</p>
+              <a className="gi-cta-link" href={resource.href} target="_blank" rel="noreferrer">
+                Open Link
+              </a>
+            </article>
+          ))}
         </div>
       </section>
     </main>

@@ -276,6 +276,116 @@
   line-height: 1.6;
 }
 
+.project-highlights,
+.support-grid,
+.resources-grid {
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.highlight-card,
+.support-card,
+.resource-card {
+  background: rgba(var(--color-secondary-rgb), 0.1);
+  border: 1px solid rgba(var(--color-secondary-rgb), 0.22);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.highlight-card h3,
+.support-card h3,
+.resource-card h3 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--gi-card-text);
+}
+
+.highlight-card p,
+.support-card p,
+.resource-card p {
+  margin: 0;
+  color: var(--gi-card-muted);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+.gi-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-md);
+}
+
+.gi-list li {
+  position: relative;
+  padding-left: var(--space-xl);
+  color: var(--gi-card-text);
+  font-size: var(--font-size-sm);
+  line-height: 1.7;
+}
+
+.gi-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+  color: var(--gi-accent);
+  font-weight: 700;
+}
+
+.gi-cta-link {
+  align-self: flex-start;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-xs) var(--space-lg);
+  border-radius: var(--radius-full);
+  background: var(--gi-highlight);
+  color: var(--gi-accent-strong);
+  font-weight: 600;
+  border: 1px solid rgba(var(--color-secondary-rgb), 0.3);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gi-cta-link:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.support-card h3 {
+  color: var(--gi-accent);
+}
+
+.resource-card {
+  background: var(--gi-card-bg);
+  border: 1px solid var(--gi-card-border);
+}
+
+.resource-card p {
+  color: var(--gi-card-muted);
+}
+
+.resource-card .gi-cta-link {
+  background: rgba(var(--color-secondary-rgb), 0.12);
+}
+
+@media (max-width: 640px) {
+  .project-highlights,
+  .support-grid,
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 900px) {
   .green-island-page {
     padding: var(--space-xl);
