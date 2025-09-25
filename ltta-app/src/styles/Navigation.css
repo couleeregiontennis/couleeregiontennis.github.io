@@ -385,101 +385,99 @@
 }
 
 /* ----- DARK MODE ----- */
-@media (prefers-color-scheme: dark) {
-  .navbar {
-    background-color: rgba(var(--color-text-rgb), 0.82);
-    color: var(--text-primary);
-    border-bottom-color: var(--border-primary);
-  }
+body[data-theme="dark"] .navbar {
+  background-color: rgba(var(--color-text-rgb), 0.82);
+  color: var(--text-primary);
+  border-bottom-color: var(--border-primary);
+}
 
-  .navbar-brand a {
-    color: var(--primary-green-light);
-  }
+body[data-theme="dark"] .navbar-brand a {
+  color: var(--primary-green-light);
+}
 
-  .theme-toggle {
-    border-color: var(--border-primary);
-    background: rgba(var(--color-text-rgb), 0.7);
-    color: var(--text-primary);
-  }
+body[data-theme="dark"] .theme-toggle {
+  border-color: var(--border-primary);
+  background: rgba(var(--color-text-rgb), 0.7);
+  color: var(--text-primary);
+}
 
-  .theme-toggle:hover,
-  .theme-toggle:focus-visible {
-    background: var(--primary);
-    color: var(--text-inverse);
-  }
+body[data-theme="dark"] .theme-toggle:hover,
+body[data-theme="dark"] .theme-toggle:focus-visible {
+  background: var(--primary);
+  color: var(--text-inverse);
+}
 
-  .navbar-toggle {
-    border-color: var(--border-primary);
-    background: rgba(var(--color-text-rgb), 0.72);
-    color: var(--text-primary);
-  }
+body[data-theme="dark"] .navbar-toggle {
+  border-color: var(--border-primary);
+  background: rgba(var(--color-text-rgb), 0.72);
+  color: var(--text-primary);
+}
 
-  .navbar-toggle:hover,
-  .navbar-toggle:focus-visible {
-    background: var(--primary);
-    color: var(--text-inverse);
-  }
+body[data-theme="dark"] .navbar-toggle:hover,
+body[data-theme="dark"] .navbar-toggle:focus-visible {
+  background: var(--primary);
+  color: var(--text-inverse);
+}
 
-  .navbar-menu {
-    background-color: rgba(var(--color-text-rgb), 0.78) !important;
-    box-shadow: var(--shadow-lg);
-    border-color: var(--border-primary);
-  }
+body[data-theme="dark"] .navbar-menu {
+  background-color: rgba(var(--color-text-rgb), 0.78) !important;
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-primary);
+}
 
-  .navbar-menu ul {
-    background: none;
-  }
+body[data-theme="dark"] .navbar-menu ul {
+  background: none;
+}
 
-  .navbar-menu li {
-    background: none;
-    border-top: 1px solid var(--border-dark);
-  }
+body[data-theme="dark"] .navbar-menu li {
+  background: none;
+  border-top: 1px solid var(--border-dark);
+}
 
-  .navbar-menu a {
-    color: var(--text-primary);
-    background: none;
-  }
+body[data-theme="dark"] .navbar-menu a {
+  color: var(--text-primary);
+  background: none;
+}
 
-  .navbar-menu a:hover {
-    background: var(--primary-green-dark);
-    color: var(--text-inverse);
-  }
+body[data-theme="dark"] .navbar-menu a:hover {
+  background: var(--primary-green-dark);
+  color: var(--text-inverse);
+}
 
-  .navbar-user-icon,
-  .navbar-login-icon {
-    color: var(--text-primary);
-  }
+body[data-theme="dark"] .navbar-user-icon,
+body[data-theme="dark"] .navbar-login-icon {
+  color: var(--text-primary);
+}
 
-  .navbar-logout-btn {
-    color: var(--text-primary);
-  }
+body[data-theme="dark"] .navbar-logout-btn {
+  color: var(--text-primary);
+}
 
-  .navbar-logout-btn:hover,
-  .navbar-login-icon:hover {
-    color: var(--primary-green-light);
-  }
+body[data-theme="dark"] .navbar-logout-btn:hover,
+body[data-theme="dark"] .navbar-login-icon:hover {
+  color: var(--primary-green-light);
+}
 
-  .dropdown-toggle {
-    color: var(--text-primary);
-  }
+body[data-theme="dark"] .dropdown-toggle {
+  color: var(--text-primary);
+}
 
-  .dropdown-toggle:hover {
-    background: var(--primary-green-dark);
-    color: var(--text-inverse);
-  }
+body[data-theme="dark"] .dropdown-toggle:hover {
+  background: var(--primary-green-dark);
+  color: var(--text-inverse);
+}
 
-  .dropdown-menu {
-    background: rgba(var(--color-text-rgb), 0.8);
-    border: 1px solid var(--border-primary);
-    box-shadow: var(--shadow-lg);
-  }
+body[data-theme="dark"] .dropdown-menu {
+  background: rgba(var(--color-text-rgb), 0.8);
+  border: 1px solid var(--border-primary);
+  box-shadow: var(--shadow-lg);
+}
 
-  .dropdown-menu a {
-    color: var(--text-primary);
-  }
+body[data-theme="dark"] .dropdown-menu a {
+  color: var(--text-primary);
+}
 
-  .dropdown-menu a:hover {
-    background: var(--primary-green-dark);
-    color: var(--text-inverse);
-  }
+body[data-theme="dark"] .dropdown-menu a:hover {
+  background: var(--primary-green-dark);
+  color: var(--text-inverse);
 }

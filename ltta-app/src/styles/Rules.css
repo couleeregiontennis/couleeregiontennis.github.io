@@ -237,16 +237,14 @@ li::marker {
 }
 
 /* Dark Mode Enhancements */
-@media (prefers-color-scheme: dark) {
-  .rule-card:hover {
-    background: rgba(var(--color-secondary-rgb), 0.12);
-  }
+body[data-theme="dark"] .rule-card:hover {
+  background: rgba(var(--color-secondary-rgb), 0.12);
+}
 
-  .rules-content {
-    background: rgba(30, 41, 59, 0.92);
-  }
+body[data-theme="dark"] .rules-content {
+  background: rgba(30, 41, 59, 0.92);
+}
 
-  li::marker {
-    color: var(--secondary-light);
-  }
+body[data-theme="dark"] .rules-content li::marker {
+  color: var(--secondary-light);
 }

@@ -313,24 +313,22 @@
 }
 
 /* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .league-stats-page {
-    --stats-page-bg: var(--bg-dark);
-    --stats-card-bg: rgba(30, 41, 59, 0.92);
-    --stats-card-border: rgba(148, 163, 184, 0.3);
-    --stats-card-text: var(--text-primary);
-    --stats-card-muted: rgba(226, 232, 240, 0.75);
-    --stats-accent: var(--secondary-light);
-    --stats-accent-strong: var(--secondary);
-  }
+body[data-theme="dark"] .league-stats-page {
+  --stats-page-bg: var(--bg-dark);
+  --stats-card-bg: rgba(30, 41, 59, 0.92);
+  --stats-card-border: rgba(148, 163, 184, 0.3);
+  --stats-card-text: var(--text-primary);
+  --stats-card-muted: rgba(226, 232, 240, 0.75);
+  --stats-accent: var(--secondary-light);
+  --stats-accent-strong: var(--secondary);
+}
 
-  .match-result {
-    color: var(--border-primary);
-  }
+body[data-theme="dark"] .league-stats-page .match-result {
+  color: var(--border-primary);
+}
 
-  .match-score {
-    color: var(--stats-card-muted);
-  }
+body[data-theme="dark"] .league-stats-page .match-score {
+  color: var(--stats-card-muted);
 }
 
 /* Responsive Design */

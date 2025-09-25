@@ -1,22 +1,22 @@
 :root {
   /* Core palette (~10 colors) */
-  --color-primary: #2c5530;
-  --color-primary-light: #4a7c59;
-  --color-primary-dark: #1a3a1d;
+  --color-primary: #2f8f45;
+  --color-primary-light: #63c56f;
+  --color-primary-dark: #226636;
 
   --color-secondary: #1e3a8a;
   --color-secondary-light: #3b82f6;
   --color-secondary-dark: #162f72;
 
   --color-surface: #ffffff;
-  --color-surface-muted: #f8fafc;
-  --color-surface-alt: #e2e8f0;
+  --color-surface-muted: #f9fbff;
+  --color-surface-alt: #eef3fb;
 
-  --color-border: #cbd5e1;
-  --color-border-strong: #475569;
+  --color-border: #d8e3ef;
+  --color-border-strong: #526079;
 
-  --color-text: #0f172a;
-  --color-text-muted: #475569;
+  --color-text: #14213d;
+  --color-text-muted: #5b6b7f;
   --color-text-inverse: #ffffff;
 
   --color-success: #059669;
@@ -24,17 +24,17 @@
   --color-error: #dc2626;
 
   /* RGB helpers for translucent backgrounds */
-  --color-primary-rgb: 44, 85, 48;
+  --color-primary-rgb: 47, 143, 69;
   --color-secondary-rgb: 30, 58, 138;
   --color-success-rgb: 5, 150, 105;
   --color-warning-rgb: 245, 158, 11;
   --color-error-rgb: 220, 38, 38;
   --color-surface-rgb: 255, 255, 255;
-  --color-surface-muted-rgb: 248, 250, 252;
-  --color-surface-alt-rgb: 226, 232, 240;
-  --color-border-rgb: 203, 213, 225;
-  --color-text-rgb: 15, 23, 42;
-  --color-text-muted-rgb: 71, 85, 105;
+  --color-surface-muted-rgb: 249, 251, 255;
+  --color-surface-alt-rgb: 238, 243, 251;
+  --color-border-rgb: 216, 227, 239;
+  --color-text-rgb: 20, 33, 61;
+  --color-text-muted-rgb: 91, 107, 127;
   --color-black-rgb: 0, 0, 0;
 
   /* Semantic aliases */
@@ -51,19 +51,19 @@
   --secondary-light: var(--color-secondary-light);
   --secondary-dark: var(--color-secondary-dark);
 
-  --bg-primary: var(--color-surface);
-  --bg-secondary: var(--color-surface-muted);
-  --bg-tertiary: var(--color-surface-alt);
+  --bg-primary: #fefeff;
+  --bg-secondary: #f7fbff;
+  --bg-tertiary: #edf3fb;
   --bg-dark: #1f2937;
 
   --text-primary: var(--color-text);
-  --text-secondary: #1f2937;
-  --text-muted: var(--color-text-muted);
+  --text-secondary: var(--color-text-muted);
+  --text-muted: #708098;
   --text-inverse: var(--color-text-inverse);
   --text-white: var(--text-inverse);
 
   --border-primary: var(--color-border);
-  --border-secondary: var(--color-border);
+  --border-secondary: #e4ecf6;
   --border-dark: var(--color-border-strong);
   --border-accent: var(--color-primary);
 
