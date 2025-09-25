@@ -11,6 +11,10 @@ export const CaptainDashboard = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
+  const [seasonWins, setSeasonWins] = useState(0);
+  const [seasonLosses, setSeasonLosses] = useState(0);
+  const [playersAvailable, setPlayersAvailable] = useState(0);
+
   useEffect(() => {
     loadCaptainData();
   }, []);
@@ -18,11 +22,11 @@ export const CaptainDashboard = () => {
   const loadCaptainData = async () => {
     try {
       setLoading(true);
-      
+
       // Get current user
       const { data: { user: currentUser } } = await supabase.auth.getUser();
       if (!currentUser) throw new Error('Not authenticated');
-      
+
       setUser(currentUser);
 
       // Get player data to check if they're a captain
@@ -56,7 +60,10 @@ export const CaptainDashboard = () => {
 
       // Load team roster
       await loadTeamRoster(teamData.id);
-      
+
+      // Load season record
+      await loadSeasonRecord(teamData.number);
+
       // Load upcoming matches
       await loadUpcomingMatches(teamData.number, teamData.play_night);
 
@@ -92,6 +99,8 @@ export const CaptainDashboard = () => {
       }));
 
       setRoster(rosterData);
+      const availableCount = rosterData.filter(player => !player.is_injured).length;
+      setPlayersAvailable(availableCount);
     } catch (err) {
       console.error('Error loading roster:', err);
     }
@@ -100,7 +109,7 @@ export const CaptainDashboard = () => {
   const loadUpcomingMatches = async (teamNumber, playNight) => {
     try {
       const today = new Date().toISOString().split('T')[0];
-      
+
       const { data: matches, error } = await supabase
         .from('matches')
         .select('*')
@@ -124,14 +133,47 @@ export const CaptainDashboard = () => {
         .eq('id', playerId);
 
       if (error) throw error;
-      
+
       setSuccess('Player updated successfully');
       setTimeout(() => setSuccess(''), 3000);
-      
+
       // Reload roster
       await loadTeamRoster(team.id);
     } catch (err) {
       setError('Error updating player: ' + err.message);
+    }
+  };
+
+  const loadSeasonRecord = async (teamNumber) => {
+    try {
+      const { data: results, error } = await supabase
+        .from('matches')
+        .select('id, home_team_number, away_team_number, home_score, away_score')
+        .or(`home_team_number.eq.${teamNumber},away_team_number.eq.${teamNumber}`)
+        .not('home_score', 'is', null)
+        .not('away_score', 'is', null);
+
+      if (error) throw error;
+
+      let wins = 0;
+      let losses = 0;
+
+      (results || []).forEach(result => {
+        const isHome = result.home_team_number === teamNumber;
+        const teamScore = isHome ? result.home_score : result.away_score;
+        const opponentScore = isHome ? result.away_score : result.home_score;
+
+        if (teamScore > opponentScore) {
+          wins += 1;
+        } else {
+          losses += 1;
+        }
+      });
+
+      setSeasonWins(wins);
+      setSeasonLosses(losses);
+    } catch (err) {
+      console.error('Error loading season record:', err);
     }
   };
 
@@ -145,18 +187,54 @@ export const CaptainDashboard = () => {
 
   return (
     <div className="captain-dashboard">
-      <h1>Captain Dashboard</h1>
-      
+      <div className="captain-header">
+        <h1>Captain Dashboard</h1>
+        <p>Manage your roster, monitor upcoming matches, and access captain tools at a glance.</p>
+      </div>
+
       {team && (
-        <div className="team-info">
-          <h2>Team {team.number} - {team.name}</h2>
-          <p><strong>League:</strong> {team.play_night} Night</p>
+        <div className="captain-team-banner">
+          <div className="team-emblem">🎾</div>
+          <div className="team-meta-block">
+            <span className="team-meta-label">Team Overview</span>
+            <span className="team-meta-name">Team {team.number} · {team.name}</span>
+            <span className="team-meta-info">{team.play_night} Night League • {roster.length} Active Players</span>
+          </div>
         </div>
       )}
 
+      <div className="captain-overview">
+        <div className="overview-card">
+          <div className="card-label">Season Record</div>
+          <div className="card-value">{seasonWins} - {seasonLosses}</div>
+          <div className="card-subtitle">Wins · Losses</div>
+        </div>
+        <div className="overview-card">
+          <div className="card-label">Upcoming Matches</div>
+          <div className="card-value">{upcomingMatches.length}</div>
+          <div className="card-subtitle">Next 30 days</div>
+        </div>
+        <div className="overview-card">
+          <div className="card-label">Roster Availability</div>
+          <div className="card-value">{playersAvailable}</div>
+          <div className="card-subtitle">Players cleared for play</div>
+        </div>
+        <div className="overview-card">
+          <div className="card-label">Recent Activity</div>
+          <div className="card-value">{success ? 'Updated' : error ? 'Attention' : 'Stable'}</div>
+          <div className="card-subtitle">Team updates this week</div>
+        </div>
+      </div>
+
       <div className="dashboard-sections">
-        <section className="roster-section">
-          <h3>Team Roster Management</h3>
+        <section className="captain-section">
+          <div className="section-header">
+            <div>
+              <h2>Team Roster Management</h2>
+              <p>Maintain player details, rankings, and contact information.</p>
+            </div>
+            <button className="section-action">Export Roster</button>
+          </div>
           <div className="roster-table">
             <table>
               <thead>
@@ -182,7 +260,7 @@ export const CaptainDashboard = () => {
                         value={player.ranking}
                         onChange={(e) => handleRosterUpdate(player.id, 'ranking', parseInt(e.target.value))}
                       >
-                        {[1,2,3,4,5].map(rank => (
+                        {[1, 2, 3, 4, 5].map(rank => (
                           <option key={rank} value={rank}>{rank}</option>
                         ))}
                       </select>
@@ -198,19 +276,38 @@ export const CaptainDashboard = () => {
           </div>
         </section>
 
-        <section className="matches-section">
-          <h3>Upcoming Matches</h3>
-          <div className="matches-list">
+        <section className="captain-section">
+          <div className="section-header">
+            <div>
+              <h2>Upcoming Matches</h2>
+              <p>Plan lineups, assign captains, and prepare for match night.</p>
+            </div>
+            <button className="section-action">Manage Lineups</button>
+          </div>
+          <div className="matches-timeline">
             {upcomingMatches.length === 0 ? (
-              <p>No upcoming matches scheduled.</p>
+              <div className="empty-state">
+                <h3>No upcoming matches scheduled</h3>
+                <p>Once new matches are scheduled they will appear here.</p>
+              </div>
             ) : (
               upcomingMatches.map((match) => (
                 <div key={match.id} className="match-card">
-                  <div className="match-date">{new Date(match.date).toLocaleDateString()}</div>
-                  <div className="match-teams">
-                    {match.home_team_name} vs {match.away_team_name}
+                  <div className="match-card-header">
+                    <div className="match-date">
+                      {new Date(match.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                    </div>
+                    <span className="match-tag">{match.time} • Court {match.courts}</span>
                   </div>
-                  <div className="match-time">{match.time} at {match.courts}</div>
+                  <div className="match-teams">
+                    <span className="team-home">{match.home_team_name}</span>
+                    <span className="vs-label">vs</span>
+                    <span className="team-away">{match.away_team_name}</span>
+                  </div>
+                  <div className="match-meta">
+                    <span>Match ID: {match.id}</span>
+                    <span>{match.home_team_number === team.number ? 'Home Match' : 'Away Match'}</span>
+                  </div>
                   <div className="match-actions">
                     <button className="btn-small">Send Reminder</button>
                     <button className="btn-small">View Details</button>
@@ -221,24 +318,33 @@ export const CaptainDashboard = () => {
           </div>
         </section>
 
-        <section className="tools-section">
-          <h3>Captain Tools</h3>
+        <section className="captain-section">
+          <div className="section-header">
+            <div>
+              <h2>Captain Tools</h2>
+              <p>Quick access to core actions that keep your team organized.</p>
+            </div>
+          </div>
           <div className="tools-grid">
-            <button className="tool-button">
-              <h4>Send Team Email</h4>
-              <p>Send announcements to all team members</p>
+            <button className="tool-card">
+              <div className="tool-icon">📧</div>
+              <h3>Send Team Email</h3>
+              <p>Send announcements to all team members.</p>
             </button>
-            <button className="tool-button">
-              <h4>Request Substitutes</h4>
-              <p>Find subs for upcoming matches</p>
+            <button className="tool-card">
+              <div className="tool-icon">🔄</div>
+              <h3>Request Substitutes</h3>
+              <p>Find subs for upcoming matches.</p>
             </button>
-            <button className="tool-button">
-              <h4>Update Lineup</h4>
-              <p>Set player positions for matches</p>
+            <button className="tool-card">
+              <div className="tool-icon">📋</div>
+              <h3>Update Lineup</h3>
+              <p>Set player positions for the next match.</p>
             </button>
-            <button className="tool-button">
-              <h4>View Team Stats</h4>
-              <p>See team performance and statistics</p>
+            <button className="tool-card">
+              <div className="tool-icon">📊</div>
+              <h3>View Team Stats</h3>
+              <p>See team performance and statistics.</p>
             </button>
           </div>
         </section>

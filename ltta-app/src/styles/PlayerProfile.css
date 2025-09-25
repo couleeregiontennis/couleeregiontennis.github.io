@@ -45,7 +45,8 @@
 }
 
 /* Message Styles */
-.error-message, .success-message {
+.error-message,
+.success-message {
   padding: 15px;
   border-radius: var(--radius-md);
   margin-bottom: 20px;
@@ -217,19 +218,19 @@
   background: var(--profile-page-bg);
 }
 
-.checkbox-label input[type="checkbox"]:checked + .checkmark {
+.checkbox-label input[type="checkbox"]:checked+.checkmark {
   background: var(--profile-highlight);
   border-color: var(--profile-highlight);
 }
 
-.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+.checkbox-label input[type="checkbox"]:checked+.checkmark::after {
   content: '✓';
   color: white;
   font-weight: bold;
   font-size: 14px;
 }
 
-.checkbox-label input[type="checkbox"]:disabled + .checkmark {
+.checkbox-label input[type="checkbox"]:disabled+.checkmark {
   background: var(--bg-secondary);
   border-color: var(--bg-tertiary);
   cursor: not-allowed;
@@ -250,7 +251,8 @@
   border-top: 1px solid var(--profile-card-border);
 }
 
-.save-btn, .cancel-btn {
+.save-btn,
+.cancel-btn {
   padding: var(--space-md) var(--space-lg);
   border: 1px solid;
   border-radius: var(--radius-md);
@@ -342,7 +344,8 @@
 }
 
 /* Loading and Error States */
-.loading, .error {
+.loading,
+.error {
   text-align: center;
   padding: 40px 20px;
   font-size: 1.2rem;
@@ -396,7 +399,8 @@
     align-items: center;
   }
 
-  .save-btn, .cancel-btn {
+  .save-btn,
+  .cancel-btn {
     width: 100%;
     max-width: 200px;
   }

@@ -8,7 +8,7 @@ export const MatchSchedule = () => {
   const [matches, setMatches] = useState([]);
   const [teams, setTeams] = useState([]);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [viewMode, setViewMode] = useState('month'); // 'month', 'week', 'list'
+  const [viewMode, setViewMode] = useState('month');
   const [selectedTeam, setSelectedTeam] = useState('all');
   const [user, setUser] = useState(null);
 
@@ -173,10 +173,18 @@ export const MatchSchedule = () => {
     return grouped;
   };
 
+  const filteredMatches = getFilteredMatches();
+  const groupedMatches = groupMatchesByDate(filteredMatches);
+  const completedCount = filteredMatches.filter(m => getMatchStatus(m) === 'completed').length;
+  const upcomingCount = filteredMatches.filter(m => getMatchStatus(m) === 'upcoming').length;
+  const pendingCount = filteredMatches.filter(m => getMatchStatus(m) === 'pending-result').length;
+
   if (loading) {
     return (
       <div className="match-schedule">
-        <div className="loading">Loading match schedule...</div>
+        <div className="schedule-shell">
+          <div className="loading">Loading match schedule...</div>
+        </div>
       </div>
     );
   }
@@ -184,174 +192,172 @@ export const MatchSchedule = () => {
   if (error) {
     return (
       <div className="match-schedule">
-        <div className="error">{error}</div>
-        <button onClick={fetchData} className="retry-btn">
-          Try Again
-        </button>
+        <div className="schedule-shell">
+          <div className="error">{error}</div>
+          <button onClick={fetchData} className="retry-btn">
+            Try Again
+          </button>
+        </div>
       </div>
     );
   }
-
-  const filteredMatches = getFilteredMatches();
-  const groupedMatches = groupMatchesByDate(filteredMatches);
 
   return (
     <div className="match-schedule">
       <div className="schedule-header">
         <h1>Match Schedule</h1>
-        <p>View and manage tennis league matches</p>
+        <p>Plan lineups, track results, and stay informed on weekly match activity.</p>
       </div>
 
-      {/* Controls */}
+      <div className="schedule-overview">
+        <div className="overview-card">
+          <div className="card-label">Total Matches</div>
+          <div className="card-value">{filteredMatches.length}</div>
+          <div className="card-subtitle">Within selected filters</div>
+        </div>
+        <div className="overview-card">
+          <div className="card-label">Upcoming</div>
+          <div className="card-value">{upcomingCount}</div>
+          <div className="card-subtitle">Scheduled next</div>
+        </div>
+        <div className="overview-card">
+          <div className="card-label">Pending Results</div>
+          <div className="card-value">{pendingCount}</div>
+          <div className="card-subtitle">Awaiting score entry</div>
+        </div>
+        <div className="overview-card">
+          <div className="card-label">Completed</div>
+          <div className="card-value">{completedCount}</div>
+          <div className="card-subtitle">With final scores</div>
+        </div>
+      </div>
+
       <div className="schedule-controls">
-        <div className="view-controls">
-          <button 
-            className={`view-btn ${viewMode === 'month' ? 'active' : ''}`}
-            onClick={() => setViewMode('month')}
-          >
-            Month
-          </button>
-          <button 
-            className={`view-btn ${viewMode === 'week' ? 'active' : ''}`}
-            onClick={() => setViewMode('week')}
-          >
-            Week
-          </button>
-          <button 
-            className={`view-btn ${viewMode === 'list' ? 'active' : ''}`}
-            onClick={() => setViewMode('list')}
-          >
-            List
-          </button>
-        </div>
+        <div className="control-row">
+          <div className="view-toggle">
+            <button
+              className={`view-btn ${viewMode === 'month' ? 'active' : ''}`}
+              onClick={() => setViewMode('month')}
+            >
+              Month
+            </button>
+            <button
+              className={`view-btn ${viewMode === 'week' ? 'active' : ''}`}
+              onClick={() => setViewMode('week')}
+            >
+              Week
+            </button>
+            <button
+              className={`view-btn ${viewMode === 'list' ? 'active' : ''}`}
+              onClick={() => setViewMode('list')}
+            >
+              List
+            </button>
+          </div>
 
-        <div className="date-navigation">
-          <button onClick={() => navigateDate(-1)} className="nav-btn">
-            ← Previous
-          </button>
-          <span className="date-range">{getDateRangeText()}</span>
-          <button onClick={() => navigateDate(1)} className="nav-btn">
-            Next →
-          </button>
-        </div>
+          <div className="date-navigation">
+            <button onClick={() => navigateDate(-1)} className="nav-btn" aria-label="Previous period">
+              ←
+            </button>
+            <span className="date-range">{getDateRangeText()}</span>
+            <button onClick={() => navigateDate(1)} className="nav-btn" aria-label="Next period">
+              →
+            </button>
+          </div>
 
-        <div className="filter-controls">
-          <select 
-            value={selectedTeam} 
-            onChange={(e) => setSelectedTeam(e.target.value)}
-            className="team-filter"
-          >
-            <option value="all">All Teams</option>
-            {teams.map(team => (
-              <option key={team.id} value={team.id}>
-                {team.name}
-              </option>
-            ))}
-          </select>
+          <div className="filter-controls">
+            <label htmlFor="team-filter" className="filter-label">Team</label>
+            <select
+              id="team-filter"
+              value={selectedTeam}
+              onChange={(e) => setSelectedTeam(e.target.value)}
+              className="team-filter"
+            >
+              <option value="all">All Teams</option>
+              {teams.map(team => (
+                <option key={team.id} value={team.id}>
+                  {team.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
-      {/* Match Display */}
       <div className="schedule-content">
         {Object.keys(groupedMatches).length > 0 ? (
           <div className={`matches-container ${viewMode}`}>
             {Object.entries(groupedMatches)
               .sort(([a], [b]) => new Date(a) - new Date(b))
               .map(([dateKey, dayMatches]) => (
-                <div key={dateKey} className="day-section">
-                  <h3 className="day-header">
-                    {new Date(dateKey).toLocaleDateString('en-US', {
-                      weekday: 'long',
-                      month: 'long',
-                      day: 'numeric',
-                      year: 'numeric'
-                    })}
-                  </h3>
-                  
+                <section key={dateKey} className="day-section">
+                  <header className="day-header">
+                    <div className="day-title">
+                      {new Date(dateKey).toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric'
+                      })}
+                    </div>
+                    <div className="day-count">{dayMatches.length} match{dayMatches.length === 1 ? '' : 'es'}</div>
+                  </header>
+
                   <div className="day-matches">
                     {dayMatches.map(match => {
                       const status = getMatchStatus(match);
                       const statusBadge = getStatusBadge(status);
-                      
+
                       return (
-                        <div key={match.id} className={`match-card ${status}`}>
-                          <div className="match-time">
-                            {formatTime(match.time)}
+                        <article key={match.id} className={`match-card ${status}`}>
+                          <div className="match-meta">
+                            <span className="match-time">{formatTime(match.time)}</span>
+                            <span className={`status-badge ${statusBadge.class}`}>{statusBadge.text}</span>
                           </div>
-                          
+
                           <div className="match-teams">
                             <div className="team home-team">
                               <span className="team-name">{match.home_team_name}</span>
                             </div>
-                            
-                            <div className="vs">vs</div>
-                            
+                            <span className="vs">vs</span>
                             <div className="team away-team">
                               <span className="team-name">{match.away_team_name}</span>
                             </div>
                           </div>
-                          
-                          <div className="match-info">
-                            <span className={`status-badge ${statusBadge.class}`}>
-                              {statusBadge.text}
-                            </span>
-                            <span className="location">📍 {match.courts}</span>
+
+                          <div className="match-details">
+                            <span className="location">📍 {match.courts || 'TBD'}</span>
+                            <span className="match-id">Match #{match.id}</span>
                           </div>
-                          
+
                           {status === 'completed' && (
                             <div className="match-result">
-                              Match completed - {match.status}
+                              Final score submitted
                             </div>
                           )}
-                        </div>
+                        </article>
                       );
                     })}
                   </div>
-                </div>
+                </section>
               ))}
           </div>
         ) : (
           <div className="no-matches">
             <p>No matches found for the selected period and filters.</p>
-            <button onClick={() => {
-              setSelectedTeam('all');
-              setCurrentDate(new Date());
-            }} className="reset-filters-btn">
+            <button
+              onClick={() => {
+                setSelectedTeam('all');
+                setCurrentDate(new Date());
+              }}
+              className="reset-filters-btn"
+            >
               Reset Filters
             </button>
           </div>
         )}
       </div>
 
-      {/* Summary Stats */}
-      <div className="schedule-summary">
-        <div className="summary-stats">
-          <div className="stat">
-            <span className="stat-number">{filteredMatches.length}</span>
-            <span className="stat-label">Total Matches</span>
-          </div>
-          <div className="stat">
-            <span className="stat-number">
-              {filteredMatches.filter(m => getMatchStatus(m) === 'completed').length}
-            </span>
-            <span className="stat-label">Completed</span>
-          </div>
-          <div className="stat">
-            <span className="stat-number">
-              {filteredMatches.filter(m => getMatchStatus(m) === 'upcoming').length}
-            </span>
-            <span className="stat-label">Upcoming</span>
-          </div>
-          <div className="stat">
-            <span className="stat-number">
-              {filteredMatches.filter(m => getMatchStatus(m) === 'pending-result').length}
-            </span>
-            <span className="stat-label">Pending Results</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Refresh Button */}
       <div className="schedule-actions">
         <button onClick={fetchData} className="refresh-btn">
           🔄 Refresh Schedule

@@ -1,204 +1,252 @@
-body {
-  --rules-page-bg: var(--bg-secondary);
-  --rules-card-bg: var(--bg-primary);
-  --rules-card-border: var(--border-primary);
-  --rules-text: var(--text-primary);
-  --rules-muted: var(--text-secondary);
-  --rules-accent: var(--secondary);
-  --rules-accent-light: var(--secondary-light);
-  background: var(--rules-page-bg);
-  color: var(--rules-text);
-  font-family: 'Segoe UI', Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-:root[data-theme="dark"] body {
-  --rules-page-bg: var(--bg-dark);
+/* Rules Page Styles - Matching LeagueStats Layout */
+.rules-page {
+  --rules-page-bg: var(--bg-primary);
   --rules-card-bg: var(--bg-secondary);
   --rules-card-border: var(--border-primary);
-  --rules-text: var(--text-primary);
-  --rules-muted: var(--text-muted);
+  --rules-card-text: var(--text-primary);
+  --rules-card-muted: var(--text-secondary);
+  --rules-accent: var(--primary-green);
+  --rules-accent-strong: var(--primary-green-dark);
+  padding: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--rules-page-bg);
+  color: var(--rules-card-text);
+  font-family: var(--font-family);
+  line-height: 1.6;
+}
+
+:root[data-theme="dark"] .rules-page {
+  --rules-page-bg: var(--bg-dark);
+  --rules-card-bg: rgba(30, 41, 59, 0.92);
+  --rules-card-border: rgba(148, 163, 184, 0.3);
+  --rules-card-text: var(--text-primary);
+  --rules-card-muted: rgba(226, 232, 240, 0.75);
   --rules-accent: var(--secondary-light);
-  --rules-accent-light: var(--secondary);
+  --rules-accent-strong: var(--secondary);
 }
 
-h1 {
-  font-size: 2rem;
-  margin: 1.2rem 0 0.8rem 0;
+/* Header Section */
+.rules-header {
   text-align: center;
-  color: var(--rules-accent);
-  letter-spacing: 1px;
+  margin-bottom: 30px;
 }
 
-h2 {
-  font-size: 1.2rem;
-  margin: 1.5rem 0 0.5rem 0;
+.rules-header h1 {
   color: var(--rules-accent);
-  border-left: 4px solid var(--rules-accent-light);
-  padding-left: 0.5rem;
+  font-size: var(--font-size-4xl);
+  font-weight: bold;
+  margin-bottom: var(--space-sm);
 }
 
-section {
+.rules-header p {
+  color: var(--rules-card-muted);
+  font-size: var(--font-size-lg);
+  margin: 0;
+}
+
+/* Overview Cards */
+.rules-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.rule-card {
   background: var(--rules-card-bg);
-  margin: 1rem auto;
-  padding: 1rem 1.2rem;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
   border: 1px solid var(--rules-card-border);
-  box-shadow: var(--shadow-md);
-  max-width: 600px;
-  color: var(--rules-text);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--rules-card-text);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
 }
 
+.rule-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--rules-accent);
+  box-shadow: var(--shadow-md);
+}
+
+.rule-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.rule-title {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  color: var(--rules-accent);
+  margin-bottom: var(--space-xs);
+}
+
+.rule-description {
+  font-size: var(--font-size-sm);
+  color: var(--rules-card-muted);
+  font-weight: 500;
+}
+
+/* Rules Sections */
+.rules-section {
+  margin-bottom: 40px;
+}
+
+.rules-section h2 {
+  color: var(--rules-accent);
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-xl);
+  border-bottom: 3px solid var(--rules-accent);
+  padding-bottom: var(--space-sm);
+}
+
+.rules-content {
+  background: var(--rules-card-bg);
+  border: 1px solid var(--rules-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+}
+
+/* List Styling */
 ul {
   padding-left: 1.2rem;
-  margin: 0.5rem 0 0 0;
-  color: var(--rules-muted);
+  margin: 0;
+  color: var(--rules-card-text);
 }
 
 li {
   margin-bottom: 0.7rem;
   line-height: 1.6;
-  font-size: 1.05rem;
+  font-size: var(--font-size-base);
   list-style: disc;
-  color: var(--rules-text);
+  color: var(--rules-card-text);
+  position: relative;
+  padding-left: 0.3rem;
 }
 
-strong {
+li:last-child {
+  margin-bottom: 0;
+}
+
+li::marker {
   color: var(--rules-accent);
-}
-
-@media (max-width: 600px) {
-  body {
-    font-size: 1rem;
-    padding: 0;
-  }
-  h1 {
-    font-size: 1.3rem;
-    margin: 1rem 0 0.7rem 0;
-    padding: 0 0.5rem;
-  }
-  h2 {
-    font-size: 1.05rem;
-    padding-left: 0.4rem;
-    margin: 1.1rem 0 0.4rem 0;
-  }
-  section {
-    padding: 0.7rem 0.5rem;
-    margin: 0.7rem 0.2rem;
-    max-width: 100vw;
-  }
-  ul {
-    padding-left: 1rem;
-  }
-  li {
-    font-size: 0.98rem;
-    margin-bottom: 0.6rem;
-  }
-}
-
-/* Table of Contents styles */
-nav.toc {
-  background: var(--bg-tertiary);
-  border-radius: 12px;
-  border: 1px solid var(--rules-card-border);
-  box-shadow: var(--shadow-sm);
-  max-width: 600px;
-  margin: 1.2rem auto 1.5rem auto;
-  padding: 1rem 1.2rem 0.7rem 1.2rem;
-}
-
-nav.toc .toc-title {
   font-weight: bold;
-  color: var(--rules-accent);
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.5px;
-  font-size: 1.1rem;
 }
 
-nav.toc ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-nav.toc li {
-  margin-bottom: 0.6rem;
-  padding-left: 2em;
-  position: relative;
-  list-style: none;
-  font-style: italic;
-  color: var(--rules-muted);
-}
-
-nav.toc li::before {
-  content: '\2022';
-  position: absolute;
-  left: 0.6em;
-  color: var(--rules-accent-light);
-}
-
-nav.toc a {
-  color: var(--rules-accent);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-nav.toc a:hover {
-  color: var(--rules-accent-light);
-  text-decoration: underline;
-}
-
-.rules-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem;
-}
-
-.rules-section {
-  background: var(--rules-card-bg);
-  padding: 1.5rem;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  border: 1px solid var(--rules-card-border);
-  box-shadow: var(--shadow-sm);
-}
-
-.rules-section h2 {
-  color: var(--rules-accent);
-  margin-bottom: 1rem;
-  font-size: 1.3em;
-}
-
-.rules-section ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  color: var(--rules-muted);
-}
-
-.rules-section li {
-  margin-bottom: 0.8rem;
-  padding-left: 1.5rem;
-  position: relative;
-  line-height: 1.5;
-  color: var(--rules-text);
-}
-
-.rules-section li::before {
-  content: "•";
-  color: var(--rules-accent-light);
-  position: absolute;
-  left: 0;
-}
-
-@media (min-width: 768px) {
+/* Responsive Design */
+@media (max-width: 768px) {
   .rules-page {
-    padding: 2rem;
+    padding: 15px;
+  }
+
+  .rules-header h1 {
+    font-size: 2rem;
+  }
+
+  .rules-overview {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .rule-card {
+    padding: 1rem;
+    min-height: 120px;
+  }
+
+  .rule-icon {
+    font-size: 2rem;
+  }
+
+  .rule-title {
+    font-size: var(--font-size-base);
+  }
+
+  .rule-description {
+    font-size: var(--font-size-xs);
+  }
+
+  .rules-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .rules-content {
+    padding: var(--space-lg);
+  }
+
+  li {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .rules-overview {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rule-card {
+    padding: 0.8rem;
+    min-height: 100px;
+  }
+
+  .rule-icon {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .rule-title {
+    font-size: var(--font-size-sm);
+    margin-bottom: 0.2rem;
+  }
+
+  .rule-description {
+    font-size: var(--font-size-xs);
+  }
+
+  .rules-header p {
+    font-size: var(--font-size-base);
   }
 
   .rules-section {
-    padding: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .rules-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .rules-content {
+    padding: var(--space-md);
+  }
+
+  ul {
+    padding-left: 1rem;
+  }
+
+  li {
+    font-size: var(--font-size-sm);
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Dark Mode Enhancements */
+@media (prefers-color-scheme: dark) {
+  .rule-card:hover {
+    background: rgba(var(--color-secondary-rgb), 0.12);
+  }
+
+  .rules-content {
+    background: rgba(30, 41, 59, 0.92);
+  }
+
+  li::marker {
+    color: var(--secondary-light);
   }
 }

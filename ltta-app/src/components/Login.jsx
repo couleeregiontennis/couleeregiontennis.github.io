@@ -35,64 +35,129 @@ export const Login = ({ onLogin }) => {
 
   return (
     <div className="login-page">
-      <h2>{isSignUp ? "Sign Up" : "Login"}</h2>
-      <form onSubmit={handleAuth}>
-        <label>
-          Email<br />
-          <input
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password<br />
-          <input
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit" disabled={loading}>
-          {loading ? (isSignUp ? 'Signing up...' : 'Logging in...') : (isSignUp ? 'Sign Up' : 'Login')}
-        </button>
-        {error && <div className="error">{error}</div>}
-      </form>
-      <div>
-        <button
-          type="button"
-          onClick={() => handleOAuth('google')}
-        >
-          <span style={{ marginRight: 8, verticalAlign: 'middle' }}>🔵</span>
-          Continue with Google
-        </button>
-        <button
-          type="button"
-          onClick={() => handleOAuth('apple')}
-          className="apple-btn"
-        >
-          <span style={{ marginRight: 8, verticalAlign: 'middle' }}></span>
-          Continue with Apple
-        </button>
+      <div className="login-header">
+        <h1>{isSignUp ? 'Create your LTTA account' : 'Welcome back to LTTA'}</h1>
+        <p>Access captain tools, submit scores, and stay connected with your league team.</p>
       </div>
-      <div style={{ marginTop: 16, textAlign: 'center' }}>
-        {isSignUp ? (
-          <>
-            Already have an account?{' '}
-            <button type="button" onClick={() => setIsSignUp(false)} className="switch-link">
+
+      <div className="login-layout">
+        <div className="login-panel">
+          <div className="login-toggle">
+            <button
+              type="button"
+              className={`toggle-button ${!isSignUp ? 'active' : ''}`}
+              onClick={() => setIsSignUp(false)}
+              disabled={loading}
+            >
               Login
             </button>
-          </>
-        ) : (
-          <>
-            New user?{' '}
-            <button type="button" onClick={() => setIsSignUp(true)} className="switch-link">
+            <button
+              type="button"
+              className={`toggle-button ${isSignUp ? 'active' : ''}`}
+              onClick={() => setIsSignUp(true)}
+              disabled={loading}
+            >
               Sign Up
             </button>
-          </>
-        )}
+          </div>
+
+          <form className="login-form" onSubmit={handleAuth}>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                required
+                autoComplete="email"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+                autoComplete={isSignUp ? 'new-password' : 'current-password'}
+              />
+            </div>
+            {error && <div className="form-error">{error}</div>}
+            <button className="primary-action" type="submit" disabled={loading}>
+              {loading ? (isSignUp ? 'Creating account…' : 'Signing in…') : (isSignUp ? 'Create account' : 'Sign in')}
+            </button>
+          </form>
+
+          <div className="oauth-divider">
+            <span />
+            <p>or continue with</p>
+            <span />
+          </div>
+
+          <div className="oauth-actions">
+            <button
+              type="button"
+              className="oauth-button google"
+              onClick={() => handleOAuth('google')}
+              disabled={loading}
+            >
+              <span className="oauth-icon" aria-hidden>🔵</span>
+              Google
+            </button>
+            <button
+              type="button"
+              className="oauth-button apple"
+              onClick={() => handleOAuth('apple')}
+              disabled={loading}
+            >
+              <span className="oauth-icon" aria-hidden></span>
+              Apple
+            </button>
+          </div>
+
+          <p className="login-switch">
+            {isSignUp ? (
+              <>
+                Already have an account?
+                <button type="button" onClick={() => setIsSignUp(false)} disabled={loading}>
+                  Sign in
+                </button>
+              </>
+            ) : (
+              <>
+                New to LTTA?
+                <button type="button" onClick={() => setIsSignUp(true)} disabled={loading}>
+                  Create an account
+                </button>
+              </>
+            )}
+          </p>
+        </div>
+
+        <aside className="login-side-card">
+          <h2>Why create an account?</h2>
+          <ul>
+            <li>
+              <span>Submit match scores instantly from the court.</span>
+            </li>
+            <li>
+              <span>View upcoming schedules and roster availability.</span>
+            </li>
+            <li>
+              <span>Receive real-time updates from league captains.</span>
+            </li>
+          </ul>
+          <p className="support-text">
+            Need assistance? Email
+            {' '}
+            <a href="mailto:support@ltta.com">support@ltta.com</a>
+            {' '}for help with your account.
+          </p>
+        </aside>
       </div>
     </div>
   );

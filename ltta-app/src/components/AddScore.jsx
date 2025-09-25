@@ -579,20 +579,101 @@ export const AddScore = () => {
     }
   };
 
+  const LINES_PER_MATCH = 3;
+  const totalMatchesAvailable = availableMatches.length;
+  const hasMatchSelected = Boolean(selectedMatch);
+  const linesRecorded = hasMatchSelected ? existingScores.length : 0;
+  const matchProgress = hasMatchSelected
+    ? Math.min(100, Math.round((linesRecorded / LINES_PER_MATCH) * 100))
+    : 0;
+  const nextMatch = availableMatches[0] || null;
+  const currentFocusLabel = hasMatchSelected ? `Line ${formData.lineNumber}` : 'Awaiting selection';
+  const currentFocusSubtitle = hasMatchSelected
+    ? formData.matchType === 'doubles'
+      ? 'Doubles match'
+      : 'Singles match'
+    : 'Choose a match and line to begin';
+
+  const getMatchHeading = (match) => {
+    if (!match) return 'No upcoming match';
+    return `${match.home_team_name} vs ${match.away_team_name}`;
+  };
+
+  const getMatchSubheading = (match) => {
+    if (!match) return 'Check back when new matches are scheduled';
+    const segments = [];
+    if (match.date) segments.push(match.date);
+    if (match.time) segments.push(match.time);
+    if (match.courts) segments.push(`Court ${match.courts}`);
+    return segments.join(' • ') || 'Details forthcoming';
+  };
+
   if (!user) {
     return <div>Please log in to submit scores.</div>;
   }
 
   return (
     <div className="add-score-page">
-      <h1>Submit Match Scores</h1>
+      <div className="add-score-header">
+        <h1>Submit Match Scores</h1>
+        <p>Record results, track progress, and keep your team's standings up to date.</p>
+      </div>
+
       {userTeam && (
-        <div className="user-info">
-          <p>Submitting scores for: <strong>{userTeam.name}</strong></p>
+        <div className="team-banner">
+          <div className="team-icon">🛡️</div>
+          <div className="team-banner-content">
+            <span className="team-label">Submitting scores for</span>
+            <span className="team-name">{userTeam.name}</span>
+            {user?.email && (
+              <span className="team-meta">Signed in as {user.email}</span>
+            )}
+          </div>
         </div>
       )}
+
+      <div className="score-overview">
+        <div className="overview-card">
+          <div className="card-label">Next Match</div>
+          <div className="card-value">{getMatchHeading(nextMatch)}</div>
+          <div className="card-subtitle">{getMatchSubheading(nextMatch)}</div>
+        </div>
+        <div className="overview-card">
+          <div className="card-label">Matches Available</div>
+          <div className="card-value">{totalMatchesAvailable}</div>
+          <div className="card-subtitle">Matches scheduled for your team</div>
+        </div>
+        <div className="overview-card">
+          <div className="card-label">Lines Submitted</div>
+          <div className="card-value">
+            {hasMatchSelected ? `${linesRecorded} / ${LINES_PER_MATCH}` : '--'}
+          </div>
+          <div className="card-subtitle">
+            {hasMatchSelected
+              ? `${Math.max(LINES_PER_MATCH - linesRecorded, 0)} lines remaining for this match`
+              : 'Select a match to track scoring progress'}
+          </div>
+          {hasMatchSelected && (
+            <div
+              className="card-progress"
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={matchProgress}
+            >
+              <div className="progress-bar" style={{ width: `${matchProgress}%` }} />
+            </div>
+          )}
+        </div>
+        <div className="overview-card">
+          <div className="card-label">Current Focus</div>
+          <div className="card-value">{currentFocusLabel}</div>
+          <div className="card-subtitle">{currentFocusSubtitle}</div>
+        </div>
+      </div>
+
       <form onSubmit={handleSubmit} className="score-form">
-        <div className="form-section">
+        <div className="score-section">
           <h2>Select Match</h2>
           <div className="form-group">
             <label>Available Matches</label>
@@ -629,7 +710,7 @@ export const AddScore = () => {
           {selectedMatch && (
             <div className="match-details">
               <h3>Match Details</h3>
-              <div className="match-info">
+              <div className="match-detail-grid">
                 <p><strong>Date:</strong> {selectedMatch.date}</p>
                 <p><strong>Time:</strong> {selectedMatch.time}</p>
                 <p><strong>Courts:</strong> {selectedMatch.courts}</p>
@@ -638,7 +719,7 @@ export const AddScore = () => {
             </div>
           )}
         </div>
-        <div className="form-section">
+        <div className="score-section">
           <h2>Line Information</h2>
           <div className="form-row">
             <div className="form-group">
@@ -728,14 +809,14 @@ export const AddScore = () => {
             </div>
           </div>
         </div>
-        <div className="form-section">
+        <div className="score-section">
           <h2>Match Scores</h2>
           {(() => {
             const { homeNames, awayNames } = getPlayerDisplayNames();
             const winner = calculateMatchWinner();
 
             return (
-              <div className="match-info">
+              <div className="score-summary-card">
                 {homeNames && awayNames && (
                   <div className="player-names">
                     <div className={`home-players ${winner === 'home' ? 'winner' : ''}`}>
@@ -822,7 +903,7 @@ export const AddScore = () => {
             </div>
           </div>
         </div>
-        <div className="form-section">
+        <div className="score-section">
           <div className="form-group">
             <label>Notes (Optional)</label>
             <textarea
