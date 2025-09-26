@@ -379,6 +379,14 @@
     background: var(--bg-tertiary);
     color: var(--primary-green-dark);
   }
+
+  body[data-theme="dark"] .navbar-menu {
+    background-color: var(--bg-tertiary) !important;
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-primary);
+    backdrop-filter: blur(84px);
+    -webkit-backdrop-filter: blur(84px);
+  }
 }
 
 @media (min-width: 769px) {
@@ -432,9 +440,6 @@ body[data-theme="dark"] .navbar-toggle:focus-visible {
 }
 
 body[data-theme="dark"] .navbar-menu {
-  background-color: rgba(15, 23, 42, 0.82) !important;
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(148, 163, 184, 0.45);
   backdrop-filter: blur(84px);
   -webkit-backdrop-filter: blur(84px);
 }

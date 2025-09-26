@@ -1,12 +1,15 @@
 /* League Statistics Page Styles */
+.league-stats,
 .league-stats-page {
   --stats-page-bg: var(--bg-primary);
-  --stats-card-bg: var(--bg-secondary);
-  --stats-card-border: var(--border-primary);
-  --stats-card-text: var(--text-primary);
-  --stats-card-muted: var(--text-secondary);
-  --stats-accent: var(--primary-green);
-  --stats-accent-strong: var(--primary-green-dark);
+  --stats-card-bg: var(--card-bg);
+  --stats-card-border: var(--card-border);
+  --stats-card-text: var(--card-text);
+  --stats-card-muted: var(--card-muted);
+  --stats-accent: var(--card-accent);
+  --stats-accent-strong: var(--card-accent-strong);
+  --stats-card-shadow: var(--card-shadow);
+  --stats-card-shadow-hover: var(--card-shadow-hover);
   padding: 2.5rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -16,14 +19,9 @@
   line-height: 1.6;
 }
 
+:root[data-theme="dark"] .league-stats,
 :root[data-theme="dark"] .league-stats-page {
   --stats-page-bg: var(--bg-dark);
-  --stats-card-bg: var(--bg-secondary);
-  --stats-card-border: var(--border-primary);
-  --stats-card-text: var(--text-primary);
-  --stats-card-muted: var(--text-muted);
-  --stats-accent: var(--secondary-light);
-  --stats-accent-strong: var(--secondary);
 }
 
 .stats-header {
@@ -54,16 +52,27 @@
 
 .stat-card {
   background: var(--stats-card-bg);
-  border-radius: var(--radius-lg);
+  border-radius: var(--card-radius-lg);
   padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--stats-card-shadow);
   border: 1px solid var(--stats-card-border);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
   color: var(--stats-card-text);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--card-highlight), transparent);
+  pointer-events: none;
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  box-shadow: var(--stats-card-shadow-hover);
   border-color: var(--stats-accent);
 }
 
@@ -83,8 +92,20 @@
 }
 
 /* Stats Sections */
+
 .stats-section {
   margin-bottom: 40px;
+  background: var(--stats-card-bg);
+  border: 1px solid var(--stats-card-border);
+  border-radius: var(--card-radius-lg);
+  box-shadow: var(--stats-card-shadow);
+  padding: var(--space-2xl);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.stats-section:hover {
+  box-shadow: var(--stats-card-shadow-hover);
+  transform: translateY(-2px);
 }
 
 .stats-section h2 {
@@ -99,9 +120,15 @@
 .team-standings {
   background: var(--stats-card-bg);
   border: 1px solid var(--stats-card-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--card-radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--stats-card-shadow);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.team-standings:hover {
+  box-shadow: var(--stats-card-shadow-hover);
+  transform: translateY(-2px);
 }
 
 .team-standings table {
@@ -110,15 +137,20 @@
   background: var(--stats-card-bg);
 }
 
+.team-standings thead {
+  background: var(--stats-card-bg);
+}
+
 .team-standings th {
-  background: var(--stats-accent);
-  color: var(--text-inverse);
+  background: transparent;
+  color: var(--stats-card-text);
   padding: var(--space-md);
   text-align: left;
   font-weight: bold;
   font-size: var(--font-size-sm);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--stats-accent);
 }
 
 .team-standings td {
@@ -128,8 +160,9 @@
   font-weight: 500;
 }
 
+
 .team-standings tr:nth-child(even) {
-  background: var(--stats-page-bg);
+  background: rgba(var(--color-secondary-rgb), 0.06);
 }
 
 .team-standings tr:hover {
@@ -171,12 +204,12 @@
 }
 
 /* Recent Matches */
+
 .recent-matches {
-  background: var(--stats-card-bg);
-  border: 1px solid var(--stats-card-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  box-shadow: var(--shadow-md);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 
 .matches-list {
@@ -217,12 +250,19 @@
 }
 
 /* Activity Chart */
+
 .activity-chart {
   background: var(--stats-card-bg);
   border: 1px solid var(--stats-card-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--card-radius-lg);
   padding: var(--space-xl);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--stats-card-shadow);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.activity-chart:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--stats-card-shadow-hover);
 }
 
 .chart-container {
@@ -278,18 +318,19 @@
   color: white;
   border: 2px solid var(--stats-accent);
   padding: 12px 24px;
-  border-radius: 6px;
+  border-radius: var(--card-radius-sm);
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: var(--stats-card-shadow);
 }
 
 .refresh-btn:hover, .retry-btn:hover {
   background: white;
   color: var(--stats-accent);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: var(--stats-card-shadow-hover);
 }
 
 /* Loading and Error States */
@@ -313,20 +354,18 @@
 }
 
 /* Dark Mode Support */
-body[data-theme="dark"] .league-stats-page {
-  --stats-page-bg: var(--bg-dark);
-  --stats-card-bg: rgba(30, 41, 59, 0.92);
-  --stats-card-border: rgba(148, 163, 184, 0.3);
-  --stats-card-text: var(--text-primary);
-  --stats-card-muted: rgba(226, 232, 240, 0.75);
-  --stats-accent: var(--secondary-light);
-  --stats-accent-strong: var(--secondary);
+
+body[data-theme="dark"] .team-standings th {
+  color: var(--text-primary);
+  border-bottom-color: var(--stats-accent-strong);
 }
 
+body[data-theme="dark"] .league-stats .match-result,
 body[data-theme="dark"] .league-stats-page .match-result {
   color: var(--border-primary);
 }
 
+body[data-theme="dark"] .league-stats .match-score,
 body[data-theme="dark"] .league-stats-page .match-score {
   color: var(--stats-card-muted);
 }

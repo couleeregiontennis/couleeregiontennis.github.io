@@ -86,6 +86,19 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
+  /* Card tokens */
+  --card-bg: var(--bg-secondary);
+  --card-border: var(--border-primary);
+  --card-text: var(--text-primary);
+  --card-muted: var(--text-secondary);
+  --card-accent: var(--primary-green);
+  --card-accent-strong: var(--primary-green-dark);
+  --card-highlight: rgba(var(--color-secondary-rgb), 0.12);
+  --card-shadow: var(--shadow-sm);
+  --card-shadow-hover: var(--shadow-md);
+  --card-radius-sm: var(--radius-md);
+  --card-radius-lg: var(--radius-xl);
+
   /* Layout scale */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
@@ -149,6 +162,18 @@
   --border-primary: rgba(255, 255, 255, 0.18);
   --border-secondary: rgba(255, 255, 255, 0.12);
   --border-dark: rgba(0, 0, 0, 0.6);
+
+  --card-bg: rgba(30, 41, 59, 0.92);
+  --card-border: rgba(148, 163, 184, 0.3);
+  --card-text: var(--text-primary);
+  --card-muted: rgba(226, 232, 240, 0.75);
+  --card-accent: var(--secondary-light);
+  --card-accent-strong: var(--secondary);
+  --card-highlight: rgba(var(--color-secondary-rgb), 0.18);
+  --card-shadow: var(--shadow-md);
+  --card-shadow-hover: var(--shadow-lg);
+  --card-radius-sm: var(--radius-md);
+  --card-radius-lg: var(--radius-2xl);
 
   --success-bg: rgba(var(--color-success-rgb), 0.22);
   --warning-bg: rgba(var(--color-warning-rgb), 0.26);

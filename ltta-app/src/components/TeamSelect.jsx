@@ -34,7 +34,7 @@ export const TeamSelect = () => {
       <h1>Teams</h1>
       <section className="teams-container">
         <div className="teams-column">
-          <h2>LTTA Tuesday Tennis – 2025</h2>
+          <h2>Tuesday</h2>
           <div>
             <Link to="/team/tuesday/all">All Team's Matches</Link>
           </div>
@@ -51,7 +51,7 @@ export const TeamSelect = () => {
         </div>
 
         <div className="teams-column">
-          <h2>LTTA Wednesday Tennis – 2025</h2>
+          <h2>Wednesday</h2>
           <div>
             <Link to="/team/wednesday/all">All Team's Matches</Link>
           </div>

@@ -2,12 +2,14 @@
 
 .match-schedule {
   --schedule-page-bg: var(--bg-primary);
-  --schedule-card-bg: var(--bg-secondary);
-  --schedule-card-border: var(--border-primary);
-  --schedule-card-text: var(--text-primary);
-  --schedule-card-muted: var(--text-secondary);
-  --schedule-accent: var(--primary-green);
-  --schedule-accent-strong: var(--primary-green-dark);
+  --schedule-card-bg: var(--card-bg);
+  --schedule-card-border: var(--card-border);
+  --schedule-card-text: var(--card-text);
+  --schedule-card-muted: var(--card-muted);
+  --schedule-accent: var(--card-accent);
+  --schedule-accent-strong: var(--card-accent-strong);
+  --schedule-card-shadow: var(--card-shadow);
+  --schedule-card-shadow-hover: var(--card-shadow-hover);
   max-width: 1200px;
   margin: 0 auto;
   padding: 2.5rem;
@@ -19,12 +21,6 @@
 
 :root[data-theme="dark"] .match-schedule {
   --schedule-page-bg: var(--bg-dark);
-  --schedule-card-bg: rgba(30, 41, 59, 0.92);
-  --schedule-card-border: rgba(148, 163, 184, 0.3);
-  --schedule-card-text: var(--text-primary);
-  --schedule-card-muted: rgba(226, 232, 240, 0.75);
-  --schedule-accent: var(--secondary-light);
-  --schedule-accent-strong: var(--secondary);
 }
 
 .schedule-header {
@@ -48,10 +44,27 @@
 .schedule-shell {
   background: var(--schedule-card-bg);
   border: 1px solid var(--schedule-card-border);
-  border-radius: var(--radius-2xl);
+  border-radius: var(--card-radius-lg);
   padding: var(--space-2xl);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--schedule-card-shadow);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.schedule-shell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--card-highlight), transparent);
+  pointer-events: none;
+}
+
+.schedule-shell:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--schedule-card-shadow-hover);
+  border-color: var(--schedule-accent);
 }
 
 .schedule-overview {
@@ -64,11 +77,12 @@
 .overview-card {
   background: var(--schedule-card-bg);
   border: 1px solid var(--schedule-card-border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--card-radius-lg);
   padding: var(--space-xl);
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--schedule-card-shadow);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
 }
 
 .overview-card::after {
@@ -77,6 +91,12 @@
   inset: 0;
   background: linear-gradient(135deg, rgba(var(--color-secondary-rgb), 0.12), transparent);
   pointer-events: none;
+}
+
+.overview-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--schedule-card-shadow-hover);
+  border-color: var(--schedule-accent);
 }
 
 .card-label {
@@ -101,10 +121,27 @@
 .schedule-controls {
   background: var(--schedule-card-bg);
   border: 1px solid var(--schedule-card-border);
-  border-radius: var(--radius-2xl);
+  border-radius: var(--card-radius-lg);
   padding: var(--space-xl);
   margin-bottom: var(--space-2xl);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--schedule-card-shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.schedule-controls::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--card-highlight), transparent);
+  pointer-events: none;
+}
+
+.schedule-controls:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--schedule-card-shadow-hover);
+  border-color: var(--schedule-accent);
 }
 
 .control-row {
@@ -214,9 +251,16 @@
 .day-section {
   background: var(--schedule-card-bg);
   border: 1px solid var(--schedule-card-border);
-  border-radius: var(--radius-2xl);
+  border-radius: var(--card-radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--schedule-card-shadow);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.day-section:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--schedule-card-shadow-hover);
+  border-color: var(--schedule-accent);
 }
 
 .day-header {
@@ -246,23 +290,31 @@
 }
 
 .match-card {
-  border: 1px solid var(--schedule-card-border);
-  border-radius: var(--radius-xl);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius-lg);
   padding: var(--space-xl);
-  background: var(--schedule-card-bg);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: var(--shadow-sm);
+  background: var(--card-bg);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.match-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--card-highlight), transparent);
+  pointer-events: none;
 }
 
 .match-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.match-card.upcoming {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--schedule-accent);
   border-left: 4px solid var(--schedule-accent);
 }
 
@@ -373,8 +425,25 @@
   padding: 60px 20px;
   background: var(--schedule-card-bg);
   border: 1px solid var(--schedule-card-border);
-  border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-md);
+  border-radius: var(--card-radius-lg);
+  box-shadow: var(--schedule-card-shadow);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.no-matches::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--card-highlight), transparent);
+  pointer-events: none;
+}
+
+.no-matches:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--schedule-card-shadow-hover);
+  border-color: var(--schedule-accent);
 }
 
 .reset-filters-btn {
@@ -407,13 +476,14 @@
   border-radius: var(--radius-full);
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: var(--schedule-card-shadow);
 }
 
 .refresh-btn:hover,
 .retry-btn:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--schedule-card-shadow-hover);
 }
 
 .loading,

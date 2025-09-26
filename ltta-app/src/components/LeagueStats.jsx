@@ -27,7 +27,14 @@ export const LeagueStats = () => {
       // Fetch total matches
       const { data: matches, error: matchesError } = await supabase
         .from('matches')
-        .select('*');
+        .select(`
+          *,
+          match_scores (
+            home_won,
+            home_lines_won,
+            away_lines_won
+          )
+        `);
 
       if (matchesError) throw matchesError;
 
@@ -56,25 +63,62 @@ export const LeagueStats = () => {
 
       // Calculate team statistics using team numbers from matches table
       const teamStats = teams?.map(team => {
-        const teamMatches = matches?.filter(match => 
-          match.home_team_number === team.number || match.away_team_number === team.number
-        ) || [];
-        
-        // For now, we'll use completed status as a proxy for wins/losses
-        // This would need to be enhanced with actual score data
+        const teamNumber = Number(team.number);
+        const teamMatches = matches?.filter(match => {
+          const homeNumber = Number(match.home_team_number);
+          const awayNumber = Number(match.away_team_number);
+          return homeNumber === teamNumber || awayNumber === teamNumber;
+        }) || [];
+
         const completedMatches = teamMatches.filter(match => match.status === 'completed');
-        const wins = Math.floor(completedMatches.length * 0.6); // Placeholder calculation
-        const losses = completedMatches.length - wins;
-        const winPercentage = completedMatches.length > 0 ? (wins / completedMatches.length * 100).toFixed(1) : 0;
+
+        const { wins, losses } = completedMatches.reduce((acc, match) => {
+          const rawScore = match.match_scores;
+          const score = Array.isArray(rawScore) ? rawScore[0] : rawScore;
+
+          if (!score) {
+            return acc;
+          }
+
+          let homeWon = score.home_won;
+
+          if (typeof homeWon !== 'boolean') {
+            const homeLines = score.home_lines_won;
+            const awayLines = score.away_lines_won;
+
+            if (typeof homeLines === 'number' && typeof awayLines === 'number' && homeLines !== awayLines) {
+              homeWon = homeLines > awayLines;
+            }
+          }
+
+          if (typeof homeWon !== 'boolean') {
+            return acc;
+          }
+
+          const isHomeTeam = Number(match.home_team_number) === teamNumber;
+
+          if ((isHomeTeam && homeWon) || (!isHomeTeam && !homeWon)) {
+            acc.wins += 1;
+          } else {
+            acc.losses += 1;
+          }
+
+          return acc;
+        }, { wins: 0, losses: 0 });
+
+        const matchesWithOutcome = wins + losses;
+        const winPercentage = matchesWithOutcome > 0
+          ? parseFloat(((wins / matchesWithOutcome) * 100).toFixed(1))
+          : 0;
 
         return {
           ...team,
           matchesPlayed: teamMatches.length,
           wins,
           losses,
-          winPercentage: parseFloat(winPercentage)
+          winPercentage
         };
-      }).sort((a, b) => b.winPercentage - a.winPercentage) || [];
+      }).sort((a, b) => b.winPercentage - a.winPercentage || b.wins - a.wins) || [];
 
       // Calculate matches by week for the chart
       const matchesByWeek = matches?.reduce((acc, match) => {
