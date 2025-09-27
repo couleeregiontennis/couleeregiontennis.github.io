@@ -157,7 +157,7 @@ export const Rules = () => {
 
       <div className="rules-overview">
         {overviewCards.map((card) => (
-          <article className="rule-card" key={card.title}>
+          <article className="rule-card card card--interactive card--overlay" key={card.title}>
             <div className="rule-icon" aria-hidden="true">
               {card.icon}
             </div>
@@ -170,7 +170,7 @@ export const Rules = () => {
       {ruleSections.map((section) => (
         <section className="rules-section" key={section.title}>
           <h2>{section.title}</h2>
-          <div className="rules-content">
+          <div className="rules-content card card--interactive">
             {section.description &&
               section.description.map((paragraph, index) => (
                 <p key={`${section.title}-desc-${index}`}>{paragraph}</p>
@@ -183,7 +183,7 @@ export const Rules = () => {
               </ul>
             )}
             {section.highlight && (
-              <div className="rules-highlight">
+              <div className="rules-highlight card card--subtle">
                 <p>{section.highlight}</p>
               </div>
             )}
@@ -194,13 +194,13 @@ export const Rules = () => {
 
       <section className="rules-section">
         <h2>Skills Description (Self-Rated)</h2>
-        <div className="rules-content">
+        <div className="rules-content card card--interactive">
           <div className="skills-grid">
             {skills.map((skill) => (
-              <div className="skill-card" key={skill.level}>
+              <article className="skill-card card card--interactive card--overlay" key={skill.level}>
                 <div className="skill-level">{skill.level}</div>
                 <p>{skill.description}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>

@@ -193,7 +193,7 @@ export const CaptainDashboard = () => {
       </div>
 
       {team && (
-        <div className="captain-team-banner">
+        <div className="captain-team-banner card card--interactive card--overlay">
           <div className="team-emblem">🎾</div>
           <div className="team-meta-block">
             <span className="team-meta-label">Team Overview</span>
@@ -204,22 +204,22 @@ export const CaptainDashboard = () => {
       )}
 
       <div className="captain-overview">
-        <div className="overview-card">
+        <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Season Record</div>
           <div className="card-value">{seasonWins} - {seasonLosses}</div>
           <div className="card-subtitle">Wins · Losses</div>
         </div>
-        <div className="overview-card">
+        <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Upcoming Matches</div>
           <div className="card-value">{upcomingMatches.length}</div>
           <div className="card-subtitle">Next 30 days</div>
         </div>
-        <div className="overview-card">
+        <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Roster Availability</div>
           <div className="card-value">{playersAvailable}</div>
           <div className="card-subtitle">Players cleared for play</div>
         </div>
-        <div className="overview-card">
+        <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Recent Activity</div>
           <div className="card-value">{success ? 'Updated' : error ? 'Attention' : 'Stable'}</div>
           <div className="card-subtitle">Team updates this week</div>
@@ -227,7 +227,7 @@ export const CaptainDashboard = () => {
       </div>
 
       <div className="dashboard-sections">
-        <section className="captain-section">
+        <section className="captain-section card card--interactive">
           <div className="section-header">
             <div>
               <h2>Team Roster Management</h2>
@@ -276,7 +276,7 @@ export const CaptainDashboard = () => {
           </div>
         </section>
 
-        <section className="captain-section">
+        <section className="captain-section card card--interactive">
           <div className="section-header">
             <div>
               <h2>Upcoming Matches</h2>
@@ -286,13 +286,13 @@ export const CaptainDashboard = () => {
           </div>
           <div className="matches-timeline">
             {upcomingMatches.length === 0 ? (
-              <div className="empty-state">
+              <div className="empty-state card card--flat">
                 <h3>No upcoming matches scheduled</h3>
                 <p>Once new matches are scheduled they will appear here.</p>
               </div>
             ) : (
               upcomingMatches.map((match) => (
-                <div key={match.id} className="match-card">
+                <div key={match.id} className="match-card card card--interactive card--overlay">
                   <div className="match-card-header">
                     <div className="match-date">
                       {new Date(match.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
@@ -318,7 +318,7 @@ export const CaptainDashboard = () => {
           </div>
         </section>
 
-        <section className="captain-section">
+        <section className="captain-section card card--interactive">
           <div className="section-header">
             <div>
               <h2>Captain Tools</h2>
@@ -326,22 +326,22 @@ export const CaptainDashboard = () => {
             </div>
           </div>
           <div className="tools-grid">
-            <button className="tool-card">
+            <button className="tool-card card card--interactive">
               <div className="tool-icon">📧</div>
               <h3>Send Team Email</h3>
               <p>Send announcements to all team members.</p>
             </button>
-            <button className="tool-card">
+            <button className="tool-card card card--interactive">
               <div className="tool-icon">🔄</div>
               <h3>Request Substitutes</h3>
               <p>Find subs for upcoming matches.</p>
             </button>
-            <button className="tool-card">
+            <button className="tool-card card card--interactive">
               <div className="tool-icon">📋</div>
               <h3>Update Lineup</h3>
               <p>Set player positions for the next match.</p>
             </button>
-            <button className="tool-card">
+            <button className="tool-card card card--interactive">
               <div className="tool-icon">📊</div>
               <h3>View Team Stats</h3>
               <p>See team performance and statistics.</p>

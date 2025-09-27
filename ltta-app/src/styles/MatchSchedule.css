@@ -75,14 +75,9 @@
 }
 
 .overview-card {
-  background: var(--schedule-card-bg);
-  border: 1px solid var(--schedule-card-border);
-  border-radius: var(--card-radius-lg);
-  padding: var(--space-xl);
   position: relative;
   overflow: hidden;
-  box-shadow: var(--schedule-card-shadow);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  padding: var(--space-xl);
 }
 
 .overview-card::after {
@@ -91,12 +86,6 @@
   inset: 0;
   background: linear-gradient(135deg, rgba(var(--color-secondary-rgb), 0.12), transparent);
   pointer-events: none;
-}
-
-.overview-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--schedule-card-shadow-hover);
-  border-color: var(--schedule-accent);
 }
 
 .card-label {
@@ -119,15 +108,10 @@
 }
 
 .schedule-controls {
-  background: var(--schedule-card-bg);
-  border: 1px solid var(--schedule-card-border);
-  border-radius: var(--card-radius-lg);
   padding: var(--space-xl);
   margin-bottom: var(--space-2xl);
-  box-shadow: var(--schedule-card-shadow);
   position: relative;
   overflow: hidden;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
 }
 
 .schedule-controls::after {
@@ -136,12 +120,6 @@
   inset: 0;
   background: linear-gradient(135deg, var(--card-highlight), transparent);
   pointer-events: none;
-}
-
-.schedule-controls:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--schedule-card-shadow-hover);
-  border-color: var(--schedule-accent);
 }
 
 .control-row {
@@ -249,18 +227,7 @@
 }
 
 .day-section {
-  background: var(--schedule-card-bg);
-  border: 1px solid var(--schedule-card-border);
-  border-radius: var(--card-radius-lg);
   overflow: hidden;
-  box-shadow: var(--schedule-card-shadow);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
-}
-
-.day-section:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--schedule-card-shadow-hover);
-  border-color: var(--schedule-accent);
 }
 
 .day-header {
@@ -290,12 +257,7 @@
 }
 
 .match-card {
-  border: 1px solid var(--card-border);
-  border-radius: var(--card-radius-lg);
   padding: var(--space-xl);
-  background: var(--card-bg);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
-  box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
@@ -312,8 +274,6 @@
 }
 
 .match-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--card-shadow-hover);
   border-color: var(--schedule-accent);
   border-left: 4px solid var(--schedule-accent);
 }
@@ -423,11 +383,6 @@
 .no-matches {
   text-align: center;
   padding: 60px 20px;
-  background: var(--schedule-card-bg);
-  border: 1px solid var(--schedule-card-border);
-  border-radius: var(--card-radius-lg);
-  box-shadow: var(--schedule-card-shadow);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
   position: relative;
   overflow: hidden;
 }
@@ -438,12 +393,6 @@
   inset: 0;
   background: linear-gradient(135deg, var(--card-highlight), transparent);
   pointer-events: none;
-}
-
-.no-matches:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--schedule-card-shadow-hover);
-  border-color: var(--schedule-accent);
 }
 
 .reset-filters-btn {

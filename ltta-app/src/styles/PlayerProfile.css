@@ -1,11 +1,14 @@
 /* Player Profile Page Styles */
 .player-profile {
   --profile-page-bg: var(--bg-primary);
-  --profile-card-bg: var(--bg-secondary);
-  --profile-card-border: var(--border-primary);
-  --profile-card-text: var(--text-primary);
-  --profile-card-muted: var(--text-secondary);
-  --profile-highlight: var(--primary-green);
+  --profile-card-bg: var(--card-bg);
+  --profile-card-border: var(--card-border);
+  --profile-card-text: var(--card-text);
+  --profile-card-muted: var(--card-muted);
+  --profile-card-shadow: var(--card-shadow);
+  --profile-card-shadow-hover: var(--card-shadow-hover);
+  --profile-card-radius: var(--card-radius-lg);
+  --profile-highlight: var(--card-accent);
   max-width: 800px;
   margin: 0 auto;
   padding: var(--space-xl);
@@ -18,11 +21,6 @@
 
 :root[data-theme="dark"] .player-profile {
   --profile-page-bg: var(--bg-dark);
-  --profile-card-bg: rgba(30, 41, 59, 0.92);
-  --profile-card-border: rgba(148, 163, 184, 0.35);
-  --profile-card-text: var(--text-primary);
-  --profile-card-muted: rgba(226, 232, 240, 0.72);
-  --profile-highlight: var(--primary);
   box-shadow: none;
 }
 
@@ -75,12 +73,8 @@
 
 /* Profile Sections */
 .profile-section {
-  background: var(--profile-card-bg);
-  border: 1px solid var(--profile-card-border);
-  border-radius: var(--radius-lg);
   padding: var(--space-xl);
   margin-bottom: var(--space-xl);
-  box-shadow: var(--shadow-md);
   color: var(--profile-card-text);
 }
 
@@ -313,15 +307,7 @@
 
 .match-item {
   padding: 15px;
-  border: 1px solid var(--profile-card-border);
-  border-radius: 6px;
-  background: var(--bg-secondary);
-  transition: background 0.2s ease;
   color: var(--profile-card-text);
-}
-
-.match-item:hover {
-  background: var(--success-bg);
 }
 
 .match-date {

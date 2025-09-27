@@ -51,12 +51,7 @@
 }
 
 .stat-card {
-  background: var(--stats-card-bg);
-  border-radius: var(--card-radius-lg);
   padding: 1.5rem;
-  box-shadow: var(--stats-card-shadow);
-  border: 1px solid var(--stats-card-border);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
   color: var(--stats-card-text);
   position: relative;
   overflow: hidden;
@@ -71,8 +66,6 @@
 }
 
 .stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--stats-card-shadow-hover);
   border-color: var(--stats-accent);
 }
 
@@ -95,17 +88,7 @@
 
 .stats-section {
   margin-bottom: 40px;
-  background: var(--stats-card-bg);
-  border: 1px solid var(--stats-card-border);
-  border-radius: var(--card-radius-lg);
-  box-shadow: var(--stats-card-shadow);
   padding: var(--space-2xl);
-  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
-}
-
-.stats-section:hover {
-  box-shadow: var(--stats-card-shadow-hover);
-  transform: translateY(-2px);
 }
 
 .stats-section h2 {
@@ -118,17 +101,7 @@
 
 /* Team Standings Table */
 .team-standings {
-  background: var(--stats-card-bg);
-  border: 1px solid var(--stats-card-border);
-  border-radius: var(--card-radius-lg);
   overflow: hidden;
-  box-shadow: var(--stats-card-shadow);
-  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
-}
-
-.team-standings:hover {
-  box-shadow: var(--stats-card-shadow-hover);
-  transform: translateY(-2px);
 }
 
 .team-standings table {
@@ -220,14 +193,19 @@
 
 .match-item {
   padding: var(--space-md);
-  border: 1px solid var(--stats-card-border);
-  border-radius: var(--radius-md);
-  background: var(--stats-card-bg);
-  transition: var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.match-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--card-highlight), transparent);
+  pointer-events: none;
 }
 
 .match-item:hover {
-  background: rgba(var(--color-secondary-rgb), 0.12);
   border-color: var(--stats-accent);
 }
 
@@ -252,17 +230,7 @@
 /* Activity Chart */
 
 .activity-chart {
-  background: var(--stats-card-bg);
-  border: 1px solid var(--stats-card-border);
-  border-radius: var(--card-radius-lg);
   padding: var(--space-xl);
-  box-shadow: var(--stats-card-shadow);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.activity-chart:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--stats-card-shadow-hover);
 }
 
 .chart-container {

@@ -10,6 +10,54 @@
     --layout-accent-strong: var(--primary-green-dark);
  }
 
+/* Global card primitives */
+.card {
+    --card-radius-current: var(--card-radius, var(--card-radius-lg));
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--card-radius-current);
+    box-shadow: var(--card-shadow);
+    color: var(--card-text);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        border-color var(--transition-fast),
+        background var(--transition-fast);
+}
+
+.card--interactive {
+    cursor: pointer;
+}
+
+.card--interactive:hover,
+.card--interactive:focus-within {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--card-accent);
+}
+
+.card--overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--card-highlight), transparent);
+    pointer-events: none;
+}
+
+.card--subtle {
+    box-shadow: var(--shadow-xs);
+}
+
+.card--flat {
+    box-shadow: none;
+}
+
+.card--flat.card--interactive:hover,
+.card--flat.card--interactive:focus-within {
+    box-shadow: none;
+}
+
 :root[data-theme="dark"] {
     --layout-background: var(--bg-dark);
     --layout-surface: rgba(var(--color-secondary-rgb), 0.14);

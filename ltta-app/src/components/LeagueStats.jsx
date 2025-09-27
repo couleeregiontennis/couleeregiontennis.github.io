@@ -190,19 +190,19 @@ export const LeagueStats = () => {
 
       {/* Overview Cards */}
       <div className="stats-overview">
-        <div className="stat-card">
+        <div className="stat-card card card--interactive card--overlay">
           <div className="stat-number">{stats.totalMatches}</div>
           <div className="stat-label">Total Matches</div>
         </div>
-        <div className="stat-card">
+        <div className="stat-card card card--interactive card--overlay">
           <div className="stat-number">{stats.totalTeams}</div>
           <div className="stat-label">Active Teams</div>
         </div>
-        <div className="stat-card">
+        <div className="stat-card card card--interactive card--overlay">
           <div className="stat-number">{stats.totalPlayers}</div>
           <div className="stat-label">Registered Players</div>
         </div>
-        <div className="stat-card">
+        <div className="stat-card card card--interactive card--overlay">
           <div className="stat-number">
             {stats.totalMatches > 0 ? (stats.totalMatches / stats.totalTeams).toFixed(1) : 0}
           </div>
@@ -211,9 +211,9 @@ export const LeagueStats = () => {
       </div>
 
       {/* Team Standings */}
-      <div className="stats-section">
+      <div className="stats-section card card--interactive">
         <h2>Team Performance</h2>
-        <div className="team-standings">
+        <div className="team-standings card card--interactive">
           <table>
             <thead>
               <tr>
@@ -247,13 +247,13 @@ export const LeagueStats = () => {
       </div>
 
       {/* Recent Matches */}
-      <div className="stats-section">
+      <div className="stats-section card card--interactive">
         <h2>Recent Matches</h2>
         <div className="recent-matches">
           {stats.recentMatches.length > 0 ? (
             <div className="matches-list">
               {stats.recentMatches.map((match) => (
-                <div key={match.id} className="match-item">
+                <div key={match.id} className="match-item card card--interactive card--overlay">
                   <div className="match-date">{formatDate(match.date)}</div>
                   <div className="match-result">{getMatchResult(match)}</div>
                   <div className="match-score">
@@ -269,9 +269,9 @@ export const LeagueStats = () => {
       </div>
 
       {/* Match Activity Chart */}
-      <div className="stats-section">
+      <div className="stats-section card card--interactive">
         <h2>Match Activity (Last 8 Weeks)</h2>
-        <div className="activity-chart">
+        <div className="activity-chart card card--interactive">
           {stats.matchesByWeek.length > 0 ? (
             <div className="chart-container">
               {stats.matchesByWeek.map((week, index) => (

@@ -620,7 +620,7 @@ export const AddScore = () => {
       </div>
 
       {userTeam && (
-        <div className="team-banner">
+        <div className="team-banner card card--interactive card--overlay">
           <div className="team-icon">🛡️</div>
           <div className="team-banner-content">
             <span className="team-label">Submitting scores for</span>
@@ -633,20 +633,20 @@ export const AddScore = () => {
       )}
 
       <div className="score-overview">
-        <div className="overview-card">
+        <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Next Match</div>
           <div className="card-value">{getMatchHeading(nextMatch)}</div>
           <div className="card-subtitle">{getMatchSubheading(nextMatch)}</div>
         </div>
-        <div className="overview-card">
+        <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Matches Available</div>
           <div className="card-value">{totalMatchesAvailable}</div>
           <div className="card-subtitle">Matches scheduled for your team</div>
         </div>
-        <div className="overview-card">
-          <div className="card-label">Lines Submitted</div>
+        <div className="overview-card card card--interactive card--overlay">
+          <div className="card-label">Match Progress</div>
           <div className="card-value">
-            {hasMatchSelected ? `${linesRecorded} / ${LINES_PER_MATCH}` : '--'}
+            {hasMatchSelected ? `${Math.round(matchProgress)}%` : 'Select a match'}
           </div>
           <div className="card-subtitle">
             {hasMatchSelected
@@ -665,7 +665,7 @@ export const AddScore = () => {
             </div>
           )}
         </div>
-        <div className="overview-card">
+        <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Current Focus</div>
           <div className="card-value">{currentFocusLabel}</div>
           <div className="card-subtitle">{currentFocusSubtitle}</div>
@@ -673,7 +673,7 @@ export const AddScore = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="score-form">
-        <div className="score-section">
+        <div className="score-section card card--interactive">
           <h2>Select Match</h2>
           <div className="form-group">
             <label>Available Matches</label>
@@ -693,11 +693,11 @@ export const AddScore = () => {
           </div>
 
           {existingScores.length > 0 && (
-            <div className="existing-scores-summary">
+            <div className="existing-scores-summary card card--interactive card--overlay">
               <h4>Existing Scores for this Match:</h4>
               <div className="scores-grid">
                 {existingScores.map(score => (
-                  <div key={score.id} className="score-summary">
+                  <div key={score.id} className="score-summary card card--interactive card--overlay">
                     <strong>Line {score.line_number}</strong> ({score.match_type}):
                     {score.home_set_1}-{score.away_set_1}, {score.home_set_2}-{score.away_set_2}
                     {score.home_set_3 && `, ${score.home_set_3}-${score.away_set_3}`}
@@ -708,7 +708,7 @@ export const AddScore = () => {
             </div>
           )}
           {selectedMatch && (
-            <div className="match-details">
+            <div className="match-details card card--interactive">
               <h3>Match Details</h3>
               <div className="match-detail-grid">
                 <p><strong>Date:</strong> {selectedMatch.date}</p>
@@ -719,7 +719,7 @@ export const AddScore = () => {
             </div>
           )}
         </div>
-        <div className="score-section">
+        <div className="score-section card card--interactive">
           <h2>Line Information</h2>
           <div className="form-row">
             <div className="form-group">
@@ -809,14 +809,14 @@ export const AddScore = () => {
             </div>
           </div>
         </div>
-        <div className="score-section">
+        <div className="score-section card card--interactive">
           <h2>Match Scores</h2>
           {(() => {
             const { homeNames, awayNames } = getPlayerDisplayNames();
             const winner = calculateMatchWinner();
 
             return (
-              <div className="score-summary-card">
+              <div className="score-summary-card card card--interactive card--overlay">
                 {homeNames && awayNames && (
                   <div className="player-names">
                     <div className={`home-players ${winner === 'home' ? 'winner' : ''}`}>
@@ -903,7 +903,7 @@ export const AddScore = () => {
             </div>
           </div>
         </div>
-        <div className="score-section">
+        <div className="score-section card card--interactive">
           <div className="form-group">
             <label>Notes (Optional)</label>
             <textarea

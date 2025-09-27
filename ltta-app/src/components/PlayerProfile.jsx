@@ -265,7 +265,7 @@ export const PlayerProfile = () => {
 
       <div className="profile-content">
         {/* Basic Information */}
-        <div className="profile-section">
+        <div className="profile-section card card--interactive">
           <div className="section-header">
             <h2>Basic Information</h2>
             {!isEditing && (
@@ -318,7 +318,7 @@ export const PlayerProfile = () => {
         </div>
 
         {/* Emergency Contact */}
-        <div className="profile-section">
+        <div className="profile-section card card--interactive">
           <h2>Emergency Contact</h2>
           <div className="form-grid">
             <div className="form-group">
@@ -347,7 +347,7 @@ export const PlayerProfile = () => {
         </div>
 
         {/* Availability */}
-        <div className="profile-section">
+        <div className="profile-section card card--interactive">
           <h2>Weekly Availability</h2>
           <div className="availability-grid">
             {profile.availability && Object.entries(profile.availability).map(([day, available]) => (
@@ -368,7 +368,7 @@ export const PlayerProfile = () => {
         </div>
 
         {/* Tennis Preferences */}
-        <div className="profile-section">
+        <div className="profile-section card card--interactive">
           <h2>Tennis Preferences</h2>
           <div className="form-grid">
             <div className="form-group">
@@ -444,7 +444,7 @@ export const PlayerProfile = () => {
 
         {/* Action Buttons */}
         {isEditing && (
-          <div className="profile-actions">
+          <div className="profile-actions card card--flat">
             <button
               className="save-btn"
               onClick={handleSave}
@@ -463,12 +463,12 @@ export const PlayerProfile = () => {
         )}
 
         {/* Match History */}
-        <div className="profile-section">
+        <div className="profile-section card card--interactive">
           <h2>Recent Match History</h2>
           {matchHistory.length > 0 ? (
             <div className="match-history">
               {matchHistory.map((matchPlayer) => (
-                <div key={matchPlayer.id} className="match-item">
+                <div key={matchPlayer.id} className="match-item card card--interactive card--overlay">
                   <div className="match-date">
                     {formatDate(matchPlayer.match.match_date)}
                   </div>

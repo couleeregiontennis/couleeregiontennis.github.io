@@ -1,12 +1,15 @@
 /* Captain Dashboard - LeagueStats inspired layout */
 .captain-dashboard {
   --captain-page-bg: var(--bg-primary);
-  --captain-card-bg: var(--bg-secondary);
-  --captain-card-border: var(--border-primary);
-  --captain-card-text: var(--text-primary);
-  --captain-card-muted: var(--text-secondary);
-  --captain-accent: var(--primary-green);
-  --captain-accent-strong: var(--primary-green-dark);
+  --captain-card-bg: var(--card-bg);
+  --captain-card-border: var(--card-border);
+  --captain-card-text: var(--card-text);
+  --captain-card-muted: var(--card-muted);
+  --captain-card-shadow: var(--card-shadow);
+  --captain-card-shadow-hover: var(--card-shadow-hover);
+  --captain-card-radius: var(--card-radius-lg);
+  --captain-accent: var(--card-accent);
+  --captain-accent-strong: var(--card-accent-strong);
   max-width: 1200px;
   margin: 0 auto;
   padding: 2.5rem;
@@ -17,12 +20,6 @@
 
 :root[data-theme="dark"] .captain-dashboard {
   --captain-page-bg: var(--bg-dark);
-  --captain-card-bg: rgba(30, 41, 59, 0.92);
-  --captain-card-border: rgba(148, 163, 184, 0.3);
-  --captain-card-text: var(--text-primary);
-  --captain-card-muted: rgba(226, 232, 240, 0.75);
-  --captain-accent: var(--secondary-light);
-  --captain-accent-strong: var(--secondary);
 }
 
 .captain-header {
@@ -47,11 +44,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-xl);
-  background: var(--captain-card-bg);
-  border: 1px solid var(--captain-card-border);
-  border-radius: var(--radius-2xl);
   padding: var(--space-xl);
-  box-shadow: var(--shadow-sm);
   margin-bottom: var(--space-2xl);
 }
 
@@ -99,16 +92,12 @@
 }
 
 .overview-card {
-  background: var(--captain-card-bg);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--captain-card-border);
-  padding: var(--space-xl);
-  box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
+  padding: var(--space-xl);
 }
 
 .overview-card::after {
@@ -145,11 +134,7 @@
 }
 
 .captain-section {
-  background: var(--captain-card-bg);
-  border-radius: var(--radius-2xl);
-  border: 1px solid var(--captain-card-border);
   padding: var(--space-2xl);
-  box-shadow: var(--shadow-md);
 }
 
 .section-header {
@@ -186,7 +171,7 @@
 
 .section-action:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--captain-card-shadow);
 }
 
 .roster-table {
@@ -288,18 +273,7 @@
 }
 
 .match-card {
-  background: var(--captain-card-bg);
-  border: 1px solid var(--captain-card-border);
-  border-radius: var(--radius-xl);
   padding: var(--space-xl);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.match-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--captain-accent);
 }
 
 .match-card-header {
@@ -361,20 +335,11 @@
 .tool-card {
   background: rgba(var(--color-secondary-rgb), 0.08);
   border: 1px solid rgba(var(--color-secondary-rgb), 0.15);
-  border-radius: var(--radius-xl);
   padding: var(--space-xl);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
   text-align: left;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.tool-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--captain-accent);
-  box-shadow: var(--shadow-md);
 }
 
 .tool-icon {

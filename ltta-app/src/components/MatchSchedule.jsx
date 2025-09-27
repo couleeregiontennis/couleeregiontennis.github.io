@@ -210,29 +210,29 @@ export const MatchSchedule = () => {
       </div>
 
       <div className="schedule-overview">
-        <div className="overview-card">
+        <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Total Matches</div>
           <div className="card-value">{filteredMatches.length}</div>
           <div className="card-subtitle">Within selected filters</div>
         </div>
-        <div className="overview-card">
+        <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Upcoming</div>
           <div className="card-value">{upcomingCount}</div>
           <div className="card-subtitle">Scheduled next</div>
         </div>
-        <div className="overview-card">
+        <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Pending Results</div>
           <div className="card-value">{pendingCount}</div>
           <div className="card-subtitle">Awaiting score entry</div>
         </div>
-        <div className="overview-card">
+        <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Completed</div>
           <div className="card-value">{completedCount}</div>
           <div className="card-subtitle">With final scores</div>
         </div>
       </div>
 
-      <div className="schedule-controls">
+      <div className="schedule-controls card card--interactive card--overlay">
         <div className="control-row">
           <div className="view-toggle">
             <button
@@ -309,7 +309,10 @@ export const MatchSchedule = () => {
                       const statusBadge = getStatusBadge(status);
 
                       return (
-                        <article key={match.id} className={`match-card ${status}`}>
+                        <article
+                          key={match.id}
+                          className={`match-card card card--interactive card--overlay ${status}`}
+                        >
                           <div className="match-meta">
                             <span className="match-time">{formatTime(match.time)}</span>
                             <span className={`status-badge ${statusBadge.class}`}>{statusBadge.text}</span>
@@ -343,7 +346,7 @@ export const MatchSchedule = () => {
               ))}
           </div>
         ) : (
-          <div className="no-matches">
+          <div className="no-matches card card--interactive card--overlay">
             <p>No matches found for the selected period and filters.</p>
             <button
               onClick={() => {
