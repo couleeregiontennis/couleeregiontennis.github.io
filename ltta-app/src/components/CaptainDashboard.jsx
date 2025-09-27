@@ -10,6 +10,9 @@ export const CaptainDashboard = () => {
   const [upcomingMatches, setUpcomingMatches] = useState([]);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [rosterManagerOpen, setRosterManagerOpen] = useState(false);
+  const [availablePlayers, setAvailablePlayers] = useState([]);
+  const [rosterManagerLoading, setRosterManagerLoading] = useState(false);
 
   const [seasonWins, setSeasonWins] = useState(0);
   const [seasonLosses, setSeasonLosses] = useState(0);
@@ -113,6 +116,90 @@ export const CaptainDashboard = () => {
     const mailtoLink = `mailto:${emails.join(',')}` +
       `?subject=${encodeURIComponent(subject)}&body=${body}`;
     window.location.href = mailtoLink;
+  };
+
+  const loadAvailablePlayers = async () => {
+    if (!team) return;
+
+    setRosterManagerLoading(true);
+    try {
+      const { data: assignments, error: assignmentsError } = await supabase
+        .from('player_to_team')
+        .select('player');
+
+      if (assignmentsError) throw assignmentsError;
+
+      const assignedIds = new Set((assignments || []).map((entry) => entry.player));
+
+      const { data: activePlayers, error: activeError } = await supabase
+        .from('player')
+        .select('id, first_name, last_name, email, ranking')
+        .eq('is_active', true);
+
+      if (activeError) throw activeError;
+
+      const freePlayers = (activePlayers || []).filter((player) => !assignedIds.has(player.id));
+      setAvailablePlayers(freePlayers);
+    } catch (err) {
+      console.error('Error loading available players:', err);
+      setError('Unable to load available players. Please try again.');
+      setTimeout(() => setError(''), 4000);
+    } finally {
+      setRosterManagerLoading(false);
+    }
+  };
+
+  const openRosterManager = async () => {
+    setRosterManagerOpen(true);
+    await loadAvailablePlayers();
+  };
+
+  const closeRosterManager = () => {
+    setRosterManagerOpen(false);
+  };
+
+  const handleRemoveFromRoster = async (playerId) => {
+    if (!team) return;
+
+    try {
+      const { error: removeError } = await supabase
+        .from('player_to_team')
+        .delete()
+        .eq('player', playerId)
+        .eq('team', team.id);
+
+      if (removeError) throw removeError;
+
+      await loadTeamRoster(team.id);
+      await loadAvailablePlayers();
+      setSuccess('Player removed from team.');
+      setTimeout(() => setSuccess(''), 3000);
+    } catch (err) {
+      console.error('Error removing player:', err);
+      setError('Failed to remove player from roster.');
+      setTimeout(() => setError(''), 4000);
+    }
+  };
+
+  const handleAddToRoster = async (playerId) => {
+    if (!team) return;
+
+    try {
+      const { error: addError } = await supabase
+        .from('player_to_team')
+        .insert({ team: team.id, player: playerId });
+
+      if (addError) throw addError;
+
+      await loadTeamRoster(team.id);
+      await loadAvailablePlayers();
+      setSuccess('Player added to team.');
+      setTimeout(() => setSuccess(''), 3000);
+    } catch (err) {
+      console.error('Error adding player:', err);
+      setError('Failed to add player to roster.');
+      setTimeout(() => setError(''), 4000);
+    }
   };
 
   const loadTeamRoster = async (teamId) => {
@@ -274,7 +361,12 @@ export const CaptainDashboard = () => {
               <h2>Team Roster Management</h2>
               <p>Maintain player details, rankings, and contact information.</p>
             </div>
-            <button className="section-action">Export Roster</button>
+            <div className="section-actions">
+              <button type="button" className="section-action" onClick={openRosterManager}>
+                Manage Roster
+              </button>
+              <button type="button" className="section-action">Export Roster</button>
+            </div>
           </div>
           <div className="roster-table">
             <table>
@@ -383,11 +475,6 @@ export const CaptainDashboard = () => {
               <p>Find subs for upcoming matches.</p>
             </button>
             <button className="tool-card card card--interactive">
-              <div className="tool-icon">📋</div>
-              <h3>Update Lineup</h3>
-              <p>Set player positions for the next match.</p>
-            </button>
-            <button className="tool-card card card--interactive">
               <div className="tool-icon">📊</div>
               <h3>View Team Stats</h3>
               <p>See team performance and statistics.</p>
@@ -395,6 +482,76 @@ export const CaptainDashboard = () => {
           </div>
         </section>
       </div>
+
+      {rosterManagerOpen && (
+        <div className="roster-manager-overlay" role="dialog" aria-modal="true">
+          <div className="roster-manager-modal card card--interactive">
+            <div className="roster-manager-header">
+              <div>
+                <h3>Manage Team Roster</h3>
+                <p>Add active free agents or remove players from your lineup.</p>
+              </div>
+              <button type="button" className="btn-small" onClick={closeRosterManager}>
+                Close
+              </button>
+            </div>
+
+            <div className="roster-manager-columns">
+              <div className="roster-column">
+                <h4>Current Roster</h4>
+                {roster.length === 0 ? (
+                  <p>No players assigned to this team.</p>
+                ) : (
+                  <ul className="roster-manager-list">
+                    {roster.map((player) => (
+                      <li key={player.id}>
+                        <div>
+                          <strong>{player.first_name} {player.last_name}</strong>
+                          <span>{player.email || 'No email'}</span>
+                        </div>
+                        <button
+                          type="button"
+                          className="btn-small btn-danger"
+                          onClick={() => handleRemoveFromRoster(player.id)}
+                        >
+                          Remove
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              <div className="roster-column">
+                <h4>Available Players</h4>
+                {rosterManagerLoading ? (
+                  <p>Loading available players…</p>
+                ) : availablePlayers.length === 0 ? (
+                  <p>No available active players found.</p>
+                ) : (
+                  <ul className="roster-manager-list">
+                    {availablePlayers.map((player) => (
+                      <li key={player.id}>
+                        <div>
+                          <strong>{player.first_name} {player.last_name}</strong>
+                          <span>{player.email || 'No email'} · Rank {player.ranking}</span>
+                        </div>
+                        <button
+                          type="button"
+                          className="btn-small"
+                          onClick={() => handleAddToRoster(player.id)}
+                        >
+                          Add
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {success && <div className="success-message">{success}</div>}
       {error && <div className="error-message">{error}</div>}

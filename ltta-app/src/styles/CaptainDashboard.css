@@ -247,6 +247,102 @@
   box-shadow: 0 10px 20px rgba(var(--color-secondary-rgb), 0.25);
 }
 
+.btn-small.btn-danger {
+  background: var(--error);
+  box-shadow: none;
+}
+
+.btn-small.btn-danger:hover {
+  box-shadow: 0 10px 20px rgba(var(--color-error-rgb), 0.3);
+}
+
+.section-actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.roster-manager-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  z-index: 999;
+}
+
+.roster-manager-modal {
+  max-width: 960px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  overflow: hidden;
+}
+
+.roster-manager-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+.roster-manager-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-xl);
+  overflow-y: auto;
+  padding-right: var(--space-sm);
+  max-height: calc(85vh - 96px);
+}
+
+.roster-column h4 {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--captain-card-text);
+}
+
+.roster-manager-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.roster-manager-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid var(--captain-card-border);
+  border-radius: var(--card-radius-lg);
+  background: var(--captain-page-bg);
+}
+
+.roster-manager-list li > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.roster-manager-list strong {
+  color: var(--captain-card-text);
+}
+
+.roster-manager-list span {
+  color: var(--captain-card-muted);
+  font-size: var(--font-size-sm);
+}
+
 
 .matches-timeline {
   display: grid;
