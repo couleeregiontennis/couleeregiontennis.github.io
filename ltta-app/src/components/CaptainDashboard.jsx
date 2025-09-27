@@ -74,6 +74,47 @@ export const CaptainDashboard = () => {
     }
   };
 
+  const handleEmailTeam = () => {
+    const emails = roster.map(player => player.email).filter(Boolean);
+
+    if (emails.length === 0) {
+      setError('No email addresses found for your roster.');
+      setTimeout(() => setError(''), 4000);
+      return;
+    }
+
+    const subject = team
+      ? `LTTA Team ${team.number}${team.name ? ` · ${team.name}` : ''}`
+      : 'LTTA Team Update';
+
+    const nextMatch = upcomingMatches[0];
+
+    const lines = [];
+    lines.push('Hello team,');
+    lines.push('');
+
+    if (nextMatch) {
+      const matchDate = new Date(nextMatch.date).toLocaleDateString(undefined, {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric'
+      });
+      lines.push(`Our next match is on ${matchDate} at ${nextMatch.time}.`);
+      lines.push(`Location: Court ${nextMatch.courts || 'TBA'}.`);
+      lines.push(`Opponent: ${nextMatch.home_team_number === team.number ? nextMatch.away_team_name : nextMatch.home_team_name}.`);
+      lines.push('');
+    }
+
+    lines.push('Please let me know your availability and if you have any questions.');
+    lines.push('Thanks!');
+
+    const body = encodeURIComponent(lines.join('\n'));
+
+    const mailtoLink = `mailto:${emails.join(',')}` +
+      `?subject=${encodeURIComponent(subject)}&body=${body}`;
+    window.location.href = mailtoLink;
+  };
+
   const loadTeamRoster = async (teamId) => {
     try {
       const { data: teamPlayers, error } = await supabase
@@ -326,7 +367,12 @@ export const CaptainDashboard = () => {
             </div>
           </div>
           <div className="tools-grid">
-            <button className="tool-card card card--interactive">
+            <button
+              type="button"
+              className="tool-card card card--interactive"
+              onClick={handleEmailTeam}
+              disabled={roster.every(player => !player.email)}
+            >
               <div className="tool-icon">📧</div>
               <h3>Send Team Email</h3>
               <p>Send announcements to all team members.</p>
