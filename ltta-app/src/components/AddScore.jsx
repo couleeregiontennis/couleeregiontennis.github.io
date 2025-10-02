@@ -273,44 +273,65 @@ export const AddScore = () => {
     }
   };
 
+  const setLineFocus = (lineValue, matchTypeOverride) => {
+    const numericLine = typeof lineValue === 'number' ? lineValue : parseInt(lineValue, 10);
+    if (!Number.isFinite(numericLine)) {
+      return;
+    }
+
+    const effectiveMatchType = matchTypeOverride ?? formData.matchType;
+
+    setFormData(prev => ({
+      ...prev,
+      lineNumber: numericLine
+    }));
+
+    setTimeout(() => {
+      const existingScore = existingScores.find((score) => score.line_number === numericLine);
+      if (existingScore) {
+        populateFormWithExistingScore(existingScore);
+        return;
+      }
+
+      setFormData(prev => ({
+        ...prev,
+        homePlayers: ['', ''],
+        awayPlayers: ['', ''],
+        homeSet1: '',
+        awaySet1: '',
+        homeSet2: '',
+        awaySet2: '',
+        homeSet3: '',
+        awaySet3: '',
+        notes: ''
+      }));
+      autoSelectPlayers(homeTeamRoster, awayTeamRoster, numericLine, effectiveMatchType);
+    }, 0);
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === 'lineNumber') {
+      setLineFocus(value);
+      return;
+    }
+
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
 
     // If line number changes, load existing score for that line or auto-select
-    if (name === 'lineNumber') {
-      setTimeout(() => {
-        const existingScore = existingScores.find(s => s.line_number === parseInt(value));
-        if (existingScore) {
-          populateFormWithExistingScore(existingScore);
-        } else {
-          // Clear form and auto-select for new line
-          setFormData(prev => ({
-            ...prev,
-            homePlayers: ['', ''],
-            awayPlayers: ['', ''],
-            homeSet1: '',
-            awaySet1: '',
-            homeSet2: '',
-            awaySet2: '',
-            homeSet3: '',
-            awaySet3: '',
-            notes: ''
-          }));
-          autoSelectPlayers(homeTeamRoster, awayTeamRoster, value, formData.matchType);
-        }
-      }, 0);
-    }
-
     // If match type changes, re-run auto-selection (unless there's existing data)
     if (name === 'matchType') {
       setTimeout(() => {
         const existingScore = existingScores.find(s => s.line_number === parseInt(formData.lineNumber));
         if (!existingScore) {
-          autoSelectPlayers(homeTeamRoster, awayTeamRoster, formData.lineNumber, value);
+          const currentLine = typeof formData.lineNumber === 'string'
+            ? parseInt(formData.lineNumber, 10)
+            : formData.lineNumber;
+          autoSelectPlayers(homeTeamRoster, awayTeamRoster, currentLine, value);
         }
       }, 0);
     }
@@ -580,6 +601,8 @@ export const AddScore = () => {
   };
 
   const LINES_PER_MATCH = 3;
+  const lineNumbers = Array.from({ length: LINES_PER_MATCH }, (_, index) => index + 1);
+  const activeLineNumber = parseInt(formData.lineNumber, 10) || 1;
   const totalMatchesAvailable = availableMatches.length;
   const hasMatchSelected = Boolean(selectedMatch);
   const linesRecorded = hasMatchSelected ? existingScores.length : 0;
@@ -587,7 +610,7 @@ export const AddScore = () => {
     ? Math.min(100, Math.round((linesRecorded / LINES_PER_MATCH) * 100))
     : 0;
   const nextMatch = availableMatches[0] || null;
-  const currentFocusLabel = hasMatchSelected ? `Line ${formData.lineNumber}` : 'Awaiting selection';
+  const currentFocusLabel = hasMatchSelected ? `Line ${activeLineNumber}` : 'Awaiting selection';
   const currentFocusSubtitle = hasMatchSelected
     ? formData.matchType === 'doubles'
       ? 'Doubles match'
@@ -677,6 +700,7 @@ export const AddScore = () => {
           <h2>Select Match</h2>
           <div className="form-group">
             <label>Available Matches</label>
+            <p className="helper-text">Use the dropdown or click a match card below to start scoring.</p>
             <select
               name="matchId"
               value={formData.matchId}
@@ -691,6 +715,36 @@ export const AddScore = () => {
               ))}
             </select>
           </div>
+
+          {availableMatches.length > 0 && (
+            <div className="match-selector">
+              <div className="match-selector-header">
+                <span className="selector-icon" aria-hidden="true">👉</span>
+                <div>
+                  <strong>Pick a match to score</strong>
+                  <p>Tap or click a card to load rosters and existing results.</p>
+                </div>
+              </div>
+              <div className="match-selector-grid">
+                {availableMatches.map((match) => {
+                  const isSelected = formData.matchId === match.id;
+                  return (
+                    <button
+                      key={match.id}
+                      type="button"
+                      className={`match-card-button${isSelected ? ' is-selected' : ''}`}
+                      onClick={() => handleMatchSelect(match.id)}
+                      aria-pressed={isSelected}
+                    >
+                      <span className="match-card-heading">{match.home_team_name} vs {match.away_team_name}</span>
+                      <span className="match-card-meta">{match.date} • {match.time} • Court {match.courts}</span>
+                      {isSelected && <span className="match-card-pill">Selected</span>}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {existingScores.length > 0 && (
             <div className="existing-scores-summary card card--interactive card--overlay">
@@ -721,6 +775,33 @@ export const AddScore = () => {
         </div>
         <div className="score-section card card--interactive">
           <h2>Line Information</h2>
+          {hasMatchSelected && (
+            <div className="line-switcher">
+              <div className="line-switcher-header">
+                <span className="line-switcher-title">Switch line focus</span>
+                <span className="line-switcher-subtitle">Jump between lines to review or enter scores.</span>
+              </div>
+              <div className="line-switcher-buttons">
+                {lineNumbers.map((line) => {
+                  const isActiveLine = activeLineNumber === line;
+                  const recordedScore = existingScores.find((score) => score.line_number === line);
+                  const status = recordedScore ? 'completed' : isActiveLine ? 'active' : 'pending';
+                  const statusLabel = recordedScore ? 'Completed' : isActiveLine ? 'In progress' : 'Not started';
+                  return (
+                    <button
+                      key={line}
+                      type="button"
+                      className={`line-switcher-button${isActiveLine ? ' is-active' : ''}`}
+                      onClick={() => setLineFocus(line, formData.matchType)}
+                    >
+                      <span className="line-label">Line {line}</span>
+                      <span className={`line-status line-status--${status}`}>{statusLabel}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
           <div className="form-row">
             <div className="form-group">
               <label>Line Number</label>

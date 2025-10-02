@@ -343,6 +343,28 @@
   font-size: var(--font-size-sm);
 }
 
+.team-stats-modal {
+  max-width: 95vw;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--captain-card-bg);
+  border-radius: var(--card-radius-lg);
+  border: 1px solid var(--captain-card-border);
+  box-shadow: var(--captain-card-shadow-hover);
+}
+
+.team-stats-header-controls {
+  position: sticky;
+  top: 0;
+  background: var(--captain-card-bg);
+  border-bottom: 1px solid var(--captain-card-border);
+  padding: var(--space-lg);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 10;
+}
+
 
 .matches-timeline {
   display: grid;
