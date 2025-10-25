@@ -15,6 +15,7 @@ import { CaptainDashboard } from './components/CaptainDashboard';
 import { LeagueStats } from './components/LeagueStats';
 import { PlayerProfile } from './components/PlayerProfile';
 import { MatchSchedule } from './components/MatchSchedule';
+import { TeamStats } from './components/TeamStats';
 import './styles/colors.css';
 import './styles/Style.css';
 import './styles/Navigation.css';
@@ -82,6 +83,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <CaptainDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/team-performance"
+              element={
+                <ProtectedRoute>
+                  <TeamStats />
                 </ProtectedRoute>
               }
             />

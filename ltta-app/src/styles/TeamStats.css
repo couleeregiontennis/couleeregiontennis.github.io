@@ -1,15 +1,17 @@
 /* Team Stats - Layout-driven styling */
 .team-stats {
-  max-width: 1200px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: var(--space-2xl);
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--layout-background);
+  color: var(--layout-body);
   font-family: var(--font-family);
 }
 
-:root[data-theme="dark"] .team-stats {
-  background: var(--bg-dark);
+.team-performance-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
 }
 
 .team-stats-header {
@@ -26,7 +28,7 @@
 }
 
 .team-stats-header p {
-  color: var(--text-secondary);
+  color: var(--layout-muted);
   font-size: var(--font-size-lg);
   margin: 0;
 }
@@ -48,7 +50,7 @@
   justify-content: center;
   font-size: 2.5rem;
   background: rgba(var(--color-secondary-rgb), 0.12);
-  color: var(--primary-green);
+  color: var(--layout-accent);
 }
 
 .team-meta-block {
@@ -61,18 +63,18 @@
   font-size: var(--font-size-xs);
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--text-secondary);
+  color: var(--layout-muted);
 }
 
 .team-meta-name {
   font-size: var(--font-size-2xl);
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--layout-heading);
 }
 
 .team-meta-info {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--layout-muted);
 }
 
 .stats-overview {
@@ -103,19 +105,19 @@
   font-size: var(--font-size-xs);
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: var(--layout-muted);
   font-weight: 600;
 }
 
 .stat-value {
   font-size: var(--font-size-3xl);
   font-weight: 700;
-  color: var(--primary-green);
+  color: var(--layout-accent);
 }
 
 .stat-subtitle {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--layout-muted);
 }
 
 .stats-sections {
@@ -126,6 +128,8 @@
 
 .stats-section {
   padding: var(--space-2xl);
+  background: var(--layout-surface);
+  border: 1px solid var(--layout-border);
 }
 
 .section-header {
@@ -141,21 +145,19 @@
 
 .section-header p {
   margin: 0;
-  color: var(--text-secondary);
+  color: var(--layout-muted);
   font-size: var(--font-size-sm);
 }
 
 .player-stats-table {
-  overflow-x: auto;
+  overflow: hidden;
   border-radius: var(--radius-xl);
-  border: 1px solid var(--border-primary);
-  background: var(--bg-primary);
-  box-shadow: inset 0 1px 0 rgba(var(--color-secondary-rgb), 0.08);
+  border: 1px solid var(--layout-border);
+  background: var(--layout-surface);
 }
 
 .player-stats-table table {
   width: 100%;
-  min-width: 800px;
   border-collapse: collapse;
 }
 
@@ -163,14 +165,14 @@
 .player-stats-table td {
   padding: var(--space-md);
   text-align: left;
-  border-bottom: 1px solid var(--border-primary);
+  border-bottom: 1px solid var(--layout-border);
   white-space: nowrap;
-  color: var(--text-primary);
+  color: var(--layout-body);
 }
 
 .player-stats-table th {
-  background: rgba(var(--color-secondary-rgb), 0.15);
-  color: var(--text-primary);
+  background: var(--layout-accent);
+  color: var(--text-inverse);
   font-size: var(--font-size-xs);
   text-transform: uppercase;
   letter-spacing: 0.8px;
@@ -178,7 +180,7 @@
 }
 
 .player-stats-table tr:hover td {
-  background: rgba(var(--color-secondary-rgb), 0.08);
+  background: rgba(var(--color-secondary-rgb), 0.06);
 }
 
 .player-name {
@@ -207,7 +209,7 @@
 
 .match-date {
   font-weight: 600;
-  color: var(--primary-green);
+  color: var(--layout-accent);
   font-size: var(--font-size-sm);
   min-width: 80px;
 }
@@ -220,11 +222,11 @@
 }
 
 .team-us {
-  color: var(--primary-green);
+  color: var(--layout-accent);
 }
 
 .team-opponent {
-  color: var(--text-secondary);
+  color: var(--layout-muted);
 }
 
 .vs-label {
@@ -247,7 +249,7 @@
 }
 
 .result-pending {
-  color: var(--text-secondary);
+  color: var(--layout-muted);
   font-style: italic;
 }
 
@@ -260,7 +262,7 @@
 .loading {
   text-align: center;
   padding: var(--space-2xl);
-  color: var(--text-primary);
+  color: var(--layout-body);
   font-size: var(--font-size-lg);
   font-weight: 600;
 }
@@ -276,10 +278,153 @@
   border-radius: var(--radius-lg);
 }
 
+.team-stats-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.team-stats-toolbar .section-action {
+  text-decoration: none;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-lg);
+}
+
+.summary-placeholder {
+  padding: var(--space-xl);
+  text-align: center;
+  color: var(--layout-muted);
+  border: 1px dashed var(--layout-border);
+  border-radius: var(--radius-lg);
+  background: rgba(var(--color-secondary-rgb), 0.05);
+}
+
+.summary-error {
+  color: var(--error);
+  border-color: var(--error);
+  background: rgba(var(--color-error-rgb), 0.08);
+}
+
+.summary-footnote {
+  margin-top: var(--space-lg);
+  color: var(--layout-muted);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+.team-stats-summary {
+  margin-bottom: var(--space-2xl);
+}
+
+.tool-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.player-stats-table table {
+  min-width: 100%;
+}
+
+.player-stats-table tbody tr {
+  transition: background var(--transition-fast);
+}
+
 /* Responsive Design */
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .team-stats {
     padding: var(--space-xl);
+  }
+}
+
+@media (max-width: 860px) {
+  .team-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .team-meta-block {
+    text-align: left;
+  }
+
+  .stats-overview {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .team-stats-toolbar {
+    justify-content: flex-start;
+  }
+
+  .team-stats-toolbar .section-action {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 680px) {
+  .team-stats {
+    padding: var(--space-lg);
+  }
+
+  .stats-section {
+    padding: var(--space-xl);
+  }
+
+  .player-stats-table table,
+  .player-stats-table thead {
+    display: none;
+  }
+
+  .player-stats-table tbody {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .player-stats-table tr {
+    display: grid;
+    gap: var(--space-xs);
+    padding: var(--space-lg);
+    border-bottom: none;
+    border: 1px solid var(--layout-border);
+    border-radius: var(--radius-lg);
+    background: var(--layout-background);
+  }
+
+  .player-stats-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    border: none;
+    white-space: normal;
+  }
+
+  .player-stats-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--layout-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-size: var(--font-size-xs);
+  }
+
+  .player-name {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2xs);
+  }
+
+  .player-stats-table tr:first-child td {
+    padding-top: 0;
+  }
+
+  .player-stats-table tr:last-child td {
+    padding-bottom: 0;
   }
 
   .match-history-card {
@@ -291,36 +436,22 @@
   .match-result {
     text-align: center;
   }
-}
 
-@media (max-width: 720px) {
-  .team-stats {
-    padding: var(--space-lg);
-  }
-
-  .team-banner {
+  .match-teams {
     flex-direction: column;
-    align-items: flex-start;
-    text-align: center;
+    gap: var(--space-xs);
   }
 
-  .team-emblem {
-    width: 60px;
-    height: 60px;
-    font-size: 2rem;
+  .vs-label {
+    display: none;
   }
 
-  .stats-overview {
-    grid-template-columns: 1fr;
-  }
-
-  .player-stats-table th,
-  .player-stats-table td {
-    padding: var(--space-sm);
+  .team-stats-toolbar {
+    gap: var(--space-sm);
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 480px) {
   .team-stats {
     padding: var(--space-md);
   }
@@ -330,15 +461,12 @@
   }
 
   .stats-section {
-    padding: var(--space-xl);
+    padding: var(--space-lg);
   }
 
-  .match-teams {
-    flex-direction: column;
-    gap: var(--space-xs);
-  }
-
-  .vs-label {
-    display: none;
+  .team-emblem {
+    width: 56px;
+    height: 56px;
+    font-size: 1.8rem;
   }
 }

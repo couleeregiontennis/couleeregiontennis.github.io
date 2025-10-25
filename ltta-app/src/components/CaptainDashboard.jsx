@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { supabase } from '../scripts/supabaseClient';
-import { TeamStats } from './TeamStats';
+import { TeamStatsSummary } from './TeamStatsSummary';
 import '../styles/CaptainDashboard.css';
 
 export const CaptainDashboard = () => {
@@ -19,7 +20,6 @@ export const CaptainDashboard = () => {
   const [eligibleSubs, setEligibleSubs] = useState([]);
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [assigningSubId, setAssigningSubId] = useState(null);
-  const [showTeamStats, setShowTeamStats] = useState(false);
 
   const [seasonWins, setSeasonWins] = useState(0);
   const [seasonLosses, setSeasonLosses] = useState(0);
@@ -462,6 +462,8 @@ export const CaptainDashboard = () => {
         </div>
       </div>
 
+      <TeamStatsSummary />
+
       <div className="dashboard-sections">
         <section className="captain-section card card--interactive">
           <div className="section-header">
@@ -596,15 +598,14 @@ export const CaptainDashboard = () => {
               <h3>Request Substitutes</h3>
               <p>Find subs for upcoming matches.</p>
             </button>
-            <button
-              type="button"
-              className="tool-card card card--interactive"
-              onClick={() => setShowTeamStats(true)}
+            <Link
+              to="/team-performance"
+              className="tool-card card card--interactive tool-card-link"
             >
               <div className="tool-icon">📊</div>
-              <h3>View Team Stats</h3>
-              <p>See team performance and statistics.</p>
-            </button>
+              <h3>View Team Performance</h3>
+              <p>Open the full performance dashboard.</p>
+            </Link>
           </div>
         </section>
       </div>
@@ -723,23 +724,6 @@ export const CaptainDashboard = () => {
                 ))}
               </ul>
             )}
-          </div>
-        </div>
-      )}
-
-      {showTeamStats && (
-        <div className="roster-manager-overlay" role="dialog" aria-modal="true">
-          <div className="team-stats-modal">
-            <div className="team-stats-header-controls">
-              <button
-                type="button"
-                className="btn-small"
-                onClick={() => setShowTeamStats(false)}
-              >
-                Close Stats
-              </button>
-            </div>
-            <TeamStats />
           </div>
         </div>
       )}
