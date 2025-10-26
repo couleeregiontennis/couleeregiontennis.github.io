@@ -16,6 +16,8 @@ import { LeagueStats } from './components/LeagueStats';
 import { PlayerProfile } from './components/PlayerProfile';
 import { MatchSchedule } from './components/MatchSchedule';
 import { TeamStats } from './components/TeamStats';
+import { AllMatches } from './components/AllMatches';
+import { NotFound } from './components/NotFound';
 import './styles/colors.css';
 import './styles/Style.css';
 import './styles/Navigation.css';
@@ -64,6 +66,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<TeamSelect />} />
+            <Route path="/team/:day/all" element={<AllMatches />} />
             <Route path="/team/:day/:teamId" element={<Team />} />
             <Route path="/subs" element={<Subs />} />
             <Route path="/greenisland" element={<GreenIsland />} />
@@ -104,6 +107,7 @@ function App() {
               }
             />
             <Route path="/schedule" element={<MatchSchedule />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </div>

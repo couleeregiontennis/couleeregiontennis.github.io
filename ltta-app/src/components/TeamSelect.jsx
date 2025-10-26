@@ -36,7 +36,7 @@ export const TeamSelect = () => {
         <div className="teams-column">
           <h2>Tuesday</h2>
           <div>
-            <Link to="/team/tuesday/all">All Team's Matches</Link>
+            <Link to="/team/tuesday/all">All Tuesday Matches</Link>
           </div>
           <p>Choose your team to view your match schedule.</p>
           <ul className="team-list">
@@ -53,7 +53,7 @@ export const TeamSelect = () => {
         <div className="teams-column">
           <h2>Wednesday</h2>
           <div>
-            <Link to="/team/wednesday/all">All Team's Matches</Link>
+            <Link to="/team/wednesday/all">All Wednesday Matches</Link>
           </div>
           <p>Choose your team to view your match schedule.</p>
           <ul className="team-list">

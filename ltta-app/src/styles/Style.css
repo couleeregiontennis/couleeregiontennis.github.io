@@ -304,6 +304,28 @@ ul {
     color: var(--primary-green);
 }
 
+.not-found-page {
+    max-width: 640px;
+    margin: 2rem auto;
+    padding: 2rem;
+    text-align: center;
+    gap: 1rem;
+}
+
+.not-found-page h1 {
+    margin-bottom: 0.5rem;
+}
+
+.not-found-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.not-found-actions .refresh-btn {
+    text-decoration: none;
+}
+
 /* Responsive styles */
 @media (max-width: 800px) {
     .teams-container {
