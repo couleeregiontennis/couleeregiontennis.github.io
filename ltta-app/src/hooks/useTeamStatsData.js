@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 
+/**
+ * Custom hook for fetching and managing team statistics data
+ * Handles authentication, data fetching, and processing for team stats
+ */
 export const useTeamStatsData = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -13,6 +17,11 @@ export const useTeamStatsData = () => {
   const [recentMatches, setRecentMatches] = useState([]);
   const [playerStats, setPlayerStats] = useState([]);
 
+  /**
+   * Loads the team roster for a given team ID
+   * @param {string} teamId - Team ID from database
+   * @returns {Promise<Array>} - Array of player objects
+   */
   const loadTeamRoster = useCallback(async (teamId) => {
     try {
       const { data: teamPlayers, error: rosterError } = await supabase
@@ -29,56 +38,125 @@ export const useTeamStatsData = () => {
         `)
         .eq('team', teamId);
 
-      if (rosterError) throw rosterError;
+      if (rosterError) {
+        console.error('Supabase roster error:', rosterError);
+        throw new Error(`Failed to load team roster: ${rosterError.message}`);
+      }
 
       const rosterData = (teamPlayers || []).map((tp) => tp.player);
       setRoster(rosterData);
       return rosterData;
     } catch (err) {
       console.error('Error loading roster:', err);
+      setError(prev => prev ? `${prev}\nRoster error: ${err.message}` : `Roster error: ${err.message}`);
       return [];
     }
   }, []);
 
+  /**
+   * Fetches all matches for a team number
+   * @param {number} teamNumber - Team number
+   * @returns {Promise<Array>} - Array of match objects
+   */
   const fetchTeamMatches = useCallback(async (teamNumber) => {
-    if (!teamNumber) return [];
+    if (!teamNumber) {
+      console.warn('No team number provided for match fetching');
+      return [];
+    }
 
-    const { data, error: matchesError } = await supabase
-      .from('matches')
-      .select('*')
-      .or(`home_team_number.eq.${teamNumber},away_team_number.eq.${teamNumber}`)
-      .order('date', { ascending: false })
-      .order('time', { ascending: false });
+    try {
+      const { data, error: matchesError } = await supabase
+        .from('matches')
+        .select('*')
+        .or(`home_team_number.eq.${teamNumber},away_team_number.eq.${teamNumber}`)
+        .order('date', { ascending: false })
+        .order('time', { ascending: false });
 
-    if (matchesError) throw matchesError;
-    return data || [];
+      if (matchesError) {
+        console.error('Supabase matches error:', matchesError);
+        throw new Error(`Failed to fetch matches: ${matchesError.message}`);
+      }
+
+      return data || [];
+    } catch (err) {
+      console.error('Error fetching team matches:', err);
+      setError(prev => prev ? `${prev}\nMatches error: ${err.message}` : `Matches error: ${err.message}`);
+      return [];
+    }
   }, []);
 
+  /**
+   * Fetches match scores for given match IDs
+   * @param {Array} matchIds - Array of match IDs
+   * @returns {Promise<Array>} - Array of score objects
+   */
   const fetchMatchScores = useCallback(async (matchIds) => {
-    if (!matchIds.length) return [];
+    if (!matchIds || matchIds.length === 0) {
+      console.warn('No match IDs provided for score fetching');
+      return [];
+    }
 
-    const { data, error: scoresError } = await supabase
-      .from('match_scores')
-      .select('match_id, home_lines_won, away_lines_won, home_total_games, away_total_games, home_won')
-      .in('match_id', matchIds);
+    try {
+      const { data, error: scoresError } = await supabase
+        .from('match_scores')
+        .select('match_id, home_lines_won, away_lines_won, home_total_games, away_total_games, home_won')
+        .in('match_id', matchIds);
 
-    if (scoresError) throw scoresError;
-    return data || [];
+      if (scoresError) {
+        console.error('Supabase scores error:', scoresError);
+        throw new Error(`Failed to fetch match scores: ${scoresError.message}`);
+      }
+
+      return data || [];
+    } catch (err) {
+      console.error('Error fetching match scores:', err);
+      setError(prev => prev ? `${prev}\nScores error: ${err.message}` : `Scores error: ${err.message}`);
+      return [];
+    }
   }, []);
 
+  /**
+   * Fetches line results for given match IDs
+   * @param {Array} matchIds - Array of match IDs
+   * @returns {Promise<Array>} - Array of line result objects
+   */
   const fetchLineResults = useCallback(async (matchIds) => {
-    if (!matchIds.length) return [];
+    if (!matchIds || matchIds.length === 0) {
+      console.warn('No match IDs provided for line results fetching');
+      return [];
+    }
 
-    const { data, error: linesError } = await supabase
-      .from('line_results')
-      .select('match_id, match_type, home_player_1_id, home_player_2_id, away_player_1_id, away_player_2_id, home_set_1, away_set_1, home_set_2, away_set_2, home_set_3, away_set_3, home_won')
-      .in('match_id', matchIds);
+    try {
+      const { data, error: linesError } = await supabase
+        .from('line_results')
+        .select('match_id, match_type, home_player_1_id, home_player_2_id, away_player_1_id, away_player_2_id, home_set_1, away_set_1, home_set_2, away_set_2, home_set_3, away_set_3, home_won')
+        .in('match_id', matchIds);
 
-    if (linesError) throw linesError;
-    return data || [];
+      if (linesError) {
+        console.error('Supabase line results error:', linesError);
+        throw new Error(`Failed to fetch line results: ${linesError.message}`);
+      }
+
+      return data || [];
+    } catch (err) {
+      console.error('Error fetching line results:', err);
+      setError(prev => prev ? `${prev}\nLine results error: ${err.message}` : `Line results error: ${err.message}`);
+      return [];
+    }
   }, []);
 
+  /**
+   * Calculates team record from match scores
+   * @param {Array} matches - Array of match objects
+   * @param {Array} matchScores - Array of score objects
+   * @param {number} teamNumber - Current team number
+   */
   const loadTeamRecordFromScores = useCallback((matches, matchScores, teamNumber) => {
+    if (!matches || !matchScores || !teamNumber) {
+      console.warn('Invalid parameters for team record calculation');
+      return;
+    }
+
     const scoreMap = new Map(matchScores.map((score) => [score.match_id, score]));
 
     let wins = 0;
@@ -86,7 +164,10 @@ export const useTeamStatsData = () => {
 
     matches.forEach((match) => {
       const score = scoreMap.get(match.id);
-      if (!score) return;
+      if (!score) {
+        console.warn(`No score found for match ${match.id}`);
+        return;
+      }
 
       const isHome = match.home_team_number === teamNumber;
 
@@ -96,7 +177,10 @@ export const useTeamStatsData = () => {
       } else {
         const teamLines = isHome ? (score.home_lines_won ?? 0) : (score.away_lines_won ?? 0);
         const oppLines = isHome ? (score.away_lines_won ?? 0) : (score.home_lines_won ?? 0);
-        if (teamLines === oppLines) return;
+        if (teamLines === oppLines) {
+          console.warn(`Tie game detected for match ${match.id}, not counting in record`);
+          return;
+        }
         teamWon = teamLines > oppLines;
       }
 
@@ -107,7 +191,18 @@ export const useTeamStatsData = () => {
     setTeamRecord({ wins, losses });
   }, []);
 
+  /**
+   * Calculates team line statistics from match scores
+   * @param {Array} matchScores - Array of score objects
+   * @param {Array} matches - Array of match objects
+   * @param {number} teamNumber - Current team number
+   */
   const loadTeamLineStatsFromScores = useCallback((matchScores, matches, teamNumber) => {
+    if (!matchScores || !matches || !teamNumber) {
+      console.warn('Invalid parameters for team line stats calculation');
+      return;
+    }
+
     const matchMap = new Map(matches.map((match) => [match.id, match]));
 
     let linesWon = 0;
@@ -117,7 +212,10 @@ export const useTeamStatsData = () => {
 
     matchScores.forEach((score) => {
       const match = matchMap.get(score.match_id);
-      if (!match) return;
+      if (!match) {
+        console.warn(`No match found for score ${score.match_id}`);
+        return;
+      }
 
       const isHome = match.home_team_number === teamNumber;
 
@@ -137,7 +235,18 @@ export const useTeamStatsData = () => {
     setTeamLineStats({ linesWon, linesLost, gamesWon, gamesLost });
   }, []);
 
+  /**
+   * Processes recent matches with score data
+   * @param {Array} matches - Array of match objects
+   * @param {Array} matchScores - Array of score objects
+   * @param {number} teamNumber - Current team number
+   */
   const loadRecentMatchesFromList = useCallback((matches, matchScores, teamNumber) => {
+    if (!matches || !matchScores || !teamNumber) {
+      console.warn('Invalid parameters for recent matches processing');
+      return;
+    }
+
     const scoreMap = new Map(matchScores.map((score) => [score.match_id, score]));
     const recent = matches.slice(0, 10).map((match) => {
       const score = scoreMap.get(match.id);
@@ -177,10 +286,23 @@ export const useTeamStatsData = () => {
     setRecentMatches(recent);
   }, []);
 
+  /**
+   * Calculates player statistics from line results
+   * @param {Array} rosterData - Team roster
+   * @param {Array} matches - Array of match objects
+   * @param {Array} lineResults - Array of line result objects
+   * @param {number} teamNumber - Current team number
+   */
   const loadPlayerStatsFromLines = useCallback((rosterData, matches, lineResults, teamNumber) => {
+    if (!rosterData || !matches || !lineResults || !teamNumber) {
+      console.warn('Invalid parameters for player stats calculation');
+      return;
+    }
+
     const matchMap = new Map(matches.map((match) => [match.id, match]));
     const playerStatsMap = new Map();
 
+    // Initialize player stats
     rosterData.forEach((player) => {
       playerStatsMap.set(player.id, {
         ...player,
@@ -196,13 +318,18 @@ export const useTeamStatsData = () => {
       });
     });
 
+    // Process line results
     lineResults.forEach((line) => {
       const match = matchMap.get(line.match_id);
-      if (!match) return;
+      if (!match) {
+        console.warn(`No match found for line result ${line.match_id}`);
+        return;
+      }
 
       const isHomeTeam = match.home_team_number === teamNumber;
       const playerIds = [];
 
+      // Get player IDs based on team side
       if (isHomeTeam) {
         if (line.home_player_1_id) playerIds.push(line.home_player_1_id);
         if (line.home_player_2_id) playerIds.push(line.home_player_2_id);
@@ -211,11 +338,15 @@ export const useTeamStatsData = () => {
         if (line.away_player_2_id) playerIds.push(line.away_player_2_id);
       }
 
+      // Process set results
       const sets = [
         { home: line.home_set_1, away: line.away_set_1 },
         { home: line.home_set_2, away: line.away_set_2 },
         { home: line.home_set_3, away: line.away_set_3 }
-      ].filter((set) => set.home !== null && set.home !== undefined && set.away !== null && set.away !== undefined);
+      ].filter((set) => 
+        set.home !== null && set.home !== undefined && 
+        set.away !== null && set.away !== undefined
+      );
 
       let setsWon = 0;
       let setsLost = 0;
@@ -236,6 +367,7 @@ export const useTeamStatsData = () => {
         }
       });
 
+      // Determine winner
       let teamWon;
       if (typeof line.home_won === 'boolean') {
         teamWon = isHomeTeam ? line.home_won : !line.home_won;
@@ -245,9 +377,13 @@ export const useTeamStatsData = () => {
         teamWon = setsWon > setsLost;
       }
 
+      // Update player stats
       playerIds.forEach((playerId) => {
         const stats = playerStatsMap.get(playerId);
-        if (!stats) return;
+        if (!stats) {
+          console.warn(`Player ${playerId} not found in roster for stats update`);
+          return;
+        }
 
         stats.matchesPlayed += 1;
         stats.setsWon += setsWon;
@@ -271,58 +407,86 @@ export const useTeamStatsData = () => {
     setPlayerStats(Array.from(playerStatsMap.values()));
   }, []);
 
+  /**
+   * Main data loading function that orchestrates all data fetching
+   */
   const loadTeamStatsData = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
 
+      // Get authenticated user
       const { data: { user: currentUser } } = await supabase.auth.getUser();
-      if (!currentUser) throw new Error('Not authenticated');
+      if (!currentUser) {
+        throw new Error('Not authenticated. Please log in to view team statistics.');
+      }
 
       setUser(currentUser);
 
+      // Verify user is a captain
       const { data: playerData, error: playerError } = await supabase
         .from('player')
         .select('*')
         .eq('id', currentUser.id)
         .single();
 
-      if (playerError || !playerData?.is_captain) {
-        throw new Error('Access denied: Captain privileges required');
+      if (playerError) {
+        console.error('Supabase player error:', playerError);
+        throw new Error(`Failed to load player data: ${playerError.message}`);
       }
 
+      if (!playerData?.is_captain) {
+        throw new Error('Access denied: Captain privileges required to view team statistics.');
+      }
+
+      // Get team link
       const { data: teamLink, error: teamLinkError } = await supabase
         .from('player_to_team')
         .select('team')
         .eq('player', currentUser.id)
         .single();
 
-      if (teamLinkError) throw teamLinkError;
+      if (teamLinkError) {
+        console.error('Supabase team link error:', teamLinkError);
+        throw new Error(`Failed to load team assignment: ${teamLinkError.message}`);
+      }
 
+      // Get team details
       const { data: teamData, error: teamError } = await supabase
         .from('team')
         .select('*')
         .eq('id', teamLink.team)
         .single();
 
-      if (teamError) throw teamError;
+      if (teamError) {
+        console.error('Supabase team error:', teamError);
+        throw new Error(`Failed to load team data: ${teamError.message}`);
+      }
+
       setTeam(teamData);
 
-      const rosterData = await loadTeamRoster(teamData.id);
+      // Load all data in parallel where possible
+      const [rosterData, matches] = await Promise.all([
+        loadTeamRoster(teamData.id),
+        fetchTeamMatches(teamData.number)
+      ]);
 
-      const matches = await fetchTeamMatches(teamData.number);
       const matchIds = matches.map((match) => match.id);
 
+      // Fetch scores and line results in parallel
       const [matchScores, lineResults] = await Promise.all([
         fetchMatchScores(matchIds),
         fetchLineResults(matchIds)
       ]);
 
+      // Process all stats
       loadTeamRecordFromScores(matches, matchScores, teamData.number);
       loadTeamLineStatsFromScores(matchScores, matches, teamData.number);
       loadRecentMatchesFromList(matches, matchScores, teamData.number);
       loadPlayerStatsFromLines(rosterData, matches, lineResults, teamData.number);
+
     } catch (err) {
+      console.error('Error loading team stats data:', err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -338,10 +502,12 @@ export const useTeamStatsData = () => {
     loadPlayerStatsFromLines
   ]);
 
+  // Auto-refresh data on mount
   useEffect(() => {
     loadTeamStatsData();
   }, [loadTeamStatsData]);
 
+  // Calculate win percentages
   const winPercentage = useMemo(() => {
     const total = teamRecord.wins + teamRecord.losses;
     if (total === 0) return '0.0';
