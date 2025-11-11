@@ -2,6 +2,145 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 import '../styles/AddScore.css';
 
+const STANDARD_SET_MIN_WIN = 6;
+const MATCH_TIEBREAK_TARGET = 10;
+
+const parseInteger = (value) => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+};
+
+const isEmptyValue = (value) => value === null || value === undefined || value === '';
+
+const isStandardSetValid = (home, away) => {
+  if (!Number.isInteger(home) || !Number.isInteger(away)) return false;
+  if (home < 0 || away < 0) return false;
+  if (home === away) return false;
+
+  const winner = Math.max(home, away);
+  const loser = Math.min(home, away);
+
+  if (winner < STANDARD_SET_MIN_WIN) return false;
+  if (winner === STANDARD_SET_MIN_WIN) {
+    return loser <= STANDARD_SET_MIN_WIN - 2;
+  }
+
+  if (winner === STANDARD_SET_MIN_WIN + 1) {
+    return loser === STANDARD_SET_MIN_WIN - 1 || loser === STANDARD_SET_MIN_WIN;
+  }
+
+  return false;
+};
+
+const isMatchTiebreakValid = (home, away) => {
+  if (home === 0 && away === 0) {
+    return true; // Not played
+  }
+
+  if (!Number.isInteger(home) || !Number.isInteger(away)) return false;
+  if (home < 0 || away < 0) return false;
+  if (home === away) return false;
+
+  const winner = Math.max(home, away);
+  const loser = Math.min(home, away);
+
+  if (winner < MATCH_TIEBREAK_TARGET) return false;
+  return winner - loser >= 2;
+};
+
+const collectScoreSnapshot = (row) => {
+  if (!row) return null;
+  return {
+    match_id: row.match_id,
+    line_number: row.line_number,
+    match_type: row.match_type,
+    home_player_1_id: row.home_player_1_id ?? null,
+    home_player_2_id: row.home_player_2_id ?? null,
+    away_player_1_id: row.away_player_1_id ?? null,
+    away_player_2_id: row.away_player_2_id ?? null,
+    home_set_1: row.home_set_1 ?? null,
+    away_set_1: row.away_set_1 ?? null,
+    home_set_2: row.home_set_2 ?? null,
+    away_set_2: row.away_set_2 ?? null,
+    home_set_3: row.home_set_3 ?? null,
+    away_set_3: row.away_set_3 ?? null,
+    home_won: row.home_won ?? null,
+    notes: row.notes ?? ''
+  };
+};
+
+const arePlayersUnique = (players) => {
+  const filtered = players.filter(Boolean);
+  const uniqueSet = new Set(filtered.map((name) => name.toLowerCase()));
+  return uniqueSet.size === filtered.length;
+};
+
+const normalizePlayerSelections = (matchType, players) => {
+  if (matchType === 'singles') {
+    return [players[0] ?? '', ''];
+  }
+  return players.map((player) => player ?? '');
+};
+
+const buildScorePayload = ({
+  matchId,
+  lineNumber,
+  matchType,
+  homeSet1,
+  homeSet2,
+  homeSet3,
+  awaySet1,
+  awaySet2,
+  awaySet3,
+  homePlayers,
+  awayPlayers,
+  notes
+}, playerIdMap, userId, winner) => {
+  const home_player_1_id = playerIdMap[homePlayers[0]] || null;
+  const home_player_2_id = matchType === 'doubles' ? playerIdMap[homePlayers[1]] || null : null;
+  const away_player_1_id = playerIdMap[awayPlayers[0]] || null;
+  const away_player_2_id = matchType === 'doubles' ? playerIdMap[awayPlayers[1]] || null : null;
+
+  return {
+    match_id: matchId,
+    line_number: Number(lineNumber),
+    match_type: matchType,
+    home_player_1_id,
+    home_player_2_id,
+    away_player_1_id,
+    away_player_2_id,
+    home_set_1: parseInteger(homeSet1),
+    away_set_1: parseInteger(awaySet1),
+    home_set_2: parseInteger(homeSet2),
+    away_set_2: parseInteger(awaySet2),
+    home_set_3: isEmptyValue(homeSet3) ? null : parseInteger(homeSet3),
+    away_set_3: isEmptyValue(awaySet3) ? null : parseInteger(awaySet3),
+    home_won: winner === 'home',
+    submitted_by: userId,
+    notes: notes?.trim() || '',
+    submitted_at: new Date().toISOString()
+  };
+};
+
+const isPayloadUnchanged = (existing, payload) => {
+  if (!existing) return false;
+  return (
+    existing.match_type === payload.match_type &&
+    (existing.home_player_1_id ?? null) === payload.home_player_1_id &&
+    (existing.home_player_2_id ?? null) === payload.home_player_2_id &&
+    (existing.away_player_1_id ?? null) === payload.away_player_1_id &&
+    (existing.away_player_2_id ?? null) === payload.away_player_2_id &&
+    (existing.home_set_1 ?? null) === payload.home_set_1 &&
+    (existing.home_set_2 ?? null) === payload.home_set_2 &&
+    (existing.home_set_3 ?? null) === payload.home_set_3 &&
+    (existing.away_set_1 ?? null) === payload.away_set_1 &&
+    (existing.away_set_2 ?? null) === payload.away_set_2 &&
+    (existing.away_set_3 ?? null) === payload.away_set_3 &&
+    Boolean(existing.home_won) === Boolean(payload.home_won) &&
+    (existing.notes ?? '').trim() === (payload.notes ?? '').trim()
+  );
+};
+
 export const AddScore = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -347,9 +486,10 @@ export const AddScore = () => {
   };
 
   const handleScoreChange = (team, set, value) => {
+    const scoreValue = value === '' ? '' : value.replace(/[^0-9]/g, '');
     setFormData(prev => ({
       ...prev,
-      [`${team}Set${set}`]: value
+      [`${team}Set${set}`]: scoreValue
     }));
   };
 
@@ -491,13 +631,36 @@ export const AddScore = () => {
       return false;
     }
 
-    // Validate that we have complete scores for the selected line
-    const hasCompleteScores = formData.homeSet1 && formData.awaySet1 &&
-      formData.homeSet2 && formData.awaySet2;
+    const normalizedHomePlayers = normalizePlayerSelections(formData.matchType, formData.homePlayers);
+    const normalizedAwayPlayers = normalizePlayerSelections(formData.matchType, formData.awayPlayers);
 
-    if (!hasCompleteScores) {
-      setError('Please enter complete scores for both sets');
+    if (!normalizedHomePlayers[0] || !normalizedAwayPlayers[0]) {
+      setError('Select at least one player for each team');
       return false;
+    }
+
+    if (!arePlayersUnique([...normalizedHomePlayers, ...normalizedAwayPlayers])) {
+      setError('Players cannot appear on both sides of the net');
+      return false;
+    }
+
+    const set1Home = parseInteger(formData.homeSet1);
+    const set1Away = parseInteger(formData.awaySet1);
+    const set2Home = parseInteger(formData.homeSet2);
+    const set2Away = parseInteger(formData.awaySet2);
+    const set3Home = parseInteger(formData.homeSet3);
+    const set3Away = parseInteger(formData.awaySet3);
+
+    if (!isStandardSetValid(set1Home, set1Away) || !isStandardSetValid(set2Home, set2Away)) {
+      setError('Sets 1 and 2 must be valid tennis scores (win by 2, 6-4/7-5/7-6 etc.)');
+      return false;
+    }
+
+    if (!isEmptyValue(formData.homeSet3) || !isEmptyValue(formData.awaySet3)) {
+      if (!isMatchTiebreakValid(set3Home, set3Away)) {
+        setError('Third set must be a valid tiebreak (first to 10, win by 2) or blank');
+        return false;
+      }
     }
 
     return true;
@@ -514,66 +677,74 @@ export const AddScore = () => {
         throw new Error('No match selected');
       }
       // Calculate winner
-      const homeWon = (parseInt(formData.homeSet1) > parseInt(formData.awaySet1) ? 1 : 0) +
-        (parseInt(formData.homeSet2) > parseInt(formData.awaySet2) ? 1 : 0) +
-        (formData.homeSet3 && formData.awaySet3 ?
-          (parseInt(formData.homeSet3) > parseInt(formData.awaySet3) ? 1 : 0) : 0);
+      const normalizedHomePlayers = normalizePlayerSelections(formData.matchType, formData.homePlayers);
+      const normalizedAwayPlayers = normalizePlayerSelections(formData.matchType, formData.awayPlayers);
+
+      setFormData((prev) => ({
+        ...prev,
+        homePlayers: normalizedHomePlayers,
+        awayPlayers: normalizedAwayPlayers
+      }));
+
+      const winner = calculateMatchWinner();
+      if (!winner) {
+        setError('Unable to determine a winner from the provided scores. Check set results.');
+        return;
+      }
+
       // Get player IDs from name
-      const home_player_1_id = playerIdMap[formData.homePlayers[0]] || null;
-      const home_player_2_id = formData.matchType === 'doubles' ? playerIdMap[formData.homePlayers[1]] || null : null;
-      const away_player_1_id = playerIdMap[formData.awayPlayers[0]] || null;
-      const away_player_2_id = formData.matchType === 'doubles' ? playerIdMap[formData.awayPlayers[1]] || null : null;
+      const payload = buildScorePayload({
+        matchId: selectedMatch.id,
+        lineNumber: formData.lineNumber,
+        matchType: formData.matchType,
+        homeSet1: formData.homeSet1,
+        homeSet2: formData.homeSet2,
+        homeSet3: formData.homeSet3,
+        awaySet1: formData.awaySet1,
+        awaySet2: formData.awaySet2,
+        awaySet3: formData.awaySet3,
+        homePlayers: normalizedHomePlayers,
+        awayPlayers: normalizedAwayPlayers,
+        notes: formData.notes
+      }, playerIdMap, user.id, winner);
+
       // Check if score already exists for this line
       const existingScore = existingScores.find(s => s.line_number === Number(formData.lineNumber));
 
+      if (existingScore && isPayloadUnchanged(existingScore, payload)) {
+        setError('No changes detected for this line. Update scores or notes before resubmitting.');
+        return;
+      }
+
       if (existingScore) {
+        const previousSnapshot = collectScoreSnapshot(existingScore);
+
         // Update existing score
-        const { error: lineError } = await supabase
+        const { data: updatedRows, error: lineError } = await supabase
           .from('line_results')
-          .update({
-            match_type: formData.matchType,
-            home_player_1_id,
-            home_player_2_id,
-            away_player_1_id,
-            away_player_2_id,
-            home_set_1: parseInt(formData.homeSet1),
-            away_set_1: parseInt(formData.awaySet1),
-            home_set_2: parseInt(formData.homeSet2),
-            away_set_2: parseInt(formData.awaySet2),
-            home_set_3: formData.homeSet3 ? parseInt(formData.homeSet3) : null,
-            away_set_3: formData.awaySet3 ? parseInt(formData.awaySet3) : null,
-            home_won: homeWon >= 2,
-            submitted_by: user.id,
-            notes: formData.notes,
-            submitted_at: new Date().toISOString()
-          })
-          .eq('id', existingScore.id);
+          .update(payload)
+          .eq('id', existingScore.id)
+          .select();
 
         if (lineError) throw lineError;
+
+        await supabase
+          .from('line_result_audit')
+          .insert([{ previous_state: previousSnapshot, new_state: collectScoreSnapshot(updatedRows?.[0]) }])
+          .throwOnError();
       } else {
         // Create new line result
-        const { error: lineError } = await supabase
+        const { data: insertedRows, error: lineError } = await supabase
           .from('line_results')
-          .insert([{
-            match_id: selectedMatch.id,
-            line_number: Number(formData.lineNumber),
-            match_type: formData.matchType,
-            home_player_1_id,
-            home_player_2_id,
-            away_player_1_id,
-            away_player_2_id,
-            home_set_1: parseInt(formData.homeSet1),
-            away_set_1: parseInt(formData.awaySet1),
-            home_set_2: parseInt(formData.homeSet2),
-            away_set_2: parseInt(formData.awaySet2),
-            home_set_3: formData.homeSet3 ? parseInt(formData.homeSet3) : null,
-            away_set_3: formData.awaySet3 ? parseInt(formData.awaySet3) : null,
-            home_won: homeWon >= 2,
-            submitted_by: user.id,
-            notes: formData.notes
-          }]);
+          .insert([payload])
+          .select();
 
         if (lineError) throw lineError;
+
+        await supabase
+          .from('line_result_audit')
+          .insert([{ previous_state: null, new_state: collectScoreSnapshot(insertedRows?.[0]) }])
+          .throwOnError();
       }
 
       setSuccess(existingScore ? 'Scores updated successfully!' : 'Scores submitted successfully!');
@@ -584,6 +755,8 @@ export const AddScore = () => {
       setFormData(prev => ({
         ...prev,
         matchId: '',
+        homePlayers: ['', ''],
+        awayPlayers: ['', ''],
         homeSet1: '',
         awaySet1: '',
         homeSet2: '',

@@ -22,8 +22,7 @@ const createEmptyProfile = () => ({
   ranking: 3,
   is_captain: false,
   is_active: true,
-  availability: getDefaultAvailability(),
-  preferred_position: '',
+  day_availability: getDefaultAvailability(),
   notes: ''
 });
 
@@ -50,11 +49,10 @@ const normalizeProfile = (data, user = null) => {
     ranking: data.ranking ?? 3,
     is_captain: data.is_captain ?? false,
     is_active: data.is_active ?? true,
-    availability: {
+    day_availability: {
       ...getDefaultAvailability(),
-      ...(typeof data.availability === 'object' && data.availability ? data.availability : {})
+      ...(typeof data.availability === 'object' && data.day_availability ? data.availability : {})
     },
-    preferred_position: data.preferred_position || '',
     notes: data.notes || ''
   };
 };
@@ -68,6 +66,7 @@ export const PlayerProfile = () => {
   const [profile, setProfile] = useState(createEmptyProfile());
   const [matchHistory, setMatchHistory] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [hasExistingProfile, setHasExistingProfile] = useState(false);
 
   useEffect(() => {
     checkUser();
@@ -105,6 +104,7 @@ export const PlayerProfile = () => {
 
       const normalized = normalizeProfile(data, authUser || user);
       setProfile(normalized);
+      setHasExistingProfile(Boolean(data));
       if (!data) {
         setIsEditing(true);
       }
@@ -138,12 +138,12 @@ export const PlayerProfile = () => {
   };
 
   const handleInputChange = (field, value) => {
-    if (field.startsWith('availability.')) {
+    if (field.startsWith('day_availability.')) {
       const day = field.split('.')[1];
       setProfile(prev => ({
         ...prev,
-        availability: {
-          ...prev.availability,
+        day_availability: {
+          ...prev.day_availability,
           [day]: value
         }
       }));
@@ -181,17 +181,16 @@ export const PlayerProfile = () => {
         ranking: rankingValue,
         is_captain: Boolean(profile.is_captain),
         is_active: Boolean(profile.is_active),
-        availability: profile.availability || getDefaultAvailability(),
-        preferred_position: profile.preferred_position || '',
+        day_availability: profile.day_availability || getDefaultAvailability(),
         notes: profile.notes || ''
       };
 
       let savedData;
-      if (profile.id) {
+      if (hasExistingProfile) {
         const { data: updatedData, error: updateError } = await supabase
           .from('player')
           .update(profileData)
-          .eq('id', profile.id)
+          .eq('id', user.id)
           .select()
           .single();
         if (updateError) throw updateError;
@@ -204,6 +203,7 @@ export const PlayerProfile = () => {
           .single();
         if (insertError) throw insertError;
         savedData = insertedData;
+        setHasExistingProfile(true);
       }
 
       setProfile(normalizeProfile(savedData, user));
@@ -350,13 +350,13 @@ export const PlayerProfile = () => {
         <div className="profile-section card card--interactive">
           <h2>Weekly Availability</h2>
           <div className="availability-grid">
-            {profile.availability && Object.entries(profile.availability).map(([day, available]) => (
-              <div key={day} className="availability-item">
+            {profile.day_availability && Object.entries(profile.day_availability).map(([day, available]) => (
+              <div key={day} className="day_availability-item">
                 <label className="checkbox-label">
                   <input
                     type="checkbox"
                     checked={available}
-                    onChange={(e) => handleInputChange(`availability.${day}`, e.target.checked)}
+                    onChange={(e) => handleInputChange(`day_availability.${day}`, e.target.checked)}
                     disabled={!isEditing}
                   />
                   <span className="checkmark"></span>
@@ -384,21 +384,6 @@ export const PlayerProfile = () => {
                 <option value={3}>3 - Intermediate</option>
                 <option value={4}>4 - Advanced</option>
                 <option value={5}>5 - Expert</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="preferred_position">Preferred Position</label>
-              <select
-                id="preferred_position"
-                value={profile.preferred_position}
-                onChange={(e) => handleInputChange('preferred_position', e.target.value)}
-                disabled={!isEditing}
-              >
-                <option value="">No preference</option>
-                <option value="singles">Singles</option>
-                <option value="doubles">Doubles</option>
-                <option value="both">Both Singles & Doubles</option>
               </select>
             </div>
 

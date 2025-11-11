@@ -20,6 +20,8 @@ export const CaptainDashboard = () => {
   const [eligibleSubs, setEligibleSubs] = useState([]);
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [assigningSubId, setAssigningSubId] = useState(null);
+  const [pendingAction, setPendingAction] = useState(null);
+  const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [seasonWins, setSeasonWins] = useState(0);
   const [seasonLosses, setSeasonLosses] = useState(0);
@@ -204,6 +206,30 @@ export const CaptainDashboard = () => {
     setAssigningSubId(null);
   };
 
+  const openConfirmation = (actionConfig) => {
+    setPendingAction(actionConfig);
+  };
+
+  const closeConfirmation = () => {
+    if (confirmLoading) return;
+    setPendingAction(null);
+  };
+
+  const handleConfirmAction = async () => {
+    if (!pendingAction?.onConfirm) {
+      setPendingAction(null);
+      return;
+    }
+
+    try {
+      setConfirmLoading(true);
+      await pendingAction.onConfirm();
+    } finally {
+      setConfirmLoading(false);
+      setPendingAction(null);
+    }
+  };
+
   const handleAssignSub = async (playerId) => {
     if (!selectedMatch || !team) return;
 
@@ -227,7 +253,7 @@ export const CaptainDashboard = () => {
     }
   };
 
-  const handleRemoveFromRoster = async (playerId) => {
+  const handleRemoveFromRoster = async (playerId, playerName = 'Player') => {
     if (!team) return;
 
     try {
@@ -241,7 +267,7 @@ export const CaptainDashboard = () => {
 
       await loadTeamRoster(team.id);
       await loadAvailablePlayers();
-      setSuccess('Player removed from team.');
+      setSuccess(`${playerName} removed from the roster.`);
       setTimeout(() => setSuccess(''), 3000);
     } catch (err) {
       console.error('Error removing player:', err);
@@ -250,7 +276,7 @@ export const CaptainDashboard = () => {
     }
   };
 
-  const handleAddToRoster = async (playerId) => {
+  const handleAddToRoster = async (playerId, playerName = 'Player') => {
     if (!team) return;
 
     try {
@@ -262,7 +288,7 @@ export const CaptainDashboard = () => {
 
       await loadTeamRoster(team.id);
       await loadAvailablePlayers();
-      setSuccess('Player added to team.');
+      setSuccess(`${playerName} added to the roster.`);
       setTimeout(() => setSuccess(''), 3000);
     } catch (err) {
       console.error('Error adding player:', err);
@@ -319,25 +345,6 @@ export const CaptainDashboard = () => {
       setUpcomingMatches(matches || []);
     } catch (err) {
       console.error('Error loading matches:', err);
-    }
-  };
-
-  const handleRosterUpdate = async (playerId, field, value) => {
-    try {
-      const { error } = await supabase
-        .from('player')
-        .update({ [field]: value })
-        .eq('id', playerId);
-
-      if (error) throw error;
-
-      setSuccess('Player updated successfully');
-      setTimeout(() => setSuccess(''), 3000);
-
-      // Reload roster
-      await loadTeamRoster(team.id);
-    } catch (err) {
-      setError('Error updating player: ' + err.message);
     }
   };
 
@@ -501,7 +508,7 @@ export const CaptainDashboard = () => {
                     <td>
                       <select
                         value={player.ranking}
-                        onChange={(e) => handleRosterUpdate(player.id, 'ranking', parseInt(e.target.value))}
+                        onChange={(e) => confirmRankingChange(player, parseInt(e.target.value, 10))}
                       >
                         {[1, 2, 3, 4, 5].map(rank => (
                           <option key={rank} value={rank}>{rank}</option>
@@ -639,7 +646,7 @@ export const CaptainDashboard = () => {
                         <button
                           type="button"
                           className="btn-small btn-danger"
-                          onClick={() => handleRemoveFromRoster(player.id)}
+                          onClick={() => confirmRemoveFromRoster(player)}
                         >
                           Remove
                         </button>
@@ -666,7 +673,7 @@ export const CaptainDashboard = () => {
                         <button
                           type="button"
                           className="btn-small"
-                          onClick={() => handleAddToRoster(player.id)}
+                          onClick={() => confirmAddToRoster(player)}
                         >
                           Add
                         </button>
@@ -730,6 +737,38 @@ export const CaptainDashboard = () => {
 
       {success && <div className="success-message">{success}</div>}
       {error && <div className="error-message">{error}</div>}
+
+      {pendingAction && (
+        <div className="confirm-overlay" role="dialog" aria-modal="true">
+          <div className={`confirm-dialog card card--interactive ${pendingAction.intent === 'danger' ? 'confirm-danger' : ''}`}>
+            <div className="confirm-header">
+              <h3>{pendingAction.title}</h3>
+              <button type="button" className="btn-icon" onClick={closeConfirmation} aria-label="Close confirmation" disabled={confirmLoading}>
+                ✕
+              </button>
+            </div>
+            <p className="confirm-message">{pendingAction.message}</p>
+            <div className="confirm-actions">
+              <button
+                type="button"
+                className="btn-small btn-secondary"
+                onClick={closeConfirmation}
+                disabled={confirmLoading}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className={`btn-small ${pendingAction.intent === 'danger' ? 'btn-danger' : ''}`}
+                onClick={handleConfirmAction}
+                disabled={confirmLoading}
+              >
+                {confirmLoading ? 'Processing…' : pendingAction.confirmLabel || 'Confirm'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

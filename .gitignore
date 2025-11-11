@@ -20,3 +20,4 @@ Gemfile.lock
 ltta.csv
 output_emails/*
 node_modules/*
+ltta-app/supabase-schema.sql
