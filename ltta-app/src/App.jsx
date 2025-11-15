@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'; 
+import React, { useEffect, useMemo, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { AnnouncementBar } from './components/AnnouncementBar';
@@ -18,6 +18,7 @@ import { MatchSchedule } from './components/MatchSchedule';
 import { TeamStats } from './components/TeamStats';
 import { AllMatches } from './components/AllMatches';
 import { NotFound } from './components/NotFound';
+import { LandingPage } from './components/LandingPage';
 import './styles/colors.css';
 import './styles/Style.css';
 import './styles/Navigation.css';
@@ -65,7 +66,8 @@ function App() {
         <AnnouncementBar />
         <main>
           <Routes>
-            <Route path="/" element={<TeamSelect />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/team" element={<TeamSelect />} />
             <Route path="/team/:day/all" element={<AllMatches />} />
             <Route path="/team/:day/:teamId" element={<Team />} />
             <Route path="/subs" element={<Subs />} />

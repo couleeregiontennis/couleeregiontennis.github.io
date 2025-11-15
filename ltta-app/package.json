@@ -14,7 +14,7 @@
   "devDependencies": {
     "@darkobits/nr": "^0.18.8",
     "@vitejs/plugin-react": "^4.2.1",
-    "vite": "^6.3.5"
+    "vite": "^6.4.1"
   },
   "scripts": {
     "dev": "vite",
