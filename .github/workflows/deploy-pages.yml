@@ -1,0 +1,56 @@
+name: Deploy static site
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            .conductor/pattaya/ltta-app/package-lock.json
+
+      - name: Install dependencies
+        run: npm install --prefix .conductor/pattaya/ltta-app
+
+      - name: Build site
+        run: npm run build --prefix .conductor/pattaya/ltta-app
+
+      - name: Upload static files
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .conductor/pattaya/ltta-app/build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

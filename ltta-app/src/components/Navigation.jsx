@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../scripts/supabaseClient';
 import '../styles/Navigation.css';
 
-export const Navigation = ({ theme = 'light', onToggleTheme = () => {} }) => {
+export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -83,11 +83,11 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => {} }) => {
           </div>
           <div className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
             <ul>
-              <li><Link to="/" onClick={closeMenu}>Teams</Link></li>
-              
+              <li><Link to="/team" onClick={closeMenu}>Teams</Link></li>
+
               {/* League Info Dropdown */}
               <li className="dropdown">
-                <button 
+                <button
                   className="dropdown-toggle"
                   onClick={() => toggleDropdown('league')}
                   aria-expanded={openDropdown === 'league'}
@@ -116,7 +116,7 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => {} }) => {
 
               {/* Player Tools Dropdown */}
               <li className="dropdown">
-                <button 
+                <button
                   className="dropdown-toggle"
                   onClick={() => toggleDropdown('player')}
                   aria-expanded={openDropdown === 'player'}
@@ -134,7 +134,7 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => {} }) => {
               {/* My Account Dropdown - Only show if user is logged in */}
               {user && (
                 <li className="dropdown">
-                  <button 
+                  <button
                     className="dropdown-toggle"
                     onClick={() => toggleDropdown('account')}
                     aria-expanded={openDropdown === 'account'}
