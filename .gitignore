@@ -21,4 +21,3 @@ ltta.csv
 output_emails/*
 node_modules/*
 ltta-app/supabase-schema.sql
-ltta-app/supabase-schema.sql
