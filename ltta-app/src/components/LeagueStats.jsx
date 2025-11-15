@@ -1,0 +1,304 @@
+import { useState, useEffect } from 'react';
+import { supabase } from '../scripts/supabaseClient';
+import '../styles/LeagueStats.css';
+
+export const LeagueStats = () => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [stats, setStats] = useState({
+    totalMatches: 0,
+    totalPlayers: 0,
+    totalTeams: 0,
+    recentMatches: [],
+    topPerformers: [],
+    teamStats: [],
+    matchesByWeek: []
+  });
+
+  useEffect(() => {
+    fetchLeagueStats();
+  }, []);
+
+  const fetchLeagueStats = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      // Fetch total matches
+      const { data: matches, error: matchesError } = await supabase
+        .from('matches')
+        .select(`
+          *,
+          match_scores (
+            home_won,
+            home_lines_won,
+            away_lines_won
+          )
+        `);
+
+      if (matchesError) throw matchesError;
+
+      // Fetch total players
+      const { data: players, error: playersError } = await supabase
+        .from('player')
+        .select('*');
+
+      if (playersError) throw playersError;
+
+      // Fetch teams
+      const { data: teams, error: teamsError } = await supabase
+        .from('team')
+        .select('*');
+
+      if (teamsError) throw teamsError;
+
+      // Fetch recent matches - using the matches table structure
+      const { data: recentMatches, error: recentError } = await supabase
+        .from('matches')
+        .select('*')
+        .order('date', { ascending: false })
+        .limit(10);
+
+      if (recentError) throw recentError;
+
+      // Calculate team statistics using team numbers from matches table
+      const teamStats = teams?.map(team => {
+        const teamNumber = Number(team.number);
+        const teamMatches = matches?.filter(match => {
+          const homeNumber = Number(match.home_team_number);
+          const awayNumber = Number(match.away_team_number);
+          return homeNumber === teamNumber || awayNumber === teamNumber;
+        }) || [];
+
+        const completedMatches = teamMatches.filter(match => match.status === 'completed');
+
+        const { wins, losses } = completedMatches.reduce((acc, match) => {
+          const rawScore = match.match_scores;
+          const score = Array.isArray(rawScore) ? rawScore[0] : rawScore;
+
+          if (!score) {
+            return acc;
+          }
+
+          let homeWon = score.home_won;
+
+          if (typeof homeWon !== 'boolean') {
+            const homeLines = score.home_lines_won;
+            const awayLines = score.away_lines_won;
+
+            if (typeof homeLines === 'number' && typeof awayLines === 'number' && homeLines !== awayLines) {
+              homeWon = homeLines > awayLines;
+            }
+          }
+
+          if (typeof homeWon !== 'boolean') {
+            return acc;
+          }
+
+          const isHomeTeam = Number(match.home_team_number) === teamNumber;
+
+          if ((isHomeTeam && homeWon) || (!isHomeTeam && !homeWon)) {
+            acc.wins += 1;
+          } else {
+            acc.losses += 1;
+          }
+
+          return acc;
+        }, { wins: 0, losses: 0 });
+
+        const matchesWithOutcome = wins + losses;
+        const winPercentage = matchesWithOutcome > 0
+          ? parseFloat(((wins / matchesWithOutcome) * 100).toFixed(1))
+          : 0;
+
+        return {
+          ...team,
+          matchesPlayed: teamMatches.length,
+          wins,
+          losses,
+          winPercentage
+        };
+      }).sort((a, b) => b.winPercentage - a.winPercentage || b.wins - a.wins) || [];
+
+      // Calculate matches by week for the chart
+      const matchesByWeek = matches?.reduce((acc, match) => {
+        const week = new Date(match.date).toISOString().split('T')[0];
+        acc[week] = (acc[week] || 0) + 1;
+        return acc;
+      }, {}) || {};
+
+      const matchesByWeekArray = Object.entries(matchesByWeek)
+        .map(([date, count]) => ({ date, count }))
+        .sort((a, b) => new Date(a.date) - new Date(b.date))
+        .slice(-8); // Last 8 weeks
+
+      setStats({
+        totalMatches: matches?.length || 0,
+        totalPlayers: players?.length || 0,
+        totalTeams: teams?.length || 0,
+        recentMatches: recentMatches || [],
+        topPerformers: teamStats.slice(0, 5),
+        teamStats,
+        matchesByWeek: matchesByWeekArray
+      });
+
+    } catch (err) {
+      console.error('Error fetching league stats:', err);
+      setError('Failed to load league statistics');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+  };
+
+  const getMatchResult = (match) => {
+    return `${match.home_team_name} vs ${match.away_team_name} - ${match.status}`;
+  };
+
+  if (loading) {
+    return (
+      <div className="league-stats">
+        <div className="loading">Loading league statistics...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="league-stats">
+        <div className="error">{error}</div>
+        <button onClick={fetchLeagueStats} className="retry-btn">
+          Try Again
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="league-stats">
+      <div className="stats-header">
+        <h1>League Statistics</h1>
+        <p>Comprehensive overview of league performance and activity</p>
+      </div>
+
+      {/* Overview Cards */}
+      <div className="stats-overview">
+        <div className="stat-card card card--interactive card--overlay">
+          <div className="stat-number">{stats.totalMatches}</div>
+          <div className="stat-label">Total Matches</div>
+        </div>
+        <div className="stat-card card card--interactive card--overlay">
+          <div className="stat-number">{stats.totalTeams}</div>
+          <div className="stat-label">Active Teams</div>
+        </div>
+        <div className="stat-card card card--interactive card--overlay">
+          <div className="stat-number">{stats.totalPlayers}</div>
+          <div className="stat-label">Registered Players</div>
+        </div>
+        <div className="stat-card card card--interactive card--overlay">
+          <div className="stat-number">
+            {stats.totalMatches > 0 ? (stats.totalMatches / stats.totalTeams).toFixed(1) : 0}
+          </div>
+          <div className="stat-label">Avg Matches/Team</div>
+        </div>
+      </div>
+
+      {/* Team Standings */}
+      <div className="stats-section card card--interactive">
+        <h2>Team Performance</h2>
+        <div className="team-standings card card--interactive">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Team</th>
+                <th>Matches</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Win %</th>
+              </tr>
+            </thead>
+            <tbody>
+              {stats.teamStats.map((team, index) => (
+                <tr key={team.id} className={index < 3 ? 'top-performer' : ''}>
+                  <td className="rank">
+                    {index + 1}
+                    {index === 0 && ' 🏆'}
+                    {index === 1 && ' 🥈'}
+                    {index === 2 && ' 🥉'}
+                  </td>
+                  <td className="team-name">{team.name}</td>
+                  <td>{team.matchesPlayed}</td>
+                  <td className="wins">{team.wins}</td>
+                  <td className="losses">{team.losses}</td>
+                  <td className="win-percentage">{team.winPercentage}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Recent Matches */}
+      <div className="stats-section card card--interactive">
+        <h2>Recent Matches</h2>
+        <div className="recent-matches">
+          {stats.recentMatches.length > 0 ? (
+            <div className="matches-list">
+              {stats.recentMatches.map((match) => (
+                <div key={match.id} className="match-item card card--interactive card--overlay">
+                  <div className="match-date">{formatDate(match.date)}</div>
+                  <div className="match-result">{getMatchResult(match)}</div>
+                  <div className="match-score">
+                    {match.home_team_name} vs {match.away_team_name} at {match.time}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="no-data">No recent matches found</p>
+          )}
+        </div>
+      </div>
+
+      {/* Match Activity Chart */}
+      <div className="stats-section card card--interactive">
+        <h2>Match Activity (Last 8 Weeks)</h2>
+        <div className="activity-chart card card--interactive">
+          {stats.matchesByWeek.length > 0 ? (
+            <div className="chart-container">
+              {stats.matchesByWeek.map((week, index) => (
+                <div key={index} className="chart-bar">
+                  <div 
+                    className="bar" 
+                    style={{ 
+                      height: `${Math.max(20, (week.count / Math.max(...stats.matchesByWeek.map(w => w.count))) * 100)}px` 
+                    }}
+                    title={`${week.count} matches`}
+                  ></div>
+                  <div className="bar-label">{formatDate(week.date)}</div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="no-data">No match activity data available</p>
+          )}
+        </div>
+      </div>
+
+      {/* Refresh Button */}
+      <div className="stats-actions">
+        <button onClick={fetchLeagueStats} className="refresh-btn">
+          🔄 Refresh Statistics
+        </button>
+      </div>
+    </div>
+  );
+};

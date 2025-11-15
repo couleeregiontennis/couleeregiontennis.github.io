@@ -1,0 +1,402 @@
+.teams-container {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.teams-column {
+  flex: 1;
+  min-width: 300px;
+}
+
+.team-list-header {
+  margin: 1rem 0;
+}
+
+.all-matches-link {
+  color: var(--secondary-light);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.all-matches-link:hover {
+  text-decoration: underline;
+}
+
+.team-list-info {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.team-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.team-list li {
+  margin-bottom: 0.5rem;
+}
+
+.team-list a {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.team-list a:hover {
+  background: var(--bg-tertiary);
+  color: var(--secondary-light);
+}
+
+.team-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.team-name {
+  color: var(--secondary);
+  margin-bottom: 1.5rem;
+}
+
+.schedule-section,
+.roster-section {
+  margin-bottom: 2rem;
+}
+
+.calendar-download {
+  margin: 1rem 0;
+}
+
+.calendar-link {
+  display: inline-block;
+  background: var(--primary-green);
+  color: var(--text-inverse);
+  padding: 0.6em 1.2em;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition-fast);
+  border: 2px solid var(--primary-green);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.calendar-link:hover:not(:disabled) {
+  background: var(--bg-primary);
+  color: var(--primary-green);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.calendar-link:disabled {
+  background: var(--text-secondary);
+  color: var(--bg-primary);
+  border-color: var(--text-secondary);
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.6;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.schedule-table,
+.roster-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.schedule-table th,
+.roster-table th {
+  background: var(--bg-secondary);
+  font-weight: 600;
+  text-align: left;
+}
+
+.schedule-table td,
+.schedule-table th,
+.roster-table td,
+.roster-table th {
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.team-link {
+  color: var(--secondary-light);
+  text-decoration: none;
+}
+
+.team-link:hover {
+  text-decoration: underline;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+}
+
+.date-time {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.date {
+  font-weight: 500;
+}
+
+.time {
+  color: var(--text-secondary);
+  font-size: 0.9em;
+}
+
+.time-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.calendar-icon {
+  font-size: 0.9em;
+  color: var(--secondary-light);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.calendar-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.groupme-link {
+  display: inline-block;
+  padding: 0.25em 0.75em;
+  background: var(--secondary-light);
+  color: var(--white);
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+.groupme-link:hover {
+  background: var(--secondary);
+}
+
+.find-sub-mobile {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .find-sub-mobile {
+    display: inline-block;
+    margin-left: 0.5em;
+  }
+}
+
+/* Style the icon if you want */
+.find-sub-icon {
+  font-size: 1.2em;
+  margin-left: 0.1em;
+  color: var(--secondary-light);
+  text-decoration: none;
+  vertical-align: middle;
+  transition: color 0.2s;
+}
+.find-sub-icon:hover {
+  color: var(--secondary);
+}
+
+@media (max-width: 800px) {
+  .teams-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .teams-column {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .schedule-table,
+  .roster-table {
+    font-size: 0.9em;
+  }
+  
+  .schedule-table td,
+  .schedule-table th,
+  .roster-table td,
+  .roster-table th {
+    padding: 0.6rem;
+  }
+}
+
+.find-sub-modal {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.find-sub-modal-content {
+  background: var(--white);
+  color: var(--text-primary);
+  padding: 1.5em;
+  border-radius: 8px;
+  max-width: 90vw;
+  width: 350px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  text-align: center;
+}
+.find-sub-modal-content textarea {
+  font-size: 1em;
+  padding: 0.5em;
+  border-radius: 4px;
+  border: 1px solid var(--border-primary);
+  resize: none;
+}
+.copy-btn, .close-btn {
+  margin: 0.5em 0.5em 0 0.5em;
+  padding: 0.5em 1.2em;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+}
+.copy-btn {
+  background: var(--secondary-light);
+  color: var(--white);
+}
+.copy-btn:hover {
+  background: var(--secondary);
+}
+.close-btn {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+.close-btn:hover {
+  background: var(--border-primary);
+}
+
+/* Match Results Styles */
+.results-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--bg-tertiary);
+}
+
+.match-results h3 {
+  color: var(--secondary);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--secondary);
+  padding-bottom: 0.5rem;
+}
+
+.results-table-container {
+  overflow-x: auto;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.results-table th {
+  background: var(--secondary);
+  color: white;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.results-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--bg-tertiary);
+}
+
+.results-table tr:hover {
+  background: var(--bg-secondary);
+}
+
+.results-table tr.win {
+  background: var(--success-bg);
+}
+
+.results-table tr.loss {
+  background: var(--error-bg);
+}
+
+.result {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.result.win {
+  background: var(--success);
+  color: white;
+}
+
+.result.loss {
+  background: var(--error);
+  color: white;
+}
+
+.match-results-loading,
+.match-results-error,
+.match-results-empty {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.match-results-error {
+  color: var(--error);
+  background: var(--error-bg);
+  border: 1px solid var(--error-bg);
+  border-radius: 4px;
+}
+
+/* Responsive design for results table */
+@media (max-width: 768px) {
+  .results-table th,
+  .results-table td {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .results-table th:nth-child(4),
+  .results-table td:nth-child(4),
+  .results-table th:nth-child(5),
+  .results-table td:nth-child(5) {
+    display: none;
+  }
+}

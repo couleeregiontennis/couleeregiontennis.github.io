@@ -1,0 +1,39 @@
+:root {
+  --announcement-bg: linear-gradient(90deg, rgba(var(--color-secondary-rgb), 0.08) 0%, rgba(var(--color-secondary-rgb), 0.16) 100%);
+  --announcement-border: rgba(var(--color-secondary-rgb), 0.25);
+  --announcement-text: var(--text-primary);
+  --announcement-strong: var(--secondary);
+}
+
+:root[data-theme="dark"] {
+  --announcement-bg: linear-gradient(90deg, rgba(var(--color-secondary-rgb), 0.12) 0%, rgba(var(--color-secondary-rgb), 0.3) 100%);
+  --announcement-border: rgba(148, 163, 184, 0.45);
+  --announcement-text: var(--text-primary);
+  --announcement-strong: var(--secondary-light);
+}
+
+.announcement-bar {
+  background: var(--announcement-bg);
+  color: var(--announcement-text);
+  font-size: 1.13em;
+  padding: 0.7em 1.2em;
+  text-align: center;
+  border-bottom: 2px solid var(--announcement-border);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 1.2em;
+}
+
+.announcement-bar strong {
+  color: var(--announcement-strong);
+}
+
+@media (max-width: 600px) {
+  .announcement-bar {
+    font-size: 1em;
+    padding: 0.7em 0.5em;
+    margin-bottom: 0.7em;
+    border-radius: 0;
+  }
+}

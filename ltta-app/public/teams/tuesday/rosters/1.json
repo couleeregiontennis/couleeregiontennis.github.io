@@ -1,0 +1,45 @@
+{
+  "teamName": "Spin Doctors",
+  "roster": [
+    {
+      "position": 1,
+      "name": "Tung Ouy",
+      "captain": ""
+    },
+    {
+      "position": 2,
+      "name": "Rich Puent",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Sai Mathi",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Isaac Puent",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Molly Stenger",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Mohammad",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Jim Brieske",
+      "captain": "✓"
+    },
+    {
+      "position": 5,
+      "name": "Kalyan Satydeep",
+      "captain": ""
+    }
+  ]
+}

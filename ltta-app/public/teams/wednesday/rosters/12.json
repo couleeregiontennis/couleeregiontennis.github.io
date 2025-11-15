@@ -1,0 +1,45 @@
+{
+  "teamName": "Nothing But Net",
+  "roster": [
+    {
+      "position": 1,
+      "name": "Alex Hiller",
+      "captain": "✓"
+    },
+    {
+      "position": 2,
+      "name": "Tom Londergan",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Lewis Kuhlman",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Sarah Wengerter",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Brittney DeChambeau",
+      "captain": ""
+    },
+    {
+      "position": 3,
+      "name": "Kevin LeQue",
+      "captain": ""
+    },
+    {
+      "position": 4,
+      "name": "Amy Harter",
+      "captain": ""
+    },
+    {
+      "position": 5,
+      "name": "Joe Hurley",
+      "captain": ""
+    }
+  ]
+}

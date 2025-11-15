@@ -19,4 +19,6 @@ Gemfile.lock
 .DS_Store
 ltta.csv
 output_emails/*
-node_modules/
+node_modules/*
+ltta-app/supabase-schema.sql
+ltta-app/supabase-schema.sql

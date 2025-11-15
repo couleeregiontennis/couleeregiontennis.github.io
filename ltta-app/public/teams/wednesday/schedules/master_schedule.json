@@ -1,0 +1,926 @@
+[
+  {
+    "week": 1,
+    "date": "2025-06-04",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Nothing But Net"
+    }
+  },
+  {
+    "week": 1,
+    "date": "2025-06-04",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "2",
+      "name": "Rally Monkeys"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Simply Smashing"
+    }
+  },
+  {
+    "week": 1,
+    "date": "2025-06-04",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "3",
+      "name": "Hit Squad"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Backhand Bandits"
+    }
+  },
+  {
+    "week": 1,
+    "date": "2025-06-04",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "4",
+      "name": "Hot Shots"
+    },
+    "teamB": {
+      "number": "9",
+      "name": "Baseliners"
+    }
+  },
+  {
+    "week": 1,
+    "date": "2025-06-04",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "5",
+      "name": "Glory Days"
+    },
+    "teamB": {
+      "number": "8",
+      "name": "Not My Fault"
+    }
+  },
+  {
+    "week": 1,
+    "date": "2025-06-04",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "6",
+      "name": "Howie's Team"
+    },
+    "teamB": {
+      "number": "7",
+      "name": "Serve Aces"
+    }
+  },
+  {
+    "week": 2,
+    "date": "2025-06-11",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Simply Smashing"
+    }
+  },
+  {
+    "week": 2,
+    "date": "2025-06-11",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "12",
+      "name": "Nothing But Net"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Backhand Bandits"
+    }
+  },
+  {
+    "week": 2,
+    "date": "2025-06-11",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "2",
+      "name": "Rally Monkeys"
+    },
+    "teamB": {
+      "number": "9",
+      "name": "Baseliners"
+    }
+  },
+  {
+    "week": 2,
+    "date": "2025-06-11",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "3",
+      "name": "Hit Squad"
+    },
+    "teamB": {
+      "number": "8",
+      "name": "Not My Fault"
+    }
+  },
+  {
+    "week": 2,
+    "date": "2025-06-11",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "4",
+      "name": "Hot Shots"
+    },
+    "teamB": {
+      "number": "7",
+      "name": "Serve Aces"
+    }
+  },
+  {
+    "week": 2,
+    "date": "2025-06-11",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "5",
+      "name": "Glory Days"
+    },
+    "teamB": {
+      "number": "6",
+      "name": "Howie's Team"
+    }
+  },
+  {
+    "week": 3,
+    "date": "2025-06-18",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Backhand Bandits"
+    }
+  },
+  {
+    "week": 3,
+    "date": "2025-06-18",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "11",
+      "name": "Simply Smashing"
+    },
+    "teamB": {
+      "number": "9",
+      "name": "Baseliners"
+    }
+  },
+  {
+    "week": 3,
+    "date": "2025-06-18",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "12",
+      "name": "Nothing But Net"
+    },
+    "teamB": {
+      "number": "8",
+      "name": "Not My Fault"
+    }
+  },
+  {
+    "week": 3,
+    "date": "2025-06-18",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "2",
+      "name": "Rally Monkeys"
+    },
+    "teamB": {
+      "number": "7",
+      "name": "Serve Aces"
+    }
+  },
+  {
+    "week": 3,
+    "date": "2025-06-18",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "3",
+      "name": "Hit Squad"
+    },
+    "teamB": {
+      "number": "6",
+      "name": "Howie's Team"
+    }
+  },
+  {
+    "week": 3,
+    "date": "2025-06-18",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "4",
+      "name": "Hot Shots"
+    },
+    "teamB": {
+      "number": "5",
+      "name": "Glory Days"
+    }
+  },
+  {
+    "week": 4,
+    "date": "2025-06-25",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
+    },
+    "teamB": {
+      "number": "9",
+      "name": "Baseliners"
+    }
+  },
+  {
+    "week": 4,
+    "date": "2025-06-25",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "10",
+      "name": "Backhand Bandits"
+    },
+    "teamB": {
+      "number": "8",
+      "name": "Not My Fault"
+    }
+  },
+  {
+    "week": 4,
+    "date": "2025-06-25",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "11",
+      "name": "Simply Smashing"
+    },
+    "teamB": {
+      "number": "7",
+      "name": "Serve Aces"
+    }
+  },
+  {
+    "week": 4,
+    "date": "2025-06-25",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "12",
+      "name": "Nothing But Net"
+    },
+    "teamB": {
+      "number": "6",
+      "name": "Howie's Team"
+    }
+  },
+  {
+    "week": 4,
+    "date": "2025-06-25",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "2",
+      "name": "Rally Monkeys"
+    },
+    "teamB": {
+      "number": "5",
+      "name": "Glory Days"
+    }
+  },
+  {
+    "week": 4,
+    "date": "2025-06-25",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "3",
+      "name": "Hit Squad"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Hot Shots"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2025-07-02",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
+    },
+    "teamB": {
+      "number": "8",
+      "name": "Not My Fault"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2025-07-02",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "9",
+      "name": "Baseliners"
+    },
+    "teamB": {
+      "number": "7",
+      "name": "Serve Aces"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2025-07-02",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "10",
+      "name": "Backhand Bandits"
+    },
+    "teamB": {
+      "number": "6",
+      "name": "Howie's Team"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2025-07-02",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "11",
+      "name": "Simply Smashing"
+    },
+    "teamB": {
+      "number": "5",
+      "name": "Glory Days"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2025-07-02",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "12",
+      "name": "Nothing But Net"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Hot Shots"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2025-07-02",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "2",
+      "name": "Rally Monkeys"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Hit Squad"
+    }
+  },
+  {
+    "week": 6,
+    "date": "2025-07-09",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
+    },
+    "teamB": {
+      "number": "7",
+      "name": "Serve Aces"
+    }
+  },
+  {
+    "week": 6,
+    "date": "2025-07-09",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "8",
+      "name": "Not My Fault"
+    },
+    "teamB": {
+      "number": "6",
+      "name": "Howie's Team"
+    }
+  },
+  {
+    "week": 6,
+    "date": "2025-07-09",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "9",
+      "name": "Baseliners"
+    },
+    "teamB": {
+      "number": "5",
+      "name": "Glory Days"
+    }
+  },
+  {
+    "week": 6,
+    "date": "2025-07-09",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "10",
+      "name": "Backhand Bandits"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Hot Shots"
+    }
+  },
+  {
+    "week": 6,
+    "date": "2025-07-09",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "11",
+      "name": "Simply Smashing"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Hit Squad"
+    }
+  },
+  {
+    "week": 6,
+    "date": "2025-07-09",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "12",
+      "name": "Nothing But Net"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Rally Monkeys"
+    }
+  },
+  {
+    "week": 7,
+    "date": "2025-07-16",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
+    },
+    "teamB": {
+      "number": "6",
+      "name": "Howie's Team"
+    }
+  },
+  {
+    "week": 7,
+    "date": "2025-07-16",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "7",
+      "name": "Serve Aces"
+    },
+    "teamB": {
+      "number": "5",
+      "name": "Glory Days"
+    }
+  },
+  {
+    "week": 7,
+    "date": "2025-07-16",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "8",
+      "name": "Not My Fault"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Hot Shots"
+    }
+  },
+  {
+    "week": 7,
+    "date": "2025-07-16",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "9",
+      "name": "Baseliners"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Hit Squad"
+    }
+  },
+  {
+    "week": 7,
+    "date": "2025-07-16",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "10",
+      "name": "Backhand Bandits"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Rally Monkeys"
+    }
+  },
+  {
+    "week": 7,
+    "date": "2025-07-16",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "11",
+      "name": "Simply Smashing"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Nothing But Net"
+    }
+  },
+  {
+    "week": 8,
+    "date": "2025-07-23",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
+    },
+    "teamB": {
+      "number": "5",
+      "name": "Glory Days"
+    }
+  },
+  {
+    "week": 8,
+    "date": "2025-07-23",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "6",
+      "name": "Howie's Team"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Hot Shots"
+    }
+  },
+  {
+    "week": 8,
+    "date": "2025-07-23",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "7",
+      "name": "Serve Aces"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Hit Squad"
+    }
+  },
+  {
+    "week": 8,
+    "date": "2025-07-23",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "8",
+      "name": "Not My Fault"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Rally Monkeys"
+    }
+  },
+  {
+    "week": 8,
+    "date": "2025-07-23",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "9",
+      "name": "Baseliners"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Nothing But Net"
+    }
+  },
+  {
+    "week": 8,
+    "date": "2025-07-23",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "10",
+      "name": "Backhand Bandits"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Simply Smashing"
+    }
+  },
+  {
+    "week": 9,
+    "date": "2025-07-30",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Hot Shots"
+    }
+  },
+  {
+    "week": 9,
+    "date": "2025-07-30",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "5",
+      "name": "Glory Days"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Hit Squad"
+    }
+  },
+  {
+    "week": 9,
+    "date": "2025-07-30",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "6",
+      "name": "Howie's Team"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Rally Monkeys"
+    }
+  },
+  {
+    "week": 9,
+    "date": "2025-07-30",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "7",
+      "name": "Serve Aces"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Nothing But Net"
+    }
+  },
+  {
+    "week": 9,
+    "date": "2025-07-30",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "8",
+      "name": "Not My Fault"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Simply Smashing"
+    }
+  },
+  {
+    "week": 9,
+    "date": "2025-07-30",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "9",
+      "name": "Baseliners"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Backhand Bandits"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2025-08-06",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Hit Squad"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2025-08-06",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "4",
+      "name": "Hot Shots"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Rally Monkeys"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2025-08-06",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "5",
+      "name": "Glory Days"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Nothing But Net"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2025-08-06",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "6",
+      "name": "Howie's Team"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Simply Smashing"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2025-08-06",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "7",
+      "name": "Serve Aces"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Backhand Bandits"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2025-08-06",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "8",
+      "name": "Not My Fault"
+    },
+    "teamB": {
+      "number": "9",
+      "name": "Baseliners"
+    }
+  },
+  {
+    "week": 11,
+    "date": "2025-08-13",
+    "time": "5:30pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Rally Monkeys"
+    }
+  },
+  {
+    "week": 11,
+    "date": "2025-08-13",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
+      "number": "3",
+      "name": "Hit Squad"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Nothing But Net"
+    }
+  },
+  {
+    "week": 11,
+    "date": "2025-08-13",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "4",
+      "name": "Hot Shots"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Simply Smashing"
+    }
+  },
+  {
+    "week": 11,
+    "date": "2025-08-13",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "5",
+      "name": "Glory Days"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Backhand Bandits"
+    }
+  },
+  {
+    "week": 11,
+    "date": "2025-08-13",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "6",
+      "name": "Howie's Team"
+    },
+    "teamB": {
+      "number": "9",
+      "name": "Baseliners"
+    }
+  },
+  {
+    "week": 11,
+    "date": "2025-08-13",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "7",
+      "name": "Serve Aces"
+    },
+    "teamB": {
+      "number": "8",
+      "name": "Not My Fault"
+    }
+  }
+]

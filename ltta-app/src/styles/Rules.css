@@ -1,0 +1,312 @@
+/* Rules Page Styles - Matching LeagueStats Layout */
+.rules-page {
+  --rules-page-bg: var(--bg-primary);
+  --rules-card-bg: var(--bg-secondary);
+  --rules-card-border: var(--border-primary);
+  --rules-card-text: var(--text-primary);
+  --rules-card-muted: var(--text-secondary);
+  --rules-accent: var(--primary-green);
+  --rules-accent-strong: var(--primary-green-dark);
+  padding: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--rules-page-bg);
+  color: var(--rules-card-text);
+  font-family: var(--font-family);
+  line-height: 1.6;
+}
+
+:root[data-theme="dark"] .rules-page {
+  --rules-page-bg: var(--bg-dark);
+  --rules-card-bg: rgba(30, 41, 59, 0.92);
+  --rules-card-border: rgba(148, 163, 184, 0.3);
+  --rules-card-text: var(--text-primary);
+  --rules-card-muted: rgba(226, 232, 240, 0.75);
+  --rules-accent: var(--secondary-light);
+  --rules-accent-strong: var(--secondary);
+}
+
+/* Header Section */
+.rules-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.rules-header h1 {
+  color: var(--rules-accent);
+  font-size: var(--font-size-4xl);
+  font-weight: bold;
+  margin-bottom: var(--space-sm);
+}
+
+.rules-header p {
+  color: var(--rules-card-muted);
+  font-size: var(--font-size-lg);
+  margin: 0;
+}
+
+/* Overview Cards */
+.rules-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.rule-card {
+  background: var(--rules-card-bg);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--rules-card-border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--rules-card-text);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+}
+
+.rule-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--rules-accent);
+  box-shadow: var(--shadow-md);
+}
+
+.rule-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.rule-title {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  color: var(--rules-accent);
+  margin-bottom: var(--space-xs);
+}
+
+.rule-description {
+  font-size: var(--font-size-sm);
+  color: var(--rules-card-muted);
+  font-weight: 500;
+}
+
+/* Rules Sections */
+.rules-section {
+  margin-bottom: 40px;
+}
+
+.rules-section h2 {
+  color: var(--rules-accent);
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-xl);
+  border-bottom: 3px solid var(--rules-accent);
+  padding-bottom: var(--space-sm);
+}
+
+.rules-content {
+  background: var(--rules-card-bg);
+  border: 1px solid var(--rules-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.rules-content p {
+  margin: 0 0 var(--space-md);
+  color: var(--rules-card-text);
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+}
+
+.rules-content p:last-child {
+  margin-bottom: 0;
+}
+
+.rules-highlight {
+  margin-top: var(--space-lg);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  background: rgba(var(--color-secondary-rgb), 0.1);
+  border: 1px solid rgba(var(--color-secondary-rgb), 0.25);
+  color: var(--rules-accent-strong);
+  font-weight: 600;
+  text-align: center;
+}
+
+.rules-note {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  border-left: 3px solid var(--rules-accent);
+  background: rgba(var(--color-secondary-rgb), 0.08);
+  color: var(--rules-card-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* List Styling */
+ul {
+  padding-left: 1.2rem;
+  margin: 0;
+  color: var(--rules-card-text);
+}
+
+li {
+  margin-bottom: 0.7rem;
+  line-height: 1.6;
+  font-size: var(--font-size-base);
+  list-style: disc;
+  color: var(--rules-card-text);
+  position: relative;
+  padding-left: 0.3rem;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+li::marker {
+  color: var(--rules-accent);
+  font-weight: bold;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-lg);
+}
+
+.skill-card {
+  border: 1px solid var(--rules-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  background: rgba(var(--color-secondary-rgb), 0.08);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.skill-level {
+  font-weight: 700;
+  color: var(--rules-accent);
+  font-size: var(--font-size-lg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .rules-page {
+    padding: 15px;
+  }
+
+  .rules-header h1 {
+    font-size: 2rem;
+  }
+
+  .rules-overview {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .rule-card {
+    padding: 1rem;
+    min-height: 120px;
+  }
+
+  .rule-icon {
+    font-size: 2rem;
+  }
+
+  .rule-title {
+    font-size: var(--font-size-base);
+  }
+
+  .rule-description {
+    font-size: var(--font-size-xs);
+  }
+
+  .rules-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .rules-content {
+    padding: var(--space-lg);
+  }
+
+  li {
+    font-size: var(--font-size-sm);
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .rules-overview {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rule-card {
+    padding: 0.8rem;
+    min-height: 100px;
+  }
+
+  .rule-icon {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .rule-title {
+    font-size: var(--font-size-sm);
+    margin-bottom: 0.2rem;
+  }
+
+  .rule-description {
+    font-size: var(--font-size-xs);
+  }
+
+  .rules-header p {
+    font-size: var(--font-size-base);
+  }
+
+  .rules-section {
+    margin-bottom: 30px;
+  }
+
+  .rules-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .rules-content {
+    padding: var(--space-md);
+  }
+
+  ul {
+    padding-left: 1rem;
+  }
+
+  li {
+    font-size: var(--font-size-sm);
+    margin-bottom: 0.5rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dark Mode Enhancements */
+body[data-theme="dark"] .rule-card:hover {
+  background: rgba(var(--color-secondary-rgb), 0.12);
+}
+
+body[data-theme="dark"] .rules-content {
+  background: rgba(30, 41, 59, 0.92);
+}
+
+body[data-theme="dark"] .rules-content li::marker {
+  color: var(--secondary-light);
+}
