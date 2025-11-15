@@ -30,18 +30,18 @@ jobs:
           cache: npm
           cache-dependency-path: |
             package-lock.json
-            .conductor/pattaya/ltta-app/package-lock.json
+            ltta-app/package-lock.json
 
       - name: Install dependencies
-        run: npm install --prefix .conductor/pattaya/ltta-app
+        run: npm install --prefix ltta-app
 
       - name: Build site
-        run: npm run build --prefix .conductor/pattaya/ltta-app
+        run: npm run build --prefix ltta-app
 
       - name: Upload static files
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .conductor/pattaya/ltta-app/build
+          path: ltta-app/build
 
   deploy:
     needs: build
