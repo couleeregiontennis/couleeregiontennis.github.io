@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('dotenv').config();
 const seedrandom = require('seedrandom');
 const { createClient } = require('@supabase/supabase-js');
 
@@ -26,18 +27,44 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 // Utilities
 // ---------------------------------------------------------------------------
 const addDays = (dateStr, days) => {
+const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+
+// ---------------------------------------------------------------------------
+// Utilities
+// ---------------------------------------------------------------------------
+const addDays = (dateStr, days) => {
   const d = new Date(dateStr);
   d.setDate(d.getDate() + days);
   return d.toISOString().slice(0, 10);
 };
 
 const shuffle = (items, seed) => {
+};
+
+const shuffle = (items, seed) => {
   const rng = seedrandom(seed);
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
   const result = [...items];
   for (let i = result.length - 1; i > 0; i--) {
     const j = Math.floor(rng() * (i + 1));
     [result[i], result[j]] = [result[j], result[i]];
+    [result[i], result[j]] = [result[j], result[i]];
   }
+  return result;
+};
+
+// ---------------------------------------------------------------------------
+// Scheduling helpers
+// ---------------------------------------------------------------------------
+const generateRoundRobin = (teams, seed = SEED) => {
+  if (teams.length < 2) return [];
+
+  const rotated = shuffle(teams, seed);
+  if (rotated.length % 2 === 1) rotated.push(null);
+
+  const rounds = rotated.length - 1;
+  const half = rotated.length / 2;
   return result;
 };
 
@@ -55,8 +82,14 @@ const generateRoundRobin = (teams, seed = SEED) => {
   const schedule = [];
 
   for (let round = 0; round < rounds; round++) {
+
+  for (let round = 0; round < rounds; round++) {
     const matches = [];
     for (let i = 0; i < half; i++) {
+      const home = rotated[i];
+      const away = rotated[rotated.length - 1 - i];
+      if (home && away) {
+        matches.push({ home, away });
       const home = rotated[i];
       const away = rotated[rotated.length - 1 - i];
       if (home && away) {
@@ -65,6 +98,10 @@ const generateRoundRobin = (teams, seed = SEED) => {
     }
     schedule.push(matches);
 
+    const fixed = rotated[0];
+    const rest = rotated.slice(1);
+    rest.unshift(rest.pop());
+    rotated.splice(0, rotated.length, fixed, ...rest);
     const fixed = rotated[0];
     const rest = rotated.slice(1);
     rest.unshift(rest.pop());
