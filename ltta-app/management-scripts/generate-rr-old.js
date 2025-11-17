@@ -5,6 +5,7 @@ const { createClient } = require('@supabase/supabase-js');
 // ---------------------------------------------------------------------------
 // Configuration
 // ---------------------------------------------------------------------------
+const COURT_GROUPS = ['Courts 1–5', 'Courts 6–9', 'Courts 10–13'];
 const TIMES = ['5:30pm', '7:00pm'];
 const SEED = 2025;
 
@@ -74,8 +75,8 @@ const generateRoundRobin = (teams, seed = SEED) => {
   return schedule;
 };
 
-const assignSlots = (matchesByWeek, courtGroups) => {
-  const slots = courtGroups.flatMap((court) =>
+const assignSlots = (matchesByWeek) => {
+  const slots = COURT_GROUPS.flatMap((court) =>
     TIMES.map((time) => ({ court, time }))
   );
 
@@ -165,41 +166,10 @@ const fetchTeamsGroupedByNight = async () => {
   }, {});
 };
 
-const fetchCourtGroupsForLocation = async (locationId) => {
-  // If no locationId provided, fetch from database or use defaults
-  if (!locationId) {
-    // Try to fetch Green Island as default
-    const { data: locationData, error: locationError } = await supabase
-      .from('location')
-      .select('id')
-      .eq('name', 'Green Island Tennis Club')
-      .single();
-
-    if (!locationError && locationData) {
-      locationId = locationData.id;
-    } else {
-      // Fallback to default court groups
-      return ['Courts 1–5', 'Courts 6–9', 'Courts 10–13'];
-    }
-  }
-
-  const { data, error } = await supabase
-    .from('court_group')
-    .select('group_name')
-    .eq('location_id', locationId)
-    .order('group_name');
-
-  if (error || !data || data.length === 0) {
-    throw new Error(`Failed to fetch court groups: ${error ? error.message : 'No court groups found'}`);
-  }
-
-  return data.map(g => g.group_name);
-};
-
 // ---------------------------------------------------------------------------
 // Orchestration
 // ---------------------------------------------------------------------------
-const buildSchedules = (teamsByNight, locationId) => {
+const buildSchedules = (teamsByNight) => {
   return Object.entries(teamsByNight).map(([night, teams]) => {
     if (teams.length < 2) {
       return {
@@ -215,7 +185,7 @@ const buildSchedules = (teamsByNight, locationId) => {
     }
 
     const roundRobin = generateRoundRobin(teams);
-    const scheduledRounds = assignSlots(roundRobin, locationId);
+    const scheduledRounds = assignSlots(roundRobin);
 
     const matches = [];
     scheduledRounds.forEach((round, roundIdx) => {
@@ -250,32 +220,13 @@ const buildSchedules = (teamsByNight, locationId) => {
 // Main entry
 // ---------------------------------------------------------------------------
 async function main() {
-  // Check if locationId provided via command line argument
-  const locationId = process.argv[2] || null;
-
-  console.error(`Generating schedule${locationId ? ' for location ' + locationId : ' with default court groups'}...`);
-
   const teamsByNight = await fetchTeamsGroupedByNight();
-
-  // Fetch court groups if location is provided
-  let finalCourtGroups = ['Courts 1–5', 'Courts 6–9', 'Courts 10–13'];
-  if (locationId) {
-    try {
-      finalCourtGroups = await fetchCourtGroupsForLocation(locationId);
-      console.error(`Using court groups: ${finalCourtGroups.join(', ')}`);
-    } catch (error) {
-      console.error(`Warning: ${error.message}. Using default court groups.`);
-    }
-  }
-
-  const schedules = buildSchedules(teamsByNight, finalCourtGroups);
+  const schedules = buildSchedules(teamsByNight);
 
   console.log(
     JSON.stringify(
       {
         generated_at: new Date().toISOString(),
-        location_id: locationId || null,
-        court_groups: finalCourtGroups,
         nights: schedules
       },
       null,
