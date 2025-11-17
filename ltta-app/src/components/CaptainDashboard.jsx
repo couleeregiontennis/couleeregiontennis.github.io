@@ -613,6 +613,16 @@ export const CaptainDashboard = () => {
               <h3>View Team Performance</h3>
               <p>Open the full performance dashboard.</p>
             </Link>
+            {user && (
+              <Link
+                to="/admin/schedule-generator"
+                className="tool-card card card--interactive tool-card-link"
+              >
+                <div className="tool-icon">⚙️</div>
+                <h3>Schedule Generator</h3>
+                <p>Generate new schedule for upcoming season.</p>
+              </Link>
+            )}
           </div>
         </section>
       </div>

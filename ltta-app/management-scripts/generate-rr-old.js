@@ -1,11 +1,11 @@
 require('dotenv').config();
-require('dotenv').config();
 const seedrandom = require('seedrandom');
 const { createClient } = require('@supabase/supabase-js');
 
 // ---------------------------------------------------------------------------
 // Configuration
 // ---------------------------------------------------------------------------
+const COURT_GROUPS = ['Courts 1–5', 'Courts 6–9', 'Courts 10–13'];
 const TIMES = ['5:30pm', '7:00pm'];
 const SEED = 2025;
 
@@ -27,44 +27,18 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 // Utilities
 // ---------------------------------------------------------------------------
 const addDays = (dateStr, days) => {
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
-
-// ---------------------------------------------------------------------------
-// Utilities
-// ---------------------------------------------------------------------------
-const addDays = (dateStr, days) => {
   const d = new Date(dateStr);
   d.setDate(d.getDate() + days);
   return d.toISOString().slice(0, 10);
 };
 
 const shuffle = (items, seed) => {
-};
-
-const shuffle = (items, seed) => {
   const rng = seedrandom(seed);
-  const result = [...items];
-  for (let i = result.length - 1; i > 0; i--) {
   const result = [...items];
   for (let i = result.length - 1; i > 0; i--) {
     const j = Math.floor(rng() * (i + 1));
     [result[i], result[j]] = [result[j], result[i]];
-    [result[i], result[j]] = [result[j], result[i]];
   }
-  return result;
-};
-
-// ---------------------------------------------------------------------------
-// Scheduling helpers
-// ---------------------------------------------------------------------------
-const generateRoundRobin = (teams, seed = SEED) => {
-  if (teams.length < 2) return [];
-
-  const rotated = shuffle(teams, seed);
-  if (rotated.length % 2 === 1) rotated.push(null);
-
-  const rounds = rotated.length - 1;
-  const half = rotated.length / 2;
   return result;
 };
 
@@ -82,14 +56,8 @@ const generateRoundRobin = (teams, seed = SEED) => {
   const schedule = [];
 
   for (let round = 0; round < rounds; round++) {
-
-  for (let round = 0; round < rounds; round++) {
     const matches = [];
     for (let i = 0; i < half; i++) {
-      const home = rotated[i];
-      const away = rotated[rotated.length - 1 - i];
-      if (home && away) {
-        matches.push({ home, away });
       const home = rotated[i];
       const away = rotated[rotated.length - 1 - i];
       if (home && away) {
@@ -102,17 +70,13 @@ const generateRoundRobin = (teams, seed = SEED) => {
     const rest = rotated.slice(1);
     rest.unshift(rest.pop());
     rotated.splice(0, rotated.length, fixed, ...rest);
-    const fixed = rotated[0];
-    const rest = rotated.slice(1);
-    rest.unshift(rest.pop());
-    rotated.splice(0, rotated.length, fixed, ...rest);
   }
 
   return schedule;
 };
 
-const assignSlots = (matchesByWeek, courtGroups) => {
-  const slots = courtGroups.flatMap((court) =>
+const assignSlots = (matchesByWeek) => {
+  const slots = COURT_GROUPS.flatMap((court) =>
     TIMES.map((time) => ({ court, time }))
   );
 
@@ -202,41 +166,10 @@ const fetchTeamsGroupedByNight = async () => {
   }, {});
 };
 
-const fetchCourtGroupsForLocation = async (locationId) => {
-  // If no locationId provided, fetch from database or use defaults
-  if (!locationId) {
-    // Try to fetch Green Island as default
-    const { data: locationData, error: locationError } = await supabase
-      .from('location')
-      .select('id')
-      .eq('name', 'Green Island Tennis Club')
-      .single();
-
-    if (!locationError && locationData) {
-      locationId = locationData.id;
-    } else {
-      // Fallback to default court groups
-      return ['Courts 1–5', 'Courts 6–9', 'Courts 10–13'];
-    }
-  }
-
-  const { data, error } = await supabase
-    .from('court_group')
-    .select('group_name')
-    .eq('location_id', locationId)
-    .order('group_name');
-
-  if (error || !data || data.length === 0) {
-    throw new Error(`Failed to fetch court groups: ${error ? error.message : 'No court groups found'}`);
-  }
-
-  return data.map(g => g.group_name);
-};
-
 // ---------------------------------------------------------------------------
 // Orchestration
 // ---------------------------------------------------------------------------
-const buildSchedules = (teamsByNight, locationId) => {
+const buildSchedules = (teamsByNight) => {
   return Object.entries(teamsByNight).map(([night, teams]) => {
     if (teams.length < 2) {
       return {
@@ -252,7 +185,7 @@ const buildSchedules = (teamsByNight, locationId) => {
     }
 
     const roundRobin = generateRoundRobin(teams);
-    const scheduledRounds = assignSlots(roundRobin, locationId);
+    const scheduledRounds = assignSlots(roundRobin);
 
     const matches = [];
     scheduledRounds.forEach((round, roundIdx) => {
@@ -287,32 +220,13 @@ const buildSchedules = (teamsByNight, locationId) => {
 // Main entry
 // ---------------------------------------------------------------------------
 async function main() {
-  // Check if locationId provided via command line argument
-  const locationId = process.argv[2] || null;
-
-  console.error(`Generating schedule${locationId ? ' for location ' + locationId : ' with default court groups'}...`);
-
   const teamsByNight = await fetchTeamsGroupedByNight();
-
-  // Fetch court groups if location is provided
-  let finalCourtGroups = ['Courts 1–5', 'Courts 6–9', 'Courts 10–13'];
-  if (locationId) {
-    try {
-      finalCourtGroups = await fetchCourtGroupsForLocation(locationId);
-      console.error(`Using court groups: ${finalCourtGroups.join(', ')}`);
-    } catch (error) {
-      console.error(`Warning: ${error.message}. Using default court groups.`);
-    }
-  }
-
-  const schedules = buildSchedules(teamsByNight, finalCourtGroups);
+  const schedules = buildSchedules(teamsByNight);
 
   console.log(
     JSON.stringify(
       {
         generated_at: new Date().toISOString(),
-        location_id: locationId || null,
-        court_groups: finalCourtGroups,
         nights: schedules
       },
       null,
