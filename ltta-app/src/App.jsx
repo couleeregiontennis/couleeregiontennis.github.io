@@ -19,6 +19,7 @@ import { TeamStats } from './components/TeamStats';
 import { AllMatches } from './components/AllMatches';
 import { NotFound } from './components/NotFound';
 import { LandingPage } from './components/LandingPage';
+import { ScheduleGenerator } from './components/admin/ScheduleGenerator';
 import './styles/colors.css';
 import './styles/Style.css';
 import './styles/Navigation.css';
@@ -96,6 +97,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <TeamStats />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/schedule-generator"
+              element={
+                <ProtectedRoute>
+                  <ScheduleGenerator />
                 </ProtectedRoute>
               }
             />
