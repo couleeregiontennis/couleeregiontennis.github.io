@@ -20,6 +20,9 @@ import { AllMatches } from './components/AllMatches';
 import { NotFound } from './components/NotFound';
 import { LandingPage } from './components/LandingPage';
 import { ScheduleGenerator } from './components/admin/ScheduleGenerator';
+import { PlayerRankings } from './components/PlayerRankings';
+import { MySchedule } from './components/MySchedule';
+import { CourtsLocations } from './components/CourtsLocations';
 import './styles/colors.css';
 import './styles/Style.css';
 import './styles/Navigation.css';
@@ -75,7 +78,10 @@ function App() {
             <Route path="/greenisland" element={<GreenIsland />} />
             <Route path="/rules" element={<Rules />} />
             <Route path="/standings" element={<Standings />} />
+            <Route path="/player-rankings" element={<PlayerRankings />} />
+            <Route path="/courts-locations" element={<CourtsLocations />} />
             <Route path="/login" element={<Login />} />
+
             <Route
               path="/add-score"
               element={
@@ -108,12 +114,36 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/admin/player-management"
+              element={
+                <ProtectedRoute>
+                  <div>Player Management (Coming Soon)</div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/team-management"
+              element={
+                <ProtectedRoute>
+                  <div>Team Management (Coming Soon)</div>
+                </ProtectedRoute>
+              }
+            />
             <Route path="/league-stats" element={<LeagueStats />} />
             <Route
               path="/player-profile"
               element={
                 <ProtectedRoute>
                   <PlayerProfile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/my-schedule"
+              element={
+                <ProtectedRoute>
+                  <MySchedule />
                 </ProtectedRoute>
               }
             />

@@ -83,9 +83,10 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
           </div>
           <div className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
             <ul>
-              <li><Link to="/team" onClick={closeMenu}>Teams</Link></li>
+              <li><Link to="/" onClick={closeMenu}>Home</Link></li>
+              <li><Link to="/schedule" onClick={closeMenu}>Schedule</Link></li>
 
-              {/* League Info Dropdown */}
+              {/* League Dropdown */}
               <li className="dropdown">
                 <button
                   className="dropdown-toggle"
@@ -94,13 +95,14 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
                   aria-haspopup="menu"
                   type="button"
                 >
-                  League Info <span className="dropdown-arrow">▼</span>
+                  League <span className="dropdown-arrow">▼</span>
                 </button>
                 <ul className={`dropdown-menu ${openDropdown === 'league' ? 'show' : ''}`} role="menu">
-                  <li><Link to="/rules" onClick={closeMenu}>Rules</Link></li>
                   <li><Link to="/standings" onClick={closeMenu}>Standings</Link></li>
-                  <li><Link to="/schedule" onClick={closeMenu}>Schedule</Link></li>
+                  <li><Link to="/all-matches" onClick={closeMenu}>All Matches</Link></li>
                   <li><Link to="/league-stats" onClick={closeMenu}>League Stats</Link></li>
+                  <li><Link to="/player-rankings" onClick={closeMenu}>Player Rankings</Link></li>
+                  <li><Link to="/team" onClick={closeMenu}>All Teams</Link></li>
                   <li>
                     <a
                       href="http://www.couleeregiontennis.com"
@@ -111,61 +113,85 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
                       CRTA Website
                     </a>
                   </li>
+                  <li><Link to="/rules" onClick={closeMenu}>Rules</Link></li>
                 </ul>
               </li>
 
-              {/* Player Tools Dropdown */}
-              <li className="dropdown">
-                <button
-                  className="dropdown-toggle"
-                  onClick={() => toggleDropdown('player')}
-                  aria-expanded={openDropdown === 'player'}
-                  aria-haspopup="menu"
-                  type="button"
-                >
-                  Player Tools <span className="dropdown-arrow">▼</span>
-                </button>
-                <ul className={`dropdown-menu ${openDropdown === 'player' ? 'show' : ''}`} role="menu">
-                  <li><Link to="/subs" onClick={closeMenu}>Find a Sub</Link></li>
-                  <li><Link to="/greenisland" onClick={closeMenu}>Green Island</Link></li>
-                </ul>
-              </li>
-
-              {/* My Account Dropdown - Only show if user is logged in */}
+              {/* Player Hub Dropdown - only show if user is logged in */}
               {user && (
                 <li className="dropdown">
                   <button
                     className="dropdown-toggle"
-                    onClick={() => toggleDropdown('account')}
-                    aria-expanded={openDropdown === 'account'}
+                    onClick={() => toggleDropdown('player')}
+                    aria-expanded={openDropdown === 'player'}
                     aria-haspopup="menu"
                     type="button"
                   >
-                    My Account <span className="dropdown-arrow">▼</span>
+                    My Hub <span className="dropdown-arrow">▼</span>
                   </button>
-                  <ul className={`dropdown-menu ${openDropdown === 'account' ? 'show' : ''}`} role="menu">
+                  <ul className={`dropdown-menu ${openDropdown === 'player' ? 'show' : ''}`} role="menu">
                     <li><Link to="/player-profile" onClick={closeMenu}>My Profile</Link></li>
+                    <li><Link to="/my-schedule" onClick={closeMenu}>My Schedule</Link></li>
+                    <li><Link to="/team-performance" onClick={closeMenu}>My Team Performance</Link></li>
                     <li><Link to="/captain-dashboard" onClick={closeMenu}>Captain Dashboard</Link></li>
-                    <li><Link to="/team-performance" onClick={closeMenu}>Team Performance</Link></li>
-                    <li><Link to="/add-score" onClick={closeMenu}>Add Score</Link></li>
+                    <li><Link to="/add-score" onClick={closeMenu}>Submit Scores</Link></li>
+                    <li><Link to="/subs" onClick={closeMenu}>Find a Sub</Link></li>
                   </ul>
                 </li>
               )}
 
-              <li className="navbar-auth">
-                {user ? (
-                  <>
-                    <span className="navbar-user-icon" title={user.email}>👤</span>
-                    <button className="navbar-logout-btn" onClick={() => { handleLogout(); closeMenu(); }}>
-                      Logout
-                    </button>
-                  </>
-                ) : (
+              {/* General Player Resources */}
+              <li className="dropdown">
+                <button
+                  className="dropdown-toggle"
+                  onClick={() => toggleDropdown('resources')}
+                  aria-expanded={openDropdown === 'resources'}
+                  aria-haspopup="menu"
+                  type="button"
+                >
+                  Resources <span className="dropdown-arrow">▼</span>
+                </button>
+                <ul className={`dropdown-menu ${openDropdown === 'resources' ? 'show' : ''}`} role="menu">
+                  <li><Link to="/courts-locations" onClick={closeMenu}>Courts & Locations</Link></li>
+                  <li><Link to="/greenisland" onClick={closeMenu}>Green Island</Link></li>
+                </ul>
+              </li>
+
+              {/* Admin Dropdown - only show for admins */}
+              {user && (
+                <li className="dropdown">
+                  <button
+                    className="dropdown-toggle"
+                    onClick={() => toggleDropdown('admin')}
+                    aria-expanded={openDropdown === 'admin'}
+                    aria-haspopup="menu"
+                    type="button"
+                  >
+                    Admin <span className="dropdown-arrow">▼</span>
+                  </button>
+                  <ul className={`dropdown-menu ${openDropdown === 'admin' ? 'show' : ''}`} role="menu">
+                    <li><Link to="/admin/schedule-generator" onClick={closeMenu}>Schedule Generator</Link></li>
+                    <li><Link to="/admin/player-management" onClick={closeMenu}>Player Management</Link></li>
+                    <li><Link to="/admin/team-management" onClick={closeMenu}>Team Management</Link></li>
+                  </ul>
+                </li>
+              )}
+
+              {/* Authentication */}
+              {user ? (
+                <li className="navbar-auth">
+                  <span className="navbar-user-icon" title={user.email}>👤</span>
+                  <button className="navbar-logout-btn" onClick={() => { handleLogout(); closeMenu(); }}>
+                    Logout
+                  </button>
+                </li>
+              ) : (
+                <li className="navbar-auth">
                   <Link to="/login" title="Login" className="navbar-login-icon" onClick={closeMenu}>
                     🔑 Login
                   </Link>
-                )}
-              </li>
+                </li>
+              )}
             </ul>
           </div>
         </div>

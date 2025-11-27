@@ -11,11 +11,13 @@ export const MatchResults = ({ teamNumber, teamNight }) => {
       try {
         setLoading(true);
         
-        // Load matches where this team is either home or away
+        // Load all completed team matches
         const { data: matchData, error: matchError } = await supabase
-          .from('matches')
+          .from('team_match')
           .select(`
             *,
+            home_team:home_team_id (number, name, play_night),
+            away_team:away_team_id (number, name, play_night),
             line_results (
               line_number,
               match_type,
@@ -26,22 +28,20 @@ export const MatchResults = ({ teamNumber, teamNight }) => {
               home_set_3,
               away_set_3,
               home_won
-            ),
-            match_scores (
-              home_lines_won,
-              away_lines_won,
-              home_total_games,
-              away_total_games,
-              home_won
             )
           `)
-          .or(`home_team_number.eq.${teamNumber},away_team_number.eq.${teamNumber}`)
           .eq('status', 'completed')
           .order('date', { ascending: false });
 
         if (matchError) throw matchError;
-        
-        setMatches(matchData || []);
+
+        // Filter matches where this team is either home or away
+        const filteredMatches = (matchData || []).filter(match =>
+          match.home_team?.number === parseInt(teamNumber) ||
+          match.away_team?.number === parseInt(teamNumber)
+        );
+
+        setMatches(filteredMatches || []);
       } catch (err) {
         setError('Error loading match results: ' + err.message);
       } finally {
@@ -92,19 +92,16 @@ export const MatchResults = ({ teamNumber, teamNight }) => {
           </thead>
           <tbody>
             {matches.map((match) => {
-              const isHomeTeam = match.home_team_number === parseInt(teamNumber);
-              const opponent = isHomeTeam ? match.away_team_name : match.home_team_name;
-              const teamWon = isHomeTeam ? match.match_scores?.[0]?.home_won : !match.match_scores?.[0]?.home_won;
-              const linesWon = isHomeTeam ? 
-                match.match_scores?.[0]?.home_lines_won : 
-                match.match_scores?.[0]?.away_lines_won;
+              const isHomeTeam = match.home_team?.number === parseInt(teamNumber);
+              const opponent = isHomeTeam ? match.away_team?.name : match.home_team?.name;
+              const teamWon = isHomeTeam ? match.home_points > match.away_points : match.away_points > match.home_points;
+              const linesWon = match.line_results?.filter(line => {
+                const lineWonByHome = line.home_won;
+                return isHomeTeam ? lineWonByHome : !lineWonByHome;
+              }).length || 0;
               const totalLines = match.line_results?.length || 0;
-              const games = isHomeTeam ? 
-                match.match_scores?.[0]?.home_total_games : 
-                match.match_scores?.[0]?.away_total_games;
-              const opponentGames = isHomeTeam ? 
-                match.match_scores?.[0]?.away_total_games : 
-                match.match_scores?.[0]?.home_total_games;
+              const games = isHomeTeam ? match.home_points : match.away_points;
+              const opponentGames = isHomeTeam ? match.away_points : match.home_points;
 
               return (
                 <tr key={match.id} className={teamWon ? 'win' : 'loss'}>
