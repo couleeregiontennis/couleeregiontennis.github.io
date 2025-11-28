@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../scripts/supabaseClient';
-import { TeamSelect } from './TeamSelect';
 import { MatchSchedule } from './MatchSchedule';
 import '../styles/LandingPage.css';
 
@@ -83,6 +82,20 @@ export const LandingPage = () => {
     return <MatchSchedule />;
   }
 
-  // If user is not authenticated OR doesn't have a team assigned, show team selection
-  return <TeamSelect />;
+  // If user is not authenticated OR doesn't have a team assigned, prompt them to log in or contact admin
+  return (
+    <div className="landing-page">
+      <section className="hero-card card card--interactive">
+        <h1>Welcome to LTTA</h1>
+        <p>
+          Log in to see your personalized match schedule, roster tools, and captain resources. If you need help getting
+          access, contact your league coordinator.
+        </p>
+        <div className="hero-actions">
+          <a className="btn" href="/login">Log In</a>
+          <a className="btn btn-secondary" href="mailto:ltta@couleeregiontennis.com">Email League Office</a>
+        </div>
+      </section>
+    </div>
+  );
 };

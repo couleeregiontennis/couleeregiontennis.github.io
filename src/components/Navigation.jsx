@@ -83,7 +83,6 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
           </div>
           <div className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
             <ul>
-              <li><Link to="/" onClick={closeMenu}>Home</Link></li>
               <li><Link to="/schedule" onClick={closeMenu}>Schedule</Link></li>
 
               {/* League Dropdown */}
@@ -99,10 +98,7 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
                 </button>
                 <ul className={`dropdown-menu ${openDropdown === 'league' ? 'show' : ''}`} role="menu">
                   <li><Link to="/standings" onClick={closeMenu}>Standings</Link></li>
-                  <li><Link to="/all-matches" onClick={closeMenu}>All Matches</Link></li>
-                  <li><Link to="/league-stats" onClick={closeMenu}>League Stats</Link></li>
                   <li><Link to="/player-rankings" onClick={closeMenu}>Player Rankings</Link></li>
-                  <li><Link to="/team" onClick={closeMenu}>All Teams</Link></li>
                   <li>
                     <a
                       href="http://www.couleeregiontennis.com"
@@ -132,10 +128,8 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
                   <ul className={`dropdown-menu ${openDropdown === 'player' ? 'show' : ''}`} role="menu">
                     <li><Link to="/player-profile" onClick={closeMenu}>My Profile</Link></li>
                     <li><Link to="/my-schedule" onClick={closeMenu}>My Schedule</Link></li>
-                    <li><Link to="/team-performance" onClick={closeMenu}>My Team Performance</Link></li>
                     <li><Link to="/captain-dashboard" onClick={closeMenu}>Captain Dashboard</Link></li>
                     <li><Link to="/add-score" onClick={closeMenu}>Submit Scores</Link></li>
-                    <li><Link to="/subs" onClick={closeMenu}>Find a Sub</Link></li>
                   </ul>
                 </li>
               )}
@@ -153,7 +147,7 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
                 </button>
                 <ul className={`dropdown-menu ${openDropdown === 'resources' ? 'show' : ''}`} role="menu">
                   <li><Link to="/courts-locations" onClick={closeMenu}>Courts & Locations</Link></li>
-                  <li><Link to="/greenisland" onClick={closeMenu}>Green Island</Link></li>
+                  <li><Link to="/player-resources" onClick={closeMenu}>Player Resources</Link></li>
                 </ul>
               </li>
 
