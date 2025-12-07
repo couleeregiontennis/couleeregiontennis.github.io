@@ -17,6 +17,14 @@ const Standings = () => {
   const [authChecked, setAuthChecked] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasUserTeam, setHasUserTeam] = useState(false);
+  const [leagueOverview, setLeagueOverview] = useState({
+    totalMatches: 0,
+    totalTeams: 0,
+    totalPlayers: 0,
+    avgMatchesPerTeam: 0,
+    recentMatches: [],
+    matchesByWeek: []
+  });
 
   const fetchStandings = useCallback(async () => {
     const valueExists = (value) => value !== null && value !== undefined;
@@ -25,7 +33,11 @@ const Standings = () => {
       setLoading(true);
       setError('');
 
-      const [{ data: teams, error: teamsError }, { data: matches, error: matchesError }] = await Promise.all([
+      const [
+        { data: teams, error: teamsError },
+        { data: matches, error: matchesError },
+        { data: players, error: playersError }
+      ] = await Promise.all([
         supabase.from('team').select('*').order('number'),
         supabase
           .from('matches')
@@ -47,11 +59,13 @@ const Standings = () => {
               home_set_3,
               away_set_3
             )
-          `)
+          `),
+        supabase.from('player').select('id')
       ]);
 
       if (teamsError) throw teamsError;
       if (matchesError) throw matchesError;
+      if (playersError) throw playersError;
 
       const standingsData = (teams || []).map((team) => {
         const teamNumber = Number(team.number);
@@ -202,6 +216,37 @@ const Standings = () => {
         tuesday: findTopTeamForNight('tuesday'),
         wednesday: findTopTeamForNight('wednesday')
       });
+
+      const totalMatches = matches?.length ?? 0;
+      const totalTeams = teams?.length ?? 0;
+      const totalPlayers = players?.length ?? 0;
+      const avgMatchesPerTeam = totalTeams > 0 ? totalMatches / totalTeams : 0;
+
+      const recentMatches = [...(matches || [])]
+        .filter((match) => match?.date)
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 6);
+
+      const matchesByWeekMap = (matches || []).reduce((acc, match) => {
+        if (!match?.date) return acc;
+        const weekKey = new Date(match.date).toISOString().split('T')[0];
+        acc[weekKey] = (acc[weekKey] || 0) + 1;
+        return acc;
+      }, {});
+
+      const matchesByWeek = Object.entries(matchesByWeekMap)
+        .map(([date, count]) => ({ date, count }))
+        .sort((a, b) => new Date(a.date) - new Date(b.date))
+        .slice(-8);
+
+      setLeagueOverview({
+        totalMatches,
+        totalTeams,
+        totalPlayers,
+        avgMatchesPerTeam,
+        recentMatches,
+        matchesByWeek
+      });
     } catch (err) {
       console.error('Error loading standings:', err);
       setError('Unable to load standings at this time.');
@@ -319,17 +364,32 @@ const Standings = () => {
 
   const formattedUpdatedAt = lastUpdated
     ? new Date(lastUpdated).toLocaleString(undefined, {
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit'
-      })
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit'
+    })
     : '';
 
   const shouldShowSpotlight =
     nightHighlights.tuesday ||
     nightHighlights.wednesday ||
     (authChecked && isAuthenticated && hasUserTeam && userTeamStanding);
+
+  const topTeamSnapshot = standings.slice(0, 5);
+  const maxMatchCount = leagueOverview.matchesByWeek.reduce(
+    (maxValue, week) => Math.max(maxValue, week.count),
+    0
+  ) || 1;
+
+  const formatMatchDate = (value) => {
+    if (!value) return 'TBA';
+    return new Date(value).toLocaleDateString(undefined, {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+  };
 
   return (
     <main className="standings-page">
@@ -521,6 +581,121 @@ const Standings = () => {
               </tbody>
             </table>
           </div>
+
+          {(leagueOverview.totalMatches > 0 || leagueOverview.totalTeams > 0) && (
+            <section className="league-metrics">
+              <div className="metrics-grid">
+                <article className="metrics-card card card--interactive card--overlay">
+                  <p className="metrics-label">Total Matches</p>
+                  <p className="metrics-value">{leagueOverview.totalMatches}</p>
+                </article>
+                <article className="metrics-card card card--interactive card--overlay">
+                  <p className="metrics-label">Active Teams</p>
+                  <p className="metrics-value">{leagueOverview.totalTeams}</p>
+                </article>
+                <article className="metrics-card card card--interactive card--overlay">
+                  <p className="metrics-label">Registered Players</p>
+                  <p className="metrics-value">{leagueOverview.totalPlayers}</p>
+                </article>
+                <article className="metrics-card card card--interactive card--overlay">
+                  <p className="metrics-label">Avg Matches / Team</p>
+                  <p className="metrics-value">
+                    {leagueOverview.avgMatchesPerTeam > 0
+                      ? leagueOverview.avgMatchesPerTeam.toFixed(1)
+                      : '0.0'}
+                  </p>
+                </article>
+              </div>
+
+              <div className="metrics-panels">
+                <article className="metrics-panel card card--interactive">
+                  <div className="panel-header">
+                    <h2>Team Performance Snapshot</h2>
+                    <p>Top teams based on win percentage.</p>
+                  </div>
+                  <table className="mini-standings">
+                    <thead>
+                      <tr>
+                        <th>Rank</th>
+                        <th>Team</th>
+                        <th>Record</th>
+                        <th>Win %</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {topTeamSnapshot.map((team, index) => (
+                        <tr key={team.id}>
+                          <td>{index + 1}</td>
+                          <td>
+                            <span className="team-number">#{team.number}</span> {team.name}
+                          </td>
+                          <td>
+                            {team.wins}-{team.losses}
+                            {team.ties ? `-${team.ties}` : ''}
+                          </td>
+                          <td>{team.winPercentage.toFixed(1)}%</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </article>
+
+                <article className="metrics-panel card card--interactive">
+                  <div className="panel-header">
+                    <h2>Recent Matches</h2>
+                    <p>Latest activity reported across the league.</p>
+                  </div>
+                  {leagueOverview.recentMatches.length === 0 ? (
+                    <p className="empty-state">No recent matches recorded.</p>
+                  ) : (
+                    <ul className="recent-matches-list">
+                      {leagueOverview.recentMatches.map((match) => (
+                        <li key={match.id} className="recent-match">
+                          <div className="recent-match-date">{formatMatchDate(match.date)}</div>
+                          <div className="recent-match-teams">
+                            <span>{match.home_team_name}</span>
+                            <span className="vs">vs</span>
+                            <span>{match.away_team_name}</span>
+                          </div>
+                          <div className="recent-match-meta">
+                            {match.time || 'Time TBA'} · {match.status || 'Scheduled'}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </article>
+              </div>
+
+              <article className="metrics-panel card card--interactive">
+                <div className="panel-header">
+                  <h2>Match Activity (Last 8 Weeks)</h2>
+                  <p>Volume of recorded matches per week.</p>
+                </div>
+                {leagueOverview.matchesByWeek.length === 0 ? (
+                  <p className="empty-state">No match activity data available.</p>
+                ) : (
+                  <div className="activity-bars" role="list">
+                    {leagueOverview.matchesByWeek.map((week) => (
+                      <div key={week.date} className="activity-bar" role="listitem">
+                        <div
+                          className="bar-fill"
+                          style={{
+                            height: `${Math.max(
+                              10,
+                              (week.count / maxMatchCount) * 100
+                            )}%`
+                          }}
+                          title={`${week.count} matches`}
+                        />
+                        <span className="bar-label">{formatMatchDate(week.date)}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </article>
+            </section>
+          )}
         </>
       )}
     </main>

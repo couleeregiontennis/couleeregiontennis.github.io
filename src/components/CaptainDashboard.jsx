@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../scripts/supabaseClient';
-import { TeamStatsSummary } from './TeamStatsSummary';
+import { useTeamStatsData } from '../hooks/useTeamStatsData';
 import '../styles/CaptainDashboard.css';
 
 export const CaptainDashboard = () => {
@@ -26,6 +26,20 @@ export const CaptainDashboard = () => {
   const [seasonWins, setSeasonWins] = useState(0);
   const [seasonLosses, setSeasonLosses] = useState(0);
   const [playersAvailable, setPlayersAvailable] = useState(0);
+
+  const {
+    loading: statsLoading,
+    error: statsError,
+    roster: statsRoster,
+    teamRecord,
+    teamLineStats,
+    recentMatches,
+    playerStats,
+    winPercentage,
+    lineWinPercentage,
+    gamesWinPercentage,
+    refresh: refreshStats
+  } = useTeamStatsData();
 
   useEffect(() => {
     loadCaptainData();
@@ -449,7 +463,7 @@ export const CaptainDashboard = () => {
       <div className="captain-overview">
         <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Season Record</div>
-          <div className="card-value">{seasonWins} - {seasonLosses}</div>
+          <div className="card-value">{teamRecord.wins ?? seasonWins} - {teamRecord.losses ?? seasonLosses}</div>
           <div className="card-subtitle">Wins · Losses</div>
         </div>
         <div className="overview-card card card--interactive card--overlay">
@@ -459,7 +473,7 @@ export const CaptainDashboard = () => {
         </div>
         <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Roster Availability</div>
-          <div className="card-value">{playersAvailable}</div>
+          <div className="card-value">{statsRoster.length || playersAvailable}</div>
           <div className="card-subtitle">Players cleared for play</div>
         </div>
         <div className="overview-card card card--interactive card--overlay">
@@ -469,7 +483,143 @@ export const CaptainDashboard = () => {
         </div>
       </div>
 
-      <TeamStatsSummary />
+      <section className="captain-section card card--interactive">
+        <div className="section-header">
+          <div>
+            <h2>Team Performance</h2>
+            <p>Deep dive your roster, match record, and recent form without leaving the dashboard.</p>
+          </div>
+          <div className="section-actions">
+            <button type="button" className="section-action" onClick={refreshStats} disabled={statsLoading}>
+              {statsLoading ? 'Refreshing…' : 'Refresh Data'}
+            </button>
+          </div>
+        </div>
+
+        {statsError && <div className="card card--flat error-message">{statsError}</div>}
+
+        {statsLoading ? (
+          <div className="card card--flat">Loading team performance…</div>
+        ) : (
+          <div className="team-performance-grid">
+            <div className="team-performance-overview">
+              <div className="stat-card card card--interactive card--overlay">
+                <div className="stat-label">Match Record</div>
+                <div className="stat-value">{teamRecord.wins} - {teamRecord.losses}</div>
+                <div className="stat-subtitle">{winPercentage}% Match Win Rate</div>
+              </div>
+              <div className="stat-card card card--interactive card--overlay">
+                <div className="stat-label">Line Record</div>
+                <div className="stat-value">{teamLineStats.linesWon} - {teamLineStats.linesLost}</div>
+                <div className="stat-subtitle">{lineWinPercentage}% Lines Won</div>
+              </div>
+              <div className="stat-card card card--interactive card--overlay">
+                <div className="stat-label">Games Record</div>
+                <div className="stat-value">{teamLineStats.gamesWon} - {teamLineStats.gamesLost}</div>
+                <div className="stat-subtitle">{gamesWinPercentage}% Games Won</div>
+              </div>
+              <div className="stat-card card card--interactive card--overlay">
+                <div className="stat-label">Matches Played</div>
+                <div className="stat-value">{(teamRecord.wins || 0) + (teamRecord.losses || 0)}</div>
+                <div className="stat-subtitle">This Season</div>
+              </div>
+            </div>
+
+            <div className="player-performance card card--flat">
+              <div className="section-header compact">
+                <div>
+                  <h3>Player Performance</h3>
+                  <p>Individual records sorted by win percentage.</p>
+                </div>
+              </div>
+              <div className="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Player</th>
+                      <th>Matches</th>
+                      <th>Record</th>
+                      <th>Win %</th>
+                      <th>Singles</th>
+                      <th>Doubles</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {playerStats.map((player) => {
+                      const total = player.wins + player.losses;
+                      const pct = total > 0 ? ((player.wins / total) * 100).toFixed(1) : '0.0';
+                      return (
+                        <tr key={player.id}>
+                          <td>
+                            <div className="player-name">
+                              {player.first_name} {player.last_name}
+                              {player.is_captain && <span className="captain-badge">👑</span>}
+                            </div>
+                          </td>
+                          <td>{player.matchesPlayed}</td>
+                          <td>{player.wins} - {player.losses}</td>
+                          <td>{pct}%</td>
+                          <td>{player.singlesRecord.wins} - {player.singlesRecord.losses}</td>
+                          <td>{player.doublesRecord.wins} - {player.doublesRecord.losses}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="recent-history card card--flat">
+              <div className="section-header compact">
+                <div>
+                  <h3>Recent Match History</h3>
+                  <p>Latest 10 results to keep tabs on momentum.</p>
+                </div>
+              </div>
+              <div className="recent-matches">
+                {recentMatches.length === 0 ? (
+                  <div className="empty-state">No match history available.</div>
+                ) : (
+                  recentMatches.map((matchEntry) => {
+                    const matchDate = matchEntry.date
+                      ? new Date(matchEntry.date).toLocaleDateString(undefined, {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                      })
+                      : 'Date TBA';
+
+                    let resultLabel = 'Pending';
+                    if (matchEntry.teamLines !== null && matchEntry.opponentLines !== null) {
+                      resultLabel = `${matchEntry.teamLines} - ${matchEntry.opponentLines} Lines`;
+                    } else if (matchEntry.teamGames !== null && matchEntry.opponentGames !== null) {
+                      resultLabel = `${matchEntry.teamGames} - ${matchEntry.opponentGames} Games`;
+                    }
+
+                    const statusClass = matchEntry.teamWon === null
+                      ? 'result-pending'
+                      : matchEntry.teamWon
+                        ? 'result-win'
+                        : 'result-loss';
+
+                    return (
+                      <article key={matchEntry.id} className="match-history-card card card--subtle">
+                        <div className="match-date">{matchDate}</div>
+                        <div className="match-teams">
+                          <span>{matchEntry.home_team_name}</span>
+                          <span className="vs-label">vs</span>
+                          <span>{matchEntry.away_team_name}</span>
+                        </div>
+                        <div className={`match-result ${statusClass}`}>{resultLabel}</div>
+                      </article>
+                    );
+                  })
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
 
       <div className="dashboard-sections">
         <section className="captain-section card card--interactive">
@@ -605,14 +755,15 @@ export const CaptainDashboard = () => {
               <h3>Request Substitutes</h3>
               <p>Find subs for upcoming matches.</p>
             </button>
-            <Link
-              to="/team-performance"
-              className="tool-card card card--interactive tool-card-link"
+            <button
+              type="button"
+              className="tool-card card card--interactive"
+              onClick={() => document.querySelector('.team-performance-grid')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <div className="tool-icon">📊</div>
               <h3>View Team Performance</h3>
-              <p>Open the full performance dashboard.</p>
-            </Link>
+              <p>Jump to the analytics section on this page.</p>
+            </button>
             {user && (
               <Link
                 to="/admin/schedule-generator"

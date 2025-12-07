@@ -3,26 +3,21 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { AnnouncementBar } from './components/AnnouncementBar';
 import { Team } from './components/Team';
-import { TeamSelect } from './components/TeamSelect';
-import { Subs } from './components/Subs';
-import { GreenIsland } from './components/GreenIsland';
 import { Rules } from './components/Rules';
 import { Login } from './components/Login';
 import { ProtectedRoute } from './scripts/ProtectedRoute';
 import { AddScore } from './components/AddScore';
 import { Standings } from './components/Standings';
 import { CaptainDashboard } from './components/CaptainDashboard';
-import { LeagueStats } from './components/LeagueStats';
 import { PlayerProfile } from './components/PlayerProfile';
 import { MatchSchedule } from './components/MatchSchedule';
-import { TeamStats } from './components/TeamStats';
-import { AllMatches } from './components/AllMatches';
 import { NotFound } from './components/NotFound';
 import { LandingPage } from './components/LandingPage';
 import { ScheduleGenerator } from './components/admin/ScheduleGenerator';
 import { PlayerRankings } from './components/PlayerRankings';
 import { MySchedule } from './components/MySchedule';
 import { CourtsLocations } from './components/CourtsLocations';
+import { PlayerResources } from './components/PlayerResources';
 import './styles/colors.css';
 import './styles/Style.css';
 import './styles/Navigation.css';
@@ -70,12 +65,10 @@ function App() {
         <AnnouncementBar />
         <main>
           <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/team" element={<TeamSelect />} />
-            <Route path="/team/:day/all" element={<AllMatches />} />
+            <Route path="/" element={<MatchSchedule />} />
+            <Route path="/welcome" element={<LandingPage />} />
             <Route path="/team/:day/:teamId" element={<Team />} />
-            <Route path="/subs" element={<Subs />} />
-            <Route path="/greenisland" element={<GreenIsland />} />
+            <Route path="/player-resources" element={<PlayerResources />} />
             <Route path="/rules" element={<Rules />} />
             <Route path="/standings" element={<Standings />} />
             <Route path="/player-rankings" element={<PlayerRankings />} />
@@ -95,14 +88,6 @@ function App() {
               element={
                 <ProtectedRoute>
                   <CaptainDashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/team-performance"
-              element={
-                <ProtectedRoute>
-                  <TeamStats />
                 </ProtectedRoute>
               }
             />
@@ -130,7 +115,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/league-stats" element={<LeagueStats />} />
             <Route
               path="/player-profile"
               element={

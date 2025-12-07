@@ -8,7 +8,7 @@
     --layout-muted: var(--text-secondary);
     --layout-accent: var(--primary-green);
     --layout-accent-strong: var(--primary-green-dark);
- }
+}
 
 /* Global card primitives */
 .card {
@@ -20,6 +20,7 @@
     color: var(--card-text);
     position: relative;
     overflow: hidden;
+    padding: var(--space-xl, var(--space-lg));
     transition: transform var(--transition-fast),
         box-shadow var(--transition-fast),
         border-color var(--transition-fast),
@@ -68,56 +69,56 @@
     --layout-muted: var(--text-muted);
     --layout-accent: var(--secondary-light);
     --layout-accent-strong: var(--secondary);
- }
+}
 
- /* ----- LIGHT MODE (default) ----- */
- body {
+/* ----- LIGHT MODE (default) ----- */
+body {
     font-family: var(--font-family);
     margin: 0;
     padding: 0;
     background: var(--layout-background);
     color: var(--layout-body);
     line-height: 1.6;
- }
+}
 
- footer {
+footer {
     padding: var(--space-lg);
     background: var(--layout-surface);
     text-align: center;
     color: var(--layout-body);
     border-top: 2px solid var(--layout-border);
- }
+}
 
- main {
+main {
     max-width: 900px;
     margin: auto;
     padding: var(--space-lg);
     box-sizing: border-box;
- }
+}
 
- details {
+details {
     margin-bottom: var(--space-lg);
     border: 1px solid var(--layout-border);
     background: var(--layout-surface);
     padding: var(--space-md);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
- }
+}
 
- summary {
+summary {
     font-weight: bold;
     font-size: var(--font-size-lg);
     cursor: pointer;
     color: var(--layout-accent);
     transition: var(--transition-fast);
- }
+}
 
- summary:hover {
+summary:hover {
     color: var(--layout-accent-strong);
- }
+}
 
- table,
- .schedule-table {
+table,
+.schedule-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: var(--space-md);
@@ -128,8 +129,10 @@
     box-shadow: var(--shadow-sm);
 }
 
-th, td,
-.schedule-table th, .schedule-table td {
+th,
+td,
+.schedule-table th,
+.schedule-table td {
     border: 1px solid var(--layout-border);
     padding: var(--space-md);
     text-align: left;
@@ -232,7 +235,8 @@ li {
     margin: 10px 0;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     max-width: 100vw;
     overflow-x: hidden;
@@ -332,6 +336,7 @@ ul {
         flex-direction: column;
         gap: 0;
     }
+
     .teams-column {
         width: 100%;
         min-width: 0;
@@ -342,9 +347,12 @@ ul {
     table {
         font-size: 0.9rem;
     }
-    th, td {
+
+    th,
+    td {
         padding: 0.4rem;
     }
+
     .team-list {
         padding: 0;
     }

@@ -1,5 +1,43 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../scripts/supabaseClient';
+import '../styles/CourtsLocations.css';
+
+const facilitySpotlights = [
+  {
+    title: 'Green Island Courts',
+    address: '2312 7th St S, La Crosse, WI 54601',
+    description: 'Primary LTTA venue with 13 outdoor courts, refreshed lighting on Courts 1-7, and year-round programming.',
+    map: 'https://www.google.com/maps/place/2312+7th+St+S,+La+Crosse,+WI+54601/'
+  },
+  {
+    title: 'Central High School Courts',
+    address: '1801 Losey Blvd S, La Crosse, WI 54601',
+    description: 'Backup site captains can reserve through Parks & Rec when overflow scheduling is required.',
+    map: 'https://www.google.com/maps/place/1801+Losey+Blvd+S,+La+Crosse,+WI+54601/'
+  }
+];
+
+const courtCheatSheet = [
+  {
+    title: 'Courts 1 – 5',
+    body: 'One standalone court near the ice arena plus four adjacent courts—great for alternating singles and doubles lines.'
+  },
+  {
+    title: 'Courts 6 – 9',
+    body: 'Central bank used for Lines #1–#5 on peak nights. Includes shaded seating for captains and subs.'
+  },
+  {
+    title: 'Courts 10 – 13',
+    body: 'Western-most stretch that stays shaded longer—perfect for late-afternoon drills or overflow matches.'
+  }
+];
+
+const courtBreakdown = [
+  { court: 'Court 6', usage: '#1/#2 Doubles (or Line 1 singles if agreed)' },
+  { court: 'Court 7', usage: '#3 Doubles' },
+  { court: 'Court 8', usage: '#3 Doubles' },
+  { court: 'Court 9', usage: '#4/#5 Doubles' }
+];
 
 export const CourtsLocations = () => {
   const [locations, setLocations] = useState([]);
@@ -231,6 +269,56 @@ export const CourtsLocations = () => {
           <li>Find contact information for each facility</li>
         </ul>
       </div>
+
+      <section className="card card--interactive supplemental-section">
+        <div className="section-header compact">
+          <div>
+            <h2>Featured Facilities</h2>
+            <p>Quick reference for captains coordinating subs or visiting teams.</p>
+          </div>
+        </div>
+        <div className="facility-grid">
+          {facilitySpotlights.map((facility) => (
+            <article className="facility-card" key={facility.title}>
+              <h3>{facility.title}</h3>
+              <p className="facility-address">{facility.address}</p>
+              <p>{facility.description}</p>
+              <a href={facility.map} target="_blank" rel="noreferrer" className="btn-link">
+                Open in Google Maps
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="card card--interactive supplemental-section">
+        <div className="section-header compact">
+          <div>
+            <h2>Court Assignment Cheat Sheet</h2>
+            <p>Use these pairings when confirming courts with opposing captains.</p>
+          </div>
+        </div>
+        <div className="assignment-grid">
+          {courtCheatSheet.map((assignment) => (
+            <article className="assignment-card" key={assignment.title}>
+              <h3>{assignment.title}</h3>
+              <p>{assignment.body}</p>
+            </article>
+          ))}
+        </div>
+        <div className="detail-card">
+          <h3>Courts 6–9 Breakdown</h3>
+          <ul>
+            {courtBreakdown.map((row) => (
+              <li key={row.court}>
+                <span className="court-label">{row.court}</span>
+                <span className="court-usage">{row.usage}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="detail-note">Confirm any deviations with the opposing captain before match night.</p>
+        </div>
+      </section>
     </div>
   );
 };
