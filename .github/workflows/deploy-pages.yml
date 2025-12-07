@@ -32,10 +32,26 @@ jobs:
             package-lock.json
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build site
         run: npm run build
+        env:
+          CI: true
+
+      - name: Verify build output
+        run: |
+          echo "Workspace root:"
+          ls -la
+          echo "Project files:"
+          ls -la .
+          if [ ! -d dist ]; then
+            echo "ERROR: 'dist' directory not found. Build either failed or produced a different output directory."
+            echo "package.json scripts:"
+            cat package.json
+            echo "Build step exit code was non-zero or produced no output — see full build logs above."
+            exit 1
+          fi
 
       - name: Upload static files
         uses: actions/upload-pages-artifact@v3
