@@ -39,19 +39,32 @@ jobs:
         env:
           CI: true
 
-      - name: Verify build output
+      - name: Normalize build output to dist (fallbacks: build, out, _site)
         run: |
-          echo "Workspace root:"
+          set -e
+          echo "Listing workspace root:"
           ls -la
-          echo "Project files:"
-          ls -la .
-          if [ ! -d dist ]; then
-            echo "ERROR: 'dist' directory not found. Build either failed or produced a different output directory."
+          echo "Looking for build output directories..."
+          if [ -d dist ]; then
+            echo "Found dist"
+          elif [ -d build ]; then
+            echo "Found build -> moving to dist"
+            mv build dist
+          elif [ -d out ]; then
+            echo "Found out -> moving to dist"
+            mv out dist
+          elif [ -d _site ]; then
+            echo "Found _site -> moving to dist"
+            mv _site dist
+          else
+            echo "No expected build output directory found (dist|build|out|_site). Listing files for debugging:"
+            ls -la
             echo "package.json scripts:"
             cat package.json
-            echo "Build step exit code was non-zero or produced no output — see full build logs above."
             exit 1
           fi
+          echo "Final dist contents:"
+          ls -la dist
 
       - name: Upload static files
         uses: actions/upload-pages-artifact@v3
