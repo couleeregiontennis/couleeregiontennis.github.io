@@ -28,8 +28,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: |
-            package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -39,7 +38,7 @@ jobs:
         env:
           CI: true
 
-      - name: Normalize build output to dist (fallbacks: build, out, _site)
+      - name: Normalize build output to dist
         run: |
           set -e
           echo "Listing workspace root:"
