@@ -28,7 +28,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && cp -r build/* ../ && echo 'Deployed to root directory'"
+    "deploy": "npm run build && cp -r dist/* ../ && echo 'Deployed to root directory'"
   },
   "browserslist": {
     "production": [
