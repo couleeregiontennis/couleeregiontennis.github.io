@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# Coulee Region Tennis Association Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+This is the official website for the Coulee Region Tennis Association (CRTA), providing a platform for managing match schedules, tracking standings, player rankings, team information, and authentication for users.
 
-## Available Scripts
+## Features
+- **Match Scheduling & Results**: View and manage match schedules, results, and court locations.
+- **Standings & Rankings**: Track real-time player rankings and team standings.
+- **Player Profiles**: Detailed profiles for players with resources and rules information.
+- **Team Management**: Access team details, captain dashboards, and scheduling tools.
+- **Authentication System**: Secure login and access control for users.
+- **Announcements**: Display important updates and announcements.
 
-In the project directory, you can run:
+## Tech Stack
+- **Frontend**: React.js with Vite build tool
+- **Backend**: Supabase (PostgreSQL database with authentication)
+- **Styling**: Custom CSS components
 
-### `npm start`
+## Project Structure
+```
+ltta-app/
+├── src/
+│   ├── components/          # React components (Login, MatchSchedule, Standings, etc.)
+│   ├── scripts/             # Utility scripts (Auth, Supabase client, ICS generator)
+│   ├── styles/              # CSS files for styling components
+│   └── hooks/               # Custom React hooks
+├── supabase/                # Supabase database schema
+└── vite.config.js           # Vite configuration file
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
+- Node.js (v18+)
+- npm or yarn package manager
+- Supabase account (for backend services)
 
-### `npm test`
+### Installation
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/couleeregiontennis.github.io.git
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Install dependencies:
+```bash
+cd couleeregiontennis.github.io
+npm install
+```
 
-### `npm run build`
+3. Set up Supabase:
+- Create a project on [Supabase](https://supabase.com/)
+- Configure environment variables in `.env` file:
+```env
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_anon_key
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Start the development server:
+```bash
+npm run dev
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contact
+For questions or feedback, please contact:
+- Email: [brett@couleeregiontennis.org](mailto:contact@couleeregiontennis.org)
+- Website: [www.couleeregiontennis.org](https://www.couleeregiontennis.org)
