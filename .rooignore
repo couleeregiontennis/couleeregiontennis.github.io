@@ -1,0 +1,80 @@
+# Files and directories ignored by Roo indexing
+# Keep this list focused on generated artifacts, binaries, secrets, and other non-source content
+# so Roo can aggressively index the actual codebase without wasted space.
+
+# Dependency artifacts
+node_modules/
+.pnp/
+.pnp.js
+yarn.lock.backup
+*.tgz
+
+# Build and bundler outputs
+dist/
+build/
+.vite/
+.out/
+.next/
+.nuxt/
+.svelte-kit/
+.storybook-out/
+.hugo_build/
+
+# Tool caches and temp directories
+.cache/
+.parcel-cache/
+.turbo/
+coverage/
+.cypress/
+.playwright/
+.pytest_cache/
+.mypy_cache/
+.eslintcache
+.stylelintcache
+.vscode-test/
+.DS_Store
+
+# Logs and reports
+*.log
+*.log.*
+logs/
+report-
+
+# Environment secrets and generated configs
+.env
+.env.*
+.supabase
+
+# Large data, backups, and static exports that Roo does not need
+backup-original-root/
+output_emails/
+public/**/*.png
+public/**/*.jpg
+public/**/*.jpeg
+public/**/*.gif
+public/**/*.svg
+public/**/*.webp
+public/**/*.pdf
+scoresheets/
+teams/
+
+# OS & editor artifacts
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Supabase local state
+supabase/.branches
+supabase/.temp
+
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+*.min.js
+*.min.css
+*.map
+
+# Vector graphics (huge XML files)
+*.svg

@@ -13,8 +13,13 @@
     "seedrandom": "^3.0.5"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/plugin-transform-runtime": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
     "@darkobits/nr": "^0.18.8",
     "@jest/globals": "^30.2.0",
+    "@rollup/plugin-babel": "^6.1.0",
     "@vitejs/plugin-react": "^4.2.1",
     "jest": "^30.2.0",
     "vite": "^6.4.1"
