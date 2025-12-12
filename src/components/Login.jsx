@@ -42,12 +42,16 @@ export const Login = ({ onLogin }) => {
 
       <div className="login-layout">
         <div className="login-panel">
-          <div className="login-toggle">
+          <div className="login-toggle" role="tablist" aria-label="Authentication method">
             <button
               type="button"
               className={`toggle-button ${!isSignUp ? 'active' : ''}`}
               onClick={() => setIsSignUp(false)}
               disabled={loading}
+              role="tab"
+              aria-selected={!isSignUp}
+              aria-controls="auth-panel"
+              id="tab-login"
             >
               Login
             </button>
@@ -56,67 +60,78 @@ export const Login = ({ onLogin }) => {
               className={`toggle-button ${isSignUp ? 'active' : ''}`}
               onClick={() => setIsSignUp(true)}
               disabled={loading}
+              role="tab"
+              aria-selected={isSignUp}
+              aria-controls="auth-panel"
+              id="tab-signup"
             >
               Sign Up
             </button>
           </div>
 
-          <form className="login-form" onSubmit={handleAuth}>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                required
-                autoComplete="email"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                required
-                autoComplete={isSignUp ? 'new-password' : 'current-password'}
-              />
-            </div>
-            {error && <div className="form-error">{error}</div>}
-            <button className="primary-action" type="submit" disabled={loading}>
-              {loading ? (isSignUp ? 'Creating account…' : 'Signing in…') : (isSignUp ? 'Create account' : 'Sign in')}
-            </button>
-          </form>
+          <div
+            id="auth-panel"
+            role="tabpanel"
+            aria-labelledby={isSignUp ? "tab-signup" : "tab-login"}
+            className="login-tab-content"
+          >
+            <form className="login-form" onSubmit={handleAuth}>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  required
+                  autoComplete="email"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  required
+                  autoComplete={isSignUp ? 'new-password' : 'current-password'}
+                />
+              </div>
+              {error && <div className="form-error">{error}</div>}
+              <button className="primary-action" type="submit" disabled={loading}>
+                {loading ? (isSignUp ? 'Creating account…' : 'Signing in…') : (isSignUp ? 'Create account' : 'Sign in')}
+              </button>
+            </form>
 
-          <div className="oauth-divider">
-            <span />
-            <p>or continue with</p>
-            <span />
-          </div>
+            <div className="oauth-divider">
+              <span />
+              <p>or continue with</p>
+              <span />
+            </div>
 
-          <div className="oauth-actions">
-            <button
-              type="button"
-              className="oauth-button google"
-              onClick={() => handleOAuth('google')}
-              disabled={loading}
-            >
-              <span className="oauth-icon" aria-hidden>🔵</span>
-              Google
-            </button>
-            <button
-              type="button"
-              className="oauth-button apple"
-              onClick={() => handleOAuth('apple')}
-              disabled={loading}
-            >
-              <span className="oauth-icon" aria-hidden></span>
-              Apple
-            </button>
+            <div className="oauth-actions">
+              <button
+                type="button"
+                className="oauth-button google"
+                onClick={() => handleOAuth('google')}
+                disabled={loading}
+              >
+                <span className="oauth-icon" aria-hidden>🔵</span>
+                Google
+              </button>
+              <button
+                type="button"
+                className="oauth-button apple"
+                onClick={() => handleOAuth('apple')}
+                disabled={loading}
+              >
+                <span className="oauth-icon" aria-hidden></span>
+                Apple
+              </button>
+            </div>
           </div>
 
           <p className="login-switch">
