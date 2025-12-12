@@ -32,6 +32,20 @@ const isStandardSetValid = (home, away) => {
   return false;
 };
 
+/**
+ * Validates the score for a match tiebreak.
+ *
+ * Why: Tiebreaks have specific ending conditions. The first to reach the target (7 points)
+ * wins, but they must win by a margin of 2 points. If the score reaches 6-6, play
+ * continues until one side leads by 2.
+ *
+ * How:
+ * 1. Checks basic numeric validity (integers, non-negative, no draws).
+ * 2. Ensures the winner has reached at least the target score.
+ * 3. If the winner matches the target exactly, ensures the margin is >= 2 (e.g., 7-5).
+ * 4. If the winner exceeds the target, ensures the margin is exactly 2 (e.g., 8-6).
+ *    Scores like 9-6 are invalid because the match would have ended at 8-6.
+ */
 const isMatchTiebreakValid = (home, away) => {
   if (home === 0 && away === 0) {
     return true; // Not played
@@ -45,7 +59,13 @@ const isMatchTiebreakValid = (home, away) => {
   const loser = Math.min(home, away);
 
   if (winner < MATCH_TIEBREAK_TARGET) return false;
-  return winner - loser >= 2;
+
+  if (winner === MATCH_TIEBREAK_TARGET) {
+    return winner - loser >= 2;
+  }
+
+  // If winner > MATCH_TIEBREAK_TARGET, the game must have ended exactly when the margin reached 2.
+  return winner - loser === 2;
 };
 
 const collectScoreSnapshot = (row) => {
