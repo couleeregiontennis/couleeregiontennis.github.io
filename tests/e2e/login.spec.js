@@ -43,7 +43,7 @@ test.describe('Login Page', () => {
     await expect(page.locator('.form-error')).toContainText('Invalid login credentials');
   });
 
-  test('should successfuly login (Mocked)', async ({ page }) => {
+  test('should successfully login (Mocked)', async ({ page }) => {
     // Mock the Supabase Auth API call for success
     await page.route('**/auth/v1/token?grant_type=password', async (route) => {
       await route.fulfill({
