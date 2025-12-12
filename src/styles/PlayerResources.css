@@ -85,13 +85,15 @@
 }
 
 .carousel-frame {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--space-lg);
+  display: flex;
+  position: relative;
+  overflow: hidden;
   margin-top: var(--space-lg);
+  height: 220px;
 }
 
 .carousel-image {
+  position: absolute;
   width: 100%;
   height: 220px;
   object-fit: cover;
