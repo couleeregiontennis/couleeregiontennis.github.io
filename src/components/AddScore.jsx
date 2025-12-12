@@ -3,7 +3,7 @@ import { supabase } from '../scripts/supabaseClient';
 import '../styles/AddScore.css';
 
 const STANDARD_SET_MIN_WIN = 6;
-const MATCH_TIEBREAK_TARGET = 10;
+const MATCH_TIEBREAK_TARGET = 7;
 
 const parseInteger = (value) => {
   const parsed = Number(value);
@@ -496,6 +496,14 @@ export const AddScore = () => {
   const generateScoreOptions = () => {
     const options = [];
     for (let i = 0; i <= 7; i++) {
+      options.push(<option key={i} value={i}>{i}</option>);
+    }
+    return options;
+  };
+
+  const generateTiebreakOptions = () => {
+    const options = [];
+    for (let i = 0; i <= 30; i++) {
       options.push(<option key={i} value={i}>{i}</option>);
     }
     return options;
@@ -1143,7 +1151,7 @@ export const AddScore = () => {
                   onChange={(e) => handleScoreChange('home', 3, e.target.value)}
                 >
                   <option value="">{getPlayerDisplayNames().homeNames || 'Home'}</option>
-                  {generateScoreOptions()}
+                  {generateTiebreakOptions()}
                 </select>
                 <span>-</span>
                 <select
@@ -1151,7 +1159,7 @@ export const AddScore = () => {
                   onChange={(e) => handleScoreChange('away', 3, e.target.value)}
                 >
                   <option value="">{getPlayerDisplayNames().awayNames || 'Away'}</option>
-                  {generateScoreOptions()}
+                  {generateTiebreakOptions()}
                 </select>
               </div>
             </div>
