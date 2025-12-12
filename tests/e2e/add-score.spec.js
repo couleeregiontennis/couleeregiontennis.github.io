@@ -97,7 +97,8 @@ test.describe('Add Score Page (Protected)', () => {
     await page.getByLabel(/Email/i).fill('test@example.com');
     await page.getByLabel(/Password/i).fill('password');
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-    await expect(page.getByText('Logout')).toBeVisible();
+    // Use toBeAttached() because on mobile the logout button is in the menu (hidden by default)
+    await expect(page.getByText('Logout')).toBeAttached();
   });
 
   test('loads and allows match selection', async ({ page }) => {

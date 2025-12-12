@@ -31,8 +31,11 @@ test.describe('Match Schedule Page', () => {
     });
 
     await page.goto('/'); // Root is MatchSchedule
-    await expect(page.getByText('Aces vs Faults')).toBeVisible();
-    await expect(page.getByText('Netters vs Lobbers')).toBeVisible();
+    // Check for team names individually as they might stack on mobile or have different layout
+    await expect(page.getByText('Aces', { exact: true })).toBeVisible();
+    await expect(page.getByText('Faults', { exact: true })).toBeVisible();
+    await expect(page.getByText('Netters', { exact: true })).toBeVisible();
+    await expect(page.getByText('Lobbers', { exact: true })).toBeVisible();
   });
 
   test('displays standings', async ({ page }) => {
