@@ -3,7 +3,7 @@ import { supabase } from '../scripts/supabaseClient';
 import '../styles/AddScore.css';
 
 const STANDARD_SET_MIN_WIN = 6;
-const MATCH_TIEBREAK_TARGET = 10;
+const MATCH_TIEBREAK_TARGET = 7;
 
 const parseInteger = (value) => {
   const parsed = Number(value);
@@ -32,6 +32,20 @@ const isStandardSetValid = (home, away) => {
   return false;
 };
 
+/**
+ * Validates the score for a match tiebreak.
+ *
+ * Why: Tiebreaks have specific ending conditions. The first to reach the target (7 points)
+ * wins, but they must win by a margin of 2 points. If the score reaches 6-6, play
+ * continues until one side leads by 2.
+ *
+ * How:
+ * 1. Checks basic numeric validity (integers, non-negative, no draws).
+ * 2. Ensures the winner has reached at least the target score.
+ * 3. If the winner matches the target exactly, ensures the margin is >= 2 (e.g., 7-5).
+ * 4. If the winner exceeds the target, ensures the margin is exactly 2 (e.g., 8-6).
+ *    Scores like 9-6 are invalid because the match would have ended at 8-6.
+ */
 const isMatchTiebreakValid = (home, away) => {
   if (home === 0 && away === 0) {
     return true; // Not played
@@ -45,7 +59,13 @@ const isMatchTiebreakValid = (home, away) => {
   const loser = Math.min(home, away);
 
   if (winner < MATCH_TIEBREAK_TARGET) return false;
-  return winner - loser >= 2;
+
+  if (winner === MATCH_TIEBREAK_TARGET) {
+    return winner - loser >= 2;
+  }
+
+  // If winner > MATCH_TIEBREAK_TARGET, the game must have ended exactly when the margin reached 2.
+  return winner - loser === 2;
 };
 
 const collectScoreSnapshot = (row) => {
@@ -496,6 +516,14 @@ export const AddScore = () => {
   const generateScoreOptions = () => {
     const options = [];
     for (let i = 0; i <= 7; i++) {
+      options.push(<option key={i} value={i}>{i}</option>);
+    }
+    return options;
+  };
+
+  const generateTiebreakOptions = () => {
+    const options = [];
+    for (let i = 0; i <= 30; i++) {
       options.push(<option key={i} value={i}>{i}</option>);
     }
     return options;
@@ -1143,7 +1171,7 @@ export const AddScore = () => {
                   onChange={(e) => handleScoreChange('home', 3, e.target.value)}
                 >
                   <option value="">{getPlayerDisplayNames().homeNames || 'Home'}</option>
-                  {generateScoreOptions()}
+                  {generateTiebreakOptions()}
                 </select>
                 <span>-</span>
                 <select
@@ -1151,7 +1179,7 @@ export const AddScore = () => {
                   onChange={(e) => handleScoreChange('away', 3, e.target.value)}
                 >
                   <option value="">{getPlayerDisplayNames().awayNames || 'Away'}</option>
-                  {generateScoreOptions()}
+                  {generateTiebreakOptions()}
                 </select>
               </div>
             </div>

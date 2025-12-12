@@ -340,3 +340,9 @@
     grid-template-columns: 1fr;
   }
 }
+/* Added for accessibility wrapper around form content */
+.login-tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
