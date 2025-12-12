@@ -94,7 +94,8 @@ test.describe('Login Page', () => {
     // Let's check for the "Logout" text or "My Hub" which only appears for logged in users.
 
     // We need to wait for the state to update.
-    await expect(page.getByText('Logout')).toBeVisible();
-    await expect(page.getByText('My Hub')).toBeVisible();
+    // Use toBeAttached() because on mobile these are hidden in the menu
+    await expect(page.getByText('Logout')).toBeAttached();
+    await expect(page.getByText('My Hub')).toBeAttached();
   });
 });

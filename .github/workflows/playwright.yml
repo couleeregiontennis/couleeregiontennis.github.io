@@ -1,5 +1,7 @@
 name: Playwright Tests
 
+permissions:
+  contents: read
 on:
   push:
     branches: [ main, master ]
@@ -15,9 +17,9 @@ on:
 
 jobs:
   test:
+    timeout-minutes: 60
     permissions:
       contents: write
-    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
