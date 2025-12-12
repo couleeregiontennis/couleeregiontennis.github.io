@@ -13,7 +13,7 @@ test.describe('Login Page', () => {
   });
 
   test('should toggle to sign up mode', async ({ page }) => {
-    await page.getByRole('button', { name: 'Sign Up' }).click();
+    await page.getByRole('tab', { name: 'Sign Up' }).click();
     await expect(page.getByRole('heading', { name: /Create your LTTA account/i })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Create account' })).toBeVisible();
   });
