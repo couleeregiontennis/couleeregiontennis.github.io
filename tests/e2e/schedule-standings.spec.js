@@ -4,6 +4,23 @@ import { mockSupabaseAuth } from '../utils/auth-mock';
 test.describe('Match Schedule Page', () => {
 
   test('displays upcoming matches', async ({ page }) => {
+    // Set fixed time so the month view shows the mocked matches
+    await page.clock.install({ time: new Date('2023-10-01T12:00:00') });
+
+    // Mock team data (required for filter dropdown, otherwise fetch fails)
+    await page.route('**/rest/v1/team*', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify([
+          { id: '1', name: 'Aces', number: 1 },
+          { id: '2', name: 'Faults', number: 2 },
+          { id: '3', name: 'Netters', number: 3 },
+          { id: '4', name: 'Lobbers', number: 4 }
+        ])
+      });
+    });
+
     // Mock the matches data
     await page.route('**/rest/v1/matches*', async (route) => {
       await route.fulfill({
@@ -32,10 +49,10 @@ test.describe('Match Schedule Page', () => {
 
     await page.goto('/'); // Root is MatchSchedule
     // Check for team names individually as they might stack on mobile or have different layout
-    await expect(page.getByText('Aces', { exact: true })).toBeVisible();
-    await expect(page.getByText('Faults', { exact: true })).toBeVisible();
-    await expect(page.getByText('Netters', { exact: true })).toBeVisible();
-    await expect(page.getByText('Lobbers', { exact: true })).toBeVisible();
+    await expect(page.locator('.team-name').getByText('Aces', { exact: true })).toBeVisible();
+    await expect(page.locator('.team-name').getByText('Faults', { exact: true })).toBeVisible();
+    await expect(page.locator('.team-name').getByText('Netters', { exact: true })).toBeVisible();
+    await expect(page.locator('.team-name').getByText('Lobbers', { exact: true })).toBeVisible();
   });
 
   test('displays standings', async ({ page }) => {

@@ -8,28 +8,64 @@ test.describe('Add Score Page (Protected)', () => {
     await mockSupabaseAuth(page);
 
     // 2. Mock Initial Data Loading
-    await page.route('**/rest/v1/player?id=eq.fake-user-id*', async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ id: 'fake-user-id', first_name: 'John', last_name: 'Doe' }),
-      });
+    await page.route('**/rest/v1/player*', async (route) => {
+      const url = route.request().url();
+      if (url.includes('id=eq')) {
+          await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({ id: 'fake-user-id', first_name: 'John', last_name: 'Doe' }),
+          });
+      } else {
+          // Roster details
+          await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify([
+                { id: 'p1', first_name: 'Player', last_name: 'One', ranking: 1 },
+                { id: 'p2', first_name: 'Player', last_name: 'Two', ranking: 2 }
+            ]),
+          });
+      }
     });
 
-    await page.route('**/rest/v1/player_to_team?player=eq.fake-user-id*', async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ team: 'fake-team-id' }),
-      });
+    await page.route('**/rest/v1/player_to_team*', async (route) => {
+      const url = route.request().url();
+      if (url.includes('player=eq')) {
+          await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({ team: 'fake-team-id' }),
+          });
+      } else {
+          // Roster fetch
+          await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify([
+                { player: 'p1' }, { player: 'p2' }
+            ]),
+          });
+      }
     });
 
-    await page.route('**/rest/v1/team?id=eq.fake-team-id*', async (route) => {
-       await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ id: 'fake-team-id', name: 'My Team', number: 1 }),
-      });
+    await page.route('**/rest/v1/team*', async (route) => {
+       const url = route.request().url();
+       if (url.includes('id=eq')) {
+           await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({ id: 'fake-team-id', name: 'My Team', number: 1 }),
+          });
+       } else if (url.includes('number=eq')) {
+           const match = url.match(/number=eq\.(\d+)/);
+           const number = match ? match[1] : '1';
+           await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({ id: `team-${number}`, number: parseInt(number), name: `Team ${number}` }),
+          });
+       }
     });
 
     await page.route('**/rest/v1/matches*', async (route) => {
@@ -53,38 +89,6 @@ test.describe('Add Score Page (Protected)', () => {
       });
     });
 
-    // Mock dynamic requests for teams/players
-    await page.route('**/rest/v1/team?number=eq.*', async (route) => {
-        const url = route.request().url();
-        const number = url.match(/number=eq\.(\d+)/)[1];
-        await route.fulfill({
-            status: 200,
-            contentType: 'application/json',
-            body: JSON.stringify({ id: `team-${number}`, number: parseInt(number), name: `Team ${number}` }),
-        });
-    });
-
-    await page.route('**/rest/v1/player_to_team?team=eq.team-*', async (route) => {
-        await route.fulfill({
-            status: 200,
-            contentType: 'application/json',
-            body: JSON.stringify([
-                { player: 'p1' }, { player: 'p2' }
-            ]),
-        });
-    });
-
-    await page.route('**/rest/v1/player?id=in.*', async (route) => {
-         await route.fulfill({
-            status: 200,
-            contentType: 'application/json',
-            body: JSON.stringify([
-                { id: 'p1', first_name: 'Player', last_name: 'One', ranking: 1 },
-                { id: 'p2', first_name: 'Player', last_name: 'Two', ranking: 2 }
-            ]),
-        });
-    });
-
     await page.route('**/rest/v1/line_results*', async (route) => {
         await route.fulfill({
             status: 200,
@@ -95,7 +99,7 @@ test.describe('Add Score Page (Protected)', () => {
 
     await page.goto('/login');
     await page.getByLabel(/Email/i).fill('test@example.com');
-    await page.getByLabel(/Password/i).fill('password');
+    await page.getByLabel('Password', { exact: true }).fill('password');
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
     // Use toBeAttached() because on mobile the logout button is in the menu (hidden by default)
     await expect(page.getByText('Logout')).toBeAttached();
@@ -116,7 +120,7 @@ test.describe('Add Score Page (Protected)', () => {
     await page.goto('/add-score');
 
     // Select match
-    await page.selectOption('select[name="matchId"]', { label: /My Team vs Opponent Team/i });
+    await page.selectOption('select[name="matchId"]', 'match-1');
 
     // Wait for roster loading (indicated by players appearing or select being enabled)
     // We can select match type
@@ -127,25 +131,23 @@ test.describe('Add Score Page (Protected)', () => {
     const playerSelect = page.locator('select').filter({ hasText: 'Select Player 1' }).first();
     await expect(playerSelect).toContainText('Player One');
 
-    // Set invalid score
+    // Set invalid score for Set 1
     const sets = page.locator('.score-group');
     const set1 = sets.nth(0);
     await set1.locator('select').nth(0).selectOption('5');
     await set1.locator('select').nth(1).selectOption('5');
 
+    // Set valid score for Set 2 (required field)
+    const set2 = sets.nth(1);
+    await set2.locator('select').nth(0).selectOption('6');
+    await set2.locator('select').nth(1).selectOption('4');
+
     // Select players to pass that validation
     const homePlayer1 = page.locator('select').filter({ hasText: 'Select Player 1' }).nth(0);
     const awayPlayer1 = page.locator('select').filter({ hasText: 'Select Player 1' }).nth(1);
 
-    await homePlayer1.selectOption({ label: /Player One/ });
-    await awayPlayer1.selectOption({ label: /Player One/ }); // Selecting same player triggers another error, but we want to check score error priority or existence.
-
-    await page.getByRole('button', { name: 'Submit Scores' }).click();
-
-    // Check for either error (score or player uniqueness)
-    // The code checks players first, then scores.
-    // Let's fix the player uniqueness to ensure we see the score error.
-    await awayPlayer1.selectOption({ label: /Player Two/ });
+    await homePlayer1.selectOption('Player One');
+    await awayPlayer1.selectOption('Player Two'); // Valid players
 
     await page.getByRole('button', { name: 'Submit Scores' }).click();
     await expect(page.locator('.error-message')).toContainText(/Sets 1 and 2 must be valid tennis scores/);
@@ -153,7 +155,7 @@ test.describe('Add Score Page (Protected)', () => {
 
   test('validates unique players', async ({ page }) => {
      await page.goto('/add-score');
-     await page.selectOption('select[name="matchId"]', { label: /My Team vs Opponent Team/i });
+     await page.selectOption('select[name="matchId"]', 'match-1');
      await page.locator('select[name="matchType"]').selectOption('singles');
 
      // Wait for players to load
@@ -163,8 +165,17 @@ test.describe('Add Score Page (Protected)', () => {
      const homePlayer1 = page.locator('select').filter({ hasText: 'Select Player 1' }).nth(0);
      const awayPlayer1 = page.locator('select').filter({ hasText: 'Select Player 1' }).nth(1);
 
-     await homePlayer1.selectOption({ label: /Player One/ });
-     await awayPlayer1.selectOption({ label: /Player One/ });
+     await homePlayer1.selectOption('Player One');
+     await awayPlayer1.selectOption('Player One'); // Duplicate player
+
+     // Fill required scores (can be valid)
+     const sets = page.locator('.score-group');
+     const set1 = sets.nth(0);
+     await set1.locator('select').nth(0).selectOption('6');
+     await set1.locator('select').nth(1).selectOption('4');
+     const set2 = sets.nth(1);
+     await set2.locator('select').nth(0).selectOption('6');
+     await set2.locator('select').nth(1).selectOption('4');
 
      await page.getByRole('button', { name: 'Submit Scores' }).click();
      await expect(page.locator('.error-message')).toContainText(/Players cannot appear on both sides/);

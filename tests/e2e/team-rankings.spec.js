@@ -24,29 +24,19 @@ test.describe('Team & Rankings (Public)', () => {
 
   test('Team Details page loads', async ({ page }) => {
     // Mock specific team fetch
-    // Route: /team/:day/:teamId
-    // App uses: select('*').eq('id', teamId).single()
-    await page.route('**/rest/v1/team?id=eq.team-1*', async (route) => {
+    // Use integer ID in URL because component uses parseInt
+    const teamId = '1';
+
+    // 1. Team fetch: select=id,name & number=eq.1
+    await page.route('**/rest/v1/team?select=id%2Cname&number=eq.1*', async (route) => {
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify({ id: 'team-1', name: 'The Aces', captain: 'Cap One', home_courts: 'Central Park' }),
+        body: JSON.stringify({ id: 'team-uuid-1', name: 'The Aces' }),
       });
     });
 
-    // Mock Roster (player_to_team -> player)
-    await page.route('**/rest/v1/player_to_team?select=*,player(*)&team=eq.team-1*', async (route) => {
-        await route.fulfill({
-            status: 200,
-            contentType: 'application/json',
-            body: JSON.stringify([
-                { player: { id: 'p1', first_name: 'Player', last_name: 'One', ranking: 1 } },
-                { player: { id: 'p2', first_name: 'Player', last_name: 'Two', ranking: 2 } }
-            ]),
-        });
-    });
-
-    // Mock Matches for team
+    // 2. Schedule fetch (matches table)
     await page.route('**/rest/v1/matches*', async (route) => {
         await route.fulfill({
             status: 200,
@@ -55,9 +45,42 @@ test.describe('Team & Rankings (Public)', () => {
         });
     });
 
-    await page.goto('/team/Monday/team-1');
+    // 3. Roster IDs fetch: player_to_team?select=player&team=eq.team-uuid-1
+    await page.route('**/rest/v1/player_to_team?select=player&team=eq.team-uuid-1*', async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify([
+                { player: 'p1' },
+                { player: 'p2' }
+            ]),
+        });
+    });
+
+    // 4. Roster details fetch: player?select=...&id=in.(p1,p2)
+    // Note: URL encoded parenthesis %28 %29
+    await page.route('**/rest/v1/player?select=id%2Cfirst_name%2Clast_name%2Cis_captain&id=in.%28p1%2Cp2%29*', async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify([
+                { id: 'p1', first_name: 'Player', last_name: 'One', is_captain: true },
+                { id: 'p2', first_name: 'Player', last_name: 'Two', is_captain: false }
+            ]),
+        });
+    });
+
+    // 5. Match Results fetch (team_match) - empty for now
+    await page.route('**/rest/v1/team_match*', async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify([]),
+        });
+    });
+
+    await page.goto('/team/Monday/1');
     await expect(page.getByRole('heading', { name: 'The Aces' })).toBeVisible();
-    await expect(page.getByText('Central Park')).toBeVisible();
     // Check roster
     await expect(page.getByText('Player One')).toBeVisible();
   });

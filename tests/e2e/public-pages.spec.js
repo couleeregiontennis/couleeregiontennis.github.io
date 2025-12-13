@@ -16,6 +16,8 @@ test.describe('Public Pages', () => {
   });
 
   test('Courts & Locations page', async ({ page }) => {
+    await mockSupabaseData(page, 'location', []);
+    await mockSupabaseData(page, 'court_group', []);
     await page.goto('/courts-locations');
     await expect(page.getByRole('heading', { name: 'Courts & Locations' })).toBeVisible();
   });
