@@ -346,3 +346,43 @@
   flex-direction: column;
   gap: var(--space-xl);
 }
+
+/* Password Toggle Styles */
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  padding-right: 4rem; /* Space for the toggle button */
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: var(--space-xs);
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--login-accent);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  z-index: 1;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+  text-decoration: none;
+  background: rgba(var(--color-secondary-rgb), 0.1);
+  color: var(--login-accent-strong);
+}
+
+.password-toggle-btn:focus-visible {
+  outline: 2px solid var(--login-accent);
+  border-radius: var(--radius-sm);
+}
