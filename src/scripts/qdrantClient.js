@@ -1,8 +1,10 @@
 import { QdrantClient } from '@qdrant/js-client-rest';
 
+throw new Error('Qdrant client is tooling-only and must not be imported by the web app bundle. Use scripts/ with QDRANT_URL/QDRANT_API_KEY instead.');
+
 const qdrantClient = new QdrantClient({
-  url: import.meta.env.VITE_QDRANT_URL,
-  apiKey: import.meta.env.VITE_QDRANT_API_KEY,
+  url: '',
+  apiKey: '',
 });
 
 export default qdrantClient;
