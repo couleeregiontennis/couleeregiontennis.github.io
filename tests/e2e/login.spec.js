@@ -8,8 +8,23 @@ test.describe('Login Page', () => {
   test('should display login form', async ({ page }) => {
     await expect(page.getByRole('heading', { name: /Welcome back to LTTA/i })).toBeVisible();
     await expect(page.getByLabel(/Email/i)).toBeVisible();
-    await expect(page.getByLabel(/Password/i)).toBeVisible();
+    await expect(page.getByLabel('Password', { exact: true })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Sign in', exact: true })).toBeVisible();
+  });
+
+  test('should toggle password visibility', async ({ page }) => {
+    const passwordInput = page.getByLabel('Password', { exact: true });
+    await expect(passwordInput).toHaveAttribute('type', 'password');
+
+    await passwordInput.fill('secret123');
+
+    // Click Show
+    await page.getByRole('button', { name: 'Show password' }).click();
+    await expect(passwordInput).toHaveAttribute('type', 'text');
+
+    // Click Hide
+    await page.getByRole('button', { name: 'Hide password' }).click();
+    await expect(passwordInput).toHaveAttribute('type', 'password');
   });
 
   test('should toggle to sign up mode', async ({ page }) => {
@@ -37,7 +52,7 @@ test.describe('Login Page', () => {
     });
 
     await page.getByLabel(/Email/i).fill('wrong@example.com');
-    await page.getByLabel(/Password/i).fill('wrongpassword');
+    await page.getByLabel('Password', { exact: true }).fill('wrongpassword');
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
 
     await expect(page.locator('.form-error')).toContainText('Invalid login credentials');
@@ -79,7 +94,7 @@ test.describe('Login Page', () => {
     });
 
     await page.getByLabel(/Email/i).fill('test@example.com');
-    await page.getByLabel(/Password/i).fill('password123');
+    await page.getByLabel('Password', { exact: true }).fill('password123');
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
 
     // Verify successful login state.
