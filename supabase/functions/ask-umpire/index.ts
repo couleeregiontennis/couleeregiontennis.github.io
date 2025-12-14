@@ -6,60 +6,6 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-// Hardcoded Rules Context (Single Source of Truth)
-const RULES_CONTEXT = `
-# La Crosse Team Tennis Association (LTTA) Summer Tennis League - 2024 Rules & Responsibilities
-
-## League Coordinator
-*   Role: Elected at pre-season meeting.
-*   2026 Coordinator: Brett Meddaugh (Sally Ruud Resigned Aug 2024).
-*   Oversight: Coulee Region Tennis Association (CRTA).
-*   Play Site: Green Island Park (13 courts).
-*   Schedule: Tue/Wed, May-Aug. 5:30 PM & 7:00 PM.
-
-## Captain Responsibilities
-*   Collect $25 fees by week 2.
-*   Check lineups/subs before play.
-*   Review scoresheets, total points, and sign after matches.
-*   Ensure team representation at meetings.
-
-## Team Member Responsibilities
-*   Arrive 10 min early.
-*   **Subs:** Find your own.
-*   **Playing Up:** Can play 1 level up (e.g., #3 playing #2). No penalty.
-*   **Interchangeable:** #4/#5 are interchangeable. #1/#2 are interchangeable (2024 exception).
-*   **Playing Down:** Penalty: 4 pts to side playing down, 10 pts to opponent.
-*   **Rostering:** One night only unless shortage. Dual players pay double fees.
-*   **Etiquette:** No throwing racquets/smashing balls. Have fun.
-
-## Match Play
-*   **Start:** 5:30 PM & 7:00 PM. Warm-up 10 min. No "First Ball In".
-*   **Forfeits:** Effective at 5:45/7:15 PM. Late arrival = 0 pts (match played for fun).
-*   **Time Limit:** 5:30 matches must vacate by 7:00. Unfinished? 
-    *   Leader gets 10 pts. Trailer gets 8 pts. Tied games? Both get 8 pts.
-*   **Scoring:** No-Ad (15, 30, 40, Game). Deuce = 1 point, receiver choice.
-*   **Format:** Best 2 of 3 sets.
-    *   6-6 in set? 7-pt tiebreak.
-    *   Split sets? 3rd set is a 7-pt tiebreak.
-*   **Heat:** Index > 95°F? Start sets at 2-2 if agreed. Index > 104°F? Cancelled.
-
-## Point System (Per Match)
-*   10 pts: Winner.
-*   8 pts: Loser in split set.
-*   8 pts: Tied games in halted match.
-*   6 pts: Loser in straight sets.
-*   6 pts: Retiree in 3rd set (Opponent 10).
-*   4 pts: Retiree in 2nd set (Opponent 10).
-*   4 pts: Playing Down Penalty (Opponent 10).
-*   2 pts: Retiree in 1st set (Opponent 10).
-*   1 pt: Non-sanctioned player (Opponent 10).
-*   0 pts: Forfeit/No-show.
-
-## Roster Structure
-*   7 players: #1, #2, #3, #3, #3, #3, #4, #5.
-*   Doubles: #1+#2, #3+#3, #4+#5.
-`;
-
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
@@ -71,6 +17,13 @@ serve(async (req) => {
 
     const UMPIRE_GEMINI_API_KEY = Deno.env.get('UMPIRE_GEMINI_API_KEY')
     if (!UMPIRE_GEMINI_API_KEY) throw new Error('UMPIRE_GEMINI_API_KEY is not set')
+
+    // Fetch the latest rules from the deployed website (Single Source of Truth)
+    const rulesResponse = await fetch('https://couleeregiontennis.org/rules_context.md')
+    if (!rulesResponse.ok) {
+        throw new Error('Failed to fetch rules context')
+    }
+    const RULES_CONTEXT = await rulesResponse.text()
 
     const genAI = new GoogleGenerativeAI(UMPIRE_GEMINI_API_KEY)
     const model = genAI.getGenerativeModel({ model: "gemini-pro" })
