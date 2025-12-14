@@ -9,18 +9,39 @@ export async function mockSupabaseAuth(page, userDetails = {}) {
     ...userDetails,
   };
 
+  const validJwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYWtlLXVzZXItaWQiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJleHAiOjE5OTk5OTk5OTksImlhdCI6MTYwMDAwMDAwMCwiYXVkIjoiYXV0aGVudGljYXRlZCIsInJvbGUiOiJhdXRoZW50aWNhdGVkIn0.fake-signature';
+
+  const session = {
+    access_token: validJwt,
+    token_type: 'bearer',
+    expires_in: 3600,
+    refresh_token: 'fake-refresh-token',
+    user: defaultUser,
+    expires_at: Math.floor(Date.now() / 1000) + 3600,
+  };
+
+  // Inject session into localStorage so the app thinks we are logged in
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://example.supabase.co';
+  let projectRef = 'example';
+  try {
+    // If URL is valid, extract subdomain
+    const hostname = new URL(supabaseUrl).hostname;
+    projectRef = hostname.split('.')[0];
+  } catch (e) {
+    // fallback or ignore
+  }
+  const storageKey = `sb-${projectRef}-auth-token`;
+
+  await page.addInitScript(({ key, value }) => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  }, { key: storageKey, value: session });
+
   // Mock token response (login)
   await page.route('**/auth/v1/token?grant_type=password', async (route) => {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify({
-        access_token: 'fake-jwt-token',
-        token_type: 'bearer',
-        expires_in: 3600,
-        refresh_token: 'fake-refresh-token',
-        user: defaultUser,
-      }),
+      body: JSON.stringify(session),
     });
   });
 
