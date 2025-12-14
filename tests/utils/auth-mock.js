@@ -1,6 +1,17 @@
 // tests/utils/auth-mock.js
 
 export async function mockSupabaseAuth(page, userDetails = {}) {
+  // Disable navigator.locks to prevent Supabase client from hanging in some environments (like Playwright in CI/Docker)
+  await page.addInitScript(() => {
+    if (navigator.locks) {
+      try {
+        Object.defineProperty(navigator, 'locks', { value: undefined });
+      } catch (e) {
+        console.error('Failed to disable navigator.locks', e);
+      }
+    }
+  });
+
   const defaultUser = {
     id: 'fake-user-id',
     aud: 'authenticated',
@@ -20,11 +31,10 @@ export async function mockSupabaseAuth(page, userDetails = {}) {
     expires_at: Math.floor(Date.now() / 1000) + 3600,
   };
 
-  // Inject session into localStorage so the app thinks we are logged in
   const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://example.supabase.co';
+
   let projectRef = 'example';
   try {
-    // If URL is valid, extract subdomain
     const hostname = new URL(supabaseUrl).hostname;
     projectRef = hostname.split('.')[0];
   } catch (e) {
@@ -36,8 +46,8 @@ export async function mockSupabaseAuth(page, userDetails = {}) {
     window.localStorage.setItem(key, JSON.stringify(value));
   }, { key: storageKey, value: session });
 
-  // Mock token response (login)
-  await page.route('**/auth/v1/token?grant_type=password', async (route) => {
+  // Mock token response (login, refresh, etc.)
+  await page.route('**/auth/v1/token*', async (route) => {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
@@ -56,9 +66,9 @@ export async function mockSupabaseAuth(page, userDetails = {}) {
 }
 
 export async function mockSupabaseData(page, table, data) {
-  // Simple mock for GET requests to a specific table
   await page.route(`**/rest/v1/${table}*`, async (route) => {
-    if (route.request().method() === 'GET') {
+    const method = route.request().method();
+    if (method === 'GET') {
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
