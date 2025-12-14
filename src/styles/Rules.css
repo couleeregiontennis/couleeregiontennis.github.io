@@ -310,3 +310,48 @@ body[data-theme="dark"] .rules-content {
 body[data-theme="dark"] .rules-content li::marker {
   color: var(--secondary-light);
 }
+/* Markdown Styles */
+.rules-markdown-container {
+  color: var(--rules-card-text);
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+}
+
+.rules-section-title {
+  color: var(--rules-accent);
+  font-size: var(--font-size-2xl);
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-xl);
+  border-bottom: 3px solid var(--rules-accent);
+  padding-bottom: var(--space-sm);
+}
+
+.rules-markdown-container p {
+  margin-bottom: var(--space-md);
+}
+
+.rules-markdown-container ul {
+  margin-bottom: var(--space-lg);
+  padding-left: 1.5rem;
+}
+
+.rules-markdown-container li {
+  margin-bottom: 0.5rem;
+}
+
+.rules-markdown-container h3 {
+  color: var(--rules-accent);
+  font-size: var(--font-size-xl);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+
+.rules-markdown-container blockquote {
+  margin: var(--space-lg) 0;
+  padding: var(--space-md);
+  border-left: 3px solid var(--rules-accent);
+  background: rgba(var(--color-secondary-rgb), 0.08);
+  color: var(--rules-card-muted);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+}
