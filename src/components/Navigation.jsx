@@ -142,6 +142,7 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
                 <ul className={`dropdown-menu ${openDropdown === 'resources' ? 'show' : ''}`} role="menu">
                   <li><Link to="/courts-locations" onClick={closeMenu}>Courts & Locations</Link></li>
                   <li><Link to="/player-resources" onClick={closeMenu}>Player Resources</Link></li>
+                  <li><Link to="/feedback" onClick={closeMenu}>Feedback</Link></li>
                 </ul>
               </li>
 
