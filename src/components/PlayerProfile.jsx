@@ -179,7 +179,9 @@ export const PlayerProfile = () => {
         emergency_contact: profile.emergency_contact || '',
         emergency_phone: profile.emergency_phone || '',
         ranking: rankingValue,
-        is_captain: Boolean(profile.is_captain),
+        // Security: is_captain is a privileged role and should not be set by the user via profile update.
+        // It must be managed by admins or database policies.
+        // is_captain: Boolean(profile.is_captain),
         is_active: Boolean(profile.is_active),
         day_availability: profile.day_availability || getDefaultAvailability(),
         notes: profile.notes || ''
@@ -388,15 +390,15 @@ export const PlayerProfile = () => {
             </div>
 
             <div className="form-group">
-              <label className="checkbox-label">
+              <label className="checkbox-label" title="Captain status is managed by league administrators">
                 <input
                   type="checkbox"
                   checked={profile.is_captain}
-                  onChange={(e) => handleInputChange('is_captain', e.target.checked)}
-                  disabled={!isEditing}
+                  disabled={true}
+                  readOnly
                 />
                 <span className="checkmark"></span>
-                Team Captain
+                Team Captain (Read-only)
               </label>
             </div>
 
