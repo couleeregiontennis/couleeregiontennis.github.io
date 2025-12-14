@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../scripts/supabaseClient';
+import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/Login.css';
 
 export const Login = ({ onLogin }) => {
@@ -113,7 +114,14 @@ export const Login = ({ onLogin }) => {
               </div>
               {error && <div className="form-error">{error}</div>}
               <button className="primary-action" type="submit" disabled={loading}>
-                {loading ? (isSignUp ? 'Creating account…' : 'Signing in…') : (isSignUp ? 'Create account' : 'Sign in')}
+                {loading ? (
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                    <LoadingSpinner size="sm" />
+                    {isSignUp ? 'Creating account…' : 'Signing in…'}
+                  </span>
+                ) : (
+                  isSignUp ? 'Create account' : 'Sign in'
+                )}
               </button>
             </form>
 
