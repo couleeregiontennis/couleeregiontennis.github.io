@@ -9,6 +9,37 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [userRole, setUserRole] = useState({ isCaptain: false, isAdmin: false });
+
+  const fetchUserRole = async (userId) => {
+    if (!userId) {
+      setUserRole({ isCaptain: false, isAdmin: false });
+      return;
+    }
+    try {
+      const { data, error } = await supabase
+        .from('player')
+        .select('is_captain, is_admin')
+        .eq('id', userId)
+        .single();
+
+      if (error) {
+        // If the user is authenticated but has no player profile, they shouldn't be admin/captain
+        // This can happen for new users or if the profile is missing
+        console.warn('Error fetching user role or profile missing:', error.message);
+        setUserRole({ isCaptain: false, isAdmin: false });
+        return;
+      }
+
+      setUserRole({
+        isCaptain: !!data?.is_captain,
+        isAdmin: !!data?.is_admin
+      });
+    } catch (err) {
+      console.error('Error fetching user role:', err);
+      setUserRole({ isCaptain: false, isAdmin: false });
+    }
+  };
 
   useEffect(() => {
     let mounted = true;
@@ -21,6 +52,9 @@ export const AuthProvider = ({ children }) => {
         if (mounted) {
           setSession(initialSession);
           setUser(initialSession?.user ?? null);
+          if (initialSession?.user) {
+            await fetchUserRole(initialSession.user.id);
+          }
           setLoading(false);
         }
       } catch (err) {
@@ -31,10 +65,15 @@ export const AuthProvider = ({ children }) => {
 
     getSession();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (mounted) {
         setSession(session);
         setUser(session?.user ?? null);
+        if (session?.user) {
+          await fetchUserRole(session.user.id);
+        } else {
+          setUserRole({ isCaptain: false, isAdmin: false });
+        }
         setLoading(false);
       }
     });
@@ -49,6 +88,7 @@ export const AuthProvider = ({ children }) => {
     session,
     user,
     loading,
+    userRole,
     signOut: () => supabase.auth.signOut(),
   };
 
