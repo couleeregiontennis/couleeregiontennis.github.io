@@ -1,9 +1,11 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '../scripts/supabaseClient';
+import { useAuth } from '../context/AuthProvider';
 import '../styles/Style.css';
 import '../styles/Standings.css';
 
 const Standings = () => {
+  const { user, loading: authLoading } = useAuth();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [standings, setStandings] = useState([]);
@@ -11,12 +13,13 @@ const Standings = () => {
   const [nightOptions, setNightOptions] = useState(['All']);
   const [lastUpdated, setLastUpdated] = useState('');
   const [nightHighlights, setNightHighlights] = useState({ tuesday: null, wednesday: null });
+
+  // User team state
   const [userTeamId, setUserTeamId] = useState(null);
   const [userTeamNumber, setUserTeamNumber] = useState(null);
   const [userTeamStanding, setUserTeamStanding] = useState(null);
-  const [authChecked, setAuthChecked] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasUserTeam, setHasUserTeam] = useState(false);
+
   const [leagueOverview, setLeagueOverview] = useState({
     totalMatches: 0,
     totalTeams: 0,
@@ -27,166 +30,45 @@ const Standings = () => {
   });
 
   const fetchStandings = useCallback(async () => {
-    const valueExists = (value) => value !== null && value !== undefined;
-
     try {
       setLoading(true);
       setError('');
 
       const [
-        { data: teams, error: teamsError },
-        { data: matches, error: matchesError },
-        { data: players, error: playersError }
+        { data: standingsData, error: standingsError },
+        { count: playerCount, error: playerError },
+        { data: recentMatchesData, error: recentMatchesError },
+        { data: allMatchDates, error: datesError }
       ] = await Promise.all([
-        supabase.from('team').select('*').order('number'),
-        supabase
-          .from('matches')
-          .select(`
-            *,
-            match_scores (
-              home_lines_won,
-              away_lines_won,
-              home_total_games,
-              away_total_games,
-              home_won
-            ),
-            line_results (
-              line_number,
-              home_set_1,
-              away_set_1,
-              home_set_2,
-              away_set_2,
-              home_set_3,
-              away_set_3
-            )
-          `),
-        supabase.from('player').select('id')
+        supabase.from('standings_view').select('*'),
+        supabase.from('player').select('*', { count: 'exact', head: true }),
+        supabase.from('matches').select('id, date, time, status, home_team_name, away_team_name').order('date', { ascending: false }).limit(6),
+        supabase.from('matches').select('date')
       ]);
 
-      if (teamsError) throw teamsError;
-      if (matchesError) throw matchesError;
-      if (playersError) throw playersError;
+      if (standingsError) throw standingsError;
+      if (recentMatchesError) throw recentMatchesError;
 
-      const standingsData = (teams || []).map((team) => {
-        const teamNumber = Number(team.number);
-        const teamMatches = (matches || []).filter((match) => {
-          const homeNumber = Number(match.home_team_number);
-          const awayNumber = Number(match.away_team_number);
-          return homeNumber === teamNumber || awayNumber === teamNumber;
-        });
+      // Process Standings
+      const formattedStandings = (standingsData || []).map((team) => ({
+        id: team.team_id,
+        number: team.team_number,
+        name: team.team_name,
+        playNight: team.play_night,
+        wins: team.wins,
+        losses: team.losses,
+        ties: team.ties,
+        matchesPlayed: team.matches_played,
+        setsWon: team.sets_won,
+        setsLost: team.sets_lost,
+        gamesWon: team.games_won,
+        gamesLost: team.games_lost,
+        winPercentage: team.win_percentage,
+        setWinPercentage: team.set_win_percentage
+      }));
 
-        let wins = 0;
-        let losses = 0;
-        let ties = 0;
-        let matchesPlayed = 0;
-        let setsWon = 0;
-        let setsLost = 0;
-        let gamesWon = 0;
-        let gamesLost = 0;
-
-        teamMatches.forEach((match) => {
-          const rawScore = match.match_scores;
-          const score = Array.isArray(rawScore) ? rawScore[0] : rawScore;
-          if (!score) return;
-
-          const hasOutcomeData =
-            typeof score.home_won === 'boolean' ||
-            valueExists(score.home_lines_won) ||
-            valueExists(score.home_total_games);
-
-          if (!hasOutcomeData) return;
-
-          const isHomeTeam = Number(match.home_team_number) === teamNumber;
-          const teamGamesTotal = isHomeTeam ? score.home_total_games ?? 0 : score.away_total_games ?? 0;
-          const opponentGamesTotal = isHomeTeam ? score.away_total_games ?? 0 : score.home_total_games ?? 0;
-
-          let matchSetsWon = 0;
-          let matchSetsLost = 0;
-
-          gamesWon += teamGamesTotal;
-          gamesLost += opponentGamesTotal;
-
-          const lineResults = Array.isArray(match.line_results) ? match.line_results : [];
-
-          lineResults.forEach((line) => {
-            const setScores = [
-              { home: line.home_set_1, away: line.away_set_1 },
-              { home: line.home_set_2, away: line.away_set_2 },
-              { home: line.home_set_3, away: line.away_set_3 }
-            ];
-
-            setScores.forEach(({ home, away }) => {
-              const homeScore = Number(home);
-              const awayScore = Number(away);
-
-              if (
-                Number.isNaN(homeScore) ||
-                Number.isNaN(awayScore) ||
-                (homeScore === 0 && awayScore === 0)
-              ) {
-                return;
-              }
-
-              if (homeScore === awayScore) {
-                return;
-              }
-
-              const teamWonSet = isHomeTeam ? homeScore > awayScore : awayScore > homeScore;
-
-              if (teamWonSet) {
-                matchSetsWon += 1;
-              } else {
-                matchSetsLost += 1;
-              }
-            });
-          });
-
-          let teamWonMatch = null;
-
-          if (typeof score.home_won === 'boolean') {
-            teamWonMatch = isHomeTeam ? score.home_won : !score.home_won;
-          } else if (matchSetsWon !== matchSetsLost) {
-            teamWonMatch = matchSetsWon > matchSetsLost;
-          } else if (teamGamesTotal !== opponentGamesTotal) {
-            teamWonMatch = teamGamesTotal > opponentGamesTotal;
-          }
-
-          if (teamWonMatch === true) {
-            wins += 1;
-          } else if (teamWonMatch === false) {
-            losses += 1;
-          } else {
-            ties += 1;
-          }
-
-          setsWon += matchSetsWon;
-          setsLost += matchSetsLost;
-
-          matchesPlayed += 1;
-        });
-
-        const winPct = matchesPlayed > 0 ? (wins / matchesPlayed) * 100 : 0;
-        const setWinPct = setsWon + setsLost > 0 ? (setsWon / (setsWon + setsLost)) * 100 : 0;
-
-        return {
-          id: team.id,
-          number: team.number,
-          name: team.name,
-          playNight: team.play_night,
-          wins,
-          losses,
-          ties,
-          matchesPlayed,
-          setsWon,
-          setsLost,
-          gamesWon,
-          gamesLost,
-          winPercentage: winPct,
-          setWinPercentage: setWinPct
-        };
-      });
-
-      const sortedStandings = [...standingsData].sort((a, b) => {
+      // Sort Standings
+      const sortedStandings = [...formattedStandings].sort((a, b) => {
         if (b.winPercentage !== a.winPercentage) return b.winPercentage - a.winPercentage;
 
         const setDiffA = a.setsWon - a.setsLost;
@@ -217,17 +99,13 @@ const Standings = () => {
         wednesday: findTopTeamForNight('wednesday')
       });
 
-      const totalMatches = matches?.length ?? 0;
-      const totalTeams = teams?.length ?? 0;
-      const totalPlayers = players?.length ?? 0;
+      // League Overview
+      const totalMatches = allMatchDates?.length ?? 0;
+      const totalTeams = standingsData?.length ?? 0;
+      const totalPlayers = playerCount ?? 0;
       const avgMatchesPerTeam = totalTeams > 0 ? totalMatches / totalTeams : 0;
 
-      const recentMatches = [...(matches || [])]
-        .filter((match) => match?.date)
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 6);
-
-      const matchesByWeekMap = (matches || []).reduce((acc, match) => {
+      const matchesByWeekMap = (allMatchDates || []).reduce((acc, match) => {
         if (!match?.date) return acc;
         const weekKey = new Date(match.date).toISOString().split('T')[0];
         acc[weekKey] = (acc[weekKey] || 0) + 1;
@@ -244,9 +122,10 @@ const Standings = () => {
         totalTeams,
         totalPlayers,
         avgMatchesPerTeam,
-        recentMatches,
+        recentMatches: recentMatchesData || [],
         matchesByWeek
       });
+
     } catch (err) {
       console.error('Error loading standings:', err);
       setError('Unable to load standings at this time.');
@@ -263,37 +142,22 @@ const Standings = () => {
     let isMounted = true;
 
     const loadUserTeam = async () => {
-      try {
-        const {
-          data: { user }
-        } = await supabase.auth.getUser();
-
-        if (!user) {
-          if (!isMounted) return;
-          setIsAuthenticated(false);
-          setHasUserTeam(false);
-          setUserTeamId(null);
-          setUserTeamNumber(null);
-          return;
-        }
-
+      if (!user) {
         if (!isMounted) return;
-        setIsAuthenticated(true);
+        setHasUserTeam(false);
+        setUserTeamId(null);
+        setUserTeamNumber(null);
+        return;
+      }
 
+      try {
         const { data: teamLink, error: teamLinkError } = await supabase
           .from('player_to_team')
           .select('team ( id, number )')
           .eq('player', user.id)
           .maybeSingle();
 
-        if (teamLinkError) {
-          console.error('Error fetching user team:', teamLinkError);
-          if (!isMounted) return;
-          setHasUserTeam(false);
-          setUserTeamId(null);
-          setUserTeamNumber(null);
-          return;
-        }
+        if (teamLinkError) throw teamLinkError;
 
         if (!isMounted) return;
 
@@ -307,25 +171,23 @@ const Standings = () => {
           setUserTeamNumber(null);
         }
       } catch (err) {
-        console.error('Error loading user session:', err);
-        if (!isMounted) return;
-        setIsAuthenticated(false);
-        setHasUserTeam(false);
-        setUserTeamId(null);
-        setUserTeamNumber(null);
-      } finally {
+        console.error('Error loading user team:', err);
         if (isMounted) {
-          setAuthChecked(true);
+          setHasUserTeam(false);
+          setUserTeamId(null);
+          setUserTeamNumber(null);
         }
       }
     };
 
-    loadUserTeam();
+    if (!authLoading) {
+      loadUserTeam();
+    }
 
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [user, authLoading]);
 
   useEffect(() => {
     if (!standings.length || (!userTeamId && !userTeamNumber)) {
@@ -374,7 +236,7 @@ const Standings = () => {
   const shouldShowSpotlight =
     nightHighlights.tuesday ||
     nightHighlights.wednesday ||
-    (authChecked && isAuthenticated && hasUserTeam && userTeamStanding);
+    (!authLoading && user && hasUserTeam && userTeamStanding);
 
   const topTeamSnapshot = standings.slice(0, 5);
   const maxMatchCount = leagueOverview.matchesByWeek.reduce(
@@ -459,7 +321,7 @@ const Standings = () => {
                   </div>
                 </div>
               )}
-              {authChecked && isAuthenticated && hasUserTeam && userTeamStanding && (
+              {!authLoading && user && hasUserTeam && userTeamStanding && (
                 <div className="spotlight-card card card--interactive card--overlay personal-team">
                   <span className="spotlight-label">Your Team</span>
                   <div className="spotlight-team">
