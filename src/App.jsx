@@ -14,6 +14,7 @@ import { MatchSchedule } from './components/MatchSchedule';
 import { NotFound } from './components/NotFound';
 import { LandingPage } from './components/LandingPage';
 import { ScheduleGenerator } from './components/admin/ScheduleGenerator';
+import { PlayerManagement } from './components/admin/PlayerManagement';
 import { PlayerRankings } from './components/PlayerRankings';
 import { MySchedule } from './components/MySchedule';
 import { CourtsLocations } from './components/CourtsLocations';
@@ -105,7 +106,7 @@ function App() {
                 path="/admin/player-management"
                 element={
                   <ProtectedRoute>
-                    <div>Player Management (Coming Soon)</div>
+                    <PlayerManagement />
                   </ProtectedRoute>
                 }
               />
