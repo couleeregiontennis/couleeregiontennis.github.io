@@ -14,6 +14,7 @@ import { MatchSchedule } from './components/MatchSchedule';
 import { NotFound } from './components/NotFound';
 import { LandingPage } from './components/LandingPage';
 import { ScheduleGenerator } from './components/admin/ScheduleGenerator';
+import { AuditLogViewer } from './components/admin/AuditLogViewer';
 import { PlayerRankings } from './components/PlayerRankings';
 import { MySchedule } from './components/MySchedule';
 import { CourtsLocations } from './components/CourtsLocations';
@@ -98,6 +99,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <ScheduleGenerator />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/audit-logs"
+                element={
+                  <ProtectedRoute>
+                    <AuditLogViewer />
                   </ProtectedRoute>
                 }
               />
