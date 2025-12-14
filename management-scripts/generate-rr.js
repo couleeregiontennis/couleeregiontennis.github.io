@@ -1,17 +1,40 @@
 require('dotenv').config();
-require('dotenv').config();
 const seedrandom = require('seedrandom');
 const { createClient } = require('@supabase/supabase-js');
+
+// ---------------------------------------------------------------------------
+// Args Parsing
+// ---------------------------------------------------------------------------
+const args = process.argv.slice(2);
+const getLocationId = () => {
+    const arg = args.find(a => !a.startsWith('--'));
+    return arg || null;
+};
+const getArgValue = (key) => {
+    const arg = args.find(a => a.startsWith(`--${key}=`));
+    return arg ? arg.split('=')[1] : null;
+};
+
+const YEAR = parseInt(getArgValue('year') || '2025', 10);
+const SEED = getArgValue('seed') || YEAR;
+const LOCATION_ID = getLocationId();
 
 // ---------------------------------------------------------------------------
 // Configuration
 // ---------------------------------------------------------------------------
 const TIMES = ['5:30pm', '7:00pm'];
-const SEED = 2025;
+
+const getFirstDayOfJune = (year, dayIndex) => {
+  const date = new Date(year, 5, 1); // June 1st
+  while (date.getDay() !== dayIndex) {
+    date.setDate(date.getDate() + 1);
+  }
+  return date.toISOString().split('T')[0];
+};
 
 const START_DATE_BY_NIGHT = {
-  tuesday: '2025-06-03',
-  wednesday: '2025-06-04'
+  tuesday: getFirstDayOfJune(YEAR, 2),   // 2 is Tuesday
+  wednesday: getFirstDayOfJune(YEAR, 3)  // 3 is Wednesday
 };
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -27,44 +50,18 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 // Utilities
 // ---------------------------------------------------------------------------
 const addDays = (dateStr, days) => {
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
-
-// ---------------------------------------------------------------------------
-// Utilities
-// ---------------------------------------------------------------------------
-const addDays = (dateStr, days) => {
   const d = new Date(dateStr);
   d.setDate(d.getDate() + days);
   return d.toISOString().slice(0, 10);
 };
 
 const shuffle = (items, seed) => {
-};
-
-const shuffle = (items, seed) => {
   const rng = seedrandom(seed);
-  const result = [...items];
-  for (let i = result.length - 1; i > 0; i--) {
   const result = [...items];
   for (let i = result.length - 1; i > 0; i--) {
     const j = Math.floor(rng() * (i + 1));
     [result[i], result[j]] = [result[j], result[i]];
-    [result[i], result[j]] = [result[j], result[i]];
   }
-  return result;
-};
-
-// ---------------------------------------------------------------------------
-// Scheduling helpers
-// ---------------------------------------------------------------------------
-const generateRoundRobin = (teams, seed = SEED) => {
-  if (teams.length < 2) return [];
-
-  const rotated = shuffle(teams, seed);
-  if (rotated.length % 2 === 1) rotated.push(null);
-
-  const rounds = rotated.length - 1;
-  const half = rotated.length / 2;
   return result;
 };
 
@@ -82,14 +79,8 @@ const generateRoundRobin = (teams, seed = SEED) => {
   const schedule = [];
 
   for (let round = 0; round < rounds; round++) {
-
-  for (let round = 0; round < rounds; round++) {
     const matches = [];
     for (let i = 0; i < half; i++) {
-      const home = rotated[i];
-      const away = rotated[rotated.length - 1 - i];
-      if (home && away) {
-        matches.push({ home, away });
       const home = rotated[i];
       const away = rotated[rotated.length - 1 - i];
       if (home && away) {
@@ -98,10 +89,6 @@ const generateRoundRobin = (teams, seed = SEED) => {
     }
     schedule.push(matches);
 
-    const fixed = rotated[0];
-    const rest = rotated.slice(1);
-    rest.unshift(rest.pop());
-    rotated.splice(0, rotated.length, fixed, ...rest);
     const fixed = rotated[0];
     const rest = rotated.slice(1);
     rest.unshift(rest.pop());
@@ -287,18 +274,15 @@ const buildSchedules = (teamsByNight, locationId) => {
 // Main entry
 // ---------------------------------------------------------------------------
 async function main() {
-  // Check if locationId provided via command line argument
-  const locationId = process.argv[2] || null;
-
-  console.error(`Generating schedule${locationId ? ' for location ' + locationId : ' with default court groups'}...`);
+  console.error(`Generating schedule for Year ${YEAR}${LOCATION_ID ? ', Location ' + LOCATION_ID : ''}...`);
 
   const teamsByNight = await fetchTeamsGroupedByNight();
 
   // Fetch court groups if location is provided
   let finalCourtGroups = ['Courts 1–5', 'Courts 6–9', 'Courts 10–13'];
-  if (locationId) {
+  if (LOCATION_ID) {
     try {
-      finalCourtGroups = await fetchCourtGroupsForLocation(locationId);
+      finalCourtGroups = await fetchCourtGroupsForLocation(LOCATION_ID);
       console.error(`Using court groups: ${finalCourtGroups.join(', ')}`);
     } catch (error) {
       console.error(`Warning: ${error.message}. Using default court groups.`);
@@ -311,7 +295,8 @@ async function main() {
     JSON.stringify(
       {
         generated_at: new Date().toISOString(),
-        location_id: locationId || null,
+        year: YEAR,
+        location_id: LOCATION_ID || null,
         court_groups: finalCourtGroups,
         nights: schedules
       },
