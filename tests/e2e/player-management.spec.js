@@ -35,26 +35,27 @@ test.describe('Player Management', () => {
     await mockSupabaseAuth(page, adminUser);
 
     // 2. Mock 'player' table requests
-    // We need to handle multiple types of requests to 'player':
-    // a) Check if current user is captain (select is_captain where id = adminUser.id)
-    // b) Fetch all players (select * order by last_name)
-    // c) Update a player (PATCH)
-
     await page.route('**/rest/v1/player*', async (route) => {
       const url = route.request().url();
       const method = route.request().method();
 
-      // Check if it's a request for the current user's captain status
-      if (method === 'GET' && url.includes(`id=eq.${adminUser.id}`) && url.includes('select=is_captain')) {
+      // Check if it's a request for the current user's profile (role check)
+      // AuthProvider calls .eq('id', user.id).single()
+      if (method === 'GET' && url.includes(`id=eq.${adminUser.id}`)) {
         await route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify({ is_captain: true }),
+          body: JSON.stringify({
+            id: adminUser.id,
+            is_captain: true,
+            is_admin: true
+          }),
         });
         return;
       }
 
-      // Check if it's the request for all players
+      // Check if it's the request for all players (for the list)
+      // This is usually a simple GET without ID filter
       if (method === 'GET' && !url.includes('id=eq.')) {
         await route.fulfill({
           status: 200,
@@ -67,15 +68,18 @@ test.describe('Player Management', () => {
       // Check for Update (PATCH)
       if (method === 'PATCH') {
         const body = JSON.parse(route.request().postData());
-        // Return the updated data merged with existing
-        const id = url.match(/id=eq\.([^&]+)/)[1];
-        const original = players.find(p => p.id === id) || {};
-        await route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify({ ...original, ...body }),
-        });
-        return;
+        const match = url.match(/id=eq\.([^&]+)/);
+        const id = match ? match[1] : null;
+
+        if (id) {
+            const original = players.find(p => p.id === id) || {};
+            await route.fulfill({
+                status: 200,
+                contentType: 'application/json',
+                body: JSON.stringify({ ...original, ...body }),
+            });
+            return;
+        }
       }
 
       await route.continue();
@@ -105,7 +109,7 @@ test.describe('Player Management', () => {
     // Verify success
     await expect(page.getByText('Player updated successfully!')).toBeVisible();
 
-    // Verify list is updated (we mocked the update response, but the list depends on local state update in the component)
+    // Verify list is updated (UI update)
     await expect(page.getByText('Doe, Johnny')).toBeVisible();
   });
 
