@@ -11,6 +11,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
+    "react-turnstile": "^1.1.4",
     "seedrandom": "^3.0.5",
     "uuid": "^13.0.0"
   },
@@ -30,7 +31,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp dist/index.html dist/404.html",
     "preview": "vite preview",
     "deploy": "npm run build && cp -r dist/* ../ && echo 'Deployed to root directory'",
     "test:e2e": "playwright test",

@@ -428,14 +428,18 @@ export const useTeamStatsData = () => {
         .from('player')
         .select('*')
         .eq('id', currentUser.id)
-        .single();
+        .maybeSingle();
 
       if (playerError) {
         console.error('Supabase player error:', playerError);
         throw new Error(`Failed to load player data: ${playerError.message}`);
       }
 
-      if (!playerData?.is_captain) {
+      if (!playerData) {
+        throw new Error('Player profile not found for this user.');
+      }
+
+      if (!playerData.is_captain) {
         throw new Error('Access denied: Captain privileges required to view team statistics.');
       }
 

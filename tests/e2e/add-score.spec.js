@@ -14,7 +14,13 @@ test.describe('Add Score Page (Protected)', () => {
           await route.fulfill({
             status: 200,
             contentType: 'application/json',
-            body: JSON.stringify({ id: 'fake-user-id', first_name: 'John', last_name: 'Doe' }),
+            body: JSON.stringify({
+              id: 'fake-user-id',
+              first_name: 'John',
+              last_name: 'Doe',
+              is_captain: true,
+              is_admin: true
+            }),
           });
       } else {
           // Roster details
@@ -97,12 +103,8 @@ test.describe('Add Score Page (Protected)', () => {
         });
     });
 
-    await page.goto('/login');
-    await page.getByLabel(/Email/i).fill('test@example.com');
-    await page.getByLabel('Password', { exact: true }).fill('password');
-    await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-    // Use toBeAttached() because on mobile the logout button is in the menu (hidden by default)
-    await expect(page.getByText('Logout')).toBeAttached();
+    // We rely on mockSupabaseAuth injecting the session into localStorage.
+    // No need for manual login steps here as they are slow and prone to UI changes.
   });
 
   test('loads and allows match selection', async ({ page }) => {

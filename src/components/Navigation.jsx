@@ -1,24 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../scripts/supabaseClient';
+import { useAuth } from '../context/AuthProvider';
 import '../styles/Navigation.css';
 
 export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
+  const { user, userRole, signOut } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [user, setUser] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(null);
   const navigate = useNavigate();
   const navRef = useRef(null);
-
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => setUser(data?.user || null));
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user || null);
-    });
-    return () => {
-      listener.subscription.unsubscribe();
-    };
-  }, []);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -45,9 +35,9 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
+    await signOut();
     navigate('/login');
+    closeMenu();
   };
 
   return (
@@ -128,8 +118,12 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
                   <ul className={`dropdown-menu ${openDropdown === 'player' ? 'show' : ''}`} role="menu">
                     <li><Link to="/player-profile" onClick={closeMenu}>My Profile</Link></li>
                     <li><Link to="/my-schedule" onClick={closeMenu}>My Schedule</Link></li>
-                    <li><Link to="/captain-dashboard" onClick={closeMenu}>Captain Dashboard</Link></li>
-                    <li><Link to="/add-score" onClick={closeMenu}>Submit Scores</Link></li>
+                    {userRole.isCaptain && (
+                      <>
+                        <li><Link to="/captain-dashboard" onClick={closeMenu}>Captain Dashboard</Link></li>
+                        <li><Link to="/add-score" onClick={closeMenu}>Submit Scores</Link></li>
+                      </>
+                    )}
                   </ul>
                 </li>
               )}
@@ -148,11 +142,12 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
                 <ul className={`dropdown-menu ${openDropdown === 'resources' ? 'show' : ''}`} role="menu">
                   <li><Link to="/courts-locations" onClick={closeMenu}>Courts & Locations</Link></li>
                   <li><Link to="/player-resources" onClick={closeMenu}>Player Resources</Link></li>
+                  <li><Link to="/feedback" onClick={closeMenu}>Feedback</Link></li>
                 </ul>
               </li>
 
               {/* Admin Dropdown - only show for admins */}
-              {user && (
+              {user && userRole.isAdmin && (
                 <li className="dropdown">
                   <button
                     className="dropdown-toggle"
@@ -176,7 +171,7 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
               {user ? (
                 <li className="navbar-auth">
                   <span className="navbar-user-icon" title={user.email}>👤</span>
-                  <button className="navbar-logout-btn" onClick={() => { handleLogout(); closeMenu(); }}>
+                  <button className="navbar-logout-btn" onClick={handleLogout}>
                     Logout
                   </button>
                 </li>

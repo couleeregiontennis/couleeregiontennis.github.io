@@ -15,10 +15,12 @@ import { NotFound } from './components/NotFound';
 import { LandingPage } from './components/LandingPage';
 import { ScheduleGenerator } from './components/admin/ScheduleGenerator';
 import { AuditLogViewer } from './components/admin/AuditLogViewer';
+import { PlayerManagement } from './components/admin/PlayerManagement';
 import { PlayerRankings } from './components/PlayerRankings';
 import { MySchedule } from './components/MySchedule';
 import { CourtsLocations } from './components/CourtsLocations';
 import { PlayerResources } from './components/PlayerResources';
+import { SuggestionBox } from './components/SuggestionBox';
 import { AuthProvider } from './context/AuthProvider';
 import './styles/colors.css';
 import './styles/Style.css';
@@ -72,6 +74,7 @@ function App() {
               <Route path="/welcome" element={<LandingPage />} />
               <Route path="/team/:day/:teamId" element={<Team />} />
               <Route path="/player-resources" element={<PlayerResources />} />
+              <Route path="/feedback" element={<SuggestionBox />} />
               <Route path="/rules" element={<Rules />} />
               <Route path="/standings" element={<Standings />} />
               <Route path="/player-rankings" element={<PlayerRankings />} />
@@ -114,7 +117,7 @@ function App() {
                 path="/admin/player-management"
                 element={
                   <ProtectedRoute>
-                    <div>Player Management (Coming Soon)</div>
+                    <PlayerManagement />
                   </ProtectedRoute>
                 }
               />

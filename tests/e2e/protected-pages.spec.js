@@ -7,20 +7,20 @@ test.describe('Protected Pages', () => {
     await mockSupabaseAuth(page);
 
     // Mock generic user data calls that might happen on any protected page load
+    // We default to a user with NO special roles, unless overridden in specific tests
     await page.route('**/rest/v1/player*', async (route) => {
         await route.fulfill({
             status: 200,
             contentType: 'application/json',
-            body: JSON.stringify({ id: 'fake-user-id', first_name: 'Test', last_name: 'User', is_captain: false }),
+            body: JSON.stringify({
+              id: 'fake-user-id',
+              first_name: 'Test',
+              last_name: 'User',
+              is_captain: false,
+              is_admin: false
+            }),
         });
     });
-
-    // Perform login to ensure session is established
-    await page.goto('/login');
-    await page.getByLabel(/Email/i).fill('test@example.com');
-    await page.getByLabel('Password', { exact: true }).fill('password');
-    await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-    await expect(page.getByText('Logout')).toBeAttached();
   });
 
   test('Player Profile loads', async ({ page }) => {
@@ -79,7 +79,13 @@ test.describe('Protected Pages', () => {
         await route.fulfill({
             status: 200,
             contentType: 'application/json',
-            body: JSON.stringify({ id: 'fake-user-id', first_name: 'Test', last_name: 'User', is_captain: true }),
+            body: JSON.stringify({
+              id: 'fake-user-id',
+              first_name: 'Test',
+              last_name: 'User',
+              is_captain: true,
+              is_admin: true
+            }),
         });
     });
 
@@ -129,7 +135,13 @@ test.describe('Protected Pages', () => {
         await route.fulfill({
             status: 200,
             contentType: 'application/json',
-            body: JSON.stringify({ id: 'fake-user-id', first_name: 'Admin', last_name: 'User', is_captain: true }),
+            body: JSON.stringify({
+              id: 'fake-user-id',
+              first_name: 'Admin',
+              last_name: 'User',
+              is_captain: true,
+              is_admin: true
+            }),
         });
     });
     await page.goto('/admin/schedule-generator');
@@ -137,11 +149,48 @@ test.describe('Protected Pages', () => {
   });
 
   test('Admin: Player Management loads', async ({ page }) => {
+    // Mock admin/captain
+    await page.route('**/rest/v1/player*', async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({
+              id: 'fake-user-id',
+              first_name: 'Admin',
+              last_name: 'User',
+              is_captain: true,
+              is_admin: true
+            }),
+        });
+    });
+    // Mock list of players for the management page
+    await page.route('**/rest/v1/player?select=*&order=last_name.asc', async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify([]),
+        });
+    });
+
     await page.goto('/admin/player-management');
-    await expect(page.getByText('Player Management (Coming Soon)')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Player Management' })).toBeVisible();
   });
 
   test('Admin: Team Management loads', async ({ page }) => {
+    // Mock admin/captain
+    await page.route('**/rest/v1/player*', async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({
+              id: 'fake-user-id',
+              first_name: 'Admin',
+              last_name: 'User',
+              is_captain: true,
+              is_admin: true
+            }),
+        });
+    });
     await page.goto('/admin/team-management');
     await expect(page.getByText('Team Management (Coming Soon)')).toBeVisible();
   });
