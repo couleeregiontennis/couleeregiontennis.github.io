@@ -3,6 +3,8 @@ import { supabase } from '../scripts/supabaseClient';
 import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/Login.css';
 
+const SUPPORT_EMAIL = import.meta.env.VITE_SUPPORT_EMAIL || 'support@ltta.com';
+
 export const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -188,7 +190,7 @@ export const Login = ({ onLogin }) => {
           <p className="support-text">
             Need assistance? Email
             {' '}
-            <a href="mailto:support@ltta.com">support@ltta.com</a>
+            <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
             {' '}for help with your account.
           </p>
         </aside>
