@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../scripts/supabaseClient';
+import { useAuth } from '../../context/AuthProvider';
 import '../../styles/ScheduleGenerator.css';
 
 export const ScheduleGenerator = () => {
+  const { user, userRole, loading: authLoading } = useAuth();
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [teams, setTeams] = useState([]);
   const [existingSchedules, setExistingSchedules] = useState({});
@@ -27,31 +28,20 @@ export const ScheduleGenerator = () => {
   });
 
   useEffect(() => {
-    loadInitialData();
-  }, []);
+    if (authLoading) return;
+
+    if (user && userRole.isAdmin) {
+      setIsAdmin(true);
+      loadInitialData();
+    } else {
+      setIsAdmin(false);
+      setLoading(false);
+    }
+  }, [authLoading, user, userRole]);
 
   const loadInitialData = async () => {
     try {
       setLoading(true);
-
-      // Get current user and check admin privileges
-      const { data: { user: currentUser } } = await supabase.auth.getUser();
-      if (!currentUser) throw new Error('Not authenticated');
-
-      setUser(currentUser);
-
-      // Check if user is admin
-      const { data: playerData, error: playerError } = await supabase
-        .from('player')
-        .select('is_captain')
-        .eq('id', currentUser.id)
-        .single();
-
-      if (playerError) throw playerError;
-
-      // For now, any captain can generate schedules
-      // You may want to implement a separate admin role in the future
-      setIsAdmin(!!playerData?.is_captain);
 
       // Load available teams
       const { data: teamData, error: teamError } = await supabase
@@ -226,7 +216,7 @@ export const ScheduleGenerator = () => {
     }
   };
 
-  if (loading) {
+  if (loading || authLoading) {
     return <div className="schedule-generator loading">Loading schedule generator...</div>;
   }
 
