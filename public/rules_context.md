@@ -106,3 +106,7 @@
 *   **#3:** Dependable strokes. Variety of shots. Can place serve.
 *   **#4:** Lacks dependability/variety. Can direct shots but lacks depth. Serve consistent but weak.
 *   **#5:** Novice. Moderate placement, slow pace. Inconsistent serve.
+
+---
+
+**Final Authority:** The [USTA "Friend at Court"](https://www.usta.com/content/dam/usta/2025-pdfs/2025-friend-at-court.pdf) rule book serves as the final authority for any unresolved situations not explicitly covered herein.
