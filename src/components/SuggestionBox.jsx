@@ -71,7 +71,11 @@ export const SuggestionBox = () => {
                 maxLength={1000}
                 required
                 placeholder="Type your suggestion here..."
+                aria-describedby="suggestion-counter"
               />
+              <div id="suggestion-counter" className="character-count">
+                {suggestion.length} / 1000 characters
+              </div>
             </div>
 
             <div className="captcha-container">

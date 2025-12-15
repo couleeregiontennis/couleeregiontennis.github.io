@@ -8,6 +8,7 @@ test.describe('Suggestion Box', () => {
     await expect(page.getByLabel('Your Suggestion (10-1000 characters)')).toBeVisible();
     await expect(page.getByRole('button', { name: 'Submit' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Submit' })).toBeDisabled();
+    await expect(page.locator('#suggestion-counter')).toBeVisible();
   });
 
   test('should validate input length', async ({ page }) => {
