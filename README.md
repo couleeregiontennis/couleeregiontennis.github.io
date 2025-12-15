@@ -10,6 +10,7 @@ This is the official website for the Coulee Region Tennis Association (CRTA), pr
 - **Team Management**: Access team details, captain dashboards, and scheduling tools.
 - **Authentication System**: Secure login and access control for users.
 - **Announcements**: Display important updates and announcements.
+- **Ask the Umpire**: AI-powered rules assistant (See [RULES_BOT_README.md](RULES_BOT_README.md) for architecture).
 
 ## Tech Stack
 - **Frontend**: React.js with Vite build tool
