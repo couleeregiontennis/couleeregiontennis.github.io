@@ -25,27 +25,30 @@ serve(async (req) => {
     }
 
     // Initialize Clients
+    console.log("Initializing clients...");
     const genAI = new GoogleGenerativeAI(UMPIRE_GEMINI_API_KEY)
     const qdrant = new QdrantClient({ url: QDRANT_URL, apiKey: QDRANT_API_KEY })
 
     // 1. Generate Embedding for the user's question
-    // We use the same model as the indexing script (embedding-001)
+    console.log("Generating embedding...");
     const embeddingModel = genAI.getGenerativeModel({ model: "text-embedding-004" })
     const embeddingResult = await embeddingModel.embedContent(query)
     const vector = embeddingResult.embedding.values
+    console.log("Embedding generated. Length:", vector.length);
 
     // 2. Search Qdrant for relevant rules
-    // Note: QDRANT_URL must be accessible from the internet if this function is deployed.
-    // If QDRANT_URL is 192.168.1.88, this will FAIL on Supabase Cloud.
+    console.log("Searching Qdrant...");
     const searchResult = await qdrant.search('rules_context', {
       vector: vector,
       limit: 5, // Get top 5 relevant chunks
       score_threshold: 0.6
     })
+    console.log("Qdrant search complete. Found matches:", searchResult.length);
 
     const context = searchResult.map(item => item.payload?.content).join('\n\n')
 
     // 3. Generate Answer
+    console.log("Generating answer with Gemini...");
     const chatModel = genAI.getGenerativeModel({ model: "gemini-1.0-pro" })
     const prompt = `
       You are the official Umpire for the Coulee Region Tennis Association (LTTA).
