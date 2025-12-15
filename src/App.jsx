@@ -21,6 +21,7 @@ import { MySchedule } from './components/MySchedule';
 import { CourtsLocations } from './components/CourtsLocations';
 import { PlayerResources } from './components/PlayerResources';
 import { SuggestionBox } from './components/SuggestionBox';
+import { AskTheUmpire } from './components/AskTheUmpire';
 import { AuthProvider } from './context/AuthProvider';
 import './styles/colors.css';
 import './styles/Style.css';
@@ -149,6 +150,7 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
+          <AskTheUmpire />
         </div>
       </Router>
     </AuthProvider>
