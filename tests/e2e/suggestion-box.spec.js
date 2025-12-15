@@ -1,6 +1,11 @@
 import { test, expect } from '@playwright/test';
+import { disableNavigatorLocks } from '../utils/auth-mock';
 
 test.describe('Suggestion Box', () => {
+  test.beforeEach(async ({ page }) => {
+    await disableNavigatorLocks(page);
+  });
+
   test('should render the suggestion box page', async ({ page }) => {
     await page.goto('/feedback');
 

@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { mockSupabaseAuth } from '../utils/auth-mock';
+import { disableNavigatorLocks } from '../utils/auth-mock';
 
 test.describe('Team & Rankings (Public)', () => {
+  test.beforeEach(async ({ page }) => {
+    await disableNavigatorLocks(page);
+  });
 
   test('Player Rankings page loads', async ({ page }) => {
     // Mock players data

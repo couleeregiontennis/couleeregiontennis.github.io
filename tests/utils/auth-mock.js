@@ -1,6 +1,6 @@
 // tests/utils/auth-mock.js
 
-export async function mockSupabaseAuth(page, userDetails = {}) {
+export async function disableNavigatorLocks(page) {
   // Disable navigator.locks to prevent Supabase client from hanging in some environments (like Playwright in CI/Docker)
   await page.addInitScript(() => {
     if (navigator.locks) {
@@ -11,6 +11,10 @@ export async function mockSupabaseAuth(page, userDetails = {}) {
       }
     }
   });
+}
+
+export async function mockSupabaseAuth(page, userDetails = {}) {
+  await disableNavigatorLocks(page);
 
   const defaultUser = {
     id: 'fake-user-id',
