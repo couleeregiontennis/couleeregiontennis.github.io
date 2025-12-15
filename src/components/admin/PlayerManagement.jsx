@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../scripts/supabaseClient';
+import { useAuth } from '../../context/AuthProvider';
 import '../../styles/PlayerManagement.css';
 
 const getDefaultAvailability = () => ({
@@ -14,8 +15,8 @@ const getDefaultAvailability = () => ({
 });
 
 export const PlayerManagement = () => {
+  const { user, userRole, loading: authLoading } = useAuth();
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [players, setPlayers] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
@@ -26,45 +27,20 @@ export const PlayerManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    checkAdminAndLoadPlayers();
-  }, []);
+    if (authLoading) return;
 
-  const checkAdminAndLoadPlayers = async () => {
-    try {
-      setLoading(true);
-      setError('');
-
-      const { data: { user: currentUser } } = await supabase.auth.getUser();
-      if (!currentUser) throw new Error('Not authenticated');
-
-      setUser(currentUser);
-
-      // Check if user is admin (captain)
-      const { data: playerData, error: playerError } = await supabase
-        .from('player')
-        .select('is_captain')
-        .eq('id', currentUser.id)
-        .single();
-
-      if (playerError) throw playerError;
-
-      const adminStatus = !!playerData?.is_captain;
-      setIsAdmin(adminStatus);
-
-      if (adminStatus) {
-        await fetchPlayers();
-      }
-
-    } catch (err) {
-      console.error('Error loading data:', err);
-      setError('Failed to verify access or load data.');
-    } finally {
+    if (user && userRole.isAdmin) {
+      setIsAdmin(true);
+      fetchPlayers();
+    } else {
+      setIsAdmin(false);
       setLoading(false);
     }
-  };
+  }, [authLoading, user, userRole]);
 
   const fetchPlayers = async () => {
     try {
+      setLoading(true);
       const { data, error } = await supabase
         .from('player')
         .select('*')
@@ -75,6 +51,8 @@ export const PlayerManagement = () => {
     } catch (err) {
       console.error('Error fetching players:', err);
       setError('Failed to load players.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -168,7 +146,7 @@ export const PlayerManagement = () => {
     return fullName.includes(search) || email.includes(search);
   });
 
-  if (loading) {
+  if (loading || authLoading) {
     return <div className="player-management loading">Loading player management...</div>;
   }
 

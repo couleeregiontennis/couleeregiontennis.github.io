@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../scripts/supabaseClient';
+import { useAuth } from '../../context/AuthProvider';
 import '../../styles/AuditLogViewer.css';
 
 export const AuditLogViewer = () => {
+  const { user, userRole, loading: authLoading } = useAuth();
   const [loading, setLoading] = useState(true);
   const [logs, setLogs] = useState([]);
   const [players, setPlayers] = useState({});
@@ -18,8 +20,16 @@ export const AuditLogViewer = () => {
   });
 
   useEffect(() => {
-    checkAdminAndLoadData();
-  }, []);
+    if (authLoading) return;
+
+    if (user && userRole.isAdmin) {
+      setIsAdmin(true);
+      loadInitialData();
+    } else {
+      setIsAdmin(false);
+      setLoading(false);
+    }
+  }, [authLoading, user, userRole]);
 
   useEffect(() => {
     if (isAdmin) {
@@ -27,32 +37,9 @@ export const AuditLogViewer = () => {
     }
   }, [filters, isAdmin]);
 
-  const checkAdminAndLoadData = async () => {
+  const loadInitialData = async () => {
     try {
       setLoading(true);
-      const { data: { user } } = await supabase.auth.getUser();
-
-      if (!user) {
-        setLoading(false);
-        return;
-      }
-
-      // Check admin status
-      const { data: playerData, error: playerError } = await supabase
-        .from('player')
-        .select('id, is_captain, first_name, last_name, email')
-        .eq('id', user.id)
-        .single();
-
-      if (playerError) throw playerError;
-
-      if (!playerData.is_captain) {
-        setIsAdmin(false);
-        setLoading(false);
-        return;
-      }
-
-      setIsAdmin(true);
 
       // Load all players for mapping IDs to names
       const { data: allPlayers, error: allPlayersError } = await supabase
@@ -68,7 +55,7 @@ export const AuditLogViewer = () => {
       setPlayers(playerMap);
 
     } catch (err) {
-      console.error('Error checking admin status:', err);
+      console.error('Error loading initial data:', err);
     } finally {
       setLoading(false);
     }
@@ -114,7 +101,7 @@ export const AuditLogViewer = () => {
     return uid || 'System';
   };
 
-  if (loading) return <div className="audit-log-viewer loading-state">Loading audit logs...</div>;
+  if (loading || authLoading) return <div className="audit-log-viewer loading-state">Loading audit logs...</div>;
 
   if (!isAdmin) {
     return (
