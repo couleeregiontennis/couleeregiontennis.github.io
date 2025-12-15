@@ -65,6 +65,13 @@
   box-shadow: 0 0 0 3px var(--primary-green-alpha);
 }
 
+.character-count {
+  text-align: right;
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+}
+
 .captcha-container {
   display: flex;
   justify-content: center;
