@@ -86,9 +86,6 @@ test.describe('Player Management', () => {
     });
 
     await page.goto('/admin/player-management');
-
-    // Hide umpire trigger to prevent click interception on mobile
-    await page.addStyleTag({ content: '.umpire-trigger { display: none !important; }' });
   });
 
   test('should display list of players', async ({ page }) => {
