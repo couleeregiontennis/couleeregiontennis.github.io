@@ -135,8 +135,9 @@ export const AuditLogViewer = () => {
 
       <div className="viewer-controls">
         <div className="control-group">
-          <label>Table</label>
+          <label htmlFor="filter-table">Table</label>
           <select
+            id="filter-table"
             className="control-input"
             value={filters.tableName}
             onChange={(e) => handleFilterChange('tableName', e.target.value)}
@@ -152,8 +153,9 @@ export const AuditLogViewer = () => {
         </div>
 
         <div className="control-group">
-          <label>Operation</label>
+          <label htmlFor="filter-operation">Operation</label>
           <select
+            id="filter-operation"
             className="control-input"
             value={filters.operation}
             onChange={(e) => handleFilterChange('operation', e.target.value)}
@@ -166,8 +168,9 @@ export const AuditLogViewer = () => {
         </div>
 
         <div className="control-group">
-          <label>Changed By</label>
+          <label htmlFor="filter-changed-by">Changed By</label>
           <select
+            id="filter-changed-by"
             className="control-input"
             value={filters.changedBy}
             onChange={(e) => handleFilterChange('changedBy', e.target.value)}
