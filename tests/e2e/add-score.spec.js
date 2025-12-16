@@ -106,9 +106,7 @@ test.describe('Add Score Page (Protected)', () => {
     // We rely on mockSupabaseAuth injecting the session into localStorage.
     // No need for manual login steps here as they are slow and prone to UI changes.
 
-    // Navigate and hide floating elements
     await page.goto('/add-score');
-    await page.addStyleTag({ content: '.umpire-trigger { display: none !important; }' });
   });
 
   test('loads and allows match selection', async ({ page }) => {

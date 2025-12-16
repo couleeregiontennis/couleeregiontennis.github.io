@@ -47,10 +47,24 @@ export const AskTheUmpire = () => {
       setAnswer(data.answer || "I couldn't find an answer to that.");
     } catch (err) {
       console.error('AskTheUmpire error:', err);
-      // For demo purposes if backend isn't ready, fail gracefully or show mock
-      // But adhering to strict instructions, I should assume function exists.
-      // If it fails (e.g. 404), I show error.
-      setError('Sorry, something went wrong. Please try again.');
+
+      const errorMessage = err?.message || '';
+      const errorName = err?.name || '';
+      const isNetworkError =
+        errorMessage.includes('Failed to fetch') ||
+        errorMessage.includes('Network Error') ||
+        errorMessage.includes('Network request failed') ||
+        errorMessage.includes('Failed to send a request to the Edge Function') ||
+        errorName === 'FunctionsFetchError';
+
+      if (isNetworkError) {
+        setError('Connection blocked. If you are using an ad-blocker or privacy extension, please disable it for this site or allow requests to supabase.co.');
+      } else {
+        // For demo purposes if backend isn't ready, fail gracefully or show mock
+        // But adhering to strict instructions, I should assume function exists.
+        // If it fails (e.g. 404), I show error.
+        setError('Sorry, something went wrong. Please try again.');
+      }
     } finally {
       setLoading(false);
     }

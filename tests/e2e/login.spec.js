@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
+import { disableNavigatorLocks } from '../utils/auth-mock';
 
 test.describe('Login Page', () => {
   test.beforeEach(async ({ page }) => {
+    await disableNavigatorLocks(page);
     await page.goto('/login');
-    // Hide floating elements for mobile tests
-    await page.addStyleTag({ content: '.umpire-trigger { display: none !important; }' });
   });
 
   test('should display login form', async ({ page }) => {

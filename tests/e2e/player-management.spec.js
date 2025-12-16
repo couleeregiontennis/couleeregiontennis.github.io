@@ -86,8 +86,6 @@ test.describe('Player Management', () => {
     });
 
     await page.goto('/admin/player-management');
-    // Hide floating elements that might intercept clicks on mobile
-    await page.addStyleTag({ content: '.umpire-trigger { display: none !important; }' });
   });
 
   test('should display list of players', async ({ page }) => {

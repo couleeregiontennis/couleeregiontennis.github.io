@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { mockSupabaseAuth } from '../utils/auth-mock';
+import { disableNavigatorLocks } from '../utils/auth-mock';
 
 test.describe('Match Schedule Page', () => {
+  test.beforeEach(async ({ page }) => {
+    await disableNavigatorLocks(page);
+  });
 
   test('displays upcoming matches', async ({ page }) => {
     // Set fixed time so the month view shows the mocked matches

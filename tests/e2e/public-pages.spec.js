@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { mockSupabaseAuth, mockSupabaseData } from '../utils/auth-mock';
+import { disableNavigatorLocks, mockSupabaseData } from '../utils/auth-mock';
 
 test.describe('Public Pages', () => {
+  test.beforeEach(async ({ page }) => {
+    await disableNavigatorLocks(page);
+  });
 
   test('Landing Page loads correctly', async ({ page }) => {
     await page.goto('/welcome');
