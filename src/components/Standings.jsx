@@ -1,8 +1,50 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 import { useAuth } from '../context/AuthProvider';
 import '../styles/Style.css';
 import '../styles/Standings.css';
+
+// OPTIMIZATION: Memoized component to prevent re-rendering all rows when parent state (like auth or spotlight) updates
+const StandingsRow = memo(({ team, index }) => {
+  const rank = index + 1;
+  const record =
+    team.ties > 0
+      ? `${team.wins}-${team.losses}-${team.ties}`
+      : `${team.wins}-${team.losses}`;
+
+  return (
+    <tr
+      className={index === 0 ? 'leader' : index < 3 ? 'top-three' : ''}
+    >
+      <td data-label="Rank">{rank}</td>
+      <td data-label="Team">
+        <div className="team-cell">
+          <span className="team-number">Team {team.number}</span>
+          <span className="team-name">{team.name}</span>
+        </div>
+      </td>
+      <td data-label="Night">{team.playNight || '—'}</td>
+      <td data-label="Matches">{team.matchesPlayed}</td>
+      <td data-label="Record">{record}</td>
+      <td data-label="Win %">
+        {team.matchesPlayed > 0
+          ? `${team.winPercentage.toFixed(1)}%`
+          : '0.0%'}
+      </td>
+      <td data-label="Sets (W-L)">
+        {team.setsWon} - {team.setsLost}
+      </td>
+      <td data-label="Set %">
+        {team.setsWon + team.setsLost > 0
+          ? `${team.setWinPercentage.toFixed(1)}%`
+          : '0.0%'}
+      </td>
+      <td data-label="Games (W-L)">
+        {team.gamesWon} - {team.gamesLost}
+      </td>
+    </tr>
+  );
+});
 
 const Standings = () => {
   const { user, loading: authLoading } = useAuth();
@@ -398,47 +440,9 @@ const Standings = () => {
                     <td colSpan={9}>No results yet for this league night.</td>
                   </tr>
                 ) : (
-                  filteredStandings.map((team, index) => {
-                    const rank = index + 1;
-                    const record =
-                      team.ties > 0
-                        ? `${team.wins}-${team.losses}-${team.ties}`
-                        : `${team.wins}-${team.losses}`;
-
-                    return (
-                      <tr
-                        key={team.id}
-                        className={index === 0 ? 'leader' : index < 3 ? 'top-three' : ''}
-                      >
-                        <td data-label="Rank">{rank}</td>
-                        <td data-label="Team">
-                          <div className="team-cell">
-                            <span className="team-number">Team {team.number}</span>
-                            <span className="team-name">{team.name}</span>
-                          </div>
-                        </td>
-                        <td data-label="Night">{team.playNight || '—'}</td>
-                        <td data-label="Matches">{team.matchesPlayed}</td>
-                        <td data-label="Record">{record}</td>
-                        <td data-label="Win %">
-                          {team.matchesPlayed > 0
-                            ? `${team.winPercentage.toFixed(1)}%`
-                            : '0.0%'}
-                        </td>
-                        <td data-label="Sets (W-L)">
-                          {team.setsWon} - {team.setsLost}
-                        </td>
-                        <td data-label="Set %">
-                          {team.setsWon + team.setsLost > 0
-                            ? `${team.setWinPercentage.toFixed(1)}%`
-                            : '0.0%'}
-                        </td>
-                        <td data-label="Games (W-L)">
-                          {team.gamesWon} - {team.gamesLost}
-                        </td>
-                      </tr>
-                    );
-                  })
+                  filteredStandings.map((team, index) => (
+                    <StandingsRow key={team.id} team={team} index={index} />
+                  ))
                 )}
               </tbody>
             </table>
