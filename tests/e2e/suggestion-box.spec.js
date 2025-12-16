@@ -1,9 +1,13 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Suggestion Box', () => {
-  test('should render the suggestion box page', async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     await page.goto('/feedback');
+    // Hide floating elements for mobile tests
+    await page.addStyleTag({ content: '.umpire-trigger { display: none !important; }' });
+  });
 
+  test('should render the suggestion box page', async ({ page }) => {
     await expect(page.getByRole('heading', { name: 'Anonymous Suggestion Box' })).toBeVisible();
     await expect(page.getByLabel('Your Suggestion (10-1000 characters)')).toBeVisible();
     await expect(page.getByRole('button', { name: 'Submit' })).toBeVisible();
@@ -12,8 +16,6 @@ test.describe('Suggestion Box', () => {
   });
 
   test('should validate input length', async ({ page }) => {
-    await page.goto('/feedback');
-
     const textarea = page.getByLabel('Your Suggestion (10-1000 characters)');
     await textarea.fill('Short');
 
