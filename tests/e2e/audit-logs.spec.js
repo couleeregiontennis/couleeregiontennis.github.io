@@ -15,7 +15,7 @@ test.describe('Admin Audit Log Viewer', () => {
             await route.fulfill({
                 status: 200,
                 contentType: 'application/json',
-                body: JSON.stringify({ id: 'fake-user-id', is_captain: true, first_name: 'Admin', last_name: 'User', email: 'admin@example.com' }),
+                body: JSON.stringify({ id: 'fake-user-id', is_captain: true, is_admin: true, first_name: 'Admin', last_name: 'User', email: 'admin@example.com' }),
             });
         } else {
             // List of players
@@ -84,7 +84,7 @@ test.describe('Admin Audit Log Viewer', () => {
             await route.fulfill({
                 status: 200,
                 contentType: 'application/json',
-                body: JSON.stringify({ id: 'fake-user-id', is_captain: true, first_name: 'Admin', last_name: 'User' }),
+                body: JSON.stringify({ id: 'fake-user-id', is_captain: true, is_admin: true, first_name: 'Admin', last_name: 'User' }),
             });
         } else {
              await route.fulfill({ status: 200, body: '[]' });
