@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { supabase } from '../scripts/supabaseClient';
 import usePlatform from '../scripts/PlatformDetector';
-import useCopyToClipboard from '../scripts/CopyToClipboard';
 import { MatchResults } from './MatchResults';
+import { FindSubButton } from './FindSubButton';
 import { generateFullSeasonICS, downloadICSFile } from '../scripts/icsGenerator';
 import '../styles/Team.css';
 
@@ -14,7 +14,6 @@ export const Team = () => {
   const [opponentRosters, setOpponentRosters] = useState({});
   const [isGeneratingICS, setIsGeneratingICS] = useState(false);
   const { day, teamId } = useParams();
-  const { copyToClipboard } = useCopyToClipboard();
   const platform = usePlatform();
 
   useEffect(() => {
@@ -220,22 +219,7 @@ export const Team = () => {
                           >
                             📅
                           </a>
-                          <a
-                            href={groupMeUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="find-sub-icon"
-                            title="Find Sub"
-                            onClick={() => copyToClipboard(message)}
-                            style={{
-                              marginLeft: '0.5em',
-                              fontSize: '1.2em',
-                              color: '#00aff0',
-                              textDecoration: 'none'
-                            }}
-                          >
-                            🆘
-                          </a>
+                          <FindSubButton message={message} url={groupMeUrl} />
                         </div>
                       </div>
                     </td>
