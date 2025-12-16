@@ -1,4 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { disableNavigatorLocks } from '../utils/auth-mock';
+
+test.beforeEach(async ({ page }) => {
+  await disableNavigatorLocks(page);
+});
 
 test('has title', async ({ page }) => {
   await page.goto('/');

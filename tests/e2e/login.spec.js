@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { disableNavigatorLocks } from '../utils/auth-mock';
 
 test.describe('Login Page', () => {
   test.beforeEach(async ({ page }) => {
+    await disableNavigatorLocks(page);
     await page.goto('/login');
   });
 

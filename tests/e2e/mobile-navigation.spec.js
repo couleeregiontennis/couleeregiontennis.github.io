@@ -1,10 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { disableNavigatorLocks } from '../utils/auth-mock';
 
 test.describe('Mobile Navigation', () => {
   // Only run this test on mobile viewports
   test.skip(({ isMobile }) => !isMobile, 'This test is only for mobile viewports');
 
   test.beforeEach(async ({ page }) => {
+    await disableNavigatorLocks(page);
     await page.goto('/');
   });
 

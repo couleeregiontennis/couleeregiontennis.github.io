@@ -1,6 +1,6 @@
 // tests/utils/auth-mock.js
 
-export async function mockSupabaseAuth(page, userDetails = {}) {
+export async function disableNavigatorLocks(page) {
   // Disable navigator.locks to prevent Supabase client from hanging in some environments (like Playwright in CI/Docker)
   await page.addInitScript(() => {
     if (navigator.locks) {
@@ -10,7 +10,18 @@ export async function mockSupabaseAuth(page, userDetails = {}) {
         console.error('Failed to disable navigator.locks', e);
       }
     }
+
+    // Inject CSS to hide global floating elements that might overlap buttons in tests (especially mobile)
+    window.addEventListener('DOMContentLoaded', () => {
+        const style = document.createElement('style');
+        style.innerHTML = '.umpire-trigger { display: none !important; }';
+        document.head.appendChild(style);
+    });
   });
+}
+
+export async function mockSupabaseAuth(page, userDetails = {}) {
+  await disableNavigatorLocks(page);
 
   const defaultUser = {
     id: 'fake-user-id',
