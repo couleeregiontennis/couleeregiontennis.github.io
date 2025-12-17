@@ -105,10 +105,11 @@ test.describe('Add Score Page (Protected)', () => {
 
     // We rely on mockSupabaseAuth injecting the session into localStorage.
     // No need for manual login steps here as they are slow and prone to UI changes.
+
+    await page.goto('/add-score');
   });
 
   test('loads and allows match selection', async ({ page }) => {
-    await page.goto('/add-score');
     await expect(page.getByRole('heading', { name: 'Submit Match Scores' })).toBeVisible();
     await expect(page.getByText('My Team', { exact: true })).toBeVisible();
 
@@ -119,8 +120,6 @@ test.describe('Add Score Page (Protected)', () => {
   });
 
   test('validates invalid tennis scores', async ({ page }) => {
-    await page.goto('/add-score');
-
     // Select match
     await page.selectOption('select[name="matchId"]', 'match-1');
 
@@ -156,7 +155,6 @@ test.describe('Add Score Page (Protected)', () => {
   });
 
   test('validates unique players', async ({ page }) => {
-     await page.goto('/add-score');
      await page.selectOption('select[name="matchId"]', 'match-1');
      await page.locator('select[name="matchType"]').selectOption('singles');
 
