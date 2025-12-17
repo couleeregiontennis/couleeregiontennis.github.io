@@ -4,10 +4,14 @@ import { disableNavigatorLocks } from '../utils/auth-mock';
 test.describe('Suggestion Box', () => {
   test.beforeEach(async ({ page }) => {
     await disableNavigatorLocks(page);
+  });
+
+  test('should navigate to suggestion box page', async ({ page }) => {
     await page.goto('/feedback');
   });
 
   test('should render the suggestion box page', async ({ page }) => {
+    await page.goto('/feedback');
     await expect(page.getByRole('heading', { name: 'Anonymous Suggestion Box' })).toBeVisible();
     await expect(page.getByLabel('Your Suggestion (10-1000 characters)')).toBeVisible();
     await expect(page.getByRole('button', { name: 'Submit' })).toBeVisible();
@@ -16,6 +20,7 @@ test.describe('Suggestion Box', () => {
   });
 
   test('should validate input length', async ({ page }) => {
+    await page.goto('/feedback');
     const textarea = page.getByLabel('Your Suggestion (10-1000 characters)');
     await textarea.fill('Short');
 

@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 
-export const MatchResults = ({ teamNumber, teamNight }) => {
+// OPTIMIZATION: Uses teamId (UUID) for server-side filtering when available to avoid fetching all matches
+export const MatchResults = ({ teamNumber, teamNight, teamId }) => {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -11,8 +12,7 @@ export const MatchResults = ({ teamNumber, teamNight }) => {
       try {
         setLoading(true);
         
-        // Load all completed team matches
-        const { data: matchData, error: matchError } = await supabase
+        let query = supabase
           .from('team_match')
           .select(`
             *,
@@ -33,15 +33,26 @@ export const MatchResults = ({ teamNumber, teamNight }) => {
           .eq('status', 'completed')
           .order('date', { ascending: false });
 
+        // OPTIMIZATION: Filter server-side if teamId is available
+        if (teamId) {
+          query = query.or(`home_team_id.eq.${teamId},away_team_id.eq.${teamId}`);
+        }
+
+        const { data: matchData, error: matchError } = await query;
+
         if (matchError) throw matchError;
 
-        // Filter matches where this team is either home or away
-        const filteredMatches = (matchData || []).filter(match =>
-          match.home_team?.number === parseInt(teamNumber) ||
-          match.away_team?.number === parseInt(teamNumber)
-        );
+        let filteredMatches = matchData || [];
 
-        setMatches(filteredMatches || []);
+        // Fallback: Client-side filter if teamId wasn't provided (for backward compatibility)
+        if (!teamId && teamNumber) {
+          filteredMatches = filteredMatches.filter(match =>
+            match.home_team?.number === parseInt(teamNumber) ||
+            match.away_team?.number === parseInt(teamNumber)
+          );
+        }
+
+        setMatches(filteredMatches);
       } catch (err) {
         setError('Error loading match results: ' + err.message);
       } finally {
@@ -52,7 +63,7 @@ export const MatchResults = ({ teamNumber, teamNight }) => {
     if (teamNumber && teamNight) {
       loadMatchResults();
     }
-  }, [teamNumber, teamNight]);
+  }, [teamNumber, teamNight, teamId]);
 
   if (loading) {
     return <div className="match-results-loading">Loading match results...</div>;
