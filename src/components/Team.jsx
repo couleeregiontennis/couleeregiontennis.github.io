@@ -10,6 +10,7 @@ import '../styles/Team.css';
 export const Team = () => {
   const [schedule, setSchedule] = useState([]);
   const [teamName, setTeamName] = useState('');
+  const [teamUUID, setTeamUUID] = useState(null);
   const [roster, setRoster] = useState([]);
   const [opponentRosters, setOpponentRosters] = useState({});
   const [isGeneratingICS, setIsGeneratingICS] = useState(false);
@@ -33,6 +34,7 @@ export const Team = () => {
           return;
         }
         setTeamName(teamDetails.name);
+        setTeamUUID(teamDetails.id);
 
         // 2. Fetch schedule from matches table
         const { data: scheduleData, error: scheduleError } = await supabase
@@ -260,7 +262,7 @@ export const Team = () => {
       </section>
 
       <section className="results-section">
-        <MatchResults teamNumber={teamId} teamNight={day} />
+        <MatchResults teamNumber={teamId} teamNight={day} teamId={teamUUID} />
       </section>
     </div>
   );
