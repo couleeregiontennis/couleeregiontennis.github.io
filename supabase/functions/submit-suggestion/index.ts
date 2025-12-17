@@ -13,11 +13,28 @@ serve(async (req) => {
   }
 
   try {
-    const { content, captchaToken, userId } = await req.json()
+    // Removed 'userId' from input to prevent ID spoofing.
+    // Ideally user identity should be derived from the Auth header.
+    const { content, captchaToken } = await req.json()
 
-    if (!content || content.length < 10) {
+    // Enhanced Input Validation
+    if (!content || typeof content !== 'string') {
+      return new Response(
+        JSON.stringify({ error: 'Invalid content format.' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
+      )
+    }
+
+    if (content.length < 10) {
       return new Response(
         JSON.stringify({ error: 'Suggestion must be at least 10 characters long.' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
+      )
+    }
+
+    if (content.length > 1000) {
+      return new Response(
+        JSON.stringify({ error: 'Suggestion must not exceed 1000 characters.' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
       )
     }
@@ -61,7 +78,7 @@ serve(async (req) => {
       .insert([
         {
           content: content,
-          user_id: userId || null, // Null if anonymous
+          user_id: null, // Always null for now (Anonymous)
           // You could hash the IP here if you wanted to store it
           // ip_hash: await crypto.subtle.digest(...) 
         },

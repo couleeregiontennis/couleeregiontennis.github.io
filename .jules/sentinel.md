@@ -12,3 +12,10 @@
 1. Enhanced `ProtectedRoute` to accept `requireAdmin` and `requireCaptain` props.
 2. Enforced role checks before rendering any route content.
 3. Redirect unauthorized users to a safe default (Home) immediately.
+## 2025-12-16 - Edge Function User ID Spoofing
+**Vulnerability:** The `submit-suggestion` Edge Function blindly trusted the `userId` provided in the JSON request body, allowing any user (or anonymous actor) to spoof their identity if they knew another user's UUID.
+**Learning:** Supabase Edge Functions often use `SUPABASE_SERVICE_ROLE_KEY` to bypass RLS for specific operations. In these contexts, you cannot trust `auth.uid()` implicitly unless you initialize the client with the user's JWT. Trusting input params for identity is a critical flaw.
+**Prevention:**
+1. Never destructure sensitive fields like `userId`, `role`, or `permissions` from the request body.
+2. If user identity is needed, derive it from the `Authorization` header by initializing a Supabase client with the incoming JWT and calling `auth.getUser()`.
+3. If anonymous submission is the goal, explicitly set `user_id` to `null` rather than accepting it from input.
