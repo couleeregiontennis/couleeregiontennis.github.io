@@ -85,7 +85,7 @@ function App() {
               <Route
                 path="/add-score"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute requireCaptain>
                     <AddScore />
                   </ProtectedRoute>
                 }
@@ -93,7 +93,7 @@ function App() {
               <Route
                 path="/captain-dashboard"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute requireCaptain>
                     <CaptainDashboard />
                   </ProtectedRoute>
                 }
@@ -101,7 +101,7 @@ function App() {
               <Route
                 path="/admin/schedule-generator"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute requireAdmin>
                     <ScheduleGenerator />
                   </ProtectedRoute>
                 }
@@ -109,7 +109,7 @@ function App() {
               <Route
                 path="/admin/audit-logs"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute requireAdmin>
                     <AuditLogViewer />
                   </ProtectedRoute>
                 }
@@ -117,7 +117,7 @@ function App() {
               <Route
                 path="/admin/player-management"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute requireAdmin>
                     <PlayerManagement />
                   </ProtectedRoute>
                 }
@@ -125,7 +125,7 @@ function App() {
               <Route
                 path="/admin/team-management"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute requireAdmin>
                     <div>Team Management (Coming Soon)</div>
                   </ProtectedRoute>
                 }
