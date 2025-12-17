@@ -5,6 +5,13 @@
 1. Exclude sensitive fields (like `is_captain`, `role`, `permissions`) from user-editable forms and update payloads.
 2. Ensure Row Level Security (RLS) policies explicitly forbid users from updating these columns on their own records.
 
+## 2025-05-24 - Client-Side Authorization Bypass
+**Vulnerability:** Admin and Captain routes were accessible to any authenticated user because `ProtectedRoute` only verified authentication status, not user roles. Access control relied on individual components rendering "Access Denied" messages, which is fragile and poor UX.
+**Learning:** Centralized route guards are essential for enforcing authorization at the entry point. Relying on component-level checks spreads security logic thin and increases the risk of accidental exposure.
+**Prevention:**
+1. Enhanced `ProtectedRoute` to accept `requireAdmin` and `requireCaptain` props.
+2. Enforced role checks before rendering any route content.
+3. Redirect unauthorized users to a safe default (Home) immediately.
 ## 2025-12-16 - Edge Function User ID Spoofing
 **Vulnerability:** The `submit-suggestion` Edge Function blindly trusted the `userId` provided in the JSON request body, allowing any user (or anonymous actor) to spoof their identity if they knew another user's UUID.
 **Learning:** Supabase Edge Functions often use `SUPABASE_SERVICE_ROLE_KEY` to bypass RLS for specific operations. In these contexts, you cannot trust `auth.uid()` implicitly unless you initialize the client with the user's JWT. Trusting input params for identity is a critical flaw.
