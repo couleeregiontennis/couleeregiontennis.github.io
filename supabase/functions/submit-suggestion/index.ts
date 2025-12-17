@@ -13,11 +13,11 @@ serve(async (req) => {
   }
 
   try {
-    // 🛡️ Sentinel: Removed 'userId' from input to prevent ID spoofing.
+    // Removed 'userId' from input to prevent ID spoofing.
     // Ideally user identity should be derived from the Auth header.
     const { content, captchaToken } = await req.json()
 
-    // 🛡️ Sentinel: Enhanced Input Validation
+    // Enhanced Input Validation
     if (!content || typeof content !== 'string') {
       return new Response(
         JSON.stringify({ error: 'Invalid content format.' }),
