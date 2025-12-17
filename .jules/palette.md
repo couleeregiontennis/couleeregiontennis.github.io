@@ -1,0 +1,3 @@
+## 2024-05-22 - Accessible Toggle Groups
+**Learning:** For view switching controls implemented as buttons, using `role="group"` on the container and `aria-pressed` on the buttons provides a significant accessibility improvement over plain buttons. While `radiogroup` is semantically precise for mutually exclusive options, `aria-pressed` buttons are well-supported and easier to retrofit into existing component structures.
+**Action:** When auditing toolbars or filter lists, check for missing group roles and state attributes. Retrofit `aria-pressed` where `radiogroup` refactoring is too complex for a quick win.
