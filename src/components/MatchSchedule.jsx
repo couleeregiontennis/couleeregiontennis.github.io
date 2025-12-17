@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../scripts/supabaseClient';
+import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/MatchSchedule.css';
 
 export const MatchSchedule = () => {
@@ -183,7 +184,9 @@ export const MatchSchedule = () => {
     return (
       <div className="match-schedule">
         <div className="schedule-shell">
-          <div className="loading">Loading match schedule...</div>
+          <div className="loading">
+            <LoadingSpinner size="md" />
+          </div>
         </div>
       </div>
     );
@@ -234,22 +237,25 @@ export const MatchSchedule = () => {
 
       <div className="schedule-controls card card--interactive card--overlay">
         <div className="control-row">
-          <div className="view-toggle">
+          <div className="view-toggle" role="group" aria-label="View mode">
             <button
               className={`view-btn ${viewMode === 'month' ? 'active' : ''}`}
               onClick={() => setViewMode('month')}
+              aria-pressed={viewMode === 'month'}
             >
               Month
             </button>
             <button
               className={`view-btn ${viewMode === 'week' ? 'active' : ''}`}
               onClick={() => setViewMode('week')}
+              aria-pressed={viewMode === 'week'}
             >
               Week
             </button>
             <button
               className={`view-btn ${viewMode === 'list' ? 'active' : ''}`}
               onClick={() => setViewMode('list')}
+              aria-pressed={viewMode === 'list'}
             >
               List
             </button>
