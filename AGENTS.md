@@ -5,3 +5,6 @@
 
 ## Git Workflow
 *   **Branch Names**: Always use meaningful, descriptive branch names for your submissions (e.g., `jules/feature/add-login-tests`, `jules/fix/mobile-nav-bug`). Avoid generic or generated names.
+
+## Code Comments
+*   **Signatures**: Do not include agent signatures (e.g., "🛡️ Sentinel:", "🤖 Bot:") in code comments.
