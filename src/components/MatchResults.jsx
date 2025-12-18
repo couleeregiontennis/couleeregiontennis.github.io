@@ -1,8 +1,50 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 
+// OPTIMIZATION: Memoized row component to prevent re-renders of the entire list
+const MatchResultRow = memo(({ match, teamNumber }) => {
+  const isHomeTeam = match.home_team?.number === parseInt(teamNumber);
+  const opponent = isHomeTeam ? match.away_team?.name : match.home_team?.name;
+  const teamWon = isHomeTeam ? match.home_points > match.away_points : match.away_points > match.home_points;
+
+  const linesWon = match.line_results?.filter(line => {
+    const lineWonByHome = line.home_won;
+    return isHomeTeam ? lineWonByHome : !lineWonByHome;
+  }).length || 0;
+
+  const totalLines = match.line_results?.length || 0;
+  const games = isHomeTeam ? match.home_points : match.away_points;
+  const opponentGames = isHomeTeam ? match.away_points : match.home_points;
+
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+  };
+
+  return (
+    <tr className={teamWon ? 'win' : 'loss'}>
+      <td>{formatDate(match.date)}</td>
+      <td>{opponent}</td>
+      <td>
+        <span className={`result ${teamWon ? 'win' : 'loss'}`}>
+          {teamWon ? 'W' : 'L'}
+        </span>
+      </td>
+      <td>{linesWon || 0}/{totalLines}</td>
+      <td>{games || 0}-{opponentGames || 0}</td>
+    </tr>
+  );
+});
+
+MatchResultRow.displayName = 'MatchResultRow';
+
 // OPTIMIZATION: Uses teamId (UUID) for server-side filtering when available to avoid fetching all matches
-export const MatchResults = ({ teamNumber, teamNight, teamId }) => {
+// OPTIMIZATION: Memoized MatchResults to avoid re-renders on parent updates
+export const MatchResults = memo(({ teamNumber, teamNight, teamId }) => {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -77,16 +119,6 @@ export const MatchResults = ({ teamNumber, teamNight, teamId }) => {
     return <div className="match-results-empty">No match results available yet.</div>;
   }
 
-  const formatDate = (dateStr) => {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('en-US', { 
-      month: 'short', 
-      day: 'numeric', 
-      year: 'numeric' 
-    });
-  };
-
-
   return (
     <div className="match-results">
       <h3>Match Results</h3>
@@ -102,35 +134,18 @@ export const MatchResults = ({ teamNumber, teamNight, teamId }) => {
             </tr>
           </thead>
           <tbody>
-            {matches.map((match) => {
-              const isHomeTeam = match.home_team?.number === parseInt(teamNumber);
-              const opponent = isHomeTeam ? match.away_team?.name : match.home_team?.name;
-              const teamWon = isHomeTeam ? match.home_points > match.away_points : match.away_points > match.home_points;
-              const linesWon = match.line_results?.filter(line => {
-                const lineWonByHome = line.home_won;
-                return isHomeTeam ? lineWonByHome : !lineWonByHome;
-              }).length || 0;
-              const totalLines = match.line_results?.length || 0;
-              const games = isHomeTeam ? match.home_points : match.away_points;
-              const opponentGames = isHomeTeam ? match.away_points : match.home_points;
-
-              return (
-                <tr key={match.id} className={teamWon ? 'win' : 'loss'}>
-                  <td>{formatDate(match.date)}</td>
-                  <td>{opponent}</td>
-                  <td>
-                    <span className={`result ${teamWon ? 'win' : 'loss'}`}>
-                      {teamWon ? 'W' : 'L'}
-                    </span>
-                  </td>
-                  <td>{linesWon || 0}/{totalLines}</td>
-                  <td>{games || 0}-{opponentGames || 0}</td>
-                </tr>
-              );
-            })}
+            {matches.map((match) => (
+              <MatchResultRow
+                key={match.id}
+                match={match}
+                teamNumber={teamNumber}
+              />
+            ))}
           </tbody>
         </table>
       </div>
     </div>
   );
-};
+});
+
+MatchResults.displayName = 'MatchResults';
