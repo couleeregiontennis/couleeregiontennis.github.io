@@ -49,7 +49,8 @@ test.describe('Add Score Page (Protected)', () => {
             status: 200,
             contentType: 'application/json',
             body: JSON.stringify([
-                { player: 'p1' }, { player: 'p2' }
+                { player: { id: 'p1', first_name: 'Player', last_name: 'One', email: 'p1@test.com', ranking: 1 } },
+                { player: { id: 'p2', first_name: 'Player', last_name: 'Two', email: 'p2@test.com', ranking: 2 } }
             ]),
           });
       }
