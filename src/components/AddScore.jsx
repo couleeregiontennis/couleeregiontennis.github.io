@@ -1193,6 +1193,7 @@ export const AddScore = () => {
               value={formData.notes}
               onChange={handleInputChange}
               placeholder="Any additional notes about the match..."
+              maxLength={500} // Security: Enforce input limit
               rows="3"
             />
           </div>
