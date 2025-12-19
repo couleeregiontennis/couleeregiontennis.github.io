@@ -73,7 +73,7 @@ test.describe('Admin Audit Log Viewer', () => {
     });
 
     await page.goto('/admin/audit-logs');
-    await expect(page.getByText('Access Denied')).toBeVisible();
+    await expect(page).toHaveURL('/');
   });
 
   test('Can filter logs', async ({ page }) => {

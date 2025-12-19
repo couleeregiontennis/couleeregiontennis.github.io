@@ -109,7 +109,6 @@ export const AskTheUmpire = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="e.g., Can I play down a level?"
-              maxLength={300} // Security: Limit input length to prevent DoS/Cost abuse
               disabled={loading}
               className="umpire-input"
             />
