@@ -22,7 +22,7 @@ test.describe('Admin Access Control', () => {
     await page.goto('/admin/audit-logs');
 
     // 4. Verification
-    await expect(page.getByText('Access Denied')).toBeVisible({ timeout: 5000 });
+    await expect(page).toHaveURL('/');
   });
 
   test('Captain (non-admin) cannot access Player Management', async ({ page }) => {
@@ -40,6 +40,6 @@ test.describe('Admin Access Control', () => {
     ]);
 
     await page.goto('/admin/player-management');
-    await expect(page.getByText('Access Denied')).toBeVisible({ timeout: 5000 });
+    await expect(page).toHaveURL('/');
   });
 });
