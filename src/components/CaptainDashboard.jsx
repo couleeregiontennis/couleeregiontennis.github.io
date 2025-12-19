@@ -330,7 +330,7 @@ export const CaptainDashboard = () => {
 
       if (error) throw error;
 
-      const rosterData = teamPlayers.map((tp, index) => ({
+      const rosterData = (Array.isArray(teamPlayers) ? teamPlayers : []).map((tp, index) => ({
         ...tp.player,
         position: index + 1
       }));

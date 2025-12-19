@@ -43,7 +43,7 @@ export const useTeamStatsData = () => {
         throw new Error(`Failed to load team roster: ${rosterError.message}`);
       }
 
-      const rosterData = (teamPlayers || []).map((tp) => tp.player);
+      const rosterData = (Array.isArray(teamPlayers) ? teamPlayers : []).map((tp) => tp.player);
       setRoster(rosterData);
       return rosterData;
     } catch (err) {
