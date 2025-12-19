@@ -19,3 +19,10 @@
 1. Never destructure sensitive fields like `userId`, `role`, or `permissions` from the request body.
 2. If user identity is needed, derive it from the `Authorization` header by initializing a Supabase client with the incoming JWT and calling `auth.getUser()`.
 3. If anonymous submission is the goal, explicitly set `user_id` to `null` rather than accepting it from input.
+
+## 2025-10-27 - Unbounded Input on AI/LLM Endpoints
+**Vulnerability:** The 'Ask the Umpire' input field allowed unlimited character input, which was passed directly to a Supabase Edge Function (likely wrapping an LLM). This created a risk of Denial of Service (DoS) via cost exhaustion or function timeouts.
+**Learning:** Frontend `maxLength` attributes are a critical first line of defense against abuse, especially for features that trigger expensive backend operations (like AI calls). While backend validation is definitive, frontend limits prevent accidental or low-effort abuse.
+**Prevention:**
+1. Enforce strict `maxLength` attributes on all free-text inputs, especially those hitting paid APIs.
+2. Provide visual feedback (character counters) so users understand the constraint.
