@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../scripts/supabaseClient';
+import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/AddScore.css';
 
 const STANDARD_SET_MIN_WIN = 6;
@@ -900,13 +901,15 @@ export const AddScore = () => {
         <div className="score-section card card--interactive">
           <h2>Select Match</h2>
           <div className="form-group">
-            <label>Available Matches</label>
-            <p className="helper-text">Use the dropdown or click a match card below to start scoring.</p>
+            <label htmlFor="match-select">Available Matches</label>
+            <p id="match-helper" className="helper-text">Use the dropdown or click a match card below to start scoring.</p>
             <select
+              id="match-select"
               name="matchId"
               value={formData.matchId}
               onChange={(e) => handleMatchSelect(e.target.value)}
               required
+              aria-describedby="match-helper"
             >
               <option value="">Select a match to submit scores for</option>
               {availableMatches.map(match => (
@@ -1005,8 +1008,9 @@ export const AddScore = () => {
           )}
           <div className="form-row">
             <div className="form-group">
-              <label>Line Number</label>
+              <label htmlFor="line-select">Line Number</label>
               <select
+                id="line-select"
                 name="lineNumber"
                 value={formData.lineNumber}
                 onChange={handleInputChange}
@@ -1018,8 +1022,9 @@ export const AddScore = () => {
               </select>
             </div>
             <div className="form-group">
-              <label>Match Type</label>
+              <label htmlFor="match-type-select">Match Type</label>
               <select
+                id="match-type-select"
                 name="matchType"
                 value={formData.matchType}
                 onChange={handleInputChange}
@@ -1037,6 +1042,7 @@ export const AddScore = () => {
                 value={formData.homePlayers[0]}
                 onChange={(e) => handlePlayerChange('home', 0, e.target.value)}
                 required
+                aria-label="Home Player 1"
               >
                 <option value="">Select Player 1</option>
                 {getDisplayPlayers(homeTeamRoster, formData.lineNumber).map((player, index) => (
@@ -1050,6 +1056,7 @@ export const AddScore = () => {
                   value={formData.homePlayers[1]}
                   onChange={(e) => handlePlayerChange('home', 1, e.target.value)}
                   required
+                  aria-label="Home Player 2"
                 >
                   <option value="">Select Player 2</option>
                   {getDisplayPlayers(homeTeamRoster, formData.lineNumber).map((player, index) => (
@@ -1066,6 +1073,7 @@ export const AddScore = () => {
                 value={formData.awayPlayers[0]}
                 onChange={(e) => handlePlayerChange('away', 0, e.target.value)}
                 required
+                aria-label="Away Player 1"
               >
                 <option value="">Select Player 1</option>
                 {getDisplayPlayers(awayTeamRoster, formData.lineNumber).map((player, index) => (
@@ -1079,6 +1087,7 @@ export const AddScore = () => {
                   value={formData.awayPlayers[1]}
                   onChange={(e) => handlePlayerChange('away', 1, e.target.value)}
                   required
+                  aria-label="Away Player 2"
                 >
                   <option value="">Select Player 2</option>
                   {getDisplayPlayers(awayTeamRoster, formData.lineNumber).map((player, index) => (
@@ -1126,6 +1135,7 @@ export const AddScore = () => {
                   value={formData.homeSet1}
                   onChange={(e) => handleScoreChange('home', 1, e.target.value)}
                   required
+                  aria-label="Set 1 Home Score"
                 >
                   <option value="">{getPlayerDisplayNames().homeNames || 'Home'}</option>
                   {generateScoreOptions()}
@@ -1135,6 +1145,7 @@ export const AddScore = () => {
                   value={formData.awaySet1}
                   onChange={(e) => handleScoreChange('away', 1, e.target.value)}
                   required
+                  aria-label="Set 1 Away Score"
                 >
                   <option value="">{getPlayerDisplayNames().awayNames || 'Away'}</option>
                   {generateScoreOptions()}
@@ -1148,6 +1159,7 @@ export const AddScore = () => {
                   value={formData.homeSet2}
                   onChange={(e) => handleScoreChange('home', 2, e.target.value)}
                   required
+                  aria-label="Set 2 Home Score"
                 >
                   <option value="">{getPlayerDisplayNames().homeNames || 'Home'}</option>
                   {generateScoreOptions()}
@@ -1157,6 +1169,7 @@ export const AddScore = () => {
                   value={formData.awaySet2}
                   onChange={(e) => handleScoreChange('away', 2, e.target.value)}
                   required
+                  aria-label="Set 2 Away Score"
                 >
                   <option value="">{getPlayerDisplayNames().awayNames || 'Away'}</option>
                   {generateScoreOptions()}
@@ -1169,6 +1182,7 @@ export const AddScore = () => {
                 <select
                   value={formData.homeSet3}
                   onChange={(e) => handleScoreChange('home', 3, e.target.value)}
+                  aria-label="Set 3 Home Score"
                 >
                   <option value="">{getPlayerDisplayNames().homeNames || 'Home'}</option>
                   {generateTiebreakOptions()}
@@ -1177,6 +1191,7 @@ export const AddScore = () => {
                 <select
                   value={formData.awaySet3}
                   onChange={(e) => handleScoreChange('away', 3, e.target.value)}
+                  aria-label="Set 3 Away Score"
                 >
                   <option value="">{getPlayerDisplayNames().awayNames || 'Away'}</option>
                   {generateTiebreakOptions()}
@@ -1187,12 +1202,14 @@ export const AddScore = () => {
         </div>
         <div className="score-section card card--interactive">
           <div className="form-group">
-            <label>Notes (Optional)</label>
+            <label htmlFor="match-notes">Notes (Optional)</label>
             <textarea
+              id="match-notes"
               name="notes"
               value={formData.notes}
               onChange={handleInputChange}
               placeholder="Any additional notes about the match..."
+              maxLength={500} // Security: Enforce input limit
               rows="3"
             />
           </div>
@@ -1200,7 +1217,12 @@ export const AddScore = () => {
         {error && <div className="error-message">{error}</div>}
         {success && <div className="success-message">{success}</div>}
         <button type="submit" disabled={loading} className="submit-button">
-          {loading ? 'Submitting...' : 'Submit Scores'}
+          {loading ? (
+            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+              <LoadingSpinner size="sm" />
+              Submitting...
+            </span>
+          ) : 'Submit Scores'}
         </button>
       </form>
     </div>

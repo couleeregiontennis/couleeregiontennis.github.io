@@ -97,6 +97,18 @@ test.describe('Add Score Page (Protected)', () => {
     });
 
     await page.route('**/rest/v1/line_results*', async (route) => {
+        // Add delay for POST/PUT/PATCH to verify loading state
+        if (['POST', 'PUT', 'PATCH'].includes(route.request().method())) {
+            await new Promise(r => setTimeout(r, 3000));
+        }
+        await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify([{ id: 'mock-id' }]), // Return dummy row for select()
+        });
+    });
+
+    await page.route('**/rest/v1/line_result_audit*', async (route) => {
         await route.fulfill({
             status: 200,
             contentType: 'application/json',
@@ -114,72 +126,97 @@ test.describe('Add Score Page (Protected)', () => {
     await expect(page.getByRole('heading', { name: 'Submit Match Scores' })).toBeVisible();
     await expect(page.getByText('My Team', { exact: true })).toBeVisible();
 
+    // Verify accessibility: inputs should be accessible by label
+    await expect(page.getByLabel('Available Matches')).toBeVisible();
+    await expect(page.getByLabel('Line Number')).toBeVisible();
+    await expect(page.getByLabel('Match Type')).toBeVisible();
+
     // Wait for the select to populate
-    const matchSelect = page.locator('select[name="matchId"]');
+    const matchSelect = page.getByLabel('Available Matches');
     await expect(matchSelect).toBeVisible();
     await expect(matchSelect).toContainText('My Team vs Opponent Team');
+
+    await page.screenshot({ path: 'frontend_verification_results/add_score_initial.png' });
   });
 
   test('validates invalid tennis scores', async ({ page }) => {
     // Select match
-    await page.selectOption('select[name="matchId"]', 'match-1');
+    await page.getByLabel('Available Matches').selectOption('match-1');
 
     // Wait for roster loading (indicated by players appearing or select being enabled)
     // We can select match type
-    await page.locator('select[name="matchType"]').selectOption('singles');
+    await page.getByLabel('Match Type').selectOption('singles');
 
     // Wait for player selects to populate with mock data
-    // Use first() or nth(0) for "Home Players" -> "Player 1"
-    const playerSelect = page.locator('select').filter({ hasText: 'Select Player 1' }).first();
-    await expect(playerSelect).toContainText('Player One');
+    await expect(page.getByLabel('Home Player 1')).toContainText('Player One');
 
     // Set invalid score for Set 1
-    const sets = page.locator('.score-group');
-    const set1 = sets.nth(0);
-    await set1.locator('select').nth(0).selectOption('5');
-    await set1.locator('select').nth(1).selectOption('5');
+    await page.getByLabel('Set 1 Home Score').selectOption('5');
+    await page.getByLabel('Set 1 Away Score').selectOption('5');
 
     // Set valid score for Set 2 (required field)
-    const set2 = sets.nth(1);
-    await set2.locator('select').nth(0).selectOption('6');
-    await set2.locator('select').nth(1).selectOption('4');
+    await page.getByLabel('Set 2 Home Score').selectOption('6');
+    await page.getByLabel('Set 2 Away Score').selectOption('4');
 
     // Select players to pass that validation
-    const homePlayer1 = page.locator('select').filter({ hasText: 'Select Player 1' }).nth(0);
-    const awayPlayer1 = page.locator('select').filter({ hasText: 'Select Player 1' }).nth(1);
-
-    await homePlayer1.selectOption('Player One');
-    await awayPlayer1.selectOption('Player Two'); // Valid players
+    await page.getByLabel('Home Player 1').selectOption('Player One');
+    await page.getByLabel('Away Player 1').selectOption('Player Two'); // Valid players
 
     await page.getByRole('button', { name: 'Submit Scores' }).click();
     await expect(page.locator('.error-message')).toContainText(/Sets 1 and 2 must be valid tennis scores/);
   });
 
   test('validates unique players', async ({ page }) => {
-     await page.selectOption('select[name="matchId"]', 'match-1');
-     await page.locator('select[name="matchType"]').selectOption('singles');
+     await page.getByLabel('Available Matches').selectOption('match-1');
+     await page.getByLabel('Match Type').selectOption('singles');
 
      // Wait for players to load
-     const playerSelect = page.locator('select').filter({ hasText: 'Select Player 1' }).first();
-     await expect(playerSelect).toContainText('Player One');
+     await expect(page.getByLabel('Home Player 1')).toContainText('Player One');
 
-     const homePlayer1 = page.locator('select').filter({ hasText: 'Select Player 1' }).nth(0);
-     const awayPlayer1 = page.locator('select').filter({ hasText: 'Select Player 1' }).nth(1);
-
-     await homePlayer1.selectOption('Player One');
-     await awayPlayer1.selectOption('Player One'); // Duplicate player
+     await page.getByLabel('Home Player 1').selectOption('Player One');
+     await page.getByLabel('Away Player 1').selectOption('Player One'); // Duplicate player
 
      // Fill required scores (can be valid)
-     const sets = page.locator('.score-group');
-     const set1 = sets.nth(0);
-     await set1.locator('select').nth(0).selectOption('6');
-     await set1.locator('select').nth(1).selectOption('4');
-     const set2 = sets.nth(1);
-     await set2.locator('select').nth(0).selectOption('6');
-     await set2.locator('select').nth(1).selectOption('4');
+     await page.getByLabel('Set 1 Home Score').selectOption('6');
+     await page.getByLabel('Set 1 Away Score').selectOption('4');
+     await page.getByLabel('Set 2 Home Score').selectOption('6');
+     await page.getByLabel('Set 2 Away Score').selectOption('4');
 
      await page.getByRole('button', { name: 'Submit Scores' }).click();
      await expect(page.locator('.error-message')).toContainText(/Players cannot appear on both sides/);
+  });
+
+  test('shows loading spinner during submission', async ({ page }) => {
+     await page.getByLabel('Available Matches').selectOption('match-1');
+     await page.getByLabel('Match Type').selectOption('singles');
+
+     // Fill valid form data
+     await page.getByLabel('Home Player 1').selectOption('Player One');
+     await page.getByLabel('Away Player 1').selectOption('Player Two');
+
+     // Scores
+     await page.getByLabel('Set 1 Home Score').selectOption('6');
+     await page.getByLabel('Set 1 Away Score').selectOption('0');
+     await page.getByLabel('Set 2 Home Score').selectOption('6');
+     await page.getByLabel('Set 2 Away Score').selectOption('0');
+
+     // Submit
+     const submitButton = page.getByRole('button', { name: 'Submit Scores' });
+     await submitButton.click();
+
+     // Verify loading state
+     const submitBtn = page.locator('.submit-button');
+     await expect(submitBtn).toBeVisible();
+     await expect(submitBtn).toContainText('Submitting...');
+     await expect(submitBtn.locator('.loading-spinner')).toBeVisible();
+     await page.screenshot({ path: 'frontend_verification_results/add_score_loading.png' });
+
+     if (await page.locator('.error-message').isVisible()) {
+        console.log('Submission Error:', await page.locator('.error-message').textContent());
+     }
+
+     await expect(page.locator('.success-message')).toContainText(/submitted successfully/, { timeout: 10000 });
+     await page.screenshot({ path: 'frontend_verification_results/add_score_success.png' });
   });
 
 });
