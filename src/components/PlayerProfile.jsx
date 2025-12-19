@@ -289,6 +289,7 @@ export const PlayerProfile = () => {
                 value={profile.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
                 disabled={!isEditing}
+                maxLength={100}
                 required
               />
             </div>
@@ -313,6 +314,7 @@ export const PlayerProfile = () => {
                 value={profile.phone}
                 onChange={(e) => handleInputChange('phone', e.target.value)}
                 disabled={!isEditing}
+                maxLength={20}
                 placeholder="(555) 123-4567"
               />
             </div>
@@ -331,6 +333,7 @@ export const PlayerProfile = () => {
                 value={profile.emergency_contact}
                 onChange={(e) => handleInputChange('emergency_contact', e.target.value)}
                 disabled={!isEditing}
+                maxLength={100}
               />
             </div>
 
@@ -342,6 +345,7 @@ export const PlayerProfile = () => {
                 value={profile.emergency_phone}
                 onChange={(e) => handleInputChange('emergency_phone', e.target.value)}
                 disabled={!isEditing}
+                maxLength={20}
                 placeholder="(555) 123-4567"
               />
             </div>
@@ -422,6 +426,7 @@ export const PlayerProfile = () => {
                 value={profile.notes}
                 onChange={(e) => handleInputChange('notes', e.target.value)}
                 disabled={!isEditing}
+                maxLength={500}
                 rows="3"
                 placeholder="Any additional information about your playing style, preferences, or availability..."
               />
