@@ -39,16 +39,28 @@ The La Crosse Team Tennis Association (LTTA) Summer League operates under electe
 * Matches begin promptly at 5:30 PM and 7:00 PM at Green Island Park unless weather delays occur. Warm-ups (including serves) are limited to 10 minutes and “first ball in” serves are not used.
 * Match forfeits take effect at 5:45 PM and 7:15 PM if players are not on the assigned court, aside from weather delays.
 * 5:30 PM matches must vacate courts by 7:00 PM. If unfinished, players may relocate (by mutual agreement) to complete the match using their own balls. Otherwise, use the score at stoppage: 10 points to the side with more total games, 8 points to the opponent, or 8 points each if total games are tied.
-* Players in the 5:30 PM session leave league-issued balls for the 7:00 PM matches. Winners of the late session may keep the balls or place them in the recycle box.
-* Matches consist of two sets using no-ad scoring with standard game points (15-30-40). Play a 7-point tiebreak (win by 2) at 6-6 in any set. Split sets revert to a 7-point tiebreak with servers alternating 1-2-2 points and switching ends every six points.
-* If the on-court heat index exceeds 95°F, any player may request to begin sets at 2-2 while still playing best two-of-three sets. If the index exceeds 104°F, league play is canceled by 4:30 PM; players may still hit on their own, but results do not count.
-* League play is not canceled for poor air quality; individuals should decide whether to play, wear a mask, or use a substitute based on personal health concerns.
-* Each session (5:30 PM versus 7:00 PM matches) is evaluated independently for weather. A rainout in the early session does not automatically cancel the late session if courts dry out.
-* Team standings are determined weekly using total team points earned divided by the maximum available points, normalizing Format 1 (50 points) and Format 2 (40 points) lineups.
-* For 2025, Court Group 1 captains may agree to play both #1 and #2 singles. Results integrate into the percentage system and address the high number of substitute-filled singles matches.
-* Play at your own risk and monitor conditions to avoid falls or injuries.
+*   **Balls:** 5:30 PM matches leave balls for 7:00 PM matches. Winners of the late session may keep the balls or place them in the recycle box.
+    *   **Missing/Broken Balls:** LTTA will provide replacements for missing or broken balls.
+    *   **Player-Provided Balls:** If both teams agree to use new balls instead of the provided ones, a player from one of the teams must supply them.
+*   **Scoring Format:**
+    *   **No-Ad Scoring:** 15, 30, 40, Game. (Deuce = 1 deciding point; receiver chooses side).
+    *   **Sets:** Best 2 of 3 sets.
+    *   **Tiebreaks:**
+        *   Set Tiebreak (at 6-6): 7-point tiebreak (win by 2).
+        *   3rd Set (Split Sets): 7-point tiebreak (win by 2).
+*   **Extreme Heat Rule:** If the **"Feels Like" temperature** (as reported by The Weather Channel/Apple Weather App) exceeds **95°F**, any player may request to begin sets at 2-2 while still playing best two-of-three sets. If the "Feels Like" temperature exceeds **104°F**, league play is canceled by 4:30 PM.
+    *   *Note:* Players may still hit on their own if play is canceled, but results do not count.
+*   **Rain:** Sessions are independent. Rain at 5:30 PM doesn't automatically cancel 7:00 PM.
+*   **Makeup Matches:** LTTA does **not** facilitate makeup matches for cancellations. Teams may organize informal matches on their own, but these results are not recorded and do not count toward league standings.
 
 **Have fun and make new friends.**
+
+## Standings, Playoffs & Weather Impact
+* **Standings Calculation:** Team standings are determined weekly by **Winning Percentage** (Total Points Earned ÷ Total Points Available).
+* **Weather Policy:** Matches that are cancelled due to weather (rain or heat) are **excluded** from the percentage calculation. Teams are not penalized for missed opportunities to play.
+* **Tiebreakers:** In the event of a tie in Winning Percentage at the end of the season, the winner is determined by **Head-to-Head** match record between the tied teams.
+*   **Championship:** The regular season winner of the Tuesday League will play the regular season winner of the Wednesday League to determine the overall League Champion.
+    *   **Championship Tiebreaker:** In the event the championship match ends with an equal number of individual matches won by each team, the overall winner will be determined by the team with the highest **cumulative games won** across all individual matches.
 
 ## 2025 Team Scoring (per scoresheet)
 * 10 points to the winner of a match, including halted matches when one side has more total games.

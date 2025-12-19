@@ -507,6 +507,49 @@
   font-weight: 700;
 }
 
+.player-score-input-header {
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--score-card-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.player-names {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.home-players,
+.away-players {
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--score-card-border);
+  background: var(--score-page-bg);
+  color: var(--score-card-text);
+  transition: all 0.2s ease;
+}
+
+.home-players.winner,
+.away-players.winner {
+  background: var(--score-accent);
+  color: var(--text-inverse);
+  border-color: var(--score-accent-strong);
+  box-shadow: 0 6px 16px rgba(var(--color-secondary-rgb), 0.3);
+}
+
+.vs {
+  color: var(--score-card-muted);
+  font-weight: 700;
+}
+
 .match-winner {
   text-align: center;
   font-weight: 700;
@@ -516,6 +559,70 @@
   border-radius: var(--score-card-radius);
   padding: var(--space-md);
 }
+
+.speech-input-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  width: 100%;
+}
+
+.microphone-button {
+  background: var(--score-page-bg);
+  border: 1px solid var(--score-card-border);
+  color: var(--score-card-text);
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  box-shadow: 0 4px 8px rgba(var(--color-secondary-rgb), 0.1);
+}
+
+.microphone-button:hover:not(:disabled) {
+  border-color: var(--score-accent);
+  box-shadow: 0 6px 12px rgba(var(--color-secondary-rgb), 0.15);
+  transform: translateY(-2px);
+}
+
+.microphone-button.listening {
+  background: var(--color-error);
+  color: var(--text-inverse);
+  border-color: var(--color-error);
+  box-shadow: 0 4px 10px rgba(var(--color-error-rgb), 0.3);
+}
+
+.microphone-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.transcript-display {
+  background: rgba(var(--color-secondary-rgb), 0.08);
+  border: 1px solid rgba(var(--color-secondary-rgb), 0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-sm);
+  color: var(--score-card-text);
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+
+.loading-message {
+  color: var(--score-accent);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-md);
+}
+
 
 .score-row {
   display: grid;
