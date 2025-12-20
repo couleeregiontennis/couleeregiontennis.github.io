@@ -23,11 +23,7 @@ test.describe('Ask the Umpire Security', () => {
 
   test('Input enforces character limit and shows counter', async ({ page }) => {
     // Debug info
-    const count = await page.locator('.umpire-trigger').count();
-    console.log(`Found ${count} triggers`);
-
     const isVisible = await page.locator('.umpire-trigger').isVisible();
-    console.log(`Is visible: ${isVisible}`);
 
     if (!isVisible) {
          // Force show it
