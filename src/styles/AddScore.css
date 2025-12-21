@@ -678,3 +678,10 @@
     font-size: var(--font-size-xl);
   }
 }
+
+.submit-loading-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
