@@ -1194,7 +1194,12 @@ export const AddScore = () => {
               onChange={handleInputChange}
               placeholder="Any additional notes about the match..."
               rows="3"
+              maxLength={500}
+              aria-describedby="notes-counter"
             />
+            <div id="notes-counter" className="character-count">
+              {(formData.notes || '').length} / 500 characters
+            </div>
           </div>
         </div>
         {error && <div className="error-message">{error}</div>}
