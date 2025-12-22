@@ -36,7 +36,7 @@
     "dev": "vite",
     "build": "vite build && cp dist/index.html dist/404.html",
     "preview": "vite preview",
-    "deploy": "npm run build && cp -r dist/* ../ && echo 'Deployed to root directory'",
+    "deploy": "pnpm run build && cp -r dist/* ../ && echo 'Deployed to root directory'",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
   },
