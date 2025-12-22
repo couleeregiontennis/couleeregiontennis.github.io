@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../scripts/supabaseClient';
+import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/AddScore.css';
 
 const STANDARD_SET_MIN_WIN = 6;
@@ -1200,7 +1201,12 @@ export const AddScore = () => {
         {error && <div className="error-message">{error}</div>}
         {success && <div className="success-message">{success}</div>}
         <button type="submit" disabled={loading} className="submit-button">
-          {loading ? 'Submitting...' : 'Submit Scores'}
+          {loading ? (
+             <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <LoadingSpinner size="sm" />
+                Submitting...
+             </span>
+          ) : 'Submit Scores'}
         </button>
       </form>
     </div>
