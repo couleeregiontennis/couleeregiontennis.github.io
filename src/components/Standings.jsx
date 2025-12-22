@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 import { useAuth } from '../context/AuthProvider';
+import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/Style.css';
 import '../styles/Standings.css';
 
@@ -304,7 +305,8 @@ const Standings = () => {
 
       {loading ? (
         <div className="loading-state card card--interactive">
-          <p>Loading standings...</p>
+          <LoadingSpinner size="lg" />
+          <p style={{ marginTop: '1rem' }}>Loading standings...</p>
         </div>
       ) : error ? (
         <div className="error-state card card--interactive">
@@ -402,13 +404,14 @@ const Standings = () => {
                 Refresh Standings
               </button>
             </div>
-            <div className="night-filter-group">
+            <div className="night-filter-group" role="group" aria-label="Filter by league night">
               {nightOptions.map((night) => (
                 <button
                   key={night}
                   type="button"
                   className={`night-filter ${nightFilter === night ? 'active' : ''}`}
                   onClick={() => setNightFilter(night)}
+                  aria-pressed={nightFilter === night}
                 >
                   {night}
                 </button>
@@ -420,7 +423,7 @@ const Standings = () => {
           </div>
 
           <div className="standings-table-card card card--interactive">
-            <table className="standings-table">
+            <table className="standings-table" aria-label="League Standings">
               <thead>
                 <tr>
                   <th>#</th>
