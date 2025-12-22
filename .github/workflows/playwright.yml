@@ -29,21 +29,23 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-        cache: 'npm'
+
+    - name: Install pnpm
+      run: npm install -g pnpm
 
     - name: Install dependencies
-      run: npm ci
+      run: pnpm install --frozen-lockfile
 
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      run: pnpm exec playwright install --with-deps
 
     - name: Run Playwright tests
       if: ${{ !inputs.update_snapshots }}
-      run: npm run test:e2e
+      run: pnpm run test:e2e
 
     - name: Run Playwright tests (Update Snapshots)
       if: ${{ inputs.update_snapshots }}
-      run: npx playwright test --update-snapshots
+      run: pnpm exec playwright test --update-snapshots
 
     # If snapshots were updated, we need to commit them back.
     # This addresses "automatically update the tests" in a way.
