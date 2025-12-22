@@ -26,6 +26,10 @@ jobs:
       VITE_SUPABASE_ANON_KEY: dummy-anon-key
     steps:
     - uses: actions/checkout@v4
+    - uses: pnpm/action-setup@v3
+      with:
+        version: 9
+
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
