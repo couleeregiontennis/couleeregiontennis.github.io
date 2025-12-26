@@ -1,5 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../scripts/supabaseClient';
+import { useAuth } from '../context/AuthProvider';
 import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/MatchSchedule.css';
 
@@ -52,6 +54,8 @@ const groupMatchesByDate = (matches) => {
 };
 
 export const MatchSchedule = () => {
+  const navigate = useNavigate();
+  const { userRole } = useAuth();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [matches, setMatches] = useState([]);
@@ -338,6 +342,18 @@ export const MatchSchedule = () => {
                           {status === 'completed' && (
                             <div className="match-result">
                               Final score submitted
+                              {userRole?.isAdmin && (
+                                <button
+                                  className="edit-result-btn"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    navigate(`/add-score?matchId=${match.id}&edit=true`);
+                                  }}
+                                  aria-label="Edit Result"
+                                >
+                                  Edit Result
+                                </button>
+                              )}
                             </div>
                           )}
                         </article>
