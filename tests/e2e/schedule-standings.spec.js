@@ -113,9 +113,9 @@ test.describe('Match Schedule Page', () => {
         await route.fulfill({
              status: 200,
              contentType: 'application/json',
-             body: JSON.stringify([]), // or handle count if needed, but [] is safe
+             body: JSON.stringify([]),
              headers: {
-                 'content-range': '0-0/100' // mock count header
+                 'content-range': '0-0/100'
              }
         });
     });

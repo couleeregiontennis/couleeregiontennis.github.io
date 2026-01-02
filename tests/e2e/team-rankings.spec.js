@@ -21,8 +21,9 @@ test.describe('Team & Rankings (Public)', () => {
 
     await page.goto('/player-rankings');
     await expect(page.getByRole('heading', { name: 'Player Rankings' })).toBeVisible();
-    await expect(page.getByText('Roger Federer')).toBeVisible();
-    await expect(page.getByText('Rafael Nadal')).toBeVisible();
+    // Use more specific selectors for table cells
+    await expect(page.getByRole('cell', { name: 'Roger Federer' })).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'Rafael Nadal' })).toBeVisible();
   });
 
   test('Team Details page loads', async ({ page }) => {
@@ -84,8 +85,8 @@ test.describe('Team & Rankings (Public)', () => {
 
     await page.goto('/team/Monday/1');
     await expect(page.getByRole('heading', { name: 'The Aces' })).toBeVisible();
-    // Check roster
-    await expect(page.getByText('Player One')).toBeVisible();
+    // Check roster using specific text or list item role
+    await expect(page.getByText('Player One', { exact: true })).toBeVisible();
   });
 
 });
