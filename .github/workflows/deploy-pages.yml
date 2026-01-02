@@ -65,6 +65,13 @@ jobs:
           echo "Final dist contents:"
           ls -la dist
 
+      - name: Ensure 404.html for SPA routing
+        run: |
+          if [ -f dist/index.html ] && [ ! -f dist/404.html ]; then
+            cp dist/index.html dist/404.html
+            echo "Created 404.html from index.html"
+          fi
+
       - name: Upload static files
         uses: actions/upload-pages-artifact@v3
         with:
