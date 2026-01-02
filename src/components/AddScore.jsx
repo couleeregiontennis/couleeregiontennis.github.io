@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 import { useVoiceScoreInput } from '../hooks/useVoiceScoreInput';
+import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/AddScore.css';
 
 const STANDARD_SET_MIN_WIN = 6;
-// League uses a match tiebreak to 10 (win by 2)
-const MATCH_TIEBREAK_TARGET = 10;
+const MATCH_TIEBREAK_TARGET = 7;
+const MAX_NOTES_LENGTH = 500;
 
 const parseInteger = (value) => {
   const parsed = Number(value);
@@ -1258,15 +1259,25 @@ export const AddScore = () => {
               name="notes"
               value={formData.notes}
               onChange={handleInputChange}
+              maxLength={MAX_NOTES_LENGTH}
               placeholder="Any additional notes about the match..."
               rows="3"
+              aria-describedby="notes-counter"
             />
+            <div id="notes-counter" className="character-count">
+              {(formData.notes || '').length} / {MAX_NOTES_LENGTH} characters
+            </div>
           </div>
         </div>
         {error && <div className="error-message">{error}</div>}
         {success && <div className="success-message">{success}</div>}
         <button type="submit" disabled={loading} className="submit-button">
-          {loading ? 'Submitting...' : 'Submit Scores'}
+          {loading ? (
+             <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <LoadingSpinner size="sm" />
+                Submitting...
+             </span>
+          ) : 'Submit Scores'}
         </button>
       </form>
     </div>

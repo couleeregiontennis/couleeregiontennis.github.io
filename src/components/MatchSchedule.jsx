@@ -1,9 +1,61 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../scripts/supabaseClient';
+import { useAuth } from '../context/AuthProvider';
 import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/MatchSchedule.css';
 
+// OPTIMIZATION: Move static helpers outside component to avoid recreation
+const formatDate = (dateString) => {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+};
+
+const formatTime = (timeString) => {
+  return timeString || 'TBD';
+};
+
+const getMatchStatus = (match) => {
+  const matchDate = new Date(match.date);
+  const now = new Date();
+
+  if (match.status === 'completed') {
+    return 'completed';
+  } else if (matchDate < now && match.status === 'scheduled') {
+    return 'pending-result';
+  } else {
+    return 'upcoming';
+  }
+};
+
+const getStatusBadge = (status) => {
+  const badges = {
+    'upcoming': { text: 'Upcoming', class: 'status-upcoming' },
+    'completed': { text: 'Completed', class: 'status-completed' },
+    'pending-result': { text: 'Pending Result', class: 'status-pending' }
+  };
+  return badges[status] || badges['upcoming'];
+};
+
+const groupMatchesByDate = (matches) => {
+  const grouped = {};
+  matches.forEach(match => {
+    const dateKey = new Date(match.date).toDateString();
+    if (!grouped[dateKey]) {
+      grouped[dateKey] = [];
+    }
+    grouped[dateKey].push(match);
+  });
+  return grouped;
+};
+
 export const MatchSchedule = () => {
+  const navigate = useNavigate();
+  const { userRole } = useAuth();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [matches, setMatches] = useState([]);
@@ -11,39 +63,28 @@ export const MatchSchedule = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [viewMode, setViewMode] = useState('month');
   const [selectedTeam, setSelectedTeam] = useState('all');
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    checkUser();
     fetchData();
   }, []);
-
-  const checkUser = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-    } catch (err) {
-      console.error('Error checking user:', err);
-    }
-  };
 
   const fetchData = async () => {
     try {
       setLoading(true);
       setError(null);
 
-      // Fetch matches with team information
+      // OPTIMIZATION: Select only necessary columns
       const { data: matchesData, error: matchesError } = await supabase
         .from('matches')
-        .select('*')
+        .select('id, date, time, status, courts, home_team_name, away_team_name, home_team_number, away_team_number')
         .order('date', { ascending: true });
 
       if (matchesError) throw matchesError;
 
-      // Fetch teams for filter dropdown
+      // OPTIMIZATION: Select only necessary columns
       const { data: teamsData, error: teamsError } = await supabase
         .from('team')
-        .select('*')
+        .select('id, name, number')
         .order('name');
 
       if (teamsError) throw teamsError;
@@ -59,7 +100,8 @@ export const MatchSchedule = () => {
     }
   };
 
-  const getFilteredMatches = () => {
+  // OPTIMIZATION: Memoize filtered matches to avoid recalculation on every render
+  const filteredMatches = useMemo(() => {
     let filtered = matches;
 
     // Filter by selected team
@@ -95,43 +137,19 @@ export const MatchSchedule = () => {
     }
 
     return filtered;
-  };
+  }, [matches, teams, selectedTeam, viewMode, currentDate]);
 
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    });
-  };
+  // OPTIMIZATION: Memoize grouped matches
+  const groupedMatches = useMemo(() => groupMatchesByDate(filteredMatches), [filteredMatches]);
 
-  const formatTime = (timeString) => {
-    // The time field is already a string in the matches table
-    return timeString || 'TBD';
-  };
-
-  const getMatchStatus = (match) => {
-    const matchDate = new Date(match.date);
-    const now = new Date();
-    
-    if (match.status === 'completed') {
-      return 'completed';
-    } else if (matchDate < now && match.status === 'scheduled') {
-      return 'pending-result';
-    } else {
-      return 'upcoming';
-    }
-  };
-
-  const getStatusBadge = (status) => {
-    const badges = {
-      'upcoming': { text: 'Upcoming', class: 'status-upcoming' },
-      'completed': { text: 'Completed', class: 'status-completed' },
-      'pending-result': { text: 'Pending Result', class: 'status-pending' }
+  // OPTIMIZATION: Memoize counts
+  const counts = useMemo(() => {
+    return {
+      completed: filteredMatches.filter(m => getMatchStatus(m) === 'completed').length,
+      upcoming: filteredMatches.filter(m => getMatchStatus(m) === 'upcoming').length,
+      pending: filteredMatches.filter(m => getMatchStatus(m) === 'pending-result').length
     };
-    return badges[status] || badges['upcoming'];
-  };
+  }, [filteredMatches]);
 
   const navigateDate = (direction) => {
     const newDate = new Date(currentDate);
@@ -161,24 +179,6 @@ export const MatchSchedule = () => {
     }
     return 'All Matches';
   };
-
-  const groupMatchesByDate = (matches) => {
-    const grouped = {};
-    matches.forEach(match => {
-      const dateKey = new Date(match.date).toDateString();
-      if (!grouped[dateKey]) {
-        grouped[dateKey] = [];
-      }
-      grouped[dateKey].push(match);
-    });
-    return grouped;
-  };
-
-  const filteredMatches = getFilteredMatches();
-  const groupedMatches = groupMatchesByDate(filteredMatches);
-  const completedCount = filteredMatches.filter(m => getMatchStatus(m) === 'completed').length;
-  const upcomingCount = filteredMatches.filter(m => getMatchStatus(m) === 'upcoming').length;
-  const pendingCount = filteredMatches.filter(m => getMatchStatus(m) === 'pending-result').length;
 
   if (loading) {
     return (
@@ -220,17 +220,17 @@ export const MatchSchedule = () => {
         </div>
         <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Upcoming</div>
-          <div className="card-value">{upcomingCount}</div>
+          <div className="card-value">{counts.upcoming}</div>
           <div className="card-subtitle">Scheduled next</div>
         </div>
         <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Pending Results</div>
-          <div className="card-value">{pendingCount}</div>
+          <div className="card-value">{counts.pending}</div>
           <div className="card-subtitle">Awaiting score entry</div>
         </div>
         <div className="overview-card card card--interactive card--overlay">
           <div className="card-label">Completed</div>
-          <div className="card-value">{completedCount}</div>
+          <div className="card-value">{counts.completed}</div>
           <div className="card-subtitle">With final scores</div>
         </div>
       </div>
@@ -342,6 +342,18 @@ export const MatchSchedule = () => {
                           {status === 'completed' && (
                             <div className="match-result">
                               Final score submitted
+                              {userRole?.isAdmin && (
+                                <button
+                                  className="edit-result-btn"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    navigate(`/add-score?matchId=${match.id}&edit=true`);
+                                  }}
+                                  aria-label="Edit Result"
+                                >
+                                  Edit Result
+                                </button>
+                              )}
                             </div>
                           )}
                         </article>

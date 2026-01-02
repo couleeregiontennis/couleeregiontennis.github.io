@@ -215,6 +215,13 @@
   font-family: inherit;
 }
 
+.character-count {
+  text-align: right;
+  font-size: var(--font-size-sm);
+  color: var(--score-card-muted);
+  margin-top: var(--space-xs);
+}
+
 .form-group select:focus,
 .form-group textarea:focus,
 .form-group input:focus {
@@ -784,4 +791,11 @@
   .score-section h2 {
     font-size: var(--font-size-xl);
   }
+}
+
+.character-count {
+  text-align: right;
+  font-size: var(--font-size-sm);
+  color: var(--score-card-muted);
+  margin-top: var(--space-xs);
 }

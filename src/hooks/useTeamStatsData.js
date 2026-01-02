@@ -43,7 +43,7 @@ export const useTeamStatsData = () => {
         throw new Error(`Failed to load team roster: ${rosterError.message}`);
       }
 
-      const rosterData = (teamPlayers || []).map((tp) => tp.player);
+      const rosterData = (Array.isArray(teamPlayers) ? teamPlayers : []).map((tp) => tp.player);
       setRoster(rosterData);
       return rosterData;
     } catch (err) {
@@ -92,7 +92,6 @@ export const useTeamStatsData = () => {
    */
   const fetchMatchScores = useCallback(async (matchIds) => {
     if (!matchIds || matchIds.length === 0) {
-      console.warn('No match IDs provided for score fetching');
       return [];
     }
 
@@ -122,7 +121,6 @@ export const useTeamStatsData = () => {
    */
   const fetchLineResults = useCallback(async (matchIds) => {
     if (!matchIds || matchIds.length === 0) {
-      console.warn('No match IDs provided for line results fetching');
       return [];
     }
 

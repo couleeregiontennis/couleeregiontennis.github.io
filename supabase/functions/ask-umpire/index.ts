@@ -13,7 +13,21 @@ serve(async (req) => {
 
   try {
     const { query } = await req.json()
-    if (!query) throw new Error('Query is required')
+
+    // Input Validation
+    if (!query || typeof query !== 'string') {
+      return new Response(
+        JSON.stringify({ error: 'Query is required and must be a string.' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
+      )
+    }
+
+    if (query.length > 500) {
+      return new Response(
+        JSON.stringify({ error: 'Query is too long. Maximum 500 characters allowed.' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
+      )
+    }
 
     const UMPIRE_GEMINI_API_KEY = Deno.env.get('UMPIRE_GEMINI_API_KEY')
     const QDRANT_URL = Deno.env.get('QDRANT_URL')
