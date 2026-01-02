@@ -59,22 +59,78 @@ test.describe('Match Schedule Page', () => {
   });
 
   test('displays standings', async ({ page }) => {
-    // Mock standings data
-    await page.route('**/rest/v1/team*', async (route) => {
+    // Mock standings_view data (correct endpoint for Standings.jsx)
+    await page.route('**/rest/v1/standings_view*', async (route) => {
          await route.fulfill({
             status: 200,
             contentType: 'application/json',
             body: JSON.stringify([
-                { id: 1, name: 'Team A', wins: 10, losses: 2, points: 20 },
-                { id: 2, name: 'Team B', wins: 5, losses: 7, points: 10 }
+                {
+                  team_id: '1',
+                  team_number: 1,
+                  team_name: 'Team A',
+                  play_night: 'Tuesday',
+                  wins: 10,
+                  losses: 2,
+                  ties: 0,
+                  matches_played: 12,
+                  sets_won: 20,
+                  sets_lost: 4,
+                  games_won: 120,
+                  games_lost: 50,
+                  win_percentage: 83.3,
+                  set_win_percentage: 83.3
+                },
+                {
+                  team_id: '2',
+                  team_number: 2,
+                  team_name: 'Team B',
+                  play_night: 'Wednesday',
+                  wins: 5,
+                  losses: 7,
+                  ties: 0,
+                  matches_played: 12,
+                  sets_won: 10,
+                  sets_lost: 14,
+                  games_won: 80,
+                  games_lost: 100,
+                  win_percentage: 41.7,
+                  set_win_percentage: 41.7
+                }
             ])
          });
     });
 
+    // Mock player count (required for League Overview)
+    await page.route('**/rest/v1/player*', async (route) => {
+       if (route.request().url().includes('count=exact')) {
+         await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            headers: { 'content-range': '0-0/100' }, // Mock total count
+            body: JSON.stringify([])
+         });
+       } else {
+         await route.continue();
+       }
+    });
+
+    // Mock matches for recent matches in Overview
+    await page.route('**/rest/v1/matches*', async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify([])
+        });
+    });
+
     await page.goto('/standings');
-    await expect(page.getByRole('heading', { name: 'Standings' })).toBeVisible();
-    // Verify table content if possible, or just load
-    // await expect(page.getByText('Team A')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Team Standings' })).toBeVisible();
+
+    // Assert visibility of team names scoped to the standings table
+    const table = page.locator('.standings-table');
+    await expect(table.getByText('Team A')).toBeVisible();
+    await expect(table.getByText('Team B')).toBeVisible();
   });
 
 });
