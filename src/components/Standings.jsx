@@ -51,7 +51,14 @@ const Standings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [standings, setStandings] = useState([]);
-  const [nightFilter, setNightFilter] = useState('All');
+  const [nightFilter, setNightFilter] = useState(() => {
+    try {
+      return localStorage.getItem('ltta-standings-filter') || 'All';
+    } catch (err) {
+      console.warn('Failed to access localStorage:', err);
+      return 'All';
+    }
+  });
   const [nightOptions, setNightOptions] = useState(['All']);
   const [lastUpdated, setLastUpdated] = useState('');
   const [nightHighlights, setNightHighlights] = useState({ tuesday: null, wednesday: null });
@@ -249,10 +256,18 @@ const Standings = () => {
   }, [standings, userTeamId, userTeamNumber]);
 
   useEffect(() => {
-    if (nightFilter !== 'All' && !nightOptions.includes(nightFilter)) {
+    if (!loading && nightFilter !== 'All' && !nightOptions.includes(nightFilter)) {
       setNightFilter('All');
     }
-  }, [nightOptions, nightFilter]);
+  }, [nightOptions, nightFilter, loading]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('ltta-standings-filter', nightFilter);
+    } catch (err) {
+      console.warn('Failed to save to localStorage:', err);
+    }
+  }, [nightFilter]);
 
   const filteredStandings = useMemo(() => {
     if (nightFilter === 'All') {
