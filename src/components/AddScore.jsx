@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../scripts/supabaseClient';
+import { useVoiceScoreInput } from '../hooks/useVoiceScoreInput';
 import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/AddScore.css';
 
@@ -37,16 +38,16 @@ const isStandardSetValid = (home, away) => {
 /**
  * Validates the score for a match tiebreak.
  *
- * Why: Tiebreaks have specific ending conditions. The first to reach the target (7 points)
+ * Why: Tiebreaks have specific ending conditions. The first to reach the target (10 points)
  * wins, but they must win by a margin of 2 points. If the score reaches 6-6, play
  * continues until one side leads by 2.
  *
  * How:
  * 1. Checks basic numeric validity (integers, non-negative, no draws).
  * 2. Ensures the winner has reached at least the target score.
- * 3. If the winner matches the target exactly, ensures the margin is >= 2 (e.g., 7-5).
- * 4. If the winner exceeds the target, ensures the margin is exactly 2 (e.g., 8-6).
- *    Scores like 9-6 are invalid because the match would have ended at 8-6.
+ * 3. If the winner matches the target exactly, ensures the margin is >= 2 (e.g., 10-8).
+ * 4. If the winner exceeds the target, ensures the margin is exactly 2 (e.g., 12-10).
+ *    Scores like 13-10 are invalid because the match would have ended at 12-10.
  */
 const isMatchTiebreakValid = (home, away) => {
   if (home === 0 && away === 0) {
@@ -177,7 +178,6 @@ export const AddScore = () => {
   const [awayTeamRoster, setAwayTeamRoster] = useState([]);
   const [playerIdMap, setPlayerIdMap] = useState({});
   const [existingScores, setExistingScores] = useState([]);
-
   const [formData, setFormData] = useState({
     matchId: '',
     lineNumber: 1,
@@ -191,6 +191,71 @@ export const AddScore = () => {
     homeSet3: '',
     awaySet3: '',
     notes: ''
+  });
+  const {
+    isListening,
+    transcript,
+    recognitionError,
+    aiProcessing,
+    aiSuccess,
+    aiError,
+    startListening,
+    stopListening,
+    isSpeechRecognitionSupported
+  } = useVoiceScoreInput((parsedData) => {
+    const sanitizedLineNumber = parseInteger(parsedData?.lineNumber) || formData.lineNumber;
+    const sanitizedMatchType = parsedData?.matchType === 'singles' || parsedData?.matchType === 'doubles'
+      ? parsedData.matchType
+      : formData.matchType;
+
+    const nextForm = {
+      ...formData,
+      lineNumber: sanitizedLineNumber,
+      matchType: sanitizedMatchType,
+      homeSet1: parsedData?.homeSet1 != null ? parseInteger(parsedData.homeSet1) : null,
+      awaySet1: parsedData?.awaySet1 != null ? parseInteger(parsedData.awaySet1) : null,
+      homeSet2: parsedData?.homeSet2 != null ? parseInteger(parsedData.homeSet2) : null,
+      awaySet2: parsedData?.awaySet2 != null ? parseInteger(parsedData.awaySet2) : null,
+      homeSet3: parsedData?.homeSet3 != null ? parseInteger(parsedData.homeSet3) : null,
+      awaySet3: parsedData?.awaySet3 != null ? parseInteger(parsedData.awaySet3) : null,
+      notes: parsedData?.notes?.trim?.() || formData.notes
+    };
+
+    const set1Home = parseInteger(nextForm.homeSet1);
+    const set1Away = parseInteger(nextForm.awaySet1);
+    const set2Home = parseInteger(nextForm.homeSet2);
+    const set2Away = parseInteger(nextForm.awaySet2);
+    const set3Home = parseInteger(nextForm.homeSet3);
+    const set3Away = parseInteger(nextForm.awaySet3);
+
+    const hasThirdSet = !isEmptyValue(nextForm.homeSet3) || !isEmptyValue(nextForm.awaySet3);
+    const invalid =
+      !isStandardSetValid(set1Home, set1Away) ||
+      !isStandardSetValid(set2Home, set2Away) ||
+      (hasThirdSet && !isMatchTiebreakValid(set3Home, set3Away));
+
+    if (invalid) {
+      setError('AI parsed an invalid score. Please correct the values and try again.');
+      return;
+    }
+
+    const matchOrLineChanged = sanitizedMatchType !== formData.matchType || sanitizedLineNumber !== formData.lineNumber;
+    setFormData((prev) => ({
+      ...prev,
+      lineNumber: sanitizedLineNumber,
+      matchType: sanitizedMatchType,
+      homePlayers: matchOrLineChanged ? ['', ''] : prev.homePlayers,
+      awayPlayers: matchOrLineChanged ? ['', ''] : prev.awayPlayers,
+      homeSet1: nextForm.homeSet1?.toString() || '',
+      awaySet1: nextForm.awaySet1?.toString() || '',
+      homeSet2: nextForm.homeSet2?.toString() || '',
+      awaySet2: nextForm.awaySet2?.toString() || '',
+      homeSet3: nextForm.homeSet3?.toString() || '',
+      awaySet3: nextForm.awaySet3?.toString() || '',
+      notes: nextForm.notes
+    }));
+    setError('');
+    setSuccess('Transcript parsed successfully by AI!');
   });
 
   // Load user, player, and team data
@@ -550,10 +615,10 @@ export const AddScore = () => {
     if (homeSet2 > awaySet2 && (homeSet2 >= 6 && (homeSet2 - awaySet2 >= 2 || homeSet2 === 7))) homeSetsWon++;
     else if (awaySet2 > homeSet2 && (awaySet2 >= 6 && (awaySet2 - homeSet2 >= 2 || awaySet2 === 7))) awaySetsWon++;
 
-    // Set 3 is a tiebreak (first to 10, win by 2)
+    // Set 3 is a tiebreak (first to MATCH_TIEBREAK_TARGET, win by 2)
     if (homeSet3 && awaySet3) {
-      if (homeSet3 >= 10 && homeSet3 - awaySet3 >= 2) homeSetsWon++;
-      else if (awaySet3 >= 10 && awaySet3 - homeSet3 >= 2) awaySetsWon++;
+      if (homeSet3 >= MATCH_TIEBREAK_TARGET && homeSet3 - awaySet3 >= 2) homeSetsWon++;
+      else if (awaySet3 >= MATCH_TIEBREAK_TARGET && awaySet3 - homeSet3 >= 2) awaySetsWon++;
     }
 
     if (homeSetsWon > awaySetsWon) return 'home';

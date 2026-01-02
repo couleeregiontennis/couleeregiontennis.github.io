@@ -67,14 +67,19 @@ export const AuthProvider = ({ children }) => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (mounted) {
-        setSession(session);
-        setUser(session?.user ?? null);
-        if (session?.user) {
-          await fetchUserRole(session.user.id);
-        } else {
-          setUserRole({ isCaptain: false, isAdmin: false });
+        try {
+          setSession(session);
+          setUser(session?.user ?? null);
+          if (session?.user) {
+            await fetchUserRole(session.user.id);
+          } else {
+            setUserRole({ isCaptain: false, isAdmin: false });
+          }
+        } catch (err) {
+          console.error('Error handling auth state change:', err);
+        } finally {
+          setLoading(false);
         }
-        setLoading(false);
       }
     });
 

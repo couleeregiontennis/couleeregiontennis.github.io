@@ -1,17 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthProvider';
 import { supabase } from '../scripts/supabaseClient';
 import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/Login.css';
 
 const SUPPORT_EMAIL = import.meta.env.VITE_SUPPORT_EMAIL || 'support@ltta.com';
 
-export const Login = ({ onLogin }) => {
+export const Login = () => {
+  const navigate = useNavigate();
+  const { session } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (session) {
+      navigate('/player-profile');
+    }
+  }, [session, navigate]);
 
   const handleAuth = async (e) => {
     e.preventDefault();
@@ -25,7 +35,9 @@ export const Login = ({ onLogin }) => {
     }
     setLoading(false);
     if (result.error) setError(result.error.message);
-    else if (!isSignUp && onLogin) onLogin(result.user);
+    else if (!isSignUp) {
+      navigate('/player-profile');
+    }
   };
 
   const handleOAuth = async (provider) => {
