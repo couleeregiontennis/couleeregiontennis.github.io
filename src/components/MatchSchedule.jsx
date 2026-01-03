@@ -55,7 +55,7 @@ const groupMatchesByDate = (matches) => {
 
 export const MatchSchedule = () => {
   const navigate = useNavigate();
-  const { userRole } = useAuth();
+  const { user, userRole } = useAuth();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [matches, setMatches] = useState([]);
@@ -69,8 +69,7 @@ export const MatchSchedule = () => {
       setLoading(true);
       setError(null);
 
-      const [userResponse, matchesResponse, teamsResponse] = await Promise.all([
-        supabase.auth.getUser(),
+      const [matchesResponse, teamsResponse] = await Promise.all([
         supabase.from('matches')
           .select('id, date, time, status, courts, home_team_name, away_team_name, home_team_number, away_team_number')
           .order('date', { ascending: true }),
@@ -79,20 +78,14 @@ export const MatchSchedule = () => {
           .order('name')
       ]);
 
-      // Process User
-      if (userResponse.data?.user) {
-        setUser(userResponse.data.user);
-      } else if (userResponse.error) {
-        console.error('Error checking user:', userResponse.error);
-      }
-
       // Process Matches
       if (matchesResponse.error) throw matchesResponse.error;
       setMatches(matchesResponse.data || []);
 
       // Process Teams
       if (teamsResponse.error) throw teamsResponse.error;
-      setTeams(teamsResponse.data || []);
+      const teamsData = teamsResponse.data;
+      setTeams(Array.isArray(teamsData) ? teamsData : []);
 
     } catch (err) {
       console.error('Error fetching data:', err);
@@ -286,7 +279,7 @@ export const MatchSchedule = () => {
               className="team-filter"
             >
               <option value="all">All Teams</option>
-              {teams.map(team => (
+              {Array.isArray(teams) && teams.map(team => (
                 <option key={team.id} value={team.id}>
                   {team.name}
                 </option>
