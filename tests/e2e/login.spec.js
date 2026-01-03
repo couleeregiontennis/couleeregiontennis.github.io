@@ -115,4 +115,55 @@ test.describe('Login Page', () => {
     await expect(page.getByText('Logout')).toBeAttached();
     await expect(page.getByText('My Hub')).toBeAttached();
   });
+
+  test('should successfully sign up (Mocked)', async ({ page }) => {
+    // Mock the Supabase Auth API call for sign up success
+    await page.route('**/auth/v1/signup', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          id: 'fake-user-id',
+          aud: 'authenticated',
+          role: 'authenticated',
+          email: 'newuser@example.com',
+          confirmation_sent_at: new Date().toISOString(),
+        }),
+      });
+    });
+
+    // Mock user call for post-signup/login state if auto-login happens
+    await page.route('**/auth/v1/user', async (route) => {
+       await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+            id: 'fake-user-id',
+            aud: 'authenticated',
+            role: 'authenticated',
+            email: 'newuser@example.com',
+        }),
+      });
+    });
+
+    await page.getByRole('tab', { name: 'Sign Up' }).click();
+    await page.getByLabel(/Email/i).fill('newuser@example.com');
+    await page.getByLabel('Password', { exact: true }).fill('newpassword123');
+    await page.getByRole('button', { name: 'Create account' }).click();
+
+    // Verify successful sign up state.
+    // Based on Login.jsx, if isSignUp is true, it sets loading false and checks for error.
+    // If no error, it does NOT navigate (logic: else if (!isSignUp) { navigate... }).
+    // This seems to be a UX issue/bug: the user stays on the sign up form with no feedback.
+    // However, the test should verify current behavior or fail if we expect better behavior.
+
+    // If the behavior is indeed to stay on the page (waiting for email confirmation),
+    // we should at least check that loading stops and no error is shown.
+    // Ideally, a success message should be shown, but looking at the code, there isn't one.
+
+    // Let's assert that the loading spinner is gone and the button is back to normal.
+    await expect(page.getByRole('button', { name: 'Create account' })).toBeVisible();
+    await expect(page.locator('.loading-spinner')).not.toBeVisible();
+    await expect(page.locator('.form-error')).not.toBeVisible();
+  });
 });
