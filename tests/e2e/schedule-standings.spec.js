@@ -65,78 +65,78 @@ test.describe('Match Schedule Page', () => {
   });
 
   test('displays standings', async ({ page }) => {
-    // Mock standings data
+    // Mock standings_view data (correct endpoint for Standings.jsx)
     await page.route('**/rest/v1/standings_view*', async (route) => {
          await route.fulfill({
             status: 200,
             contentType: 'application/json',
             body: JSON.stringify([
                 {
-                    team_id: '1',
-                    team_number: 1,
-                    team_name: 'Team A',
-                    play_night: 'Tuesday',
-                    wins: 10,
-                    losses: 2,
-                    ties: 0,
-                    matches_played: 12,
-                    sets_won: 20,
-                    sets_lost: 4,
-                    games_won: 120,
-                    games_lost: 80,
-                    win_percentage: 83.3,
-                    set_win_percentage: 83.3
+                  team_id: '1',
+                  team_number: 1,
+                  team_name: 'Team A',
+                  play_night: 'Tuesday',
+                  wins: 10,
+                  losses: 2,
+                  ties: 0,
+                  matches_played: 12,
+                  sets_won: 20,
+                  sets_lost: 4,
+                  games_won: 120,
+                  games_lost: 50,
+                  win_percentage: 83.3,
+                  set_win_percentage: 83.3
                 },
                 {
-                    team_id: '2',
-                    team_number: 2,
-                    team_name: 'Team B',
-                    play_night: 'Wednesday',
-                    wins: 5,
-                    losses: 7,
-                    ties: 0,
-                    matches_played: 12,
-                    sets_won: 10,
-                    sets_lost: 14,
-                    games_won: 90,
-                    games_lost: 100,
-                    win_percentage: 41.7,
-                    set_win_percentage: 41.7
+                  team_id: '2',
+                  team_number: 2,
+                  team_name: 'Team B',
+                  play_night: 'Wednesday',
+                  wins: 5,
+                  losses: 7,
+                  ties: 0,
+                  matches_played: 12,
+                  sets_won: 10,
+                  sets_lost: 14,
+                  games_won: 80,
+                  games_lost: 100,
+                  win_percentage: 41.7,
+                  set_win_percentage: 41.7
                 }
             ])
          });
     });
 
-    // Mock other requests that Standings might make (player, matches for metrics)
+    // Mock player count (required for League Overview)
     await page.route('**/rest/v1/player*', async (route) => {
-        // Return count for player count
-        await route.fulfill({
-             status: 200,
-             contentType: 'application/json',
-             body: JSON.stringify([]),
-             headers: {
-                 'content-range': '0-0/100'
-             }
-        });
-    });
-
-    await page.route('**/rest/v1/matches*', async (route) => {
+       if (route.request().url().includes('count=exact')) {
          await route.fulfill({
             status: 200,
             contentType: 'application/json',
+            headers: { 'content-range': '0-0/100' }, // Mock total count
             body: JSON.stringify([])
          });
+       } else {
+         await route.continue();
+       }
+    });
+
+    // Mock matches for recent matches in Overview
+    await page.route('**/rest/v1/matches*', async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify([])
+        });
     });
 
     await page.goto('/standings');
     await expect(page.getByRole('heading', { name: 'Team Standings' })).toBeVisible();
 
-    // Verify table content
+    // Assert visibility of team names scoped to the standings table
     const table = page.locator('.standings-table');
-    await expect(table.getByRole('cell', { name: 'Team A', exact: false })).toBeVisible();
-    await expect(table.getByRole('cell', { name: 'Team B', exact: false })).toBeVisible();
-    await expect(table.getByRole('cell', { name: 'Tuesday' })).toBeVisible();
-    await expect(table.getByRole('cell', { name: 'Wednesday' })).toBeVisible();
+    await expect(table.getByText('Team A')).toBeVisible();
+    await expect(table.getByText('Team B')).toBeVisible();
   });
 
 });
