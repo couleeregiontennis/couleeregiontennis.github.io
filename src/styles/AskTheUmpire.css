@@ -119,14 +119,29 @@
   background-color: var(--bg-secondary);
 }
 
-.umpire-input {
+.umpire-input-wrapper {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.umpire-input {
+  width: 100%;
   padding: 10px;
   border: 1px solid var(--border-primary);
   border-radius: 6px;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-family);
+  box-sizing: border-box;
+}
+
+.umpire-counter {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-align: right;
+  margin-top: 4px;
+  margin-right: 2px;
 }
 
 .umpire-input:focus {

@@ -103,15 +103,22 @@ export const AskTheUmpire = () => {
             {loading && <div className="umpire-loading">Thinking...</div>}
           </div>
           <form onSubmit={handleSubmit} className="umpire-form">
-            <input
-              ref={inputRef}
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="e.g., Can I play down a level?"
-              disabled={loading}
-              className="umpire-input"
-            />
+            <div className="umpire-input-wrapper">
+              <input
+                ref={inputRef}
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="e.g., Can I play down a level?"
+                disabled={loading}
+                className="umpire-input"
+                maxLength={300}
+                aria-describedby="umpire-query-counter"
+              />
+              <div id="umpire-query-counter" className="umpire-counter">
+                {query.length} / 300
+              </div>
+            </div>
             <button type="submit" disabled={loading || !query.trim()} className="umpire-submit">
               Send
             </button>

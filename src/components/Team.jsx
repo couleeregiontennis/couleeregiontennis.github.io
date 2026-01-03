@@ -87,41 +87,59 @@ export const Team = () => {
         })
       )];
 
-      const rostersData = {};
-
-      for (const opponentNumber of opponentTeamNumbers) {
-        // Get opponent team details
-        const { data: opponentTeam, error: teamError } = await supabase
-          .from('team')
-          .select('id, name')
-          .eq('number', opponentNumber)
-          .eq('play_night', day)
-          .single();
-
-        if (teamError || !opponentTeam) continue;
-
-        // Get opponent player IDs
-        const { data: opponentPlayerLinks, error: linksError } = await supabase
-          .from('player_to_team')
-          .select('player')
-          .eq('team', opponentTeam.id);
-
-        if (linksError || !opponentPlayerLinks) continue;
-
-        const opponentPlayerIds = opponentPlayerLinks.map(link => link.player);
-
-        // Get opponent player details
-        if (opponentPlayerIds.length > 0) {
-          const { data: opponentRosterData, error: rosterError } = await supabase
-            .from('player')
-            .select('id, first_name, last_name, is_captain')
-            .in('id', opponentPlayerIds);
-
-          if (!rosterError && opponentRosterData) {
-            rostersData[opponentNumber] = opponentRosterData;
-          }
-        }
+      // OPTIMIZATION: Batched queries to prevent N+1 problem
+      if (opponentTeamNumbers.length === 0) {
+        setOpponentRosters({});
+        return;
       }
+
+      const { data: opponentTeams, error: teamsError } = await supabase
+        .from('team')
+        .select('id, number, name')
+        .in('number', opponentTeamNumbers)
+        .eq('play_night', day);
+
+      if (teamsError) throw teamsError;
+      if (!opponentTeams?.length) {
+        setOpponentRosters({});
+        return;
+      }
+
+      const teamIds = opponentTeams.map(t => t.id);
+
+      const { data: playerLinks, error: linksError } = await supabase
+        .from('player_to_team')
+        .select('player, team')
+        .in('team', teamIds);
+
+      if (linksError) throw linksError;
+
+      const playerIds = [...new Set(playerLinks?.map(link => link.player) || [])];
+
+      let players = [];
+      if (playerIds.length > 0) {
+        const { data: playersData, error: playersError } = await supabase
+          .from('player')
+          .select('id, first_name, last_name, is_captain')
+          .in('id', playerIds);
+
+        if (playersError) throw playersError;
+        players = playersData || [];
+      }
+
+      const rostersData = {};
+      const playerMap = new Map(players.map(p => [p.id, p]));
+
+      opponentTeams.forEach(team => {
+        const teamPlayerLinks = playerLinks?.filter(link => link.team === team.id) || [];
+        const teamRoster = teamPlayerLinks
+          .map(link => playerMap.get(link.player))
+          .filter(Boolean);
+
+        if (teamRoster.length > 0) {
+          rostersData[team.number] = teamRoster;
+        }
+      });
 
       setOpponentRosters(rostersData);
     } catch (err) {
