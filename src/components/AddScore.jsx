@@ -5,7 +5,8 @@ import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/AddScore.css';
 
 const STANDARD_SET_MIN_WIN = 6;
-const MATCH_TIEBREAK_TARGET = 7;
+// League uses a match tiebreak to 10 (win by 2)
+const MATCH_TIEBREAK_TARGET = 10;
 const MAX_NOTES_LENGTH = 500;
 
 const parseInteger = (value) => {

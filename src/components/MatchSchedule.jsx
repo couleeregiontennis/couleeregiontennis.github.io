@@ -64,33 +64,35 @@ export const MatchSchedule = () => {
   const [viewMode, setViewMode] = useState('month');
   const [selectedTeam, setSelectedTeam] = useState('all');
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
+  const fetchAllData = async () => {
     try {
       setLoading(true);
       setError(null);
 
-      // OPTIMIZATION: Select only necessary columns
-      const { data: matchesData, error: matchesError } = await supabase
-        .from('matches')
-        .select('id, date, time, status, courts, home_team_name, away_team_name, home_team_number, away_team_number')
-        .order('date', { ascending: true });
+      const [userResponse, matchesResponse, teamsResponse] = await Promise.all([
+        supabase.auth.getUser(),
+        supabase.from('matches')
+          .select('id, date, time, status, courts, home_team_name, away_team_name, home_team_number, away_team_number')
+          .order('date', { ascending: true }),
+        supabase.from('team')
+          .select('id, name, number')
+          .order('name')
+      ]);
 
-      if (matchesError) throw matchesError;
+      // Process User
+      if (userResponse.data?.user) {
+        setUser(userResponse.data.user);
+      } else if (userResponse.error) {
+        console.error('Error checking user:', userResponse.error);
+      }
 
-      // OPTIMIZATION: Select only necessary columns
-      const { data: teamsData, error: teamsError } = await supabase
-        .from('team')
-        .select('id, name, number')
-        .order('name');
+      // Process Matches
+      if (matchesResponse.error) throw matchesResponse.error;
+      setMatches(matchesResponse.data || []);
 
-      if (teamsError) throw teamsError;
-
-      setMatches(matchesData || []);
-      setTeams(teamsData || []);
+      // Process Teams
+      if (teamsResponse.error) throw teamsResponse.error;
+      setTeams(teamsResponse.data || []);
 
     } catch (err) {
       console.error('Error fetching data:', err);
@@ -99,6 +101,10 @@ export const MatchSchedule = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchAllData();
+  }, []);
 
   // OPTIMIZATION: Memoize filtered matches to avoid recalculation on every render
   const filteredMatches = useMemo(() => {
@@ -197,7 +203,7 @@ export const MatchSchedule = () => {
       <div className="match-schedule">
         <div className="schedule-shell">
           <div className="error">{error}</div>
-          <button onClick={fetchData} className="retry-btn">
+          <button onClick={fetchAllData} className="retry-btn">
             Try Again
           </button>
         </div>
@@ -380,7 +386,7 @@ export const MatchSchedule = () => {
       </div>
 
       <div className="schedule-actions">
-        <button onClick={fetchData} className="refresh-btn">
+        <button onClick={fetchAllData} className="refresh-btn">
           🔄 Refresh Schedule
         </button>
       </div>

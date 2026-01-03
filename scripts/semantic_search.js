@@ -1,44 +1,44 @@
 import 'dotenv/config';
 import { QdrantClient } from '@qdrant/js-client-rest';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import dotenv from 'dotenv';
+
+// Load .env.local manually
+dotenv.config({ path: '.env.local' });
 
 // Configuration
-const OLLAMA_URL = 'http://192.168.1.88:11434/api/embeddings';
-const EMBEDDING_MODEL = 'nomic-embed-text:latest';
 const COLLECTION_NAME = 'codebase_context';
 
 // Qdrant Config
 const QDRANT_URL = process.env.QDRANT_URL;
 const QDRANT_API_KEY = process.env.QDRANT_API_KEY;
 
+// Gemini Config
+const GEMINI_API_KEY = process.env.UMPIRE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
+
 if (!QDRANT_URL || !QDRANT_API_KEY) {
     console.error('Error: QDRANT_URL and QDRANT_API_KEY must be set in the environment or .env file.');
     process.exit(1);
 }
 
+if (!GEMINI_API_KEY) {
+    console.error('Error: GEMINI_API_KEY must be set in the environment or .env file.');
+    process.exit(1);
+}
+
 const qdrant = new QdrantClient({
     url: QDRANT_URL,
-    headers: { 'api-key': QDRANT_API_KEY },
+    apiKey: QDRANT_API_KEY,
     port: 443,
-    checkCompatibility: false, // Disable version check
 });
+
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "text-embedding-004" });
 
 async function getEmbedding(text) {
     try {
-        const response = await fetch(OLLAMA_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                model: EMBEDDING_MODEL,
-                prompt: text
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`Ollama API Error: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        return data.embedding;
+        const result = await model.embedContent(text);
+        return result.embedding.values;
     } catch (error) {
         console.error('Failed to generate embedding:', error);
         process.exit(1);
@@ -50,22 +50,26 @@ async function search(query) {
     const vector = await getEmbedding(query);
 
     console.log('📡 Querying Qdrant...');
-    const results = await qdrant.search(COLLECTION_NAME, {
-        vector: vector,
-        limit: 3,
-        with_payload: true
-    });
+    try {
+        const results = await qdrant.search(COLLECTION_NAME, {
+            vector: vector,
+            limit: 3,
+            with_payload: true
+        });
 
-    console.log(`
+        console.log(`
 --- Top 3 Results for: "${query}" ---
 `);
-    results.forEach((result, index) => {
-        console.log(`#${index + 1} [Score: ${result.score.toFixed(4)}]`);
-        console.log(`📄 File: ${result.payload.filepath}`);
-        console.log(`📝 Type: ${result.payload.type}`);
-        console.log(`ℹ️  Summary: ${result.payload.summary}`);
-        console.log('-'.repeat(40));
-    });
+        results.forEach((result, index) => {
+            console.log(`#${index + 1} [Score: ${result.score.toFixed(4)}]`);
+            console.log(`📄 File: ${result.payload.filepath}`);
+            console.log(`📝 Type: ${result.payload.type}`);
+            console.log(`ℹ️  Summary: ${result.payload.summary}`);
+            console.log('-'.repeat(40));
+        });
+    } catch (error) {
+        console.error('Qdrant Search Error:', error);
+    }
 }
 
 const query = process.argv[2];
