@@ -23,6 +23,7 @@ import { PlayerResources } from './components/PlayerResources';
 import { SuggestionBox } from './components/SuggestionBox';
 import { AskTheUmpire } from './components/AskTheUmpire';
 import { AuthProvider } from './context/AuthProvider';
+import { supabaseConfig } from './scripts/supabaseClient';
 import './styles/colors.css';
 import './styles/Style.css';
 import './styles/Navigation.css';
@@ -62,6 +63,20 @@ function App() {
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
+
+  if (!supabaseConfig.url || !supabaseConfig.anonKeyPresent) {
+    return (
+      <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-primary)' }} className={`theme-${theme}`}>
+        <h1>Configuration Error</h1>
+        <p>
+          Missing Supabase environment variables. Please check your <code>.env</code> file.
+        </p>
+        <p>
+          Required: <code>VITE_SUPABASE_URL</code>, <code>VITE_SUPABASE_ANON_KEY</code>
+        </p>
+      </div>
+    );
+  }
 
   return (
     <AuthProvider>
