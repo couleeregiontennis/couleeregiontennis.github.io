@@ -15,4 +15,9 @@ if (!supabaseUrl || !supabaseAnonKey) {
     });
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Prevent crash if env vars are missing (for CI/Test environments)
+// The App component will handle showing a friendly error message.
+const safeUrl = supabaseUrl || 'https://example.supabase.co';
+const safeKey = supabaseAnonKey || 'dummy-key';
+
+export const supabase = createClient(safeUrl, safeKey);
