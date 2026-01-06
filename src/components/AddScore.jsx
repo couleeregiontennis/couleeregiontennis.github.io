@@ -1049,7 +1049,7 @@ export const AddScore = () => {
                 <span className="line-switcher-title">Switch line focus</span>
                 <span className="line-switcher-subtitle">Jump between lines to review or enter scores.</span>
               </div>
-              <div className="line-switcher-buttons">
+              <div className="line-switcher-buttons" role="group" aria-label="Line selection">
                 {lineNumbers.map((line) => {
                   const isActiveLine = activeLineNumber === line;
                   const recordedScore = existingScores.find((score) => score.line_number === line);
