@@ -97,10 +97,26 @@ test.describe('Add Score Page (Protected)', () => {
     });
 
     await page.route('**/rest/v1/line_results*', async (route) => {
-        await route.fulfill({
-            status: 200,
+        if (route.request().method() === 'POST') {
+             await route.fulfill({
+                status: 201,
+                contentType: 'application/json',
+                body: JSON.stringify([{ id: 'new-score-id' }]),
+            });
+        } else {
+             await route.fulfill({
+                status: 200,
+                contentType: 'application/json',
+                body: JSON.stringify([]),
+            });
+        }
+    });
+
+    await page.route('**/rest/v1/line_result_audit*', async (route) => {
+         await route.fulfill({
+            status: 201,
             contentType: 'application/json',
-            body: JSON.stringify([]),
+            body: JSON.stringify([{ id: 'audit-id' }]),
         });
     });
 
@@ -180,6 +196,48 @@ test.describe('Add Score Page (Protected)', () => {
 
      await page.getByRole('button', { name: 'Submit Scores' }).click();
      await expect(page.locator('.error-message')).toContainText(/Players cannot appear on both sides/);
+  });
+
+  test('validates match tiebreak scores (3rd set)', async ({ page }) => {
+     await page.selectOption('select[name="matchId"]', 'match-1');
+     await page.locator('select[name="matchType"]').selectOption('singles');
+
+     // Select players
+     const homePlayer1 = page.locator('select').filter({ hasText: 'Select Player 1' }).nth(0);
+     const awayPlayer1 = page.locator('select').filter({ hasText: 'Select Player 1' }).nth(1);
+     await homePlayer1.selectOption('Player One');
+     await awayPlayer1.selectOption('Player Two');
+
+     // Fill valid Set 1 & 2
+     const sets = page.locator('.score-group');
+     const set1 = sets.nth(0);
+     await set1.locator('select').nth(0).selectOption('6');
+     await set1.locator('select').nth(1).selectOption('4');
+     const set2 = sets.nth(1);
+     await set2.locator('select').nth(0).selectOption('4');
+     await set2.locator('select').nth(1).selectOption('6');
+
+     const set3 = sets.nth(2);
+     const submitBtn = page.getByRole('button', { name: 'Submit Scores' });
+     const errorMsg = page.locator('.error-message');
+
+     // Case 1: 7-6 (Invalid, win by 2 required for target 7)
+     await set3.locator('select').nth(0).selectOption('7');
+     await set3.locator('select').nth(1).selectOption('6');
+     await submitBtn.click();
+     await expect(errorMsg).toContainText(/Third set must be a valid tiebreak/);
+
+     // Case 2: 10-5 (Invalid, should have ended at 7-5)
+     await set3.locator('select').nth(0).selectOption('10');
+     await set3.locator('select').nth(1).selectOption('5');
+     await submitBtn.click();
+     await expect(errorMsg).toContainText(/Third set must be a valid tiebreak/);
+
+     // Case 3: 7-5 (Valid)
+     await set3.locator('select').nth(0).selectOption('7');
+     await set3.locator('select').nth(1).selectOption('5');
+     await submitBtn.click();
+     await expect(page.locator('.success-message')).toContainText(/Scores submitted successfully/);
   });
 
 });
