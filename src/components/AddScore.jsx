@@ -753,7 +753,7 @@ export const AddScore = () => {
 
     if (!isEmptyValue(formData.homeSet3) || !isEmptyValue(formData.awaySet3)) {
       if (!isMatchTiebreakValid(set3Home, set3Away)) {
-        setError('Third set must be a valid tiebreak (first to 10, win by 2) or blank');
+        setError('Third set must be a valid tiebreak (first to 7, win by 2) or blank');
         return false;
       }
     }
