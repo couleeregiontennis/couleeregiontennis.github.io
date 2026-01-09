@@ -39,20 +39,20 @@ const validateDateTime = (dateStr, timeStr) => {
  */
 const formatICSDateTime = (dateStr, timeStr) => {
   if (!validateDateTime(dateStr, timeStr)) return '';
-  
+
   try {
     const [year, month, day] = dateStr.split('-');
     const [hour, minute] = timeStr.split(':');
-    
+
     // Create date object and convert to UTC
     const date = new Date(year, month - 1, day, hour, minute);
-    
+
     // Validate the created date
     if (isNaN(date.getTime())) {
       console.warn(`Invalid date created from: ${dateStr} ${timeStr}`);
       return '';
     }
-    
+
     return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   } catch (error) {
     console.error('Error formatting ICS datetime:', error);
@@ -67,7 +67,7 @@ const formatICSDateTime = (dateStr, timeStr) => {
  */
 const escapeICSText = (text) => {
   if (!text) return '';
-  
+
   try {
     return text
       .replace(/\\/g, '\\\\')
@@ -92,7 +92,7 @@ const generateEventId = (teamId, week) => {
     console.warn('Invalid parameters for event ID generation');
     return `match-unknown-week${week || 'unknown'}-${Date.now()}@couleeregiontennis.com`;
   }
-  
+
   return `match-${teamId}-week${week}-${Date.now()}@couleeregiontennis.com`;
 };
 
@@ -104,21 +104,21 @@ const generateEventId = (teamId, week) => {
  */
 const calculateEndTime = (dateStr, timeStr) => {
   if (!validateDateTime(dateStr, timeStr)) return '';
-  
+
   try {
     const [year, month, day] = dateStr.split('-');
     const [hour, minute] = timeStr.split(':');
-    
+
     const startDate = new Date(year, month - 1, day, hour, minute);
-    
+
     // Validate start date
     if (isNaN(startDate.getTime())) {
       console.warn(`Invalid start date for end time calculation: ${dateStr} ${timeStr}`);
       return '';
     }
-    
+
     const endDate = new Date(startDate.getTime() + (3 * 60 * 60 * 1000)); // Add 3 hours
-    
+
     return endDate.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   } catch (error) {
     console.error('Error calculating end time:', error);
@@ -135,7 +135,7 @@ const formatRoster = (roster) => {
   if (!roster || !Array.isArray(roster) || roster.length === 0) {
     return 'Roster not available';
   }
-  
+
   try {
     return roster
       .map(player => {
@@ -171,17 +171,17 @@ const generateICSEvent = (match, teamName, teamRoster, opponentRoster) => {
     const isHome = match.home_team_number === parseInt(match.current_team_id);
     const opponentName = isHome ? match.away_team_name : match.home_team_name;
     const location = match.courts ? `Courts: ${match.courts}` : 'TBD';
-    
+
     const startTime = formatICSDateTime(match.date, match.time);
     const endTime = calculateEndTime(match.date, match.time);
-    
+
     if (!startTime || !endTime) {
       console.warn(`Invalid date/time for match: ${match.date} ${match.time}`);
       return '';
     }
-    
+
     const eventId = generateEventId(match.current_team_id, match.week);
-    
+
     const summary = `${teamName} vs ${opponentName}`;
     const description = [
       `Tennis Match: ${teamName} vs ${opponentName}`,
@@ -230,7 +230,7 @@ export const generateFullSeasonICS = (matches, teamName, teamRoster, opponentRos
     console.error('Invalid matches array provided to generateFullSeasonICS');
     return '';
   }
-  
+
   if (!teamName || typeof teamName !== 'string') {
     console.error('Invalid team name provided to generateFullSeasonICS');
     return '';
@@ -252,7 +252,7 @@ export const generateFullSeasonICS = (matches, teamName, teamRoster, opponentRos
       const isHome = match.home_team_number === parseInt(match.current_team_id);
       const opponentTeamId = isHome ? match.away_team_number : match.home_team_number;
       const opponentRoster = opponentRosters[opponentTeamId] || [];
-      
+
       return generateICSEvent(match, teamName, teamRoster, opponentRoster);
     }).filter(event => event); // Filter out empty events
 
@@ -279,18 +279,18 @@ export const downloadICSFile = (icsContent, filename = 'tennis-schedule.ics') =>
   try {
     const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
     const url = window.URL.createObjectURL(blob);
-    
+
     const link = document.createElement('a');
     link.href = url;
     link.download = filename;
     link.style.display = 'none';
-    
+
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    
+
     window.URL.revokeObjectURL(url);
-    console.log(`ICS file downloaded: ${filename}`);
+
   } catch (error) {
     console.error('Error downloading ICS file:', error);
   }

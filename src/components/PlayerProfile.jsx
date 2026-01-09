@@ -77,13 +77,13 @@ export const PlayerProfile = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         setUser(user);
-        
+
         // Parallel fetch
         await Promise.all([
-            fetchPlayerProfile(user.id, user),
-            fetchMatchHistory(user.id)
+          fetchPlayerProfile(user.id, user),
+          fetchMatchHistory(user.id)
         ]);
-        
+
       } else {
         setError('Please log in to view your profile');
       }

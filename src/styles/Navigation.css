@@ -484,3 +484,11 @@ body[data-theme="dark"] .dropdown-menu a:hover {
   background: var(--primary-green-dark);
   color: var(--text-inverse);
 }
+
+/* Add to src/styles/Navigation.css */
+.navbar-logo {
+  height: 3.5rem;
+  /* Increased size to fill navbar */
+  width: auto;
+  vertical-align: middle;
+}

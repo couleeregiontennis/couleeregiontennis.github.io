@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../scripts/supabaseClient';
 import { useAuth } from '../context/AuthProvider';
+import { useSeason } from '../hooks/useSeason';
 import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/MatchSchedule.css';
 
@@ -64,27 +65,57 @@ export const MatchSchedule = () => {
   const [viewMode, setViewMode] = useState('month');
   const [selectedTeam, setSelectedTeam] = useState('all');
 
+  const { currentSeason, loading: seasonLoading } = useSeason();
+
   const fetchAllData = async () => {
+    console.log('MatchSchedule: fetchAllData called. Current Season:', currentSeason);
+    if (!currentSeason) {
+      console.log('MatchSchedule: Aborting fetch, no current season.');
+      return;
+    }
+
     try {
       setLoading(true);
       setError(null);
+      console.log('MatchSchedule: Fetching matches for season', currentSeason.id);
 
-      const [matchesResponse, teamsResponse] = await Promise.all([
-        supabase.from('matches')
-          .select('id, date, time, status, courts, home_team_name, away_team_name, home_team_number, away_team_number')
-          .order('date', { ascending: true }),
-        supabase.from('team')
-          .select('id, name, number')
-          .order('name')
-      ]);
+      // Fetch Matches from team_match (Relational)
+      const { data: matchesData, error: matchesError } = await supabase
+        .from('team_match')
+        .select(`
+          id, 
+          date, 
+          time, 
+          status, 
+          courts, 
+          home_team:home_team_id (id, name, number), 
+          away_team:away_team_id (id, name, number)
+        `)
+        .eq('season_id', currentSeason.id)
+        .order('date', { ascending: true });
 
-      // Process Matches
-      if (matchesResponse.error) throw matchesResponse.error;
-      setMatches(matchesResponse.data || []);
+      // Fetch Teams (Active in this season - simplifying to all teams for now)
+      const { data: teamsData, error: teamsError } = await supabase
+        .from('team')
+        .select('id, name, number')
+        .order('name');
 
-      // Process Teams
-      if (teamsResponse.error) throw teamsResponse.error;
-      const teamsData = teamsResponse.data;
+      if (matchesError) throw matchesError;
+      if (teamsError) throw teamsError;
+
+      console.log('MatchSchedule: Records found:', matchesData?.length);
+
+      // Transform relational data to flattened structure for component compatibility
+      // OR update component to use nested structure. Let's flatten for minimal regression risk first.
+      const flattenedMatches = (matchesData || []).map(m => ({
+        ...m,
+        home_team_name: m.home_team?.name || 'Unknown',
+        home_team_number: m.home_team?.number || 0,
+        away_team_name: m.away_team?.name || 'Unknown',
+        away_team_number: m.away_team?.number || 0
+      }));
+
+      setMatches(flattenedMatches);
       setTeams(Array.isArray(teamsData) ? teamsData : []);
 
     } catch (err) {
@@ -96,8 +127,16 @@ export const MatchSchedule = () => {
   };
 
   useEffect(() => {
-    fetchAllData();
-  }, []);
+    console.log('MatchSchedule: Effect triggered. Loading:', seasonLoading, 'Season:', currentSeason);
+    if (!seasonLoading) {
+      if (currentSeason) {
+        fetchAllData();
+      } else {
+        setLoading(false); // No season found, stop loading
+        console.log('MatchSchedule: No season found, stopping loading state.');
+      }
+    }
+  }, [currentSeason, seasonLoading]);
 
   // OPTIMIZATION: Memoize filtered matches to avoid recalculation on every render
   const filteredMatches = useMemo(() => {
@@ -107,8 +146,8 @@ export const MatchSchedule = () => {
     if (selectedTeam !== 'all') {
       const selectedTeamData = teams.find(t => t.id === selectedTeam);
       if (selectedTeamData) {
-        filtered = filtered.filter(match => 
-          match.home_team_number === selectedTeamData.number || 
+        filtered = filtered.filter(match =>
+          match.home_team_number === selectedTeamData.number ||
           match.away_team_number === selectedTeamData.number
         );
       }
@@ -117,7 +156,7 @@ export const MatchSchedule = () => {
     // Filter by current view period
     const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     const endOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-    
+
     if (viewMode === 'month') {
       filtered = filtered.filter(match => {
         const matchDate = new Date(match.date);
@@ -128,7 +167,7 @@ export const MatchSchedule = () => {
       startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
       const endOfWeek = new Date(startOfWeek);
       endOfWeek.setDate(startOfWeek.getDate() + 6);
-      
+
       filtered = filtered.filter(match => {
         const matchDate = new Date(match.date);
         return matchDate >= startOfWeek && matchDate <= endOfWeek;
@@ -152,28 +191,28 @@ export const MatchSchedule = () => {
 
   const navigateDate = (direction) => {
     const newDate = new Date(currentDate);
-    
+
     if (viewMode === 'month') {
       newDate.setMonth(currentDate.getMonth() + direction);
     } else if (viewMode === 'week') {
       newDate.setDate(currentDate.getDate() + (direction * 7));
     }
-    
+
     setCurrentDate(newDate);
   };
 
   const getDateRangeText = () => {
     if (viewMode === 'month') {
-      return currentDate.toLocaleDateString('en-US', { 
-        month: 'long', 
-        year: 'numeric' 
+      return currentDate.toLocaleDateString('en-US', {
+        month: 'long',
+        year: 'numeric'
       });
     } else if (viewMode === 'week') {
       const startOfWeek = new Date(currentDate);
       startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
       const endOfWeek = new Date(startOfWeek);
       endOfWeek.setDate(startOfWeek.getDate() + 6);
-      
+
       return `${startOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${endOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
     }
     return 'All Matches';
