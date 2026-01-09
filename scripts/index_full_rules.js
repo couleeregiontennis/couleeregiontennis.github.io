@@ -1,27 +1,36 @@
 import 'dotenv/config';
 import dotenv from 'dotenv';
-dotenv.config({ path: '.env.local' });
-
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { QdrantClient } from '@qdrant/js-client-rest';
 import fs from 'fs/promises';
 import { v4 as uuidv4 } from 'uuid';
 
+// Load .env.local if it exists
+dotenv.config({ path: '.env.local' });
+
 // Config
-const UMPIRE_GEMINI_API_KEY = process.env.UMPIRE_GEMINI_API_KEY;
+const GEMINI_API_KEY = process.env.UMPIRE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
 const QDRANT_URL = process.env.QDRANT_URL;
 const QDRANT_API_KEY = process.env.QDRANT_API_KEY;
 const COLLECTION_NAME = 'rules_context';
 
-if (!UMPIRE_GEMINI_API_KEY || !QDRANT_URL) {
-    console.error('Error: UMPIRE_GEMINI_API_KEY and QDRANT_URL must be set in .env.local');
+if (!GEMINI_API_KEY || !QDRANT_URL) {
+    console.error('Error: Missing required environment variables.');
+    console.error('Ensure GEMINI_API_KEY (or UMPIRE_GEMINI_API_KEY) and QDRANT_URL are set.');
+    console.error('Local: Check your .env.local file.');
+    console.error('CI: Check your GitHub Repository Secrets.');
     process.exit(1);
 }
 
-console.log(`Using UMPIRE_GEMINI_API_KEY: ${UMPIRE_GEMINI_API_KEY.substring(0, 5)}...`);
+console.log('Using Gemini API Key: [configured]');
+console.log(`Using Qdrant URL: ${QDRANT_URL}`);
 
-const genAI = new GoogleGenerativeAI(UMPIRE_GEMINI_API_KEY);
-const qdrant = new QdrantClient({ url: QDRANT_URL, apiKey: QDRANT_API_KEY });
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+const qdrant = new QdrantClient({ 
+    url: QDRANT_URL, 
+    apiKey: QDRANT_API_KEY,
+    port: 443 
+});
 
 async function indexFile(filePath, model) {
     console.log(`📖 Reading ${filePath}...`);

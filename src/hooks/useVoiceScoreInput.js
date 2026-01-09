@@ -38,7 +38,7 @@ export const useVoiceScoreInput = (onScoreParsed) => {
       }
 
       const parsedData = await response.json();
-      console.log('AI Parsed Data:', parsedData);
+
       setAiSuccess('Transcript parsed successfully by AI!');
       if (onScoreParsed) {
         onScoreParsed(parsedData);

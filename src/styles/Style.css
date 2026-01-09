@@ -370,7 +370,7 @@ ul {
 /* ----- DARK MODE ----- */
 body[data-theme="dark"] {
     background: var(--bg-dark);
-    color: var(--border-primary);
+    color: var(--text-primary);
 }
 
 body[data-theme="dark"] h1,
@@ -379,13 +379,13 @@ body[data-theme="dark"] h3,
 body[data-theme="dark"] h4,
 body[data-theme="dark"] h5,
 body[data-theme="dark"] h6 {
-    color: rgba(255, 255, 255, 0.92);
+    color: var(--text-inverse);
 }
 
 body[data-theme="dark"] .schedule-table,
 body[data-theme="dark"] table {
     background: var(--bg-dark);
-    color: var(--border-primary);
+    color: var(--text-primary);
 }
 
 body[data-theme="dark"] .schedule-table th,
@@ -394,18 +394,18 @@ body[data-theme="dark"] th,
 body[data-theme="dark"] td {
     border-color: var(--text-secondary);
     background: var(--bg-dark);
-    color: var(--border-primary);
+    color: var(--text-primary);
 }
 
 body[data-theme="dark"] .date-row {
     background-color: var(--bg-dark);
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--text-primary);
 }
 
 body[data-theme="dark"] .court-header,
 body[data-theme="dark"] .time-header {
     background: var(--bg-dark);
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--text-primary);
     border-right: 2px solid var(--secondary);
 }
 
@@ -420,7 +420,7 @@ body[data-theme="dark"] .team-num {
 
 body[data-theme="dark"] footer {
     background: var(--bg-dark);
-    color: rgba(255, 255, 255, 0.82);
+    color: var(--text-secondary);
 }
 
 body[data-theme="dark"] .highlight {
@@ -433,11 +433,11 @@ body[data-theme="dark"] .highlight {
 body[data-theme="dark"] details {
     background: var(--bg-dark);
     border-color: var(--text-secondary);
-    color: var(--border-primary);
+    color: var(--text-primary);
 }
 
 body[data-theme="dark"] summary {
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--text-primary);
 }
 
 body[data-theme="dark"] .announcement-bar {
