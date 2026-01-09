@@ -1,13 +1,12 @@
 import { test, expect } from '@playwright/test';
 import { mockSupabaseAuth } from '../utils/auth-mock';
 
-test.describe('Add Score - Tiebreak Logic', () => {
+test.describe('Tiebreak Validation', () => {
 
   test.beforeEach(async ({ page }) => {
-    // 1. Mock Auth (User Login)
     await mockSupabaseAuth(page);
 
-    // 2. Mock Initial Data Loading
+    // Mock initial data loading
     await page.route('**/rest/v1/player*', async (route) => {
       const url = route.request().url();
       if (url.includes('id=eq')) {
@@ -23,7 +22,7 @@ test.describe('Add Score - Tiebreak Logic', () => {
             }),
           });
       } else {
-          // Roster details
+          // Roster
           await route.fulfill({
             status: 200,
             contentType: 'application/json',
@@ -44,13 +43,12 @@ test.describe('Add Score - Tiebreak Logic', () => {
             body: JSON.stringify({ team: 'fake-team-id' }),
           });
       } else {
-          // Roster fetch
           await route.fulfill({
             status: 200,
             contentType: 'application/json',
             body: JSON.stringify([
-                { player: { id: 'p1', first_name: 'Player', last_name: 'One', email: 'p1@test.com', ranking: 1 } },
-                { player: { id: 'p2', first_name: 'Player', last_name: 'Two', email: 'p2@test.com', ranking: 2 } }
+                { player: { id: 'p1', first_name: 'Player', last_name: 'One', ranking: 1 } },
+                { player: { id: 'p2', first_name: 'Player', last_name: 'Two', ranking: 2 } }
             ]),
           });
       }
@@ -97,10 +95,26 @@ test.describe('Add Score - Tiebreak Logic', () => {
     });
 
     await page.route('**/rest/v1/line_results*', async (route) => {
+        if (route.request().method() === 'POST') {
+             await route.fulfill({
+                status: 200,
+                contentType: 'application/json',
+                body: JSON.stringify([{ id: 'mock-id', status: 'success' }]),
+            });
+        } else {
+            await route.fulfill({
+                status: 200,
+                contentType: 'application/json',
+                body: JSON.stringify([]),
+            });
+        }
+    });
+
+    await page.route('**/rest/v1/line_result_audit*', async (route) => {
         await route.fulfill({
             status: 200,
             contentType: 'application/json',
-            body: JSON.stringify([]),
+            body: JSON.stringify([{ id: 'audit-id' }]),
         });
     });
 
@@ -108,66 +122,73 @@ test.describe('Add Score - Tiebreak Logic', () => {
     await page.selectOption('select[name="matchId"]', 'match-1');
     await page.locator('select[name="matchType"]').selectOption('singles');
 
-    // Select players
+    // Wait for players to load
+    const playerSelect = page.locator('select').filter({ hasText: 'Select Player 1' }).first();
+    await expect(playerSelect).toContainText('Player One');
+
+    // Select valid players
     const homePlayer1 = page.locator('select').filter({ hasText: 'Select Player 1' }).nth(0);
     const awayPlayer1 = page.locator('select').filter({ hasText: 'Select Player 1' }).nth(1);
     await homePlayer1.selectOption('Player One');
     await awayPlayer1.selectOption('Player Two');
 
-    // Set Sets 1 and 2 to split sets so we can test the 3rd set tiebreak
+    // Fill valid first two sets (split sets to require a 3rd set)
     const sets = page.locator('.score-group');
-    const set1 = sets.nth(0);
-    const set2 = sets.nth(1);
-
-    await set1.locator('select').nth(0).selectOption('6');
-    await set1.locator('select').nth(1).selectOption('4'); // Home wins set 1
-
-    await set2.locator('select').nth(0).selectOption('4');
-    await set2.locator('select').nth(1).selectOption('6'); // Away wins set 2
+    await sets.nth(0).locator('select').nth(0).selectOption('6');
+    await sets.nth(0).locator('select').nth(1).selectOption('4'); // 6-4 Home
+    await sets.nth(1).locator('select').nth(0).selectOption('4');
+    await sets.nth(1).locator('select').nth(1).selectOption('6'); // 4-6 Away
   });
 
-  test('validates 3rd set tiebreak (first to 7, win by 2)', async ({ page }) => {
+  test('validates 3rd set tiebreak (first to 7)', async ({ page }) => {
     const sets = page.locator('.score-group');
     const set3 = sets.nth(2);
-    const submitBtn = page.getByRole('button', { name: 'Submit Scores' });
-    const errorMessage = page.locator('.error-message');
 
-    // Scenario: 7-5 (Valid)
+    // Test case 1: 5-5 (invalid, game not over)
+    await set3.locator('select').nth(0).selectOption('5');
+    await set3.locator('select').nth(1).selectOption('5');
+    await page.getByRole('button', { name: 'Submit Scores' }).click();
+    await expect(page.locator('.error-message')).toContainText(/Third set must be a valid tiebreak/);
+
+    // Test case 2: 7-5 (valid)
     await set3.locator('select').nth(0).selectOption('7');
     await set3.locator('select').nth(1).selectOption('5');
-
-    // Mock successful submission
-    await page.route('**/rest/v1/line_results*', async (route) => {
-       // Must match post
-       if (route.request().method() === 'POST') {
-           await route.fulfill({ status: 201, body: JSON.stringify([{ id: 'new-score' }]) });
-       } else {
-           // For GET requests (loading existing scores), return empty or existing
-           await route.fulfill({ status: 200, body: JSON.stringify([]) });
-       }
-    });
-
-    await page.route('**/rest/v1/line_result_audit*', async (route) => {
-        await route.fulfill({ status: 201, body: JSON.stringify({}) });
-    });
-
-    await submitBtn.click();
-    await expect(errorMessage).toBeHidden();
-    await expect(page.locator('.success-message')).toBeVisible();
+    await page.getByRole('button', { name: 'Submit Scores' }).click();
+    await expect(page.locator('.error-message')).toBeHidden();
+    await expect(page.locator('.success-message')).toContainText(/Scores submitted successfully/);
   });
 
-  test('enforces correct error message for invalid tiebreak', async ({ page }) => {
-     const sets = page.locator('.score-group');
-     const set3 = sets.nth(2);
-     const submitBtn = page.getByRole('button', { name: 'Submit Scores' });
-     const errorMessage = page.locator('.error-message');
+  test('validates 3rd set tiebreak win by 2', async ({ page }) => {
+    const sets = page.locator('.score-group');
+    const set3 = sets.nth(2);
 
-     // Try an invalid score: 5-5
-     await set3.locator('select').nth(0).selectOption('5');
-     await set3.locator('select').nth(1).selectOption('5');
-     await submitBtn.click();
+    // Test case: 7-6 (invalid, must win by 2)
+    await set3.locator('select').nth(0).selectOption('7');
+    await set3.locator('select').nth(1).selectOption('6');
+    await page.getByRole('button', { name: 'Submit Scores' }).click();
+    await expect(page.locator('.error-message')).toContainText(/Third set must be a valid tiebreak/);
+  });
 
-     await expect(errorMessage).toBeVisible();
-     await expect(errorMessage).toContainText('Third set must be a valid tiebreak (first to 7, win by 2) or blank');
+  test('validates 3rd set tiebreak extended play', async ({ page }) => {
+    const sets = page.locator('.score-group');
+    const set3 = sets.nth(2);
+
+    // Test case: 8-6 (valid)
+    await set3.locator('select').nth(0).selectOption('8');
+    await set3.locator('select').nth(1).selectOption('6');
+    await page.getByRole('button', { name: 'Submit Scores' }).click();
+    await expect(page.locator('.error-message')).toBeHidden();
+    await expect(page.locator('.success-message')).toContainText(/Scores submitted successfully/);
+  });
+
+   test('validates 3rd set tiebreak target', async ({ page }) => {
+    const sets = page.locator('.score-group');
+    const set3 = sets.nth(2);
+
+    // Test case: 6-4 (invalid, must reach 7)
+    await set3.locator('select').nth(0).selectOption('6');
+    await set3.locator('select').nth(1).selectOption('4');
+    await page.getByRole('button', { name: 'Submit Scores' }).click();
+    await expect(page.locator('.error-message')).toContainText(/Third set must be a valid tiebreak/);
   });
 });
