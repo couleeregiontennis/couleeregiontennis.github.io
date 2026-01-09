@@ -22,7 +22,7 @@ if (!GEMINI_API_KEY || !QDRANT_URL) {
     process.exit(1);
 }
 
-console.log(`Using Gemini API Key: ${GEMINI_API_KEY.substring(0, 5)}...`);
+console.log('Using Gemini API Key: [configured]');
 console.log(`Using Qdrant URL: ${QDRANT_URL}`);
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
