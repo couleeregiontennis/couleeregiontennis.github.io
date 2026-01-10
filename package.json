@@ -2,6 +2,7 @@
   "name": "ltta-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "@qdrant/js-client-rest": "^1.16.2",

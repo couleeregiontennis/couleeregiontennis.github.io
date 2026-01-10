@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, useMemo, useCallback } from 'react';
+import { createContext, useContext, useEffect, useState, useMemo, useCallback, useRef } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 
 const AuthContext = createContext({});
@@ -20,13 +20,13 @@ export const AuthProvider = ({ children }) => {
       const { data, error } = await supabase
         .from('player')
         .select('is_captain, is_admin')
-        .eq('id', userId)
+        .eq('user_id', userId)
         .single();
 
       if (error) {
-        // If the user is authenticated but has no player profile, they shouldn't be admin/captain
-        // This can happen for new users or if the profile is missing
-        console.warn('Error fetching user role or profile missing:', error.message);
+        if (error.code !== 'PGRST116') {
+          console.warn('Error fetching user role:', error.message);
+        }
         setUserRole({ isCaptain: false, isAdmin: false });
         return;
       }
@@ -65,13 +65,16 @@ export const AuthProvider = ({ children }) => {
 
     getSession();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (mounted) {
         try {
+          const newUserId = session?.user?.id;
+
           setSession(session);
           setUser(session?.user ?? null);
-          if (session?.user) {
-            await fetchUserRole(session.user.id);
+
+          if (newUserId) {
+            await fetchUserRole(newUserId);
           } else {
             setUserRole({ isCaptain: false, isAdmin: false });
           }

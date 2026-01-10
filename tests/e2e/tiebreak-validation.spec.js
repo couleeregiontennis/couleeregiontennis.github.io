@@ -179,6 +179,12 @@ test.describe('Tiebreak Validation', () => {
     await page.getByRole('button', { name: 'Submit Scores' }).click();
     await expect(page.locator('.error-message')).toBeHidden();
     await expect(page.locator('.success-message')).toContainText(/Scores submitted successfully/);
+
+    // Test case: 9-8 (invalid, must win by 2)
+    // We need to reload or reset the form/mock for a new submission,
+    // but here we can just check validation failure on the same page state (assuming failure prevents clear)
+    // Actually, success clears the form. So we need to re-enter.
+    // Let's just focus on one case per test block or re-fill.
   });
 
    test('validates 3rd set tiebreak target', async ({ page }) => {
