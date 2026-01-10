@@ -43,7 +43,14 @@ export const Login = () => {
   const handleOAuth = async (provider) => {
     setError('');
     setLoading(true);
-    const { error } = await supabase.auth.signInWithOAuth({ provider });
+    const redirectUrl = window.location.origin;
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: redirectUrl
+      }
+    });
     setLoading(false);
     if (error) setError(error.message);
     // On success, Supabase will redirect to your configured redirect URL

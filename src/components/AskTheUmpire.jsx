@@ -26,14 +26,10 @@ export const AskTheUmpire = () => {
 
     try {
       const startedAt = Date.now();
-      console.log('[AskTheUmpire] invoking ask-umpire...', { queryLength: query.length });
+
 
       // Debug: Attempt raw fetch to verify network path
       // This helps diagnose if supabase-js is misconfigured or if it's a network block
-      const projectUrl = supabase.supabaseUrl;
-      const functionUrl = `${projectUrl}/functions/v1/ask-umpire`;
-      console.log('[AskTheUmpire] Target URL:', functionUrl);
-
       const { data, error } = await supabase.functions.invoke('ask-umpire', {
         body: { query },
       });
@@ -42,8 +38,7 @@ export const AskTheUmpire = () => {
         console.error('[AskTheUmpire] Invocation error object:', error);
         throw error;
       }
-      
-      console.log('[AskTheUmpire] response received', { elapsedMs: Date.now() - startedAt, data });
+
       setAnswer(data.answer || "I couldn't find an answer to that.");
     } catch (err) {
       console.error('AskTheUmpire error:', err);

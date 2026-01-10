@@ -77,8 +77,13 @@ export const PlayerProfile = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         setUser(user);
-        await fetchPlayerProfile(user.id, user);
-        await fetchMatchHistory(user.id);
+
+        // Parallel fetch
+        await Promise.all([
+          fetchPlayerProfile(user.id, user),
+          fetchMatchHistory(user.id)
+        ]);
+
       } else {
         setError('Please log in to view your profile');
       }
@@ -95,7 +100,7 @@ export const PlayerProfile = () => {
       const { data, error } = await supabase
         .from('player')
         .select('*')
-        .eq('id', userId)
+        .eq('user_id', userId)
         .single();
 
       if (error && error.code !== 'PGRST116') {
@@ -171,7 +176,7 @@ export const PlayerProfile = () => {
       const rankingValue = Number.isNaN(parsedRanking) ? 3 : parsedRanking;
 
       const profileData = {
-        id: user.id,
+        user_id: user.id,
         first_name: firstName,
         last_name: lastName,
         email: profile.email || user.email || '',
@@ -189,10 +194,11 @@ export const PlayerProfile = () => {
 
       let savedData;
       if (hasExistingProfile) {
+        // When updating, we identify the record by user_id
         const { data: updatedData, error: updateError } = await supabase
           .from('player')
           .update(profileData)
-          .eq('id', user.id)
+          .eq('user_id', user.id)
           .select()
           .single();
         if (updateError) throw updateError;

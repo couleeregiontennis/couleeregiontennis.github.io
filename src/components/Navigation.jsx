@@ -45,7 +45,9 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
       <nav className="navbar" ref={navRef}>
         <div className="navbar-container">
           <div className="navbar-brand">
-            <Link to="/" onClick={closeMenu}>LTTA</Link>
+            <Link to="/" onClick={closeMenu}>
+              <img src="/crta-logo.png" alt="CRTA Logo" className="navbar-logo" />
+            </Link>
           </div>
           <div className="navbar-actions">
             <button
