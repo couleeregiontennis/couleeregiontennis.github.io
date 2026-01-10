@@ -5,6 +5,7 @@ import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/AddScore.css';
 
 const STANDARD_SET_MIN_WIN = 6;
+// League uses a match tiebreak to 7 (win by 2)
 const MATCH_TIEBREAK_TARGET = 7;
 const MAX_NOTES_LENGTH = 500;
 
@@ -753,7 +754,7 @@ export const AddScore = () => {
 
     if (!isEmptyValue(formData.homeSet3) || !isEmptyValue(formData.awaySet3)) {
       if (!isMatchTiebreakValid(set3Home, set3Away)) {
-        setError('Third set must be a valid tiebreak (first to 10, win by 2) or blank');
+        setError('Third set must be a valid tiebreak (first to 7, win by 2) or blank');
         return false;
       }
     }

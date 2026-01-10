@@ -80,7 +80,7 @@ test.describe('Access Control Verification', () => {
 
     // Mock specific dashboard data to avoid errors
     await page.route('**/rest/v1/player_to_team*', async route => route.fulfill({ status: 200, body: JSON.stringify({ team: 'team-1' }) }));
-    await page.route('**/rest/v1/team*', async route => route.fulfill({ status: 200, body: JSON.stringify({ id: 'team-1', number: 1, name: 'Test Team', play_night: 'Tuesday' }) }));
+    await page.route('**/rest/v1/team*', async route => route.fulfill({ status: 200, body: JSON.stringify([{ id: 'team-1', number: 1, name: 'Test Team', play_night: 'Tuesday' }]) }));
 
     await page.goto('/captain-dashboard');
     expect(page.url()).toContain('/captain-dashboard');
