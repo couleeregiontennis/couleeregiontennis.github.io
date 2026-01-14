@@ -5,8 +5,8 @@ import { LoadingSpinner } from './LoadingSpinner';
 import '../styles/AddScore.css';
 
 const STANDARD_SET_MIN_WIN = 6;
-// League uses a match tiebreak to 10 (win by 2)
-const MATCH_TIEBREAK_TARGET = 10;
+// League uses a match tiebreak to 7 (win by 2)
+const MATCH_TIEBREAK_TARGET = 7;
 const MAX_NOTES_LENGTH = 500;
 
 const parseInteger = (value) => {
@@ -39,16 +39,16 @@ const isStandardSetValid = (home, away) => {
 /**
  * Validates the score for a match tiebreak.
  *
- * Why: Tiebreaks have specific ending conditions. The first to reach the target (10 points)
+ * Why: Tiebreaks have specific ending conditions. The first to reach the target (7 points)
  * wins, but they must win by a margin of 2 points. If the score reaches 6-6, play
  * continues until one side leads by 2.
  *
  * How:
  * 1. Checks basic numeric validity (integers, non-negative, no draws).
  * 2. Ensures the winner has reached at least the target score.
- * 3. If the winner matches the target exactly, ensures the margin is >= 2 (e.g., 10-8).
- * 4. If the winner exceeds the target, ensures the margin is exactly 2 (e.g., 12-10).
- *    Scores like 13-10 are invalid because the match would have ended at 12-10.
+ * 3. If the winner matches the target exactly, ensures the margin is >= 2 (e.g., 7-5).
+ * 4. If the winner exceeds the target, ensures the margin is exactly 2 (e.g., 9-7).
+ *    Scores like 10-7 are invalid because the match would have ended at 9-7.
  */
 const isMatchTiebreakValid = (home, away) => {
   if (home === 0 && away === 0) {
