@@ -10,6 +10,20 @@ test.describe('Match Schedule Page', () => {
     // Set fixed time so the month view shows the mocked matches
     await page.clock.install({ time: new Date('2023-10-01T12:00:00') });
 
+    // Mock season data (required for MatchSchedule to load)
+    await page.route('**/rest/v1/season*', async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({
+              id: 'season-1',
+              name: 'Fall 2023',
+              start_date: '2023-09-01',
+              end_date: '2023-12-31'
+            })
+        });
+    });
+
     // Mock team data (required for filter dropdown, otherwise fetch fails)
     await page.route('**/rest/v1/team*', async (route) => {
       await route.fulfill({
@@ -24,8 +38,8 @@ test.describe('Match Schedule Page', () => {
       });
     });
 
-    // Mock the matches data
-    await page.route('**/rest/v1/matches*', async (route) => {
+    // Mock the matches data (MatchSchedule queries 'team_match' table)
+    await page.route('**/rest/v1/team_match*', async (route) => {
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
@@ -34,17 +48,19 @@ test.describe('Match Schedule Page', () => {
             id: '1',
             date: '2023-10-01',
             time: '18:00',
-            home_team_name: 'Aces',
-            away_team_name: 'Faults',
-            courts: '1-3'
+            status: 'upcoming',
+            courts: '1-3',
+            home_team: { id: '1', name: 'Aces', number: 1 },
+            away_team: { id: '2', name: 'Faults', number: 2 }
           },
           {
             id: '2',
             date: '2023-10-02',
             time: '18:00',
-            home_team_name: 'Netters',
-            away_team_name: 'Lobbers',
-            courts: '4-6'
+            status: 'upcoming',
+            courts: '4-6',
+            home_team: { id: '3', name: 'Netters', number: 3 },
+            away_team: { id: '4', name: 'Lobbers', number: 4 }
           }
         ]),
       });
