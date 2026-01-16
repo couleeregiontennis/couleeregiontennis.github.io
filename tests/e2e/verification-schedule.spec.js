@@ -11,6 +11,20 @@ test('schedule screenshot', async ({ page }) => {
   // Use a fixed viewport for consistency
   await page.setViewportSize({ width: 1280, height: 720 });
 
+  // Mock season data
+  await page.route('**/rest/v1/season*', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          id: 'season-1',
+          name: 'Fall 2023',
+          start_date: '2023-09-01',
+          end_date: '2023-12-31'
+        })
+      });
+  });
+
   // Mock data to ensure consistent screenshots
   await page.route('**/rest/v1/team*', async (route) => {
       await route.fulfill({
@@ -25,7 +39,7 @@ test('schedule screenshot', async ({ page }) => {
       });
   });
 
-  await page.route('**/rest/v1/matches*', async (route) => {
+  await page.route('**/rest/v1/team_match*', async (route) => {
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
@@ -34,23 +48,19 @@ test('schedule screenshot', async ({ page }) => {
             id: '1',
             date: '2023-10-01',
             time: '18:00',
-            home_team_name: 'Aces',
-            away_team_name: 'Faults',
+            status: 'upcoming',
             courts: '1-3',
-            home_team_number: 1,
-            away_team_number: 2,
-            status: 'upcoming'
+            home_team: { id: '1', name: 'Aces', number: 1 },
+            away_team: { id: '2', name: 'Faults', number: 2 }
           },
           {
             id: '2',
             date: '2023-10-02',
             time: '18:00',
-            home_team_name: 'Netters',
-            away_team_name: 'Lobbers',
+            status: 'upcoming',
             courts: '4-6',
-            home_team_number: 3,
-            away_team_number: 4,
-            status: 'upcoming'
+            home_team: { id: '3', name: 'Netters', number: 3 },
+            away_team: { id: '4', name: 'Lobbers', number: 4 }
           }
         ]),
       });
