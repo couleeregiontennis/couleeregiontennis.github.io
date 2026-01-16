@@ -25,7 +25,20 @@ test('schedule screenshot', async ({ page }) => {
       });
   });
 
-  await page.route('**/rest/v1/matches*', async (route) => {
+  await page.route('**/rest/v1/season*', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          id: 'season-1',
+          name: 'Summer 2023',
+          start_date: '2023-05-01',
+          end_date: '2023-12-31'
+        }),
+      });
+  });
+
+  await page.route('**/rest/v1/team_match*', async (route) => {
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
@@ -34,23 +47,21 @@ test('schedule screenshot', async ({ page }) => {
             id: '1',
             date: '2023-10-01',
             time: '18:00',
-            home_team_name: 'Aces',
-            away_team_name: 'Faults',
+            home_team: { name: 'Aces', number: 1 },
+            away_team: { name: 'Faults', number: 2 },
             courts: '1-3',
-            home_team_number: 1,
-            away_team_number: 2,
-            status: 'upcoming'
+            status: 'upcoming',
+            season_id: 'season-1'
           },
           {
             id: '2',
             date: '2023-10-02',
             time: '18:00',
-            home_team_name: 'Netters',
-            away_team_name: 'Lobbers',
+            home_team: { name: 'Netters', number: 3 },
+            away_team: { name: 'Lobbers', number: 4 },
             courts: '4-6',
-            home_team_number: 3,
-            away_team_number: 4,
-            status: 'upcoming'
+            status: 'upcoming',
+            season_id: 'season-1'
           }
         ]),
       });

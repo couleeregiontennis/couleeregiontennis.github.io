@@ -41,10 +41,22 @@ test.describe('Admin Match Result Override', () => {
       });
     });
 
-    // 4. Mock matches - Note: MatchSchedule.jsx queries 'matches' view, not 'team_match' table directly in some places,
-    // but looking at MatchSchedule.jsx code: .from('matches').select(...)
-    // So we must mock 'matches'.
-    await page.route('**/rest/v1/matches*', async (route) => {
+    // Mock season
+    await page.route('**/rest/v1/season*', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          id: 'season-1',
+          name: 'Summer 2023',
+          start_date: '2023-05-01',
+          end_date: '2023-12-31'
+        }),
+      });
+    });
+
+    // 4. Mock matches (team_match table)
+    await page.route('**/rest/v1/team_match*', async (route) => {
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
@@ -53,14 +65,11 @@ test.describe('Admin Match Result Override', () => {
             id: 'match-1',
             date: '2023-10-01',
             time: '18:00',
-            home_team_id: 'team-1',
-            away_team_id: 'team-2',
-            home_team_name: 'Home Team',
-            away_team_name: 'Away Team',
-            home_team_number: 1,
-            away_team_number: 2,
+            home_team: { id: 'team-1', name: 'Home Team', number: 1 },
+            away_team: { id: 'team-2', name: 'Away Team', number: 2 },
             courts: '1-3',
-            status: 'completed', // Important: status completed
+            status: 'completed',
+            season_id: 'season-1'
           }
         ]),
       });
