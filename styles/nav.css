@@ -32,8 +32,16 @@
 }
 
 .navbar-brand a{
+  display: flex;
+  align-items: center;
+  gap: 10px;
   color: cornflowerblue;
   text-decoration: none;
+}
+
+.navbar-logo {
+  height: 40px;
+  width: auto;
 }
 
 .navbar-toggle {
