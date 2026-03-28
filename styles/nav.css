@@ -6,8 +6,8 @@
   max-width: none;
   margin: 0;
   z-index: 2000;
-  color: blue;
-  background-color: black;
+  color: white;
+  background-color: #007BFF;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -35,7 +35,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: cornflowerblue;
+  color: white;
   text-decoration: none;
 }
 
@@ -138,5 +138,21 @@
     text-align: center;
     border-radius: 0;
     background: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .navbar {
+    background-color: #111;
+    color: #e0e0e0;
+  }
+  .navbar-brand a {
+    color: #c9e1ff;
+  }
+  .navbar-menu a {
+    color: #e0e0e0;
+  }
+  .navbar-menu a:hover {
+    color: #fff;
   }
 }
