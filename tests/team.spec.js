@@ -13,7 +13,7 @@ test.describe('Team Page', () => {
         await expect(matchRows).not.toHaveCount(0);
 
         // Check if table headers exist
-        await expect(page.locator('#matches-table th').first()).toHaveText('Week');
+        await expect(page.getByRole('columnheader', { name: 'Week' })).toBeVisible();
     });
 
     test('should handle missing URL parameters gracefully', async ({ page }) => {
