@@ -25,6 +25,7 @@ async function loadSheet() {
     const csvContent = await fetchCSV(CSV_URL);
     console.log('CSV data fetched successfully');
     
+<<<<<<< HEAD
     // Parse CSV
     const rows = parse(csvContent, {
       columns: [
@@ -38,7 +39,28 @@ async function loadSheet() {
       from_line: 2,
       skip_empty_lines: true,
       relax_column_count: true
+=======
+    // Parse CSV content using csv-parse/sync
+    const rawRows = parse(csvContent, {
+      columns: false,
+      skip_empty_lines: true
+>>>>>>> origin/main
     });
+
+    // Convert parsed arrays to objects matching the expected format
+    const rows = [];
+    for (let i = 0; i < rawRows.length; i++) {
+      const row = rawRows[i];
+      rows.push({
+        'Night': row[0] || '',
+        'Team/': row[1] || '',
+        'C/CC': row[2] || '',
+        'Level': row[3] || '',
+        '1-Name': row[4] || '',
+        'TEAM NAME': row[5] || ''
+      });
+    }
+
 
     console.log(`Parsed ${rows.length} rows from CSV`);
     return rows;
