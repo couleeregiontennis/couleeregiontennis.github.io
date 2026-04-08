@@ -4,7 +4,7 @@ const path = require('path');
 const { fetchCSV } = require('./fetch-csv');
 
 // CONFIG
-const OUTPUT_DIR = '../teams';
+const OUTPUT_DIR = path.join(__dirname, '../teams');
 const START_DATE = '2025-06-03'; // Change as needed
 const COURT_GROUPS = ["Courts 1–5", "Courts 6–9", "Courts 10–13"];
 const TIMES = ["5:30pm", "7:00pm"];
@@ -25,6 +25,19 @@ async function loadSheet() {
     const csvContent = await fetchCSV(CSV_URL);
     console.log('CSV data fetched successfully');
     
+    // Parse CSV
+    const rows = parse(csvContent, {
+      columns: [
+        'Night',
+        'Team/',
+        'C/CC',
+        'Level',
+        '1-Name',
+        'TEAM NAME'
+      ],
+      from_line: 2,
+      skip_empty_lines: true,
+      relax_column_count: true
     // Parse CSV content using csv-parse/sync
     const rawRows = parse(csvContent, {
       columns: false,
