@@ -1,0 +1,1 @@
+- Context-blind generic escaping in URL attributes: Using escapeHTML for href attributes does not prevent javascript: URI schemes, leaving DOM-based XSS vectors open.
