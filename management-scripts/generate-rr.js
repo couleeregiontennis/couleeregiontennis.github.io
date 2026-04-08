@@ -1,4 +1,4 @@
-const XLSX = require('xlsx');
+const { parse } = require('csv-parse/sync');
 const fs = require('fs');
 const path = require('path');
 const { fetchCSV } = require('./fetch-csv');
@@ -25,27 +25,26 @@ async function loadSheet() {
     const csvContent = await fetchCSV(CSV_URL);
     console.log('CSV data fetched successfully');
     
-    // Create workbook from CSV
-    const wb = XLSX.read(csvContent, { 
-      type: 'string',
-      raw: true,
-      cellDates: true,
-      dateNF: 'yyyy-mm-dd'
+    // Parse CSV content using csv-parse/sync
+    const rawRows = parse(csvContent, {
+      columns: false,
+      skip_empty_lines: true
     });
-    
-    const ws = wb.Sheets[wb.SheetNames[0]];
-    const rows = XLSX.utils.sheet_to_json(ws, { 
-      raw: false,
-      defval: '',
-      header: [
-        'Night',
-        'Team/',
-        'C/CC',
-        'Level',
-        '1-Name',
-        'TEAM NAME'
-      ]
-    });
+
+    // Convert parsed arrays to objects matching the expected format
+    const rows = [];
+    for (let i = 0; i < rawRows.length; i++) {
+      const row = rawRows[i];
+      rows.push({
+        'Night': row[0] || '',
+        'Team/': row[1] || '',
+        'C/CC': row[2] || '',
+        'Level': row[3] || '',
+        '1-Name': row[4] || '',
+        'TEAM NAME': row[5] || ''
+      });
+    }
+
 
     console.log(`Parsed ${rows.length} rows from CSV`);
     return rows;
