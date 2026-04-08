@@ -25,7 +25,6 @@ async function loadSheet() {
     const csvContent = await fetchCSV(CSV_URL);
     console.log('CSV data fetched successfully');
     
-<<<<<<< HEAD
     // Parse CSV
     const rows = parse(csvContent, {
       columns: [
@@ -39,12 +38,10 @@ async function loadSheet() {
       from_line: 2,
       skip_empty_lines: true,
       relax_column_count: true
-=======
     // Parse CSV content using csv-parse/sync
     const rawRows = parse(csvContent, {
       columns: false,
       skip_empty_lines: true
->>>>>>> origin/main
     });
 
     // Convert parsed arrays to objects matching the expected format
