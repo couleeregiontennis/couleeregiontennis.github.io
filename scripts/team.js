@@ -12,7 +12,7 @@ function sanitizeUrl(url) {
   if (!url) return '';
   const trimmed = url.trim();
   const lower = trimmed.toLowerCase();
-  if (lower.startsWith('javascript:') || lower.startsWith('data:')) {
+  if (lower.startsWith('javascript:') || lower.startsWith('data:') || lower.startsWith('vbscript:')) {
     return '#';
   }
   return trimmed;
