@@ -21,7 +21,7 @@ fetch(CSV_URL)
     }
 
     // Header
-    thead.innerHTML = '<tr>' + rows[0].map(h => `<th>${h}</th>`).join('') + '</tr>';
+    thead.innerHTML = '<tr>' + rows[0].map(h => `<th>${escapeHTML(h)}</th>`).join('') + '</tr>';
 
     // Find the "ranks" and "Night" column indices (case-insensitive)
     const totalIdx = rows[0].findIndex(h => h.trim().toLowerCase() === "rank");
@@ -39,8 +39,8 @@ fetch(CSV_URL)
         return aVal - bVal;
       });
       tbody.innerHTML = sortedRows.map(row =>
-        `<tr data-night="${row[nightIdx].toLowerCase()}">` + 
-        row.map(cell => `<td>${cell}</td>`).join('') + 
+        `<tr data-night="${escapeHTML(row[nightIdx].toLowerCase())}">` +
+        row.map(cell => `<td>${escapeHTML(cell)}</td>`).join('') +
         '</tr>'
       ).join('');
     }
@@ -58,3 +58,12 @@ fetch(CSV_URL)
       });
     });
   });
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
