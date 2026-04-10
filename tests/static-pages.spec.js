@@ -16,4 +16,9 @@ test.describe('Static Pages', () => {
         // The rules page usually has a specific header or title.
         await expect(page.getByRole('heading', { level: 1, name: 'La Crosse Team Tennis Association (LTTA) – Summer League 2025' })).toBeVisible();
     });
+
+    test('Green Island page renders correctly', async ({ page }) => {
+        await page.goto('/pages/greenisland.html');
+        await expect(page.getByRole('heading', { level: 1, name: 'Green Island' })).toBeVisible();
+    });
 });
