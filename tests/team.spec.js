@@ -10,10 +10,20 @@ test.describe('Team Page', () => {
 
         // Wait for the match schedule rows to populate
         // We wait for the table row to be visible instead of using a lazy `not.toHaveCount(0)` wait
-        await expect(page.locator('#matches-table tbody tr').nth(0)).toBeVisible();
+        await expect(page.locator('#matches-table').getByRole('row').nth(1)).toBeVisible();
+
+        // Wait for the Team Roster rows to populate
+        await expect(page.locator('table:not(#matches-table)').getByRole('row').nth(1)).toBeVisible();
 
         // Check if table headers exist
         await expect(page.getByRole('columnheader', { name: 'Week' })).toBeVisible();
+    });
+
+    test('should display error messages when match or roster data fails to load', async ({ page }) => {
+        await page.goto('/pages/team.html?day=tuesday&team=invalid');
+
+        await expect(page.getByRole('cell', { name: /Could not load match data\./i })).toBeVisible();
+        await expect(page.getByRole('cell', { name: /Could not load roster data\./i })).toBeVisible();
     });
 
     test('should handle missing URL parameters gracefully', async ({ page }) => {
