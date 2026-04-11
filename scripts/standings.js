@@ -20,8 +20,18 @@ fetch(CSV_URL)
       tableResponsive.parentNode.insertBefore(filterContainer, tableResponsive);
     }
 
+    function escapeHTML(val) {
+      if (val === null || val === undefined) return '';
+      return String(val)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
     // Header
-    thead.innerHTML = '<tr>' + rows[0].map(h => `<th>${h}</th>`).join('') + '</tr>';
+    thead.innerHTML = '<tr>' + rows[0].map(h => `<th>${escapeHTML(h)}</th>`).join('') + '</tr>';
 
     // Find the "ranks" and "Night" column indices (case-insensitive)
     const totalIdx = rows[0].findIndex(h => h.trim().toLowerCase() === "rank");
@@ -39,8 +49,8 @@ fetch(CSV_URL)
         return aVal - bVal;
       });
       tbody.innerHTML = sortedRows.map(row =>
-        `<tr data-night="${row[nightIdx].toLowerCase()}">` + 
-        row.map(cell => `<td>${cell}</td>`).join('') + 
+        `<tr data-night="${escapeHTML(row[nightIdx].toLowerCase())}">` +
+        row.map(cell => `<td>${escapeHTML(cell)}</td>`).join('') +
         '</tr>'
       ).join('');
     }
