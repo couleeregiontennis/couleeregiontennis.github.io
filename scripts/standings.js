@@ -1,3 +1,12 @@
+function escapeHTML(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ09FIuDMkX5mmdp9e-szR15pWx2cp-YyqsYxoNBL4FM0y8v3Q_LKboCjAEcUyobbgwCCGQpSMT3bXh/pub?output=csv";
 fetch(CSV_URL)
   .then(res => res.text())
@@ -21,7 +30,7 @@ fetch(CSV_URL)
     }
 
     // Header
-    thead.innerHTML = '<tr>' + rows[0].map(h => `<th>${h}</th>`).join('') + '</tr>';
+    thead.innerHTML = '<tr>' + rows[0].map(h => `<th>${escapeHTML(h)}</th>`).join('') + '</tr>';
 
     // Find the "ranks" and "Night" column indices (case-insensitive)
     const totalIdx = rows[0].findIndex(h => h.trim().toLowerCase() === "rank");
@@ -39,8 +48,8 @@ fetch(CSV_URL)
         return aVal - bVal;
       });
       tbody.innerHTML = sortedRows.map(row =>
-        `<tr data-night="${row[nightIdx].toLowerCase()}">` + 
-        row.map(cell => `<td>${cell}</td>`).join('') + 
+        `<tr data-night="${escapeHTML(row[nightIdx].toLowerCase())}">` +
+        row.map(cell => `<td>${escapeHTML(cell)}</td>`).join('') +
         '</tr>'
       ).join('');
     }
