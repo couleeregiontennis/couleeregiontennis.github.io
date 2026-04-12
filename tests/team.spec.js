@@ -10,10 +10,13 @@ test.describe('Team Page', () => {
 
         // Wait for the match schedule rows to populate
         // We wait for the table row to be visible instead of using a lazy `not.toHaveCount(0)` wait
-        await expect(page.locator('#matches-table tbody tr').nth(0)).toBeVisible();
+        await expect(page.locator('#matches-table tbody').getByRole('row').nth(0)).toBeVisible();
 
         // Check if table headers exist
         await expect(page.getByRole('columnheader', { name: 'Week' })).toBeVisible();
+
+        // Check if the team roster table is populated
+        await expect(page.locator('table:not(#matches-table) tbody').getByRole('row').nth(0)).toBeVisible();
     });
 
     test('should handle missing URL parameters gracefully', async ({ page }) => {
