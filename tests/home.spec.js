@@ -22,6 +22,6 @@ test.describe('Home Page', () => {
         await expect(page).toHaveURL(/.*pages\/team\.html\?day=tuesday&team=1/);
 
         // Verify the team name is visible on the new page
-        await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+        await expect(page.getByRole('heading', { level: 1, name: 'Spin Doctors' })).toBeVisible();
     });
 });
