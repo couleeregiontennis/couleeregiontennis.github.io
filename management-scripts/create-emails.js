@@ -1,15 +1,15 @@
 const fs = require('fs');
 const path = require('path');
-const csv = require('csv-parser');
+const { parse } = require('csv-parse/sync');
 const { fetchCSV } = require('./fetch-csv');
 
-const OUTPUT_DIR = '../output_emails';
+const OUTPUT_DIR = path.join(__dirname, '..', 'output_emails');
 
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRlgS5yGzip6doLKqud9BDdpCt1_8CPWNjUxFmYgVdkdbQ_MNIc1ku1GJoZ2NBEuw/pub?gid=270023155&single=true&output=csv';
 
 // Ensure output directory exists
 if (!fs.existsSync(OUTPUT_DIR)) {
-  fs.mkdirSync(OUTPUT_DIR);
+  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
 
 const coordinator = {
@@ -41,12 +41,14 @@ async function main() {
     console.log('Fetched CSV data successfully');
     
     // Parse CSV content
-    const records = [];
-    const parser = csv({
-      mapValues: ({ header, value }) => value.trim()
+    const parsedData = parse(csvContent, {
+      columns: true,
+      skip_empty_lines: true,
+      trim: true
     });
 
-    parser.on('data', (data) => {
+    const records = [];
+    parsedData.forEach((data) => {
       // Map new column names to expected format
       const record = {
         Night: data.Night,
@@ -60,9 +62,8 @@ async function main() {
       records.push(record);
     });
 
-    parser.on('end', () => {
-      // Group players by team
-      records.forEach(record => {
+    // Group players by team
+    records.forEach(record => {
         if (!record.Night || !record.Team || !record.Name) {
           console.warn('Skipping incomplete record:', record);
           return;
@@ -221,10 +222,6 @@ async function main() {
         fs.writeFileSync(fileName, emailContent, 'utf8');
         console.log(`✅ Created email for ${night} Team ${teamNumber} – ${fileName}`);
       });
-    });
-    
-    parser.write(csvContent);
-    parser.end();
 
   } catch (error) {
     console.error('Error processing CSV:', error);
