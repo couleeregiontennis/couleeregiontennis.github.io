@@ -1,4 +1,28 @@
 // This script dynamically loads match and roster data into tables and highlights the next match
+
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function sanitizeUrl(urlStr) {
+  if (!urlStr) return '';
+  try {
+    const parsed = new URL(String(urlStr), window.location.origin);
+    if (['javascript:', 'data:', 'vbscript:'].includes(parsed.protocol)) {
+      return 'about:blank';
+    }
+    return String(urlStr);
+  } catch (e) {
+    return 'about:blank';
+  }
+}
+
 async function loadTeamData(scheduleUrl, rosterUrl) {
   const tableBody = document.querySelector("#matches-table tbody");
   const rosterBody = document.querySelector("table:not(#matches-table) tbody");
@@ -18,17 +42,17 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
     tableBody.innerHTML = "";
     (scheduleData.schedule || []).forEach(match => {
       const icsLink = match.ics
-        ? `<a href="${match.ics}" download="LTTA-Match-Week${match.week}.ics" title="Add to calendar">📅</a>`
+        ? `<a href="${sanitizeUrl(match.ics)}" download="LTTA-Match-Week${escapeHTML(match.week)}.ics" title="Add to calendar">📅</a>`
         : '';
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${match.week}</td>
-        <td>${formatDateUS(match.date)}</td>
-        <td>${match.time}</td>
+        <td>${escapeHTML(match.week)}</td>
+        <td>${escapeHTML(formatDateUS(match.date))}</td>
+        <td>${escapeHTML(match.time)}</td>
         <td>
-          <a href="${match.opponent.file}" class="team-link">${match.opponent.name}</a>
+          <a href="${sanitizeUrl(match.opponent.file)}" class="team-link">${escapeHTML(match.opponent.name)}</a>
         </td>
-        <td>${match.courts}</td>
+        <td>${escapeHTML(match.courts)}</td>
         <td style="text-align:center">${icsLink}</td>
       `;
       tableBody.appendChild(tr);
@@ -39,15 +63,15 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
     (rosterData.roster || []).forEach(player => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${player.position}</td>
-        <td>${player.name}</td>
-        <td>${player.captain || ""}</td>
+        <td>${escapeHTML(player.position)}</td>
+        <td>${escapeHTML(player.name)}</td>
+        <td>${escapeHTML(player.captain || "")}</td>
       `;
       rosterBody.appendChild(tr);
     });
 
     // After loading the team data and knowing the ICS path:
-    document.getElementById('add-all-ics').href = scheduleData.teamIcsPath || `/teams/${scheduleData.night}/ics/${scheduleData.team.replace(/\s+/g, '_')}/team.ics`;
+    document.getElementById('add-all-ics').href = sanitizeUrl(scheduleData.teamIcsPath) || sanitizeUrl(`/teams/${scheduleData.night}/ics/${scheduleData.team.replace(/\s+/g, '_')}/team.ics`);
 
     highlightNextMatch();
   } catch (err) {
