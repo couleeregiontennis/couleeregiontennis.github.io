@@ -17,10 +17,15 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
   if (!tableBody || !rosterBody) return;
 
   try {
-    const scheduleResponse = await fetch(scheduleUrl);
-    const scheduleData = await scheduleResponse.json();
-    const rosterResponse = await fetch(rosterUrl);
-    const rosterData = await rosterResponse.json();
+    // ⚡ Bolt: Parallelize schedule and roster data fetches to reduce wait time
+    const [scheduleResponse, rosterResponse] = await Promise.all([
+      fetch(scheduleUrl),
+      fetch(rosterUrl)
+    ]);
+    const [scheduleData, rosterData] = await Promise.all([
+      scheduleResponse.json(),
+      rosterResponse.json()
+    ]);
 
     // Update header with team name if available
     if (header && rosterData.teamName) header.textContent = rosterData.teamName;
