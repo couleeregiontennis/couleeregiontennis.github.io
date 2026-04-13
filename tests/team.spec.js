@@ -10,7 +10,7 @@ test.describe('Team Page', () => {
 
         // Wait for the match schedule rows to populate
         // We wait for the table row to be visible instead of using a lazy `not.toHaveCount(0)` wait
-        await expect(page.locator('#matches-table tbody tr').nth(0)).toBeVisible();
+        await expect(page.getByRole('row').nth(1)).toBeVisible();
 
         // Check if table headers exist
         await expect(page.getByRole('columnheader', { name: 'Week' })).toBeVisible();
