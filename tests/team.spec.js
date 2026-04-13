@@ -17,10 +17,10 @@ test.describe('Team Page', () => {
     });
 
     test('should handle missing URL parameters gracefully', async ({ page }) => {
-        await page.goto('/pages/team.html');
+        await page.goto('/pages/team.html?day=invalid&team=invalid');
 
-        // Depending on the implementation, it might show "Team not found" or leave it empty.
-        // For now, let's just assert the page loads without crashing the core layout.
         await expect(page.getByRole('heading', { level: 2, name: 'Match Schedule' })).toBeVisible();
+        await expect(page.getByRole('cell', { name: 'Could not load match data.', exact: true })).toBeVisible();
+        await expect(page.getByRole('cell', { name: 'Could not load roster data.', exact: true })).toBeVisible();
     });
 });
