@@ -25,19 +25,6 @@ async function loadSheet() {
     const csvContent = await fetchCSV(CSV_URL);
     console.log('CSV data fetched successfully');
     
-    // Parse CSV
-    const rows = parse(csvContent, {
-      columns: [
-        'Night',
-        'Team/',
-        'C/CC',
-        'Level',
-        '1-Name',
-        'TEAM NAME'
-      ],
-      from_line: 2,
-      skip_empty_lines: true,
-      relax_column_count: true
     // Parse CSV content using csv-parse/sync
     const rawRows = parse(csvContent, {
       columns: false,
