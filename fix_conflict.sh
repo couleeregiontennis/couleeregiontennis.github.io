@@ -1,3 +1,4 @@
+cat << 'INNER_EOF' > tests/team.spec.js
 const { test, expect } = require('@playwright/test');
 
 test.describe('Team Page', () => {
@@ -34,3 +35,4 @@ test.describe('Team Page', () => {
         await expect(page.getByRole('cell', { name: 'Could not load roster data.', exact: true })).toBeVisible();
     });
 });
+INNER_EOF

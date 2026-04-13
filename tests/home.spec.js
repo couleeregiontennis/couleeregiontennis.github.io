@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 test.describe('Home Page', () => {
     test('should display the main header', async ({ page }) => {
         await page.goto('/');
-        await expect(page.getByRole('heading', { level: 1, name: 'Teams' })).toBeVisible();
+        await expect(page.getByRole('heading', { level: 1, name: 'Teams', exact: true })).toBeVisible();
     });
 
     test('should display both league sections', async ({ page }) => {
