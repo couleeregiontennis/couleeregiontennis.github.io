@@ -89,12 +89,12 @@
     "time": "7:00pm",
     "courts": "Courts 10–13",
     "teamA": {
-      "number": "1",
-      "name": "LAX-Winona Fusion"
-    },
-    "teamB": {
       "number": "11",
       "name": "Simply Smashing"
+    },
+    "teamB": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
     }
   },
   {
@@ -117,12 +117,12 @@
     "time": "5:30pm",
     "courts": "Courts 10–13",
     "teamA": {
-      "number": "2",
-      "name": "Rally Monkeys"
-    },
-    "teamB": {
       "number": "9",
       "name": "Baseliners"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Rally Monkeys"
     }
   },
   {
@@ -131,12 +131,12 @@
     "time": "7:00pm",
     "courts": "Courts 1–5",
     "teamA": {
-      "number": "3",
-      "name": "Hit Squad"
-    },
-    "teamB": {
       "number": "8",
       "name": "Not My Fault"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Hit Squad"
     }
   },
   {
@@ -145,12 +145,12 @@
     "time": "6:00pm",
     "courts": "Forest Hills",
     "teamA": {
-      "number": "4",
-      "name": "Hot Shots"
-    },
-    "teamB": {
       "number": "7",
       "name": "Serve Aces"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Hot Shots"
     }
   },
   {
@@ -173,12 +173,12 @@
     "time": "6:00pm",
     "courts": "Forest Hills",
     "teamA": {
-      "number": "1",
-      "name": "LAX-Winona Fusion"
-    },
-    "teamB": {
       "number": "10",
       "name": "Backhand Bandits"
+    },
+    "teamB": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
     }
   },
   {
@@ -285,12 +285,12 @@
     "time": "5:30pm",
     "courts": "Courts 10–13",
     "teamA": {
-      "number": "11",
-      "name": "Simply Smashing"
-    },
-    "teamB": {
       "number": "7",
       "name": "Serve Aces"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Simply Smashing"
     }
   },
   {
@@ -299,12 +299,12 @@
     "time": "5:30pm",
     "courts": "Courts 1–5",
     "teamA": {
-      "number": "12",
-      "name": "Nothing But Net"
-    },
-    "teamB": {
       "number": "6",
       "name": "Howie's Team"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Nothing But Net"
     }
   },
   {
@@ -341,12 +341,12 @@
     "time": "5:30pm",
     "courts": "Courts 6–9",
     "teamA": {
-      "number": "1",
-      "name": "LAX-Winona Fusion"
-    },
-    "teamB": {
       "number": "8",
       "name": "Not My Fault"
+    },
+    "teamB": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
     }
   },
   {
@@ -467,12 +467,12 @@
     "time": "5:30pm",
     "courts": "Courts 10–13",
     "teamA": {
-      "number": "10",
-      "name": "Backhand Bandits"
-    },
-    "teamB": {
       "number": "4",
       "name": "Hot Shots"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Backhand Bandits"
     }
   },
   {
@@ -509,12 +509,12 @@
     "time": "5:30pm",
     "courts": "Courts 6–9",
     "teamA": {
-      "number": "1",
-      "name": "LAX-Winona Fusion"
-    },
-    "teamB": {
       "number": "6",
       "name": "Howie's Team"
+    },
+    "teamB": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
     }
   },
   {
@@ -593,12 +593,12 @@
     "time": "7:00pm",
     "courts": "Courts 10–13",
     "teamA": {
-      "number": "1",
-      "name": "LAX-Winona Fusion"
-    },
-    "teamB": {
       "number": "5",
       "name": "Glory Days"
+    },
+    "teamB": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
     }
   },
   {
@@ -761,12 +761,12 @@
     "time": "7:00pm",
     "courts": "Courts 10–13",
     "teamA": {
-      "number": "1",
-      "name": "LAX-Winona Fusion"
-    },
-    "teamB": {
       "number": "3",
       "name": "Hit Squad"
+    },
+    "teamB": {
+      "number": "1",
+      "name": "LAX-Winona Fusion"
     }
   },
   {

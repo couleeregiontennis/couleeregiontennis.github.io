@@ -114,12 +114,18 @@ function assignSlotsToMatches(matchesByWeek, teams) {
   const slots = [];
   COURT_GROUPS.forEach(court => TIMES.forEach(time => slots.push({ court, time })));
 
-  // Track how many times each team has played at each time and court
-  const teamTimeCounts = {};
-  const teamCourtCounts = {};
+  // Track how many times each team has played at each time, court, and home/away
+  const teamStats = {};
   teams.forEach(t => {
-    teamTimeCounts[t.number] = { "5:30pm": 0, "7:00pm": 0 };
-    teamCourtCounts[t.number] = { "Courts 1–5": 0, "Courts 6–9": 0, "Courts 10–13": 0 };
+    teamStats[t.number] = { 
+      "5:30pm": 0, 
+      "7:00pm": 0,
+      "Courts 1–5": 0, 
+      "Courts 6–9": 0, 
+      "Courts 10–13": 0,
+      "home": 0,
+      "away": 0
+    };
   });
 
   const weekAssignments = [];
@@ -133,22 +139,34 @@ function assignSlotsToMatches(matchesByWeek, teams) {
 
     const assignments = [];
     matches.forEach(([a, b], i) => {
+      // Decide Home/Away first
+      let home, away;
+      if (teamStats[a.number].home <= teamStats[b.number].home) {
+        home = a;
+        away = b;
+      } else {
+        home = b;
+        away = a;
+      }
+      teamStats[home.number].home++;
+      teamStats[away.number].away++;
+
       // Try to balance time slots and courts for teams
       weekSlots.sort((s1, s2) => {
-        const time1 = teamTimeCounts[a.number][s1.time] + teamTimeCounts[b.number][s1.time];
-        const time2 = teamTimeCounts[a.number][s2.time] + teamTimeCounts[b.number][s2.time];
+        const time1 = teamStats[a.number][s1.time] + teamStats[b.number][s1.time];
+        const time2 = teamStats[a.number][s2.time] + teamStats[b.number][s2.time];
         if (time1 !== time2) return time1 - time2;
         
-        const court1 = teamCourtCounts[a.number][s1.court] + teamCourtCounts[b.number][s1.court];
-        const court2 = teamCourtCounts[a.number][s2.court] + teamCourtCounts[b.number][s2.court];
+        const court1 = teamStats[a.number][s1.court] + teamStats[b.number][s1.court];
+        const court2 = teamStats[a.number][s2.court] + teamStats[b.number][s2.court];
         return court1 - court2;
       });
       const slot = weekSlots.shift();
-      teamTimeCounts[a.number][slot.time]++;
-      teamTimeCounts[b.number][slot.time]++;
-      teamCourtCounts[a.number][slot.court]++;
-      teamCourtCounts[b.number][slot.court]++;
-      assignments.push({ teamA: a, teamB: b, court: slot.court, time: slot.time });
+      teamStats[a.number][slot.time]++;
+      teamStats[b.number][slot.time]++;
+      teamStats[a.number][slot.court]++;
+      teamStats[b.number][slot.court]++;
+      assignments.push({ teamA: home, teamB: away, court: slot.court, time: slot.time });
     });
     weekAssignments.push(assignments);
   });
@@ -309,6 +327,7 @@ async function main() {
             date: weekDates[weekIdx],
             time: match.time,
             courts: match.court,
+            homeAway: "Home",
             opponent: {
               name: teamB.name,
               number: teamB.number,
@@ -320,6 +339,7 @@ async function main() {
             date: weekDates[weekIdx],
             time: match.time,
             courts: match.court,
+            homeAway: "Away",
             opponent: {
               name: teamA.name,
               number: teamA.number,

@@ -89,12 +89,12 @@
     "time": "7:00pm",
     "courts": "Courts 10–13",
     "teamA": {
-      "number": "1",
-      "name": "Spin Doctors"
-    },
-    "teamB": {
       "number": "11",
       "name": "Full Metal Racquet"
+    },
+    "teamB": {
+      "number": "1",
+      "name": "Spin Doctors"
     }
   },
   {
@@ -117,12 +117,12 @@
     "time": "5:30pm",
     "courts": "Courts 10–13",
     "teamA": {
-      "number": "2",
-      "name": "Tennis the Menace"
-    },
-    "teamB": {
       "number": "9",
       "name": "Bounce It"
+    },
+    "teamB": {
+      "number": "2",
+      "name": "Tennis the Menace"
     }
   },
   {
@@ -131,12 +131,12 @@
     "time": "7:00pm",
     "courts": "Courts 1–5",
     "teamA": {
-      "number": "3",
-      "name": "Zoomers"
-    },
-    "teamB": {
       "number": "8",
       "name": "Return to Sender with Love"
+    },
+    "teamB": {
+      "number": "3",
+      "name": "Zoomers"
     }
   },
   {
@@ -145,12 +145,12 @@
     "time": "6:00pm",
     "courts": "Forest Hills",
     "teamA": {
-      "number": "4",
-      "name": "Approach Shots"
-    },
-    "teamB": {
       "number": "7",
       "name": "Good Ol' Boys"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Approach Shots"
     }
   },
   {
@@ -173,12 +173,12 @@
     "time": "6:00pm",
     "courts": "Forest Hills",
     "teamA": {
-      "number": "1",
-      "name": "Spin Doctors"
-    },
-    "teamB": {
       "number": "10",
       "name": "Jetsetters"
+    },
+    "teamB": {
+      "number": "1",
+      "name": "Spin Doctors"
     }
   },
   {
@@ -285,12 +285,12 @@
     "time": "5:30pm",
     "courts": "Courts 10–13",
     "teamA": {
-      "number": "11",
-      "name": "Full Metal Racquet"
-    },
-    "teamB": {
       "number": "7",
       "name": "Good Ol' Boys"
+    },
+    "teamB": {
+      "number": "11",
+      "name": "Full Metal Racquet"
     }
   },
   {
@@ -299,12 +299,12 @@
     "time": "5:30pm",
     "courts": "Courts 1–5",
     "teamA": {
-      "number": "12",
-      "name": "Easy Overhead"
-    },
-    "teamB": {
       "number": "6",
       "name": "Rascals"
+    },
+    "teamB": {
+      "number": "12",
+      "name": "Easy Overhead"
     }
   },
   {
@@ -341,12 +341,12 @@
     "time": "5:30pm",
     "courts": "Courts 6–9",
     "teamA": {
-      "number": "1",
-      "name": "Spin Doctors"
-    },
-    "teamB": {
       "number": "8",
       "name": "Return to Sender with Love"
+    },
+    "teamB": {
+      "number": "1",
+      "name": "Spin Doctors"
     }
   },
   {
@@ -467,12 +467,12 @@
     "time": "5:30pm",
     "courts": "Courts 10–13",
     "teamA": {
-      "number": "10",
-      "name": "Jetsetters"
-    },
-    "teamB": {
       "number": "4",
       "name": "Approach Shots"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Jetsetters"
     }
   },
   {
@@ -509,12 +509,12 @@
     "time": "5:30pm",
     "courts": "Courts 6–9",
     "teamA": {
-      "number": "1",
-      "name": "Spin Doctors"
-    },
-    "teamB": {
       "number": "6",
       "name": "Rascals"
+    },
+    "teamB": {
+      "number": "1",
+      "name": "Spin Doctors"
     }
   },
   {
@@ -593,12 +593,12 @@
     "time": "7:00pm",
     "courts": "Courts 10–13",
     "teamA": {
-      "number": "1",
-      "name": "Spin Doctors"
-    },
-    "teamB": {
       "number": "5",
       "name": "Racquet Scientists"
+    },
+    "teamB": {
+      "number": "1",
+      "name": "Spin Doctors"
     }
   },
   {
@@ -761,12 +761,12 @@
     "time": "7:00pm",
     "courts": "Courts 10–13",
     "teamA": {
-      "number": "1",
-      "name": "Spin Doctors"
-    },
-    "teamB": {
       "number": "3",
       "name": "Zoomers"
+    },
+    "teamB": {
+      "number": "1",
+      "name": "Spin Doctors"
     }
   },
   {

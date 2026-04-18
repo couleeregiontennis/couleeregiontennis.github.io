@@ -53,23 +53,19 @@ teamFiles.forEach(file => {
 });
 
 // Gather all matches by week
+const masterSchedulePath = path.join(schedulesDir, 'master_schedule.json');
+const masterSchedule = JSON.parse(fs.readFileSync(masterSchedulePath, 'utf8'));
 const matchesByWeek = {};
-teamFiles.forEach(file => {
-  const teamNum = file.replace(/\.json$/, '');
-  const data = JSON.parse(fs.readFileSync(path.join(schedulesDir, file), 'utf8'));
-  (data.schedule || []).forEach(match => {
-    const week = match.week;
-    if (!matchesByWeek[week]) matchesByWeek[week] = [];
-    // Avoid duplicate matches (only add if teamNum < opponent.number)
-    if (parseInt(teamNum) < parseInt(match.opponent.number)) {
-      matchesByWeek[week].push({
-        team: teamNum,
-        opponent: match.opponent.number,
-        time: match.time,
-        courts: match.courts,
-        date: match.date
-      });
-    }
+
+masterSchedule.forEach(match => {
+  const week = match.week;
+  if (!matchesByWeek[week]) matchesByWeek[week] = [];
+  matchesByWeek[week].push({
+    team: match.teamA.number,
+    opponent: match.teamB.number,
+    time: match.time,
+    courts: match.courts,
+    date: match.date
   });
 });
 
@@ -254,6 +250,7 @@ let html = `<!DOCTYPE html>
   </head>
   <body>
     <h1>${scheduleTitle}</h1>
+    <p style="text-align:center; font-size: 0.8em; margin-top: -10px;">(Home Team listed first)</p>
     <table class="schedule-table">
       <tr>
         <th class="court-header">Court Group</th>

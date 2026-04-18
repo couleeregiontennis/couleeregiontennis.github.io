@@ -7,6 +7,7 @@
       "date": "2026-05-27",
       "time": "5:30pm",
       "courts": "Courts 6–9",
+      "homeAway": "Away",
       "opponent": {
         "name": "Hit Squad",
         "number": "3",
@@ -19,6 +20,7 @@
       "date": "2026-06-03",
       "time": "7:00pm",
       "courts": "Courts 6–9",
+      "homeAway": "Away",
       "opponent": {
         "name": "Nothing But Net",
         "number": "12",
@@ -31,6 +33,7 @@
       "date": "2026-06-10",
       "time": "6:00pm",
       "courts": "Forest Hills",
+      "homeAway": "Home",
       "opponent": {
         "name": "LAX-Winona Fusion",
         "number": "1",
@@ -43,6 +46,7 @@
       "date": "2026-06-17",
       "time": "7:00pm",
       "courts": "Courts 6–9",
+      "homeAway": "Home",
       "opponent": {
         "name": "Not My Fault",
         "number": "8",
@@ -55,6 +59,7 @@
       "date": "2026-06-24",
       "time": "7:00pm",
       "courts": "Courts 1–5",
+      "homeAway": "Home",
       "opponent": {
         "name": "Howie's Team",
         "number": "6",
@@ -67,6 +72,7 @@
       "date": "2026-07-01",
       "time": "5:30pm",
       "courts": "Courts 10–13",
+      "homeAway": "Away",
       "opponent": {
         "name": "Hot Shots",
         "number": "4",
@@ -79,6 +85,7 @@
       "date": "2026-07-08",
       "time": "5:30pm",
       "courts": "Courts 1–5",
+      "homeAway": "Home",
       "opponent": {
         "name": "Rally Monkeys",
         "number": "2",
@@ -91,6 +98,7 @@
       "date": "2026-07-15",
       "time": "5:30pm",
       "courts": "Courts 10–13",
+      "homeAway": "Home",
       "opponent": {
         "name": "Simply Smashing",
         "number": "11",
@@ -103,6 +111,7 @@
       "date": "2026-07-22",
       "time": "7:00pm",
       "courts": "Courts 10–13",
+      "homeAway": "Away",
       "opponent": {
         "name": "Baseliners",
         "number": "9",
@@ -115,6 +124,7 @@
       "date": "2026-07-29",
       "time": "5:30pm",
       "courts": "Courts 6–9",
+      "homeAway": "Away",
       "opponent": {
         "name": "Serve Aces",
         "number": "7",
@@ -127,6 +137,7 @@
       "date": "2026-08-05",
       "time": "7:00pm",
       "courts": "Courts 10–13",
+      "homeAway": "Away",
       "opponent": {
         "name": "Glory Days",
         "number": "5",

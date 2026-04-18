@@ -54,6 +54,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
         <td>${escapeHTML(match.week)}</td>
         <td>${escapeHTML(formatDateUS(match.date))}</td>
         <td>${escapeHTML(match.time)}</td>
+        <td style="text-align:center">${escapeHTML(match.homeAway || "")}</td>
         <td>
           <a href="${sanitizeUrl(match.opponent.file)}" class="team-link">${escapeHTML(match.opponent.name)}</a>
         </td>
