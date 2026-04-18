@@ -107,7 +107,7 @@
 
 .dropdown-menu li {
   width: 100%;
-  border: none; /* Reset borders for dropdown items */
+  border: none;
 }
 
 .dropdown-menu a {
@@ -133,7 +133,7 @@
 }
 
 .donate-button {
-  border-color: #ffc107 !important; /* Gold border for donation */
+  border-color: #ffc107 !important;
 }
 
 /* Modal Styles */
@@ -252,7 +252,7 @@
   .desktop-only {
     display: none !important;
   }
-...
+
   .navbar {
     position: relative;
   }
@@ -308,10 +308,7 @@
 
   /* Expand dropdown items in mobile */
   .navbar-menu .navbar-dropdown .dropdown-menu {
-    display: block; /* Always show in mobile view */
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
+    display: block !important;
     position: static;
     box-shadow: none;
     background: rgba(0,0,0,0.1);
@@ -372,12 +369,6 @@
     border-color: #444;
   }
   .qr-toggle-btn:hover {
-    background-color: #444;
-  }
-  .qr-container {
-    border-top-color: #444;
-  }
-}r {
     background-color: #444;
   }
   .qr-container {
