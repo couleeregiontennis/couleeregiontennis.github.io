@@ -94,10 +94,24 @@ weeks.forEach(week => {
     });
   });
   matchesByWeek[week].forEach(match => {
-    if (allCourts.includes(match.courts) && allTimes.includes(match.time)) {
-      schedule[week][match.courts][match.time].push({
+    let colCourt = match.courts;
+    let colTime = match.time;
+    let suffix = "";
+
+    if (match.courts === 'Forest Hills') {
+      colCourt = 'Courts 1–5';
+      suffix = '(Forest Hills)';
+    }
+    if (match.time === '6:00pm') {
+      colTime = '5:30pm';
+      suffix += ' (6:00pm)';
+    }
+
+    if (allCourts.includes(colCourt) && allTimes.includes(colTime)) {
+      schedule[week][colCourt][colTime].push({
         team: match.team,
-        opponent: match.opponent
+        opponent: match.opponent,
+        suffix: suffix.trim()
       });
     }
   });
@@ -257,7 +271,11 @@ weeks.forEach(week => {
       html += `        <td class="match-cell">`;
       if (matchups && matchups.length > 0) {
         matchups.slice(0, 2).forEach(m => {
-          html += `<span class="team-num">${m.team}</span>${teams[m.team]} vs <span class="team-num">${m.opponent}</span>${teams[m.opponent]}<br>`;
+          html += `<span class="team-num">${m.team}</span>${teams[m.team]} vs <span class="team-num">${m.opponent}</span>${teams[m.opponent]}`;
+          if (m.suffix) {
+            html += `<br><small style="color: #666; font-weight: bold;">${m.suffix}</small>`;
+          }
+          html += `<br>`;
         });
       }
       html += `</td>\n`;

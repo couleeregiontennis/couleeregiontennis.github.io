@@ -287,14 +287,12 @@ async function main() {
         const dateStr = weekDates[weekIdx];
         matches.forEach(match => {
           // Date specific overrides
-          if (dateStr === '2026-05-27' && match.time === '5:30pm') {
-            match.court = 'Forest Hills';
-          } else if (['2026-06-02', '2026-06-03', '2026-06-09', '2026-06-10'].includes(dateStr) && match.time === '5:30pm') {
+          if (['2026-05-27', '2026-06-02', '2026-06-03', '2026-06-09', '2026-06-10'].includes(dateStr) && match.time === '5:30pm') {
             if (match.court === 'Courts 1–5') {
-              match.court = 'Green Island Courts 8-13';
-            } else {
               match.court = 'Forest Hills';
-              match.time = '6:00pm';
+              if (dateStr !== '2026-05-27') {
+                match.time = '6:00pm';
+              }
             }
           }
 

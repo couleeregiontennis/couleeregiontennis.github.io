@@ -31,7 +31,7 @@
     "week": 1,
     "date": "2026-05-27",
     "time": "5:30pm",
-    "courts": "Forest Hills",
+    "courts": "Courts 6–9",
     "teamA": {
       "number": "3",
       "name": "sheldonhlee@gmail.com"
@@ -59,7 +59,7 @@
     "week": 1,
     "date": "2026-05-27",
     "time": "5:30pm",
-    "courts": "Forest Hills",
+    "courts": "Courts 10–13",
     "teamA": {
       "number": "5",
       "name": "laxoneills@charter.net"
@@ -114,8 +114,8 @@
   {
     "week": 2,
     "date": "2026-06-03",
-    "time": "6:00pm",
-    "courts": "Forest Hills",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
     "teamA": {
       "number": "2",
       "name": "brett.meddaugh@gmail.com"
@@ -142,8 +142,8 @@
   {
     "week": 2,
     "date": "2026-06-03",
-    "time": "5:30pm",
-    "courts": "Green Island Courts 8-13",
+    "time": "6:00pm",
+    "courts": "Forest Hills",
     "teamA": {
       "number": "4",
       "name": "reutla01@yahoo.com"
@@ -156,8 +156,8 @@
   {
     "week": 2,
     "date": "2026-06-03",
-    "time": "6:00pm",
-    "courts": "Forest Hills",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
     "teamA": {
       "number": "5",
       "name": "laxoneills@charter.net"
@@ -170,8 +170,8 @@
   {
     "week": 3,
     "date": "2026-06-10",
-    "time": "5:30pm",
-    "courts": "Green Island Courts 8-13",
+    "time": "6:00pm",
+    "courts": "Forest Hills",
     "teamA": {
       "number": "1",
       "name": "rjand541@gmail.com"
@@ -184,8 +184,8 @@
   {
     "week": 3,
     "date": "2026-06-10",
-    "time": "6:00pm",
-    "courts": "Forest Hills",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
     "teamA": {
       "number": "11",
       "name": "kurt@gutknecht.ws"
@@ -198,8 +198,8 @@
   {
     "week": 3,
     "date": "2026-06-10",
-    "time": "6:00pm",
-    "courts": "Forest Hills",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
     "teamA": {
       "number": "12",
       "name": "alexmoorehiller@gmail.com"

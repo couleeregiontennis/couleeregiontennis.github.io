@@ -114,8 +114,8 @@
   {
     "week": 2,
     "date": "2026-06-02",
-    "time": "6:00pm",
-    "courts": "Forest Hills",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
     "teamA": {
       "number": "2",
       "name": null
@@ -142,8 +142,8 @@
   {
     "week": 2,
     "date": "2026-06-02",
-    "time": "5:30pm",
-    "courts": "Green Island Courts 8-13",
+    "time": "6:00pm",
+    "courts": "Forest Hills",
     "teamA": {
       "number": "4",
       "name": "schigreg@luther.k12.wi.us"
@@ -156,8 +156,8 @@
   {
     "week": 2,
     "date": "2026-06-02",
-    "time": "6:00pm",
-    "courts": "Forest Hills",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
     "teamA": {
       "number": "5",
       "name": "mjharris84@gmail.com"
@@ -170,8 +170,8 @@
   {
     "week": 3,
     "date": "2026-06-09",
-    "time": "5:30pm",
-    "courts": "Green Island Courts 8-13",
+    "time": "6:00pm",
+    "courts": "Forest Hills",
     "teamA": {
       "number": "1",
       "name": "tung.ouy@gmail.com"
@@ -184,8 +184,8 @@
   {
     "week": 3,
     "date": "2026-06-09",
-    "time": "6:00pm",
-    "courts": "Forest Hills",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
     "teamA": {
       "number": "11",
       "name": "jherde18@gmail.com"
@@ -198,8 +198,8 @@
   {
     "week": 3,
     "date": "2026-06-09",
-    "time": "6:00pm",
-    "courts": "Forest Hills",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
     "teamA": {
       "number": "12",
       "name": "bmansky@gmail.com"

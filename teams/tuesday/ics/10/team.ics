@@ -35,8 +35,8 @@ DTSTAMP:20260609T173000Z
 DTSTART;TZID=America/Chicago:20260609T173000
 DTEND;TZID=America/Chicago:20260609T190000
 SUMMARY:LTTA Tennis: vs tung.ouy@gmail.com
-DESCRIPTION:LTTA Tennis match: 10 vs tung.ouy@gmail.com at Green Island Courts 8-13\nOpponent Roster: Tung Ouy (1); Rich Puent (2); Sai Mathi (3); Isaac Puent (3); Molly Stenger (3); Mohammad (3); Jim Brieske (4); Kalyan Satydeep (5)
-LOCATION:Green Island Courts 8-13
+DESCRIPTION:LTTA Tennis match: 10 vs tung.ouy@gmail.com at Forest Hills\nOpponent Roster: Tung Ouy (1); Rich Puent (2); Sai Mathi (3); Isaac Puent (3); Molly Stenger (3); Mohammad (3); Jim Brieske (4); Kalyan Satydeep (5)
+LOCATION:Forest Hills
 BEGIN:VALARM
 TRIGGER:-PT9H30M
 ACTION:DISPLAY
