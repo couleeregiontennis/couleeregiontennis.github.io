@@ -24,8 +24,8 @@ UID:ltta-tuesday-6-week9@couleeregiontennis.org
 DTSTAMP:20260721T190000Z
 DTSTART;TZID=America/Chicago:20260721T190000
 DTEND;TZID=America/Chicago:20260721T203000
-SUMMARY:LTTA Tennis: vs null
-DESCRIPTION:LTTA Tennis match: 6 vs null at Courts 6–9\nOpponent Roster: Robert Jordan (1); Jake Schweitzer (2); Mike Allen (3); Dave Mills (3); John Sullivan (3); Madan Mohan (3); Hailey Kincaid (4); Meg Jelen (5)
+SUMMARY:LTTA Tennis: vs Tennis the Menace
+DESCRIPTION:LTTA Tennis match: 6 vs Tennis the Menace at Courts 6–9\nOpponent Roster: Robert Jordan (1); Jake Schweitzer (2); Mike Allen (3); Dave Mills (3); John Sullivan (3); Madan Mohan (3); Hailey Kincaid (4); Meg Jelen (5)
 LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H

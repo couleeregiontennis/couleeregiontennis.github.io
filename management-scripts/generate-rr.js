@@ -41,7 +41,7 @@ async function loadSheet() {
         'C/CC': row[2] || '',
         'Level': row[3] || '',
         '1-Name': row[4] || '',
-        'TEAM NAME': row[5] || ''
+        'TEAM NAME': row[9] || ''
       });
     }
 
@@ -237,6 +237,9 @@ async function main() {
       if (teams.length < 2) {
         console.log(`Skipping '${night}' (only ${teams.length} team)`);
         continue;
+      }
+      if (night === 'tuesday') {
+        console.log("TEAMS for tuesday:", JSON.stringify(teams.slice(0, 2), null, 2));
       }
 
       const rosterDir = path.join(OUTPUT_DIR, night, "rosters");

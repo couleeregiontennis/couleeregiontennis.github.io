@@ -24,8 +24,8 @@ UID:ltta-wednesday-8-week9@couleeregiontennis.org
 DTSTAMP:20260722T190000Z
 DTSTART;TZID=America/Chicago:20260722T190000
 DTEND;TZID=America/Chicago:20260722T203000
-SUMMARY:LTTA Tennis: vs kurt@gutknecht.ws
-DESCRIPTION:LTTA Tennis match: 8 vs kurt@gutknecht.ws at Courts 1–5\nOpponent Roster: Kurt Gutknecht (1); Therese Waltz (2); Kacey Nomland (3); Tyler Thomas (3); David Yao (3); Kris Bartley (3); Jenna Dinkel (4); Logan Dzielinski (5)
+SUMMARY:LTTA Tennis: vs Simply Smashing
+DESCRIPTION:LTTA Tennis match: 8 vs Simply Smashing at Courts 1–5\nOpponent Roster: Kurt Gutknecht (1); Therese Waltz (2); Kacey Nomland (3); Tyler Thomas (3); David Yao (3); Kris Bartley (3); Jenna Dinkel (4); Logan Dzielinski (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT11H

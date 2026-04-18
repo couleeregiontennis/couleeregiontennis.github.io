@@ -24,8 +24,8 @@ UID:ltta-wednesday-3-week2@couleeregiontennis.org
 DTSTAMP:20260603T190000Z
 DTSTART;TZID=America/Chicago:20260603T190000
 DTEND;TZID=America/Chicago:20260603T203000
-SUMMARY:LTTA Tennis: vs dahlgl17@gmail.com
-DESCRIPTION:LTTA Tennis match: 3 vs dahlgl17@gmail.com at Courts 1–5\nOpponent Roster: Joe O'Flaherty (1); Ran Ikeyama (2); Dan Grilley (3); Ben Haenni (3); Tamara Byrne (3); Josh Neukom (3); Basu Bhattacharyya (4); John May (5)
+SUMMARY:LTTA Tennis: vs Not My Fault
+DESCRIPTION:LTTA Tennis match: 3 vs Not My Fault at Courts 1–5\nOpponent Roster: Joe O'Flaherty (1); Ran Ikeyama (2); Dan Grilley (3); Ben Haenni (3); Tamara Byrne (3); Josh Neukom (3); Basu Bhattacharyya (4); John May (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT11H

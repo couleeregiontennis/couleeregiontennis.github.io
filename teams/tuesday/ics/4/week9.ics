@@ -24,8 +24,8 @@ UID:ltta-tuesday-4-week9@couleeregiontennis.org
 DTSTAMP:20260721T173000Z
 DTSTART;TZID=America/Chicago:20260721T173000
 DTEND;TZID=America/Chicago:20260721T190000
-SUMMARY:LTTA Tennis: vs tung.ouy@gmail.com
-DESCRIPTION:LTTA Tennis match: 4 vs tung.ouy@gmail.com at Courts 1–5\nOpponent Roster: Tung Ouy (1); Rich Puent (2); Sai Mathi (3); Isaac Puent (3); Molly Stenger (3); Mohammad (3); Jim Brieske (4); Kalyan Satydeep (5)
+SUMMARY:LTTA Tennis: vs Spin Doctors
+DESCRIPTION:LTTA Tennis match: 4 vs Spin Doctors at Courts 1–5\nOpponent Roster: Tung Ouy (1); Rich Puent (2); Sai Mathi (3); Isaac Puent (3); Molly Stenger (3); Mohammad (3); Jim Brieske (4); Kalyan Satydeep (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M

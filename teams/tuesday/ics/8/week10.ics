@@ -24,8 +24,8 @@ UID:ltta-tuesday-8-week10@couleeregiontennis.org
 DTSTAMP:20260728T173000Z
 DTSTART;TZID=America/Chicago:20260728T173000
 DTEND;TZID=America/Chicago:20260728T190000
-SUMMARY:LTTA Tennis: vs nianyb@gmail.com
-DESCRIPTION:LTTA Tennis match: 8 vs nianyb@gmail.com at Courts 10–13\nOpponent Roster: Yubo Nian (1); Matt Diehl (2); Tom Dwyer (3); Joe Kotnour Sr. (3); Sean O'Flaherty (3); Dan Skemp (3); Aziz Bhetasiwala (4); Mike Roskos (5)
+SUMMARY:LTTA Tennis: vs Bounce It
+DESCRIPTION:LTTA Tennis match: 8 vs Bounce It at Courts 10–13\nOpponent Roster: Yubo Nian (1); Matt Diehl (2); Tom Dwyer (3); Joe Kotnour Sr. (3); Sean O'Flaherty (3); Dan Skemp (3); Aziz Bhetasiwala (4); Mike Roskos (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT9H30M

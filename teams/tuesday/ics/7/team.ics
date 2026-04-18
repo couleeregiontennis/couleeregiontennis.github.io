@@ -6,8 +6,8 @@ UID:ltta-tuesday-7-week1@couleeregiontennis.org
 DTSTAMP:20260526T190000Z
 DTSTART;TZID=America/Chicago:20260526T190000
 DTEND;TZID=America/Chicago:20260526T203000
-SUMMARY:LTTA Tennis: vs pcoppola6@yahoo.com
-DESCRIPTION:LTTA Tennis match: 7 vs pcoppola6@yahoo.com at Courts 10–13\nOpponent Roster: Peter Coppola (1); Laura Coppola (2); Ellen Seithamer (3); Pete  Thomson (3); Craig Hanson (3); Jason Herbert (3); Dan Russell (4); Becky Rauch (5)
+SUMMARY:LTTA Tennis: vs Rascals
+DESCRIPTION:LTTA Tennis match: 7 vs Rascals at Courts 10–13\nOpponent Roster: Peter Coppola (1); Laura Coppola (2); Ellen Seithamer (3); Pete  Thomson (3); Craig Hanson (3); Jason Herbert (3); Dan Russell (4); Becky Rauch (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT11H
@@ -20,8 +20,8 @@ UID:ltta-tuesday-7-week2@couleeregiontennis.org
 DTSTAMP:20260602T173000Z
 DTSTART;TZID=America/Chicago:20260602T173000
 DTEND;TZID=America/Chicago:20260602T190000
-SUMMARY:LTTA Tennis: vs schigreg@luther.k12.wi.us
-DESCRIPTION:LTTA Tennis match: 7 vs schigreg@luther.k12.wi.us at Forest Hills\nOpponent Roster: Greg Schibbelhut (1); Dillon Eddingsaas (2); John Aschenbrenner (3); Mary Aschenbrenner (3); Dale Barclay (3); Rich Levinger (3); Judith Engen (4); Amanda Wilke (5)
+SUMMARY:LTTA Tennis: vs Approach Shots
+DESCRIPTION:LTTA Tennis match: 7 vs Approach Shots at Forest Hills\nOpponent Roster: Greg Schibbelhut (1); Dillon Eddingsaas (2); John Aschenbrenner (3); Mary Aschenbrenner (3); Dale Barclay (3); Rich Levinger (3); Judith Engen (4); Amanda Wilke (5)
 LOCATION:Forest Hills
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -34,8 +34,8 @@ UID:ltta-tuesday-7-week3@couleeregiontennis.org
 DTSTAMP:20260609T190000Z
 DTSTART;TZID=America/Chicago:20260609T190000
 DTEND;TZID=America/Chicago:20260609T203000
-SUMMARY:LTTA Tennis: vs null
-DESCRIPTION:LTTA Tennis match: 7 vs null at Courts 6–9\nOpponent Roster: Robert Jordan (1); Jake Schweitzer (2); Mike Allen (3); Dave Mills (3); John Sullivan (3); Madan Mohan (3); Hailey Kincaid (4); Meg Jelen (5)
+SUMMARY:LTTA Tennis: vs Tennis the Menace
+DESCRIPTION:LTTA Tennis match: 7 vs Tennis the Menace at Courts 6–9\nOpponent Roster: Robert Jordan (1); Jake Schweitzer (2); Mike Allen (3); Dave Mills (3); John Sullivan (3); Madan Mohan (3); Hailey Kincaid (4); Meg Jelen (5)
 LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H
@@ -48,8 +48,8 @@ UID:ltta-tuesday-7-week4@couleeregiontennis.org
 DTSTAMP:20260616T173000Z
 DTSTART;TZID=America/Chicago:20260616T173000
 DTEND;TZID=America/Chicago:20260616T190000
-SUMMARY:LTTA Tennis: vs jherde18@gmail.com
-DESCRIPTION:LTTA Tennis match: 7 vs jherde18@gmail.com at Courts 10–13\nOpponent Roster: Tayler Garves Nelson (1); Todd Garves (2); Martin Frank (3); Regina Jones (3); Stephen Sinur (3); Hannah Exner (3); Kim Garves (4); Jane Frank (5)
+SUMMARY:LTTA Tennis: vs Full Metal Racquet
+DESCRIPTION:LTTA Tennis match: 7 vs Full Metal Racquet at Courts 10–13\nOpponent Roster: Tayler Garves Nelson (1); Todd Garves (2); Martin Frank (3); Regina Jones (3); Stephen Sinur (3); Hannah Exner (3); Kim Garves (4); Jane Frank (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -62,8 +62,8 @@ UID:ltta-tuesday-7-week5@couleeregiontennis.org
 DTSTAMP:20260623T173000Z
 DTSTART;TZID=America/Chicago:20260623T173000
 DTEND;TZID=America/Chicago:20260623T190000
-SUMMARY:LTTA Tennis: vs nianyb@gmail.com
-DESCRIPTION:LTTA Tennis match: 7 vs nianyb@gmail.com at Courts 1–5\nOpponent Roster: Yubo Nian (1); Matt Diehl (2); Tom Dwyer (3); Joe Kotnour Sr. (3); Sean O'Flaherty (3); Dan Skemp (3); Aziz Bhetasiwala (4); Mike Roskos (5)
+SUMMARY:LTTA Tennis: vs Bounce It
+DESCRIPTION:LTTA Tennis match: 7 vs Bounce It at Courts 1–5\nOpponent Roster: Yubo Nian (1); Matt Diehl (2); Tom Dwyer (3); Joe Kotnour Sr. (3); Sean O'Flaherty (3); Dan Skemp (3); Aziz Bhetasiwala (4); Mike Roskos (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -76,8 +76,8 @@ UID:ltta-tuesday-7-week6@couleeregiontennis.org
 DTSTAMP:20260630T190000Z
 DTSTART;TZID=America/Chicago:20260630T190000
 DTEND;TZID=America/Chicago:20260630T203000
-SUMMARY:LTTA Tennis: vs tung.ouy@gmail.com
-DESCRIPTION:LTTA Tennis match: 7 vs tung.ouy@gmail.com at Courts 6–9\nOpponent Roster: Tung Ouy (1); Rich Puent (2); Sai Mathi (3); Isaac Puent (3); Molly Stenger (3); Mohammad (3); Jim Brieske (4); Kalyan Satydeep (5)
+SUMMARY:LTTA Tennis: vs Spin Doctors
+DESCRIPTION:LTTA Tennis match: 7 vs Spin Doctors at Courts 6–9\nOpponent Roster: Tung Ouy (1); Rich Puent (2); Sai Mathi (3); Isaac Puent (3); Molly Stenger (3); Mohammad (3); Jim Brieske (4); Kalyan Satydeep (5)
 LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H
@@ -90,8 +90,8 @@ UID:ltta-tuesday-7-week7@couleeregiontennis.org
 DTSTAMP:20260707T173000Z
 DTSTART;TZID=America/Chicago:20260707T173000
 DTEND;TZID=America/Chicago:20260707T190000
-SUMMARY:LTTA Tennis: vs mjharris84@gmail.com
-DESCRIPTION:LTTA Tennis match: 7 vs mjharris84@gmail.com at Courts 10–13\nOpponent Roster: Mark Harris (1); Nathan Tunks (2); Gavin Goss (3); Dale Ralph (3); Nancy Winberg (3); Karie Johnson (3); Kim Thurk (4); Ronghui Chen (5)
+SUMMARY:LTTA Tennis: vs Racquet Scientists
+DESCRIPTION:LTTA Tennis match: 7 vs Racquet Scientists at Courts 10–13\nOpponent Roster: Mark Harris (1); Nathan Tunks (2); Gavin Goss (3); Dale Ralph (3); Nancy Winberg (3); Karie Johnson (3); Kim Thurk (4); Ronghui Chen (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -104,8 +104,8 @@ UID:ltta-tuesday-7-week8@couleeregiontennis.org
 DTSTAMP:20260714T190000Z
 DTSTART;TZID=America/Chicago:20260714T190000
 DTEND;TZID=America/Chicago:20260714T203000
-SUMMARY:LTTA Tennis: vs brettfsm@gmail.com
-DESCRIPTION:LTTA Tennis match: 7 vs brettfsm@gmail.com at Courts 1–5\nOpponent Roster: Jacob Schafer (1); Joe Gregas (2); Madeline Loh (3); Adrienne Loh (3); Stanton Loh (3); Malakai Berget (3); Kaitlyn Northrup (4); Learoy Daryl Joseph (5)
+SUMMARY:LTTA Tennis: vs Zoomers
+DESCRIPTION:LTTA Tennis match: 7 vs Zoomers at Courts 1–5\nOpponent Roster: Jacob Schafer (1); Joe Gregas (2); Madeline Loh (3); Adrienne Loh (3); Stanton Loh (3); Malakai Berget (3); Kaitlyn Northrup (4); Learoy Daryl Joseph (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT11H
@@ -118,8 +118,8 @@ UID:ltta-tuesday-7-week9@couleeregiontennis.org
 DTSTAMP:20260721T173000Z
 DTSTART;TZID=America/Chicago:20260721T173000
 DTEND;TZID=America/Chicago:20260721T190000
-SUMMARY:LTTA Tennis: vs bmansky@gmail.com
-DESCRIPTION:LTTA Tennis match: 7 vs bmansky@gmail.com at Courts 10–13\nOpponent Roster: Brian Mansky (1); Randy Moseng (2); Heidi Barreyro (3); Shanon Torgerud (3); Odessa Barreyro (3); Peter Thomson (3); Tyler Benson (4); Amit Mishra (5)
+SUMMARY:LTTA Tennis: vs Easy Overhead
+DESCRIPTION:LTTA Tennis match: 7 vs Easy Overhead at Courts 10–13\nOpponent Roster: Brian Mansky (1); Randy Moseng (2); Heidi Barreyro (3); Shanon Torgerud (3); Odessa Barreyro (3); Peter Thomson (3); Tyler Benson (4); Amit Mishra (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -146,8 +146,8 @@ UID:ltta-tuesday-7-week11@couleeregiontennis.org
 DTSTAMP:20260804T190000Z
 DTSTART;TZID=America/Chicago:20260804T190000
 DTEND;TZID=America/Chicago:20260804T203000
-SUMMARY:LTTA Tennis: vs 4953drk@gmail.com
-DESCRIPTION:LTTA Tennis match: 7 vs 4953drk@gmail.com at Courts 6–9\nOpponent Roster: Denny Kreuser (1); Paul Leithold (2); Sara Bieneman (3); Kate Skaar (3); Julie Kamla (3); Leah Bower (3); Catherine Roraff (4); Mary Leithold (5)
+SUMMARY:LTTA Tennis: vs Return to Sender with Love
+DESCRIPTION:LTTA Tennis match: 7 vs Return to Sender with Love at Courts 6–9\nOpponent Roster: Denny Kreuser (1); Paul Leithold (2); Sara Bieneman (3); Kate Skaar (3); Julie Kamla (3); Leah Bower (3); Catherine Roraff (4); Mary Leithold (5)
 LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H
