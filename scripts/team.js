@@ -84,7 +84,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
 
     highlightNextMatch();
   } catch (err) {
-    tableBody.innerHTML = "<tr><td colspan='5'>Could not load match data.</td></tr>";
+    tableBody.innerHTML = "<tr><td colspan='7'>Could not load match data.</td></tr>";
     rosterBody.innerHTML = "<tr><td colspan='3'>Could not load roster data.</td></tr>";
   }
 }
