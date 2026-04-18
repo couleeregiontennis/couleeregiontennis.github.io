@@ -12,11 +12,16 @@
       <div class="navbar-menu">
         <ul>
           <li><a href="../index.html">Teams</a></li>
-          <li><a href="../pages/subs.html">Find a Sub</a></li>
-          <li><a href="../pages/greenisland.html">Green Island</a></li>
-          <li><a href="../pages/ltta-rules.html">Rules</a></li>
           <li><a href="../pages/standings.html">Standings</a></li>
-          <li><a href="#" id="donate-link">Donate</a></li>
+          <li class="navbar-dropdown">
+            <a href="#" class="dropdown-trigger">League Info ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="../pages/ltta-rules.html">Rules</a></li>
+              <li><a href="../pages/subs.html">Find a Sub</a></li>
+              <li><a href="../pages/greenisland.html">Green Island</a></li>
+            </ul>
+          </li>
+          <li><a href="#" id="pay-link" class="pay-button">Pay Registration Online</a></li>
           <li>
             <a href="http://www.couleeregiontennis.com" target="_blank" rel="noopener noreferrer"
               >CRTA Website</a
@@ -28,17 +33,17 @@
   </nav>
 </header>
 
-<!-- Donation Modal -->
-<div id="donation-modal" class="modal">
+<!-- Registration Modal -->
+<div id="registration-modal" class="modal">
   <div class="modal-content">
     <span class="close-modal">&times;</span>
-    <h2>Support LTTA</h2>
-    <p>We use <strong>Zeffy</strong> for donations because they are the only platform for nonprofits that doesn't charge transaction fees, which means <strong>100% of your donation</strong> goes directly to LTTA.</p>
+    <h2>League Registration Payment</h2>
+    <p>We use <strong>Zeffy</strong> for online payments because they are the only platform for nonprofits that doesn't charge transaction fees. This ensures that <strong>100% of your registration fee</strong> goes directly to LTTA to cover court costs and balls.</p>
     <div class="zeffy-warning">
-      <p><strong>Note:</strong> During checkout, Zeffy will default to an additional "voluntary contribution" to their platform. You can change this amount to $0 if you prefer to only donate to LTTA.</p>
+      <p><strong>Note:</strong> During checkout, Zeffy defaults to an additional "voluntary contribution" to their platform. You can change this amount to $0 if you prefer to only pay the league fee.</p>
     </div>
     <div class="modal-actions">
-      <a href="https://www.zeffy.com/en-US/ticketing/2026-la-crosse-team-tennis" target="_blank" rel="noopener noreferrer" class="donate-button-final">Continue to Zeffy</a>
+      <button data-zeffy-form-url="https://www.zeffy.com/en-US/ticketing/2026-la-crosse-team-tennis" class="pay-button-final">Continue to Registration</button>
     </div>
   </div>
 </div>

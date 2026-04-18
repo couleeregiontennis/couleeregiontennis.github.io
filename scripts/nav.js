@@ -15,15 +15,23 @@ async function loadNav() {
     }
 
     // Modal Logic
-    const donateLink = document.getElementById('donate-link');
-    const modal = document.getElementById('donation-modal');
+    const payLink = document.getElementById('pay-link');
+    const modal = document.getElementById('registration-modal');
     const closeBtn = document.querySelector('.close-modal');
 
-    if (donateLink && modal) {
-      donateLink.addEventListener('click', (e) => {
+    if (payLink && modal) {
+      payLink.addEventListener('click', (e) => {
         e.preventDefault();
         modal.style.display = 'block';
       });
+
+      // Close modal when Zeffy button is clicked (Zeffy will open its own popup)
+      const payButtonFinal = document.querySelector('.pay-button-final');
+      if (payButtonFinal) {
+        payButtonFinal.addEventListener('click', () => {
+          modal.style.display = 'none';
+        });
+      }
 
       closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
