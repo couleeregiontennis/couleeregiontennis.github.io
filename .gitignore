@@ -18,7 +18,7 @@ _site/
 Gemfile.lock
 .DS_Store
 ltta.csv
-output_emails/*
+output_emails/
 node_modules/
 
 # Testing and development caches

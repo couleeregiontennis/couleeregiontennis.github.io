@@ -50,7 +50,10 @@ fetch(CSV_URL)
       });
       tbody.innerHTML = sortedRows.map(row =>
         `<tr data-night="${escapeHTML(row[nightIdx].toLowerCase())}">` +
-        row.map(cell => `<td>${escapeHTML(cell)}</td>`).join('') +
+        row.map(cell => {
+          const val = escapeHTML(cell);
+          return `<td>${val === 'N/A' ? '-' : val}</td>`;
+        }).join('') +
         '</tr>'
       ).join('');
     }

@@ -22,7 +22,7 @@ const tuesdayCoordinator = {
     name: 'Tom Dwyer',
     phone: '815-904-0008'
 }
- wednesdayCoordinator = {
+const wednesdayCoordinator = {
     name: 'Mark Hoff',
     phone: '608-386-9310'
 }
@@ -62,12 +62,14 @@ async function main() {
     parsedData.forEach((data) => {
       // Map new column names to expected format
       const record = {
-        Night: data.Night,
+        Night: data['v'],
         Team: data['Team/'],
         Captain: data['C/CC'] === 'C' ? '✓' : '',
         CoCaptain: data['C/CC'] === 'CC' ? '✓' : '',
         Level: data.Level,
         Name: data['1-Name'],
+        Phone: data['1-Telephone'],
+        Email: data['Email'],
         TeamName: data['TEAM NAME']
       };
       records.push(record);
@@ -96,6 +98,7 @@ async function main() {
         const player = {
           name: record.Name,
           phone: record.Phone || '',
+          email: record.Email || '',
           position: parseInt(record.Level) || 0
         };
 
