@@ -32,7 +32,7 @@
       "time": "6:00pm",
       "courts": "Forest Hills",
       "opponent": {
-        "name": null,
+        "name": "Jetsetters",
         "number": "10",
         "file": "/pages/team.html?day=tuesday&team=10"
       },

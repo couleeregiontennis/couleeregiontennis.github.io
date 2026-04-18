@@ -26,6 +26,7 @@ function generateCombinedScoresheet(matches, night, template) {
     html = html.replace('[TUES]', night.toLowerCase() === 'tuesday' ? '✓' : ' ');
     html = html.replace('[WED]', night.toLowerCase() === 'wednesday' ? '✓' : ' ');
     html = html.replace('[DATE]', match.date);
+    html = html.replace('[TIME]', match.time);
     html = html.replace('[COURTS]', match.courts);
 
     // Team information

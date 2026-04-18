@@ -70,6 +70,8 @@ function groupByNight(rows) {
     if (!groups[night]) groups[night] = new Map();
     if (!groups[night].has(number)) {
       groups[night].set(number, { number, name });
+    } else if (name && !groups[night].get(number).name) {
+      groups[night].get(number).name = name;
     }
   });
   
