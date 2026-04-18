@@ -5,7 +5,7 @@ const { fetchCSV } = require('./fetch-csv');
 
 const OUTPUT_DIR = path.join(__dirname, '..', 'output_emails');
 
-const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRlgS5yGzip6doLKqud9BDdpCt1_8CPWNjUxFmYgVdkdbQ_MNIc1ku1GJoZ2NBEuw/pub?gid=270023155&single=true&output=csv';
+const CSV_PATH = '/Users/brett/Downloads/2026 LTTA TEAM ROSTERS.xlsx - ROSTERS-2.csv';
 
 // Ensure output directory exists
 if (!fs.existsSync(OUTPUT_DIR)) {
@@ -48,7 +48,7 @@ const teams = {};
 
 async function main() {
   try {
-    const csvContent = await fetchCSV(CSV_URL);
+    const csvContent = await fetchCSV(CSV_PATH);
     console.log('Fetched CSV data successfully');
     
     // Parse CSV content
@@ -141,7 +141,7 @@ async function main() {
               <tr>
                 <td style="padding: 20px;">
                   <h2 style="color: #004080; margin-bottom: 5px;">Hello LTTA ${escapeHTML(night)} Team ${escapeHTML(teamNumber)} ${escapeHTML(teamName)}:</h2>
-                  <p style="margin-top: 5px;">Here we go – our 42nd year for La Crosse Team Tennis Association (LTTA) tennis league.</p>
+                  <p style="margin-top: 5px;">Here we go – our 43rd year for La Crosse Team Tennis Association (LTTA) tennis league.</p>
         
                   <div style="background:#f5f8fb; border-radius:8px; padding:18px 16px; margin:28px 0;">
                     <p>We're trying something a little different this year. Visit:</p>

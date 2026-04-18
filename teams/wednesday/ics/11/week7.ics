@@ -21,12 +21,12 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-wednesday-11-week7@couleeregiontennis.org
-DTSTAMP:20250716T190000Z
-DTSTART;TZID=America/Chicago:20250716T190000
-DTEND;TZID=America/Chicago:20250716T203000
-SUMMARY:LTTA Tennis: vs Nothing But Net
-DESCRIPTION:LTTA Tennis match: 11 vs Nothing But Net at Courts 10–13\nOpponent Roster: Alex Hiller (1); Tom Londergan (2); Lewis Kuhlman (3); Sarah Wengerter (3); Brittney DeChambeau (3); Kevin LeQue (3); Amy Harter (4); Joe Hurley (5)
-LOCATION:Courts 10–13
+DTSTAMP:20260708T190000Z
+DTSTART;TZID=America/Chicago:20260708T190000
+DTEND;TZID=America/Chicago:20260708T203000
+SUMMARY:LTTA Tennis: vs alexmoorehiller@gmail.com
+DESCRIPTION:LTTA Tennis match: 11 vs alexmoorehiller@gmail.com at Courts 6–9\nOpponent Roster: Alex Hiller (1); Tom Londergan (2); Lewis Kuhlman (3); Sarah Wengerter (3); Brittney DeChambeau (3); Kevin LeQue (3); Amy Harter (4); Joe Hurley (5)
+LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H
 ACTION:DISPLAY

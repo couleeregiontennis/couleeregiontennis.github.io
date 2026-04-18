@@ -4,11 +4,11 @@
   "schedule": [
     {
       "week": 1,
-      "date": "2025-06-04",
+      "date": "2026-05-27",
       "time": "5:30pm",
-      "courts": "Courts 1–5",
+      "courts": "Forest Hills",
       "opponent": {
-        "name": "LAX-Winona Fusion",
+        "name": "rjand541@gmail.com",
         "number": "1",
         "file": "/pages/team.html?day=wednesday&team=1"
       },
@@ -16,11 +16,11 @@
     },
     {
       "week": 2,
-      "date": "2025-06-11",
-      "time": "5:30pm",
-      "courts": "Courts 10–13",
+      "date": "2026-06-03",
+      "time": "7:00pm",
+      "courts": "Courts 6–9",
       "opponent": {
-        "name": "Backhand Bandits",
+        "name": "leahfortun@hotmail.com",
         "number": "10",
         "file": "/pages/team.html?day=wednesday&team=10"
       },
@@ -28,11 +28,11 @@
     },
     {
       "week": 3,
-      "date": "2025-06-18",
-      "time": "7:00pm",
-      "courts": "Courts 6–9",
+      "date": "2026-06-10",
+      "time": "6:00pm",
+      "courts": "Forest Hills",
       "opponent": {
-        "name": "Not My Fault",
+        "name": "dahlgl17@gmail.com",
         "number": "8",
         "file": "/pages/team.html?day=wednesday&team=8"
       },
@@ -40,11 +40,11 @@
     },
     {
       "week": 4,
-      "date": "2025-06-25",
-      "time": "7:00pm",
-      "courts": "Courts 6–9",
+      "date": "2026-06-17",
+      "time": "5:30pm",
+      "courts": "Courts 1–5",
       "opponent": {
-        "name": "Howie's Team",
+        "name": "meyers.michael@mayo.edu",
         "number": "6",
         "file": "/pages/team.html?day=wednesday&team=6"
       },
@@ -52,11 +52,11 @@
     },
     {
       "week": 5,
-      "date": "2025-07-02",
-      "time": "5:30pm",
+      "date": "2026-06-24",
+      "time": "7:00pm",
       "courts": "Courts 10–13",
       "opponent": {
-        "name": "Hot Shots",
+        "name": "reutla01@yahoo.com",
         "number": "4",
         "file": "/pages/team.html?day=wednesday&team=4"
       },
@@ -64,11 +64,11 @@
     },
     {
       "week": 6,
-      "date": "2025-07-09",
-      "time": "5:30pm",
-      "courts": "Courts 1–5",
+      "date": "2026-07-01",
+      "time": "7:00pm",
+      "courts": "Courts 10–13",
       "opponent": {
-        "name": "Rally Monkeys",
+        "name": "brett.meddaugh@gmail.com",
         "number": "2",
         "file": "/pages/team.html?day=wednesday&team=2"
       },
@@ -76,11 +76,11 @@
     },
     {
       "week": 7,
-      "date": "2025-07-16",
+      "date": "2026-07-08",
       "time": "7:00pm",
-      "courts": "Courts 10–13",
+      "courts": "Courts 6–9",
       "opponent": {
-        "name": "Simply Smashing",
+        "name": "kurt@gutknecht.ws",
         "number": "11",
         "file": "/pages/team.html?day=wednesday&team=11"
       },
@@ -88,11 +88,11 @@
     },
     {
       "week": 8,
-      "date": "2025-07-23",
+      "date": "2026-07-15",
       "time": "7:00pm",
-      "courts": "Courts 1–5",
+      "courts": "Courts 6–9",
       "opponent": {
-        "name": "Baseliners",
+        "name": "jrhildebrandt39@gmail.com",
         "number": "9",
         "file": "/pages/team.html?day=wednesday&team=9"
       },
@@ -100,11 +100,11 @@
     },
     {
       "week": 9,
-      "date": "2025-07-30",
+      "date": "2026-07-22",
       "time": "5:30pm",
-      "courts": "Courts 6–9",
+      "courts": "Courts 10–13",
       "opponent": {
-        "name": "Serve Aces",
+        "name": "reallylazymark@yahoo.com",
         "number": "7",
         "file": "/pages/team.html?day=wednesday&team=7"
       },
@@ -112,11 +112,11 @@
     },
     {
       "week": 10,
-      "date": "2025-08-06",
-      "time": "5:30pm",
-      "courts": "Courts 6–9",
+      "date": "2026-07-29",
+      "time": "7:00pm",
+      "courts": "Courts 1–5",
       "opponent": {
-        "name": "Glory Days",
+        "name": "laxoneills@charter.net",
         "number": "5",
         "file": "/pages/team.html?day=wednesday&team=5"
       },
@@ -124,11 +124,11 @@
     },
     {
       "week": 11,
-      "date": "2025-08-13",
-      "time": "7:00pm",
+      "date": "2026-08-05",
+      "time": "5:30pm",
       "courts": "Courts 1–5",
       "opponent": {
-        "name": "Hit Squad",
+        "name": "sheldonhlee@gmail.com",
         "number": "3",
         "file": "/pages/team.html?day=wednesday&team=3"
       },

@@ -2,8 +2,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const day = "wednesday"; // Change to "tuesday" or "wednesday"
-const year = 2025;       // Change if needed
+const day = process.argv[2] || "wednesday"; // Change to "tuesday" or "wednesday"
+const year = 2026;       // Change if needed
 
 const teamsDir = path.join(__dirname, '..', 'teams', day);
 const schedulesDir = path.join(teamsDir, 'schedules');

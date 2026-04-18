@@ -21,12 +21,12 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-wednesday-8-week1@couleeregiontennis.org
-DTSTAMP:20250604T173000Z
-DTSTART;TZID=America/Chicago:20250604T173000
-DTEND;TZID=America/Chicago:20250604T190000
-SUMMARY:LTTA Tennis: vs Glory Days
-DESCRIPTION:LTTA Tennis match: 8 vs Glory Days at Courts 10–13\nOpponent Roster: Mike O'Neill (1); Mike Fahey (2); Zach Acklin (3); Laura O'Neill (3); Amy Valentine (3); Tim Acklin (3); Eric Marr (4); Samantha Marr (5)
-LOCATION:Courts 10–13
+DTSTAMP:20260527T173000Z
+DTSTART;TZID=America/Chicago:20260527T173000
+DTEND;TZID=America/Chicago:20260527T190000
+SUMMARY:LTTA Tennis: vs laxoneills@charter.net
+DESCRIPTION:LTTA Tennis match: 8 vs laxoneills@charter.net at Forest Hills\nOpponent Roster: Mike O'Neill (1); Mike Fahey (2); Zach Acklin (3); Laura O'Neill (3); Amy Valentine (3); Tim Acklin (3); Eric Marr (4); Samantha Marr (5)
+LOCATION:Forest Hills
 BEGIN:VALARM
 TRIGGER:-PT9H30M
 ACTION:DISPLAY

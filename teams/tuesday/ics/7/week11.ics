@@ -21,12 +21,12 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-tuesday-7-week11@couleeregiontennis.org
-DTSTAMP:20250812T190000Z
-DTSTART;TZID=America/Chicago:20250812T190000
-DTEND;TZID=America/Chicago:20250812T203000
-SUMMARY:LTTA Tennis: vs Return to Sender with Love
-DESCRIPTION:LTTA Tennis match: 7 vs Return to Sender with Love at Courts 10–13\nOpponent Roster: Denny Kreuser (1); Paul Leithold (2); Sara Bieneman (3); Kate Skaar (3); Julie Kamla (3); Leah Bower (3); Catherine Roraff (4); Mary Leithold (5)
-LOCATION:Courts 10–13
+DTSTAMP:20260804T190000Z
+DTSTART;TZID=America/Chicago:20260804T190000
+DTEND;TZID=America/Chicago:20260804T203000
+SUMMARY:LTTA Tennis: vs 4953drk@gmail.com
+DESCRIPTION:LTTA Tennis match: 7 vs 4953drk@gmail.com at Courts 6–9\nOpponent Roster: Denny Kreuser (1); Paul Leithold (2); Sara Bieneman (3); Kate Skaar (3); Julie Kamla (3); Leah Bower (3); Catherine Roraff (4); Mary Leithold (5)
+LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H
 ACTION:DISPLAY

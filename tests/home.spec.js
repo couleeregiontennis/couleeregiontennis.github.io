@@ -8,8 +8,8 @@ test.describe('Home Page', () => {
 
     test('should display both league sections', async ({ page }) => {
         await page.goto('/');
-        await expect(page.getByRole('heading', { name: 'LTTA Tuesday Tennis – 2025', level: 2 })).toBeVisible();
-        await expect(page.getByRole('heading', { name: 'LTTA Wednesday Tennis – 2025', level: 2 })).toBeVisible();
+        await expect(page.getByRole('heading', { name: 'LTTA Tuesday Tennis – 2026', level: 2 })).toBeVisible();
+        await expect(page.getByRole('heading', { name: 'LTTA Wednesday Tennis – 2026', level: 2 })).toBeVisible();
     });
 
     test('should navigate to team page when clicking a team link', async ({ page }) => {

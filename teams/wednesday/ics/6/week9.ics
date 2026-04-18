@@ -21,11 +21,11 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-wednesday-6-week9@couleeregiontennis.org
-DTSTAMP:20250730T190000Z
-DTSTART;TZID=America/Chicago:20250730T190000
-DTEND;TZID=America/Chicago:20250730T203000
-SUMMARY:LTTA Tennis: vs Rally Monkeys
-DESCRIPTION:LTTA Tennis match: 6 vs Rally Monkeys at Courts 6–9\nOpponent Roster: Brett Meddaugh (1); Greg Jameson (2); Pam Jameson (3); Andy Seithamer (3); Bette Smith (3); Rick Moody (3); Greg Smith (4); Sui Wang (5)
+DTSTAMP:20260722T190000Z
+DTSTART;TZID=America/Chicago:20260722T190000
+DTEND;TZID=America/Chicago:20260722T203000
+SUMMARY:LTTA Tennis: vs brett.meddaugh@gmail.com
+DESCRIPTION:LTTA Tennis match: 6 vs brett.meddaugh@gmail.com at Courts 6–9\nOpponent Roster: Brett Meddaugh (1); Greg Jameson (2); Pam Jameson (3); Andy Seithamer (3); Bette Smith (3); Rick Moody (3); Greg Smith (4); Sui Wang (5)
 LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H

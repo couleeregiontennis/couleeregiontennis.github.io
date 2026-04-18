@@ -50,6 +50,6 @@ test.describe('Static Pages', () => {
     test('Rules page renders correctly', async ({ page }) => {
         await page.goto('/pages/ltta-rules.html');
         // The rules page usually has a specific header or title.
-        await expect(page.getByRole('heading', { level: 1, name: 'La Crosse Team Tennis Association (LTTA) – Summer League 2025' })).toBeVisible();
+        await expect(page.getByRole('heading', { level: 1, name: 'La Crosse Team Tennis Association (LTTA) – Summer League 2026' })).toBeVisible();
     });
 });

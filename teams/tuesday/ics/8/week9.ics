@@ -21,14 +21,14 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-tuesday-8-week9@couleeregiontennis.org
-DTSTAMP:20250729T173000Z
-DTSTART;TZID=America/Chicago:20250729T173000
-DTEND;TZID=America/Chicago:20250729T190000
-SUMMARY:LTTA Tennis: vs Full Metal Racquet
-DESCRIPTION:LTTA Tennis match: 8 vs Full Metal Racquet at Courts 10–13\nOpponent Roster: Tayler Garves Nelson (1); Todd Garves (2); Martin Frank (3); Regina Jones (3); Stephen Sinur (3); Hannah Exner (3); Kim Garves (4); Jane Frank (5)
-LOCATION:Courts 10–13
+DTSTAMP:20260721T190000Z
+DTSTART;TZID=America/Chicago:20260721T190000
+DTEND;TZID=America/Chicago:20260721T203000
+SUMMARY:LTTA Tennis: vs jherde18@gmail.com
+DESCRIPTION:LTTA Tennis match: 8 vs jherde18@gmail.com at Courts 1–5\nOpponent Roster: Tayler Garves Nelson (1); Todd Garves (2); Martin Frank (3); Regina Jones (3); Stephen Sinur (3); Hannah Exner (3); Kim Garves (4); Jane Frank (5)
+LOCATION:Courts 1–5
 BEGIN:VALARM
-TRIGGER:-PT9H30M
+TRIGGER:-PT11H
 ACTION:DISPLAY
 DESCRIPTION:LTTA Tennis Match Reminder
 END:VALARM

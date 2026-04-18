@@ -1,8 +1,13 @@
 const https = require('https');
+const fs = require('fs');
 
-async function fetchCSV(url) {
+async function fetchCSV(urlOrPath) {
+  if (!urlOrPath.startsWith('http')) {
+    return fs.promises.readFile(urlOrPath, 'utf8');
+  }
+
   return new Promise((resolve, reject) => {
-    const request = https.get(url, (response) => {
+    const request = https.get(urlOrPath, (response) => {
       // Handle redirects
       if (response.statusCode === 301 || response.statusCode === 302 || response.statusCode === 307) {
         console.log(`Following redirect to: ${response.headers.location}`);

@@ -21,14 +21,14 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-tuesday-2-week10@couleeregiontennis.org
-DTSTAMP:20250805T173000Z
-DTSTART;TZID=America/Chicago:20250805T173000
-DTEND;TZID=America/Chicago:20250805T190000
-SUMMARY:LTTA Tennis: vs Approach Shots
-DESCRIPTION:LTTA Tennis match: 2 vs Approach Shots at Courts 10–13\nOpponent Roster: Greg Schibbelhut (1); Dillon Eddingsaas (2); John Aschenbrenner (3); Mary Aschenbrenner (3); Dale Barclay (3); Rich Levinger (3); Judith Engen (4); Amanda Wilke (5)
-LOCATION:Courts 10–13
+DTSTAMP:20260728T190000Z
+DTSTART;TZID=America/Chicago:20260728T190000
+DTEND;TZID=America/Chicago:20260728T203000
+SUMMARY:LTTA Tennis: vs schigreg@luther.k12.wi.us
+DESCRIPTION:LTTA Tennis match: 2 vs schigreg@luther.k12.wi.us at Courts 6–9\nOpponent Roster: Greg Schibbelhut (1); Dillon Eddingsaas (2); John Aschenbrenner (3); Mary Aschenbrenner (3); Dale Barclay (3); Rich Levinger (3); Judith Engen (4); Amanda Wilke (5)
+LOCATION:Courts 6–9
 BEGIN:VALARM
-TRIGGER:-PT9H30M
+TRIGGER:-PT11H
 ACTION:DISPLAY
 DESCRIPTION:LTTA Tennis Match Reminder
 END:VALARM

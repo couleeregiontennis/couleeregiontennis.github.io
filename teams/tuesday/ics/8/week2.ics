@@ -21,12 +21,12 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-tuesday-8-week2@couleeregiontennis.org
-DTSTAMP:20250610T190000Z
-DTSTART;TZID=America/Chicago:20250610T190000
-DTEND;TZID=America/Chicago:20250610T203000
-SUMMARY:LTTA Tennis: vs Zoomers
-DESCRIPTION:LTTA Tennis match: 8 vs Zoomers at Courts 6–9\nOpponent Roster: Jacob Schafer (1); Joe Gregas (2); Madeline Loh (3); Adrienne Loh (3); Stanton Loh (3); Malakai Berget (3); Kaitlyn Northrup (4); Learoy Daryl Joseph (5)
-LOCATION:Courts 6–9
+DTSTAMP:20260602T190000Z
+DTSTART;TZID=America/Chicago:20260602T190000
+DTEND;TZID=America/Chicago:20260602T203000
+SUMMARY:LTTA Tennis: vs brettfsm@gmail.com
+DESCRIPTION:LTTA Tennis match: 8 vs brettfsm@gmail.com at Courts 1–5\nOpponent Roster: Jacob Schafer (1); Joe Gregas (2); Madeline Loh (3); Adrienne Loh (3); Stanton Loh (3); Malakai Berget (3); Kaitlyn Northrup (4); Learoy Daryl Joseph (5)
+LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT11H
 ACTION:DISPLAY

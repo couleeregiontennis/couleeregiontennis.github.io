@@ -21,12 +21,12 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-tuesday-6-week2@couleeregiontennis.org
-DTSTAMP:20250610T173000Z
-DTSTART;TZID=America/Chicago:20250610T173000
-DTEND;TZID=America/Chicago:20250610T190000
-SUMMARY:LTTA Tennis: vs Racquet Scientists
-DESCRIPTION:LTTA Tennis match: 6 vs Racquet Scientists at Courts 1–5\nOpponent Roster: Mark Harris (1); Nathan Tunks (2); Gavin Goss (3); Dale Ralph (3); Nancy Winberg (3); Karie Johnson (3); Kim Thurk (4); Ronghui Chen (5)
-LOCATION:Courts 1–5
+DTSTAMP:20260602T173000Z
+DTSTART;TZID=America/Chicago:20260602T173000
+DTEND;TZID=America/Chicago:20260602T190000
+SUMMARY:LTTA Tennis: vs mjharris84@gmail.com
+DESCRIPTION:LTTA Tennis match: 6 vs mjharris84@gmail.com at Forest Hills\nOpponent Roster: Mark Harris (1); Nathan Tunks (2); Gavin Goss (3); Dale Ralph (3); Nancy Winberg (3); Karie Johnson (3); Kim Thurk (4); Ronghui Chen (5)
+LOCATION:Forest Hills
 BEGIN:VALARM
 TRIGGER:-PT9H30M
 ACTION:DISPLAY

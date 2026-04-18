@@ -21,12 +21,12 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-wednesday-12-week7@couleeregiontennis.org
-DTSTAMP:20250716T190000Z
-DTSTART;TZID=America/Chicago:20250716T190000
-DTEND;TZID=America/Chicago:20250716T203000
-SUMMARY:LTTA Tennis: vs Simply Smashing
-DESCRIPTION:LTTA Tennis match: 12 vs Simply Smashing at Courts 10–13\nOpponent Roster: Kurt Gutknecht (1); Therese Waltz (2); Kacey Nomland (3); Tyler Thomas (3); David Yao (3); Kris Bartley (3); Jenna Dinkel (4); Logan Dzielinski (5)
-LOCATION:Courts 10–13
+DTSTAMP:20260708T190000Z
+DTSTART;TZID=America/Chicago:20260708T190000
+DTEND;TZID=America/Chicago:20260708T203000
+SUMMARY:LTTA Tennis: vs kurt@gutknecht.ws
+DESCRIPTION:LTTA Tennis match: 12 vs kurt@gutknecht.ws at Courts 6–9\nOpponent Roster: Kurt Gutknecht (1); Therese Waltz (2); Kacey Nomland (3); Tyler Thomas (3); David Yao (3); Kris Bartley (3); Jenna Dinkel (4); Logan Dzielinski (5)
+LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H
 ACTION:DISPLAY

@@ -21,12 +21,12 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-tuesday-6-week5@couleeregiontennis.org
-DTSTAMP:20250701T190000Z
-DTSTART;TZID=America/Chicago:20250701T190000
-DTEND;TZID=America/Chicago:20250701T203000
-SUMMARY:LTTA Tennis: vs Jetsetters
-DESCRIPTION:LTTA Tennis match: 6 vs Jetsetters at Courts 6–9\nOpponent Roster: Julio Bird (1); Elia Romano (2); Jada Brunkow (3); Dan Petersen (3); Shirley Yuan (3); Ryan Mullaney (3); Kim Hardy (4); Leonardo Silva (5)
-LOCATION:Courts 6–9
+DTSTAMP:20260623T190000Z
+DTSTART;TZID=America/Chicago:20260623T190000
+DTEND;TZID=America/Chicago:20260623T203000
+SUMMARY:LTTA Tennis: vs null
+DESCRIPTION:LTTA Tennis match: 6 vs null at Courts 1–5\nOpponent Roster: Julio Bird (1); Elia Romano (2); Jada Brunkow (3); Dan Petersen (3); Shirley Yuan (3); Ryan Mullaney (3); Kim Hardy (4); Leonardo Silva (5)
+LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT11H
 ACTION:DISPLAY

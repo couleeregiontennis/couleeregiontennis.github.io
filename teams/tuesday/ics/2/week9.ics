@@ -21,11 +21,11 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-tuesday-2-week9@couleeregiontennis.org
-DTSTAMP:20250729T190000Z
-DTSTART;TZID=America/Chicago:20250729T190000
-DTEND;TZID=America/Chicago:20250729T203000
-SUMMARY:LTTA Tennis: vs Rascals
-DESCRIPTION:LTTA Tennis match: 2 vs Rascals at Courts 6–9\nOpponent Roster: Peter Coppola (1); Laura Coppola (2); Ellen Seithamer (3); Pete  Thomson (3); Craig Hanson (3); Jason Herbert (3); Dan Russell (4); Becky Rauch (5)
+DTSTAMP:20260721T190000Z
+DTSTART;TZID=America/Chicago:20260721T190000
+DTEND;TZID=America/Chicago:20260721T203000
+SUMMARY:LTTA Tennis: vs pcoppola6@yahoo.com
+DESCRIPTION:LTTA Tennis match: 2 vs pcoppola6@yahoo.com at Courts 6–9\nOpponent Roster: Peter Coppola (1); Laura Coppola (2); Ellen Seithamer (3); Pete  Thomson (3); Craig Hanson (3); Jason Herbert (3); Dan Russell (4); Becky Rauch (5)
 LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H

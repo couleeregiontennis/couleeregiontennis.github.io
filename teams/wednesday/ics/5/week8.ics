@@ -21,11 +21,11 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-wednesday-5-week8@couleeregiontennis.org
-DTSTAMP:20250723T190000Z
-DTSTART;TZID=America/Chicago:20250723T190000
-DTEND;TZID=America/Chicago:20250723T203000
-SUMMARY:LTTA Tennis: vs LAX-Winona Fusion
-DESCRIPTION:LTTA Tennis match: 5 vs LAX-Winona Fusion at Courts 10–13\nOpponent Roster: Ruben Anderson (1); Dan Lewis (2); Joe Heer (3); Janice Hoeschler (3); Eric Rowekamp (3); Nikki Nakano (3); Lora Cadwell (4); Barb Buswell (5)
+DTSTAMP:20260715T190000Z
+DTSTART;TZID=America/Chicago:20260715T190000
+DTEND;TZID=America/Chicago:20260715T203000
+SUMMARY:LTTA Tennis: vs rjand541@gmail.com
+DESCRIPTION:LTTA Tennis match: 5 vs rjand541@gmail.com at Courts 10–13\nOpponent Roster: Ruben Anderson (1); Dan Lewis (2); Joe Heer (3); Janice Hoeschler (3); Eric Rowekamp (3); Nikki Nakano (3); Lora Cadwell (4); Barb Buswell (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT11H

@@ -5,7 +5,7 @@ const { fetchCSV } = require('./fetch-csv');
 
 // CONFIG
 const OUTPUT_DIR = path.join(__dirname, '../teams');
-const START_DATE = '2025-06-03'; // Change as needed
+const START_DATE = '2026-05-26'; // Change as needed
 const COURT_GROUPS = ["Courts 1–5", "Courts 6–9", "Courts 10–13"];
 const TIMES = ["5:30pm", "7:00pm"];
 
@@ -17,12 +17,12 @@ function addDays(dateStr, days) {
 }
 
 // Load CSV or Excel
-const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRlgS5yGzip6doLKqud9BDdpCt1_8CPWNjUxFmYgVdkdbQ_MNIc1ku1GJoZ2NBEuw/pub?gid=270023155&single=true&output=csv';
+const CSV_PATH = '/Users/brett/Downloads/2026 LTTA TEAM ROSTERS.xlsx - ROSTERS-2.csv';
 
 // Update loadSheet function
 async function loadSheet() {
   try {
-    const csvContent = await fetchCSV(CSV_URL);
+    const csvContent = await fetchCSV(CSV_PATH);
     console.log('CSV data fetched successfully');
     
     // Parse CSV content using csv-parse/sync
@@ -112,9 +112,13 @@ function assignSlotsToMatches(matchesByWeek, teams) {
   const slots = [];
   COURT_GROUPS.forEach(court => TIMES.forEach(time => slots.push({ court, time })));
 
-  // Track how many times each team has played at each time
+  // Track how many times each team has played at each time and court
   const teamTimeCounts = {};
-  teams.forEach(t => teamTimeCounts[t] = { "5:30pm": 0, "7:00pm": 0 });
+  const teamCourtCounts = {};
+  teams.forEach(t => {
+    teamTimeCounts[t.number] = { "5:30pm": 0, "7:00pm": 0 };
+    teamCourtCounts[t.number] = { "Courts 1–5": 0, "Courts 6–9": 0, "Courts 10–13": 0 };
+  });
 
   const weekAssignments = [];
 
@@ -127,15 +131,21 @@ function assignSlotsToMatches(matchesByWeek, teams) {
 
     const assignments = [];
     matches.forEach(([a, b], i) => {
-      // Try to balance time slots for teams
+      // Try to balance time slots and courts for teams
       weekSlots.sort((s1, s2) => {
-        const t1 = teamTimeCounts[a][s1.time] + teamTimeCounts[b][s1.time];
-        const t2 = teamTimeCounts[a][s2.time] + teamTimeCounts[b][s2.time];
-        return t1 - t2;
+        const time1 = teamTimeCounts[a.number][s1.time] + teamTimeCounts[b.number][s1.time];
+        const time2 = teamTimeCounts[a.number][s2.time] + teamTimeCounts[b.number][s2.time];
+        if (time1 !== time2) return time1 - time2;
+        
+        const court1 = teamCourtCounts[a.number][s1.court] + teamCourtCounts[b.number][s1.court];
+        const court2 = teamCourtCounts[a.number][s2.court] + teamCourtCounts[b.number][s2.court];
+        return court1 - court2;
       });
       const slot = weekSlots.shift();
-      teamTimeCounts[a][slot.time]++;
-      teamTimeCounts[b][slot.time]++;
+      teamTimeCounts[a.number][slot.time]++;
+      teamTimeCounts[b.number][slot.time]++;
+      teamCourtCounts[a.number][slot.court]++;
+      teamCourtCounts[b.number][slot.court]++;
       assignments.push({ teamA: a, teamB: b, court: slot.court, time: slot.time });
     });
     weekAssignments.push(assignments);
@@ -274,7 +284,20 @@ async function main() {
       const schedules = {};
       teams.forEach(t => schedules[t.number] = []);
       weekAssignments.forEach((matches, weekIdx) => {
+        const dateStr = weekDates[weekIdx];
         matches.forEach(match => {
+          // Date specific overrides
+          if (dateStr === '2026-05-27' && match.time === '5:30pm') {
+            match.court = 'Forest Hills';
+          } else if (['2026-06-02', '2026-06-03', '2026-06-09', '2026-06-10'].includes(dateStr) && match.time === '5:30pm') {
+            if (match.court === 'Courts 1–5') {
+              match.court = 'Green Island Courts 8-13';
+            } else {
+              match.court = 'Forest Hills';
+              match.time = '6:00pm';
+            }
+          }
+
           // Find team objects for A and B
           const teamA = teams.find(t => t.number === match.teamA.number);
           const teamB = teams.find(t => t.number === match.teamB.number);

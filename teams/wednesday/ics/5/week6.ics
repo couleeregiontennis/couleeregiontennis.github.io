@@ -21,12 +21,12 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-wednesday-5-week6@couleeregiontennis.org
-DTSTAMP:20250709T173000Z
-DTSTART;TZID=America/Chicago:20250709T173000
-DTEND;TZID=America/Chicago:20250709T190000
-SUMMARY:LTTA Tennis: vs Baseliners
-DESCRIPTION:LTTA Tennis match: 5 vs Baseliners at Courts 6–9\nOpponent Roster: John Hildebrandt (1); Dan Bodelson (2); Dick Deml (3); Al Graewin (3); Mark Schlafer (3); Joey Endrizzi (3); Terri Kaiser (4); Jill Graewin (5)
-LOCATION:Courts 6–9
+DTSTAMP:20260701T173000Z
+DTSTART;TZID=America/Chicago:20260701T173000
+DTEND;TZID=America/Chicago:20260701T190000
+SUMMARY:LTTA Tennis: vs jrhildebrandt39@gmail.com
+DESCRIPTION:LTTA Tennis match: 5 vs jrhildebrandt39@gmail.com at Courts 1–5\nOpponent Roster: John Hildebrandt (1); Dan Bodelson (2); Dick Deml (3); Al Graewin (3); Mark Schlafer (3); Joey Endrizzi (3); Terri Kaiser (4); Jill Graewin (5)
+LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M
 ACTION:DISPLAY

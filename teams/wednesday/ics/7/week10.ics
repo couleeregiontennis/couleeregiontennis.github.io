@@ -21,14 +21,14 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-wednesday-7-week10@couleeregiontennis.org
-DTSTAMP:20250806T190000Z
-DTSTART;TZID=America/Chicago:20250806T190000
-DTEND;TZID=America/Chicago:20250806T203000
-SUMMARY:LTTA Tennis: vs Backhand Bandits
-DESCRIPTION:LTTA Tennis match: 7 vs Backhand Bandits at Courts 1–5\nOpponent Roster: Quentin Lamers (1); Leah Fortun (2); Jennifer Carr (3); Amy Marcou (3); Michael Ojelabi (3); Eli Carr (3); Eli De Leon (4); Irene Johnson-Salvador (5)
-LOCATION:Courts 1–5
+DTSTAMP:20260729T173000Z
+DTSTART;TZID=America/Chicago:20260729T173000
+DTEND;TZID=America/Chicago:20260729T190000
+SUMMARY:LTTA Tennis: vs leahfortun@hotmail.com
+DESCRIPTION:LTTA Tennis match: 7 vs leahfortun@hotmail.com at Courts 6–9\nOpponent Roster: Quentin Lamers (1); Leah Fortun (2); Jennifer Carr (3); Amy Marcou (3); Michael Ojelabi (3); Eli Carr (3); Eli De Leon (4); Irene Johnson-Salvador (5)
+LOCATION:Courts 6–9
 BEGIN:VALARM
-TRIGGER:-PT11H
+TRIGGER:-PT9H30M
 ACTION:DISPLAY
 DESCRIPTION:LTTA Tennis Match Reminder
 END:VALARM
