@@ -56,7 +56,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
         <td>${escapeHTML(match.time)}</td>
         <td style="text-align:center">${escapeHTML(match.homeAway || "")}</td>
         <td>
-          <a href="${sanitizeUrl(match.opponent.file)}" class="team-link">${escapeHTML(match.opponent.name)}</a>
+          <a href="${sanitizeUrl(match.opponent.file)}" class="team-link">${escapeHTML(match.opponent.name || "Team " + match.opponent.number)}</a>
         </td>
         <td>${escapeHTML(match.courts)}</td>
         <td style="text-align:center">${icsLink}</td>

@@ -24,7 +24,7 @@ UID:ltta-tuesday-2-week5@couleeregiontennis.org
 DTSTAMP:20260623T173000Z
 DTSTART;TZID=America/Chicago:20260623T173000
 DTEND;TZID=America/Chicago:20260623T190000
-SUMMARY:LTTA Tennis: vs Zoomers
+SUMMARY:LTTA Tennis: vs Zoomers (Home)
 DESCRIPTION:LTTA Tennis match: 2 vs Zoomers at Courts 10–13\nOpponent Roster: Stephan Brettfeld (1); Joe Gregas (2); Madeline Loh (3); Adrienne Loh (3); Stanton Loh (3); Malakai Berget (3); Kaitlyn Northrup (4); Learoy Daryl Joseph (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM

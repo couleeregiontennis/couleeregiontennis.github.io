@@ -24,7 +24,7 @@ UID:ltta-wednesday-12-week9@couleeregiontennis.org
 DTSTAMP:20260722T173000Z
 DTSTART;TZID=America/Chicago:20260722T173000
 DTEND;TZID=America/Chicago:20260722T190000
-SUMMARY:LTTA Tennis: vs Serve Aces
+SUMMARY:LTTA Tennis: vs Serve Aces (Away)
 DESCRIPTION:LTTA Tennis match: 12 vs Serve Aces at Courts 10–13\nOpponent Roster: Mark Hoff (1); Randy Moseng (2); Luke/ Emily Bussiere (3); Franklin Greene (3); Nicole Hoff (3); Michelle Rank (3); Sharon Harter (4); Gary Harter (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM

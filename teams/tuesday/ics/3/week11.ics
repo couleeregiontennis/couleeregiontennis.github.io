@@ -24,7 +24,7 @@ UID:ltta-tuesday-3-week11@couleeregiontennis.org
 DTSTAMP:20260804T173000Z
 DTSTART;TZID=America/Chicago:20260804T173000
 DTEND;TZID=America/Chicago:20260804T190000
-SUMMARY:LTTA Tennis: vs Easy Overhead
+SUMMARY:LTTA Tennis: vs Easy Overhead (Home)
 DESCRIPTION:LTTA Tennis match: 3 vs Easy Overhead at Courts 1–5\nOpponent Roster: Brian Mansky (1); Brennan Quinn (2); Heidi Barreyro (3); Shanon Torgerud (3); Odessa Barreyro (3); Tyler Benson (4); Amit Mishra (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM

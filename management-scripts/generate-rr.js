@@ -419,7 +419,7 @@ async function main() {
         sched.forEach(match => {
           const startTime = match.time.replace('pm', '') === '7:00' ? '19:00' : '17:30';
           const endTime = getEndTime(startTime);
-          const summary = `LTTA Tennis: vs ${match.opponent.name}`;
+          const summary = `LTTA Tennis: vs ${match.opponent.name} (${match.homeAway})`;
           const opponentNum = match.opponent.number;
           const opponentRoster = rosters[opponentNum] || [];
           const rosterText = opponentRoster.length

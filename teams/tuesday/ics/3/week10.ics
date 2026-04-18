@@ -24,7 +24,7 @@ UID:ltta-tuesday-3-week10@couleeregiontennis.org
 DTSTAMP:20260728T190000Z
 DTSTART;TZID=America/Chicago:20260728T190000
 DTEND;TZID=America/Chicago:20260728T203000
-SUMMARY:LTTA Tennis: vs Spin Doctors
+SUMMARY:LTTA Tennis: vs Spin Doctors (Home)
 DESCRIPTION:LTTA Tennis match: 3 vs Spin Doctors at Courts 10–13\nOpponent Roster: Tung Ouy (1); Rich Puent (2); Sai Mathi (3); Isaac Puent (3); Molly Stenger (3); Leah Bower (3); Jim Brieske (4); Kalyan Satydeep (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM

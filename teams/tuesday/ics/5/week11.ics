@@ -24,7 +24,7 @@ UID:ltta-tuesday-5-week11@couleeregiontennis.org
 DTSTAMP:20260804T190000Z
 DTSTART;TZID=America/Chicago:20260804T190000
 DTEND;TZID=America/Chicago:20260804T203000
-SUMMARY:LTTA Tennis: vs Jetsetters
+SUMMARY:LTTA Tennis: vs Jetsetters (Home)
 DESCRIPTION:LTTA Tennis match: 5 vs Jetsetters at Courts 10–13\nOpponent Roster: Drake Wonderling (1); Corey Stauner (2); Jada Brunkow (3); Dan Petersen (3); Shirley Yuan (3); Ryan Mullaney (3); Aaron Olson (4); Anna Olson (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM

@@ -25,11 +25,15 @@ async function loadNav() {
         modal.style.display = 'block';
       });
 
-      // Close modal when Zeffy button is clicked (Zeffy will open its own popup)
+      // Close our informational modal when the Zeffy button is clicked
+      // Zeffy's script will intercept this same click to open its popup
       const payButtonFinal = document.querySelector('.pay-button-final');
       if (payButtonFinal) {
         payButtonFinal.addEventListener('click', () => {
-          modal.style.display = 'none';
+          // Use a tiny delay to ensure Zeffy script sees the click before we hide the button
+          setTimeout(() => {
+            modal.style.display = 'none';
+          }, 100);
         });
       }
 

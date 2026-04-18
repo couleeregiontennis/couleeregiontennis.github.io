@@ -268,7 +268,7 @@ weeks.forEach(week => {
       html += `        <td class="match-cell">`;
       if (matchups && matchups.length > 0) {
         matchups.slice(0, 2).forEach(m => {
-          html += `🏠 <strong><span class="team-num">${m.team}</span>${teams[m.team]}</strong> vs <span class="team-num">${m.opponent}</span>${teams[m.opponent]}`;
+          html += `<span class="team-num">${m.team}</span>${teams[m.team]} (H) vs <span class="team-num">${m.opponent}</span>${teams[m.opponent]}`;
           if (m.suffix) {
             html += `<br><small style="color: #666; font-weight: bold;">${m.suffix}</small>`;
           }

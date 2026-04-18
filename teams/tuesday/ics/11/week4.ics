@@ -24,7 +24,7 @@ UID:ltta-tuesday-11-week4@couleeregiontennis.org
 DTSTAMP:20260616T173000Z
 DTSTART;TZID=America/Chicago:20260616T173000
 DTEND;TZID=America/Chicago:20260616T190000
-SUMMARY:LTTA Tennis: vs Good Ol' Boys
+SUMMARY:LTTA Tennis: vs Good Ol' Boys (Away)
 DESCRIPTION:LTTA Tennis match: 11 vs Good Ol' Boys at Courts 10–13\nOpponent Roster: Paul Jacobson (1); Don Harvey (3); David Lange (3); Larry Ruff (3); Corey Ruud (3); Pennie Pierce-Jorgeson (4); Sally Ruud (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM

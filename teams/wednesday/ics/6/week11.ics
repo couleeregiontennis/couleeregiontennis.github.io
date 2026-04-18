@@ -24,7 +24,7 @@ UID:ltta-wednesday-6-week11@couleeregiontennis.org
 DTSTAMP:20260805T190000Z
 DTSTART;TZID=America/Chicago:20260805T190000
 DTEND;TZID=America/Chicago:20260805T203000
-SUMMARY:LTTA Tennis: vs Baseliners
+SUMMARY:LTTA Tennis: vs Baseliners (Home)
 DESCRIPTION:LTTA Tennis match: 6 vs Baseliners at Courts 1–5\nOpponent Roster: John Hildebrandt (1); Dan Bodelson (2); Dick Deml (3); Al Graewin (3); Mark Schlafer (3); Bob Hildebrandt (3); Terri Kaiser (4); Jill Graewin (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM

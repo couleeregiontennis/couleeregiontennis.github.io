@@ -24,7 +24,7 @@ UID:ltta-wednesday-11-week1@couleeregiontennis.org
 DTSTAMP:20260527T190000Z
 DTSTART;TZID=America/Chicago:20260527T190000
 DTEND;TZID=America/Chicago:20260527T203000
-SUMMARY:LTTA Tennis: vs Rally Monkeys
+SUMMARY:LTTA Tennis: vs Rally Monkeys (Away)
 DESCRIPTION:LTTA Tennis match: 11 vs Rally Monkeys at Courts 1–5\nOpponent Roster: Brett Meddaugh (1); Meredith Holt (2); Ronghui Chen (3); Andy Seithamer (3); Mason Engebretsen (3); Isaiah Dahmen (3); Sam Hinton (4); Sui Wang (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM
