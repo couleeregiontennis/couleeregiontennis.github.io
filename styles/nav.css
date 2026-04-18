@@ -120,16 +120,20 @@
   display: block;
 }
 
-/* Pay Button Styling */
-.pay-button {
+/* Pay & Donate Button Styling */
+.pay-button, .donate-button {
   background: rgba(255, 255, 255, 0.2) !important;
   border: 1px solid rgba(255, 255, 255, 0.4);
   font-weight: bold;
 }
 
-.pay-button:hover {
+.pay-button:hover, .donate-button:hover {
   background: white !important;
   color: #007BFF !important;
+}
+
+.donate-button {
+  border-color: #ffc107 !important; /* Gold border for donation */
 }
 
 /* Modal Styles */
@@ -337,10 +341,10 @@
   .dropdown-menu {
     background-color: #1a1a1a;
   }
-  .pay-button {
+  .pay-button, .donate-button {
     background: rgba(201, 225, 255, 0.1) !important;
   }
-  .pay-button:hover {
+  .pay-button:hover, .donate-button:hover {
     background: #c9e1ff !important;
     color: #111 !important;
   }
