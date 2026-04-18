@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../styles/nav.css" />
+<link rel="stylesheet" href="../styles/nav.css?v=2026" />
 <header>
   <nav class="navbar">
     <div class="navbar-container">
@@ -43,11 +43,13 @@
       <p><strong>Note:</strong> During checkout, Zeffy defaults to an additional "voluntary contribution" to their platform. You can change this amount to $0 if you prefer to only pay the league fee.</p>
     </div>
     <div class="modal-actions">
-      <button 
-        type="button" 
-        data-zeffy-form-link="https://www.zeffy.com/embed/ticketing/2026-la-crosse-team-tennis?modal=true" 
+      <a 
+        href="https://www.zeffy.com/en-US/ticketing/2026-la-crosse-team-tennis" 
+        target="_blank" 
+        rel="noopener noreferrer" 
         class="pay-button-final"
-      >Continue to Registration</button>
+        id="pay-button-final-link"
+      >Continue to Registration</a>
       <button type="button" class="qr-toggle-btn desktop-only" id="qr-toggle-btn">Scan QR Instead</button>
     </div>
     <div id="qr-container" class="qr-container desktop-only" style="display: none;">

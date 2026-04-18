@@ -250,7 +250,10 @@ let html = `<!DOCTYPE html>
   </head>
   <body>
     <h1>${scheduleTitle}</h1>
-    <p style="text-align:center; font-size: 0.8em; margin-top: -10px;">(Home Team listed first)</p>
+    <p style="text-align:center; font-size: 0.9em; margin-top: -10px;">
+      <strong>Legend:</strong> (h) = Home Team. 
+      Matches are played at Green Island unless otherwise noted.
+    </p>
     <table class="schedule-table">
       <tr>
         <th class="court-header">Court Group</th>
@@ -268,7 +271,7 @@ weeks.forEach(week => {
       html += `        <td class="match-cell">`;
       if (matchups && matchups.length > 0) {
         matchups.slice(0, 2).forEach(m => {
-          html += `<span class="team-num">${m.team}</span>${teams[m.team]} (H) vs <span class="team-num">${m.opponent}</span>${teams[m.opponent]}`;
+          html += `<span class="team-num">${m.team}</span>${teams[m.team]} (h) vs <span class="team-num">${m.opponent}</span>${teams[m.opponent]}`;
           if (m.suffix) {
             html += `<br><small style="color: #666; font-weight: bold;">${m.suffix}</small>`;
           }

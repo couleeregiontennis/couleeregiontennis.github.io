@@ -192,6 +192,7 @@
 }
 
 .pay-button-final {
+  display: inline-block;
   background-color: #007BFF;
   color: white !important;
   padding: 0.8rem 2rem;
@@ -203,13 +204,51 @@
   cursor: pointer;
   font-size: 1rem;
 }
-
 .pay-button-final:hover {
   background-color: #0056b3;
 }
 
+.qr-toggle-btn {
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background 0.2s;
+}
+
+.qr-toggle-btn:hover {
+  background-color: #e2e6ea;
+}
+
+.qr-container {
+  margin-top: 1.5rem;
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.qr-code-image {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.desktop-only {
+  display: inline-block;
+}
+
 /* Mobile Styles */
 @media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+...
   .navbar {
     position: relative;
   }
@@ -266,6 +305,9 @@
   /* Expand dropdown items in mobile */
   .navbar-menu .navbar-dropdown .dropdown-menu {
     display: block; /* Always show in mobile view */
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
     position: static;
     box-shadow: none;
     background: rgba(0,0,0,0.1);
@@ -319,5 +361,22 @@
   }
   .pay-button-final:hover {
     background-color: #004085;
+  }
+  .qr-toggle-btn {
+    background-color: #333;
+    color: #e0e0e0;
+    border-color: #444;
+  }
+  .qr-toggle-btn:hover {
+    background-color: #444;
+  }
+  .qr-container {
+    border-top-color: #444;
+  }
+}r {
+    background-color: #444;
+  }
+  .qr-container {
+    border-top-color: #444;
   }
 }

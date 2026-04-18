@@ -23,17 +23,26 @@ async function loadNav() {
       payLink.addEventListener('click', (e) => {
         e.preventDefault();
         modal.style.display = 'block';
+        // Reset QR view when opening
+        const qrContainer = document.getElementById('qr-container');
+        if (qrContainer) qrContainer.style.display = 'none';
       });
 
-      // Close our informational modal when the Zeffy button is clicked
-      // Zeffy's script will intercept this same click to open its popup
-      const payButtonFinal = document.querySelector('.pay-button-final');
+      // QR Toggle Logic
+      const qrToggleBtn = document.getElementById('qr-toggle-btn');
+      const qrContainer = document.getElementById('qr-container');
+      if (qrToggleBtn && qrContainer) {
+        qrToggleBtn.addEventListener('click', () => {
+          qrContainer.style.display = qrContainer.style.display === 'none' ? 'block' : 'none';
+          qrToggleBtn.innerText = qrContainer.style.display === 'none' ? 'Scan QR Instead' : 'Hide QR Code';
+        });
+      }
+
+      // Close our informational modal when the Zeffy link is clicked
+      const payButtonFinal = document.getElementById('pay-button-final-link');
       if (payButtonFinal) {
         payButtonFinal.addEventListener('click', () => {
-          // Use a slight delay to ensure Zeffy script sees the click before we hide the button
-          setTimeout(() => {
-            modal.style.display = 'none';
-          }, 300);
+          modal.style.display = 'none';
         });
       }
 
