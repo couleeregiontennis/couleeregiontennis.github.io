@@ -45,9 +45,14 @@
     <div class="modal-actions">
       <button 
         type="button" 
-        data-zeffy-form-url="https://www.zeffy.com/en-US/ticketing/2026-la-crosse-team-tennis" 
+        data-zeffy-form-link="https://www.zeffy.com/embed/ticketing/2026-la-crosse-team-tennis?modal=true" 
         class="pay-button-final"
       >Continue to Registration</button>
+      <button type="button" class="qr-toggle-btn desktop-only" id="qr-toggle-btn">Scan QR Instead</button>
+    </div>
+    <div id="qr-container" class="qr-container desktop-only" style="display: none;">
+      <img src="../assets/qr-code.png" alt="Registration QR Code" class="qr-code-image">
+      <p>Scan with your phone to register and pay.</p>
     </div>
   </div>
 </div>

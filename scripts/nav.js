@@ -30,10 +30,10 @@ async function loadNav() {
       const payButtonFinal = document.querySelector('.pay-button-final');
       if (payButtonFinal) {
         payButtonFinal.addEventListener('click', () => {
-          // Use a tiny delay to ensure Zeffy script sees the click before we hide the button
+          // Use a slight delay to ensure Zeffy script sees the click before we hide the button
           setTimeout(() => {
             modal.style.display = 'none';
-          }, 100);
+          }, 300);
         });
       }
 
