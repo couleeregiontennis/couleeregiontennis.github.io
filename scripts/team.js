@@ -9,6 +9,19 @@ function escapeHTML(str) {
     .replace(/'/g, '&#39;');
 }
 
+function sanitizeUrl(urlStr) {
+  if (!urlStr) return '';
+  try {
+    const parsed = new URL(String(urlStr), window.location.origin);
+    if (['javascript:', 'data:', 'vbscript:'].includes(parsed.protocol)) {
+      return 'about:blank';
+    }
+    return String(urlStr);
+  } catch (e) {
+    return 'about:blank';
+  }
+}
+
 // This script dynamically loads match and roster data into tables and highlights the next match
 async function loadTeamData(scheduleUrl, rosterUrl) {
   const tableBody = document.querySelector("#matches-table tbody");
@@ -34,7 +47,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
     tableBody.innerHTML = "";
     (scheduleData.schedule || []).forEach(match => {
       const icsLink = match.ics
-        ? `<a href="${match.ics}" download="LTTA-Match-Week${match.week}.ics" title="Add to calendar">📅</a>`
+        ? `<a href="${sanitizeUrl(match.ics)}" download="LTTA-Match-Week${escapeHTML(match.week)}.ics" title="Add to calendar">📅</a>`
         : '';
       const tr = document.createElement("tr");
       tr.innerHTML = `
@@ -42,7 +55,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
         <td>${escapeHTML(formatDateUS(match.date))}</td>
         <td>${escapeHTML(match.time)}</td>
         <td>
-          <a href="${escapeHTML(match.opponent.file)}" class="team-link">${escapeHTML(match.opponent.name)}</a>
+          <a href="${sanitizeUrl(match.opponent.file)}" class="team-link">${escapeHTML(match.opponent.name)}</a>
         </td>
         <td>${escapeHTML(match.courts)}</td>
         <td style="text-align:center">${icsLink}</td>
@@ -63,7 +76,10 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
     });
 
     // After loading the team data and knowing the ICS path:
-    document.getElementById('add-all-ics').href = scheduleData.teamIcsPath || `/teams/${scheduleData.night}/ics/${scheduleData.team.replace(/\s+/g, '_')}/team.ics`;
+    const teamIcsLink = document.getElementById('add-all-ics');
+    if (teamIcsLink) {
+      teamIcsLink.href = sanitizeUrl(scheduleData.teamIcsPath) || sanitizeUrl(`/teams/${scheduleData.night}/ics/${scheduleData.team.replace(/\s+/g, '_')}/team.ics`);
+    }
 
     highlightNextMatch();
   } catch (err) {

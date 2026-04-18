@@ -32,6 +32,17 @@ function teamKey(night, teamNumber) {
   return `${night}-${teamNumber}`;
 }
 
+// Utility: Escape HTML to prevent XSS
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // Store players by team
 const teams = {};
 
@@ -107,9 +118,12 @@ async function main() {
           return;
         }
 
+        // Sanitize teamName for filename to prevent Path Traversal
+        const safeTeamName = teamName.replace(/[^a-zA-Z0-9_-]/g, '_');
+
         const fileName = path.join(
           OUTPUT_DIR,
-          `${night}_Team_${teamNumber}_${teamName.replace(/\s+/g, '_')}.html`
+          `${night}_Team_${teamNumber}_${safeTeamName}.html`
         );
 
         const coCaptain = team.coCaptain;
@@ -126,7 +140,7 @@ async function main() {
             <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 700px; margin: auto;">
               <tr>
                 <td style="padding: 20px;">
-                  <h2 style="color: #004080; margin-bottom: 5px;">Hello LTTA ${night} Team ${teamNumber} ${teamName}:</h2>
+                  <h2 style="color: #004080; margin-bottom: 5px;">Hello LTTA ${escapeHTML(night)} Team ${escapeHTML(teamNumber)} ${escapeHTML(teamName)}:</h2>
                   <p style="margin-top: 5px;">Here we go – our 42nd year for La Crosse Team Tennis Association (LTTA) tennis league.</p>
         
                   <div style="background:#f5f8fb; border-radius:8px; padding:18px 16px; margin:28px 0;">
@@ -147,17 +161,17 @@ async function main() {
         
                   <div style="background:#f5f8fb; border-radius:8px; padding:18px 16px; margin:28px 0;">
                     <p><strong>Your Team Captain</strong><br>
-                    ${captain.name}<br>
-                    📞 ${captain.phone}</p>
+                    ${escapeHTML(captain.name)}<br>
+                    📞 ${escapeHTML(captain.phone)}</p>
                     ${coCaptain ? `
                     <p><strong>Your Co-Captain</strong><br>
-                    ${coCaptain.name}<br>
-                    📞 ${coCaptain.phone}</p>
+                    ${escapeHTML(coCaptain.name)}<br>
+                    📞 ${escapeHTML(coCaptain.phone)}</p>
                     ` : ''}
                     <p><span style="font-size:0.95em; color:#666;">(see Rules area of website for info on On-Site Coordinator)</span><br>
                     <strong>On-Site Coordinator</strong><br>
-                    ${nightCoordinator.name}<br>
-                    📞 ${nightCoordinator.phone}</p>
+                    ${escapeHTML(nightCoordinator.name)}<br>
+                    📞 ${escapeHTML(nightCoordinator.phone)}</p>
                   </div>
         
                   <div style="background:#f5f8fb; border-radius:8px; padding:18px 16px; margin:28px 0;">
@@ -206,10 +220,10 @@ async function main() {
         
                   <div style="background:#f5f8fb; border-radius:8px; padding:18px 16px; margin:28px 0;">
                     <p>See you on the courts,</p>
-                    <p><strong>${coordinator.name}</strong><br>
+                    <p><strong>${escapeHTML(coordinator.name)}</strong><br>
                     LTTA Coordinator<br>
-                    📞 ${coordinator.phone}<br>
-                    ✉️ ${coordinator.email}</p>
+                    📞 ${escapeHTML(coordinator.phone)}<br>
+                    ✉️ ${escapeHTML(coordinator.email)}</p>
                   </div>
                 </td>
               </tr>
