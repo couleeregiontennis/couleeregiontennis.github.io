@@ -156,3 +156,97 @@
     color: #fff;
   }
 }
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  color: #333;
+}
+
+.close-modal {
+  color: #aaa;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  color: #000;
+}
+
+.modal-content h2 {
+  color: #007BFF;
+  margin-top: 0;
+}
+
+.zeffy-warning {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.donate-button-final {
+  background-color: #007BFF;
+  color: white !important;
+  padding: 0.8rem 2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.donate-button-final:hover {
+  background-color: #0056b3;
+}
+
+@media (prefers-color-scheme: dark) {
+  .modal-content {
+    background-color: #23272a;
+    color: #e0e0e0;
+  }
+  .modal-content h2 {
+    color: #c9e1ff;
+  }
+  .zeffy-warning {
+    background-color: #2d2a1e;
+    border-color: #5d4037;
+    color: #ffe082;
+  }
+  .donate-button-final {
+    background-color: #0056b3;
+  }
+  .donate-button-final:hover {
+    background-color: #004085;
+  }
+}
