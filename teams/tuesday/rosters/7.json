@@ -2,42 +2,37 @@
   "teamName": "Good Ol' Boys",
   "roster": [
     {
-      "position": 1,
+      "position": "1",
       "name": "Paul Jacobson",
       "captain": "✓"
     },
     {
-      "position": 2,
-      "name": "Dave Bentz",
-      "captain": ""
-    },
-    {
-      "position": 3,
+      "position": "3",
       "name": "Don Harvey",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "David Lange",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Larry Ruff",
       "captain": ""
     },
     {
-      "position": 3,
-      "name": "Cory Ruud",
+      "position": "3",
+      "name": "Corey Ruud",
       "captain": ""
     },
     {
-      "position": 4,
+      "position": "4",
       "name": "Pennie Pierce-Jorgeson",
       "captain": ""
     },
     {
-      "position": 5,
+      "position": "5",
       "name": "Sally Ruud",
       "captain": "✓"
     }

@@ -2,43 +2,43 @@
   "teamName": "Jetsetters",
   "roster": [
     {
-      "position": 1,
-      "name": "Julio Bird",
+      "position": "1",
+      "name": "Drake Wonderling",
       "captain": ""
     },
     {
-      "position": 2,
-      "name": "Elia Romano",
+      "position": "2",
+      "name": "Corey Stauner",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Jada Brunkow",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Dan Petersen",
       "captain": "✓"
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Shirley Yuan",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Ryan Mullaney",
       "captain": ""
     },
     {
-      "position": 4,
-      "name": "Kim Hardy",
+      "position": "4",
+      "name": "Aaron Olson",
       "captain": ""
     },
     {
-      "position": 5,
-      "name": "Leonardo Silva",
+      "position": "5",
+      "name": "Anna Olson",
       "captain": ""
     }
   ]

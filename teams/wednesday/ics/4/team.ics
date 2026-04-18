@@ -7,7 +7,7 @@ DTSTAMP:20260527T190000Z
 DTSTART;TZID=America/Chicago:20260527T190000
 DTEND;TZID=America/Chicago:20260527T203000
 SUMMARY:LTTA Tennis: vs Baseliners
-DESCRIPTION:LTTA Tennis match: 4 vs Baseliners at Courts 6–9\nOpponent Roster: John Hildebrandt (1); Dan Bodelson (2); Dick Deml (3); Al Graewin (3); Mark Schlafer (3); Joey Endrizzi (3); Terri Kaiser (4); Jill Graewin (5)
+DESCRIPTION:LTTA Tennis match: 4 vs Baseliners at Courts 6–9\nOpponent Roster: John Hildebrandt (1); Dan Bodelson (2); Dick Deml (3); Al Graewin (3); Mark Schlafer (3); Bob Hildebrandt (3); Terri Kaiser (4); Jill Graewin (5)
 LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H
@@ -21,7 +21,7 @@ DTSTAMP:20260603T173000Z
 DTSTART;TZID=America/Chicago:20260603T173000
 DTEND;TZID=America/Chicago:20260603T190000
 SUMMARY:LTTA Tennis: vs Serve Aces
-DESCRIPTION:LTTA Tennis match: 4 vs Serve Aces at Forest Hills\nOpponent Roster: Mark Hoff (1); Gina Nelms (2); Luke Bussiere (3); Franklin Greene (3); Nicole Hoff (3); Michelle Rank (3); Sharon Harter (4); Asa Harter (5)
+DESCRIPTION:LTTA Tennis match: 4 vs Serve Aces at Forest Hills\nOpponent Roster: Mark Hoff (1); Randy Moseng (2); Luke/ Emily Bussiere (3); Franklin Greene (3); Nicole Hoff (3); Michelle Rank (3); Sharon Harter (4); Gary Harter (5)
 LOCATION:Forest Hills
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -35,7 +35,7 @@ DTSTAMP:20260610T190000Z
 DTSTART;TZID=America/Chicago:20260610T190000
 DTEND;TZID=America/Chicago:20260610T203000
 SUMMARY:LTTA Tennis: vs Glory Days
-DESCRIPTION:LTTA Tennis match: 4 vs Glory Days at Courts 1–5\nOpponent Roster: Mike O'Neill (1); Mike Fahey (2); Zach Acklin (3); Laura O'Neill (3); Amy Valentine (3); Tim Acklin (3); Eric Marr (4); Samantha Marr (5)
+DESCRIPTION:LTTA Tennis match: 4 vs Glory Days at Courts 1–5\nOpponent Roster: Mike O'Neill (1); Mike Fahey (2); Zach Acklin (3); Laura O'Neill (3); Amy Valentine (3); Tim Acklin (3); Sarah Meyers (4); Samantha Marr (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT11H
@@ -49,7 +49,7 @@ DTSTAMP:20260617T173000Z
 DTSTART;TZID=America/Chicago:20260617T173000
 DTEND;TZID=America/Chicago:20260617T190000
 SUMMARY:LTTA Tennis: vs Hit Squad
-DESCRIPTION:LTTA Tennis match: 4 vs Hit Squad at Courts 6–9\nOpponent Roster: Sheldon Lee (1); Kyle Deyo (2); Michael Current (3); Christine Lee (3); Bennet Myers (3); Kayla Holman (3); Michelle Ottum (4); Amanda Waters (5)
+DESCRIPTION:LTTA Tennis match: 4 vs Hit Squad at Courts 6–9\nOpponent Roster: Sheldon Lee (1); Kyle Deyo (2); Michael Current (3); Christine Lee (3); John Sullivan (3); Kayla Holman (3); Michelle Ottum (4); Amanda Waters (5)
 LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -77,7 +77,7 @@ DTSTAMP:20260701T173000Z
 DTSTART;TZID=America/Chicago:20260701T173000
 DTEND;TZID=America/Chicago:20260701T190000
 SUMMARY:LTTA Tennis: vs Backhand Bandits
-DESCRIPTION:LTTA Tennis match: 4 vs Backhand Bandits at Courts 10–13\nOpponent Roster: Quentin Lamers (1); Leah Fortun (2); Jennifer Carr (3); Amy Marcou (3); Michael Ojelabi (3); Eli Carr (3); Eli De Leon (4); Irene Johnson-Salvador (5)
+DESCRIPTION:LTTA Tennis match: 4 vs Backhand Bandits at Courts 10–13\nOpponent Roster: Leah Fortun (1); Josh Fortun (2); Jennifer Carr (3); Amy Marcou (3); Michael Ojelabi (3); Marc Crosby (3); Eli De Leon (4); Irene Johnson-Salvador (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -91,7 +91,7 @@ DTSTAMP:20260708T190000Z
 DTSTART;TZID=America/Chicago:20260708T190000
 DTEND;TZID=America/Chicago:20260708T203000
 SUMMARY:LTTA Tennis: vs Not My Fault
-DESCRIPTION:LTTA Tennis match: 4 vs Not My Fault at Courts 10–13\nOpponent Roster: Joe O'Flaherty (1); Ran Ikeyama (2); Dan Grilley (3); Ben Haenni (3); Tamara Byrne (3); Josh Neukom (3); Basu Bhattacharyya (4); John May (5)
+DESCRIPTION:LTTA Tennis match: 4 vs Not My Fault at Courts 10–13\nOpponent Roster: Gina Nelms (1); Brian Spier (2); Dan Grilley (3); Ben Haenni (3); Tamara Byrne (3); Josh Neukom (3); Basu Bhattacharyya (4); John May (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT11H
@@ -105,7 +105,7 @@ DTSTAMP:20260715T173000Z
 DTSTART;TZID=America/Chicago:20260715T173000
 DTEND;TZID=America/Chicago:20260715T190000
 SUMMARY:LTTA Tennis: vs Howie's Team
-DESCRIPTION:LTTA Tennis match: 4 vs Howie's Team at Courts 6–9\nOpponent Roster: Mike Meyers (1); Brian Day (2); Shira Busch (3); Janeen Day (3); Paul Holman (3); Austin Stalsberg (3); Lisa Flottmeyer (4); Gretchen Coleman (5)
+DESCRIPTION:LTTA Tennis match: 4 vs Howie's Team at Courts 6–9\nOpponent Roster: Mike Meyers (1); Brian Day (2); Shira Busch (3); Janeen Day (3); Paul Holman (3); Austin DeBoer (3); Lisa Flottmeyer (4); Gretchen Coleman (5)
 LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -119,7 +119,7 @@ DTSTAMP:20260722T173000Z
 DTSTART;TZID=America/Chicago:20260722T173000
 DTEND;TZID=America/Chicago:20260722T190000
 SUMMARY:LTTA Tennis: vs LAX-Winona Fusion
-DESCRIPTION:LTTA Tennis match: 4 vs LAX-Winona Fusion at Courts 1–5\nOpponent Roster: Ruben Anderson (1); Dan Lewis (2); Joe Heer (3); Janice Hoeschler (3); Eric Rowekamp (3); Nikki Nakano (3); Lora Cadwell (4); Barb Buswell (5)
+DESCRIPTION:LTTA Tennis match: 4 vs LAX-Winona Fusion at Courts 1–5\nOpponent Roster: Ruben Anderson / Allie Laux (1); Dan Lewis (2); Joe Heer (3); Janice Hoeschler (3); Nikki Nakano (3); Lora Cadwell (4); Barb Buswell (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -133,7 +133,7 @@ DTSTAMP:20260729T190000Z
 DTSTART;TZID=America/Chicago:20260729T190000
 DTEND;TZID=America/Chicago:20260729T203000
 SUMMARY:LTTA Tennis: vs Rally Monkeys
-DESCRIPTION:LTTA Tennis match: 4 vs Rally Monkeys at Courts 6–9\nOpponent Roster: Brett Meddaugh (1); Greg Jameson (2); Pam Jameson (3); Andy Seithamer (3); Bette Smith (3); Rick Moody (3); Greg Smith (4); Sui Wang (5)
+DESCRIPTION:LTTA Tennis match: 4 vs Rally Monkeys at Courts 6–9\nOpponent Roster: Brett Meddaugh (1); Meredith Holt (2); Ronghui Chen (3); Andy Seithamer (3); Mason Engebretsen (3); Isaiah Dahmen (3); Sam Hinton (4); Sui Wang (5)
 LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H

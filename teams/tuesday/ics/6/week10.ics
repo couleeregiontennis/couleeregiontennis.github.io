@@ -25,7 +25,7 @@ DTSTAMP:20260728T173000Z
 DTSTART;TZID=America/Chicago:20260728T173000
 DTEND;TZID=America/Chicago:20260728T190000
 SUMMARY:LTTA Tennis: vs Full Metal Racquet
-DESCRIPTION:LTTA Tennis match: 6 vs Full Metal Racquet at Courts 1–5\nOpponent Roster: Tayler Garves Nelson (1); Todd Garves (2); Martin Frank (3); Regina Jones (3); Stephen Sinur (3); Hannah Exner (3); Kim Garves (4); Jane Frank (5)
+DESCRIPTION:LTTA Tennis match: 6 vs Full Metal Racquet at Courts 1–5\nOpponent Roster: Jeff Herde (1); Cole Lapp (2); Bill Lapp (3); Regina Jones (3); Sam Schmidt (3); Hannah Exner (3); Sarah Gang (4); Morgan Brazil (5)
 LOCATION:Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M

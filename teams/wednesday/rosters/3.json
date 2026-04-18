@@ -2,42 +2,42 @@
   "teamName": "Hit Squad",
   "roster": [
     {
-      "position": 1,
+      "position": "1",
       "name": "Sheldon Lee",
       "captain": "✓"
     },
     {
-      "position": 2,
+      "position": "2",
       "name": "Kyle Deyo",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Michael Current",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Christine Lee",
       "captain": "✓"
     },
     {
-      "position": 3,
-      "name": "Bennet Myers",
+      "position": "3",
+      "name": "John Sullivan",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Kayla Holman",
       "captain": ""
     },
     {
-      "position": 4,
+      "position": "4",
       "name": "Michelle Ottum",
       "captain": ""
     },
     {
-      "position": 5,
+      "position": "5",
       "name": "Amanda Waters",
       "captain": ""
     }

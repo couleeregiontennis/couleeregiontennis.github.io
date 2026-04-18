@@ -25,7 +25,7 @@ DTSTAMP:20260805T173000Z
 DTSTART;TZID=America/Chicago:20260805T173000
 DTEND;TZID=America/Chicago:20260805T190000
 SUMMARY:LTTA Tennis: vs LAX-Winona Fusion
-DESCRIPTION:LTTA Tennis match: 2 vs LAX-Winona Fusion at Courts 6–9\nOpponent Roster: Ruben Anderson (1); Dan Lewis (2); Joe Heer (3); Janice Hoeschler (3); Eric Rowekamp (3); Nikki Nakano (3); Lora Cadwell (4); Barb Buswell (5)
+DESCRIPTION:LTTA Tennis match: 2 vs LAX-Winona Fusion at Courts 6–9\nOpponent Roster: Ruben Anderson / Allie Laux (1); Dan Lewis (2); Joe Heer (3); Janice Hoeschler (3); Nikki Nakano (3); Lora Cadwell (4); Barb Buswell (5)
 LOCATION:Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT9H30M

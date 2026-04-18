@@ -2,42 +2,37 @@
   "teamName": "LAX-Winona Fusion",
   "roster": [
     {
-      "position": 1,
-      "name": "Ruben Anderson",
+      "position": "1",
+      "name": "Ruben Anderson / Allie Laux",
       "captain": ""
     },
     {
-      "position": 2,
+      "position": "2",
       "name": "Dan Lewis",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Joe Heer",
       "captain": "✓"
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Janice Hoeschler",
       "captain": ""
     },
     {
-      "position": 3,
-      "name": "Eric Rowekamp",
-      "captain": ""
-    },
-    {
-      "position": 3,
+      "position": "3",
       "name": "Nikki Nakano",
       "captain": ""
     },
     {
-      "position": 4,
+      "position": "4",
       "name": "Lora Cadwell",
       "captain": ""
     },
     {
-      "position": 5,
+      "position": "5",
       "name": "Barb Buswell",
       "captain": ""
     }

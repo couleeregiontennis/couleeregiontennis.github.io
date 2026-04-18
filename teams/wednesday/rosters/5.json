@@ -2,42 +2,42 @@
   "teamName": "Glory Days",
   "roster": [
     {
-      "position": 1,
+      "position": "1",
       "name": "Mike O'Neill",
       "captain": "✓"
     },
     {
-      "position": 2,
+      "position": "2",
       "name": "Mike Fahey",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Zach Acklin",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Laura O'Neill",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Amy Valentine",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Tim Acklin",
       "captain": ""
     },
     {
-      "position": 4,
-      "name": "Eric Marr",
+      "position": "4",
+      "name": "Sarah Meyers",
       "captain": ""
     },
     {
-      "position": 5,
+      "position": "5",
       "name": "Samantha Marr",
       "captain": ""
     }

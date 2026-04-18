@@ -2,43 +2,43 @@
   "teamName": "Serve Aces",
   "roster": [
     {
-      "position": 1,
+      "position": "1",
       "name": "Mark Hoff",
       "captain": "✓"
     },
     {
-      "position": 2,
-      "name": "Gina Nelms",
+      "position": "2",
+      "name": "Randy Moseng",
       "captain": ""
     },
     {
-      "position": 3,
-      "name": "Luke Bussiere",
+      "position": "3",
+      "name": "Luke/ Emily Bussiere",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Franklin Greene",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Nicole Hoff",
       "captain": "✓"
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Michelle Rank",
       "captain": ""
     },
     {
-      "position": 4,
+      "position": "4",
       "name": "Sharon Harter",
       "captain": ""
     },
     {
-      "position": 5,
-      "name": "Asa Harter",
+      "position": "5",
+      "name": "Gary Harter",
       "captain": ""
     }
   ]

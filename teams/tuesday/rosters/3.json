@@ -2,42 +2,42 @@
   "teamName": "Zoomers",
   "roster": [
     {
-      "position": 1,
-      "name": "Jacob Schafer",
+      "position": "1",
+      "name": "Stephan Brettfeld",
       "captain": ""
     },
     {
-      "position": 2,
+      "position": "2",
       "name": "Joe Gregas",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Madeline Loh",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Adrienne Loh",
       "captain": "✓"
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Stanton Loh",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Malakai Berget",
       "captain": ""
     },
     {
-      "position": 4,
+      "position": "4",
       "name": "Kaitlyn Northrup",
       "captain": ""
     },
     {
-      "position": 5,
+      "position": "5",
       "name": "Learoy Daryl Joseph",
       "captain": ""
     }

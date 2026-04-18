@@ -2,43 +2,43 @@
   "teamName": "Full Metal Racquet",
   "roster": [
     {
-      "position": 1,
-      "name": "Tayler Garves Nelson",
+      "position": "1",
+      "name": "Jeff Herde",
       "captain": ""
     },
     {
-      "position": 2,
-      "name": "Todd Garves",
+      "position": "2",
+      "name": "Cole Lapp",
       "captain": ""
     },
     {
-      "position": 3,
-      "name": "Martin Frank",
-      "captain": "✓"
+      "position": "3",
+      "name": "Bill Lapp",
+      "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Regina Jones",
       "captain": "✓"
     },
     {
-      "position": 3,
-      "name": "Stephen Sinur",
+      "position": "3",
+      "name": "Sam Schmidt",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Hannah Exner",
       "captain": ""
     },
     {
-      "position": 4,
-      "name": "Kim Garves",
+      "position": "4",
+      "name": "Sarah Gang",
       "captain": ""
     },
     {
-      "position": 5,
-      "name": "Jane Frank",
+      "position": "5",
+      "name": "Morgan Brazil",
       "captain": ""
     }
   ]

@@ -2,43 +2,23 @@
   "teamName": "Tennis the Menace",
   "roster": [
     {
-      "position": 1,
-      "name": "Robert Jordan",
-      "captain": "✓"
-    },
-    {
-      "position": 2,
-      "name": "Jake Schweitzer",
+      "position": "3",
+      "name": "Matthew Isaacson",
       "captain": ""
     },
     {
-      "position": 3,
-      "name": "Mike Allen",
-      "captain": "✓"
-    },
-    {
-      "position": 3,
-      "name": "Dave Mills",
+      "position": "3",
+      "name": "Jeffrey Schott",
       "captain": ""
     },
     {
-      "position": 3,
-      "name": "John Sullivan",
+      "position": "4",
+      "name": "Asa Harter",
       "captain": ""
     },
     {
-      "position": 3,
-      "name": "Madan Mohan",
-      "captain": ""
-    },
-    {
-      "position": 4,
-      "name": "Hailey Kincaid",
-      "captain": ""
-    },
-    {
-      "position": 5,
-      "name": "Meg Jelen",
+      "position": "5",
+      "name": "Logan",
       "captain": ""
     }
   ]

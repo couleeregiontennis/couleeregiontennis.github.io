@@ -2,42 +2,42 @@
   "teamName": "Howie's Team",
   "roster": [
     {
-      "position": 1,
+      "position": "1",
       "name": "Mike Meyers",
       "captain": ""
     },
     {
-      "position": 2,
+      "position": "2",
       "name": "Brian Day",
       "captain": "✓"
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Shira Busch",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Janeen Day",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Paul Holman",
       "captain": ""
     },
     {
-      "position": 3,
-      "name": "Austin Stalsberg",
+      "position": "3",
+      "name": "Austin DeBoer",
       "captain": ""
     },
     {
-      "position": 4,
+      "position": "4",
       "name": "Lisa Flottmeyer",
       "captain": ""
     },
     {
-      "position": 5,
+      "position": "5",
       "name": "Gretchen Coleman",
       "captain": ""
     }

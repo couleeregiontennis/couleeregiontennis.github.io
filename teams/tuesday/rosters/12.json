@@ -2,42 +2,37 @@
   "teamName": "Easy Overhead",
   "roster": [
     {
-      "position": 1,
+      "position": "1",
       "name": "Brian Mansky",
       "captain": ""
     },
     {
-      "position": 2,
-      "name": "Randy Moseng",
+      "position": "2",
+      "name": "Brennan Quinn",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Heidi Barreyro",
       "captain": "✓"
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Shanon Torgerud",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Odessa Barreyro",
       "captain": ""
     },
     {
-      "position": 3,
-      "name": "Peter Thomson",
-      "captain": ""
-    },
-    {
-      "position": 4,
+      "position": "4",
       "name": "Tyler Benson",
       "captain": ""
     },
     {
-      "position": 5,
+      "position": "5",
       "name": "Amit Mishra",
       "captain": ""
     }

@@ -281,7 +281,6 @@ weeks.forEach(week => {
   });
 });
 
-html += `    </table>\n  </body>\n</html>\n`;
-
+html += `    </table>\n    <p style="text-align:center; font-size: 0.8em; color: #999;">Last Updated: ${new Date().toLocaleString()}</p>\n  </body>\n</html>\n`;
 fs.writeFileSync(outputFile, html);
 console.log('all.html generated! for ' + day.charAt(0).toUpperCase() + day.slice(1) + ' night');

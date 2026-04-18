@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const parse = require('csv-parse/sync');
+const { parse } = require('csv-parse/sync');
 const { fetchCSV } = require('./fetch-csv');
 
 const CSV_PATH = '/Users/brett/Downloads/2026 LTTA TEAM ROSTERS.xlsx - ROSTERS-2.csv';
@@ -13,10 +13,11 @@ async function createRostersFromCSV() {
     // Log the first few lines to debug
     console.log('CSV Preview:', csvContent.split('\n').slice(0, 3));
     
-    const records = parse.parse(csvContent, { 
+    const records = parse(csvContent, { 
       columns: true, 
       skip_empty_lines: true,
-      trim: true // Add trim to handle extra whitespace
+      relax_column_count: true,
+      trim: true
     });
     
     console.log(`Parsed ${records.length} records from CSV`);
@@ -24,37 +25,46 @@ async function createRostersFromCSV() {
     // Group by night and team number
     const rosters = {};
     records.forEach(row => {
-      // Update column names to match new CSV format
-      if (!row.Night || !row['Team/'] || !row['1-Name'] || !row.Level) {
-        console.log('Skipping incomplete row:', row);
+      const nightRaw = row['v'] || '';
+      const teamNum = row['Team/'] || '';
+      const name = row['1-Name'] || '';
+      const level = row['Level'] || '';
+
+      if (!nightRaw || !teamNum || !name) {
         return;
       }
 
-      const night = row.Night.trim();
-      const teamNum = row['Team/'].trim(); // Updated from Team to Team/
-      const teamName = row['TEAM NAME'] ? row['TEAM NAME'].trim() : `Team ${teamNum}`;
+      const night = nightRaw.startsWith('Tue') ? 'tuesday' : (nightRaw.startsWith('Wed') ? 'wednesday' : null);
+      if (!night) return;
+
+      const teamName = row['TEAM NAME'] ? row['TEAM NAME'].trim() : null;
       const key = `${night}-${teamNum}`;
 
       if (!rosters[key]) {
         rosters[key] = { night, teamNum, teamName, roster: [] };
       }
+      
+      // Update team name if we find it later in the CSV
+      if (teamName && !rosters[key].teamName) {
+        rosters[key].teamName = teamName;
+      }
 
       rosters[key].roster.push({
-        position: Number(row.Level),
-        name: row['1-Name'].trim(),
-        captain: row['C/CC'] && row['C/CC'].trim() ? '✓' : '' // Still using C/CC
+        position: level,
+        name: name,
+        captain: row['C/CC'] && row['C/CC'].trim() ? '✓' : ''
       });
     });
 
     // Write one file per team, in subfolders by night
     for (const [key, teamObj] of Object.entries(rosters)) {
       const { night, teamNum, teamName, roster } = teamObj;
-      const jsonFileFolderNight = night == "Tues" ? "tuesday" : "wednesday";
-      const outDir = path.join(__dirname, '..', 'teams', jsonFileFolderNight, 'rosters');
+      const finalTeamName = teamName || `Team ${teamNum}`;
+      const outDir = path.join(__dirname, '..', 'teams', night, 'rosters');
       fs.mkdirSync(outDir, { recursive: true });
       const outPath = path.join(outDir, `${teamNum}.json`);
-      fs.writeFileSync(outPath, JSON.stringify({ teamName, roster }, null, 2));
-      console.log(`Wrote roster for ${night} team ${teamNum} (${teamName})`);
+      fs.writeFileSync(outPath, JSON.stringify({ teamName: finalTeamName, roster }, null, 2));
+      console.log(`Wrote roster for ${night} team ${teamNum} (${finalTeamName})`);
     }
   } catch (error) {
     console.error('Error processing CSV:', error);
@@ -62,4 +72,4 @@ async function createRostersFromCSV() {
   }
 }
 
-createRostersFromCSV(path.join(__dirname, '..', 'ltta.csv'));
+createRostersFromCSV();

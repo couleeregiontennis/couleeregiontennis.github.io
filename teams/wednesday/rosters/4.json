@@ -2,42 +2,42 @@
   "teamName": "Hot Shots",
   "roster": [
     {
-      "position": 1,
+      "position": "1",
       "name": "Laura Reutlinger",
       "captain": ""
     },
     {
-      "position": 2,
+      "position": "2",
       "name": "Roxie Anderson",
       "captain": "✓"
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Chris Kahlow",
       "captain": ""
     },
     {
-      "position": 3,
+      "position": "3",
       "name": "Taylor Nelson",
       "captain": ""
     },
     {
-      "position": 3,
-      "name": "Bryan Spier",
+      "position": "3",
+      "name": "Anna Rydeski",
       "captain": ""
     },
     {
-      "position": 3,
-      "name": "Gracie Miller",
+      "position": "3",
+      "name": "Jenna Helminski Juve",
       "captain": ""
     },
     {
-      "position": 4,
+      "position": "4",
       "name": "Mike Leonard",
       "captain": ""
     },
     {
-      "position": 5,
+      "position": "5",
       "name": "John Noble",
       "captain": ""
     }

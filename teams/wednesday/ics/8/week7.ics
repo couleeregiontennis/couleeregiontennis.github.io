@@ -25,7 +25,7 @@ DTSTAMP:20260708T190000Z
 DTSTART;TZID=America/Chicago:20260708T190000
 DTEND;TZID=America/Chicago:20260708T203000
 SUMMARY:LTTA Tennis: vs Hot Shots
-DESCRIPTION:LTTA Tennis match: 8 vs Hot Shots at Courts 10–13\nOpponent Roster: Laura Reutlinger (1); Roxie Anderson (2); Chris Kahlow (3); Taylor Nelson (3); Bryan Spier (3); Gracie Miller (3); Mike Leonard (4); John Noble (5)
+DESCRIPTION:LTTA Tennis match: 8 vs Hot Shots at Courts 10–13\nOpponent Roster: Laura Reutlinger (1); Roxie Anderson (2); Chris Kahlow (3); Taylor Nelson (3); Anna Rydeski (3); Jenna Helminski Juve (3); Mike Leonard (4); John Noble (5)
 LOCATION:Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT11H
