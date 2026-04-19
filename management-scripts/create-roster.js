@@ -1,9 +1,15 @@
+require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const { parse } = require('csv-parse/sync');
 const { fetchCSV } = require('./fetch-csv');
 
-const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRlgS5yGzip6doLKqud9BDdpCt1_8CPWNjUxFmYgVdkdbQ_MNIc1ku1GJoZ2NBEuw/pub?gid=270023155&single=true&output=csv';
+const CSV_URL = process.env.CSV_URL;
+
+if (!CSV_URL) {
+  console.error('Error: CSV_URL environment variable is not set.');
+  process.exit(1);
+}
 
 async function createRostersFromCSV() {
   try {
