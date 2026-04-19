@@ -4,13 +4,7 @@ const { parse } = require('csv-parse/sync');
 const { fetchCSV } = require('./fetch-csv');
 
 const OUTPUT_DIR = path.join(__dirname, '..', 'output_emails');
-
 const CSV_PATH = '/Users/brett/Downloads/2026 LTTA TEAM ROSTERS.xlsx - ROSTERS-2.csv';
-
-// Ensure output directory exists
-if (!fs.existsSync(OUTPUT_DIR)) {
-  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-}
 
 const coordinator = {
   name: 'Brett Meddaugh',
@@ -19,18 +13,14 @@ const coordinator = {
 };
 
 const tuesdayCoordinator = {
-    name: 'Tom Dwyer',
-    phone: '815-904-0008'
-}
-const wednesdayCoordinator = {
-    name: 'Mark Hoff',
-    phone: '608-386-9310'
-}
+  name: 'Tom Dwyer',
+  phone: '815-904-0008'
+};
 
-// Utility: Generate a team ID like "Wed-2"
-function teamKey(night, teamNumber) {
-  return `${night}-${teamNumber}`;
-}
+const wednesdayCoordinator = {
+  name: 'Mark Hoff',
+  phone: '608-386-9310'
+};
 
 // Utility: Escape HTML to prevent XSS
 function escapeHTML(str) {
@@ -43,11 +33,117 @@ function escapeHTML(str) {
     .replace(/'/g, '&#39;');
 }
 
-// Store players by team
-const teams = {};
+function generateEmailTemplate(team) {
+  const { night, teamNumber, teamName, captain } = team;
+  const nightCoordinator = night === 'Tues' ? tuesdayCoordinator : wednesdayCoordinator;
+  const leagueStart = night === 'Tues' ? 'Tuesday, June 3' : 'Wednesday, June 4';
+
+  return `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LTTA 2026 Season Kickoff</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f0f2f5; padding: 40px; color: #1c1e21; }
+        .email-container { max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .header { background: #004080; color: white; padding: 32px 24px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; }
+        .content { padding: 32px 24px; }
+        .team-banner { background: #e7f3ff; border-radius: 8px; padding: 16px; margin-bottom: 24px; border-left: 4px solid #0066cc; }
+        .team-banner h2 { margin: 0; font-size: 18px; color: #004080; }
+        .action-box { background: #ffffff; border: 2px solid #0066cc; border-radius: 10px; padding: 20px; margin: 24px 0; }
+        .action-box h3 { margin-top: 0; color: #0066cc; display: flex; align-items: center; }
+        .btn { display: inline-block; background: #0066cc; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 10px; }
+        .update-item { border-bottom: 1px solid #e5e7eb; padding: 16px 0; }
+        .update-item:last-child { border-bottom: none; }
+        .update-item strong { display: block; color: #004080; margin-bottom: 4px; }
+        .footer { background: #f9fafb; padding: 24px; border-top: 1px solid #e5e7eb; color: #65676b; font-size: 14px; }
+        .coordinator-card { display: flex; align-items: center; margin-top: 16px; gap: 12px; }
+        .coordinator-info strong { color: #1c1e21; }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>LTTA 2026 Season Kickoff</h1>
+        </div>
+        <div class="content">
+            <p>Hello LTTA Player,</p>
+            <p>Welcome to our 43rd year! We're excited to get back on the courts at Green Island.</p>
+            
+            <div class="team-banner">
+                <h2>${escapeHTML(night)} Team ${escapeHTML(teamNumber)}: ${escapeHTML(teamName)}</h2>
+            </div>
+
+            <div class="action-box">
+                <h3>🚀 Essential Links</h3>
+                <p>Access your team schedule, current standings, and sub lists on the league website:</p>
+                <a href="https://couleeregiontennis.github.io" class="btn">Visit Website</a>
+                <p style="margin-top:15px; font-size: 14px;"><strong>Player Fee:</strong> $25 due by Week 2. Pay via your captain or online (Zeffy link on website).</p>
+            </div>
+
+            <div style="background:#f8f9fa; border-radius:8px; padding:20px; margin:24px 0; border: 1px solid #dee2e6;">
+                <h3 style="margin-top:0; font-size: 16px; color: #004080;">📞 Your Team Contacts</h3>
+                <p style="margin: 8px 0;"><strong>Captain:</strong> ${escapeHTML(captain.name)} (${escapeHTML(captain.phone)})</p>
+                <p style="margin: 8px 0;"><strong>On-Site Coordinator:</strong> ${escapeHTML(nightCoordinator.name)} (${escapeHTML(nightCoordinator.phone)})</p>
+            </div>
+
+            <h3>🎾 2026 Season Updates</h3>
+            
+            <div class="update-item">
+                <strong>New Participation Point</strong>
+                Every match earns 1 point just for showing up. You only lose this point for a forfeit.
+            </div>
+
+            <div class="update-item">
+                <strong>"Feels Like" Heat Rule</strong>
+                We now use the "Feels Like" temperature on weather.com. Over 95&deg;F = optional 2-2 start; over 104&deg;F = automatic cancellation.
+            </div>
+
+            <div class="update-item">
+                <strong>Home Team Responsibility</strong>
+                If neither team is willing to put their #3 line out first, the Home team must complete their official lineup sheet first.
+            </div>
+
+            <div class="update-item">
+                <strong>Championship Picnic</strong>
+                The season finale will now feature the top two teams from both nights playing cross-night matches to determine the overall champion.
+            </div>
+
+            <div style="margin-top: 32px;">
+                <p><strong>League Start:</strong> ${escapeHTML(leagueStart)}<br>
+                <strong>Location:</strong> Green Island Park</p>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="coordinator-card">
+                <div class="coordinator-info">
+                    <p style="margin-bottom: 10px;"><strong>LTTA Leadership Team</strong></p>
+                    <table style="width: 100%; font-size: 13px; color: #65676b; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding-bottom: 8px;"><strong>Brett Meddaugh</strong><br>League Coordinator</td>
+                            <td style="padding-bottom: 8px;"><strong>Jenn Carr</strong><br>Teams & Rosters</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tom Dwyer</strong><br>Tuesday Coordinator</td>
+                            <td><strong>Mark Hoff</strong><br>Wednesday Coordinator</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>`;
+}
 
 async function main() {
   try {
+    // Ensure output directory exists
+    if (!fs.existsSync(OUTPUT_DIR)) {
+      fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+    }
+
     const csvContent = await fetchCSV(CSV_PATH);
     console.log('Fetched CSV data successfully');
     
@@ -75,170 +171,66 @@ async function main() {
       records.push(record);
     });
 
+    const teams = {};
+
     // Group players by team
     records.forEach(record => {
-        if (!record.Night || !record.Team || !record.Name) {
-          console.warn('Skipping incomplete record:', record);
-          return;
-        }
+      if (!record.Night || !record.Team || !record.Name) {
+        console.warn('Skipping incomplete record:', record);
+        return;
+      }
 
-        const key = teamKey(record.Night, record.Team);
-        
-        if (!teams[key]) {
-          teams[key] = {
-            night: record.Night,
-            teamNumber: record.Team,
-            teamName: record.TeamName || `Team ${record.Team}`,
-            players: [],
-            captain: null,
-            coCaptain: null
-          };
-        }
-
-        const player = {
-          name: record.Name,
-          phone: record.Phone || '',
-          email: record.Email || '',
-          position: parseInt(record.Level) || 0
+      const key = `${record.Night}-${record.Team}`;
+      
+      if (!teams[key]) {
+        teams[key] = {
+          night: record.Night,
+          teamNumber: record.Team,
+          teamName: record.TeamName || `Team ${record.Team}`,
+          players: [],
+          captain: null,
+          coCaptain: null
         };
+      }
 
-        teams[key].players.push(player);
+      const player = {
+        name: record.Name,
+        phone: record.Phone || '',
+        email: record.Email || '',
+        position: parseInt(record.Level) || 0
+      };
 
-        // Set captain/co-captain
-        if (record.Captain) {
-          teams[key].captain = player;
-        }
-        if (record.CoCaptain) {
-          teams[key].coCaptain = player;
-        }
-      });
+      teams[key].players.push(player);
 
-      Object.values(teams).forEach(team => {
-        const { night, teamNumber, teamName, players, captain } = team;
+      // Set captain/co-captain
+      if (record.Captain) {
+        teams[key].captain = player;
+      }
+      if (record.CoCaptain) {
+        teams[key].coCaptain = player;
+      }
+    });
 
-        if (!captain) {
-          console.warn(`⚠️  No captain found for ${night} Team ${teamNumber}`);
-          return;
-        }
+    Object.values(teams).forEach(team => {
+      const { night, teamNumber, teamName, captain } = team;
 
-        // Sanitize teamName for filename to prevent Path Traversal
-        const safeTeamName = teamName.replace(/[^a-zA-Z0-9_-]/g, '_');
+      if (!captain) {
+        console.warn(`⚠️  No captain found for ${night} Team ${teamNumber}`);
+        return;
+      }
 
-        const fileName = path.join(
-          OUTPUT_DIR,
-          `${night}_Team_${teamNumber}_${safeTeamName}.html`
-        );
+      // Sanitize teamName for filename to prevent Path Traversal
+      const safeTeamName = teamName.replace(/[^a-zA-Z0-9_-]/g, '_');
 
-        const coCaptain = team.coCaptain;
-        const nightCoordinator = night === 'Tues' ? tuesdayCoordinator : wednesdayCoordinator;
+      const fileName = path.join(
+        OUTPUT_DIR,
+        `${night}_Team_${teamNumber}_${safeTeamName}.html`
+      );
 
-        const body = `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="UTF-8" />
-            <title>LTTA Email</title>
-          </head>
-          <body style="font-family: Arial, sans-serif; color: #111111; line-height: 1.6; margin: 0; padding: 0;">
-            <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 700px; margin: auto;">
-              <tr>
-                <td style="padding: 20px;">
-                  <h2 style="color: #004080; margin-bottom: 5px;">Hello LTTA ${escapeHTML(night)} Team ${escapeHTML(teamNumber)} ${escapeHTML(teamName)}:</h2>
-                  <p style="margin-top: 5px;">Here we go – our 43rd year for La Crosse Team Tennis Association (LTTA) tennis league.</p>
-        
-                  <div style="background:#f5f8fb; border-radius:8px; padding:18px 16px; margin:28px 0;">
-                    <p>We're trying something a little different this year. Visit:</p>
-                    <p><a href="https://couleeregiontennis.github.io" style="color: #0066cc;">https://couleeregiontennis.github.io</a></p>
-                    <p>There you’ll find:</p>
-                    <ul style="padding-left: 20px;">
-                      <li>Your team schedule</li>
-                      <li>Printable schedule for all teams</li>
-                      <li>The ability to add matches to your calendar</li>
-                      <li>Team rosters</li>
-                      <li>Rules</li>
-                      <li>Green Island info</li>
-                      <li>GroupMe chats to help find a sub</li>
-                    </ul>
-                    <p>Once the season starts, we’ll add team standings. Feel free to send any feedback.</p>
-                  </div>
-        
-                  <div style="background:#f5f8fb; border-radius:8px; padding:18px 16px; margin:28px 0;">
-                    <p><strong>Your Team Captain</strong><br>
-                    ${escapeHTML(captain.name)}<br>
-                    📞 ${escapeHTML(captain.phone)}</p>
-                    ${coCaptain ? `
-                    <p><strong>Your Co-Captain</strong><br>
-                    ${escapeHTML(coCaptain.name)}<br>
-                    📞 ${escapeHTML(coCaptain.phone)}</p>
-                    ` : ''}
-                    <p><span style="font-size:0.95em; color:#666;">(see Rules area of website for info on On-Site Coordinator)</span><br>
-                    <strong>On-Site Coordinator</strong><br>
-                    ${escapeHTML(nightCoordinator.name)}<br>
-                    📞 ${escapeHTML(nightCoordinator.phone)}</p>
-                  </div>
-        
-                  <div style="background:#f5f8fb; border-radius:8px; padding:18px 16px; margin:28px 0;">
-                    <p><strong>League Start:</strong> ${night === 'Tues' ? 'Tuesday, June 3' : 'Wednesday, June 4'} at 5:30 PM or 7:00 PM<br>
-                    Some courts at 5:30 may be in use by Aquinas tennis. If it affects your team, we’ll let you know.</p>
-                    <p><strong>Location:</strong> Green Island Park Tennis Courts</p>
-                    <p><strong>Player Fee:</strong> $25 – Pay your captain within the first two weeks.<br>
-                    Checks payable to <em>LTTA</em> (confirm preferred method with your captain).</p>
-                  </div>
-        
-                  <div style="background:#f5f8fb; border-radius:8px; padding:18px 16px; margin:28px 0;">
-                    <p><strong>Scheduling Note:</strong><br>
-                    Match times don't always alternate between 5:30 and 7:00 PM. Some teams may have the same time multiple weeks in a row. It should even out (or close to) by season’s end.</p>
-                  </div>
-        
-                  <div style="background:#f5f8fb; border-radius:8px; padding:18px 16px; margin:28px 0;">
-                    <p><strong>Sub Policy:</strong></p>
-                    <ul style="padding-left: 20px;">
-                      <li>Tell your captain if you can’t make a match</li>
-                      <li>Try find a sub that doesn't get to play normally, before asking players from the other night</li>
-                      <li>Use GroupMe – it makes finding subs easier</li>
-                    </ul>
-                    <p>Players reported that finding a sub is sometimes difficult. Please use GroupMe to find a sub, it should make the process easier.</p>
-                  </div>
-        
-                  <div style="background:#f5f8fb; border-radius:8px; padding:18px 16px; margin:28px 0;">
-                    <p><strong>What’s New This Season:</strong></p>
-                    <ol style="padding-left: 20px;">
-                      <li>Teams now have 8 players.</li>
-                      <li>Players #1 & #2 defaults to doubles, but may choose to play singles (if all players agree and match is scheduled for courts 1–5).</li>
-                      <li>There will be a Singles Night. If you’re interested, sign up:<br>
-                        <a href="https://forms.gle/mUgE38YeV7rNLduR8" style="color: #0066cc;">https://forms.gle/mUgE38YeV7rNLduR8</a>
-                      </li>
-                      <li>Line 3 now has both lines as doubles. You may mix and match partners as usual.</li>
-                    </ol>
-                  </div>
-        
-                  <div style="background:#f5f8fb; border-radius:8px; padding:18px 16px; margin:28px 0;">
-                    <p><strong>Thanks to Roxie Anderson</strong> (Wed Team 4 Captain) for updating our Facebook page.</p>
-                    <p>
-                      Follow us:<br>
-                      <a href="https://facebook.com/couleeregiontennis" style="color: #0066cc;">facebook.com/couleeregiontennis</a><br>
-                      <a href="https://www.couleeregiontennis.com" style="color: #0066cc;">www.couleeregiontennis.com</a>
-                    </p>
-                  </div>
-        
-                  <div style="background:#f5f8fb; border-radius:8px; padding:18px 16px; margin:28px 0;">
-                    <p>See you on the courts,</p>
-                    <p><strong>${escapeHTML(coordinator.name)}</strong><br>
-                    LTTA Coordinator<br>
-                    📞 ${escapeHTML(coordinator.phone)}<br>
-                    ✉️ ${escapeHTML(coordinator.email)}</p>
-                  </div>
-                </td>
-              </tr>
-            </table>
-          </body>
-        </html>
-        `;
-        
-        const emailContent = `${body}`;
-        fs.writeFileSync(fileName, emailContent, 'utf8');
-        console.log(`✅ Created email for ${night} Team ${teamNumber} – ${fileName}`);
-      });
+      const emailContent = generateEmailTemplate(team);
+      fs.writeFileSync(fileName, emailContent, 'utf8');
+      console.log(`✅ Created email for ${night} Team ${teamNumber} – ${fileName}`);
+    });
 
   } catch (error) {
     console.error('Error processing CSV:', error);
@@ -253,4 +245,12 @@ process.on('unhandledRejection', (error) => {
   process.exit(1);
 });
 
-main().catch(console.error);
+module.exports = {
+  generateEmailTemplate,
+  main,
+  escapeHTML
+};
+
+if (require.main === module) {
+  main().catch(console.error);
+}
