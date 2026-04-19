@@ -34,7 +34,7 @@ function escapeHTML(str) {
 }
 
 function generateEmailTemplate(team) {
-  const { night, teamNumber, teamName, captain } = team;
+  const { night, teamNumber, teamName, captain, coCaptain } = team;
   const nightCoordinator = night === 'Tues' ? tuesdayCoordinator : wednesdayCoordinator;
   const leagueStart = night === 'Tues' ? 'Tuesday, June 3' : 'Wednesday, June 4';
 
@@ -85,6 +85,7 @@ function generateEmailTemplate(team) {
             <div style="background:#f8f9fa; border-radius:8px; padding:20px; margin:24px 0; border: 1px solid #dee2e6;">
                 <h3 style="margin-top:0; font-size: 16px; color: #004080;">📞 Your Team Contacts</h3>
                 <p style="margin: 8px 0;"><strong>Captain:</strong> ${escapeHTML(captain.name)} (${escapeHTML(captain.phone)})</p>
+                ${coCaptain ? `<p style="margin: 8px 0;"><strong>Co-Captain:</strong> ${escapeHTML(coCaptain.name)} (${escapeHTML(coCaptain.phone)})</p>` : ''}
                 <p style="margin: 8px 0;"><strong>On-Site Coordinator:</strong> ${escapeHTML(nightCoordinator.name)} (${escapeHTML(nightCoordinator.phone)})</p>
             </div>
 
@@ -107,15 +108,22 @@ function generateEmailTemplate(team) {
 
             <div class="update-item">
                 <strong>Championship Picnic</strong>
-                The season finale will now feature the top two teams from both nights playing cross-night matches to determine the overall champion.
+                The season finale features the top two teams from both nights playing cross-night matches to determine the overall champion. All matches at the picnic start at 2-all.
             </div>
 
             <div style="margin-top: 32px;">
                 <p><strong>League Start:</strong> ${escapeHTML(leagueStart)}<br>
                 <strong>Location:</strong> Green Island Park</p>
             </div>
+
+            <p style="margin-top: 24px; font-size: 14px; color: #65676b; font-style: italic;">
+                Once the season starts, please provide feedback on the new digital scoring site.
+            </p>
         </div>
         <div class="footer">
+            <div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e5e7eb;">
+                <p style="margin: 0 0 8px 0;"><strong>Sub Policy:</strong> If you cannot play, you are responsible for finding a sub from the official sub list on the website.</p>
+            </div>
             <div class="coordinator-card">
                 <div class="coordinator-info">
                     <p style="margin-bottom: 10px;"><strong>LTTA Leadership Team</strong></p>

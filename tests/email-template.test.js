@@ -25,6 +25,11 @@ test('generateEmailTemplate should return a string containing team details', (t)
   assert.ok(html.includes('555-0101'), 'Should include captain phone');
   assert.ok(html.includes('Tuesday, June 3'), 'Should include correct league start date');
   assert.ok(html.includes('Tom Dwyer'), 'Should include Tuesday coordinator');
+  assert.ok(html.includes('Jane Smith'), 'Should include co-captain name');
+  assert.ok(html.includes('555-0102'), 'Should include co-captain phone');
+  assert.ok(html.includes('All matches at the picnic start at 2-all'), 'Should include 2-all scoring for picnic');
+  assert.ok(html.includes('feedback on the new digital scoring site'), 'Should include feedback loop');
+  assert.ok(html.includes('Sub Policy:'), 'Should include sub policy');
 });
 
 test('generateEmailTemplate should handle Wednesday teams', (t) => {
