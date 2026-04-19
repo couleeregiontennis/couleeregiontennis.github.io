@@ -4,22 +4,22 @@ const { parse } = require('csv-parse/sync');
 const { fetchCSV } = require('./fetch-csv');
 
 const OUTPUT_DIR = path.join(__dirname, '..', 'output_emails');
-const CSV_PATH = '/Users/brett/Downloads/2026 LTTA TEAM ROSTERS.xlsx - ROSTERS-2.csv';
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRlgS5yGzip6doLKqud9BDdpCt1_8CPWNjUxFmYgVdkdbQ_MNIc1ku1GJoZ2NBEuw/pub?gid=270023155&single=true&output=csv';
 
 const coordinator = {
-  name: 'Brett Meddaugh',
-  phone: '907-980-1293',
-  email: 'brett.meddaugh@gmail.com'
+  name: process.env.COORDINATOR_NAME || 'Brett Meddaugh',
+  phone: process.env.COORDINATOR_PHONE || '555-0100',
+  email: process.env.COORDINATOR_EMAIL || 'coordinator@example.com'
 };
 
 const tuesdayCoordinator = {
-  name: 'Tom Dwyer',
-  phone: '815-904-0008'
+  name: process.env.TUESDAY_COORDINATOR_NAME || 'Tom Dwyer',
+  phone: process.env.TUESDAY_COORDINATOR_PHONE || '555-0101'
 };
 
 const wednesdayCoordinator = {
-  name: 'Mark Hoff',
-  phone: '608-386-9310'
+  name: process.env.WEDNESDAY_COORDINATOR_NAME || 'Mark Hoff',
+  phone: process.env.WEDNESDAY_COORDINATOR_PHONE || '555-0102'
 };
 
 // Utility: Escape HTML to prevent XSS
@@ -152,7 +152,7 @@ async function main() {
       fs.mkdirSync(OUTPUT_DIR, { recursive: true });
     }
 
-    const csvContent = await fetchCSV(CSV_PATH);
+    const csvContent = await fetchCSV(CSV_URL);
     console.log('Fetched CSV data successfully');
     
     // Parse CSV content

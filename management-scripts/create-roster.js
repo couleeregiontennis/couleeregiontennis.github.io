@@ -3,11 +3,12 @@ const path = require('path');
 const { parse } = require('csv-parse/sync');
 const { fetchCSV } = require('./fetch-csv');
 
-const CSV_PATH = '/Users/brett/Downloads/2026 LTTA TEAM ROSTERS.xlsx - ROSTERS-2.csv';
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRlgS5yGzip6doLKqud9BDdpCt1_8CPWNjUxFmYgVdkdbQ_MNIc1ku1GJoZ2NBEuw/pub?gid=270023155&single=true&output=csv';
 
 async function createRostersFromCSV() {
   try {
-    const csvContent = await fetchCSV(CSV_PATH);
+    const csvContent = await fetchCSV(CSV_URL);
+
     console.log('Fetched CSV data successfully');
     
     // Log the first few lines to debug
