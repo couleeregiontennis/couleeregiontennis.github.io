@@ -1,13 +1,20 @@
+require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const { parse } = require('csv-parse/sync');
 const { fetchCSV } = require('./fetch-csv');
 
-const CSV_PATH = '/Users/brett/Downloads/2026 LTTA TEAM ROSTERS.xlsx - ROSTERS-2.csv';
+const CSV_URL = process.env.CSV_URL;
+
+if (!CSV_URL) {
+  console.error('Error: CSV_URL environment variable is not set.');
+  process.exit(1);
+}
 
 async function createRostersFromCSV() {
   try {
-    const csvContent = await fetchCSV(CSV_PATH);
+    const csvContent = await fetchCSV(CSV_URL);
+
     console.log('Fetched CSV data successfully');
     
     // Log the first few lines to debug

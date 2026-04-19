@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { parse } = require('csv-parse/sync');
 const fs = require('fs');
 const path = require('path');
@@ -17,31 +18,54 @@ function addDays(dateStr, days) {
 }
 
 // Load CSV or Excel
-const CSV_PATH = '/Users/brett/Downloads/2026 LTTA TEAM ROSTERS.xlsx - ROSTERS-2.csv';
+const CSV_URL = process.env.CSV_URL;
+
+if (!CSV_URL) {
+  console.error('Error: CSV_URL environment variable is not set.');
+  process.exit(1);
+}
 
 // Update loadSheet function
 async function loadSheet() {
   try {
-    const csvContent = await fetchCSV(CSV_PATH);
+    const csvContent = await fetchCSV(CSV_URL);
     console.log('CSV data fetched successfully');
     
     // Parse CSV content using csv-parse/sync
     const rawRows = parse(csvContent, {
       columns: false,
-      skip_empty_lines: true
+      skip_empty_lines: true,
+      relax_column_count: true
     });
 
-    // Convert parsed arrays to objects matching the expected format
+    if (rawRows.length === 0) return [];
+
+    const header = rawRows[0];
+    const getIndex = (name) => {
+      const idx = header.findIndex(h => h.trim().toLowerCase() === name.toLowerCase());
+      return idx !== -1 ? idx : header.findIndex(h => h.trim().toLowerCase().includes(name.toLowerCase()));
+    };
+
+    const indices = {
+      night: getIndex('v'),
+      team: getIndex('Team/'),
+      ccc: getIndex('C/CC'),
+      level: getIndex('Level'),
+      name: getIndex('1-Name'),
+      teamName: getIndex('TEAM NAME')
+    };
+
+    // Convert parsed arrays to objects matching the expected format, skipping header
     const rows = [];
-    for (let i = 0; i < rawRows.length; i++) {
+    for (let i = 1; i < rawRows.length; i++) {
       const row = rawRows[i];
       rows.push({
-        'Night': row[0] || '',
-        'Team/': row[1] || '',
-        'C/CC': row[2] || '',
-        'Level': row[3] || '',
-        '1-Name': row[4] || '',
-        'TEAM NAME': row[9] || ''
+        'Night': row[indices.night] || '',
+        'Team/': row[indices.team] || '',
+        'C/CC': row[indices.ccc] || '',
+        'Level': row[indices.level] || '',
+        '1-Name': row[indices.name] || '',
+        'TEAM NAME': row[indices.teamName] || ''
       });
     }
 
