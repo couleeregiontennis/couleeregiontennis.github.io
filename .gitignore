@@ -24,4 +24,5 @@ node_modules/
 # Testing and development caches
 .vite/
 playwright-report/
-test-results/.worktrees/
+test-results/
+.worktrees/
