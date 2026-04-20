@@ -145,7 +145,7 @@ let html = `<!DOCTYPE html>
           margin: 3px 0 5px 0;
         }
         .schedule-table {
-          page-break-after: always;
+          page-break-after: auto;
         }
       }
       /* Mobile-friendly styles */
