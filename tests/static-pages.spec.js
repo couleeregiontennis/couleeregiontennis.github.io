@@ -12,7 +12,7 @@ test.describe('Static Pages', () => {
         });
 
         await page.goto('/pages/standings.html');
-        await expect(page.getByRole('heading', { level: 1, name: 'Standings' })).toBeVisible();
+        await expect(page.getByRole('heading', { level: 1, name: '2026 Standings' })).toBeVisible();
 
         // Verify initial render (All)
         const teamARow = page.getByRole('row', { name: '1 Tuesday Team A' });
