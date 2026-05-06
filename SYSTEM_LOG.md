@@ -7,3 +7,8 @@
 ## 2025-05-XX - Reverse Tabnabbing Regression in Audit
 **Vulnerability:** A bot (Jules) performed an audit and explicitly removed `rel="noopener noreferrer"` from `target="_blank"` anchor tags. This reintroduced a reverse tabnabbing security vulnerability.
 **Learning:** Automated auditors can suffer from destructive confirmation bias, removing essential security attributes if they don't understand their purpose. Security invariants must be hardcoded in memory/checklists for future bots.
+
+## 2026 Season Roadmap
+- [ ] **Security Hardening:** Move the `CSV_URL` and Coordinator phone numbers in `create-emails.js` to GitHub Secrets.
+- [ ] **Automation:** Implement a GitHub Action workflow (`sync-data.yml`) to automatically fetch rosters and regenerate the website on a schedule.
+- [ ] **Digital Scoring:** Re-enable and formalize the digital scoring system for full league use once the captain demo phase is complete.
