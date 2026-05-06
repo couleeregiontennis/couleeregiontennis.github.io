@@ -66,7 +66,13 @@ async function createRostersFromCSV() {
     // Write one file per team, in subfolders by night
     for (const [key, teamObj] of Object.entries(rosters)) {
       const { night, teamNum, teamName, roster } = teamObj;
-      const finalTeamName = teamName || `Team ${teamNum}`;
+      let finalTeamName = teamName || `Team ${teamNum}`;
+      
+      // If roster is empty or contains no valid players, rename to BYE
+      if (!roster || roster.length === 0) {
+        finalTeamName = "BYE";
+      }
+
       const outDir = path.join(__dirname, '..', 'teams', night, 'rosters');
       fs.mkdirSync(outDir, { recursive: true });
       const outPath = path.join(outDir, `${teamNum}.json`);

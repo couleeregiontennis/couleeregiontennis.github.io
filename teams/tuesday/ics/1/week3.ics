@@ -21,12 +21,12 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-tuesday-1-week3@couleeregiontennis.org
-DTSTAMP:20260609T173000Z
-DTSTART;TZID=America/Chicago:20260609T173000
-DTEND;TZID=America/Chicago:20260609T190000
+DTSTAMP:20260609T180000Z
+DTSTART;TZID=America/Chicago:20260609T180000
+DTEND;TZID=America/Chicago:20260609T193000
 SUMMARY:LTTA Tennis: vs Jetsetters (Away)
-DESCRIPTION:LTTA Tennis match: 1 vs Jetsetters at Forest Hills\nOpponent Roster: Drake Wonderling (1); Corey Stauner (2); Jada Brunkow (3); Dan Petersen (3); Shirley Yuan (3); Ryan Mullaney (3); Aaron Olson (4); Anna Olson (5)
-LOCATION:Forest Hills
+DESCRIPTION:LTTA Tennis match: 1 vs Jetsetters at Forest Hills Tennis Courts\nOpponent Roster: Julio Bird (1); Elia Romano (2); Jada Brunkow (3); Dan Petersen (3); Shirley Yuan (3); Ryan Mullaney (3); Kim Hardy (4); Leonardo Silva (5)
+LOCATION:Forest Hills Tennis Courts
 BEGIN:VALARM
 TRIGGER:-PT9H30M
 ACTION:DISPLAY
