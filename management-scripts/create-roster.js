@@ -4,7 +4,7 @@ const path = require('path');
 const { parse } = require('csv-parse/sync');
 const { fetchCSV } = require('./fetch-csv');
 
-const CSV_URL = process.env.CSV_URL;
+const CSV_URL = process.env.CSV_URL || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTRXXJgqymosDbuyhAHCpHHUqQsNxRk0B-3kBGWr7CuPymhKUpT83JKyN7DxkCiaPdKsZEeBaA3GDjH/pub?gid=1666435806&single=true&output=csv';
 
 if (!CSV_URL) {
   console.error('Error: CSV_URL environment variable is not set.');

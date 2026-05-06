@@ -3,18 +3,18 @@
   "roster": [
     {
       "position": "1",
-      "name": "Jeff Herde",
+      "name": "Tayler Garves Nelson",
       "captain": ""
     },
     {
       "position": "2",
-      "name": "Cole Lapp",
+      "name": "Todd Garves",
       "captain": ""
     },
     {
       "position": "3",
-      "name": "Bill Lapp",
-      "captain": ""
+      "name": "Martin Frank",
+      "captain": "✓"
     },
     {
       "position": "3",
@@ -23,7 +23,7 @@
     },
     {
       "position": "3",
-      "name": "Sam Schmidt",
+      "name": "Stephen Sinur",
       "captain": ""
     },
     {
@@ -33,12 +33,12 @@
     },
     {
       "position": "4",
-      "name": "Sarah Gang",
+      "name": "Kim Garves",
       "captain": ""
     },
     {
       "position": "5",
-      "name": "Morgan Brazil",
+      "name": "Jane Frank",
       "captain": ""
     }
   ]

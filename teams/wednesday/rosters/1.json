@@ -3,7 +3,7 @@
   "roster": [
     {
       "position": "1",
-      "name": "Ruben Anderson / Allie Laux",
+      "name": "Ruben Anderson",
       "captain": ""
     },
     {
@@ -19,6 +19,11 @@
     {
       "position": "3",
       "name": "Janice Hoeschler",
+      "captain": ""
+    },
+    {
+      "position": "3",
+      "name": "Eric Rowekamp",
       "captain": ""
     },
     {
