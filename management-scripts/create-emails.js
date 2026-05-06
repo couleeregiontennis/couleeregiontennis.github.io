@@ -66,7 +66,7 @@ function generateEmailTemplate(team) {
 
         <div class="content">
             <p>Hello LTTA Player,</p>
-            <p>Welcome to the 2026 season of the La Crosse Team Tennis Association (LTTA)! We are thrilled to get back out on the courts for another great summer of tennis at the Green Island Park Tennis Complex.</p>
+            <p>Welcome to the 2026 season of the La Crosse Team Tennis Association (LTTA)! We are thrilled to get back out on the courts for another great summer of tennis at Green Island.</p>
 
             <div class="highlight-box">
                 <h3 style="margin-top: 0; color: #2e7d32;">📋 Your Team: ${escapeHTML(teamName)} (${escapeHTML(night)} #${escapeHTML(teamNumber)})</h3>
@@ -77,7 +77,7 @@ function generateEmailTemplate(team) {
 
             <h2>First Night Onboarding</h2>
             <ul>
-                <li><strong>Check-in:</strong> Arrive 15 minutes early for your first match. Head to the central shelter (by Court 1) to check in with ${escapeHTML(nightCoordinator.name)}, get your court assignment, and pick up your balls.</li>
+                <li><strong>Check-in:</strong> Arrive 15 minutes early for your first match.</li>
                 <li><strong>Balls:</strong> Tennis balls are provided by the league for every match.</li>
                 <li><strong>Hydration:</strong> ⚠️ <strong>IMPORTANT:</strong> The water fountain at Green Island is currently out of order. Please bring plenty of your own water.</li>
             </ul>
@@ -86,25 +86,20 @@ function generateEmailTemplate(team) {
             <ul>
                 <li><strong>When & Where:</strong> Matches are played on ${escapeHTML(matchDay)} evenings at Green Island Park. Start times rotate between 5:30 pm and 7:00 pm.</li>
                 <li><strong>Punctuality:</strong> Please arrive 10 minutes prior to your scheduled match time. The 15-minute forfeit rule is strictly in effect.</li>
-                <li><strong>League Website:</strong> Find schedules, standings, and sub lists at <a href="https://couleeregiontennis.github.io">couleeregiontennis.github.io</a></li>
+                <li><strong>League Website:</strong> Find schedules, standings, and sub lists at <a href="https://couleeregiontennis.org">couleeregiontennis.org</a></li>
             </ul>
 
             <div class="highlight-box">
                 <h3 style="margin-top: 0; color: #2e7d32;">🚨 2026 Rule Reminders</h3>
                 <ul>
-                    <li><strong>Scoring:</strong> Earn <strong>1 point per set won</strong> and <strong>1 point for participation</strong> (showing up on time).</li>
+                    <li><strong>Scoring:</strong> Earn <strong>1 point per set won(including tiebreakers)</strong> and <strong>1 point for participation</strong> (showing up on time).</li>
                     <li><strong>Heat Rule:</strong> We use the "Feels Like" temperature on weather.com. Over 95&deg;F = optional 2-2 start; over 104&deg;F = automatic cancellation.</li>
                     <li><strong>Lineups:</strong> If teams can't agree on who plays first, the Home team must complete the official lineup sheet first.</li>
                 </ul>
             </div>
 
             <h2>League Dues</h2>
-            <p>Dues are <strong>$25 for the season</strong>, due by the 2nd week of play. Please pay your captain via cash, check, or use the <strong>Zeffy</strong> link on our website (preferred for digital as it has zero fees).</p>
-
-            <div class="captain-box">
-                <h3 style="margin-top: 0; color: #e65100;">🔸 Note for Captains</h3>
-                <p style="margin-bottom: 0;">We will be doing a brief demo of the new digital scoring system on the first night. We aren't using it for official scores yet, but we want you to see how it works for the future!</p>
-            </div>
+            <p>Dues are <strong>$25 for the season</strong>, due by the 2nd week of play. Please pay your captain who will pass it on to a Coordinator.</p>
 
             <h2>Year-End Picnic & Championship</h2>
             <p>The season wraps up with our picnic and a new crossover championship! The top teams from Tuesday will face off against the top teams from Wednesday to determine the overall league champion.</p>
@@ -132,7 +127,7 @@ async function main() {
 
     const csvContent = await fetchCSV(CSV_URL);
     console.log('Fetched CSV data successfully');
-    
+
     // Parse CSV content
     const parsedData = parse(csvContent, {
       columns: true,
@@ -167,7 +162,7 @@ async function main() {
       }
 
       const key = `${record.Night}-${record.Team}`;
-      
+
       if (!teams[key]) {
         teams[key] = {
           night: record.Night,
