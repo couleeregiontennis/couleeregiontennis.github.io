@@ -70,9 +70,9 @@ function generateEmailTemplate(team) {
 
             <div class="highlight-box">
                 <h3 style="margin-top: 0; color: #2e7d32;">📋 Your Team: ${escapeHTML(teamName)} (${escapeHTML(night)} #${escapeHTML(teamNumber)})</h3>
-                <p><strong>Captain:</strong> ${escapeHTML(captain.name)} (${escapeHTML(captain.phone)})</p>
-                ${coCaptain ? `<p><strong>Co-Captain:</strong> ${escapeHTML(coCaptain.name)} (${escapeHTML(coCaptain.phone)})</p>` : ''}
-                <p><strong>Night Coordinator:</strong> ${escapeHTML(nightCoordinator.name)} (${escapeHTML(nightCoordinator.phone)})</p>
+                <p><strong>Captain:</strong> ${escapeHTML(captain.name)}</p>
+                ${coCaptain ? `<p><strong>Co-Captain:</strong> ${escapeHTML(coCaptain.name)}</p>` : ''}
+                <p><strong>Night Coordinator:</strong> ${escapeHTML(nightCoordinator.name)}</p>
             </div>
 
             <h2>First Night Onboarding</h2>
