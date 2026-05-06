@@ -5,28 +5,21 @@ const { parse } = require('csv-parse/sync');
 const { fetchCSV } = require('./fetch-csv');
 
 const OUTPUT_DIR = path.join(__dirname, '..', 'output_emails');
-const CSV_URL = process.env.CSV_URL;
+const CSV_URL = process.env.CSV_URL || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTRXXJgqymosDbuyhAHCpHHUqQsNxRk0B-3kBGWr7CuPymhKUpT83JKyN7DxkCiaPdKsZEeBaA3GDjH/pub?gid=1666435806&single=true&output=csv';
 
 if (!CSV_URL) {
   console.error('Error: CSV_URL environment variable is not set.');
   process.exit(1);
 }
 
-
-const coordinator = {
-  name: process.env.COORDINATOR_NAME || 'Brett Meddaugh',
-  phone: process.env.COORDINATOR_PHONE || '555-0100',
-  email: process.env.COORDINATOR_EMAIL || 'coordinator@example.com'
-};
-
 const tuesdayCoordinator = {
-  name: process.env.TUESDAY_COORDINATOR_NAME || 'Tom Dwyer',
-  phone: process.env.TUESDAY_COORDINATOR_PHONE || '555-0101'
+  name: 'Tom Dwyer',
+  phone: '608-386-3536'
 };
 
 const wednesdayCoordinator = {
-  name: process.env.WEDNESDAY_COORDINATOR_NAME || 'Mark Hoff',
-  phone: process.env.WEDNESDAY_COORDINATOR_PHONE || '555-0102'
+  name: 'Mark Hoff',
+  phone: '608-769-1416'
 };
 
 // Utility: Escape HTML to prevent XSS
@@ -43,109 +36,82 @@ function escapeHTML(str) {
 function generateEmailTemplate(team) {
   const { night, teamNumber, teamName, captain, coCaptain } = team;
   const nightCoordinator = night === 'Tues' ? tuesdayCoordinator : wednesdayCoordinator;
-  const leagueStart = night === 'Tues' ? 'Tuesday, June 3' : 'Wednesday, June 4';
+  const matchDay = night === 'Tues' ? 'Tuesday' : 'Wednesday';
 
   return `<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LTTA 2026 Season Kickoff</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the 2026 LTTA Season!</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f0f2f5; padding: 40px; color: #1c1e21; }
-        .email-container { max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .header { background: #004080; color: white; padding: 32px 24px; text-align: center; }
+        body { font-family: Arial, sans-serif; color: #333333; line-height: 1.6; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        .email-container { max-width: 650px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .header { background-color: #2e7d32; color: #ffffff; padding: 20px; text-align: center; }
         .header h1 { margin: 0; font-size: 24px; }
-        .content { padding: 32px 24px; }
-        .team-banner { background: #e7f3ff; border-radius: 8px; padding: 16px; margin-bottom: 24px; border-left: 4px solid #0066cc; }
-        .team-banner h2 { margin: 0; font-size: 18px; color: #004080; }
-        .action-box { background: #ffffff; border: 2px solid #0066cc; border-radius: 10px; padding: 20px; margin: 24px 0; }
-        .action-box h3 { margin-top: 0; color: #0066cc; display: flex; align-items: center; }
-        .btn { display: inline-block; background: #0066cc; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 10px; }
-        .update-item { border-bottom: 1px solid #e5e7eb; padding: 16px 0; }
-        .update-item:last-child { border-bottom: none; }
-        .update-item strong { display: block; color: #004080; margin-bottom: 4px; }
-        .footer { background: #f9fafb; padding: 24px; border-top: 1px solid #e5e7eb; color: #65676b; font-size: 14px; }
-        .coordinator-card { display: flex; align-items: center; margin-top: 16px; gap: 12px; }
-        .coordinator-info strong { color: #1c1e21; }
+        .content { padding: 20px 30px; }
+        h2 { color: #2e7d32; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; margin-top: 30px; }
+        .highlight-box { background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 15px; margin: 20px 0; border-radius: 0 4px 4px 0; }
+        .captain-box { background-color: #fff3e0; border-left: 5px solid #ef6c00; padding: 15px; margin: 20px 0; border-radius: 0 4px 4px 0; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+        .footer { background-color: #f9f9f9; text-align: center; padding: 15px; font-size: 12px; color: #777777; border-top: 1px solid #eeeeee; }
     </style>
 </head>
 <body>
     <div class="email-container">
         <div class="header">
-            <h1>LTTA 2026 Season Kickoff</h1>
+            <h1>Welcome to the 2026 LTTA Season! 🎾</h1>
         </div>
+
         <div class="content">
             <p>Hello LTTA Player,</p>
-            <p>Welcome to our 43rd year! We're excited to get back on the courts at Green Island.</p>
-            
-            <div class="team-banner">
-                <h2>${escapeHTML(night)} Team ${escapeHTML(teamNumber)}: ${escapeHTML(teamName)}</h2>
+            <p>Welcome to the 2026 season of the La Crosse Team Tennis Association (LTTA)! We are thrilled to get back out on the courts for another great summer of tennis at Green Island.</p>
+
+            <div class="highlight-box">
+                <h3 style="margin-top: 0; color: #2e7d32;">📋 Your Team: ${escapeHTML(teamName)} (${escapeHTML(night)} #${escapeHTML(teamNumber)})</h3>
+                <p><strong>Captain:</strong> ${escapeHTML(captain.name)}</p>
+                ${coCaptain ? `<p><strong>Co-Captain:</strong> ${escapeHTML(coCaptain.name)}</p>` : ''}
+                <p><strong>Night Coordinator:</strong> ${escapeHTML(nightCoordinator.name)}</p>
             </div>
 
-            <div class="action-box">
-                <h3>🚀 Essential Links</h3>
-                <p>Access your team schedule, current standings, and sub lists on the league website:</p>
-                <a href="https://couleeregiontennis.github.io" class="btn">Visit Website</a>
-                <p style="margin-top:15px; font-size: 14px;"><strong>Player Fee:</strong> $25 due by Week 2. Pay via your captain or online (Zeffy link on website).</p>
+            <h2>First Night Onboarding</h2>
+            <ul>
+                <li><strong>Check-in:</strong> Arrive 15 minutes early for your first match.</li>
+                <li><strong>Balls:</strong> Tennis balls are provided by the league for every match.</li>
+                <li><strong>Hydration:</strong> ⚠️ <strong>IMPORTANT:</strong> The water fountain at Green Island is currently out of order. Please bring plenty of your own water.</li>
+            </ul>
+
+            <h2>The Basics</h2>
+            <ul>
+                <li><strong>When & Where:</strong> Matches are played on ${escapeHTML(matchDay)} evenings at Green Island Park. Start times rotate between 5:30 pm and 7:00 pm.</li>
+                <li><strong>Punctuality:</strong> Please arrive 10 minutes prior to your scheduled match time. The 15-minute forfeit rule is strictly in effect.</li>
+                <li><strong>League Website:</strong> Find schedules, standings, and sub lists at <a href="https://couleeregiontennis.org">couleeregiontennis.org</a></li>
+            </ul>
+
+            <div class="highlight-box">
+                <h3 style="margin-top: 0; color: #2e7d32;">🚨 2026 Rule Reminders</h3>
+                <ul>
+                    <li><strong>Scoring:</strong> Earn <strong>1 point per set won(including tiebreakers)</strong> and <strong>1 point for participation</strong> (showing up on time).</li>
+                    <li><strong>Heat Rule:</strong> We use the "Feels Like" temperature on weather.com. Over 95&deg;F = optional 2-2 start; over 104&deg;F = automatic cancellation.</li>
+                    <li><strong>Lineups:</strong> If teams can't agree on who plays first, the Home team must complete the official lineup sheet first.</li>
+                </ul>
             </div>
 
-            <div style="background:#f8f9fa; border-radius:8px; padding:20px; margin:24px 0; border: 1px solid #dee2e6;">
-                <h3 style="margin-top:0; font-size: 16px; color: #004080;">📞 Your Team Contacts</h3>
-                <p style="margin: 8px 0;"><strong>Captain:</strong> ${escapeHTML(captain.name)} (${escapeHTML(captain.phone)})</p>
-                ${coCaptain ? `<p style="margin: 8px 0;"><strong>Co-Captain:</strong> ${escapeHTML(coCaptain.name)} (${escapeHTML(coCaptain.phone)})</p>` : ''}
-                <p style="margin: 8px 0;"><strong>On-Site Coordinator:</strong> ${escapeHTML(nightCoordinator.name)} (${escapeHTML(nightCoordinator.phone)})</p>
-            </div>
+            <h2>League Dues</h2>
+            <p>Dues are <strong>$25 for the season</strong>, due by the 2nd week of play. Please pay your captain who will pass it on to a Coordinator.</p>
 
-            <h3>🎾 2026 Season Updates</h3>
-            
-            <div class="update-item">
-                <strong>New Participation Point</strong>
-                Every match earns 1 point just for showing up. You only lose this point for a forfeit.
-            </div>
+            <h2>Year-End Picnic & Championship</h2>
+            <p>The season wraps up with our picnic and a new crossover championship! The top teams from Tuesday will face off against the top teams from Wednesday to determine the overall league champion.</p>
 
-            <div class="update-item">
-                <strong>"Feels Like" Heat Rule</strong>
-                We now use the "Feels Like" temperature on weather.com. Over 95&deg;F = optional 2-2 start; over 104&deg;F = automatic cancellation.
-            </div>
-
-            <div class="update-item">
-                <strong>Home Team Responsibility</strong>
-                If neither team is willing to put their #3 line out first, the Home team must complete their official lineup sheet first.
-            </div>
-
-            <div class="update-item">
-                <strong>Championship Picnic</strong>
-                The season finale features the top two teams from both nights playing cross-night matches to determine the overall champion. All matches at the picnic start at 2-all.
-            </div>
-
-            <div style="margin-top: 32px;">
-                <p><strong>League Start:</strong> ${escapeHTML(leagueStart)}<br>
-                <strong>Location:</strong> Green Island Park</p>
-            </div>
-
-            <p style="margin-top: 24px; font-size: 14px; color: #65676b; font-style: italic;">
-                Once the season starts, please provide feedback on the new digital scoring site.
+            <p>Best regards,<br>
+                <strong>The LTTA League Committee</strong>
             </p>
         </div>
+
         <div class="footer">
-            <div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e5e7eb;">
-                <p style="margin: 0 0 8px 0;"><strong>Sub Policy:</strong> If you cannot play, you are responsible for finding a sub from the official sub list on the website.</p>
-            </div>
-            <div class="coordinator-card">
-                <div class="coordinator-info">
-                    <p style="margin-bottom: 10px;"><strong>LTTA Leadership Team</strong></p>
-                    <table style="width: 100%; font-size: 13px; color: #65676b; border-collapse: collapse;">
-                        <tr>
-                            <td style="padding-bottom: 8px;"><strong>Brett Meddaugh</strong><br>League Coordinator</td>
-                            <td style="padding-bottom: 8px;"><strong>Jenn Carr</strong><br>Teams & Rosters</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Tom Dwyer</strong><br>Tuesday Coordinator</td>
-                            <td><strong>Mark Hoff</strong><br>Wednesday Coordinator</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            La Crosse Team Tennis Association (LTTA)<br>
+            Coulee Region Tennis Association (CRTA)
         </div>
     </div>
 </body>
@@ -161,7 +127,7 @@ async function main() {
 
     const csvContent = await fetchCSV(CSV_URL);
     console.log('Fetched CSV data successfully');
-    
+
     // Parse CSV content
     const parsedData = parse(csvContent, {
       columns: true,
@@ -196,7 +162,7 @@ async function main() {
       }
 
       const key = `${record.Night}-${record.Team}`;
-      
+
       if (!teams[key]) {
         teams[key] = {
           night: record.Night,
