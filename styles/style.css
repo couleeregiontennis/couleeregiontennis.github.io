@@ -164,18 +164,6 @@ th, td {
   background: rgba(0,0,0,0.2);
 }
 
-.header {
-  background-color: var(--header-bg);
-  color: var(--header-text);
-  padding: 1rem 0;
-  text-align: center;
-  width: 100%;
-  box-sizing: border-box;
-  position: relative;
-  z-index: 1000;
-  border-bottom: 2px solid var(--primary-hover);
-}
-
 [data-theme='dark'] h1, 
 [data-theme='dark'] h2, 
 [data-theme='dark'] h3, 
@@ -236,12 +224,6 @@ th, td {
   box-shadow: 0 2px 8px rgba(0,0,0,0.18);
 }
 
-main {
-    max-width: 1200px;
-    margin: 32px auto 0 auto;
-    padding: 1rem;
-}
-
 h1 {
     color: #2a4d69;
     font-size: 2.1em;
@@ -249,12 +231,6 @@ h1 {
     padding: 0;
     text-align: center;
     letter-spacing: 1px;
-}
-
-@media (prefers-color-scheme: dark) {
-    h1 {
-        color: #b3d1ff;
-    }
 }
 
 @media (max-width: 768px) {
@@ -267,4 +243,47 @@ h1 {
         font-size: 1.8em;
         margin-bottom: 1.2em;
     }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.teams-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding: 32px 16px;
+    justify-content: center;
+    width: 100%;
+    background: transparent;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+.teams-column {
+    flex: 1;
+    min-width: 340px;
+    max-width: 480px;
+    background: var(--surface-color);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    padding: 28px 22px;
+    margin-bottom: 24px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .teams-container {
+    flex-direction: column;
+    padding: 16px 8px;
+    align-items: center;
+  }
+  .teams-column {
+    min-width: 100%;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 18px 12px;
+  }
 }
