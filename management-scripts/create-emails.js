@@ -65,7 +65,7 @@ function generateEmailTemplate(team) {
         </div>
 
         <div class="content">
-            <p>Hello ${escapeHTML(teamName)} player,</p>
+            <p>Hello ${escapeHTML(teamName)} players,</p>
             <p>Welcome to the 2026 season of the La Crosse Team Tennis Association (LTTA)! We are thrilled to get back out on the courts for another great summer of tennis.</p>
 
             <div class="highlight-box">
@@ -95,7 +95,7 @@ function generateEmailTemplate(team) {
                 <ul>
                     <li><strong>Scoring:</strong> Earn <strong>1 point per set won(including tiebreakers)</strong> and <strong>1 point for participation</strong> (showing up on time).</li>
                     <li><strong>Heat Rule:</strong> We use the "RealFeel" temperature on accuweather.com. Over 95&deg;F = optional 2-2 start; over 104&deg;F = automatic cancellation.</li>
-                    <li><strong>Lineups:</strong> If teams can't agree on who plays first, the home team must set their 3 lines up first.</li>
+                    <li><strong>Lineups:</strong> For line 3, if there is a dispute over who assigns teams first, home team must assign lines first.</li>
                 </ul>
             </div>
 
