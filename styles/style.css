@@ -121,6 +121,7 @@ th, td {
   font-weight: 600;
   font-size: 0.85rem;
   min-height: 54px;
+  height: 100%;
   line-height: 1.2;
   box-sizing: border-box;
   transition: background-color 0.2s, transform 0.1s;

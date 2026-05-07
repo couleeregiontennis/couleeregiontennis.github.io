@@ -106,7 +106,7 @@
   margin-right: 1.5rem;
 }
 
-.navbar-menu ul {
+.navbar-menu > ul {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -202,7 +202,7 @@
     display: block;
   }
 
-  .navbar-menu ul {
+  .navbar-menu > ul {
     flex-direction: column;
     gap: 0;
     padding: 10px 0;
