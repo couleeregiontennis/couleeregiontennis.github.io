@@ -142,8 +142,26 @@ th, td {
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-.dashboard h3 { margin: 0 0 8px 0; font-size: 1.2rem; }
+.dashboard h3 { 
+  margin: 0 0 12px 0; 
+  font-size: 1.3rem; 
+  color: var(--active-match-text);
+  border-bottom: 1px solid var(--active-match-border);
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
 .dashboard p { margin: 0; font-weight: bold; }
+
+.day-card {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.3);
+}
+
+[data-theme='dark'] .day-card {
+  background: rgba(0,0,0,0.2);
+}
 
 .header {
   background-color: var(--header-bg);
@@ -157,153 +175,64 @@ th, td {
   border-bottom: 2px solid var(--primary-hover);
 }
 
-
-.table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  @media (max-width: 768px) {
-    table {
-      font-size: 0.9rem;
-    }
-  
-    th, td {
-      padding: 0.4rem;
-    }
-  }
-  
-@media (max-width: 768px) {
-    .navbar-toggle {
-        display: block;
-    }
-
-    .navbar-menu {
-        display: none;
-        flex-direction: column;
-        background: #333;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 100%;
-        z-index: 100;
-    }
-
-    .navbar-menu.active {
-        display: flex;
-    }
-
-    .team-list {
-        padding: 0;
-    }
+[data-theme='dark'] h1, 
+[data-theme='dark'] h2, 
+[data-theme='dark'] h3, 
+[data-theme='dark'] h4, 
+[data-theme='dark'] h5, 
+[data-theme='dark'] h6 {
+  color: #c9e1ff;
 }
 
-@media (max-width: 900px) {
-  .teams-container {
-    flex-direction: column;
-    padding: 16px 4px;
-  }
-  .teams-column {
-    max-width: 100%;
-    margin-bottom: 20px;
-    padding: 18px 8px;
-  }
+[data-theme='dark'] .schedule-table,
+[data-theme='dark'] table {
+  background: #23272a;
+  color: #e0e0e0;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+[data-theme='dark'] .schedule-table th, 
+[data-theme='dark'] .schedule-table td {
+  border-color: #444;
+  background: #23272a;
+  color: #e0e0e0;
 }
 
-section {
-  background: #fff;
-  margin: 1rem auto;
-  padding: 1rem 1.2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  max-width: 600px;
+[data-theme='dark'] .date-row {
+  background-color: #222e3c;
+  color: #c9e1ff;
 }
 
-section.teams-container {
-  max-width: none;
-  background: transparent;
-  box-shadow: none;
-  margin: 0;
-  padding: 0;
+[data-theme='dark'] .court-header,
+[data-theme='dark'] .time-header {
+  background: #1a1f23;
+  color: #c9e1ff;
+  border-right: 2px solid #2a4d69;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #181a1b;
-    color: #e0e0e0;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    color: #c9e1ff;
-  }
-  .schedule-table,
-  table {
-    background: #23272a;
-    color: #e0e0e0;
-  }
-  .schedule-table th, .schedule-table td {
-    border-color: #444;
-    background: #23272a;
-    color: #e0e0e0;
-  }
-  .date-row {
-    background-color: #222e3c;
-    color: #c9e1ff;
-  }
-  .court-header,
-  .time-header {
-    background: #1a1f23;
-    color: #c9e1ff;
-    border-right: 2px solid #2a4d69;
-  }
-  .match-cell {
-    background: #23272a;
-  }
-  .team-num {
-    background: #2a4d69;
-    color: #fff;
-  }
-  .navbar {
-    background-color: #111;
-    color: #c9e1ff;
-  }
-  .navbar-menu {
-    background-color: #23272a;
-  }
-  .navbar-menu a {
-    color: #c9e1ff;
-  }
-  .navbar-menu a:hover {
-    background: #2a4d69;
-    color: #fff;
-  }
-  footer {
-    background: #23272a;
-    color: #c9e1ff;
-  }
+[data-theme='dark'] .match-cell {
+  background: #23272a;
+}
 
-  section {
-    background: #23272a;
-    color: #e0e0e0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-  }
+[data-theme='dark'] .team-num {
+  background: #2a4d69;
+  color: #fff;
+}
 
-  section.teams-container {
-    background: transparent;
-    box-shadow: none;
-  }
+[data-theme='dark'] footer {
+  background: #23272a;
+  color: #c9e1ff;
+}
 
-  .teams-column {
-    background: #23272a;
-    color: #e0e0e0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-  }
+[data-theme='dark'] section {
+  background: #23272a;
+  color: #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+[data-theme='dark'] .teams-column {
+  background: #23272a;
+  color: #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
 }
 
 main {
