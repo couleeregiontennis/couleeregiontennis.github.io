@@ -47,7 +47,7 @@ async function loadSheet() {
     };
 
     const indices = {
-      night: getIndex('v'),
+      night: getIndex('Night') !== -1 ? getIndex('Night') : getIndex('v'),
       team: getIndex('Team/'),
       ccc: getIndex('C/CC'),
       level: getIndex('Level'),

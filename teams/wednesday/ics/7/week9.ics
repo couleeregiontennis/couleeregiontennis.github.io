@@ -25,7 +25,7 @@ DTSTAMP:20260722T173000Z
 DTSTART;TZID=America/Chicago:20260722T173000
 DTEND;TZID=America/Chicago:20260722T190000
 SUMMARY:LTTA Tennis: vs Nothing But Net (Home)
-DESCRIPTION:LTTA Tennis match: 7 vs Nothing But Net at Green Island Park - Courts 10–13\nOpponent Roster: Alex Hiller (1); Tom Londergan (2); Lewis Kuhlman (3); Sarah Wengerter (3); Brittney DeChambeau (3); Kevin LeQue (3); Amy Harter (4); Joe Hurley (5)
+DESCRIPTION:LTTA Tennis match: 7 vs Nothing But Net at Green Island Park - Courts 10–13\nOpponent Roster: Alex Hiller (1); Eric Johnson (2); Lewis Kuhlman (3); Sarah Wengerter (3); Brittney DeChambeau (3); Kevin LeQue (3); Asa Harter (4); Logan Bahr (5)
 LOCATION:Green Island Park - Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT9H30M
