@@ -65,8 +65,8 @@ function generateEmailTemplate(team) {
         </div>
 
         <div class="content">
-            <p>Hello LTTA Player,</p>
-            <p>Welcome to the 2026 season of the La Crosse Team Tennis Association (LTTA)! We are thrilled to get back out on the courts for another great summer of tennis at Green Island.</p>
+            <p>Hello ${escapeHTML(teamName)} player,</p>
+            <p>Welcome to the 2026 season of the La Crosse Team Tennis Association (LTTA)! We are thrilled to get back out on the courts for another great summer of tennis.</p>
 
             <div class="highlight-box">
                 <h3 style="margin-top: 0; color: #2e7d32;">📋 Your Team: ${escapeHTML(teamName)} (${escapeHTML(night)} #${escapeHTML(teamNumber)})</h3>
@@ -84,17 +84,18 @@ function generateEmailTemplate(team) {
 
             <h2>The Basics</h2>
             <ul>
-                <li><strong>When & Where:</strong> Matches are played on ${escapeHTML(matchDay)} evenings at Green Island Park. Start times rotate between 5:30 pm and 7:00 pm.</li>
+                <li><strong>When & Where:</strong> Matches are played on ${escapeHTML(matchDay)} evenings at Green Island Park. Start times rotate between 5:30 pm and 7:00 pm. <strong>Please pay attention to the schedule location, as a few matches are at Forest Hills due to court conflicts.</strong></li>
                 <li><strong>Punctuality:</strong> Please arrive 10 minutes prior to your scheduled match time. The 15-minute forfeit rule is strictly in effect.</li>
                 <li><strong>League Website:</strong> Find schedules, standings, and sub lists at <a href="https://couleeregiontennis.org">couleeregiontennis.org</a></li>
+                <li><strong>Subs:</strong> If you can't make a match, you are responsible for finding a sub. Check the <a href="https://couleeregiontennis.org/pages/subs.html">Sub List and GroupMe links</a> on the website.</li>
             </ul>
 
             <div class="highlight-box">
                 <h3 style="margin-top: 0; color: #2e7d32;">🚨 2026 Rule Reminders</h3>
                 <ul>
                     <li><strong>Scoring:</strong> Earn <strong>1 point per set won(including tiebreakers)</strong> and <strong>1 point for participation</strong> (showing up on time).</li>
-                    <li><strong>Heat Rule:</strong> We use the "Feels Like" temperature on weather.com. Over 95&deg;F = optional 2-2 start; over 104&deg;F = automatic cancellation.</li>
-                    <li><strong>Lineups:</strong> If teams can't agree on who plays first, the Home team must complete the official lineup sheet first.</li>
+                    <li><strong>Heat Rule:</strong> We use the "RealFeel" temperature on accuweather.com. Over 95&deg;F = optional 2-2 start; over 104&deg;F = automatic cancellation.</li>
+                    <li><strong>Lineups:</strong> If teams can't agree on who plays first, the home team must set their 3 lines up first.</li>
                 </ul>
             </div>
 
@@ -102,7 +103,7 @@ function generateEmailTemplate(team) {
             <p>Dues are <strong>$25 for the season</strong>, due by the 2nd week of play. Please pay your captain who will pass it on to a Coordinator.</p>
 
             <h2>Year-End Picnic & Championship</h2>
-            <p>The season wraps up with our picnic and a new crossover championship! The top teams from Tuesday will face off against the top teams from Wednesday to determine the overall league champion.</p>
+            <p>The season wraps up with our picnic and a new crossover championship! The top teams from Tuesday will face off against the top teams from Wednesday to determine the overall league champion. Additionally, the 'winningest lines' will be invited to play in this event.</p>
 
             <p>Best regards,<br>
                 <strong>The LTTA League Committee</strong>
