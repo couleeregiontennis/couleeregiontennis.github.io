@@ -228,7 +228,11 @@
   }
 
   .navbar-menu .navbar-dropdown .dropdown-menu {
+<<<<<<< HEAD
     display: none;
+=======
+    display: block !important;
+>>>>>>> origin/main
     position: static;
     background: rgba(0,0,0,0.1);
     box-shadow: none;
