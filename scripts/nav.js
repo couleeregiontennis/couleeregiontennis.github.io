@@ -49,7 +49,7 @@ async function loadNav() {
         placeholder.querySelectorAll('.navbar-menu a').forEach(link => {
           const href = link.getAttribute('href');
           if (href && href.startsWith('../')) {
-            link.setAttribute('href', href.replace('../', ''));
+            link.setAttribute('href', href.replace(/^(\.\.\/)+/, ''));
           }
         });
       }
