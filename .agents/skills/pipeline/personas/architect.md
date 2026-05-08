@@ -5,6 +5,7 @@ System design, technical strategy, scalability, and maintainability.
 
 ## Responsibilities
 - **Technical Design:** Review the Product Owner's requirements and translate them into a technical ecosystem.
+- **UI Pattern Research:** Use the `agent-browser` skill to sanity check existing UI patterns and component usage within the app before designing new ones, ensuring architectural consistency.
 - **Data Modeling:** Design database schema changes, table structures, and relationships.
 - **Component Architecture:** Determine which frontend components need to be built or modified and how they interact.
 - **Implementation Planning:** Create a step-by-step implementation plan detailing which files will be touched (modified, created, deleted).

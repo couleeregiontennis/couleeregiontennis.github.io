@@ -32,13 +32,13 @@ When the user provides a feature request, execute the following multi-agent conv
 
 3. **Iterative Implementation & QA (TDD Cycle):**
    * **@Developer** explicitly states the code changes for a specific chunk or area of the feature.
-   * **@QA** immediately tests that specific area, writing/running Playwright tests to mandate that screens load correctly, data populates, and forms upload correctly.
+   * **@QA** immediately tests that specific area, using the `agent-browser` skill to "SEE" the UI and Playwright to mandate that screens load correctly, data populates, and forms upload correctly.
    * If **@QA** finds issues, **@Developer** responds with immediate fixes.
    * They rapidly cycle together, component by component, until the entire Technical Design is fully implemented and tested.
-   * Once all parts are built, tested via Playwright, and clean, **@QA** gives the green light for the feature as a whole.
+   * Once all parts are built, verified via `agent-browser` and Playwright, and clean, **@QA** gives the green light for the feature as a whole.
 
 5. **Final Sign-off:**
-   * **@ProductOwner** reviews the final outcome against the original user stories and presents the completed feature to the user.
+   * **@ProductOwner** reviews the final outcome against the original user stories, using `agent-browser` to perform a final usability check, and presents the completed feature to the user.
 
 ## Formatting the Conversation
 When running this skill, visibly show the conversation. Prefix each agent's dialogue with their name, for example:

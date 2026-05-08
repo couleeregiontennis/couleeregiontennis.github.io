@@ -14,7 +14,7 @@ async function loadNav() {
   try {
     // Determine path based on current location
     const isRoot = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
-    const navPath = isRoot ? 'partials/nav.html?v=2026' : '../partials/nav.html?v=2026';
+    const navPath = isRoot ? 'partials/nav.html?v=2026.1' : '../partials/nav.html?v=2026.1';
 
     const response = await fetch(navPath);
     const html = await response.text();
@@ -71,6 +71,20 @@ async function loadNav() {
       if (toggle && menu) {
         toggle.addEventListener('click', () => {
           menu.classList.toggle('active');
+        });
+      }
+
+      // Mobile Dropdown Toggle
+      const dropdownTrigger = placeholder.querySelector('.navbar-dropdown > a');
+      if (dropdownTrigger) {
+        dropdownTrigger.addEventListener('click', (e) => {
+          if (window.innerWidth <= 1150) {
+            e.preventDefault();
+            const parent = dropdownTrigger.closest('.navbar-dropdown');
+            if (parent) {
+              parent.classList.toggle('active');
+            }
+          }
         });
       }
 
