@@ -47,7 +47,7 @@ async function loadSheet() {
     };
 
     const indices = {
-      night: getIndex('v'),
+      night: getIndex('Night') !== -1 ? getIndex('Night') : getIndex('v'),
       team: getIndex('Team/'),
       ccc: getIndex('C/CC'),
       level: getIndex('Level'),
@@ -393,7 +393,11 @@ async function main() {
 
         // Collect all VEVENTs for this team
         const vevents = sched.map(match => {
-          const startTime = match.time.replace('pm', '') === '7:00' ? '19:00' : '17:30';
+          let startTime = match.time.replace('pm', '');
+          if (startTime === '7:00') startTime = '19:00';
+          else if (startTime === '6:00') startTime = '18:00';
+          else startTime = '17:30';
+          
           const endTime = getEndTime(startTime);
           const summary = `LTTA Tennis: vs ${match.opponent.name}`;
           const opponentNum = match.opponent.number;
@@ -401,10 +405,11 @@ async function main() {
           const rosterText = opponentRoster.length
             ? '\\nOpponent Roster: ' + opponentRoster.map(p => `${p.name} (${p.position})`).join('; ')
             : '';
-          const description = `LTTA Tennis match: ${team} vs ${match.opponent.name} at ${match.courts}${rosterText}`;
-          const location = match.courts;
+          
+          const locationName = match.courts === 'Forest Hills' ? 'Forest Hills Tennis Courts' : `Green Island Park - ${match.courts}`;
+          const description = `LTTA Tennis match: ${team} vs ${match.opponent.name} at ${locationName}${rosterText}`;
           const uid = `ltta-${night}-${team}-week${match.week}@couleeregiontennis.org`;
-          const alarmTime = `${match.date.replace(/-/g, '')}T080000`;
+          
           // Only return the VEVENT block (not the full VCALENDAR)
           return [
             'BEGIN:VEVENT',
@@ -414,7 +419,7 @@ async function main() {
             `DTEND;TZID=America/Chicago:${match.date.replace(/-/g, '')}T${endTime.replace(':', '')}00`,
             `SUMMARY:${summary}`,
             `DESCRIPTION:${description}`,
-            `LOCATION:${location}`,
+            `LOCATION:${locationName}`,
             'BEGIN:VALARM',
             (startTime === '19:00'
               ? 'TRIGGER:-PT11H'
@@ -441,7 +446,11 @@ async function main() {
         );
 
         sched.forEach(match => {
-          const startTime = match.time.replace('pm', '') === '7:00' ? '19:00' : '17:30';
+          let startTime = match.time.replace('pm', '');
+          if (startTime === '7:00') startTime = '19:00';
+          else if (startTime === '6:00') startTime = '18:00';
+          else startTime = '17:30';
+
           const endTime = getEndTime(startTime);
           const summary = `LTTA Tennis: vs ${match.opponent.name} (${match.homeAway})`;
           const opponentNum = match.opponent.number;
@@ -449,14 +458,14 @@ async function main() {
           const rosterText = opponentRoster.length
             ? '\\nOpponent Roster: ' + opponentRoster.map(p => `${p.name} (${p.position})`).join('; ')
             : '';
-          const description = `LTTA Tennis match: ${team} vs ${match.opponent.name} at ${match.courts}${rosterText}`;
-          const location = match.courts;
+          
+          const locationName = match.courts === 'Forest Hills' ? 'Forest Hills Tennis Courts' : `Green Island Park - ${match.courts}`;
+          const description = `LTTA Tennis match: ${team} vs ${match.opponent.name} at ${locationName}${rosterText}`;
           const uid = `ltta-${night}-${team}-week${match.week}@couleeregiontennis.org`;
-          const alarmTime = `${match.date.replace(/-/g, '')}T080000`;
           const icsContent = createICSEvent({
             summary,
             description,
-            location,
+            location: locationName,
             startDate: match.date,
             startTime,
             endTime,

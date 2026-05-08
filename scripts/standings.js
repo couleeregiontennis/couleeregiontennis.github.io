@@ -33,33 +33,9 @@ fetch(CSV_URL)
     // Header
     thead.innerHTML = '<tr>' + rows[0].map(h => `<th>${escapeHTML(h)}</th>`).join('') + '</tr>';
 
-    // Find the "ranks" and "Night" column indices (case-insensitive)
-    const totalIdx = rows[0].findIndex(h => h.trim().toLowerCase() === "rank");
-    const nightIdx = rows[0].findIndex(h => h.trim().toLowerCase() === "night");
-
-    // Render function with filter
-    function renderTable(night) {
-      let filteredRows = rows.slice(1);
-      if (night && night !== "All" && nightIdx !== -1) {
-        filteredRows = filteredRows.filter(row => row[nightIdx].toLowerCase() === night.toLowerCase());
-      }
-      const sortedRows = filteredRows.sort((a, b) => {
-        const aVal = parseFloat(a[totalIdx]) || 0;
-        const bVal = parseFloat(b[totalIdx]) || 0;
-        return aVal - bVal;
-      });
-      tbody.innerHTML = sortedRows.map(row =>
-        `<tr data-night="${escapeHTML(row[nightIdx].toLowerCase())}">` +
-        row.map(cell => {
-          const val = escapeHTML(cell);
-          return `<td>${val === 'N/A' ? '-' : val}</td>`;
-        }).join('') +
-        '</tr>'
-      ).join('');
-    }
-
-    // Initial render (all)
-    renderTable("All");
+    // Clear body for 2026
+    tbody.innerHTML = '<tr><td colspan="' + rows[0].length + '" style="text-align:center; padding: 2rem;">2026 Standings will be updated once the season begins!</td></tr>';
+    return; // Stop here for now
 
     // Add event listeners to filter buttons
     filterContainer.querySelectorAll('.night-filter').forEach(btn => {

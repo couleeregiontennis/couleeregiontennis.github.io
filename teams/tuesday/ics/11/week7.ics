@@ -25,8 +25,8 @@ DTSTAMP:20260707T190000Z
 DTSTART;TZID=America/Chicago:20260707T190000
 DTEND;TZID=America/Chicago:20260707T203000
 SUMMARY:LTTA Tennis: vs Easy Overhead (Home)
-DESCRIPTION:LTTA Tennis match: 11 vs Easy Overhead at Courts 6–9\nOpponent Roster: Brian Mansky (1); Brennan Quinn (2); Heidi Barreyro (3); Shanon Torgerud (3); Odessa Barreyro (3); Tyler Benson (4); Amit Mishra (5)
-LOCATION:Courts 6–9
+DESCRIPTION:LTTA Tennis match: 11 vs Easy Overhead at Green Island Park - Courts 6–9\nOpponent Roster: Brian Mansky (1); Ryan Mullaney (2); Heidi Barreyro (3); Shanon Torgerud (3); Odessa Barreyro (3); Katie Johnson (3); Amit Mishra (4); Dwight Mills (5)
+LOCATION:Green Island Park - Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H
 ACTION:DISPLAY

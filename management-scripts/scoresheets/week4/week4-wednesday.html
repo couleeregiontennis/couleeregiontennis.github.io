@@ -2,20 +2,27 @@
       @media print {
         body {
           margin: 0.25in;
-          font-size: 10px;
+          font-size: 11.5px;
+        }
+        .match-sheet {
+          page-break-after: always;
+          page-break-inside: avoid;
+          height: 100vh; /* Force it to act as one full page */
+          overflow: hidden;
         }
       }
 
       body {
         font-family: Arial, sans-serif;
-        font-size: 10px;
+        font-size: 11.5px;
         margin: 0.25in;
       }
 
       h2,
       h3 {
-        margin: 6px 0;
+        margin: 4px 0;
         text-align: center;
+        font-size: 14px;
       }
 
       table {
@@ -28,7 +35,7 @@
       td,
       th {
         border: 1px solid #000;
-        padding: 2px 4px;
+        padding: 3px 5px;
         vertical-align: top;
         overflow: hidden; /* Prevents content from breaking layout */
         white-space: nowrap; /* Keeps content on one line */
@@ -55,7 +62,7 @@
       table:not(.no-border) tr td:nth-child(3) {
         width: 10%;
         text-align: center;
-        padding: 2px;
+        padding: 3px;
       }
 
       /* Keep empty VS column cells visible */
@@ -100,14 +107,16 @@
 
       /* Team header table specific */
       table:not(.no-border) tr td[colspan="4"] {
-        font-size: 10px;
-        padding: 4px;
+        font-size: 13px;
+        font-weight: bold;
+        padding: 5px;
         line-height: 1.2;
+        text-align: center;
       }
 
       .no-border td {
         border: none;
-        padding: 2px 8px;
+        padding: 3px 6px;
         width: auto;
       }
 
@@ -115,17 +124,17 @@
         background: #f0f0f0;
         font-weight: bold;
         text-align: center;
-        font-size: 11px;
-        padding: 2px 0;
+        font-size: 12.5px;
+        padding: 3px 0;
         margin: 6px 0;
       }
 
       .checkbox {
         display: inline-block;
-        width: 10px;
-        height: 10px;
+        width: 12px;
+        height: 12px;
         border: 1px solid #000;
-        margin-right: 4px;
+        margin-right: 5px;
         vertical-align: middle;
         float: left; /* Align checkbox to the left */
       }
@@ -179,7 +188,7 @@
 
     <table>
       <tr>
-        <td colspan="4">TEAM 1 / LAX-Winona Fusion VS TEAM 9 / Baseliners</td>
+        <td colspan="4">TEAM 1 / LAX-Winona Fusion (Home) VS TEAM 9 / Baseliners (Away)</td>
       </tr>
     </table>
 
@@ -194,7 +203,7 @@
         <td colspan="2">Position # / Player Names:</td>
       </tr>
       <tr>
-        <td>1 / Ruben Anderson / Allie Laux</td>
+        <td>1 / Pheng Lo</td>
         <td>2 / Dan Lewis</td>
         <td></td>
         <td>1 / John Hildebrandt</td>
@@ -224,8 +233,8 @@
         <td colspan="2">Position # / Player Names (circle 1):</td>
       </tr>
       <tr>
-        <td>3 / Joe Heer (C)<br />Janice Hoeschler<br />Nikki Nakano<br />_______</td>
-        <td>3 / Joe Heer (C)<br />Janice Hoeschler<br />Nikki Nakano<br />_______</td>
+        <td>3 / Joe Heer (C)<br />Janice Hoeschler<br />Jeffrey Schott<br />Nikki Nakano</td>
+        <td>3 / Joe Heer (C)<br />Janice Hoeschler<br />Jeffrey Schott<br />Nikki Nakano</td>
         <td></td>
         <td>3 / Dick Deml<br />Al Graewin (C)<br />Mark Schlafer<br />Bob Hildebrandt</td>
         <td>3 / Dick Deml<br />Al Graewin (C)<br />Mark Schlafer<br />Bob Hildebrandt</td>
@@ -254,8 +263,8 @@
         <td colspan="2">Position # / Player Names (circle 1):</td>
       </tr>
       <tr>
-        <td>3 / Joe Heer (C)<br />Janice Hoeschler<br />Nikki Nakano<br />_______</td>
-        <td>3 / Joe Heer (C)<br />Janice Hoeschler<br />Nikki Nakano<br />_______</td>
+        <td>3 / Joe Heer (C)<br />Janice Hoeschler<br />Jeffrey Schott<br />Nikki Nakano</td>
+        <td>3 / Joe Heer (C)<br />Janice Hoeschler<br />Jeffrey Schott<br />Nikki Nakano</td>
         <td></td>
         <td>3 / Dick Deml<br />Al Graewin (C)<br />Mark Schlafer<br />Bob Hildebrandt</td>
         <td>3 / Dick Deml<br />Al Graewin (C)<br />Mark Schlafer<br />Bob Hildebrandt</td>
@@ -326,19 +335,16 @@
       </tr>
     </table>
 
+    <div class="section-title">2026 RULES REMINDER</div>
+    <ul>
+      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete their official lineup sheet first.</li>
+    </ul>
+
     <div class="section-title">TEAM SCORING</div>
     <ul>
-      <li>A. 10 points to match winner.</li>
-      <li>B. 8 points to split set loser.</li>
-      <li>C. 8 points each if tied halted match.</li>
-      <li>D. 8 points to loser in halted match (fewer games).</li>
-      <li>E. 6 points to regular set loser.</li>
-      <li>F. 6 points to 3rd set retiree; winner gets 10.</li>
-      <li>G. 4 points to 2nd set retiree; winner gets 10.</li>
-      <li>H. 4 points if using higher rated player; opponent gets 10.</li>
-      <li>I. 2 points to 1st set retiree; winner gets 10.</li>
-      <li>J. 1 point for non-sanctioned player; opponent gets 10.</li>
-      <li>K. 0 points for no-show/late; opponent gets 10.</li>
+      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
+      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
+      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other sub and counts toward the participation point (no penalty).</li>
     </ul>
 
     <p>
@@ -363,7 +369,7 @@
 
     <table>
       <tr>
-        <td colspan="4">TEAM 10 / Backhand Bandits VS TEAM 8 / Not My Fault</td>
+        <td colspan="4">TEAM 10 / Backhand Bandits (Home) VS TEAM 8 / Not My Fault (Away)</td>
       </tr>
     </table>
 
@@ -510,19 +516,16 @@
       </tr>
     </table>
 
+    <div class="section-title">2026 RULES REMINDER</div>
+    <ul>
+      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete their official lineup sheet first.</li>
+    </ul>
+
     <div class="section-title">TEAM SCORING</div>
     <ul>
-      <li>A. 10 points to match winner.</li>
-      <li>B. 8 points to split set loser.</li>
-      <li>C. 8 points each if tied halted match.</li>
-      <li>D. 8 points to loser in halted match (fewer games).</li>
-      <li>E. 6 points to regular set loser.</li>
-      <li>F. 6 points to 3rd set retiree; winner gets 10.</li>
-      <li>G. 4 points to 2nd set retiree; winner gets 10.</li>
-      <li>H. 4 points if using higher rated player; opponent gets 10.</li>
-      <li>I. 2 points to 1st set retiree; winner gets 10.</li>
-      <li>J. 1 point for non-sanctioned player; opponent gets 10.</li>
-      <li>K. 0 points for no-show/late; opponent gets 10.</li>
+      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
+      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
+      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other sub and counts toward the participation point (no penalty).</li>
     </ul>
 
     <p>
@@ -547,7 +550,7 @@
 
     <table>
       <tr>
-        <td colspan="4">TEAM 7 / Serve Aces VS TEAM 11 / Simply Smashing</td>
+        <td colspan="4">TEAM 7 / Serve Aces (Home) VS TEAM 11 / Simply Smashing (Away)</td>
       </tr>
     </table>
 
@@ -694,19 +697,16 @@
       </tr>
     </table>
 
+    <div class="section-title">2026 RULES REMINDER</div>
+    <ul>
+      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete their official lineup sheet first.</li>
+    </ul>
+
     <div class="section-title">TEAM SCORING</div>
     <ul>
-      <li>A. 10 points to match winner.</li>
-      <li>B. 8 points to split set loser.</li>
-      <li>C. 8 points each if tied halted match.</li>
-      <li>D. 8 points to loser in halted match (fewer games).</li>
-      <li>E. 6 points to regular set loser.</li>
-      <li>F. 6 points to 3rd set retiree; winner gets 10.</li>
-      <li>G. 4 points to 2nd set retiree; winner gets 10.</li>
-      <li>H. 4 points if using higher rated player; opponent gets 10.</li>
-      <li>I. 2 points to 1st set retiree; winner gets 10.</li>
-      <li>J. 1 point for non-sanctioned player; opponent gets 10.</li>
-      <li>K. 0 points for no-show/late; opponent gets 10.</li>
+      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
+      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
+      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other sub and counts toward the participation point (no penalty).</li>
     </ul>
 
     <p>
@@ -731,7 +731,7 @@
 
     <table>
       <tr>
-        <td colspan="4">TEAM 6 / Howie's Team VS TEAM 12 / Nothing But Net</td>
+        <td colspan="4">TEAM 6 / Howie's Team (Home) VS TEAM 12 / Nothing But Net (Away)</td>
       </tr>
     </table>
 
@@ -750,7 +750,7 @@
         <td>2 / Brian Day (C)</td>
         <td></td>
         <td>1 / Alex Hiller (C)</td>
-        <td>2 / Tom Londergan</td>
+        <td>2 / Eric Johnson</td>
       </tr>
       <tr>
         <td colspan="2">
@@ -839,8 +839,8 @@
         <td>4 / Lisa Flottmeyer</td>
         <td>5 / Gretchen Coleman</td>
         <td></td>
-        <td>4 / Amy Harter</td>
-        <td>5 / Joe Hurley</td>
+        <td>4 / Asa Harter</td>
+        <td>5 / Logan Bahr</td>
       </tr>
       <tr>
         <td colspan="2">
@@ -878,19 +878,16 @@
       </tr>
     </table>
 
+    <div class="section-title">2026 RULES REMINDER</div>
+    <ul>
+      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete their official lineup sheet first.</li>
+    </ul>
+
     <div class="section-title">TEAM SCORING</div>
     <ul>
-      <li>A. 10 points to match winner.</li>
-      <li>B. 8 points to split set loser.</li>
-      <li>C. 8 points each if tied halted match.</li>
-      <li>D. 8 points to loser in halted match (fewer games).</li>
-      <li>E. 6 points to regular set loser.</li>
-      <li>F. 6 points to 3rd set retiree; winner gets 10.</li>
-      <li>G. 4 points to 2nd set retiree; winner gets 10.</li>
-      <li>H. 4 points if using higher rated player; opponent gets 10.</li>
-      <li>I. 2 points to 1st set retiree; winner gets 10.</li>
-      <li>J. 1 point for non-sanctioned player; opponent gets 10.</li>
-      <li>K. 0 points for no-show/late; opponent gets 10.</li>
+      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
+      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
+      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other sub and counts toward the participation point (no penalty).</li>
     </ul>
 
     <p>
@@ -915,7 +912,7 @@
 
     <table>
       <tr>
-        <td colspan="4">TEAM 2 / Rally Monkeys VS TEAM 5 / Glory Days</td>
+        <td colspan="4">TEAM 2 / Rally Monkeys (Home) VS TEAM 5 / Glory Days (Away)</td>
       </tr>
     </table>
 
@@ -1024,7 +1021,7 @@
         <td>5 / Sui Wang</td>
         <td></td>
         <td>4 / Sarah Meyers</td>
-        <td>5 / Samantha Marr</td>
+        <td>5 / Nathan Crowder</td>
       </tr>
       <tr>
         <td colspan="2">
@@ -1062,19 +1059,16 @@
       </tr>
     </table>
 
+    <div class="section-title">2026 RULES REMINDER</div>
+    <ul>
+      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete their official lineup sheet first.</li>
+    </ul>
+
     <div class="section-title">TEAM SCORING</div>
     <ul>
-      <li>A. 10 points to match winner.</li>
-      <li>B. 8 points to split set loser.</li>
-      <li>C. 8 points each if tied halted match.</li>
-      <li>D. 8 points to loser in halted match (fewer games).</li>
-      <li>E. 6 points to regular set loser.</li>
-      <li>F. 6 points to 3rd set retiree; winner gets 10.</li>
-      <li>G. 4 points to 2nd set retiree; winner gets 10.</li>
-      <li>H. 4 points if using higher rated player; opponent gets 10.</li>
-      <li>I. 2 points to 1st set retiree; winner gets 10.</li>
-      <li>J. 1 point for non-sanctioned player; opponent gets 10.</li>
-      <li>K. 0 points for no-show/late; opponent gets 10.</li>
+      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
+      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
+      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other sub and counts toward the participation point (no penalty).</li>
     </ul>
 
     <p>
@@ -1099,7 +1093,7 @@
 
     <table>
       <tr>
-        <td colspan="4">TEAM 3 / Hit Squad VS TEAM 4 / Hot Shots</td>
+        <td colspan="4">TEAM 3 / Hit Squad (Home) VS TEAM 4 / Hot Shots (Away)</td>
       </tr>
     </table>
 
@@ -1144,11 +1138,11 @@
         <td colspan="2">Position # / Player Names (circle 1):</td>
       </tr>
       <tr>
-        <td>3 / Michael Current<br />Christine Lee (C)<br />John Sullivan<br />Kayla Holman</td>
-        <td>3 / Michael Current<br />Christine Lee (C)<br />John Sullivan<br />Kayla Holman</td>
+        <td>3 / Michael Current<br />Christine Lee (C)<br />John Sullivan<br />Anna Rydeski</td>
+        <td>3 / Michael Current<br />Christine Lee (C)<br />John Sullivan<br />Anna Rydeski</td>
         <td></td>
-        <td>3 / Chris Kahlow<br />Taylor Nelson<br />Anna Rydeski<br />Jenna Helminski Juve</td>
-        <td>3 / Chris Kahlow<br />Taylor Nelson<br />Anna Rydeski<br />Jenna Helminski Juve</td>
+        <td>3 / Chris Kahlow<br />Taylor Nelson<br />Peyton Demeyer<br />Jenna Helminski Juve</td>
+        <td>3 / Chris Kahlow<br />Taylor Nelson<br />Peyton Demeyer<br />Jenna Helminski Juve</td>
       </tr>
       <tr>
         <td colspan="2">
@@ -1174,11 +1168,11 @@
         <td colspan="2">Position # / Player Names (circle 1):</td>
       </tr>
       <tr>
-        <td>3 / Michael Current<br />Christine Lee (C)<br />John Sullivan<br />Kayla Holman</td>
-        <td>3 / Michael Current<br />Christine Lee (C)<br />John Sullivan<br />Kayla Holman</td>
+        <td>3 / Michael Current<br />Christine Lee (C)<br />John Sullivan<br />Anna Rydeski</td>
+        <td>3 / Michael Current<br />Christine Lee (C)<br />John Sullivan<br />Anna Rydeski</td>
         <td></td>
-        <td>3 / Chris Kahlow<br />Taylor Nelson<br />Anna Rydeski<br />Jenna Helminski Juve</td>
-        <td>3 / Chris Kahlow<br />Taylor Nelson<br />Anna Rydeski<br />Jenna Helminski Juve</td>
+        <td>3 / Chris Kahlow<br />Taylor Nelson<br />Peyton Demeyer<br />Jenna Helminski Juve</td>
+        <td>3 / Chris Kahlow<br />Taylor Nelson<br />Peyton Demeyer<br />Jenna Helminski Juve</td>
       </tr>
       <tr>
         <td colspan="2">
@@ -1205,7 +1199,7 @@
       </tr>
       <tr>
         <td>4 / Michelle Ottum</td>
-        <td>5 / Amanda Waters</td>
+        <td>5 / John Kelly</td>
         <td></td>
         <td>4 / Mike Leonard</td>
         <td>5 / John Noble</td>
@@ -1246,19 +1240,16 @@
       </tr>
     </table>
 
+    <div class="section-title">2026 RULES REMINDER</div>
+    <ul>
+      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete their official lineup sheet first.</li>
+    </ul>
+
     <div class="section-title">TEAM SCORING</div>
     <ul>
-      <li>A. 10 points to match winner.</li>
-      <li>B. 8 points to split set loser.</li>
-      <li>C. 8 points each if tied halted match.</li>
-      <li>D. 8 points to loser in halted match (fewer games).</li>
-      <li>E. 6 points to regular set loser.</li>
-      <li>F. 6 points to 3rd set retiree; winner gets 10.</li>
-      <li>G. 4 points to 2nd set retiree; winner gets 10.</li>
-      <li>H. 4 points if using higher rated player; opponent gets 10.</li>
-      <li>I. 2 points to 1st set retiree; winner gets 10.</li>
-      <li>J. 1 point for non-sanctioned player; opponent gets 10.</li>
-      <li>K. 0 points for no-show/late; opponent gets 10.</li>
+      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
+      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
+      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other sub and counts toward the participation point (no penalty).</li>
     </ul>
 
     <p>

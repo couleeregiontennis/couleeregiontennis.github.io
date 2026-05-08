@@ -4,7 +4,7 @@ const path = require('path');
 const { parse } = require('csv-parse/sync');
 const { fetchCSV } = require('./fetch-csv');
 
-const CSV_URL = process.env.CSV_URL || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTRXXJgqymosDbuyhAHCpHHUqQsNxRk0B-3kBGWr7CuPymhKUpT83JKyN7DxkCiaPdKsZEeBaA3GDjH/pub?gid=1666435806&single=true&output=csv';
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTRXXJgqymosDbuyhAHCpHHUqQsNxRk0B-3kBGWr7CuPymhKUpT83JKyN7DxkCiaPdKsZEeBaA3GDjH/pub?gid=1666435806&single=true&output=csv';
 
 if (!CSV_URL) {
   console.error('Error: CSV_URL environment variable is not set.');
@@ -16,29 +16,29 @@ async function createRostersFromCSV() {
     const csvContent = await fetchCSV(CSV_URL);
 
     console.log('Fetched CSV data successfully');
-    
+
     // Log the first few lines to debug
     console.log('CSV Preview:', csvContent.split('\n').slice(0, 3));
-    
-    const records = parse(csvContent, { 
-      columns: true, 
+
+    const records = parse(csvContent, {
+      columns: true,
       skip_empty_lines: true,
       relax_column_count: true,
       trim: true
     });
-    
+
     console.log(`Parsed ${records.length} records from CSV`);
 
     // Group by night and team number
     const rosters = {};
     records.forEach(row => {
-      const nightRaw = row['v'] || '';
+      const nightRaw = row['Night'] || row['v'] || '';
       const teamNum = row['Team/'] || '';
       const name = row['1-Name'] || '';
       const level = row['Level'] || '';
 
-      if (!nightRaw || !teamNum || !name) {
-        return;
+      if (!nightRaw || !teamNum) {
+        return; // We need at least the night and team number
       }
 
       const night = nightRaw.startsWith('Tue') ? 'tuesday' : (nightRaw.startsWith('Wed') ? 'wednesday' : null);
@@ -50,23 +50,31 @@ async function createRostersFromCSV() {
       if (!rosters[key]) {
         rosters[key] = { night, teamNum, teamName, roster: [] };
       }
-      
+
       // Update team name if we find it later in the CSV
       if (teamName && !rosters[key].teamName) {
         rosters[key].teamName = teamName;
       }
 
-      rosters[key].roster.push({
-        position: level,
-        name: name,
-        captain: row['C/CC'] && row['C/CC'].trim() ? '✓' : ''
-      });
+      // Only add to roster array if there is an actual player name
+      if (name) {
+        rosters[key].roster.push({
+          position: level,
+          name: name,
+          captain: row['C/CC'] && row['C/CC'].trim() ? '✓' : ''
+        });
+      }
     });
-
     // Write one file per team, in subfolders by night
     for (const [key, teamObj] of Object.entries(rosters)) {
       const { night, teamNum, teamName, roster } = teamObj;
-      const finalTeamName = teamName || `Team ${teamNum}`;
+      let finalTeamName = teamName || `Team ${teamNum}`;
+
+      // If roster is empty or contains no valid players, rename to BYE
+      if (!roster || roster.length === 0) {
+        finalTeamName = "BYE";
+      }
+
       const outDir = path.join(__dirname, '..', 'teams', night, 'rosters');
       fs.mkdirSync(outDir, { recursive: true });
       const outPath = path.join(outDir, `${teamNum}.json`);
