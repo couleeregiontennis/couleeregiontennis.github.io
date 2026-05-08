@@ -74,6 +74,20 @@ async function loadNav() {
         });
       }
 
+      // Mobile Dropdown Toggle
+      const dropdownTrigger = placeholder.querySelector('.navbar-dropdown > a');
+      if (dropdownTrigger) {
+        dropdownTrigger.addEventListener('click', (e) => {
+          if (window.innerWidth <= 1150) {
+            e.preventDefault();
+            const parent = dropdownTrigger.closest('.navbar-dropdown');
+            if (parent) {
+              parent.classList.toggle('active');
+            }
+          }
+        });
+      }
+
       // Modal Logic
       const payLink = document.getElementById('pay-link');
       const modal = document.getElementById('registration-modal');

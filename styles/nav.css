@@ -228,11 +228,15 @@
   }
 
   .navbar-menu .navbar-dropdown .dropdown-menu {
-    display: block !important;
+    display: none;
     position: static;
     background: rgba(0,0,0,0.1);
     box-shadow: none;
     border: none;
+  }
+
+  .navbar-menu .navbar-dropdown.active .dropdown-menu {
+    display: block !important;
   }
 }
 
