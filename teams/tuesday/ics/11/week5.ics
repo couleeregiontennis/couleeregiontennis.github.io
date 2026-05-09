@@ -21,14 +21,14 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-tuesday-11-week5@couleeregiontennis.org
-DTSTAMP:20260623T190000Z
-DTSTART;TZID=America/Chicago:20260623T190000
-DTEND;TZID=America/Chicago:20260623T203000
-SUMMARY:LTTA Tennis: vs Racquet Scientists (Home)
-DESCRIPTION:LTTA Tennis match: 11 vs Racquet Scientists at Green Island Park - Courts 6–9\nOpponent Roster: Mark Harris (1); Nathan Tunks (2); Gavin Goss (3); Frank Schwarz (3); Nancy Winberg (3); Karie Johnson (3); Kim Thurk (4); Morgan McBride (5)
-LOCATION:Green Island Park - Courts 6–9
+DTSTAMP:20260623T173000Z
+DTSTART;TZID=America/Chicago:20260623T173000
+DTEND;TZID=America/Chicago:20260623T190000
+SUMMARY:LTTA Tennis: vs Rascals (Away)
+DESCRIPTION:LTTA Tennis match: 11 vs Rascals at Green Island Park - Courts 1–5
+LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
-TRIGGER:-PT11H
+TRIGGER:-PT9H30M
 ACTION:DISPLAY
 DESCRIPTION:LTTA Tennis Match Reminder
 END:VALARM

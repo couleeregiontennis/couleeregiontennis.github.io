@@ -25,7 +25,7 @@ DTSTAMP:20260602T180000Z
 DTSTART;TZID=America/Chicago:20260602T180000
 DTEND;TZID=America/Chicago:20260602T193000
 SUMMARY:LTTA Tennis: vs Approach Shots (Home)
-DESCRIPTION:LTTA Tennis match: 7 vs Approach Shots at Forest Hills Tennis Courts\nOpponent Roster: Greg Schibbelhut (1); Dillon Eddingsaas (2); Matthew Isaacson (3); Mary Aschenbrenner (3); Dale Barclay (3); Rich Levinger (3); Judith Engen (4); Amanda Wilke (5)
+DESCRIPTION:LTTA Tennis match: 7 vs Approach Shots at Forest Hills Tennis Courts
 LOCATION:Forest Hills Tennis Courts
 BEGIN:VALARM
 TRIGGER:-PT9H30M
