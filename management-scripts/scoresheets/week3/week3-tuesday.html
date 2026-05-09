@@ -1,547 +1,208 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>
-      @media print {
-        body {
-          margin: 0.25in;
-          font-size: 11.5px;
-        }
-        .match-sheet {
-          page-break-after: always;
-          page-break-inside: avoid;
-          height: 100vh; /* Force it to act as one full page */
-          overflow: hidden;
-        }
-      }
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @media print {
       body {
-        font-family: Arial, sans-serif;
-        font-size: 11.5px;
         margin: 0.25in;
+        font-size: 11.5px;
       }
 
-      h2,
-      h3 {
-        margin: 4px 0;
-        text-align: center;
-        font-size: 14px;
-      }
-
-      table {
-        border-collapse: collapse;
-        width: 100%;
-        margin: 6px 0;
-        table-layout: fixed; /* Forces equal column widths */
-      }
-
-      td,
-      th {
-        border: 1px solid #000;
-        padding: 3px 5px;
-        vertical-align: top;
-        overflow: hidden; /* Prevents content from breaking layout */
-        white-space: nowrap; /* Keeps content on one line */
-      }
-
-      /* Match tables specific styling */
-      table tr:first-child td {
-        white-space: normal; /* Allow wrapping in header rows */
-      }
-
-      /* Updated column widths for match tables */
-      table:not(.no-border) {
-        width: 100%;
-        table-layout: fixed;
-      }
-
-      /* Player columns for team 1 */
-      table:not(.no-border) tr td:nth-child(1),
-      table:not(.no-border) tr td:nth-child(2) {
-        width: 30%;
-      }
-
-      /* VS column and its empty cells */
-      table:not(.no-border) tr td:nth-child(3) {
-        width: 10%;
-        text-align: center;
-        padding: 3px;
-      }
-
-      /* Keep empty VS column cells visible */
-      table:not(.no-border) tr td:nth-child(3):empty {
-        display: table-cell;
-      }
-
-      /* Player columns for team 2 */
-      table:not(.no-border) tr td:nth-child(4),
-      table:not(.no-border) tr td:nth-child(5) {
-        width: 30%;
-      }
-
-      /* Remove display:none from empty cells */
-      table:not(.no-border) tr td:empty {
-        visibility: hidden; /* Hide content but keep spacing */
-      }
-
-      /* Score area styling */
-      table:not(.no-border) tr td[colspan="3"] {
-        width: 45%;
-        visibility: visible !important; /* Ensure score areas remain visible */
-      }
-
-      /* Adjust header cells with colspan */
-      table:not(.no-border) tr td[colspan="2"] {
-        width: 45%;
-        text-align: left; /* Force left alignment */
-        white-space: normal; /* Allow text to wrap */
-        vertical-align: top;
-      }
-
-      /* Header row styling */
-      table:not(.no-border) tr td[colspan="3"] {
-        width: 45%; /* Combined width of first three columns */
-      }
-
-      table:not(.no-border) tr td[colspan="4"] {
-        width: 100%;
-        white-space: normal; /* Allow team names to wrap */
-      }
-
-      /* Team header table specific */
-      table:not(.no-border) tr td[colspan="4"] {
-        font-size: 13px;
-        font-weight: bold;
-        padding: 5px;
-        line-height: 1.2;
-        text-align: center;
-      }
-
-      .no-border td {
-        border: none;
-        padding: 3px 6px;
-        width: auto;
-      }
-
-      .section-title {
-        background: #f0f0f0;
-        font-weight: bold;
-        text-align: center;
-        font-size: 12.5px;
-        padding: 3px 0;
-        margin: 6px 0;
-      }
-
-      .checkbox {
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        border: 1px solid #000;
-        margin-right: 5px;
-        vertical-align: middle;
-        float: left; /* Align checkbox to the left */
-      }
-
-      /* Clear float after checkbox */
-      td[colspan="2"]::after {
-        content: "";
-        display: table;
-        clear: both;
-      }
-
-      /* Score area styling for both teams */
-      td[colspan="3"] {
-        white-space: normal; /* Allow wrapping in score areas */
-      }
-
-      ul {
-        padding-left: 1.2em;
-        margin: 4px 0;
-      }
-
-      li {
-        margin-bottom: 2px;
-      }
-
-      p {
-        margin: 4px 0;
-      }
-
-      /* Add page break styles */
       .match-sheet {
         page-break-after: always;
+        page-break-inside: avoid;
+        height: 100vh;
+        /* Force it to act as one full page */
+        overflow: hidden;
       }
+    }
 
-      /* Last sheet shouldn't have a page break */
-      .match-sheet:last-child {
-        page-break-after: auto;
-      }
-    </style></head><body><div class="match-sheet">
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 11.5px;
+      margin: 0.25in;
+    }
+
+    h2,
+    h3 {
+      margin: 4px 0;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 6px 0;
+      table-layout: fixed;
+      /* Forces equal column widths */
+    }
+
+    td,
+    th {
+      border: 1px solid #000;
+      padding: 3px 5px;
+      vertical-align: top;
+      overflow: hidden;
+      /* Prevents content from breaking layout */
+      white-space: nowrap;
+      /* Keeps content on one line */
+    }
+
+    /* Match tables specific styling */
+    table tr:first-child td {
+      white-space: normal;
+      /* Allow wrapping in header rows */
+    }
+
+    /* Updated column widths for match tables */
+    table:not(.no-border) {
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    /* Player columns for team 1 */
+    table:not(.no-border) tr td:nth-child(1),
+    table:not(.no-border) tr td:nth-child(2) {
+      width: 30%;
+    }
+
+    /* VS column and its empty cells */
+    table:not(.no-border) tr td:nth-child(3) {
+      width: 10%;
+      text-align: center;
+      padding: 3px;
+    }
+
+    /* Keep empty VS column cells visible */
+    table:not(.no-border) tr td:nth-child(3):empty {
+      display: table-cell;
+    }
+
+    /* Player columns for team 2 */
+    table:not(.no-border) tr td:nth-child(4),
+    table:not(.no-border) tr td:nth-child(5) {
+      width: 30%;
+    }
+
+    /* Remove display:none from empty cells */
+    table:not(.no-border) tr td:empty {
+      visibility: hidden;
+      /* Hide content but keep spacing */
+    }
+
+    /* Score area styling */
+    table:not(.no-border) tr td[colspan="3"] {
+      width: 45%;
+      visibility: visible !important;
+      /* Ensure score areas remain visible */
+    }
+
+    /* Adjust header cells with colspan */
+    table:not(.no-border) tr td[colspan="2"] {
+      width: 45%;
+      text-align: left;
+      /* Force left alignment */
+      white-space: normal;
+      /* Allow text to wrap */
+      vertical-align: top;
+    }
+
+    /* Header row styling */
+    table:not(.no-border) tr td[colspan="3"] {
+      width: 45%;
+      /* Combined width of first three columns */
+    }
+
+    table:not(.no-border) tr td[colspan="4"] {
+      width: 100%;
+      white-space: normal;
+      /* Allow team names to wrap */
+    }
+
+    /* Team header table specific */
+    table:not(.no-border) tr td[colspan="4"] {
+      font-size: 13px;
+      font-weight: bold;
+      padding: 5px;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .no-border td {
+      border: none;
+      padding: 3px 6px;
+      width: auto;
+    }
+
+    .section-title {
+      background: #f0f0f0;
+      font-weight: bold;
+      text-align: center;
+      font-size: 12.5px;
+      padding: 3px 0;
+      margin: 6px 0;
+    }
+
+    .checkbox {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 1px solid #000;
+      margin-right: 5px;
+      vertical-align: middle;
+      float: left;
+      /* Align checkbox to the left */
+    }
+
+    /* Clear float after checkbox */
+    td[colspan="2"]::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Score area styling for both teams */
+    td[colspan="3"] {
+      white-space: normal;
+      /* Allow wrapping in score areas */
+    }
+
+    ul {
+      padding-left: 1.2em;
+      margin: 4px 0;
+    }
+
+    li {
+      margin-bottom: 2px;
+    }
+
+    p {
+      margin: 4px 0;
+    }
+
+    /* Add page break styles */
+    .match-sheet {
+      page-break-after: always;
+    }
+
+    /* Last sheet shouldn't have a page break */
+    .match-sheet:last-child {
+      page-break-after: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="match-sheet">
     <h2>COULEE REGION TENNIS ASSOCIATION MATCH SCORE SHEET – LTTA LEAGUE</h2>
 
     <table class="no-border">
       <tr>
         <td>TUES ✓</td>
-        <td>WED  </td>
-        <td>DATE 2026-06-09</td>
-        <td>TIME 6:00pm</td>
-        <td>COURTS Forest Hills</td>
-      </tr>
-    </table>
-
-    <table>
-      <tr>
-        <td colspan="4">TEAM 10 / Jetsetters (Home) VS TEAM 1 / Spin Doctors (Away)</td>
-      </tr>
-    </table>
-
-    <div class="section-title">DOUBLES</div>
-
-    <!-- Repeat match blocks -->
-    <!-- Match 1 -->
-    <table>
-      <tr>
-        <td colspan="2">Position # / Player Names:</td>
-        <td>VS</td>
-        <td colspan="2">Position # / Player Names:</td>
-      </tr>
-      <tr>
-        <td>1 / Drake Wonderling</td>
-        <td>2 / Corey Stauner</td>
-        <td></td>
-        <td>1 / Tung Ouy</td>
-        <td>2 / Rich Puent</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____<br />
-          Score: ____ ____ ____
-        </td>
-        <td></td>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____
-        </td>
-      </tr>
-    </table>
-
-    <!-- Match 2 -->
-    <table>
-      <tr>
-        <td colspan="2">Position # / Player Names (circle 1):</td>
-        <td>VS</td>
-        <td colspan="2">Position # / Player Names (circle 1):</td>
-      </tr>
-      <tr>
-        <td>3 / Jada Brunkow<br />Dan Petersen (C)<br />Shirley Yuan<br />Tyler Benson</td>
-        <td>3 / Jada Brunkow<br />Dan Petersen (C)<br />Shirley Yuan<br />Tyler Benson</td>
-        <td></td>
-        <td>3 / Sai Mathi<br />Isaac Puent<br />Molly Stenger<br />Leah Bower</td>
-        <td>3 / Sai Mathi<br />Isaac Puent<br />Molly Stenger<br />Leah Bower</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____<br />
-          Score: ____ ____ ____
-        </td>
-        <td></td>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____
-        </td>
-      </tr>
-    </table>
-
-    <!-- Match 3 -->
-    <table>
-      <tr>
-        <td colspan="2">Position # / Player Names (circle 1):</td>
-        <td>VS</td>
-        <td colspan="2">Position # / Player Names (circle 1):</td>
-      </tr>
-      <tr>
-        <td>3 / Jada Brunkow<br />Dan Petersen (C)<br />Shirley Yuan<br />Tyler Benson</td>
-        <td>3 / Jada Brunkow<br />Dan Petersen (C)<br />Shirley Yuan<br />Tyler Benson</td>
-        <td></td>
-        <td>3 / Sai Mathi<br />Isaac Puent<br />Molly Stenger<br />Leah Bower</td>
-        <td>3 / Sai Mathi<br />Isaac Puent<br />Molly Stenger<br />Leah Bower</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____<br />
-          Score: ____ ____ ____
-        </td>
-        <td></td>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____
-        </td>
-      </tr>
-    </table>
-
-    <!-- Match 4 -->
-    <table>
-      <tr>
-        <td colspan="2">Position # / Player Names:</td>
-        <td>VS</td>
-        <td colspan="2">Position # / Player Names:</td>
-      </tr>
-      <tr>
-        <td>4 / Aaron Olson</td>
-        <td>5 / Anna Olson</td>
-        <td></td>
-        <td>4 / Jim Brieske (C)</td>
-        <td>5 / Kalyan Satydeep</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____<br />
-          Score: ____ ____ ____
-        </td>
-        <td></td>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____
-        </td>
-      </tr>
-    </table>
-
-    <!-- Team totals -->
-    <table>
-      <tr>
-        <td>TEAM POINTS _____ TOTAL</td>
-        <td>TEAM POINTS _____ TOTAL</td>
-      </tr>
-    </table>
-
-    <!-- Signatures -->
-    <table class="no-border">
-      <tr>
-        <td>__________________________________________</td>
-        <td>__________________________________________</td>
-      </tr>
-      <tr>
-        <td>TEAM CAPTAIN / REP SIGNATURE</td>
-        <td>TEAM CAPTAIN / REP SIGNATURE</td>
-      </tr>
-    </table>
-
-    <div class="section-title">2026 RULES REMINDER</div>
-    <ul>
-      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete their official lineup sheet first.</li>
-    </ul>
-
-    <div class="section-title">TEAM SCORING</div>
-    <ul>
-      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
-      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
-      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other sub and counts toward the participation point (no penalty).</li>
-    </ul>
-
-    <p>
-      <strong
-        >Leave clipboards & score sheets on red tote until scores are
-        posted.</strong
-      >
-    </p>
-    <p><em>Rev 5/30/26</em></p>
-  </div><div class="match-sheet">
-    <h2>COULEE REGION TENNIS ASSOCIATION MATCH SCORE SHEET – LTTA LEAGUE</h2>
-
-    <table class="no-border">
-      <tr>
-        <td>TUES ✓</td>
-        <td>WED  </td>
-        <td>DATE 2026-06-09</td>
-        <td>TIME 5:30pm</td>
-        <td>COURTS Courts 6–9</td>
-      </tr>
-    </table>
-
-    <table>
-      <tr>
-        <td colspan="4">TEAM 11 / Full Metal Racquet (Home) VS TEAM 9 / Bounce It (Away)</td>
-      </tr>
-    </table>
-
-    <div class="section-title">DOUBLES</div>
-
-    <!-- Repeat match blocks -->
-    <!-- Match 1 -->
-    <table>
-      <tr>
-        <td colspan="2">Position # / Player Names:</td>
-        <td>VS</td>
-        <td colspan="2">Position # / Player Names:</td>
-      </tr>
-      <tr>
-        <td>1 / Jeff Herde</td>
-        <td>2 / Cole Lapp</td>
-        <td></td>
-        <td>1 / Yubo Nian</td>
-        <td>2 / Matt Diehl</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____<br />
-          Score: ____ ____ ____
-        </td>
-        <td></td>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____
-        </td>
-      </tr>
-    </table>
-
-    <!-- Match 2 -->
-    <table>
-      <tr>
-        <td colspan="2">Position # / Player Names (circle 1):</td>
-        <td>VS</td>
-        <td colspan="2">Position # / Player Names (circle 1):</td>
-      </tr>
-      <tr>
-        <td>3 / Bill Lapp<br />Regina Jones (C)<br />Sam Schmidt<br />Hannah Exner</td>
-        <td>3 / Bill Lapp<br />Regina Jones (C)<br />Sam Schmidt<br />Hannah Exner</td>
-        <td></td>
-        <td>3 / Tom Dwyer (C)<br />Mike Roscos (C)<br />Sean O'Flaherty<br />Dan Skemp</td>
-        <td>3 / Tom Dwyer (C)<br />Mike Roscos (C)<br />Sean O'Flaherty<br />Dan Skemp</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____<br />
-          Score: ____ ____ ____
-        </td>
-        <td></td>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____
-        </td>
-      </tr>
-    </table>
-
-    <!-- Match 3 -->
-    <table>
-      <tr>
-        <td colspan="2">Position # / Player Names (circle 1):</td>
-        <td>VS</td>
-        <td colspan="2">Position # / Player Names (circle 1):</td>
-      </tr>
-      <tr>
-        <td>3 / Bill Lapp<br />Regina Jones (C)<br />Sam Schmidt<br />Hannah Exner</td>
-        <td>3 / Bill Lapp<br />Regina Jones (C)<br />Sam Schmidt<br />Hannah Exner</td>
-        <td></td>
-        <td>3 / Tom Dwyer (C)<br />Mike Roscos (C)<br />Sean O'Flaherty<br />Dan Skemp</td>
-        <td>3 / Tom Dwyer (C)<br />Mike Roscos (C)<br />Sean O'Flaherty<br />Dan Skemp</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____<br />
-          Score: ____ ____ ____
-        </td>
-        <td></td>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____
-        </td>
-      </tr>
-    </table>
-
-    <!-- Match 4 -->
-    <table>
-      <tr>
-        <td colspan="2">Position # / Player Names:</td>
-        <td>VS</td>
-        <td colspan="2">Position # / Player Names:</td>
-      </tr>
-      <tr>
-        <td>4 / Sarah Gang</td>
-        <td>5 / Morgan Brazil</td>
-        <td></td>
-        <td>4 / Joe Kotnour Sr.</td>
-        <td>5 / Ann Kotnour</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____<br />
-          Score: ____ ____ ____
-        </td>
-        <td></td>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____
-        </td>
-      </tr>
-    </table>
-
-    <!-- Team totals -->
-    <table>
-      <tr>
-        <td>TEAM POINTS _____ TOTAL</td>
-        <td>TEAM POINTS _____ TOTAL</td>
-      </tr>
-    </table>
-
-    <!-- Signatures -->
-    <table class="no-border">
-      <tr>
-        <td>__________________________________________</td>
-        <td>__________________________________________</td>
-      </tr>
-      <tr>
-        <td>TEAM CAPTAIN / REP SIGNATURE</td>
-        <td>TEAM CAPTAIN / REP SIGNATURE</td>
-      </tr>
-    </table>
-
-    <div class="section-title">2026 RULES REMINDER</div>
-    <ul>
-      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete their official lineup sheet first.</li>
-    </ul>
-
-    <div class="section-title">TEAM SCORING</div>
-    <ul>
-      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
-      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
-      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other sub and counts toward the participation point (no penalty).</li>
-    </ul>
-
-    <p>
-      <strong
-        >Leave clipboards & score sheets on red tote until scores are
-        posted.</strong
-      >
-    </p>
-    <p><em>Rev 5/30/26</em></p>
-  </div><div class="match-sheet">
-    <h2>COULEE REGION TENNIS ASSOCIATION MATCH SCORE SHEET – LTTA LEAGUE</h2>
-
-    <table class="no-border">
-      <tr>
-        <td>TUES ✓</td>
-        <td>WED  </td>
+        <td>WED </td>
         <td>DATE 2026-06-09</td>
         <td>TIME 5:30pm</td>
         <td>COURTS Courts 10–13</td>
@@ -699,39 +360,42 @@
 
     <div class="section-title">2026 RULES REMINDER</div>
     <ul>
-      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete their official lineup sheet first.</li>
+      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete
+        their official lineup sheet first.</li>
     </ul>
 
     <div class="section-title">TEAM SCORING</div>
     <ul>
-      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
-      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
-      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other sub and counts toward the participation point (no penalty).</li>
+      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for
+        each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
+      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all
+        <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
+      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other
+        sub and counts toward the participation point (no penalty).</li>
     </ul>
 
     <p>
-      <strong
-        >Leave clipboards & score sheets on red tote until scores are
-        posted.</strong
-      >
+      <strong>Leave clipboards & score sheets on red tote until scores are
+        posted.</strong>
     </p>
     <p><em>Rev 5/30/26</em></p>
-  </div><div class="match-sheet">
+  </div>
+  <div class="match-sheet">
     <h2>COULEE REGION TENNIS ASSOCIATION MATCH SCORE SHEET – LTTA LEAGUE</h2>
 
     <table class="no-border">
       <tr>
         <td>TUES ✓</td>
-        <td>WED  </td>
+        <td>WED </td>
         <td>DATE 2026-06-09</td>
-        <td>TIME 7:00pm</td>
+        <td>TIME 5:30pm</td>
         <td>COURTS Courts 6–9</td>
       </tr>
     </table>
 
     <table>
       <tr>
-        <td colspan="4">TEAM 2 / Tennis the Menace (Home) VS TEAM 7 / Good Ol' Boys (Away)</td>
+        <td colspan="4">TEAM 11 / Full Metal Racquet (Home) VS TEAM 9 / Bounce It (Away)</td>
       </tr>
     </table>
 
@@ -746,11 +410,11 @@
         <td colspan="2">Position # / Player Names:</td>
       </tr>
       <tr>
-        <td>1 / _______</td>
-        <td>2 / _______</td>
+        <td>1 / Jeff Herde</td>
+        <td>2 / Cole Lapp</td>
         <td></td>
-        <td>1 / Paul Jacobson (C)</td>
-        <td>2 / Brennan Quinn</td>
+        <td>1 / Yubo Nian</td>
+        <td>2 / Matt Diehl</td>
       </tr>
       <tr>
         <td colspan="2">
@@ -776,11 +440,11 @@
         <td colspan="2">Position # / Player Names (circle 1):</td>
       </tr>
       <tr>
-        <td>3 / _______<br />_______<br />_______<br />_______</td>
-        <td>3 / _______<br />_______<br />_______<br />_______</td>
+        <td>3 / Bill Lapp<br />Regina Jones (C)<br />Sam Schmidt<br />Hannah Exner</td>
+        <td>3 / Bill Lapp<br />Regina Jones (C)<br />Sam Schmidt<br />Hannah Exner</td>
         <td></td>
-        <td>3 / Don Harvey<br />David Lange<br />Larry Ruff<br />Corey Ruud</td>
-        <td>3 / Don Harvey<br />David Lange<br />Larry Ruff<br />Corey Ruud</td>
+        <td>3 / Tom Dwyer (C)<br />Mike Roscos (C)<br />Sean O'Flaherty<br />Dan Skemp</td>
+        <td>3 / Tom Dwyer (C)<br />Mike Roscos (C)<br />Sean O'Flaherty<br />Dan Skemp</td>
       </tr>
       <tr>
         <td colspan="2">
@@ -806,11 +470,11 @@
         <td colspan="2">Position # / Player Names (circle 1):</td>
       </tr>
       <tr>
-        <td>3 / _______<br />_______<br />_______<br />_______</td>
-        <td>3 / _______<br />_______<br />_______<br />_______</td>
+        <td>3 / Bill Lapp<br />Regina Jones (C)<br />Sam Schmidt<br />Hannah Exner</td>
+        <td>3 / Bill Lapp<br />Regina Jones (C)<br />Sam Schmidt<br />Hannah Exner</td>
         <td></td>
-        <td>3 / Don Harvey<br />David Lange<br />Larry Ruff<br />Corey Ruud</td>
-        <td>3 / Don Harvey<br />David Lange<br />Larry Ruff<br />Corey Ruud</td>
+        <td>3 / Tom Dwyer (C)<br />Mike Roscos (C)<br />Sean O'Flaherty<br />Dan Skemp</td>
+        <td>3 / Tom Dwyer (C)<br />Mike Roscos (C)<br />Sean O'Flaherty<br />Dan Skemp</td>
       </tr>
       <tr>
         <td colspan="2">
@@ -836,11 +500,11 @@
         <td colspan="2">Position # / Player Names:</td>
       </tr>
       <tr>
-        <td>4 / _______</td>
-        <td>5 / _______</td>
+        <td>4 / Sarah Gang</td>
+        <td>5 / Morgan Brazil</td>
         <td></td>
-        <td>4 / Pennie Pierce-Jorgeson</td>
-        <td>5 / Sally Ruud (C)</td>
+        <td>4 / Joe Kotnour Sr.</td>
+        <td>5 / Ann Kotnour</td>
       </tr>
       <tr>
         <td colspan="2">
@@ -880,30 +544,217 @@
 
     <div class="section-title">2026 RULES REMINDER</div>
     <ul>
-      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete their official lineup sheet first.</li>
+      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete
+        their official lineup sheet first.</li>
     </ul>
 
     <div class="section-title">TEAM SCORING</div>
     <ul>
-      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
-      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
-      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other sub and counts toward the participation point (no penalty).</li>
+      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for
+        each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
+      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all
+        <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
+      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other
+        sub and counts toward the participation point (no penalty).</li>
     </ul>
 
     <p>
-      <strong
-        >Leave clipboards & score sheets on red tote until scores are
-        posted.</strong
-      >
+      <strong>Leave clipboards & score sheets on red tote until scores are
+        posted.</strong>
     </p>
     <p><em>Rev 5/30/26</em></p>
-  </div><div class="match-sheet">
+  </div>
+  <div class="match-sheet">
     <h2>COULEE REGION TENNIS ASSOCIATION MATCH SCORE SHEET – LTTA LEAGUE</h2>
 
     <table class="no-border">
       <tr>
         <td>TUES ✓</td>
-        <td>WED  </td>
+        <td>WED </td>
+        <td>DATE 2026-06-09</td>
+        <td>TIME 6:00pm</td>
+        <td>COURTS Forest Hills</td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <td colspan="4">TEAM 10 / Jetsetters (Home) VS TEAM 1 / Spin Doctors (Away)</td>
+      </tr>
+    </table>
+
+    <div class="section-title">DOUBLES</div>
+
+    <!-- Repeat match blocks -->
+    <!-- Match 1 -->
+    <table>
+      <tr>
+        <td colspan="2">Position # / Player Names:</td>
+        <td>VS</td>
+        <td colspan="2">Position # / Player Names:</td>
+      </tr>
+      <tr>
+        <td>1 / Drake Wonderling</td>
+        <td>2 / Corey Stauner</td>
+        <td></td>
+        <td>1 / Tung Ouy</td>
+        <td>2 / Rich Puent</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____<br />
+          Score: ____ ____ ____
+        </td>
+        <td></td>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____
+        </td>
+      </tr>
+    </table>
+
+    <!-- Match 2 -->
+    <table>
+      <tr>
+        <td colspan="2">Position # / Player Names (circle 1):</td>
+        <td>VS</td>
+        <td colspan="2">Position # / Player Names (circle 1):</td>
+      </tr>
+      <tr>
+        <td>3 / Jada Brunkow<br />Dan Petersen (C)<br />Shirley Yuan<br />Tyler Benson</td>
+        <td>3 / Jada Brunkow<br />Dan Petersen (C)<br />Shirley Yuan<br />Tyler Benson</td>
+        <td></td>
+        <td>3 / Sai Mathi<br />Isaac Puent<br />Molly Stenger<br />Leah Bower</td>
+        <td>3 / Sai Mathi<br />Isaac Puent<br />Molly Stenger<br />Leah Bower</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____<br />
+          Score: ____ ____ ____
+        </td>
+        <td></td>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____
+        </td>
+      </tr>
+    </table>
+
+    <!-- Match 3 -->
+    <table>
+      <tr>
+        <td colspan="2">Position # / Player Names (circle 1):</td>
+        <td>VS</td>
+        <td colspan="2">Position # / Player Names (circle 1):</td>
+      </tr>
+      <tr>
+        <td>3 / Jada Brunkow<br />Dan Petersen (C)<br />Shirley Yuan<br />Tyler Benson</td>
+        <td>3 / Jada Brunkow<br />Dan Petersen (C)<br />Shirley Yuan<br />Tyler Benson</td>
+        <td></td>
+        <td>3 / Sai Mathi<br />Isaac Puent<br />Molly Stenger<br />Leah Bower</td>
+        <td>3 / Sai Mathi<br />Isaac Puent<br />Molly Stenger<br />Leah Bower</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____<br />
+          Score: ____ ____ ____
+        </td>
+        <td></td>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____
+        </td>
+      </tr>
+    </table>
+
+    <!-- Match 4 -->
+    <table>
+      <tr>
+        <td colspan="2">Position # / Player Names:</td>
+        <td>VS</td>
+        <td colspan="2">Position # / Player Names:</td>
+      </tr>
+      <tr>
+        <td>4 / Aaron Olson</td>
+        <td>5 / Anna Olson</td>
+        <td></td>
+        <td>4 / Jim Brieske (C)</td>
+        <td>5 / Kalyan Satydeep</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____<br />
+          Score: ____ ____ ____
+        </td>
+        <td></td>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____
+        </td>
+      </tr>
+    </table>
+
+    <!-- Team totals -->
+    <table>
+      <tr>
+        <td>TEAM POINTS _____ TOTAL</td>
+        <td>TEAM POINTS _____ TOTAL</td>
+      </tr>
+    </table>
+
+    <!-- Signatures -->
+    <table class="no-border">
+      <tr>
+        <td>__________________________________________</td>
+        <td>__________________________________________</td>
+      </tr>
+      <tr>
+        <td>TEAM CAPTAIN / REP SIGNATURE</td>
+        <td>TEAM CAPTAIN / REP SIGNATURE</td>
+      </tr>
+    </table>
+
+    <div class="section-title">2026 RULES REMINDER</div>
+    <ul>
+      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete
+        their official lineup sheet first.</li>
+    </ul>
+
+    <div class="section-title">TEAM SCORING</div>
+    <ul>
+      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for
+        each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
+      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all
+        <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
+      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other
+        sub and counts toward the participation point (no penalty).</li>
+    </ul>
+
+    <p>
+      <strong>Leave clipboards & score sheets on red tote until scores are
+        posted.</strong>
+    </p>
+    <p><em>Rev 5/30/26</em></p>
+  </div>
+  <div class="match-sheet">
+    <h2>COULEE REGION TENNIS ASSOCIATION MATCH SCORE SHEET – LTTA LEAGUE</h2>
+
+    <table class="no-border">
+      <tr>
+        <td>TUES ✓</td>
+        <td>WED </td>
         <td>DATE 2026-06-09</td>
         <td>TIME 7:00pm</td>
         <td>COURTS Courts 10–13</td>
@@ -912,7 +763,7 @@
 
     <table>
       <tr>
-        <td colspan="4">TEAM 3 / Zoomers (Home) VS TEAM 6 / Rascals (Away)</td>
+        <td colspan="4">TEAM 3 / Herons (Home) VS TEAM 6 / Rascals (Away)</td>
       </tr>
     </table>
 
@@ -1061,30 +912,33 @@
 
     <div class="section-title">2026 RULES REMINDER</div>
     <ul>
-      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete their official lineup sheet first.</li>
+      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete
+        their official lineup sheet first.</li>
     </ul>
 
     <div class="section-title">TEAM SCORING</div>
     <ul>
-      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
-      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
-      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other sub and counts toward the participation point (no penalty).</li>
+      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for
+        each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
+      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all
+        <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
+      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other
+        sub and counts toward the participation point (no penalty).</li>
     </ul>
 
     <p>
-      <strong
-        >Leave clipboards & score sheets on red tote until scores are
-        posted.</strong
-      >
+      <strong>Leave clipboards & score sheets on red tote until scores are
+        posted.</strong>
     </p>
     <p><em>Rev 5/30/26</em></p>
-  </div><div class="match-sheet">
+  </div>
+  <div class="match-sheet">
     <h2>COULEE REGION TENNIS ASSOCIATION MATCH SCORE SHEET – LTTA LEAGUE</h2>
 
     <table class="no-border">
       <tr>
         <td>TUES ✓</td>
-        <td>WED  </td>
+        <td>WED </td>
         <td>DATE 2026-06-09</td>
         <td>TIME 7:00pm</td>
         <td>COURTS Courts 1–5</td>
@@ -1242,21 +1096,210 @@
 
     <div class="section-title">2026 RULES REMINDER</div>
     <ul>
-      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete their official lineup sheet first.</li>
+      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete
+        their official lineup sheet first.</li>
     </ul>
 
     <div class="section-title">TEAM SCORING</div>
     <ul>
-      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
-      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
-      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other sub and counts toward the participation point (no penalty).</li>
+      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for
+        each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
+      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all
+        <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
+      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other
+        sub and counts toward the participation point (no penalty).</li>
     </ul>
 
     <p>
-      <strong
-        >Leave clipboards & score sheets on red tote until scores are
-        posted.</strong
-      >
+      <strong>Leave clipboards & score sheets on red tote until scores are
+        posted.</strong>
     </p>
     <p><em>Rev 5/30/26</em></p>
-  </div></body></html>
+  </div>
+  <div class="match-sheet">
+    <h2>COULEE REGION TENNIS ASSOCIATION MATCH SCORE SHEET – LTTA LEAGUE</h2>
+
+    <table class="no-border">
+      <tr>
+        <td>TUES ✓</td>
+        <td>WED </td>
+        <td>DATE 2026-06-09</td>
+        <td>TIME 7:00pm</td>
+        <td>COURTS Courts 6–9</td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <td colspan="4">TEAM 2 / Tennis the Menace (Home) VS TEAM 7 / Good Ol' Boys (Away)</td>
+      </tr>
+    </table>
+
+    <div class="section-title">DOUBLES</div>
+
+    <!-- Repeat match blocks -->
+    <!-- Match 1 -->
+    <table>
+      <tr>
+        <td colspan="2">Position # / Player Names:</td>
+        <td>VS</td>
+        <td colspan="2">Position # / Player Names:</td>
+      </tr>
+      <tr>
+        <td>1 / _______</td>
+        <td>2 / _______</td>
+        <td></td>
+        <td>1 / Paul Jacobson (C)</td>
+        <td>2 / Brennan Quinn</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____<br />
+          Score: ____ ____ ____
+        </td>
+        <td></td>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____
+        </td>
+      </tr>
+    </table>
+
+    <!-- Match 2 -->
+    <table>
+      <tr>
+        <td colspan="2">Position # / Player Names (circle 1):</td>
+        <td>VS</td>
+        <td colspan="2">Position # / Player Names (circle 1):</td>
+      </tr>
+      <tr>
+        <td>3 / _______<br />_______<br />_______<br />_______</td>
+        <td>3 / _______<br />_______<br />_______<br />_______</td>
+        <td></td>
+        <td>3 / Don Harvey<br />David Lange<br />Larry Ruff<br />Corey Ruud</td>
+        <td>3 / Don Harvey<br />David Lange<br />Larry Ruff<br />Corey Ruud</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____<br />
+          Score: ____ ____ ____
+        </td>
+        <td></td>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____
+        </td>
+      </tr>
+    </table>
+
+    <!-- Match 3 -->
+    <table>
+      <tr>
+        <td colspan="2">Position # / Player Names (circle 1):</td>
+        <td>VS</td>
+        <td colspan="2">Position # / Player Names (circle 1):</td>
+      </tr>
+      <tr>
+        <td>3 / _______<br />_______<br />_______<br />_______</td>
+        <td>3 / _______<br />_______<br />_______<br />_______</td>
+        <td></td>
+        <td>3 / Don Harvey<br />David Lange<br />Larry Ruff<br />Corey Ruud</td>
+        <td>3 / Don Harvey<br />David Lange<br />Larry Ruff<br />Corey Ruud</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____<br />
+          Score: ____ ____ ____
+        </td>
+        <td></td>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____
+        </td>
+      </tr>
+    </table>
+
+    <!-- Match 4 -->
+    <table>
+      <tr>
+        <td colspan="2">Position # / Player Names:</td>
+        <td>VS</td>
+        <td colspan="2">Position # / Player Names:</td>
+      </tr>
+      <tr>
+        <td>4 / _______</td>
+        <td>5 / _______</td>
+        <td></td>
+        <td>4 / Pennie Pierce-Jorgeson</td>
+        <td>5 / Sally Ruud (C)</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____<br />
+          Score: ____ ____ ____
+        </td>
+        <td></td>
+        <td colspan="2">
+          <div class="checkbox"></div>
+          Win<br />
+          Points _____
+        </td>
+      </tr>
+    </table>
+
+    <!-- Team totals -->
+    <table>
+      <tr>
+        <td>TEAM POINTS _____ TOTAL</td>
+        <td>TEAM POINTS _____ TOTAL</td>
+      </tr>
+    </table>
+
+    <!-- Signatures -->
+    <table class="no-border">
+      <tr>
+        <td>__________________________________________</td>
+        <td>__________________________________________</td>
+      </tr>
+      <tr>
+        <td>TEAM CAPTAIN / REP SIGNATURE</td>
+        <td>TEAM CAPTAIN / REP SIGNATURE</td>
+      </tr>
+    </table>
+
+    <div class="section-title">2026 RULES REMINDER</div>
+    <ul>
+      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete
+        their official lineup sheet first.</li>
+    </ul>
+
+    <div class="section-title">TEAM SCORING</div>
+    <ul>
+      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for
+        each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
+      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all
+        <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
+      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other
+        sub and counts toward the participation point (no penalty).</li>
+    </ul>
+
+    <p>
+      <strong>Leave clipboards & score sheets on red tote until scores are
+        posted.</strong>
+    </p>
+    <p><em>Rev 5/30/26</em></p>
+  </div>
+</body>
+
+</html>
