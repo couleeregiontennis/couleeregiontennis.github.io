@@ -6,360 +6,318 @@
     <style>
       @media print {
         body {
-          margin: 0.25in;
-          font-size: 11.5px;
+          margin: 0;
+          padding: 0.25in;
+          font-size: 11px;
         }
         .match-sheet {
           page-break-after: always;
-          page-break-inside: avoid;
-          height: 100vh; /* Force it to act as one full page */
-          overflow: hidden;
+          height: 10.5in; /* Standard letter height minus margins */
+          position: relative;
         }
       }
 
       body {
-        font-family: Arial, sans-serif;
-        font-size: 11.5px;
-        margin: 0.25in;
+        font-family: "Helvetica", "Arial", sans-serif;
+        font-size: 11px;
+        margin: 0;
+        padding: 0.25in;
       }
 
-      h2,
-      h3 {
-        margin: 4px 0;
-        text-align: center;
+      /* OCR Fiducials */
+      .fiducial {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: black;
+      }
+      .tl { top: 0; left: 0; }
+      .tr { top: 0; right: 0; }
+      .bl { bottom: 0; left: 0; }
+      .br { bottom: 0; right: 0; }
+
+      .match-id {
+        text-align: right;
+        font-family: monospace;
         font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        padding-right: 25px;
+      }
+
+      h2 {
+        margin: 0 0 10px 0;
+        text-align: center;
+        font-size: 16px;
+        border-bottom: 2px solid black;
+        padding-bottom: 5px;
       }
 
       table {
         border-collapse: collapse;
         width: 100%;
-        margin: 6px 0;
-        table-layout: fixed; /* Forces equal column widths */
-      }
-
-      td,
-      th {
-        border: 1px solid #000;
-        padding: 3px 5px;
-        vertical-align: top;
-        overflow: hidden; /* Prevents content from breaking layout */
-        white-space: nowrap; /* Keeps content on one line */
-      }
-
-      /* Match tables specific styling */
-      table tr:first-child td {
-        white-space: normal; /* Allow wrapping in header rows */
-      }
-
-      /* Updated column widths for match tables */
-      table:not(.no-border) {
-        width: 100%;
+        margin: 5px 0;
         table-layout: fixed;
       }
 
-      /* Player columns for team 1 */
-      table:not(.no-border) tr td:nth-child(1),
-      table:not(.no-border) tr td:nth-child(2) {
-        width: 30%;
+      td, th {
+        border: 1px solid black;
+        padding: 4px;
+        vertical-align: middle;
       }
 
-      /* VS column and its empty cells */
-      table:not(.no-border) tr td:nth-child(3) {
-        width: 10%;
-        text-align: center;
-        padding: 3px;
-      }
-
-      /* Keep empty VS column cells visible */
-      table:not(.no-border) tr td:nth-child(3):empty {
-        display: table-cell;
-      }
-
-      /* Player columns for team 2 */
-      table:not(.no-border) tr td:nth-child(4),
-      table:not(.no-border) tr td:nth-child(5) {
-        width: 30%;
-      }
-
-      /* Remove display:none from empty cells */
-      table:not(.no-border) tr td:empty {
-        visibility: hidden; /* Hide content but keep spacing */
-      }
-
-      /* Score area styling */
-      table:not(.no-border) tr td[colspan="3"] {
-        width: 45%;
-        visibility: visible !important; /* Ensure score areas remain visible */
-      }
-
-      /* Adjust header cells with colspan */
-      table:not(.no-border) tr td[colspan="2"] {
-        width: 45%;
-        text-align: left; /* Force left alignment */
-        white-space: normal; /* Allow text to wrap */
-        vertical-align: top;
-      }
-
-      /* Header row styling */
-      table:not(.no-border) tr td[colspan="3"] {
-        width: 45%; /* Combined width of first three columns */
-      }
-
-      table:not(.no-border) tr td[colspan="4"] {
-        width: 100%;
-        white-space: normal; /* Allow team names to wrap */
-      }
-
-      /* Team header table specific */
-      table:not(.no-border) tr td[colspan="4"] {
-        font-size: 13px;
+      .header-table td {
+        border: 2px solid black;
         font-weight: bold;
-        padding: 5px;
-        line-height: 1.2;
-        text-align: center;
-      }
-
-      .no-border td {
-        border: none;
-        padding: 3px 6px;
-        width: auto;
+        background: #f0f0f0;
       }
 
       .section-title {
-        background: #f0f0f0;
+        background: black;
+        color: white;
         font-weight: bold;
         text-align: center;
-        font-size: 12.5px;
-        padding: 3px 0;
-        margin: 6px 0;
+        font-size: 12px;
+        padding: 4px 0;
+        margin: 10px 0 5px 0;
+        text-transform: uppercase;
       }
 
-      .checkbox {
+      /* Boxed inputs for digits */
+      .digit-box {
         display: inline-block;
-        width: 12px;
-        height: 12px;
-        border: 1px solid #000;
-        margin-right: 5px;
-        vertical-align: middle;
-        float: left; /* Align checkbox to the left */
+        width: 25px;
+        height: 30px;
+        border: 2px solid black;
+        margin: 0 2px;
+        background: white;
       }
 
-      /* Clear float after checkbox */
-      td[colspan="2"]::after {
-        content: "";
-        display: table;
-        clear: both;
+      .score-box-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
       }
 
-      /* Score area styling for both teams */
-      td[colspan="3"] {
-        white-space: normal; /* Allow wrapping in score areas */
-      }
-
-      ul {
-        padding-left: 1.2em;
-        margin: 4px 0;
-      }
-
-      li {
+      .label-small {
+        font-size: 9px;
+        font-weight: bold;
+        text-transform: uppercase;
+        display: block;
         margin-bottom: 2px;
       }
 
-      p {
-        margin: 4px 0;
+      .team-header {
+        background: #eee;
+        font-weight: bold;
+        font-size: 13px;
+        text-align: center;
       }
 
-      /* Add page break styles */
-      .match-sheet {
-        page-break-after: always;
+      .participation-cell {
+        text-align: center;
+        width: 80px;
       }
 
-      /* Last sheet shouldn't have a page break */
-      .match-sheet:last-child {
-        page-break-after: auto;
+      .ocr-check {
+        width: 25px;
+        height: 25px;
+        border: 3px solid black;
+        margin: 0 auto;
       }
+
+      .total-row {
+        background: #ddd;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .rules-mini {
+        font-size: 9px;
+        border: 1px dashed black;
+        padding: 5px;
+        margin-top: 10px;
+      }
+
+      p { margin: 2px 0; }
     </style>
   </head>
   <body>
-    <h2>COULEE REGION TENNIS ASSOCIATION MATCH SCORE SHEET – LTTA LEAGUE</h2>
+    <div class="fiducial tl"></div>
+    <div class="fiducial tr"></div>
+    <div class="fiducial bl"></div>
+    <div class="fiducial br"></div>
 
-    <table class="no-border">
+    <div class="match-id">[MATCH_ID]</div>
+    
+    <h2>LTTA MATCH SCORE SHEET</h2>
+
+    <table class="header-table">
       <tr>
-        <td>TUES [TUES]</td>
-        <td>WED [WED]</td>
-        <td>DATE [DATE]</td>
-        <td>TIME [TIME]</td>
-        <td>COURTS [COURTS]</td>
+        <td style="width: 15%;">LEAGUE: [TUES][WED]</td>
+        <td style="width: 25%;">DATE: [DATE]</td>
+        <td style="width: 15%;">TIME: [TIME]</td>
+        <td style="width: 45%;">COURTS: [COURTS]</td>
       </tr>
     </table>
 
     <table>
-      <tr>
-        <td colspan="4">TEAM [T1NUM] / [T1NAME] (Home) VS TEAM [T2NUM] / [T2NAME] (Away)</td>
+      <tr class="team-header">
+        <td colspan="2">HOME: Team [T1NUM] - [T1NAME]</td>
+        <td style="width: 10%; border: none; background: white;">VS</td>
+        <td colspan="2">AWAY: Team [T2NUM] - [T2NAME]</td>
       </tr>
     </table>
 
-    <div class="section-title">DOUBLES</div>
+    <div class="section-title">Match Results</div>
 
-    <!-- Repeat match blocks -->
-    <!-- Match 1 -->
+    <!-- Line 1 -->
     <table>
       <tr>
-        <td colspan="2">Position # / Player Names:</td>
-        <td>VS</td>
-        <td colspan="2">Position # / Player Names:</td>
+        <th style="width: 45%;">HOME PLAYERS</th>
+        <th style="width: 10%;">LINE</th>
+        <th style="width: 45%;">AWAY PLAYERS</th>
       </tr>
       <tr>
-        <td>1 / [P1T1]</td>
-        <td>2 / [P2T1]</td>
-        <td></td>
-        <td>1 / [P1T2]</td>
-        <td>2 / [P2T2]</td>
+        <td>1: [P1T1]<br>2: [P2T1]</td>
+        <td style="text-align: center; font-weight: bold;">1</td>
+        <td>1: [P1T2]<br>2: [P2T2]</td>
       </tr>
       <tr>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____<br />
-          Score: ____ ____ ____
+        <td>
+          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <div class="score-box-container">
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+          </div>
         </td>
-        <td></td>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____
+        <td class="participation-cell">
+          <span class="label-small">Win?</span>
+          <div class="ocr-check"></div>
+        </td>
+        <td>
+          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <div class="score-box-container">
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+          </div>
         </td>
       </tr>
     </table>
 
-    <!-- Match 2 -->
+    <!-- Line 2 -->
     <table>
       <tr>
-        <td colspan="2">Position # / Player Names (circle 1):</td>
-        <td>VS</td>
-        <td colspan="2">Position # / Player Names (circle 1):</td>
+        <td>3: [P3T1A] / [P3T1B] / [P3T1C]<br>3: [P3T1A] / [P3T1B] / [P3T1C]</td>
+        <td style="width: 10%; text-align: center; font-weight: bold;">2</td>
+        <td>3: [P3T2A] / [P3T2B] / [P3T2C]<br>3: [P3T2A] / [P3T2B] / [P3T2C]</td>
       </tr>
       <tr>
-        <td>3 / [P3T1A]<br />[P3T1B]<br />[P3T1C]<br />[P3T1D]</td>
-        <td>3 / [P3T1A]<br />[P3T1B]<br />[P3T1C]<br />[P3T1D]</td>
-        <td></td>
-        <td>3 / [P3T2A]<br />[P3T2B]<br />[P3T2C]<br />[P3T2D]</td>
-        <td>3 / [P3T2A]<br />[P3T2B]<br />[P3T2C]<br />[P3T2D]</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____<br />
-          Score: ____ ____ ____
+        <td>
+          <div class="score-box-container">
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+          </div>
         </td>
-        <td></td>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____
+        <td class="participation-cell">
+          <div class="ocr-check"></div>
+        </td>
+        <td>
+          <div class="score-box-container">
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+          </div>
         </td>
       </tr>
     </table>
 
-    <!-- Match 3 -->
+    <!-- Line 3 -->
     <table>
       <tr>
-        <td colspan="2">Position # / Player Names (circle 1):</td>
-        <td>VS</td>
-        <td colspan="2">Position # / Player Names (circle 1):</td>
+        <td>3: [P3T1A] / [P3T1B] / [P3T1C]<br>3: [P3T1A] / [P3T1B] / [P3T1C]</td>
+        <td style="width: 10%; text-align: center; font-weight: bold;">3</td>
+        <td>3: [P3T2A] / [P3T2B] / [P3T2C]<br>3: [P3T2A] / [P3T2B] / [P3T2C]</td>
       </tr>
       <tr>
-        <td>3 / [P3T1A]<br />[P3T1B]<br />[P3T1C]<br />[P3T1D]</td>
-        <td>3 / [P3T1A]<br />[P3T1B]<br />[P3T1C]<br />[P3T1D]</td>
-        <td></td>
-        <td>3 / [P3T2A]<br />[P3T2B]<br />[P3T2C]<br />[P3T2D]</td>
-        <td>3 / [P3T2A]<br />[P3T2B]<br />[P3T2C]<br />[P3T2D]</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____<br />
-          Score: ____ ____ ____
+        <td>
+          <div class="score-box-container">
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+          </div>
         </td>
-        <td></td>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____
+        <td class="participation-cell">
+          <div class="ocr-check"></div>
+        </td>
+        <td>
+          <div class="score-box-container">
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+          </div>
         </td>
       </tr>
     </table>
 
-    <!-- Match 4 -->
+    <!-- Line 4 -->
     <table>
       <tr>
-        <td colspan="2">Position # / Player Names:</td>
-        <td>VS</td>
-        <td colspan="2">Position # / Player Names:</td>
+        <td>4: [P4T1]<br>5: [P5T1]</td>
+        <td style="width: 10%; text-align: center; font-weight: bold;">4</td>
+        <td>4: [P4T2]<br>5: [P5T2]</td>
       </tr>
       <tr>
-        <td>4 / [P4T1]</td>
-        <td>5 / [P5T1]</td>
-        <td></td>
-        <td>4 / [P4T2]</td>
-        <td>5 / [P5T2]</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____<br />
-          Score: ____ ____ ____
+        <td>
+          <div class="score-box-container">
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+          </div>
         </td>
-        <td></td>
-        <td colspan="2">
-          <div class="checkbox"></div>
-          Win<br />
-          Points _____
+        <td class="participation-cell">
+          <div class="ocr-check"></div>
+        </td>
+        <td>
+          <div class="score-box-container">
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+          </div>
         </td>
       </tr>
     </table>
 
-    <!-- Team totals -->
+    <div class="section-title">Final Scoring (0-3 Points Max)</div>
     <table>
-      <tr>
-        <td>TEAM POINTS [T1POINTS] TOTAL</td>
-        <td>TEAM POINTS [T2POINTS] TOTAL</td>
+      <tr class="total-row">
+        <td style="width: 40%; text-align: right;">HOME TOTAL POINTS:</td>
+        <td style="width: 10%;">
+          <div class="digit-box"></div>
+        </td>
+        <td style="width: 40%; text-align: right;">AWAY TOTAL POINTS:</td>
+        <td style="width: 10%;">
+          <div class="digit-box"></div>
+        </td>
       </tr>
     </table>
 
-    <!-- Signatures -->
-    <table class="no-border">
-      <tr>
-        <td>__________________________________________</td>
-        <td>__________________________________________</td>
-      </tr>
-      <tr>
-        <td>TEAM CAPTAIN / REP SIGNATURE</td>
-        <td>TEAM CAPTAIN / REP SIGNATURE</td>
+    <table style="margin-top: 20px; border: none;">
+      <tr style="border: none;">
+        <td style="border: none; border-top: 1px solid black;">Home Captain Signature</td>
+        <td style="border: none; width: 10%;"></td>
+        <td style="border: none; border-top: 1px solid black;">Away Captain Signature</td>
       </tr>
     </table>
 
-    <div class="section-title">2026 RULES REMINDER</div>
-    <ul>
-      <li><strong>Lineup Transparency:</strong> If teams can't agree on who plays first, the Home team must complete their official lineup sheet first.</li>
-    </ul>
-
-    <div class="section-title">TEAM SCORING</div>
-    <ul>
-      <li><strong>Standard Match:</strong> 1 participation point is awarded for showing up on time, plus 1 point for each set won (including tie-breaker sets). A 2-0 win usually results in <strong>3 total points</strong>.</li>
-      <li><strong>Forfeits & Defaults:</strong> In the event of a no-show or default, the winning team is awarded all <strong>3 points</strong>. The defaulting team receives <strong>0 points</strong>.</li>
-      <li><strong>Subs:</strong> A 'Last Minute' sub found from players at the court is treated the same as any other sub and counts toward the participation point (no penalty).</li>
-    </ul>
-
-    <p>
-      <strong
-        >Leave clipboards & score sheets on red tote until scores are
-        posted.</strong
-      >
-    </p>
-    <p><em>Rev 5/30/26</em></p>
+    <div class="rules-mini">
+      <strong>SCORING:</strong> 1 pt for participation + 1 pt per set won (Max 3 per Line). 
+      <strong>HEAT RULE:</strong> >95°F optional 2-2 start. <strong>SIGNATURES REQUIRED.</strong>
+      <br><em>Rev 2026.OCR.1</em>
+    </div>
   </body>
 </html>

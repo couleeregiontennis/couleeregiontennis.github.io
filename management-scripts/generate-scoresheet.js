@@ -23,6 +23,8 @@ function generateCombinedScoresheet(matches, night, template) {
     });
 
     // Fill in header information (exact matches from template)
+    const matchId = `W${match.week}-${night.substring(0, 3).toUpperCase()}-T${match.teamA.number}vT${match.teamB.number}`;
+    html = html.replace('[MATCH_ID]', matchId);
     html = html.replace('[TUES]', night.toLowerCase() === 'tuesday' ? '✓' : ' ');
     html = html.replace('[WED]', night.toLowerCase() === 'wednesday' ? '✓' : ' ');
     html = html.replace('[DATE]', match.date);
