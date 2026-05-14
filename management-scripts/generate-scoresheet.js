@@ -25,8 +25,8 @@ function generateCombinedScoresheet(matches, night, template) {
     // Fill in header information (exact matches from template)
     const matchId = `W${match.week}-${night.substring(0, 3).toUpperCase()}-T${match.teamA.number}vT${match.teamB.number}`;
     html = html.replace('[MATCH_ID]', matchId);
-    html = html.replace('[TUES]', night.toLowerCase() === 'tuesday' ? '✓' : ' ');
-    html = html.replace('[WED]', night.toLowerCase() === 'wednesday' ? '✓' : ' ');
+    html = html.replace('[TUES]', night.toLowerCase() === 'tuesday' ? 'TUES' : '');
+    html = html.replace('[WED]', night.toLowerCase() === 'wednesday' ? 'WED' : '');
     html = html.replace('[DATE]', match.date);
     html = html.replace('[TIME]', match.time);
     html = html.replace('[COURTS]', match.courts);
@@ -52,21 +52,15 @@ function generateCombinedScoresheet(matches, night, template) {
       html = html.replaceAll('[P3T1A]', team1Pos3Players[0] || '_______');
       html = html.replaceAll('[P3T1B]', team1Pos3Players[1] || '_______');
       html = html.replaceAll('[P3T1C]', team1Pos3Players[2] || '_______');
-      html = html.replaceAll('[P3T1D]', team1Pos3Players[3] || '_______');
       html = html.replaceAll('[P3T2A]', team2Pos3Players[0] || '_______');
       html = html.replaceAll('[P3T2B]', team2Pos3Players[1] || '_______');
       html = html.replaceAll('[P3T2C]', team2Pos3Players[2] || '_______');
-      html = html.replaceAll('[P3T2D]', team2Pos3Players[3] || '_______');
 
       // Positions 4 & 5
       html = html.replace('[P4T1]', getPlayerByPosition(match.teamA.roster, 4) || '_______');
       html = html.replace('[P5T1]', getPlayerByPosition(match.teamA.roster, 5) || '_______');
       html = html.replace('[P4T2]', getPlayerByPosition(match.teamB.roster, 4) || '_______');
       html = html.replace('[P5T2]', getPlayerByPosition(match.teamB.roster, 5) || '_______');
-
-      // Add point placeholders (empty for now)
-      html = html.replace('[T1POINTS]', '_____');
-      html = html.replace('[T2POINTS]', '_____');
     }
 
     // Add verification logging
