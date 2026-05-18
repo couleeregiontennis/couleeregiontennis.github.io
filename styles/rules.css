@@ -31,9 +31,12 @@ body {
     margin-bottom: 0.7rem;
     line-height: 1.6;
     font-size: 1.05rem;
-    list-style: disc;
   }
   
+  section ul li {
+    list-style: disc;
+  }
+
   strong {
     color: #007BFF;
   }
@@ -66,6 +69,8 @@ body {
     li {
       font-size: 0.98rem;
       margin-bottom: 0.6rem;
+    }
+    section ul li {
       list-style: disc;
     }
   }
