@@ -11,7 +11,7 @@ test.describe('UI Visual Audit', () => {
   for (const bp of BREAKPOINTS) {
     test(`Audit at ${bp.name} (${bp.width}px)`, async ({ page }) => {
       await page.setViewportSize({ width: bp.width, height: bp.height });
-      await page.goto('http://localhost:3001/index.html');
+      await page.goto('/index.html');
       
       // Wait for nav to load
       await page.waitForSelector('#nav-placeholder nav');
