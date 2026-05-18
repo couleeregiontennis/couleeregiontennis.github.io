@@ -13,7 +13,7 @@ function onOpen() {
 function createLTTADrafts() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const sheet = ss.getSheetByName("ROSTERS");
-  
+
   if (!sheet) {
     SpreadsheetApp.getUi().alert("Error: Tab 'ROSTERS' not found.");
     return;
@@ -21,7 +21,7 @@ function createLTTADrafts() {
 
   const data = sheet.getDataRange().getValues();
   const headers = data[0].map(function(h) { return String(h).trim().toLowerCase(); });
-  
+
   function findCol(possibleNames) {
     for (var i = 0; i < possibleNames.length; i++) {
       var target = possibleNames[i].toLowerCase();
@@ -46,7 +46,7 @@ function createLTTADrafts() {
     const night = row[idx.night];
     const teamNum = row[idx.team];
     const name = row[idx.name];
-    
+
     if (!night || !teamNum || !name) continue;
 
     const key = night + "-" + teamNum;
@@ -105,8 +105,8 @@ function generateEmailHtml(team) {
   var isTues = (String(night).toLowerCase().indexOf('tue') !== -1);
   var matchDay = isTues ? 'Tuesday' : 'Wednesday';
   var startDate = isTues ? 'May 26th' : 'May 27th';
-  var coord = isTues ? 
-    { n: 'Tom Dwyer', p: '608-386-3536' } : 
+  var coord = isTues ?
+    { n: 'Tom Dwyer', p: '608-386-3536' } :
     { n: 'Mark Hoff', p: '608-769-1416' };
 
   var coCapHtml = team.coCaptain ? '<p style="margin: 5px 0;"><strong>Co-Captain:</strong> ' + team.coCaptain + '</p>' : '';
@@ -117,15 +117,15 @@ function generateEmailHtml(team) {
   var warningIcon = '&#9888;';
   var sirenIcon = '&#128680;';
 
-  return '<div style="font-family: Arial, sans-serif; color: #333333; line-height: 1.6; max-width: 650px; margin: 0 auto; border: 1px solid #eeeeee; border-radius: 8px; overflow: hidden; background-color: #ffffff;">' +
+  return '<div style="font-family: Arial, sans-serif; color: #333333; line-height: 1.6; max-width: 650px; margin: 0 auto; border: 1px solid #eeeeee; border-radius: 8px; overflow: hidden; background-color: #ffffff;">' +      
       '<div style="background-color: #2e7d32; color: #ffffff; padding: 20px; text-align: center;">' +
-        '<h1 style="margin: 0; font-size: 24px;">Welcome to the 2026 LTTA Season! ' + racketIcon + '</h1>' +
+        '<h1 style="margin: 0; font-size: 24px;">Welcome to the 2026 LTTA Season! ' + racketIcon + '</h1>' +    
       '</div>' +
       '<div style="padding: 20px 30px;">' +
         '<p>Hello ' + team.teamName + ' players,</p>' +
         '<p>The season kicks off on <strong>' + startDate + '</strong>!</p>' +
         '<p>Welcome to the 2026 season of the La Crosse Team Tennis Association (LTTA)! We are thrilled to get back out on the courts for another great summer of tennis.</p>' +
-        
+
         '<div style="background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 15px; margin: 25px 0; border-radius: 0 4px 4px 0;">' +
           '<h3 style="margin-top: 0; color: #2e7d32;">' + clipboardIcon + ' Your Team: ' + team.teamName + ' (' + night + ' #' + team.teamNumber + ')</h3>' +
           '<p style="margin: 5px 0;"><strong>Captain:</strong> ' + team.captain + '</p>' +
@@ -152,6 +152,7 @@ function generateEmailHtml(team) {
           '<ul style="padding-left: 20px; margin-bottom: 0;">' +
             '<li style="margin-bottom: 5px;"><strong>Scoring:</strong> 1 point per set won (including tiebreakers) + 1 point for participation.</li>' +
             '<li style="margin-bottom: 5px;"><strong>Heat Rule:</strong> Over 95&deg;F = optional 2-2 start; over 104&deg;F = automatic cancellation.</li>' +
+            '<li style="margin-bottom: 5px;"><strong>Home Team:</strong> For line 3, if there is a dispute over who assigns teams first, home team must assign lines first.</li>' +
           '</ul>' +
         '</div>' +
 
@@ -161,7 +162,7 @@ function generateEmailHtml(team) {
         '<h2 style="color: #2e7d32; border-bottom: 1px solid #eeeeee; padding-bottom: 5px; margin-top: 30px;">Year-End Picnic & Championship</h2>' +
         '<p>The season wraps up with our picnic and a new crossover championship! The top teams from Tuesday will face off against the top teams from Wednesday to determine the overall league champion. Additionally, the 'winningest lines' will be invited to play in this event.</p>' +
 
-        '<p style="margin-top: 30px;">Best regards,<br><strong>The LTTA League Committee</strong></p>' +
+        '<p style="margin-top: 30px;">Best regards,<br><strong>The LTTA League Committee</strong></p>' +        
       '</div>' +
       '<div style="background-color: #f9f9f9; text-align: center; padding: 15px; font-size: 12px; color: #777777; border-top: 1px solid #eeeeee;">' +
         'La Crosse Team Tennis Association (LTTA)' +
