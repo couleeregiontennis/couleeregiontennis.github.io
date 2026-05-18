@@ -88,17 +88,24 @@ body {
     font-size: 1.1rem;
   }
   
-  nav.toc ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
+  nav.toc ul, 
+  nav.toc li,
+  .dropdown-menu,
+  .dropdown-menu li {
+    list-style: none !important;
+    list-style-type: none !important;
+    display: block !important;
   }
   
+  nav.toc ul {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
   nav.toc li {
     margin-bottom: 0.6rem;
-    padding-left: 2em;
+    padding-left: 0 !important;
     position: relative;
-    list-style: none;
     font-style: italic;
   }
   
