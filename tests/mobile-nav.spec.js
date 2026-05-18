@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test('Check mobile nav dropdown', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 667 });
-  await page.goto('http://localhost:3001/index.html');
+  await page.goto('/index.html');
   
   // Click hamburger
   await page.click('.navbar-toggle');
