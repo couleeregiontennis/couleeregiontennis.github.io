@@ -12,10 +12,10 @@ test.describe('Static Pages', () => {
         });
 
         await page.goto('/pages/standings.html');
-        await expect(page.getByRole('heading', { level: 1, name: '2026 Standings' })).toBeVisible();
+        await expect(page.getByRole('heading', { level: 1, name: 'Standings' })).toBeVisible();
 
-        // Currently, standings.js displays a 'coming soon' message for 2026
-        await expect(page.getByText('2026 Standings will be updated once the season begins!')).toBeVisible();
+        // Verify placeholder message is displayed
+        await expect(page.locator('#standings-table')).toContainText('2026 Standings will be updated once the season begins!');
     });
 
     test('Subs page renders correctly', async ({ page }) => {

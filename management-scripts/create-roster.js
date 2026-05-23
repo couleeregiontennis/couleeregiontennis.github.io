@@ -34,7 +34,7 @@ async function createRostersFromCSV() {
     records.forEach(row => {
       const nightRaw = row['Night'] || row['v'] || '';
       const teamNum = row['Team/'] || '';
-      const name = row['1-Name'] || '';
+      const name = row['Name'] || row['1-Name'] || '';
       const level = row['Level'] || '';
 
       if (!nightRaw || !teamNum) {

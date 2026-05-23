@@ -142,7 +142,7 @@ function generateEmailHtml(team) {
 
         '<h2 style="color: #2e7d32; border-bottom: 1px solid #eeeeee; padding-bottom: 5px; margin-top: 30px;">The Basics</h2>' +
         '<ul style="padding-left: 20px;">' +
-          '<li style="margin-bottom: 10px;"><strong>When & Where:</strong> Matches are played on ' + matchDay + ' evenings at Green Island Park. Start times rotate between 5:30 pm and 7:00 pm. <strong>Please pay attention to the schedule location, as a few matches are at TBD (still figuring out the best option for conflicts on court usage) due to court conflicts.</strong></li>' +
+          '<li style="margin-bottom: 10px;"><strong>When & Where:</strong> Matches are played on ' + matchDay + ' evenings at Green Island Park. Start times rotate between 5:30 pm and 7:00 pm. <strong>Please pay attention to the schedule location, as a few matches are at Logan due to court conflicts.</strong></li>' +
           '<li style="margin-bottom: 10px;"><strong>Punctuality:</strong> Please arrive 10 minutes prior to your scheduled match time.</li>' +
           '<li style="margin-bottom: 10px;"><strong>League Website:</strong> <a href="https://couleeregiontennis.org" style="color: #2e7d32; font-weight: bold;">couleeregiontennis.org</a></li>' +
         '</ul>' +

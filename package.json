@@ -8,6 +8,6 @@
   },
   "scripts": {
     "test": "npx playwright test",
-    "test:unit": "node --test tests/email-template.test.js"
+    "test:unit": "node --test tests/email-template.test.js tests/schedule-alignment.test.js"
   }
 }

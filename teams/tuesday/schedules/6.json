@@ -6,7 +6,7 @@
       "week": 1,
       "date": "2026-05-26",
       "time": "7:00pm",
-      "courts": "Courts 10\u201313",
+      "courts": "Courts 10–13",
       "homeAway": "Home",
       "opponent": {
         "name": "Good Ol' Boys",
@@ -19,7 +19,7 @@
       "week": 2,
       "date": "2026-06-02",
       "time": "5:30pm",
-      "courts": "Courts 6\u20139",
+      "courts": "Courts 6–9",
       "homeAway": "Away",
       "opponent": {
         "name": "Racquet Scientists",
@@ -32,7 +32,7 @@
       "week": 3,
       "date": "2026-06-09",
       "time": "7:00pm",
-      "courts": "Courts 10\u201313",
+      "courts": "Courts 10–13",
       "homeAway": "Away",
       "opponent": {
         "name": "Herons",
@@ -45,7 +45,7 @@
       "week": 4,
       "date": "2026-06-16",
       "time": "5:30pm",
-      "courts": "Courts 1\u20135",
+      "courts": "Courts 1–5",
       "homeAway": "Home",
       "opponent": {
         "name": "Easy Overhead",
@@ -57,13 +57,13 @@
     {
       "week": 5,
       "date": "2026-06-23",
-      "time": "5:30pm",
-      "courts": "Courts 1\u20135",
-      "homeAway": "Home",
+      "time": "7:00pm",
+      "courts": "Courts 1–5",
+      "homeAway": "Away",
       "opponent": {
-        "name": "Full Metal Racquet",
-        "number": "11",
-        "file": "/pages/team.html?day=tuesday&team=11"
+        "name": "Jetsetters",
+        "number": "10",
+        "file": "/pages/team.html?day=tuesday&team=10"
       },
       "ics": "/teams/tuesday/ics/6/week5.ics"
     },
@@ -71,7 +71,7 @@
       "week": 6,
       "date": "2026-06-30",
       "time": "7:00pm",
-      "courts": "Courts 1\u20135",
+      "courts": "Courts 1–5",
       "homeAway": "Away",
       "opponent": {
         "name": "Return to Sender with Love",
@@ -84,7 +84,7 @@
       "week": 7,
       "date": "2026-07-07",
       "time": "5:30pm",
-      "courts": "Courts 6\u20139",
+      "courts": "Courts 6–9",
       "homeAway": "Home",
       "opponent": {
         "name": "Spin Doctors",
@@ -97,7 +97,7 @@
       "week": 8,
       "date": "2026-07-14",
       "time": "5:30pm",
-      "courts": "Courts 6\u20139",
+      "courts": "Courts 6–9",
       "homeAway": "Home",
       "opponent": {
         "name": "Approach Shots",
@@ -110,10 +110,10 @@
       "week": 9,
       "date": "2026-07-21",
       "time": "7:00pm",
-      "courts": "Courts 6\u20139",
+      "courts": "Courts 6–9",
       "homeAway": "Home",
       "opponent": {
-        "name": "Tennis the Menace",
+        "name": "Subs",
         "number": "2",
         "file": "/pages/team.html?day=tuesday&team=2"
       },
@@ -122,13 +122,13 @@
     {
       "week": 10,
       "date": "2026-07-28",
-      "time": "7:00pm",
-      "courts": "Courts 1\u20135",
-      "homeAway": "Away",
+      "time": "5:30pm",
+      "courts": "Courts 1–5",
+      "homeAway": "Home",
       "opponent": {
-        "name": "Jetsetters",
-        "number": "10",
-        "file": "/pages/team.html?day=tuesday&team=10"
+        "name": "Full Metal Racquet",
+        "number": "11",
+        "file": "/pages/team.html?day=tuesday&team=11"
       },
       "ics": "/teams/tuesday/ics/6/week10.ics"
     },
@@ -136,7 +136,7 @@
       "week": 11,
       "date": "2026-08-04",
       "time": "7:00pm",
-      "courts": "Courts 1\u20135",
+      "courts": "Courts 1–5",
       "homeAway": "Home",
       "opponent": {
         "name": "Bounce It",

@@ -21,14 +21,14 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-tuesday-10-week5@couleeregiontennis.org
-DTSTAMP:20260623T173000Z
-DTSTART;TZID=America/Chicago:20260623T173000
-DTEND;TZID=America/Chicago:20260623T190000
-SUMMARY:LTTA Tennis: vs Good Ol' Boys (Away)
-DESCRIPTION:LTTA Tennis match: 10 vs Good Ol' Boys at Green Island Park - Courts 6–9
-LOCATION:Green Island Park - Courts 6–9
+DTSTAMP:20260623T190000Z
+DTSTART;TZID=America/Chicago:20260623T190000
+DTEND;TZID=America/Chicago:20260623T203000
+SUMMARY:LTTA Tennis: vs Rascals (Home)
+DESCRIPTION:LTTA Tennis match: 10 vs Rascals at Green Island Park - Courts 1–5\nOpponent Roster: Peter Coppola (1); Fritz Wiggert (2); Ellen Seithamer (3); Margi Hanson (3); Craig Hanson (3); Jason Herbert (3); Erin Herbert (4); Becky Rauch (5)
+LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
-TRIGGER:-PT9H30M
+TRIGGER:-PT11H
 ACTION:DISPLAY
 DESCRIPTION:LTTA Tennis Match Reminder
 END:VALARM
