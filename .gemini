@@ -1,0 +1,63 @@
+# Gemini Project Notes & Guidelines
+
+This file contains useful findings, domain knowledge, and development instructions learned during our sessions.
+
+---
+
+## 🎾 LTTA Domain Knowledge
+
+### 1. League Structure
+- **League Name**: La Crosse Team Tennis Association (LTTA).
+- **Match Format**: Set scoring with 1 point per set won (including tiebreakers) and 1 point for participation (showing up on time).
+- **Team Count**: 12 teams for both Tuesday and Wednesday nights.
+- **Round-Robin**: Standard round-robin rotation takes 11 weeks (each team playing the other 11 once).
+- **Start Times**: Matches rotate between 5:30pm and 7:00pm on Green Island Park courts.
+- **PICNIC & CROSSOVER**: The season concludes with a picnic and crossover championship matches between Tuesday and Wednesday teams, plus winningest lines.
+
+### 2. Tuesday Team 2 (`Subs`)
+- Tuesday Team 2 is the **`Subs`** team (with roster players Sawyer Kuck, Dave Mills, etc.). 
+- When rosters are regenerated, ensure it is named `Subs` rather than defaulting to `BYE`.
+
+### 3. Logan Alternate Location
+- When Green Island `Courts 1–5` are unavailable at `5:30pm` due to early-season conflicts, the affected matches are moved to **`Logan`** courts.
+- Keep the match times at **5:30pm** (do not apply 6:00pm overrides).
+- Dates requiring the Logan override are:
+  - Tuesday Week 2 (`2026-06-02`)
+  - Tuesday Week 3 (`2026-06-09`)
+  - Wednesday Week 1 (`2026-05-27`)
+  - Wednesday Week 2 (`2026-06-03`)
+  - Wednesday Week 3 (`2026-06-10`)
+
+---
+
+## 🛠️ Management Scripts & Workflow
+
+### 1. Roster Column Mapping
+- The Google Sheet uses `Name` as the player name column header (older sheets used `1-Name`).
+- All scripts (`create-roster.js`, `generate-rr.js`, `create-emails.js`) must support both `Name` and `1-Name` mapping to avoid empty rosters and default `"BYE"` names.
+
+### 2. Typical Regeneration Workflow
+Always run scripts in this order from the project directory (or within `management-scripts` folder adjusting paths):
+1. `node management-scripts/create-roster.js` (creates JSON rosters)
+2. `node management-scripts/generate-rr.js` (generates schedules and ICS calendars)
+3. `node management-scripts/generate-all-html.js tuesday` and `node management-scripts/generate-all-html.js wednesday` (creates printable full-season schedules)
+4. `node management-scripts/create-emails.js` (onboarding emails)
+5. `cd management-scripts && node generate-scoresheet.js` (creates printable weekly scoresheet files)
+
+---
+
+## 🧪 Testing and Verification
+
+### 1. Alignment Verification
+- Run `npm run test:unit` to execute [tests/schedule-alignment.test.js](file:///Users/brett/.gemini/antigravity/worktrees/couleeregiontennis.github.io/fix-2026-ics-generation/tests/schedule-alignment.test.js).
+- This suite checks matching data across JSON schedules, weekly scoresheets, individual ICS files, and the master team ICS files to prevent double-booking or discrepancies.
+
+### 2. GitHub CI/CD Actions
+- A CI workflow in `.github/workflows/ci.yml` runs the unit tests on all push and pull requests targeting the `main` branch.
+
+---
+
+## 💻 Sandboxed Environment Tips
+
+1. **Git Worktree Path Issue**: Running git commands inside standard sandbox mode can fail because `.git` points back to the parent repository. Always set `BypassSandbox: true` for git operations in this worktree.
+2. **EPERM sandbox restriction on npm**: The standard sandbox blocks reading global npm directories (like fnm versions), causing `npm run` commands to fail. Execute test scripts directly using `node` (e.g. `node --test ...`) or set `BypassSandbox: true` to use npm.
