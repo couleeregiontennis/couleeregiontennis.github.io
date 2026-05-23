@@ -142,8 +142,8 @@
   {
     "week": 2,
     "date": "2026-06-02",
-    "time": "6:00pm",
-    "courts": "Forest Hills",
+    "time": "5:30pm",
+    "courts": "Logan",
     "teamA": {
       "number": "7",
       "name": "Good Ol' Boys"
@@ -170,8 +170,8 @@
   {
     "week": 3,
     "date": "2026-06-09",
-    "time": "6:00pm",
-    "courts": "Forest Hills",
+    "time": "5:30pm",
+    "courts": "Logan",
     "teamA": {
       "number": "10",
       "name": "Jetsetters"

@@ -17,12 +17,12 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ltta-wednesday-7-week2@couleeregiontennis.org
-DTSTAMP:20260603T180000Z
-DTSTART;TZID=America/Chicago:20260603T180000
-DTEND;TZID=America/Chicago:20260603T193000
+DTSTAMP:20260603T173000Z
+DTSTART;TZID=America/Chicago:20260603T173000
+DTEND;TZID=America/Chicago:20260603T190000
 SUMMARY:LTTA Tennis: vs Hot Shots
-DESCRIPTION:LTTA Tennis match: 7 vs Hot Shots at Forest Hills Tennis Courts\nOpponent Roster: Laura Reutlinger (1); Roxie Anderson (2); Chris Kahlow (3); Taylor Nelson (3); Payton Demeyer (3); Jenna Helminski Juve (3); Mike Leonard (4); John Noble (5)
-LOCATION:Forest Hills Tennis Courts
+DESCRIPTION:LTTA Tennis match: 7 vs Hot Shots at Logan Tennis Courts\nOpponent Roster: Laura Reutlinger (1); Roxie Anderson (2); Chris Kahlow (3); Taylor Nelson (3); Payton Demeyer (3); Jenna Helminski Juve (3); Mike Leonard (4); John Noble (5)
+LOCATION:Logan Tennis Courts
 BEGIN:VALARM
 TRIGGER:-PT9H30M
 ACTION:DISPLAY

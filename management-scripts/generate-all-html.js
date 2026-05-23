@@ -94,9 +94,9 @@ weeks.forEach(week => {
     let colTime = match.time;
     let location = "Green Island";
 
-    if (match.courts === 'TBD (still figuring out the best option for conflicts on court usage)') {
+    if (match.courts === 'Logan') {
       colCourt = 'Courts 1–5';
-      location = 'TBD (still figuring out the best option for conflicts on court usage)';
+      location = 'Logan';
     }
 
     let suffix = `(${location})`;

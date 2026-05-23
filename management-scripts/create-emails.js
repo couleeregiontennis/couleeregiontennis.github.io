@@ -84,7 +84,7 @@ function generateEmailTemplate(team) {
 
             <h2>The Basics</h2>
             <ul>
-                <li><strong>When & Where:</strong> Matches are played on ${escapeHTML(matchDay)} evenings at Green Island Park. Start times rotate between 5:30 pm and 7:00 pm. <strong>Please pay attention to the schedule location, as a few matches are at Forest Hills due to court conflicts.</strong></li>
+                <li><strong>When & Where:</strong> Matches are played on ${escapeHTML(matchDay)} evenings at Green Island Park. Start times rotate between 5:30 pm and 7:00 pm. <strong>Please pay attention to the schedule location, as a few matches are at Logan due to court conflicts.</strong></li>
                 <li><strong>Punctuality:</strong> Please arrive 10 minutes prior to your scheduled match time. The 15-minute forfeit rule is strictly in effect.</li>
                 <li><strong>League Website:</strong> Find schedules, standings, and sub lists at <a href="https://couleeregiontennis.org">couleeregiontennis.org</a></li>
                 <li><strong>Subs:</strong> If you can't make a match, you are responsible for finding a sub. Check the <a href="https://couleeregiontennis.org/pages/subs.html">Sub List and GroupMe links</a> on the website.</li>
