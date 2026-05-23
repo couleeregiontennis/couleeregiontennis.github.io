@@ -24,8 +24,8 @@ UID:ltta-tuesday-10-week7@couleeregiontennis.org
 DTSTAMP:20260707T173000Z
 DTSTART;TZID=America/Chicago:20260707T173000
 DTEND;TZID=America/Chicago:20260707T190000
-SUMMARY:LTTA Tennis: vs BYE (Home)
-DESCRIPTION:LTTA Tennis match: 10 vs BYE at Green Island Park - Courts 1–5\nOpponent Roster: Sawyer Kuck (1); Dave Wissink (2); Dave Mills (3); Amanda Arneson                       
+SUMMARY:LTTA Tennis: vs Subs (Home)
+DESCRIPTION:LTTA Tennis match: 10 vs Subs at Green Island Park - Courts 1–5\nOpponent Roster: Sawyer Kuck (1); Dave Wissink (2); Dave Mills (3); Amanda Arneson                       
 Kirk Arneson                kirk.arneson@gmail.com        608 397 4536 (3); Kirk Arneson (3); Raj Remnarace (3); Laura Prosperi (5)
 LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
