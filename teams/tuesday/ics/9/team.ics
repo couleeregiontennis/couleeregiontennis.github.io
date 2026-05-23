@@ -20,8 +20,9 @@ UID:ltta-tuesday-9-week2@couleeregiontennis.org
 DTSTAMP:20260602T173000Z
 DTSTART;TZID=America/Chicago:20260602T173000
 DTEND;TZID=America/Chicago:20260602T190000
-SUMMARY:LTTA Tennis: vs Tennis the Menace
-DESCRIPTION:LTTA Tennis match: 9 vs Tennis the Menace at Green Island Park - Courts 10–13
+SUMMARY:LTTA Tennis: vs BYE
+DESCRIPTION:LTTA Tennis match: 9 vs BYE at Green Island Park - Courts 10–13\nOpponent Roster: Sawyer Kuck (1); Dave Wissink (2); Dave Mills (3); Amanda Arneson                       
+Kirk Arneson                kirk.arneson@gmail.com        608 397 4536 (3); Kirk Arneson (3); Raj Remnarace (3); Laura Prosperi (5)
 LOCATION:Green Island Park - Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -63,7 +64,7 @@ DTSTAMP:20260623T173000Z
 DTSTART;TZID=America/Chicago:20260623T173000
 DTEND;TZID=America/Chicago:20260623T190000
 SUMMARY:LTTA Tennis: vs Good Ol' Boys
-DESCRIPTION:LTTA Tennis match: 9 vs Good Ol' Boys at Green Island Park - Courts 1–5\nOpponent Roster: Paul Jacobson (1); Brennan Quinn (2); Don Harvey (3); David Lange (3); Larry Ruff (3); Corey Ruud (3); Pennie Pierce-Jorgeson (4); Sally Ruud (5)
+DESCRIPTION:LTTA Tennis match: 9 vs Good Ol' Boys at Green Island Park - Courts 1–5\nOpponent Roster: Paul Jacobson (1); Brennan Quinn (2); Don Harvey (3); David Lange (3); Larry Ruff (3); Cory Ruud (3); Pennie Pierce-Jorgeson (4); Sally Ruud (5)
 LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -133,7 +134,7 @@ DTSTAMP:20260728T173000Z
 DTSTART;TZID=America/Chicago:20260728T173000
 DTEND;TZID=America/Chicago:20260728T190000
 SUMMARY:LTTA Tennis: vs Return to Sender with Love
-DESCRIPTION:LTTA Tennis match: 9 vs Return to Sender with Love at Green Island Park - Courts 10–13\nOpponent Roster: Denny Kreuser (1); Paul Leithold (2); Sara Bieneman (3); Kate Skaar (3); Julie Kamla (3); Asher Helgerson (3); Catherine Roraff (4); Mary Leithold (5)
+DESCRIPTION:LTTA Tennis match: 9 vs Return to Sender with Love at Green Island Park - Courts 10–13\nOpponent Roster: Denny Kreuser (1); Paul Leithold (2); Sara Bieneman (3); Missy Marcus (3); Julie Kamla (3); Asher Helgerson (3); Catherine Roraff (4); Mary Leithold (5)
 LOCATION:Green Island Park - Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT9H30M

@@ -6,7 +6,7 @@
       "week": 1,
       "date": "2026-05-26",
       "time": "7:00pm",
-      "courts": "Courts 6\u20139",
+      "courts": "Courts 6–9",
       "homeAway": "Home",
       "opponent": {
         "name": "Bounce It",
@@ -32,7 +32,7 @@
       "week": 3,
       "date": "2026-06-09",
       "time": "7:00pm",
-      "courts": "Courts 1\u20135",
+      "courts": "Courts 1–5",
       "homeAway": "Home",
       "opponent": {
         "name": "Racquet Scientists",
@@ -45,7 +45,7 @@
       "week": 4,
       "date": "2026-06-16",
       "time": "5:30pm",
-      "courts": "Courts 6\u20139",
+      "courts": "Courts 6–9",
       "homeAway": "Away",
       "opponent": {
         "name": "Herons",
@@ -58,12 +58,12 @@
       "week": 5,
       "date": "2026-06-23",
       "time": "7:00pm",
-      "courts": "Courts 6\u20139",
-      "homeAway": "Home",
+      "courts": "Courts 10–13",
+      "homeAway": "Away",
       "opponent": {
-        "name": "BYE",
-        "number": "2",
-        "file": "/pages/team.html?day=tuesday&team=2"
+        "name": "Easy Overhead",
+        "number": "12",
+        "file": "/pages/team.html?day=tuesday&team=12"
       },
       "ics": "/teams/tuesday/ics/4/week5.ics"
     },
@@ -71,7 +71,7 @@
       "week": 6,
       "date": "2026-06-30",
       "time": "5:30pm",
-      "courts": "Courts 10\u201313",
+      "courts": "Courts 10–13",
       "homeAway": "Home",
       "opponent": {
         "name": "Jetsetters",
@@ -84,7 +84,7 @@
       "week": 7,
       "date": "2026-07-07",
       "time": "7:00pm",
-      "courts": "Courts 10\u201313",
+      "courts": "Courts 10–13",
       "homeAway": "Away",
       "opponent": {
         "name": "Return to Sender with Love",
@@ -97,7 +97,7 @@
       "week": 8,
       "date": "2026-07-14",
       "time": "5:30pm",
-      "courts": "Courts 6\u20139",
+      "courts": "Courts 6–9",
       "homeAway": "Away",
       "opponent": {
         "name": "Rascals",
@@ -110,7 +110,7 @@
       "week": 9,
       "date": "2026-07-21",
       "time": "5:30pm",
-      "courts": "Courts 1\u20135",
+      "courts": "Courts 1–5",
       "homeAway": "Away",
       "opponent": {
         "name": "Spin Doctors",
@@ -123,12 +123,12 @@
       "week": 10,
       "date": "2026-07-28",
       "time": "7:00pm",
-      "courts": "Courts 10\u201313",
-      "homeAway": "Away",
+      "courts": "Courts 6–9",
+      "homeAway": "Home",
       "opponent": {
-        "name": "Easy Overhead",
-        "number": "12",
-        "file": "/pages/team.html?day=tuesday&team=12"
+        "name": "BYE",
+        "number": "2",
+        "file": "/pages/team.html?day=tuesday&team=2"
       },
       "ics": "/teams/tuesday/ics/4/week10.ics"
     },
@@ -136,7 +136,7 @@
       "week": 11,
       "date": "2026-08-04",
       "time": "5:30pm",
-      "courts": "Courts 10\u201313",
+      "courts": "Courts 10–13",
       "homeAway": "Home",
       "opponent": {
         "name": "Full Metal Racquet",

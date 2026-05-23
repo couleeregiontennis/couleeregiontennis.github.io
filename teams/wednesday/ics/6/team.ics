@@ -105,7 +105,7 @@ DTSTAMP:20260715T173000Z
 DTSTART;TZID=America/Chicago:20260715T173000
 DTEND;TZID=America/Chicago:20260715T190000
 SUMMARY:LTTA Tennis: vs Hot Shots
-DESCRIPTION:LTTA Tennis match: 6 vs Hot Shots at Green Island Park - Courts 6–9\nOpponent Roster: Laura Reutlinger (1); Roxie Anderson (2); Chris Kahlow (3); Taylor Nelson (3); Peyton Demeyer (3); Jenna Helminski Juve (3); Mike Leonard (4); John Noble (5)
+DESCRIPTION:LTTA Tennis match: 6 vs Hot Shots at Green Island Park - Courts 6–9\nOpponent Roster: Laura Reutlinger (1); Roxie Anderson (2); Chris Kahlow (3); Taylor Nelson (3); Payton Demeyer (3); Jenna Helminski Juve (3); Mike Leonard (4); John Noble (5)
 LOCATION:Green Island Park - Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -119,7 +119,7 @@ DTSTAMP:20260722T190000Z
 DTSTART;TZID=America/Chicago:20260722T190000
 DTEND;TZID=America/Chicago:20260722T203000
 SUMMARY:LTTA Tennis: vs Rally Monkeys
-DESCRIPTION:LTTA Tennis match: 6 vs Rally Monkeys at Green Island Park - Courts 6–9\nOpponent Roster: Brett Meddaugh (1); Meredith Holt (2); Ronghui Chen (3); Andy Seithamer (3); Mason Engebretsen (3); Isaiah Dahmen (3); Sam Hinton (4); Sui Wang (5)
+DESCRIPTION:LTTA Tennis match: 6 vs Rally Monkeys at Green Island Park - Courts 6–9\nOpponent Roster: Brett Meddaugh (1); Meredith Holt (2); Ronghui Chen (3); Kayla Holman/Kelly Gorres (3); Mason Engebretsen (3); Isaiah Dahman (3); Sam Hinton (4); Andrew Horton (5)
 LOCATION:Green Island Park - Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H
@@ -147,7 +147,7 @@ DTSTAMP:20260805T190000Z
 DTSTART;TZID=America/Chicago:20260805T190000
 DTEND;TZID=America/Chicago:20260805T203000
 SUMMARY:LTTA Tennis: vs Baseliners
-DESCRIPTION:LTTA Tennis match: 6 vs Baseliners at Green Island Park - Courts 1–5\nOpponent Roster: John Hildebrandt (1); Dan Bodelson (2); Dick Deml (3); Al Graewin (3); Mark Schlafer (3); Bob Hildebrandt (3); Terri Kaiser (4); Jill Graewin (5)
+DESCRIPTION:LTTA Tennis match: 6 vs Baseliners at Green Island Park - Courts 1–5\nOpponent Roster: John Hildebrandt (1); Dan Bodelson (2); Dick Deml (3); Al Graewin (3); Jim Ballas (3); Bob Hildebrandt (3); Terri Kaiser (4); Jill Graewin (5)
 LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT11H

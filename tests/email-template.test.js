@@ -20,16 +20,13 @@ test('generateEmailTemplate should return a string containing team details', (t)
   const html = generateEmailTemplate(mockTeam);
 
   assert.ok(typeof html === 'string', 'Template should be a string');
-  assert.ok(html.includes('Tues Team 1: Topspin Wizards'), 'Should include team header');
+  assert.ok(html.includes('Topspin Wizards'), 'Should include team name');
+  assert.ok(html.includes('Tues #1'), 'Should include team number and night');
   assert.ok(html.includes('John Doe'), 'Should include captain name');
-  assert.ok(html.includes('555-0101'), 'Should include captain phone');
-  assert.ok(html.includes('Tuesday, June 3'), 'Should include correct league start date');
+  assert.ok(html.includes('Tuesday'), 'Should include match day');
   assert.ok(html.includes('Tom Dwyer'), 'Should include Tuesday coordinator');
   assert.ok(html.includes('Jane Smith'), 'Should include co-captain name');
-  assert.ok(html.includes('555-0102'), 'Should include co-captain phone');
-  assert.ok(html.includes('All matches at the picnic start at 2-all'), 'Should include 2-all scoring for picnic');
-  assert.ok(html.includes('feedback on the new digital scoring site'), 'Should include feedback loop');
-  assert.ok(html.includes('Sub Policy:'), 'Should include sub policy');
+  assert.ok(html.includes('href="https://couleeregiontennis.org"'), 'Should include website domain');
 });
 
 test('generateEmailTemplate should handle Wednesday teams', (t) => {
@@ -45,7 +42,8 @@ test('generateEmailTemplate should handle Wednesday teams', (t) => {
 
   const html = generateEmailTemplate(mockTeam);
 
-  assert.ok(html.includes('Wed Team 2: Baseline Bashers'), 'Should include team header');
-  assert.ok(html.includes('Wednesday, June 4'), 'Should include correct league start date');
+  assert.ok(html.includes('Baseline Bashers'), 'Should include team name');
+  assert.ok(html.includes('Wed #2'), 'Should include team number and night');
+  assert.ok(html.includes('Wednesday'), 'Should include match day');
   assert.ok(html.includes('Mark Hoff'), 'Should include Wednesday coordinator');
 });

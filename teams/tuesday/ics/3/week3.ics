@@ -25,7 +25,7 @@ DTSTAMP:20260609T190000Z
 DTSTART;TZID=America/Chicago:20260609T190000
 DTEND;TZID=America/Chicago:20260609T203000
 SUMMARY:LTTA Tennis: vs Rascals (Home)
-DESCRIPTION:LTTA Tennis match: 3 vs Rascals at Green Island Park - Courts 10–13
+DESCRIPTION:LTTA Tennis match: 3 vs Rascals at Green Island Park - Courts 10–13\nOpponent Roster: Peter Coppola (1); Fritz Wiggert (2); Ellen Seithamer (3); Margi Hanson (3); Craig Hanson (3); Jason Herbert (3); Erin Herbert (4); Becky Rauch (5)
 LOCATION:Green Island Park - Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT11H

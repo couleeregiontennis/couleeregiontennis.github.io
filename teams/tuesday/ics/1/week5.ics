@@ -21,14 +21,14 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-tuesday-1-week5@couleeregiontennis.org
-DTSTAMP:20260623T190000Z
-DTSTART;TZID=America/Chicago:20260623T190000
-DTEND;TZID=America/Chicago:20260623T203000
-SUMMARY:LTTA Tennis: vs Zoomers (Away)
-DESCRIPTION:LTTA Tennis match: 1 vs Zoomers at Green Island Park - Courts 10–13
-LOCATION:Green Island Park - Courts 10–13
+DTSTAMP:20260623T173000Z
+DTSTART;TZID=America/Chicago:20260623T173000
+DTEND;TZID=America/Chicago:20260623T190000
+SUMMARY:LTTA Tennis: vs Return to Sender with Love (Away)
+DESCRIPTION:LTTA Tennis match: 1 vs Return to Sender with Love at Green Island Park - Courts 6–9\nOpponent Roster: Denny Kreuser (1); Paul Leithold (2); Sara Bieneman (3); Missy Marcus (3); Julie Kamla (3); Asher Helgerson (3); Catherine Roraff (4); Mary Leithold (5)
+LOCATION:Green Island Park - Courts 6–9
 BEGIN:VALARM
-TRIGGER:-PT11H
+TRIGGER:-PT9H30M
 ACTION:DISPLAY
 DESCRIPTION:LTTA Tennis Match Reminder
 END:VALARM
