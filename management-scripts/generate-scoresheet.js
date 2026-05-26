@@ -52,9 +52,11 @@ function generateCombinedScoresheet(matches, night, template) {
       html = html.replaceAll('[P3T1A]', team1Pos3Players[0] || '_______');
       html = html.replaceAll('[P3T1B]', team1Pos3Players[1] || '_______');
       html = html.replaceAll('[P3T1C]', team1Pos3Players[2] || '_______');
+      html = html.replaceAll('[P3T1D]', team1Pos3Players[3] || '_______');
       html = html.replaceAll('[P3T2A]', team2Pos3Players[0] || '_______');
       html = html.replaceAll('[P3T2B]', team2Pos3Players[1] || '_______');
       html = html.replaceAll('[P3T2C]', team2Pos3Players[2] || '_______');
+      html = html.replaceAll('[P3T2D]', team2Pos3Players[3] || '_______');
 
       // Positions 4 & 5
       html = html.replace('[P4T1]', getPlayerByPosition(match.teamA.roster, 4) || '_______');
@@ -71,6 +73,9 @@ function generateCombinedScoresheet(matches, night, template) {
       hasCourts: html.includes(match.courts)
     });
 
+    if (index > 0) {
+      combinedHtml += '<div class="page-break"></div>';
+    }
     // Wrap each scoresheet in a div with page break
     combinedHtml += `<div class="match-sheet">${html}</div>`;
   });

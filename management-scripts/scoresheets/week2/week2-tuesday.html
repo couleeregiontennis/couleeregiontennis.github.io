@@ -1,15 +1,32 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>
       @media print {
+        @page {
+          size: letter;
+          margin: 0.1in;
+        }
         body {
           margin: 0;
-          padding: 0.25in;
+          padding: 0;
           font-size: 11px;
         }
         .match-sheet {
-          page-break-after: always;
-          height: 10.5in; /* Standard letter height minus margins */
+          page-break-inside: avoid;
+          break-inside: avoid;
+          height: 10.2in; /* Safe height with 0.6in headroom to prevent sub-pixel rounding overflow */
+          padding: 0.15in; /* Insets content to align with the 0.25in physical margins */
+          box-sizing: border-box;
           position: relative;
         }
+        .page-break {
+          page-break-after: always;
+          break-after: page;
+          clear: both;
+        }
+        /* Absolute position fiducials precisely, overriding screen styles and clearing bottom */
+        .fiducial.tl { top: 0.15in; bottom: auto; left: 0.15in; right: auto; }
+        .fiducial.tr { top: 0.15in; bottom: auto; right: 0.15in; left: auto; }
+        .fiducial.bl { top: 10.65in; bottom: auto; left: 0.15in; right: auto; }
+        .fiducial.br { top: 10.65in; bottom: auto; right: 0.15in; left: auto; }
       }
 
       body {
@@ -179,23 +196,36 @@
       </tr>
       <tr>
         <td>
-          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
+        <td class="participation-cell" style="padding: 2px;">
           <span class="label-small">Win?</span>
-          <div class="ocr-check"></div>
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
-          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -204,9 +234,9 @@
     <!-- Line 2 -->
     <table>
       <tr>
-        <td>3: Tom Dwyer (C) / Mike Roscos (C) / Sean O'Flaherty<br>3: Tom Dwyer (C) / Mike Roscos (C) / Sean O'Flaherty</td>
+        <td>3: Tom Dwyer (C) / Mike Roscos (C) / Sean O'Flaherty / Dan Skemp<br>3: Tom Dwyer (C) / Mike Roscos (C) / Sean O'Flaherty / Dan Skemp</td>
         <td style="width: 10%; text-align: center; font-weight: bold;">2</td>
-        <td>3: _______ / _______ / _______<br>3: _______ / _______ / _______</td>
+        <td>3: _______ / _______ / _______ / _______<br>3: _______ / _______ / _______ / _______</td>
       </tr>
       <tr>
         <td>
@@ -214,16 +244,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -232,9 +275,9 @@
     <!-- Line 3 -->
     <table>
       <tr>
-        <td>3: Tom Dwyer (C) / Mike Roscos (C) / Sean O'Flaherty<br>3: Tom Dwyer (C) / Mike Roscos (C) / Sean O'Flaherty</td>
+        <td>3: Tom Dwyer (C) / Mike Roscos (C) / Sean O'Flaherty / Dan Skemp<br>3: Tom Dwyer (C) / Mike Roscos (C) / Sean O'Flaherty / Dan Skemp</td>
         <td style="width: 10%; text-align: center; font-weight: bold;">3</td>
-        <td>3: _______ / _______ / _______<br>3: _______ / _______ / _______</td>
+        <td>3: _______ / _______ / _______ / _______<br>3: _______ / _______ / _______ / _______</td>
       </tr>
       <tr>
         <td>
@@ -242,16 +285,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -270,16 +326,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -308,11 +377,28 @@
     </table>
 
     <div class="rules-mini">
-      <strong>SCORING:</strong> 1 pt for participation + 1 pt per set won (Max 3 per Line). 
-      <strong>HEAT RULE:</strong> >95°F optional 2-2 start. <strong>SIGNATURES REQUIRED.</strong>
-      <br><em>Rev 2026.OCR.1</em>
+      <div style="font-weight: bold; font-size: 10px; margin-bottom: 5px; text-transform: uppercase; border-bottom: 1px solid black; padding-bottom: 2px;">
+        Quick Guide: How to Fill Out This Scoresheet
+      </div>
+      <div style="display: flex; gap: 15px;">
+        <div style="flex: 1; font-size: 9px;">
+          <strong>1. RECORD SCORES:</strong> Write games won for <strong>Set 1</strong> & <strong>Set 2</strong>. If a 10-point match tiebreaker is played, write the score in the <strong>TB</strong> box.
+          <br><strong>2. LINE WINNER:</strong> Check the <strong>Home</strong> or <strong>Away</strong> box under the <strong>Win?</strong> column to mark the line winner.
+          <br><strong>3. SUBSTITUTES:</strong> If a sub plays, cross out the prefilled player name and write the sub's name clearly.
+        </div>
+        <div style="flex: 1; font-size: 9px; border-left: 1px dashed #ccc; padding-left: 15px;">
+          <strong>4. CALCULATE LINE POINTS (Max 3 per Line):</strong>
+          <br>&bull; <strong>1 Point</strong> for participation (if line is played).
+          <br>&bull; <strong>1 Point</strong> for each set won (maximum of 2 set points).
+          <br><em>Example:</em> Winning 6-4, 6-4 = <strong>3 pts</strong>. Losing 4-6, 4-6 = <strong>1 pt</strong>.
+          <br><strong>5. Match Totals:</strong> Sum all 4 line points (max 12 pts total) and write them in the <strong>TOTAL POINTS</strong> box. Both Captains must sign.
+        </div>
+      </div>
+      <div style="margin-top: 5px; font-size: 8px; text-align: right; color: #555; border-top: 1px dotted #ccc; padding-top: 3px;">
+        <strong>HEAT RULE:</strong> If temp is >95°F, optional 2-2 start in sets. | <em>Rev 2026.OCR.3</em>
+      </div>
     </div>
-  </div><div class="match-sheet">
+  </div><div class="page-break"></div><div class="match-sheet">
     <div class="fiducial tl"></div>
     <div class="fiducial tr"></div>
     <div class="fiducial bl"></div>
@@ -355,23 +441,36 @@
       </tr>
       <tr>
         <td>
-          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
+        <td class="participation-cell" style="padding: 2px;">
           <span class="label-small">Win?</span>
-          <div class="ocr-check"></div>
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
-          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -380,9 +479,9 @@
     <!-- Line 2 -->
     <table>
       <tr>
-        <td>3: Gavin Goss / Frank Schwarz / Nancy Winberg<br>3: Gavin Goss / Frank Schwarz / Nancy Winberg</td>
+        <td>3: Gavin Goss / Frank Schwarz / Nancy Winberg / Karie Johnson<br>3: Gavin Goss / Frank Schwarz / Nancy Winberg / Karie Johnson</td>
         <td style="width: 10%; text-align: center; font-weight: bold;">2</td>
-        <td>3: Ellen Seithamer / Margi Hanson / Craig Hanson<br>3: Ellen Seithamer / Margi Hanson / Craig Hanson</td>
+        <td>3: Ellen Seithamer / Margi Hanson / Craig Hanson / Jason Herbert<br>3: Ellen Seithamer / Margi Hanson / Craig Hanson / Jason Herbert</td>
       </tr>
       <tr>
         <td>
@@ -390,16 +489,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -408,9 +520,9 @@
     <!-- Line 3 -->
     <table>
       <tr>
-        <td>3: Gavin Goss / Frank Schwarz / Nancy Winberg<br>3: Gavin Goss / Frank Schwarz / Nancy Winberg</td>
+        <td>3: Gavin Goss / Frank Schwarz / Nancy Winberg / Karie Johnson<br>3: Gavin Goss / Frank Schwarz / Nancy Winberg / Karie Johnson</td>
         <td style="width: 10%; text-align: center; font-weight: bold;">3</td>
-        <td>3: Ellen Seithamer / Margi Hanson / Craig Hanson<br>3: Ellen Seithamer / Margi Hanson / Craig Hanson</td>
+        <td>3: Ellen Seithamer / Margi Hanson / Craig Hanson / Jason Herbert<br>3: Ellen Seithamer / Margi Hanson / Craig Hanson / Jason Herbert</td>
       </tr>
       <tr>
         <td>
@@ -418,16 +530,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -446,16 +571,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -484,11 +622,28 @@
     </table>
 
     <div class="rules-mini">
-      <strong>SCORING:</strong> 1 pt for participation + 1 pt per set won (Max 3 per Line). 
-      <strong>HEAT RULE:</strong> >95°F optional 2-2 start. <strong>SIGNATURES REQUIRED.</strong>
-      <br><em>Rev 2026.OCR.1</em>
+      <div style="font-weight: bold; font-size: 10px; margin-bottom: 5px; text-transform: uppercase; border-bottom: 1px solid black; padding-bottom: 2px;">
+        Quick Guide: How to Fill Out This Scoresheet
+      </div>
+      <div style="display: flex; gap: 15px;">
+        <div style="flex: 1; font-size: 9px;">
+          <strong>1. RECORD SCORES:</strong> Write games won for <strong>Set 1</strong> & <strong>Set 2</strong>. If a 10-point match tiebreaker is played, write the score in the <strong>TB</strong> box.
+          <br><strong>2. LINE WINNER:</strong> Check the <strong>Home</strong> or <strong>Away</strong> box under the <strong>Win?</strong> column to mark the line winner.
+          <br><strong>3. SUBSTITUTES:</strong> If a sub plays, cross out the prefilled player name and write the sub's name clearly.
+        </div>
+        <div style="flex: 1; font-size: 9px; border-left: 1px dashed #ccc; padding-left: 15px;">
+          <strong>4. CALCULATE LINE POINTS (Max 3 per Line):</strong>
+          <br>&bull; <strong>1 Point</strong> for participation (if line is played).
+          <br>&bull; <strong>1 Point</strong> for each set won (maximum of 2 set points).
+          <br><em>Example:</em> Winning 6-4, 6-4 = <strong>3 pts</strong>. Losing 4-6, 4-6 = <strong>1 pt</strong>.
+          <br><strong>5. Match Totals:</strong> Sum all 4 line points (max 12 pts total) and write them in the <strong>TOTAL POINTS</strong> box. Both Captains must sign.
+        </div>
+      </div>
+      <div style="margin-top: 5px; font-size: 8px; text-align: right; color: #555; border-top: 1px dotted #ccc; padding-top: 3px;">
+        <strong>HEAT RULE:</strong> If temp is >95°F, optional 2-2 start in sets. | <em>Rev 2026.OCR.3</em>
+      </div>
     </div>
-  </div><div class="match-sheet">
+  </div><div class="page-break"></div><div class="match-sheet">
     <div class="fiducial tl"></div>
     <div class="fiducial tr"></div>
     <div class="fiducial bl"></div>
@@ -531,23 +686,36 @@
       </tr>
       <tr>
         <td>
-          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
+        <td class="participation-cell" style="padding: 2px;">
           <span class="label-small">Win?</span>
-          <div class="ocr-check"></div>
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
-          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -556,9 +724,9 @@
     <!-- Line 2 -->
     <table>
       <tr>
-        <td>3: Don Harvey / David Lange / Larry Ruff<br>3: Don Harvey / David Lange / Larry Ruff</td>
+        <td>3: Don Harvey / David Lange / Larry Ruff / Corey Ruud<br>3: Don Harvey / David Lange / Larry Ruff / Corey Ruud</td>
         <td style="width: 10%; text-align: center; font-weight: bold;">2</td>
-        <td>3: Matthew Isaacson / Mary Aschenbrenner / Dale Barclay (C)<br>3: Matthew Isaacson / Mary Aschenbrenner / Dale Barclay (C)</td>
+        <td>3: Matthew Isaacson / Mary Aschenbrenner / Dale Barclay (C) / Rich Levinger<br>3: Matthew Isaacson / Mary Aschenbrenner / Dale Barclay (C) / Rich Levinger</td>
       </tr>
       <tr>
         <td>
@@ -566,16 +734,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -584,9 +765,9 @@
     <!-- Line 3 -->
     <table>
       <tr>
-        <td>3: Don Harvey / David Lange / Larry Ruff<br>3: Don Harvey / David Lange / Larry Ruff</td>
+        <td>3: Don Harvey / David Lange / Larry Ruff / Corey Ruud<br>3: Don Harvey / David Lange / Larry Ruff / Corey Ruud</td>
         <td style="width: 10%; text-align: center; font-weight: bold;">3</td>
-        <td>3: Matthew Isaacson / Mary Aschenbrenner / Dale Barclay (C)<br>3: Matthew Isaacson / Mary Aschenbrenner / Dale Barclay (C)</td>
+        <td>3: Matthew Isaacson / Mary Aschenbrenner / Dale Barclay (C) / Rich Levinger<br>3: Matthew Isaacson / Mary Aschenbrenner / Dale Barclay (C) / Rich Levinger</td>
       </tr>
       <tr>
         <td>
@@ -594,16 +775,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -622,16 +816,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -660,11 +867,28 @@
     </table>
 
     <div class="rules-mini">
-      <strong>SCORING:</strong> 1 pt for participation + 1 pt per set won (Max 3 per Line). 
-      <strong>HEAT RULE:</strong> >95°F optional 2-2 start. <strong>SIGNATURES REQUIRED.</strong>
-      <br><em>Rev 2026.OCR.1</em>
+      <div style="font-weight: bold; font-size: 10px; margin-bottom: 5px; text-transform: uppercase; border-bottom: 1px solid black; padding-bottom: 2px;">
+        Quick Guide: How to Fill Out This Scoresheet
+      </div>
+      <div style="display: flex; gap: 15px;">
+        <div style="flex: 1; font-size: 9px;">
+          <strong>1. RECORD SCORES:</strong> Write games won for <strong>Set 1</strong> & <strong>Set 2</strong>. If a 10-point match tiebreaker is played, write the score in the <strong>TB</strong> box.
+          <br><strong>2. LINE WINNER:</strong> Check the <strong>Home</strong> or <strong>Away</strong> box under the <strong>Win?</strong> column to mark the line winner.
+          <br><strong>3. SUBSTITUTES:</strong> If a sub plays, cross out the prefilled player name and write the sub's name clearly.
+        </div>
+        <div style="flex: 1; font-size: 9px; border-left: 1px dashed #ccc; padding-left: 15px;">
+          <strong>4. CALCULATE LINE POINTS (Max 3 per Line):</strong>
+          <br>&bull; <strong>1 Point</strong> for participation (if line is played).
+          <br>&bull; <strong>1 Point</strong> for each set won (maximum of 2 set points).
+          <br><em>Example:</em> Winning 6-4, 6-4 = <strong>3 pts</strong>. Losing 4-6, 4-6 = <strong>1 pt</strong>.
+          <br><strong>5. Match Totals:</strong> Sum all 4 line points (max 12 pts total) and write them in the <strong>TOTAL POINTS</strong> box. Both Captains must sign.
+        </div>
+      </div>
+      <div style="margin-top: 5px; font-size: 8px; text-align: right; color: #555; border-top: 1px dotted #ccc; padding-top: 3px;">
+        <strong>HEAT RULE:</strong> If temp is >95°F, optional 2-2 start in sets. | <em>Rev 2026.OCR.3</em>
+      </div>
     </div>
-  </div><div class="match-sheet">
+  </div><div class="page-break"></div><div class="match-sheet">
     <div class="fiducial tl"></div>
     <div class="fiducial tr"></div>
     <div class="fiducial bl"></div>
@@ -707,23 +931,36 @@
       </tr>
       <tr>
         <td>
-          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
+        <td class="participation-cell" style="padding: 2px;">
           <span class="label-small">Win?</span>
-          <div class="ocr-check"></div>
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
-          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -732,9 +969,9 @@
     <!-- Line 2 -->
     <table>
       <tr>
-        <td>3: Bill Lapp / Regina Jones (C) / Sam Schmidt<br>3: Bill Lapp / Regina Jones (C) / Sam Schmidt</td>
+        <td>3: Bill Lapp / Regina Jones (C) / Sam Schmidt / Hannah Exner<br>3: Bill Lapp / Regina Jones (C) / Sam Schmidt / Hannah Exner</td>
         <td style="width: 10%; text-align: center; font-weight: bold;">2</td>
-        <td>3: Sai Mathi / Isaac Puent / Molly Stenger<br>3: Sai Mathi / Isaac Puent / Molly Stenger</td>
+        <td>3: Sai Mathi / Isaac Puent / Molly Stenger / Leah Bower<br>3: Sai Mathi / Isaac Puent / Molly Stenger / Leah Bower</td>
       </tr>
       <tr>
         <td>
@@ -742,16 +979,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -760,9 +1010,9 @@
     <!-- Line 3 -->
     <table>
       <tr>
-        <td>3: Bill Lapp / Regina Jones (C) / Sam Schmidt<br>3: Bill Lapp / Regina Jones (C) / Sam Schmidt</td>
+        <td>3: Bill Lapp / Regina Jones (C) / Sam Schmidt / Hannah Exner<br>3: Bill Lapp / Regina Jones (C) / Sam Schmidt / Hannah Exner</td>
         <td style="width: 10%; text-align: center; font-weight: bold;">3</td>
-        <td>3: Sai Mathi / Isaac Puent / Molly Stenger<br>3: Sai Mathi / Isaac Puent / Molly Stenger</td>
+        <td>3: Sai Mathi / Isaac Puent / Molly Stenger / Leah Bower<br>3: Sai Mathi / Isaac Puent / Molly Stenger / Leah Bower</td>
       </tr>
       <tr>
         <td>
@@ -770,16 +1020,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -798,16 +1061,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -836,11 +1112,28 @@
     </table>
 
     <div class="rules-mini">
-      <strong>SCORING:</strong> 1 pt for participation + 1 pt per set won (Max 3 per Line). 
-      <strong>HEAT RULE:</strong> >95°F optional 2-2 start. <strong>SIGNATURES REQUIRED.</strong>
-      <br><em>Rev 2026.OCR.1</em>
+      <div style="font-weight: bold; font-size: 10px; margin-bottom: 5px; text-transform: uppercase; border-bottom: 1px solid black; padding-bottom: 2px;">
+        Quick Guide: How to Fill Out This Scoresheet
+      </div>
+      <div style="display: flex; gap: 15px;">
+        <div style="flex: 1; font-size: 9px;">
+          <strong>1. RECORD SCORES:</strong> Write games won for <strong>Set 1</strong> & <strong>Set 2</strong>. If a 10-point match tiebreaker is played, write the score in the <strong>TB</strong> box.
+          <br><strong>2. LINE WINNER:</strong> Check the <strong>Home</strong> or <strong>Away</strong> box under the <strong>Win?</strong> column to mark the line winner.
+          <br><strong>3. SUBSTITUTES:</strong> If a sub plays, cross out the prefilled player name and write the sub's name clearly.
+        </div>
+        <div style="flex: 1; font-size: 9px; border-left: 1px dashed #ccc; padding-left: 15px;">
+          <strong>4. CALCULATE LINE POINTS (Max 3 per Line):</strong>
+          <br>&bull; <strong>1 Point</strong> for participation (if line is played).
+          <br>&bull; <strong>1 Point</strong> for each set won (maximum of 2 set points).
+          <br><em>Example:</em> Winning 6-4, 6-4 = <strong>3 pts</strong>. Losing 4-6, 4-6 = <strong>1 pt</strong>.
+          <br><strong>5. Match Totals:</strong> Sum all 4 line points (max 12 pts total) and write them in the <strong>TOTAL POINTS</strong> box. Both Captains must sign.
+        </div>
+      </div>
+      <div style="margin-top: 5px; font-size: 8px; text-align: right; color: #555; border-top: 1px dotted #ccc; padding-top: 3px;">
+        <strong>HEAT RULE:</strong> If temp is >95°F, optional 2-2 start in sets. | <em>Rev 2026.OCR.3</em>
+      </div>
     </div>
-  </div><div class="match-sheet">
+  </div><div class="page-break"></div><div class="match-sheet">
     <div class="fiducial tl"></div>
     <div class="fiducial tr"></div>
     <div class="fiducial bl"></div>
@@ -883,23 +1176,36 @@
       </tr>
       <tr>
         <td>
-          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
+        <td class="participation-cell" style="padding: 2px;">
           <span class="label-small">Win?</span>
-          <div class="ocr-check"></div>
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
-          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -908,9 +1214,9 @@
     <!-- Line 2 -->
     <table>
       <tr>
-        <td>3: Sara Bieneman / Kate Skaar / Julie Kamla (C)<br>3: Sara Bieneman / Kate Skaar / Julie Kamla (C)</td>
+        <td>3: Sara Bieneman / Kate Skaar / Julie Kamla (C) / Asher Helgerson<br>3: Sara Bieneman / Kate Skaar / Julie Kamla (C) / Asher Helgerson</td>
         <td style="width: 10%; text-align: center; font-weight: bold;">2</td>
-        <td>3: Madeline Loh / Adrienne Loh (C) / Stanton Loh<br>3: Madeline Loh / Adrienne Loh (C) / Stanton Loh</td>
+        <td>3: Madeline Loh / Adrienne Loh (C) / Stanton Loh / Malakai Berget<br>3: Madeline Loh / Adrienne Loh (C) / Stanton Loh / Malakai Berget</td>
       </tr>
       <tr>
         <td>
@@ -918,16 +1224,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -936,9 +1255,9 @@
     <!-- Line 3 -->
     <table>
       <tr>
-        <td>3: Sara Bieneman / Kate Skaar / Julie Kamla (C)<br>3: Sara Bieneman / Kate Skaar / Julie Kamla (C)</td>
+        <td>3: Sara Bieneman / Kate Skaar / Julie Kamla (C) / Asher Helgerson<br>3: Sara Bieneman / Kate Skaar / Julie Kamla (C) / Asher Helgerson</td>
         <td style="width: 10%; text-align: center; font-weight: bold;">3</td>
-        <td>3: Madeline Loh / Adrienne Loh (C) / Stanton Loh<br>3: Madeline Loh / Adrienne Loh (C) / Stanton Loh</td>
+        <td>3: Madeline Loh / Adrienne Loh (C) / Stanton Loh / Malakai Berget<br>3: Madeline Loh / Adrienne Loh (C) / Stanton Loh / Malakai Berget</td>
       </tr>
       <tr>
         <td>
@@ -946,16 +1265,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -974,16 +1306,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -1012,11 +1357,28 @@
     </table>
 
     <div class="rules-mini">
-      <strong>SCORING:</strong> 1 pt for participation + 1 pt per set won (Max 3 per Line). 
-      <strong>HEAT RULE:</strong> >95°F optional 2-2 start. <strong>SIGNATURES REQUIRED.</strong>
-      <br><em>Rev 2026.OCR.1</em>
+      <div style="font-weight: bold; font-size: 10px; margin-bottom: 5px; text-transform: uppercase; border-bottom: 1px solid black; padding-bottom: 2px;">
+        Quick Guide: How to Fill Out This Scoresheet
+      </div>
+      <div style="display: flex; gap: 15px;">
+        <div style="flex: 1; font-size: 9px;">
+          <strong>1. RECORD SCORES:</strong> Write games won for <strong>Set 1</strong> & <strong>Set 2</strong>. If a 10-point match tiebreaker is played, write the score in the <strong>TB</strong> box.
+          <br><strong>2. LINE WINNER:</strong> Check the <strong>Home</strong> or <strong>Away</strong> box under the <strong>Win?</strong> column to mark the line winner.
+          <br><strong>3. SUBSTITUTES:</strong> If a sub plays, cross out the prefilled player name and write the sub's name clearly.
+        </div>
+        <div style="flex: 1; font-size: 9px; border-left: 1px dashed #ccc; padding-left: 15px;">
+          <strong>4. CALCULATE LINE POINTS (Max 3 per Line):</strong>
+          <br>&bull; <strong>1 Point</strong> for participation (if line is played).
+          <br>&bull; <strong>1 Point</strong> for each set won (maximum of 2 set points).
+          <br><em>Example:</em> Winning 6-4, 6-4 = <strong>3 pts</strong>. Losing 4-6, 4-6 = <strong>1 pt</strong>.
+          <br><strong>5. Match Totals:</strong> Sum all 4 line points (max 12 pts total) and write them in the <strong>TOTAL POINTS</strong> box. Both Captains must sign.
+        </div>
+      </div>
+      <div style="margin-top: 5px; font-size: 8px; text-align: right; color: #555; border-top: 1px dotted #ccc; padding-top: 3px;">
+        <strong>HEAT RULE:</strong> If temp is >95°F, optional 2-2 start in sets. | <em>Rev 2026.OCR.3</em>
+      </div>
     </div>
-  </div><div class="match-sheet">
+  </div><div class="page-break"></div><div class="match-sheet">
     <div class="fiducial tl"></div>
     <div class="fiducial tr"></div>
     <div class="fiducial bl"></div>
@@ -1059,23 +1421,36 @@
       </tr>
       <tr>
         <td>
-          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
+        <td class="participation-cell" style="padding: 2px;">
           <span class="label-small">Win?</span>
-          <div class="ocr-check"></div>
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
-          <span class="label-small">Set 1 | Set 2 | TB</span>
+          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -1084,9 +1459,9 @@
     <!-- Line 2 -->
     <table>
       <tr>
-        <td>3: Heidi Barreyro (C) / Shanon Torgerud / Odessa Barreyro<br>3: Heidi Barreyro (C) / Shanon Torgerud / Odessa Barreyro</td>
+        <td>3: Heidi Barreyro (C) / Shanon Torgerud / Odessa Barreyro / Katie Johnson<br>3: Heidi Barreyro (C) / Shanon Torgerud / Odessa Barreyro / Katie Johnson</td>
         <td style="width: 10%; text-align: center; font-weight: bold;">2</td>
-        <td>3: Jada Brunkow / Dan Petersen (C) / Shirley Yuan<br>3: Jada Brunkow / Dan Petersen (C) / Shirley Yuan</td>
+        <td>3: Jada Brunkow / Dan Petersen (C) / Shirley Yuan / Tyler Benson<br>3: Jada Brunkow / Dan Petersen (C) / Shirley Yuan / Tyler Benson</td>
       </tr>
       <tr>
         <td>
@@ -1094,16 +1469,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -1112,9 +1500,9 @@
     <!-- Line 3 -->
     <table>
       <tr>
-        <td>3: Heidi Barreyro (C) / Shanon Torgerud / Odessa Barreyro<br>3: Heidi Barreyro (C) / Shanon Torgerud / Odessa Barreyro</td>
+        <td>3: Heidi Barreyro (C) / Shanon Torgerud / Odessa Barreyro / Katie Johnson<br>3: Heidi Barreyro (C) / Shanon Torgerud / Odessa Barreyro / Katie Johnson</td>
         <td style="width: 10%; text-align: center; font-weight: bold;">3</td>
-        <td>3: Jada Brunkow / Dan Petersen (C) / Shirley Yuan<br>3: Jada Brunkow / Dan Petersen (C) / Shirley Yuan</td>
+        <td>3: Jada Brunkow / Dan Petersen (C) / Shirley Yuan / Tyler Benson<br>3: Jada Brunkow / Dan Petersen (C) / Shirley Yuan / Tyler Benson</td>
       </tr>
       <tr>
         <td>
@@ -1122,16 +1510,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -1150,16 +1551,29 @@
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
-        <td class="participation-cell">
-          <div class="ocr-check"></div>
+        <td class="participation-cell" style="padding: 2px;">
+          <div style="display: flex; justify-content: center; gap: 6px;">
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+            <div>
+              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
+              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            </div>
+          </div>
         </td>
         <td>
           <div class="score-box-container">
             <div class="digit-box"></div>
             <div class="digit-box"></div>
             <div class="digit-box"></div>
+            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
+            <div class="digit-box" style="border-width: 3px;"></div>
           </div>
         </td>
       </tr>
@@ -1188,8 +1602,25 @@
     </table>
 
     <div class="rules-mini">
-      <strong>SCORING:</strong> 1 pt for participation + 1 pt per set won (Max 3 per Line). 
-      <strong>HEAT RULE:</strong> >95°F optional 2-2 start. <strong>SIGNATURES REQUIRED.</strong>
-      <br><em>Rev 2026.OCR.1</em>
+      <div style="font-weight: bold; font-size: 10px; margin-bottom: 5px; text-transform: uppercase; border-bottom: 1px solid black; padding-bottom: 2px;">
+        Quick Guide: How to Fill Out This Scoresheet
+      </div>
+      <div style="display: flex; gap: 15px;">
+        <div style="flex: 1; font-size: 9px;">
+          <strong>1. RECORD SCORES:</strong> Write games won for <strong>Set 1</strong> & <strong>Set 2</strong>. If a 10-point match tiebreaker is played, write the score in the <strong>TB</strong> box.
+          <br><strong>2. LINE WINNER:</strong> Check the <strong>Home</strong> or <strong>Away</strong> box under the <strong>Win?</strong> column to mark the line winner.
+          <br><strong>3. SUBSTITUTES:</strong> If a sub plays, cross out the prefilled player name and write the sub's name clearly.
+        </div>
+        <div style="flex: 1; font-size: 9px; border-left: 1px dashed #ccc; padding-left: 15px;">
+          <strong>4. CALCULATE LINE POINTS (Max 3 per Line):</strong>
+          <br>&bull; <strong>1 Point</strong> for participation (if line is played).
+          <br>&bull; <strong>1 Point</strong> for each set won (maximum of 2 set points).
+          <br><em>Example:</em> Winning 6-4, 6-4 = <strong>3 pts</strong>. Losing 4-6, 4-6 = <strong>1 pt</strong>.
+          <br><strong>5. Match Totals:</strong> Sum all 4 line points (max 12 pts total) and write them in the <strong>TOTAL POINTS</strong> box. Both Captains must sign.
+        </div>
+      </div>
+      <div style="margin-top: 5px; font-size: 8px; text-align: right; color: #555; border-top: 1px dotted #ccc; padding-top: 3px;">
+        <strong>HEAT RULE:</strong> If temp is >95°F, optional 2-2 start in sets. | <em>Rev 2026.OCR.3</em>
+      </div>
     </div>
   </div></body></html>
