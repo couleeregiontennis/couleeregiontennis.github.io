@@ -20,7 +20,7 @@
     "courts": "Courts 1–5",
     "teamA": {
       "number": "2",
-      "name": "Tennis the Menace"
+      "name": "Subs"
     },
     "teamB": {
       "number": "11",
@@ -34,7 +34,7 @@
     "courts": "Courts 6–9",
     "teamA": {
       "number": "3",
-      "name": "Zoomers"
+      "name": "Herons"
     },
     "teamB": {
       "number": "10",
@@ -122,7 +122,7 @@
     },
     "teamB": {
       "number": "2",
-      "name": "Tennis the Menace"
+      "name": "Subs"
     }
   },
   {
@@ -136,27 +136,27 @@
     },
     "teamB": {
       "number": "3",
-      "name": "Zoomers"
-    }
-  },
-  {
-    "week": 2,
-    "date": "2026-06-02",
-    "time": "6:00pm",
-    "courts": "TBD (still figuring out the best option for conflicts on court usage)",
-    "teamA": {
-      "number": "7",
-      "name": "Good Ol' Boys"
-    },
-    "teamB": {
-      "number": "4",
-      "name": "Approach Shots"
+      "name": "Herons"
     }
   },
   {
     "week": 2,
     "date": "2026-06-02",
     "time": "5:30pm",
+    "courts": "Logan",
+    "teamA": {
+      "number": "7",
+      "name": "Good Ol' Boys"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Approach Shots"
+    }
+  },
+  {
+    "week": 2,
+    "date": "2026-06-02",
+    "time": "5:30pm",
     "courts": "Courts 6–9",
     "teamA": {
       "number": "5",
@@ -170,8 +170,8 @@
   {
     "week": 3,
     "date": "2026-06-09",
-    "time": "6:00pm",
-    "courts": "TBD (still figuring out the best option for conflicts on court usage)",
+    "time": "5:30pm",
+    "courts": "Logan",
     "teamA": {
       "number": "10",
       "name": "Jetsetters"
@@ -216,7 +216,7 @@
     "courts": "Courts 6–9",
     "teamA": {
       "number": "2",
-      "name": "Tennis the Menace"
+      "name": "Subs"
     },
     "teamB": {
       "number": "7",
@@ -230,7 +230,7 @@
     "courts": "Courts 10–13",
     "teamA": {
       "number": "3",
-      "name": "Zoomers"
+      "name": "Herons"
     },
     "teamB": {
       "number": "6",
@@ -314,7 +314,7 @@
     "courts": "Courts 1–5",
     "teamA": {
       "number": "2",
-      "name": "Tennis the Menace"
+      "name": "Subs"
     },
     "teamB": {
       "number": "5",
@@ -328,7 +328,7 @@
     "courts": "Courts 6–9",
     "teamA": {
       "number": "3",
-      "name": "Zoomers"
+      "name": "Herons"
     },
     "teamB": {
       "number": "4",
@@ -412,11 +412,11 @@
     "courts": "Courts 10–13",
     "teamA": {
       "number": "2",
-      "name": "Tennis the Menace"
+      "name": "Subs"
     },
     "teamB": {
       "number": "3",
-      "name": "Zoomers"
+      "name": "Herons"
     }
   },
   {
@@ -486,7 +486,7 @@
     },
     "teamB": {
       "number": "3",
-      "name": "Zoomers"
+      "name": "Herons"
     }
   },
   {
@@ -500,7 +500,7 @@
     },
     "teamB": {
       "number": "2",
-      "name": "Tennis the Menace"
+      "name": "Subs"
     }
   },
   {
@@ -556,7 +556,7 @@
     },
     "teamB": {
       "number": "3",
-      "name": "Zoomers"
+      "name": "Herons"
     }
   },
   {
@@ -570,7 +570,7 @@
     },
     "teamB": {
       "number": "2",
-      "name": "Tennis the Menace"
+      "name": "Subs"
     }
   },
   {
@@ -626,7 +626,7 @@
     },
     "teamB": {
       "number": "3",
-      "name": "Zoomers"
+      "name": "Herons"
     }
   },
   {
@@ -640,7 +640,7 @@
     },
     "teamB": {
       "number": "2",
-      "name": "Tennis the Menace"
+      "name": "Subs"
     }
   },
   {
@@ -696,7 +696,7 @@
     },
     "teamB": {
       "number": "3",
-      "name": "Zoomers"
+      "name": "Herons"
     }
   },
   {
@@ -710,7 +710,7 @@
     },
     "teamB": {
       "number": "2",
-      "name": "Tennis the Menace"
+      "name": "Subs"
     }
   },
   {
@@ -762,7 +762,7 @@
     "courts": "Courts 10–13",
     "teamA": {
       "number": "3",
-      "name": "Zoomers"
+      "name": "Herons"
     },
     "teamB": {
       "number": "1",
@@ -780,7 +780,7 @@
     },
     "teamB": {
       "number": "2",
-      "name": "Tennis the Menace"
+      "name": "Subs"
     }
   },
   {
@@ -850,7 +850,7 @@
     },
     "teamB": {
       "number": "2",
-      "name": "Tennis the Menace"
+      "name": "Subs"
     }
   },
   {
@@ -860,7 +860,7 @@
     "courts": "Courts 1–5",
     "teamA": {
       "number": "3",
-      "name": "Zoomers"
+      "name": "Herons"
     },
     "teamB": {
       "number": "12",

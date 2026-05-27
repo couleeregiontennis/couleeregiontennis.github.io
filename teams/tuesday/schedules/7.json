@@ -18,8 +18,8 @@
     {
       "week": 2,
       "date": "2026-06-02",
-      "time": "6:00pm",
-      "courts": "TBD (still figuring out the best option for conflicts on court usage)",
+      "time": "5:30pm",
+      "courts": "Logan",
       "homeAway": "Home",
       "opponent": {
         "name": "Approach Shots",
@@ -35,7 +35,7 @@
       "courts": "Courts 6–9",
       "homeAway": "Away",
       "opponent": {
-        "name": "Tennis the Menace",
+        "name": "Subs",
         "number": "2",
         "file": "/pages/team.html?day=tuesday&team=2"
       },
@@ -100,7 +100,7 @@
       "courts": "Courts 1–5",
       "homeAway": "Home",
       "opponent": {
-        "name": "Zoomers",
+        "name": "Herons",
         "number": "3",
         "file": "/pages/team.html?day=tuesday&team=3"
       },

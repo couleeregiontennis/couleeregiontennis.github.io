@@ -1,4 +1,40 @@
 {
-  "teamName": "BYE",
-  "roster": []
+  "teamName": "Subs",
+  "roster": [
+    {
+      "position": "1",
+      "name": "Sawyer Kuck",
+      "captain": ""
+    },
+    {
+      "position": "2",
+      "name": "Dave Wissink",
+      "captain": ""
+    },
+    {
+      "position": "3",
+      "name": "Dave Mills",
+      "captain": "✓"
+    },
+    {
+      "position": "3",
+      "name": "Amanda Arneson                       \nKirk Arneson                kirk.arneson@gmail.com        608 397 4536",
+      "captain": ""
+    },
+    {
+      "position": "3",
+      "name": "Kirk Arneson",
+      "captain": ""
+    },
+    {
+      "position": "3",
+      "name": "Raj Remnarace",
+      "captain": ""
+    },
+    {
+      "position": "5",
+      "name": "Laura Prosperi",
+      "captain": ""
+    }
+  ]
 }

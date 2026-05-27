@@ -21,12 +21,12 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:ltta-wednesday-1-week3@couleeregiontennis.org
-DTSTAMP:20260610T180000Z
-DTSTART;TZID=America/Chicago:20260610T180000
-DTEND;TZID=America/Chicago:20260610T193000
+DTSTAMP:20260610T173000Z
+DTSTART;TZID=America/Chicago:20260610T173000
+DTEND;TZID=America/Chicago:20260610T190000
 SUMMARY:LTTA Tennis: vs Backhand Bandits (Away)
-DESCRIPTION:LTTA Tennis match: 1 vs Backhand Bandits at TBD (still figuring out the best option for conflicts on court usage) Tennis Courts\nOpponent Roster: Leah Fortun (1); Josh Fortun (2); Jennifer Carr (3); Amy Marcou (3); Michael Ojelabi (3); Marc Crosby (3); Eli De Leon (4); Irene Johnson-Salvador (5)
-LOCATION:TBD (still figuring out the best option for conflicts on court usage) Tennis Courts
+DESCRIPTION:LTTA Tennis match: 1 vs Backhand Bandits at Logan Tennis Courts\nOpponent Roster: Leah Fortun (1); Josh Fortun (2); Jennifer Carr (3); Amy Marcou (3); Michael Ojelabi (3); Marc Crosby (3); Eli De Leon (4); Irene Johnson-Salvador (5)
+LOCATION:Logan Tennis Courts
 BEGIN:VALARM
 TRIGGER:-PT9H30M
 ACTION:DISPLAY

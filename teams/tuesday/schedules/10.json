@@ -9,7 +9,7 @@
       "courts": "Courts 6–9",
       "homeAway": "Away",
       "opponent": {
-        "name": "Zoomers",
+        "name": "Herons",
         "number": "3",
         "file": "/pages/team.html?day=tuesday&team=3"
       },
@@ -31,8 +31,8 @@
     {
       "week": 3,
       "date": "2026-06-09",
-      "time": "6:00pm",
-      "courts": "TBD (still figuring out the best option for conflicts on court usage)",
+      "time": "5:30pm",
+      "courts": "Logan",
       "homeAway": "Home",
       "opponent": {
         "name": "Spin Doctors",
@@ -87,7 +87,7 @@
       "courts": "Courts 1–5",
       "homeAway": "Home",
       "opponent": {
-        "name": "Tennis the Menace",
+        "name": "Subs",
         "number": "2",
         "file": "/pages/team.html?day=tuesday&team=2"
       },
