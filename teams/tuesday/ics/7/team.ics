@@ -21,8 +21,8 @@ DTSTAMP:20260602T180000Z
 DTSTART;TZID=America/Chicago:20260602T180000
 DTEND;TZID=America/Chicago:20260602T193000
 SUMMARY:LTTA Tennis: vs Approach Shots
-DESCRIPTION:LTTA Tennis match: 7 vs Approach Shots at Forest Hills Tennis Courts\nOpponent Roster: Greg Schibbelhut (1); Dillon Eddingsaas (2); Matthew Isaacson (3); Mary Aschenbrenner (3); Dale Barclay (3); Rich Levinger (3); Judith Engen (4); Amanda Wilke (5)
-LOCATION:Forest Hills Tennis Courts
+DESCRIPTION:LTTA Tennis match: 7 vs Approach Shots at TBD (still figuring out the best option for conflicts on court usage) Tennis Courts\nOpponent Roster: Greg Schibbelhut (1); Dillon Eddingsaas (2); Matthew Isaacson (3); Mary Aschenbrenner (3); Dale Barclay (3); Rich Levinger (3); Judith Engen (4); Amanda Wilke (5)
+LOCATION:TBD (still figuring out the best option for conflicts on court usage) Tennis Courts
 BEGIN:VALARM
 TRIGGER:-PT9H30M
 ACTION:DISPLAY
@@ -104,8 +104,8 @@ UID:ltta-tuesday-7-week8@couleeregiontennis.org
 DTSTAMP:20260714T190000Z
 DTSTART;TZID=America/Chicago:20260714T190000
 DTEND;TZID=America/Chicago:20260714T203000
-SUMMARY:LTTA Tennis: vs Herons
-DESCRIPTION:LTTA Tennis match: 7 vs Herons at Green Island Park - Courts 1–5\nOpponent Roster: Stephan Brettfeld (1); Joe Gregas (2); Madeline Loh (3); Adrienne Loh (3); Stanton Loh (3); Malakai Berget (3); Kaitlyn Northrup (4); Steve Mydy (5)
+SUMMARY:LTTA Tennis: vs Zoomers
+DESCRIPTION:LTTA Tennis match: 7 vs Zoomers at Green Island Park - Courts 1–5\nOpponent Roster: Stephan Brettfeld (1); Joe Gregas (2); Madeline Loh (3); Adrienne Loh (3); Stanton Loh (3); Malakai Berget (3); Kaitlyn Northrup (4); Steve Mydy (5)
 LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT11H

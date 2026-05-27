@@ -25,8 +25,8 @@ DTSTAMP:20260527T173000Z
 DTSTART;TZID=America/Chicago:20260527T173000
 DTEND;TZID=America/Chicago:20260527T190000
 SUMMARY:LTTA Tennis: vs LAX-Winona Fusion (Away)
-DESCRIPTION:LTTA Tennis match: 12 vs LAX-Winona Fusion at Forest Hills Tennis Courts\nOpponent Roster: Pheng Lo (1); Dan Lewis (2); Joe Heer (3); Janice Hoeschler (3); Jeffrey Schott (3); Nikki Nakano (3); Lora Cadwell (4); Barb Buswell (5)
-LOCATION:Forest Hills Tennis Courts
+DESCRIPTION:LTTA Tennis match: 12 vs LAX-Winona Fusion at TBD (still figuring out the best option for conflicts on court usage) Tennis Courts\nOpponent Roster: Pheng Lo (1); Dan Lewis (2); Joe Heer (3); Janice Hoeschler (3); Jeffrey Schott (3); Nikki Nakano (3); Lora Cadwell (4); Barb Buswell (5)
+LOCATION:TBD (still figuring out the best option for conflicts on court usage) Tennis Courts
 BEGIN:VALARM
 TRIGGER:-PT9H30M
 ACTION:DISPLAY

@@ -6,7 +6,7 @@
       "week": 1,
       "date": "2026-05-27",
       "time": "5:30pm",
-      "courts": "Forest Hills",
+      "courts": "TBD (still figuring out the best option for conflicts on court usage)",
       "homeAway": "Home",
       "opponent": {
         "name": "Nothing But Net",
@@ -32,7 +32,7 @@
       "week": 3,
       "date": "2026-06-10",
       "time": "6:00pm",
-      "courts": "Forest Hills",
+      "courts": "TBD (still figuring out the best option for conflicts on court usage)",
       "homeAway": "Away",
       "opponent": {
         "name": "Backhand Bandits",
