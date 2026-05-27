@@ -116,29 +116,31 @@ async function main() {
         });
       }
 
-      // Group matches by week
-      const matchesByWeek = {};
+      // Ensure scoresheets base output directory exists
+      fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+
+      // Group matches by date
+      const matchesByDate = {};
       schedule.forEach(match => {
         // Add rosters to match data
         match.teamA.roster = rosters[match.teamA.number] || [];
         match.teamB.roster = rosters[match.teamB.number] || [];
         
-        const weekNum = match.week;
-        if (!matchesByWeek[weekNum]) {
-          matchesByWeek[weekNum] = [];
+        const date = match.date; // e.g. "2026-05-26"
+        if (!matchesByDate[date]) {
+          matchesByDate[date] = [];
         }
-        matchesByWeek[weekNum].push(match);
+        matchesByDate[date].push(match);
       });
 
-      // Generate one file per week
-      Object.entries(matchesByWeek).forEach(([week, matches]) => {
+      // Generate one file per date (flat inside the scoresheets directory)
+      Object.entries(matchesByDate).forEach(([date, matches]) => {
         const combinedHtml = generateCombinedScoresheet(matches, night, template);
-        const filename = `week${week}-${night}.html`;
-        const outputPath = path.join(OUTPUT_DIR, `week${week}`, filename);
+        const filename = `${date}.html`;
+        const outputPath = path.join(OUTPUT_DIR, filename);
         
-        fs.mkdirSync(path.dirname(outputPath), { recursive: true });
         fs.writeFileSync(outputPath, combinedHtml);
-        console.log(`Generated combined scoresheet for week ${week}, ${night}`);
+        console.log(`Generated combined scoresheet for date ${date} (${night})`);
       });
     });
   } catch (error) {

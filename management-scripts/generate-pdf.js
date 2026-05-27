@@ -21,49 +21,37 @@ async function generatePdf() {
     let combinedBodyContent = '';
     let sheetCount = 0;
 
-    // Iterate through weeks 1 to 11
-    for (let week = 1; week <= 11; week++) {
-      const weekDir = path.join(SCORESHEETS_DIR, `week${week}`);
-      if (!fs.existsSync(weekDir)) {
-        console.log(`Skipping week ${week} (directory does not exist)`);
+    // Scan flat SCORESHEETS_DIR for YYYY-MM-DD.html files
+    if (!fs.existsSync(SCORESHEETS_DIR)) {
+      throw new Error(`Scoresheets directory not found at: ${SCORESHEETS_DIR}`);
+    }
+
+    const files = fs.readdirSync(SCORESHEETS_DIR)
+      .filter(file => /^\d{4}-\d{2}-\d{2}\.html$/.test(file))
+      .sort(); // String sort of YYYY-MM-DD.html is perfectly chronological
+
+    for (const filename of files) {
+      const filePath = path.join(SCORESHEETS_DIR, filename);
+      const fileContent = fs.readFileSync(filePath, 'utf-8');
+      const bodyMatch = fileContent.match(/<body>([\s\S]*?)<\/body>/);
+      
+      if (!bodyMatch) {
+        console.log(`Could not find body in ${filename}`);
         continue;
       }
 
-      // Order: Tuesday, then Wednesday for each week
-      const nights = ['tuesday', 'wednesday'];
-      for (const night of nights) {
-        const filename = `week${week}-${night}.html`;
-        const filePath = path.join(weekDir, filename);
+      const bodyContent = bodyMatch[1].trim();
 
-        if (!fs.existsSync(filePath)) {
-          console.log(`Skipping ${filename} (file does not exist)`);
-          continue;
-        }
-
-        const fileContent = fs.readFileSync(filePath, 'utf-8');
-        const bodyMatch = fileContent.match(/<body>([\s\S]*?)<\/body>/);
-        
-        if (!bodyMatch) {
-          console.log(`Could not find body in ${filename}`);
-          continue;
-        }
-
-        const bodyContent = bodyMatch[1].trim();
-
-        // Extract individual match sheets
-        // We can split by <div class="page-break"></div> or just append them directly
-        if (combinedBodyContent && bodyContent) {
-          combinedBodyContent += '\n<div class="page-break"></div>\n';
-        }
-        
-        combinedBodyContent += bodyContent;
-        
-        // Count match sheets in this file to verify
-        const matchSheetMatches = bodyContent.match(/class="match-sheet"/g) || [];
-        sheetCount += matchSheetMatches.length;
-        
-        console.log(`Added week ${week} ${night} (${matchSheetMatches.length} sheets)`);
+      if (combinedBodyContent && bodyContent) {
+        combinedBodyContent += '\n<div class="page-break"></div>\n';
       }
+      
+      combinedBodyContent += bodyContent;
+      
+      const matchSheetMatches = bodyContent.match(/class="match-sheet"/g) || [];
+      sheetCount += matchSheetMatches.length;
+      
+      console.log(`Added date scoresheet: ${filename} (${matchSheetMatches.length} sheets)`);
     }
 
     if (!combinedBodyContent) {

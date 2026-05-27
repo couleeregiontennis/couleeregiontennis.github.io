@@ -83,10 +83,11 @@ This folder contains scripts to help you manage the Coulee Region Tennis Associa
 
 - **Purpose:** Creates printable paper scoresheets for each match.
 - **Input:** Team rosters and schedules (JSON), `scoresheet.html` template
-- **Output:** HTML scoresheets in `scoresheets/` (organized by week and night)
+- **Output:** HTML scoresheets in `scoresheets/` (named by date as `YYYY-MM-DD.html`)
 - **Details:**
+  - Saves sheets flat inside the `scoresheets/` folder named exactly after their match dates.
   - These files can be opened in a browser and printed.
-  - Each match will be on a separate page for easy printing.
+  - Each match in the file will automatically print on a separate page.
 - **Run after generating rosters and schedules.**
   ```bash
   node generate-scoresheet.js
@@ -96,11 +97,12 @@ This folder contains scripts to help you manage the Coulee Region Tennis Associa
 
 ### 6. `generate-pdf.js`
 
-- **Purpose:** Combines all individual HTML scoresheets across Weeks 1–11 into a single, high-quality, printable PDF document.
-- **Input:** Generated HTML scoresheets under `scoresheets/week*/week*-*.html`, `scoresheet.html` template CSS
+- **Purpose:** Combines all individual HTML scoresheets into a single, high-quality, printable PDF document.
+- **Input:** Generated HTML scoresheets `scoresheets/YYYY-MM-DD.html`, `scoresheet.html` template CSS
 - **Output:** `scoresheets/all-scoresheets.pdf` (master PDF) and `scoresheets/all-scoresheets.html` (combined HTML)
 - **Details:**
-  - Automatically loads and renders all **132 match sheets** in sequential week/night order.
+  - Scans the flat `scoresheets/` folder for date-named HTML files, sorting them chronologically.
+  - Automatically loads and renders all **132 match sheets** in sequential date order.
   - Uses Playwright to print the sheets with professional print-layout margins.
 - **Run after generating scoresheets.**
   ```bash
@@ -128,7 +130,7 @@ This folder contains scripts to help you manage the Coulee Region Tennis Associa
 - **Schedules:** `teams/{night}/schedules/`
 - **All-team HTML:** `teams/{night}/all.html`
 - **Emails:** `output_emails/`
-- **Scoresheets:** `scoresheets/week{N}/`
+- **Scoresheets:** `scoresheets/YYYY-MM-DD.html` (flat in the scoresheets folder)
 - **Combined PDF:** `scoresheets/all-scoresheets.pdf`
 
 ---
@@ -143,8 +145,8 @@ You have two options for printing the match scoresheets:
 3. Ensure **Margins are set to "None"** or **"Default"** (since the layout is perfectly sized for letter sheets).
 4. Print the entire season's 132 scoresheets at once!
 
-### Option B: Individual Weekly HTML Files
-1. Open any generated HTML file in the `scoresheets/week{N}/` folders in your browser.
+### Option B: Individual Date-named HTML Files
+1. Open any generated HTML file in the `scoresheets/` folder (e.g., `2026-05-26.html`) in your browser.
 2. Print (Cmd+P or Ctrl+P).
 3. Each match will automatically be on a separate page.
 
