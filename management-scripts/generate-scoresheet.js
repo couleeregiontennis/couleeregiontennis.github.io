@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const TEAMS_DIR = '../teams';
-const TEMPLATE_PATH = './scoresheet.html';
-const OUTPUT_DIR = './scoresheets';
+const TEAMS_DIR = path.join(__dirname, '../teams');
+const TEMPLATE_PATH = path.join(__dirname, 'scoresheet.html');
+const OUTPUT_DIR = path.join(__dirname, 'scoresheets');
 
 function generateCombinedScoresheet(matches, night, template) {
   let combinedHtml = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">';
