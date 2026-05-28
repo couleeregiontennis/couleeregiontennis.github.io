@@ -22,11 +22,13 @@ test('generateEmailTemplate should return a string containing team details', (t)
   assert.ok(typeof html === 'string', 'Template should be a string');
   assert.ok(html.includes('Your Team: Topspin Wizards (Tues #1)'), 'Should include team header');
   assert.ok(html.includes('John Doe'), 'Should include captain name');
+  assert.ok(html.includes('Tuesday'), 'Should include match day');
   assert.ok(html.includes('Tom Dwyer'), 'Should include Tuesday coordinator');
   assert.ok(html.includes('Jane Smith'), 'Should include co-captain name');
   assert.ok(html.includes('The water fountain at Green Island is currently out of order'), 'Should include water warning');
   assert.ok(html.includes('RealFeel'), 'Should include heat rule');
   assert.ok(html.includes('crossover championship'), 'Should include championship details');
+  assert.ok(html.includes('href="https://couleeregiontennis.org"'), 'Should include website domain');
 });
 
 test('generateEmailTemplate should handle Wednesday teams', (t) => {

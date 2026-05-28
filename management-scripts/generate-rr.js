@@ -51,7 +51,7 @@ async function loadSheet() {
       team: getIndex('Team/'),
       ccc: getIndex('C/CC'),
       level: getIndex('Level'),
-      name: getIndex('1-Name'),
+      name: getIndex('Name') !== -1 ? getIndex('Name') : getIndex('1-Name'),
       teamName: getIndex('TEAM NAME')
     };
 
@@ -336,10 +336,7 @@ async function main() {
           // Date specific overrides
           if (['2026-05-27', '2026-06-02', '2026-06-03', '2026-06-09', '2026-06-10'].includes(dateStr) && match.time === '5:30pm') {
             if (match.court === 'Courts 1–5') {
-              match.court = 'TBD (still figuring out the best option for conflicts on court usage)';
-              if (dateStr !== '2026-05-27') {
-                match.time = '6:00pm';
-              }
+              match.court = 'Logan';
             }
           }
 
@@ -406,7 +403,7 @@ async function main() {
             ? '\\nOpponent Roster: ' + opponentRoster.map(p => `${p.name} (${p.position})`).join('; ')
             : '';
           
-          const locationName = match.courts === 'TBD (still figuring out the best option for conflicts on court usage)' ? 'TBD (still figuring out the best option for conflicts on court usage) Tennis Courts' : `Green Island Park - ${match.courts}`;
+          const locationName = match.courts === 'Logan' ? 'Logan Tennis Courts' : `Green Island Park - ${match.courts}`;
           const description = `LTTA Tennis match: ${team} vs ${match.opponent.name} at ${locationName}${rosterText}`;
           const uid = `ltta-${night}-${team}-week${match.week}@couleeregiontennis.org`;
           
@@ -459,7 +456,7 @@ async function main() {
             ? '\\nOpponent Roster: ' + opponentRoster.map(p => `${p.name} (${p.position})`).join('; ')
             : '';
           
-          const locationName = match.courts === 'TBD (still figuring out the best option for conflicts on court usage)' ? 'TBD (still figuring out the best option for conflicts on court usage) Tennis Courts' : `Green Island Park - ${match.courts}`;
+          const locationName = match.courts === 'Logan' ? 'Logan Tennis Courts' : `Green Island Park - ${match.courts}`;
           const description = `LTTA Tennis match: ${team} vs ${match.opponent.name} at ${locationName}${rosterText}`;
           const uid = `ltta-${night}-${team}-week${match.week}@couleeregiontennis.org`;
           const icsContent = createICSEvent({
