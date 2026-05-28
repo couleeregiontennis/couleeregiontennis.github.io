@@ -86,8 +86,8 @@ test('Schedules, ICS calendars, and Scoresheets should all have matching data fo
       assert.strictEqual(matchEvent['LOCATION'], expectedLocation, `Team ${teamA} master team.ics LOCATION mismatch`);
 
       // 5. Assert Week Scoresheet matches schedule details
-      const sheetPath = path.join(SCORESHEETS_DIR, `week${week}`, `week${week}-${night}.html`);
-      assert.ok(fs.existsSync(sheetPath), `Scoresheet should exist for week ${week} ${night}`);
+      const sheetPath = path.join(SCORESHEETS_DIR, `${date}.html`);
+      assert.ok(fs.existsSync(sheetPath), `Scoresheet should exist for date ${date}`);
       const html = fs.readFileSync(sheetPath, 'utf8');
       assert.ok(html.includes(teamAName), `Scoresheet should contain Team A name: "${teamAName}"`);
       assert.ok(html.includes(teamBName), `Scoresheet should contain Team B name: "${teamBName}"`);
