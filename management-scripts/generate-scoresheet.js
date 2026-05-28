@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const TEAMS_DIR = '../teams';
-const TEMPLATE_PATH = './scoresheet.html';
-const OUTPUT_DIR = './scoresheets';
+const TEAMS_DIR = path.join(__dirname, '../teams');
+const TEMPLATE_PATH = path.join(__dirname, 'scoresheet.html');
+const OUTPUT_DIR = path.join(__dirname, 'scoresheets');
 
 function generateCombinedScoresheet(matches, night, template) {
   let combinedHtml = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">';
@@ -23,8 +23,10 @@ function generateCombinedScoresheet(matches, night, template) {
     });
 
     // Fill in header information (exact matches from template)
-    html = html.replace('[TUES]', night.toLowerCase() === 'tuesday' ? '✓' : ' ');
-    html = html.replace('[WED]', night.toLowerCase() === 'wednesday' ? '✓' : ' ');
+    const matchId = `W${match.week}-${night.substring(0, 3).toUpperCase()}-T${match.teamA.number}vT${match.teamB.number}`;
+    html = html.replace('[MATCH_ID]', matchId);
+    html = html.replace('[TUES]', night.toLowerCase() === 'tuesday' ? 'TUES' : '');
+    html = html.replace('[WED]', night.toLowerCase() === 'wednesday' ? 'WED' : '');
     html = html.replace('[DATE]', match.date);
     html = html.replace('[TIME]', match.time);
     html = html.replace('[COURTS]', match.courts);
@@ -61,10 +63,6 @@ function generateCombinedScoresheet(matches, night, template) {
       html = html.replace('[P5T1]', getPlayerByPosition(match.teamA.roster, 5) || '_______');
       html = html.replace('[P4T2]', getPlayerByPosition(match.teamB.roster, 4) || '_______');
       html = html.replace('[P5T2]', getPlayerByPosition(match.teamB.roster, 5) || '_______');
-
-      // Add point placeholders (empty for now)
-      html = html.replace('[T1POINTS]', '_____');
-      html = html.replace('[T2POINTS]', '_____');
     }
 
     // Add verification logging
@@ -75,6 +73,9 @@ function generateCombinedScoresheet(matches, night, template) {
       hasCourts: html.includes(match.courts)
     });
 
+    if (index > 0) {
+      combinedHtml += '<div class="page-break"></div>';
+    }
     // Wrap each scoresheet in a div with page break
     combinedHtml += `<div class="match-sheet">${html}</div>`;
   });
@@ -115,29 +116,31 @@ async function main() {
         });
       }
 
-      // Group matches by week
-      const matchesByWeek = {};
+      // Ensure scoresheets base output directory exists
+      fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+
+      // Group matches by date
+      const matchesByDate = {};
       schedule.forEach(match => {
         // Add rosters to match data
         match.teamA.roster = rosters[match.teamA.number] || [];
         match.teamB.roster = rosters[match.teamB.number] || [];
         
-        const weekNum = match.week;
-        if (!matchesByWeek[weekNum]) {
-          matchesByWeek[weekNum] = [];
+        const date = match.date; // e.g. "2026-05-26"
+        if (!matchesByDate[date]) {
+          matchesByDate[date] = [];
         }
-        matchesByWeek[weekNum].push(match);
+        matchesByDate[date].push(match);
       });
 
-      // Generate one file per week
-      Object.entries(matchesByWeek).forEach(([week, matches]) => {
+      // Generate one file per date (flat inside the scoresheets directory)
+      Object.entries(matchesByDate).forEach(([date, matches]) => {
         const combinedHtml = generateCombinedScoresheet(matches, night, template);
-        const filename = `week${week}-${night}.html`;
-        const outputPath = path.join(OUTPUT_DIR, `week${week}`, filename);
+        const filename = `${date}.html`;
+        const outputPath = path.join(OUTPUT_DIR, filename);
         
-        fs.mkdirSync(path.dirname(outputPath), { recursive: true });
         fs.writeFileSync(outputPath, combinedHtml);
-        console.log(`Generated combined scoresheet for week ${week}, ${night}`);
+        console.log(`Generated combined scoresheet for date ${date} (${night})`);
       });
     });
   } catch (error) {

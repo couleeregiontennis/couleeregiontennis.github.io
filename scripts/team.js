@@ -47,7 +47,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
     tableBody.innerHTML = "";
     (scheduleData.schedule || []).forEach(match => {
       const icsLink = match.ics
-        ? `<a href="${sanitizeUrl(match.ics)}" download="LTTA-Match-Week${escapeHTML(match.week)}.ics" title="Add to calendar">📅</a>`
+        ? `<a href="${sanitizeUrl(match.ics)}?v=2026" download="LTTA-Match-Week${escapeHTML(match.week)}.ics" title="Add to calendar">📅</a>`
         : '';
       const tr = document.createElement("tr");
       tr.innerHTML = `
@@ -79,7 +79,8 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
     // After loading the team data and knowing the ICS path:
     const teamIcsLink = document.getElementById('add-all-ics');
     if (teamIcsLink) {
-      teamIcsLink.href = sanitizeUrl(scheduleData.teamIcsPath) || sanitizeUrl(`/teams/${scheduleData.night}/ics/${scheduleData.team.replace(/\s+/g, '_')}/team.ics`);
+      const baseIcsUrl = scheduleData.teamIcsPath || `/teams/${scheduleData.night}/ics/${scheduleData.team.replace(/\s+/g, '_')}/team.ics`;
+      teamIcsLink.href = sanitizeUrl(`${baseIcsUrl}?v=2026`);
     }
 
     highlightNextMatch();
