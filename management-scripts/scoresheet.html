@@ -132,9 +132,53 @@
         text-align: center;
       }
 
-      .participation-cell {
+      /* Match Results Unified Grid */
+      .match-results-table {
+        border: 2px solid black;
+        width: 100%;
+        margin: 10px 0;
+        table-layout: fixed;
+        border-collapse: collapse;
+      }
+
+      .match-results-table th {
+        background: #f0f0f0;
+        font-weight: bold;
+        font-size: 11px;
         text-align: center;
-        width: 80px;
+        border: 2px solid black;
+        padding: 6px 4px;
+      }
+
+      .match-results-table td {
+        border: 1px solid black;
+        padding: 5px;
+        vertical-align: middle;
+      }
+
+      .match-results-table tr.line-separator td {
+        border-top: 2px solid black;
+      }
+
+      .player-cell {
+        font-size: 11px;
+        text-align: left;
+        line-height: 1.4;
+      }
+
+      .player-cell strong {
+        font-size: 10px;
+        color: #333;
+        display: inline-block;
+        width: 45px;
+      }
+
+      .match-results-table .ocr-check {
+        width: 20px;
+        height: 20px;
+        border: 3.5px solid black;
+        margin: 0 auto;
+        background: white;
       }
 
       .ocr-check {
@@ -189,176 +233,95 @@
 
     <div class="section-title">Match Results</div>
 
-    <!-- Line 1 -->
-    <table>
-      <tr>
-        <th style="width: 45%;">HOME PLAYERS</th>
-        <th style="width: 10%;">LINE</th>
-        <th style="width: 45%;">AWAY PLAYERS</th>
-      </tr>
-      <tr>
-        <td>1: [P1T1]<br>2: [P2T1]</td>
-        <td style="text-align: center; font-weight: bold;">1</td>
-        <td>1: [P1T2]<br>2: [P2T2]</td>
-      </tr>
-      <tr>
-        <td>
-          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
-          <div class="score-box-container">
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
-            <div class="digit-box" style="border-width: 3px;"></div>
-          </div>
-        </td>
-        <td class="participation-cell" style="padding: 2px;">
-          <span class="label-small">Win?</span>
-          <div style="display: flex; justify-content: center; gap: 6px;">
-            <div>
-              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
-              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
-            </div>
-            <div>
-              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
-              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
-            </div>
-          </div>
-        </td>
-        <td>
-          <span class="label-small">Set 1 | Set 2 | TB || PTS</span>
-          <div class="score-box-container">
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
-            <div class="digit-box" style="border-width: 3px;"></div>
-          </div>
-        </td>
-      </tr>
-    </table>
+    <table class="match-results-table">
+      <thead>
+        <tr>
+          <th style="width: 6%;">LINE</th>
+          <th style="width: 44%; text-align: left; padding-left: 8px;">PLAYERS</th>
+          <th style="width: 10%;">SET 1</th>
+          <th style="width: 10%;">SET 2</th>
+          <th style="width: 10%;">TB</th>
+          <th style="width: 10%; border-left: 2px dashed black;">PTS</th>
+          <th style="width: 10%;">WIN?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Line 1 -->
+        <tr>
+          <td rowspan="2" style="text-align: center; font-weight: bold; font-size: 14px;">1</td>
+          <td class="player-cell"><strong>HOME:</strong> 1: [P1T1]<br>2: [P2T1]</td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center; border-left: 2px dashed black;"><div class="digit-box" style="border-width: 3px;"></div></td>
+          <td style="text-align: center;"><div class="ocr-check"></div></td>
+        </tr>
+        <tr>
+          <td class="player-cell"><strong>AWAY:</strong> 1: [P1T2]<br>2: [P2T2]</td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center; border-left: 2px dashed black;"><div class="digit-box" style="border-width: 3px;"></div></td>
+          <td style="text-align: center;"><div class="ocr-check"></div></td>
+        </tr>
 
-    <!-- Line 2 -->
-    <table>
-      <tr>
-        <td>3: [P3T1A] / [P3T1B] / [P3T1C] / [P3T1D]<br>3: [P3T1A] / [P3T1B] / [P3T1C] / [P3T1D]</td>
-        <td style="width: 10%; text-align: center; font-weight: bold;">2</td>
-        <td>3: [P3T2A] / [P3T2B] / [P3T2C] / [P3T2D]<br>3: [P3T2A] / [P3T2B] / [P3T2C] / [P3T2D]</td>
-      </tr>
-      <tr>
-        <td>
-          <div class="score-box-container">
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
-            <div class="digit-box" style="border-width: 3px;"></div>
-          </div>
-        </td>
-        <td class="participation-cell" style="padding: 2px;">
-          <div style="display: flex; justify-content: center; gap: 6px;">
-            <div>
-              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
-              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
-            </div>
-            <div>
-              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
-              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="score-box-container">
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
-            <div class="digit-box" style="border-width: 3px;"></div>
-          </div>
-        </td>
-      </tr>
-    </table>
+        <!-- Line 2 -->
+        <tr class="line-separator">
+          <td rowspan="2" style="text-align: center; font-weight: bold; font-size: 14px;">2</td>
+          <td class="player-cell"><strong>HOME:</strong> 3: [P3T1A] / [P3T1B] / [P3T1C] / [P3T1D]<br>3: [P3T1A] / [P3T1B] / [P3T1C] / [P3T1D]</td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center; border-left: 2px dashed black;"><div class="digit-box" style="border-width: 3px;"></div></td>
+          <td style="text-align: center;"><div class="ocr-check"></div></td>
+        </tr>
+        <tr>
+          <td class="player-cell"><strong>AWAY:</strong> 3: [P3T2A] / [P3T2B] / [P3T2C] / [P3T2D]<br>3: [P3T2A] / [P3T2B] / [P3T2C] / [P3T2D]</td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center; border-left: 2px dashed black;"><div class="digit-box" style="border-width: 3px;"></div></td>
+          <td style="text-align: center;"><div class="ocr-check"></div></td>
+        </tr>
 
-    <!-- Line 3 -->
-    <table>
-      <tr>
-        <td>3: [P3T1A] / [P3T1B] / [P3T1C] / [P3T1D]<br>3: [P3T1A] / [P3T1B] / [P3T1C] / [P3T1D]</td>
-        <td style="width: 10%; text-align: center; font-weight: bold;">3</td>
-        <td>3: [P3T2A] / [P3T2B] / [P3T2C] / [P3T2D]<br>3: [P3T2A] / [P3T2B] / [P3T2C] / [P3T2D]</td>
-      </tr>
-      <tr>
-        <td>
-          <div class="score-box-container">
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
-            <div class="digit-box" style="border-width: 3px;"></div>
-          </div>
-        </td>
-        <td class="participation-cell" style="padding: 2px;">
-          <div style="display: flex; justify-content: center; gap: 6px;">
-            <div>
-              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
-              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
-            </div>
-            <div>
-              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
-              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="score-box-container">
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
-            <div class="digit-box" style="border-width: 3px;"></div>
-          </div>
-        </td>
-      </tr>
-    </table>
+        <!-- Line 3 -->
+        <tr class="line-separator">
+          <td rowspan="2" style="text-align: center; font-weight: bold; font-size: 14px;">3</td>
+          <td class="player-cell"><strong>HOME:</strong> 3: [P3T1A] / [P3T1B] / [P3T1C] / [P3T1D]<br>3: [P3T1A] / [P3T1B] / [P3T1C] / [P3T1D]</td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center; border-left: 2px dashed black;"><div class="digit-box" style="border-width: 3px;"></div></td>
+          <td style="text-align: center;"><div class="ocr-check"></div></td>
+        </tr>
+        <tr>
+          <td class="player-cell"><strong>AWAY:</strong> 3: [P3T2A] / [P3T2B] / [P3T2C] / [P3T2D]<br>3: [P3T2A] / [P3T2B] / [P3T2C] / [P3T2D]</td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center; border-left: 2px dashed black;"><div class="digit-box" style="border-width: 3px;"></div></td>
+          <td style="text-align: center;"><div class="ocr-check"></div></td>
+        </tr>
 
-    <!-- Line 4 -->
-    <table>
-      <tr>
-        <td>4: [P4T1]<br>5: [P5T1]</td>
-        <td style="width: 10%; text-align: center; font-weight: bold;">4</td>
-        <td>4: [P4T2]<br>5: [P5T2]</td>
-      </tr>
-      <tr>
-        <td>
-          <div class="score-box-container">
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
-            <div class="digit-box" style="border-width: 3px;"></div>
-          </div>
-        </td>
-        <td class="participation-cell" style="padding: 2px;">
-          <div style="display: flex; justify-content: center; gap: 6px;">
-            <div>
-              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Home</span>
-              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
-            </div>
-            <div>
-              <span class="label-small" style="font-size: 8px; margin-bottom: 1px;">Away</span>
-              <div class="ocr-check" style="width: 20px; height: 20px; border-width: 2px;"></div>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="score-box-container">
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div class="digit-box"></div>
-            <div style="border-left: 2px dashed black; margin: 0 4px; height: 30px;"></div>
-            <div class="digit-box" style="border-width: 3px;"></div>
-          </div>
-        </td>
-      </tr>
+        <!-- Line 4 -->
+        <tr class="line-separator">
+          <td rowspan="2" style="text-align: center; font-weight: bold; font-size: 14px;">4</td>
+          <td class="player-cell"><strong>HOME:</strong> 4: [P4T1]<br>5: [P5T1]</td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center; border-left: 2px dashed black;"><div class="digit-box" style="border-width: 3px;"></div></td>
+          <td style="text-align: center;"><div class="ocr-check"></div></td>
+        </tr>
+        <tr>
+          <td class="player-cell"><strong>AWAY:</strong> 4: [P4T2]<br>5: [P5T2]</td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center;"><div class="digit-box"></div></td>
+          <td style="text-align: center; border-left: 2px dashed black;"><div class="digit-box" style="border-width: 3px;"></div></td>
+          <td style="text-align: center;"><div class="ocr-check"></div></td>
+        </tr>
+      </tbody>
     </table>
 
     <div class="section-title">Final Scoring (0-3 Points Max)</div>
@@ -389,8 +352,8 @@
       </div>
       <div style="display: flex; gap: 15px;">
         <div style="flex: 1; font-size: 9px;">
-          <strong>1. RECORD SCORES:</strong> Write games won for <strong>Set 1</strong> & <strong>Set 2</strong>. If a 10-point match tiebreaker is played, write the score in the <strong>TB</strong> box.
-          <br><strong>2. LINE WINNER:</strong> Check the <strong>Home</strong> or <strong>Away</strong> box under the <strong>Win?</strong> column to mark the line winner.
+          <strong>1. RECORD SCORES:</strong> Write games won in <strong>SET 1</strong> & <strong>SET 2</strong> rows for both Home and Away. If a 10-point match tiebreaker is played, write the score in the <strong>TB</strong> box.
+          <br><strong>2. LINE WINNER:</strong> Check the <strong>WIN?</strong> box in the row of the winning team.
           <br><strong>3. SUBSTITUTES:</strong> If a sub plays, cross out the prefilled player name and write the sub's name clearly.
         </div>
         <div style="flex: 1; font-size: 9px; border-left: 1px dashed #ccc; padding-left: 15px;">
