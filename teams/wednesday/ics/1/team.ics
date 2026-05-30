@@ -7,8 +7,8 @@ DTSTAMP:20260527T173000Z
 DTSTART;TZID=America/Chicago:20260527T173000
 DTEND;TZID=America/Chicago:20260527T190000
 SUMMARY:LTTA Tennis: vs Nothing But Net
-DESCRIPTION:LTTA Tennis match: 1 vs Nothing But Net at Logan Tennis Courts\nOpponent Roster: Alex Hiller (1); Eric Johnson (2); Lewis Kuhlman (3); Sarah Wengerter (3); Brittney DeChambeau (3); Kevin LeQue (3); Asa Harter (4); Logan Bahr (5)
-LOCATION:Logan Tennis Courts
+DESCRIPTION:LTTA Tennis match: 1 vs Nothing But Net at Green Island Park - Courts 1–5\nOpponent Roster: Alex Hiller (1); Eric Johnson (2); Lewis Kuhlman (3); Sarah Wengerter (3); Brittney DeChambeau (3); Kevin LeQue (3); Asa Harter (4); Logan Bahr (5)
+LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M
 ACTION:DISPLAY
@@ -35,8 +35,8 @@ DTSTAMP:20260610T173000Z
 DTSTART;TZID=America/Chicago:20260610T173000
 DTEND;TZID=America/Chicago:20260610T190000
 SUMMARY:LTTA Tennis: vs Backhand Bandits
-DESCRIPTION:LTTA Tennis match: 1 vs Backhand Bandits at Logan Tennis Courts\nOpponent Roster: Leah Fortun (1); Josh Fortun (2); Jennifer Carr (3); Amy Marcou (3); Michael Ojelabi (3); Marc Crosby (3); Eli De Leon (4); Irene Johnson-Salvador (5)
-LOCATION:Logan Tennis Courts
+DESCRIPTION:LTTA Tennis match: 1 vs Backhand Bandits at Green Island Park - Courts 1–5\nOpponent Roster: Leah Fortun (1); Josh Fortun (2); Jennifer Carr (3); Amy Marcou (3); Michael Ojelabi (3); Marc Crosby (3); Eli De Leon (4); Irene Johnson-Salvador (5)
+LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M
 ACTION:DISPLAY

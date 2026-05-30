@@ -35,8 +35,8 @@ DTSTAMP:20260609T173000Z
 DTSTART;TZID=America/Chicago:20260609T173000
 DTEND;TZID=America/Chicago:20260609T190000
 SUMMARY:LTTA Tennis: vs Jetsetters
-DESCRIPTION:LTTA Tennis match: 1 vs Jetsetters at Logan Tennis Courts\nOpponent Roster: Drake Wonderling (1); Corey Stauner (2); Jada Brunkow (3); Dan Petersen (3); Shirley Yuan (3); Tyler Benson (3); Aaron Olson (4); Anna Olson (5)
-LOCATION:Logan Tennis Courts
+DESCRIPTION:LTTA Tennis match: 1 vs Jetsetters at Green Island Park - Courts 1–5\nOpponent Roster: Drake Wonderling (1); Corey Stauner (2); Jada Brunkow (3); Dan Petersen (3); Shirley Yuan (3); Tyler Benson (3); Aaron Olson (4); Anna Olson (5)
+LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M
 ACTION:DISPLAY

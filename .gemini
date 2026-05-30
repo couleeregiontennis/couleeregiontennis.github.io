@@ -21,15 +21,9 @@ This file contains useful findings, domain knowledge, and development instructio
 - Tuesday Team 2 is the **`Subs`** team (with roster players Sawyer Kuck, Dave Mills, etc.). 
 - When rosters are regenerated, ensure it is named `Subs` rather than defaulting to `BYE`.
 
-### 3. Logan Alternate Location
-- When Green Island `Courts 1–5` are unavailable at `5:30pm` due to early-season conflicts, the affected matches are moved to **`Logan`** courts.
-- Keep the match times at **5:30pm** (do not apply 6:00pm overrides).
-- Dates requiring the Logan override are:
-  - Tuesday Week 2 (`2026-06-02`)
-  - Tuesday Week 3 (`2026-06-09`)
-  - Wednesday Week 1 (`2026-05-27`)
-  - Wednesday Week 2 (`2026-06-03`)
-  - Wednesday Week 3 (`2026-06-10`)
+### 3. Logan Alternate Location (Retired)
+- Previously, matches were moved to **`Logan`** courts when Green Island `Courts 1–5` were unavailable at `5:30pm` due to early-season conflicts.
+- This override has been completely removed in May 2026. All matches now show they are at Green Island (using standard court groups like `Courts 1–5`).
 
 ---
 

@@ -3,7 +3,7 @@
     "week": 1,
     "date": "2026-05-27",
     "time": "5:30pm",
-    "courts": "Logan",
+    "courts": "Courts 1–5",
     "teamA": {
       "number": "1",
       "name": "LAX-Winona Fusion"
@@ -143,7 +143,7 @@
     "week": 2,
     "date": "2026-06-03",
     "time": "5:30pm",
-    "courts": "Logan",
+    "courts": "Courts 1–5",
     "teamA": {
       "number": "7",
       "name": "Serve Aces"
@@ -171,7 +171,7 @@
     "week": 3,
     "date": "2026-06-10",
     "time": "5:30pm",
-    "courts": "Logan",
+    "courts": "Courts 1–5",
     "teamA": {
       "number": "10",
       "name": "Backhand Bandits"

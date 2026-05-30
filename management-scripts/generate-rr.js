@@ -333,11 +333,7 @@ async function main() {
       weekAssignments.forEach((matches, weekIdx) => {
         const dateStr = weekDates[weekIdx];
         matches.forEach(match => {
-          // Date specific overrides
-          if (['2026-05-27', '2026-06-02', '2026-06-03', '2026-06-09', '2026-06-10'].includes(dateStr) && match.time === '5:30pm') {
-            if (match.court === 'Courts 1–5') {
-              match.court = 'Logan';
-            }
+
           }
 
           // Find team objects for A and B
