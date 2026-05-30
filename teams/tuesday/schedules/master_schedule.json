@@ -143,7 +143,7 @@
     "week": 2,
     "date": "2026-06-02",
     "time": "5:30pm",
-    "courts": "Logan",
+    "courts": "Courts 1–5",
     "teamA": {
       "number": "7",
       "name": "Good Ol' Boys"
@@ -171,7 +171,7 @@
     "week": 3,
     "date": "2026-06-09",
     "time": "5:30pm",
-    "courts": "Logan",
+    "courts": "Courts 1–5",
     "teamA": {
       "number": "10",
       "name": "Jetsetters"
