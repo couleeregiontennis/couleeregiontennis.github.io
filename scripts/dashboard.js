@@ -81,6 +81,19 @@ async function loadWeather(nextMatchDate) {
     const apparentDisplay = apparentTemp !== '--' ? `${apparentTemp}°F` : '--';
     const humidityDisplay = humidity !== '--' ? `${humidity}%` : '--';
 
+    let ruleLink = '';
+    if (heatRuleClass !== 'heat-alert-normal') {
+      ruleLink = 'pages/ltta-rules.html#match-play-rules';
+    }
+
+    const weatherRuleHtml = ruleLink 
+      ? `<a href="${ruleLink}" class="weather-rule-status ${heatRuleClass}" style="display: block; font-weight: bold; font-size: 0.9rem; margin-bottom: 8px; padding: 6px; border-radius: 4px; text-align: center; text-decoration: none; color: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
+          ${heatRuleText} <span style="font-size: 0.75rem; font-weight: normal; opacity: 0.9; text-decoration: underline; margin-left: 4px;">(View Rule)</span>
+         </a>`
+      : `<div class="weather-rule-status ${heatRuleClass}" style="font-weight: bold; font-size: 0.9rem; margin-bottom: 8px; padding: 6px; border-radius: 4px; text-align: center;">
+          ${heatRuleText}
+         </div>`;
+
     weatherWidget.innerHTML = `
       <h3>🌡️ Match Weather</h3>
       <div style="font-size: 0.8rem; margin-top: -8px; margin-bottom: 8px; opacity: 0.85; font-weight: bold;">
@@ -106,9 +119,7 @@ async function loadWeather(nextMatchDate) {
           </div>
         </div>
 
-        <div class="weather-rule-status ${heatRuleClass}" style="font-weight: bold; font-size: 0.9rem; margin-bottom: 8px; padding: 6px; border-radius: 4px; text-align: center;">
-          ${heatRuleText}
-        </div>
+        ${weatherRuleHtml}
 
         <div style="font-size: 0.72rem; opacity: 0.85; line-height: 1.3; text-align: center;">
           LTTA uses the "RealFeel" temperature on 
