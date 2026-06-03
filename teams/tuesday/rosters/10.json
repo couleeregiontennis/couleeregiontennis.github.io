@@ -13,11 +13,6 @@
     },
     {
       "position": "3",
-      "name": "Jada Brunkow",
-      "captain": ""
-    },
-    {
-      "position": "3",
       "name": "Dan Petersen",
       "captain": "✓"
     },
@@ -29,16 +24,6 @@
     {
       "position": "3",
       "name": "Tyler Benson",
-      "captain": ""
-    },
-    {
-      "position": "4",
-      "name": "Aaron Olson",
-      "captain": ""
-    },
-    {
-      "position": "5",
-      "name": "Anna Olson",
       "captain": ""
     }
   ]

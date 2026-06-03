@@ -11,6 +11,25 @@ if (!CSV_URL) {
   process.exit(1);
 }
 
+function sanitizeAndSplitName(rawName) {
+  if (!rawName) return [];
+  const lines = rawName.split(/\r?\n/);
+  const names = [];
+  lines.forEach(line => {
+    let clean = line;
+    // Remove email addresses
+    clean = clean.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, '');
+    // Remove phone numbers
+    clean = clean.replace(/\b\d{3}[-.\s]??\d{3}[-.\s]??\d{4}\b/g, '');
+    // Clean up whitespace
+    clean = clean.replace(/\s+/g, ' ').trim();
+    if (clean) {
+      names.push(clean);
+    }
+  });
+  return names;
+}
+
 async function createRostersFromCSV() {
   try {
     const csvContent = await fetchCSV(CSV_URL);
@@ -58,10 +77,16 @@ async function createRostersFromCSV() {
 
       // Only add to roster array if there is an actual player name
       if (name) {
-        rosters[key].roster.push({
-          position: level,
-          name: name,
-          captain: row['C/CC'] && row['C/CC'].trim() ? '✓' : ''
+        const cleanNames = sanitizeAndSplitName(name);
+        cleanNames.forEach(cleanName => {
+          const exists = rosters[key].roster.some(p => p.name === cleanName && p.position === level);
+          if (!exists) {
+            rosters[key].roster.push({
+              position: level,
+              name: cleanName,
+              captain: row['C/CC'] && row['C/CC'].trim() ? '✓' : ''
+            });
+          }
         });
       }
     });
