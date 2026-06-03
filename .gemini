@@ -54,6 +54,14 @@ Always run scripts in this order from the project directory (or within `manageme
 
 ---
 
+## 🌐 Cache Busting & Asset Updates
+
+### 1. Version Queries
+- Always append or increment the query parameter version string (e.g., `?v=2026.5` -> `?v=2026.6`) on references to modified static CSS and JS files in HTML files when deploying layout or script changes (e.g., in [index.html](file:///H:/Repo/couleeregiontennis.github.io/index.html), [pages/team.html](file:///H:/Repo/couleeregiontennis.github.io/pages/team.html), etc.).
+- This forces browsers to fetch the newly modified files immediately rather than serving broken, stale cached layouts to users.
+
+---
+
 ## 💻 Sandboxed Environment Tips
 
 1. **Git Worktree Path Issue**: Running git commands inside standard sandbox mode can fail because `.git` points back to the parent repository. Always set `BypassSandbox: true` for git operations in this worktree.
