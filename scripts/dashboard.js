@@ -83,7 +83,7 @@ async function loadWeather(nextMatchDate) {
 
     let ruleLink = '';
     if (heatRuleClass !== 'heat-alert-normal') {
-      ruleLink = 'pages/ltta-rules.html#match-play-rules';
+      ruleLink = 'pages/ltta-rules.html#weather-cancellations';
     }
 
     const weatherRuleHtml = ruleLink 
