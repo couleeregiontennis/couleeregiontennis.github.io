@@ -12,25 +12,30 @@ async function loadWeather(nextMatchDate) {
     // Attempt to find the hourly forecast for 6:00 PM (18:00) on the next match date
     // Note: matches are scheduled for 5:30 PM & 7:00 PM; 6:00 PM represents the ideal overlap forecast hour.
     const targetTimeStr = `${nextMatchDate}T18:00`;
-    const targetIndex = data.hourly ? data.hourly.time.indexOf(targetTimeStr) : -1;
+    const targetIndex = data.hourly?.time ? data.hourly.time.indexOf(targetTimeStr) : -1;
     
     if (targetIndex !== -1) {
       // Use forecasted weather for match time
-      temp = Math.round(data.hourly.temperature_2m[targetIndex]);
-      apparentTemp = Math.round(data.hourly.apparent_temperature[targetIndex]);
-      code = data.hourly.weather_code[targetIndex];
-      humidity = data.hourly.relative_humidity_2m[targetIndex];
+      const hourlyTemp = data.hourly?.temperature_2m?.[targetIndex];
+      const hourlyApparent = data.hourly?.apparent_temperature?.[targetIndex];
+      const hourlyCode = data.hourly?.weather_code?.[targetIndex];
+      const hourlyHumidity = data.hourly?.relative_humidity_2m?.[targetIndex];
+
+      temp = hourlyTemp !== undefined ? Math.round(hourlyTemp) : '--';
+      apparentTemp = hourlyApparent !== undefined ? Math.round(hourlyApparent) : '--';
+      code = hourlyCode !== undefined ? hourlyCode : 0;
+      humidity = hourlyHumidity !== undefined ? hourlyHumidity : '--';
       
       const dateObj = new Date(nextMatchDate + 'T12:00:00');
       const formattedDate = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
       labelText = `Forecast: ${formattedDate} @ 5:30 / 7pm`;
     } else {
       // Fallback to current weather
-      const current = data.current;
-      temp = Math.round(current.temperature_2m);
-      apparentTemp = Math.round(current.apparent_temperature);
-      code = current.weather_code;
-      humidity = current.relative_humidity_2m;
+      const current = data.current || {};
+      temp = current.temperature_2m !== undefined ? Math.round(current.temperature_2m) : '--';
+      apparentTemp = current.apparent_temperature !== undefined ? Math.round(current.apparent_temperature) : '--';
+      code = current.weather_code !== undefined ? current.weather_code : 0;
+      humidity = current.relative_humidity_2m !== undefined ? current.relative_humidity_2m : '--';
       labelText = 'Current Weather';
     }
     
@@ -52,23 +57,29 @@ async function loadWeather(nextMatchDate) {
     else if (code >= 95 && code <= 99) { weatherDesc = 'Thunderstorm'; weatherEmoji = '⛈️'; }
 
     // Let's determine if the Heat Rule is active or if rain is forecasted
-    let heatRuleText = '';
-    let heatRuleClass = '';
+    let heatRuleText = 'Normal Play Conditions';
+    let heatRuleClass = 'heat-alert-normal';
     const isRainy = (code >= 51 && code <= 67) || (code >= 80 && code <= 82) || (code >= 95 && code <= 99);
 
-    if (apparentTemp >= 104) {
-      heatRuleText = '⚠️ OVER 104°F: Automatic Cancel!';
-      heatRuleClass = 'heat-alert-cancel';
-    } else if (apparentTemp >= 95) {
-      heatRuleText = '⚠️ OVER 95°F: Optional 2-2 Start';
-      heatRuleClass = 'heat-alert-warning';
+    if (typeof apparentTemp === 'number') {
+      if (apparentTemp >= 104) {
+        heatRuleText = '⚠️ OVER 104°F: Automatic Cancel!';
+        heatRuleClass = 'heat-alert-cancel';
+      } else if (apparentTemp >= 95) {
+        heatRuleText = '⚠️ OVER 95°F: Optional 2-2 Start';
+        heatRuleClass = 'heat-alert-warning';
+      } else if (isRainy) {
+        heatRuleText = '🌧️ Rain Forecasted: Watch for Updates';
+        heatRuleClass = 'weather-alert-rain';
+      }
     } else if (isRainy) {
       heatRuleText = '🌧️ Rain Forecasted: Watch for Updates';
       heatRuleClass = 'weather-alert-rain';
-    } else {
-      heatRuleText = 'Normal Play Conditions';
-      heatRuleClass = 'heat-alert-normal';
     }
+
+    const tempDisplay = temp !== '--' ? `${temp}°F` : '--';
+    const apparentDisplay = apparentTemp !== '--' ? `${apparentTemp}°F` : '--';
+    const humidityDisplay = humidity !== '--' ? `${humidity}%` : '--';
 
     weatherWidget.innerHTML = `
       <h3>🌡️ Match Weather</h3>
@@ -79,7 +90,7 @@ async function loadWeather(nextMatchDate) {
         <div class="weather-main">
           <span class="weather-temp-emoji" style="font-size: 2.2rem; margin-right: 8px;">${weatherEmoji}</span>
           <div style="text-align: left;">
-            <div class="weather-temp-val" style="font-size: 1.6rem; font-weight: bold; line-height: 1.1;">${temp}°F</div>
+            <div class="weather-temp-val" style="font-size: 1.6rem; font-weight: bold; line-height: 1.1;">${tempDisplay}</div>
             <div style="font-size: 0.85rem; opacity: 0.8;">${weatherDesc}</div>
           </div>
         </div>
@@ -87,11 +98,11 @@ async function loadWeather(nextMatchDate) {
         <div class="weather-details" style="margin: 12px 0; font-size: 0.9rem; text-align: left; background: rgba(255,255,255,0.15); padding: 8px 12px; border-radius: 8px;">
           <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
             <span>Feels Like:</span>
-            <strong style="color: var(--primary-color);">${apparentTemp}°F</strong>
+            <strong style="color: var(--primary-color);">${apparentDisplay}</strong>
           </div>
           <div style="display: flex; justify-content: space-between;">
             <span>Humidity:</span>
-            <span>${humidity}%</span>
+            <span>${humidityDisplay}</span>
           </div>
         </div>
 
@@ -177,35 +188,46 @@ async function loadDashboard() {
       const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
       
       const dayMatches = grouped[date] || [];
-      const slot530 = dayMatches.filter(m => m.time.toLowerCase().includes('5:30'));
-      const slot700 = dayMatches.filter(m => m.time.toLowerCase().includes('7:00'));
+
+      // Group matches by time slot dynamically
+      const slots = {};
+      dayMatches.forEach(m => {
+        const time = m.time || 'TBD';
+        if (!slots[time]) slots[time] = [];
+        slots[time].push(m);
+      });
+
+      // Sort time slots chronologically
+      const times = Object.keys(slots).sort((a, b) => {
+        if (a === 'TBD') return 1;
+        if (b === 'TBD') return -1;
+        return a.localeCompare(b);
+      });
 
       const renderSlot = (matches) => {
         if (matches.length === 0) return '<div class="no-matches" style="font-size: 0.8rem; opacity: 0.6; padding: 4px;">No matches</div>';
         return matches.map(m => `
           <div class="match-row">
-            <span class="match-teams">${m.teamA.name} <span class="vs">vs</span> ${m.teamB.name}</span>
-            <span class="match-courts-badge">${m.courts.replace('Courts ', 'C')}</span>
+            <span class="match-teams">${m.teamA?.name ?? ''} <span class="vs">vs</span> ${m.teamB?.name ?? ''}</span>
+            <span class="match-courts-badge">${m.courts?.replace('Courts ', 'C') ?? ''}</span>
           </div>
         `).join('');
       };
+
+      const renderedSlots = times.map((time, idx) => `
+        <div class="time-slot" style="${idx > 0 ? 'margin-top: 8px;' : ''}">
+          <div class="slot-title">${time}</div>
+          <div class="slot-content">
+            ${renderSlot(slots[time])}
+          </div>
+        </div>
+      `).join('');
 
       html += `
         <div class="day-card ${isToday ? 'today' : ''}">
           <h4 class="day-header">${isToday ? '🔥 TONIGHT' : dayName}</h4>
           <div class="day-slots-container">
-            <div class="time-slot">
-              <div class="slot-title">5:30 PM</div>
-              <div class="slot-content">
-                ${renderSlot(slot530)}
-              </div>
-            </div>
-            <div class="time-slot" style="margin-top: 6px;">
-              <div class="slot-title">7:00 PM</div>
-              <div class="slot-content">
-                ${renderSlot(slot700)}
-              </div>
-            </div>
+            ${renderedSlots || '<div class="no-matches">No matches scheduled</div>'}
           </div>
         </div>
       `;
@@ -231,5 +253,6 @@ async function loadDashboard() {
 }
 
 document.addEventListener('DOMContentLoaded', loadDashboard);
+
 
 
