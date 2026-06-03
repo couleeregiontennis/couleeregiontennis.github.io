@@ -168,18 +168,45 @@ async function loadDashboard() {
       <div class="dashboard-container">
         <div class="dashboard matches-card">
           <h3>🎾 Week ${activeWeek} Matches</h3>
-          <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+          <div class="days-wrapper">
     `;
 
     dates.forEach(date => {
       const isToday = date === todayStr;
       const dateObj = new Date(date + 'T12:00:00');
-      const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+      const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
       
+      const dayMatches = grouped[date] || [];
+      const slot530 = dayMatches.filter(m => m.time.toLowerCase().includes('5:30'));
+      const slot700 = dayMatches.filter(m => m.time.toLowerCase().includes('7:00'));
+
+      const renderSlot = (matches) => {
+        if (matches.length === 0) return '<div class="no-matches" style="font-size: 0.8rem; opacity: 0.6; padding: 4px;">No matches</div>';
+        return matches.map(m => `
+          <div class="match-row">
+            <span class="match-teams">${m.teamA.name} <span class="vs">vs</span> ${m.teamB.name}</span>
+            <span class="match-courts-badge">${m.courts.replace('Courts ', 'C')}</span>
+          </div>
+        `).join('');
+      };
+
       html += `
-        <div class="day-card" style="${isToday ? 'color: var(--primary-color);' : ''}">
-          <p style="margin-bottom: 4px;">${isToday ? '🔥 TONIGHT' : dayName}</p>
-          <span style="font-size: 0.9rem; opacity: 0.8;">5:30pm & 7:00pm</span>
+        <div class="day-card ${isToday ? 'today' : ''}">
+          <h4 class="day-header">${isToday ? '🔥 TONIGHT' : dayName}</h4>
+          <div class="day-slots-container">
+            <div class="time-slot">
+              <div class="slot-title">5:30 PM</div>
+              <div class="slot-content">
+                ${renderSlot(slot530)}
+              </div>
+            </div>
+            <div class="time-slot" style="margin-top: 6px;">
+              <div class="slot-title">7:00 PM</div>
+              <div class="slot-content">
+                ${renderSlot(slot700)}
+              </div>
+            </div>
+          </div>
         </div>
       `;
     });
