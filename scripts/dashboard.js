@@ -137,6 +137,9 @@ async function loadWeather(nextMatchDate) {
         Failed to load current weather. Please check directly on 
         <a href="https://www.accuweather.com/en/us/la-crosse/54601/weather-forecast/331528" target="_blank" rel="noopener noreferrer" style="font-weight: bold; color: var(--primary-color);">accuweather.com</a>.
       </div>
+      <div style="font-size: 0.72rem; opacity: 0.75; text-align: left; border-top: 1px dotted rgba(255,255,255,0.2); padding-top: 8px; margin-top: 8px; line-height: 1.3;">
+        💡 <strong>Tip:</strong> If you use an ad-blocker or Brave shields, they may block our weather forecast provider. Try pausing them for this site to restore the widget.
+      </div>
     `;
   }
 }
