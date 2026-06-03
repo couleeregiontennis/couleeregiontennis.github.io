@@ -1,17 +1,37 @@
-async function loadWeather() {
+async function loadWeather(nextMatchDate) {
   const weatherWidget = document.getElementById('weather-widget');
   if (!weatherWidget) return;
 
   try {
-    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=43.7892&longitude=-91.2511&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code&temperature_unit=fahrenheit&timezone=America%2FChicago');
+    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=43.7892&longitude=-91.2511&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code&hourly=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code&temperature_unit=fahrenheit&timezone=America%2FChicago');
     if (!res.ok) throw new Error('Weather API error');
     const data = await res.json();
     
-    const current = data.current;
-    const temp = Math.round(current.temperature_2m);
-    const apparentTemp = Math.round(current.apparent_temperature);
-    const code = current.weather_code;
-    const humidity = current.relative_humidity_2m;
+    let temp, apparentTemp, code, humidity, labelText;
+    
+    // Attempt to find the hourly forecast for 6:00 PM (18:00) on the next match date
+    const targetTimeStr = `${nextMatchDate}T18:00`;
+    const targetIndex = data.hourly ? data.hourly.time.indexOf(targetTimeStr) : -1;
+    
+    if (targetIndex !== -1) {
+      // Use forecasted weather for match time
+      temp = Math.round(data.hourly.temperature_2m[targetIndex]);
+      apparentTemp = Math.round(data.hourly.apparent_temperature[targetIndex]);
+      code = data.hourly.weather_code[targetIndex];
+      humidity = data.hourly.relative_humidity_2m[targetIndex];
+      
+      const dateObj = new Date(nextMatchDate + 'T12:00:00');
+      const formattedDate = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+      labelText = `Forecast: ${formattedDate} @ 6pm`;
+    } else {
+      // Fallback to current weather
+      const current = data.current;
+      temp = Math.round(current.temperature_2m);
+      apparentTemp = Math.round(current.apparent_temperature);
+      code = current.weather_code;
+      humidity = current.relative_humidity_2m;
+      labelText = 'Current Weather';
+    }
     
     // Map WMO codes to description & emoji
     let weatherDesc = 'Clear';
@@ -45,7 +65,10 @@ async function loadWeather() {
     }
 
     weatherWidget.innerHTML = `
-      <h3>🌡️ La Crosse Weather</h3>
+      <h3>🌡️ Match Weather</h3>
+      <div style="font-size: 0.8rem; margin-top: -8px; margin-bottom: 8px; opacity: 0.85; font-weight: bold;">
+        ${labelText}
+      </div>
       <div class="weather-info">
         <div class="weather-main">
           <span class="weather-temp-emoji" style="font-size: 2.2rem; margin-right: 8px;">${weatherEmoji}</span>
@@ -80,7 +103,7 @@ async function loadWeather() {
   } catch (err) {
     console.error('Error fetching weather:', err);
     weatherWidget.innerHTML = `
-      <h3>🌡️ Weather</h3>
+      <h3>🌡️ Match Weather</h3>
       <p style="font-size: 0.9rem; opacity: 0.8;">La Crosse, WI</p>
       <div style="margin: 12px 0; font-size: 0.8rem; line-height: 1.4; text-align: left;">
         Failed to load current weather. Please check directly on 
@@ -112,6 +135,7 @@ async function loadDashboard() {
     
     let activeWeek = null;
     let weekMatches = [];
+    let nextMatchDate = todayStr;
     
     // Find the first match that is today or in the future
     const nextMatch = allMatches.find(m => m.date >= todayStr);
@@ -119,6 +143,7 @@ async function loadDashboard() {
     if (nextMatch) {
       activeWeek = nextMatch.week;
       weekMatches = allMatches.filter(m => m.week === activeWeek);
+      nextMatchDate = nextMatch.date;
     } else {
       // Off-season or season ended
       return;
@@ -165,12 +190,13 @@ async function loadDashboard() {
 
     placeholder.innerHTML = html;
     
-    // Fetch and load weather
-    loadWeather();
+    // Fetch and load weather for next match date
+    loadWeather(nextMatchDate);
   } catch (error) {
     console.error('Error loading dashboard:', error);
   }
 }
 
 document.addEventListener('DOMContentLoaded', loadDashboard);
+
 
