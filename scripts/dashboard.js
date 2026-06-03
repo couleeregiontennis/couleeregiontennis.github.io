@@ -2,11 +2,42 @@ async function loadWeather(nextMatchDate) {
   const weatherWidget = document.getElementById('weather-widget');
   if (!weatherWidget) return;
 
+  let data;
+  let isCached = false;
+
   try {
+    // 1. Try to fetch live weather
     const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=43.7892&longitude=-91.2511&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code&hourly=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code&temperature_unit=fahrenheit&timezone=America%2FChicago');
     if (!res.ok) throw new Error('Weather API error');
-    const data = await res.json();
-    
+    data = await res.json();
+  } catch (err) {
+    console.log('Live weather fetch failed, attempting cached fallback:', err.message);
+    try {
+      // 2. Fall back to static cached file in repository (immune to browser adblockers!)
+      const cacheRes = await fetch('assets/weather-fallback.json');
+      if (!cacheRes.ok) throw new Error('Failed to load fallback cache');
+      data = await cacheRes.json();
+      isCached = true;
+    } catch (cacheErr) {
+      console.error('All weather sources failed:', cacheErr);
+      // 3. Absolute fallback view (only AccuWeather text link)
+      weatherWidget.innerHTML = `
+        <h3>🌡️ Match Weather</h3>
+        <p style="font-size: 0.9rem; opacity: 0.8;">La Crosse, WI</p>
+        <div style="margin: 12px 0; font-size: 0.8rem; line-height: 1.4; text-align: left;">
+          Failed to load current weather. Please check directly on 
+          <a href="https://www.accuweather.com/en/us/la-crosse/54601/weather-forecast/331528" target="_blank" rel="noopener noreferrer" style="font-weight: bold; color: var(--primary-color);">accuweather.com</a>.
+        </div>
+        <div style="font-size: 0.72rem; opacity: 0.75; text-align: left; border-top: 1px dotted rgba(255,255,255,0.2); padding-top: 8px; margin-top: 8px; line-height: 1.3;">
+          💡 <strong>Tip:</strong> If you use an ad-blocker or Brave shields, they may block our weather forecast provider. Try pausing them for this site to restore the widget.
+        </div>
+      `;
+      return;
+    }
+  }
+
+  // 4. Parse and render weather using data (either live or cached)
+  try {
     let temp, apparentTemp, code, humidity, labelText;
     
     // Attempt to find the hourly forecast for 6:00 PM (18:00) on the next match date
@@ -31,11 +62,17 @@ async function loadWeather(nextMatchDate) {
     } else {
       // Fallback to current weather
       const current = data.current || {};
-      temp = current.temperature_2m !== undefined ? Math.round(current.temperature_2m) : '--';
-      apparentTemp = current.apparent_temperature !== undefined ? Math.round(current.apparent_temperature) : '--';
-      code = current.weather_code !== undefined ? current.weather_code : 0;
-      humidity = current.relative_humidity_2m !== undefined ? current.relative_humidity_2m : '--';
+      temp = current.temperature_2m !== undefined ? Math.round(current.temperature_2m) : (current.temp !== undefined ? current.temp : '--');
+      apparentTemp = current.apparent_temperature !== undefined ? Math.round(current.apparent_temperature) : (current.apparentTemp !== undefined ? current.apparentTemp : '--');
+      code = current.weather_code !== undefined ? current.weather_code : (current.code !== undefined ? current.code : 0);
+      humidity = current.relative_humidity_2m !== undefined ? current.relative_humidity_2m : (current.humidity !== undefined ? current.humidity : '--');
       labelText = 'Current Weather';
+    }
+
+    if (isCached && data.lastUpdated) {
+      const updateTime = new Date(data.lastUpdated);
+      const timeStr = updateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      labelText += ` (Cached ${timeStr})`;
     }
     
     // Map WMO codes to description & emoji
@@ -121,25 +158,14 @@ async function loadWeather(nextMatchDate) {
         ${weatherRuleHtml}
 
         <div style="font-size: 0.72rem; opacity: 0.85; line-height: 1.3; text-align: center;">
-          LTTA uses the "Feels Like" (apparent) temperature from the 
-          <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer" style="font-weight: bold; color: inherit; text-decoration: underline;">Open-Meteo API</a> 
-          for playability decisions.
+          LTTA uses the "RealFeel" temperature on 
+          <a href="https://www.accuweather.com/en/us/la-crosse/54601/weather-forecast/331528" target="_blank" rel="noopener noreferrer" style="font-weight: bold; color: inherit; text-decoration: underline;">accuweather.com</a> 
+          for official playability decisions.
         </div>
       </div>
     `;
-  } catch (err) {
-    console.error('Error rendering weather widget:', err);
-    weatherWidget.innerHTML = `
-      <h3>🌡️ Match Weather</h3>
-      <p style="font-size: 0.9rem; opacity: 0.8;">La Crosse, WI</p>
-      <div style="margin: 12px 0; font-size: 0.8rem; line-height: 1.4; text-align: left;">
-        Failed to load current weather. Please check directly on 
-        <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer" style="font-weight: bold; color: var(--primary-color);">open-meteo.com</a>.
-      </div>
-      <div style="font-size: 0.72rem; opacity: 0.75; text-align: left; border-top: 1px dotted rgba(255,255,255,0.2); padding-top: 8px; margin-top: 8px; line-height: 1.3;">
-        💡 <strong>Tip:</strong> If you use an ad-blocker or Brave shields, they may block our weather forecast provider. Try pausing them for this site to restore the widget.
-      </div>
-    `;
+  } catch (renderErr) {
+    console.error('Error rendering weather widget:', renderErr);
   }
 }
 
