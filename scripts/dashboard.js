@@ -10,6 +10,7 @@ async function loadWeather(nextMatchDate) {
     let temp, apparentTemp, code, humidity, labelText;
     
     // Attempt to find the hourly forecast for 6:00 PM (18:00) on the next match date
+    // Note: matches are scheduled for 5:30 PM & 7:00 PM; 6:00 PM represents the ideal overlap forecast hour.
     const targetTimeStr = `${nextMatchDate}T18:00`;
     const targetIndex = data.hourly ? data.hourly.time.indexOf(targetTimeStr) : -1;
     
@@ -22,7 +23,7 @@ async function loadWeather(nextMatchDate) {
       
       const dateObj = new Date(nextMatchDate + 'T12:00:00');
       const formattedDate = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-      labelText = `Forecast: ${formattedDate} @ 6pm`;
+      labelText = `Forecast: ${formattedDate} @ 5:30 / 7pm`;
     } else {
       // Fallback to current weather
       const current = data.current;
@@ -50,15 +51,20 @@ async function loadWeather(nextMatchDate) {
     else if (code >= 85 && code <= 86) { weatherDesc = 'Snow Showers'; weatherEmoji = '❄️'; }
     else if (code >= 95 && code <= 99) { weatherDesc = 'Thunderstorm'; weatherEmoji = '⛈️'; }
 
-    // Let's determine if the Heat Rule is active
+    // Let's determine if the Heat Rule is active or if rain is forecasted
     let heatRuleText = '';
     let heatRuleClass = '';
+    const isRainy = (code >= 51 && code <= 67) || (code >= 80 && code <= 82) || (code >= 95 && code <= 99);
+
     if (apparentTemp >= 104) {
       heatRuleText = '⚠️ OVER 104°F: Automatic Cancel!';
       heatRuleClass = 'heat-alert-cancel';
     } else if (apparentTemp >= 95) {
       heatRuleText = '⚠️ OVER 95°F: Optional 2-2 Start';
       heatRuleClass = 'heat-alert-warning';
+    } else if (isRainy) {
+      heatRuleText = '🌧️ Rain Forecasted: Watch for Updates';
+      heatRuleClass = 'weather-alert-rain';
     } else {
       heatRuleText = 'Normal Play Conditions';
       heatRuleClass = 'heat-alert-normal';
