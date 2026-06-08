@@ -39,5 +39,5 @@ jobs:
             echo "No changes in fallback weather data."
           else
             git commit -m "chore: update weather fallback cache [skip ci]"
-            git push
+            git push origin HEAD:${{ github.ref_name }}
           fi
