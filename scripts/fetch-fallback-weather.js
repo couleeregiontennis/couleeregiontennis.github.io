@@ -38,8 +38,8 @@ async function main() {
     fs.writeFileSync(outputPath, JSON.stringify(outputData, null, 2));
     console.log(`Weather fallback successfully written to ${outputPath}`);
   } catch (error) {
-    console.error('Error fetching fallback weather:', error);
-    process.exit(1);
+    console.warn('Warning: Failed to fetch fallback weather. Using the existing committed assets/weather-fallback.json instead.', error);
+    process.exit(0);
   }
 }
 
