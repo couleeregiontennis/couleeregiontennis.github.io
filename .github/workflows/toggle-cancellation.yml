@@ -1,0 +1,59 @@
+name: Toggle Weather Cancellation
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Cancellation Date (YYYY-MM-DD). Use "none" to clear.'
+        required: true
+        default: '2026-06-17'
+      reason:
+        description: 'Reason for cancellation (rain, heat, other). Use "none" to clear.'
+        required: true
+        type: choice
+        options:
+          - rain
+          - heat
+          - other
+          - none
+        default: 'rain'
+
+jobs:
+  update-cancellation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update cancellations.json
+        run: |
+          DATE_INPUT="${{ github.event.inputs.date }}"
+          REASON_INPUT="${{ github.event.inputs.reason }}"
+          
+          if [ "$DATE_INPUT" = "none" ] || [ -z "$DATE_INPUT" ] || [ "$REASON_INPUT" = "none" ]; then
+            echo '{"cancelledDate":"","reason":""}' > assets/cancellations.json
+          else
+            # Ensure date input is in valid format YYYY-MM-DD
+            if [[ ! "$DATE_INPUT" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+              echo "Error: Date must be in YYYY-MM-DD format (or 'none')"
+              exit 1
+            fi
+            echo "{\"cancelledDate\":\"$DATE_INPUT\",\"reason\":\"$REASON_INPUT\"}" > assets/cancellations.json
+          fi
+          cat assets/cancellations.json
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "actions@github.com"
+          git add assets/cancellations.json
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update weather cancellation status via GitHub UI"
+            git push
+          fi

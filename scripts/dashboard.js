@@ -1,4 +1,4 @@
-async function loadWeather(nextMatchDate) {
+async function loadWeather(nextMatchDate, cancellationData) {
   const weatherWidget = document.getElementById('weather-widget');
   if (!weatherWidget) return;
 
@@ -97,11 +97,21 @@ async function loadWeather(nextMatchDate) {
     let heatRuleClass = 'heat-alert-normal';
     const isRainy = (code >= 51 && code <= 67) || (code >= 80 && code <= 82) || (code >= 95 && code <= 99);
 
-    // Official rain cancellation override for tonight (Wednesday, June 17, 2026)
-    const isTonightCancelled = nextMatchDate === '2026-06-17';
+    // Official rain/heat cancellation override from config
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const localTodayStr = `${year}-${month}-${day}`;
+    
+    const isTonightCancelled = cancellationData && cancellationData.cancelledDate && 
+                               nextMatchDate === cancellationData.cancelledDate && 
+                               localTodayStr <= cancellationData.cancelledDate;
 
     if (isTonightCancelled) {
-      heatRuleText = '🌧️ Matches Cancelled Tonight (Rain)';
+      const reasonText = cancellationData.reason === 'heat' ? 'Heat' : 'Rain';
+      const emoji = cancellationData.reason === 'heat' ? '🔥' : '🌧️';
+      heatRuleText = `${emoji} Matches Cancelled Tonight (${reasonText})`;
       heatRuleClass = 'heat-alert-cancel';
     } else if (typeof apparentTemp === 'number') {
       if (apparentTemp >= 104) {
@@ -180,16 +190,26 @@ async function loadDashboard() {
   if (!placeholder) return;
 
   try {
-    const [tueRes, wedRes] = await Promise.all([
+    const [tueRes, wedRes, cancelRes] = await Promise.all([
       fetch('teams/tuesday/schedules/master_schedule.json?v=2026'),
-      fetch('teams/wednesday/schedules/master_schedule.json?v=2026')
+      fetch('teams/wednesday/schedules/master_schedule.json?v=2026'),
+      fetch('assets/cancellations.json?v=' + Date.now()).catch(() => null)
     ]);
 
     const tueSched = await tueRes.json();
     const wedSched = await wedRes.json();
+    let cancellationData = { cancelledDate: '', reason: '' };
+    if (cancelRes && cancelRes.ok) {
+      cancellationData = await cancelRes.json();
+    }
     
     const now = new Date();
     const todayStr = now.toISOString().split('T')[0];
+    
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const localTodayStr = `${year}-${month}-${day}`;
     
     // Find the next upcoming week
     // Combine and sort all unique dates
@@ -229,7 +249,7 @@ async function loadDashboard() {
 
     dates.forEach(date => {
       const isToday = date === todayStr;
-      const isCancelledDate = date === '2026-06-17';
+      const isCancelledDate = cancellationData.cancelledDate && date === cancellationData.cancelledDate && localTodayStr <= cancellationData.cancelledDate;
       const dateObj = new Date(date + 'T12:00:00');
       const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
       
@@ -271,7 +291,7 @@ async function loadDashboard() {
 
       const cancellationNotice = isCancelledDate ? `
         <div class="card-cancellation-notice" style="background: rgba(220, 53, 69, 0.12); color: #dc3545; font-weight: bold; text-align: center; padding: 6px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 10px; border: 1px solid rgba(220, 53, 69, 0.25);">
-          🌧️ Canceled due to Rain
+          ${cancellationData.reason === 'heat' ? '🔥 Canceled due to Extreme Heat' : '🌧️ Canceled due to Rain'}
         </div>
       ` : '';
 
@@ -299,7 +319,7 @@ async function loadDashboard() {
     placeholder.innerHTML = html;
     
     // Fetch and load weather for next match date
-    loadWeather(nextMatchDate);
+    loadWeather(nextMatchDate, cancellationData);
   } catch (error) {
     console.error('Error loading dashboard:', error);
   }
