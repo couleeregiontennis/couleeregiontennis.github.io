@@ -99,6 +99,10 @@ function generateEmailTemplate(team) {
                 </ul>
             </div>
 
+            <h2>Weather Cancellations / Rainouts</h2>
+            <p>If play is officially canceled by the league due to weather, no match results are recorded. While players are welcome to use the courts for practice hits at their own discretion, any sets played will be completely unofficial and will not count toward league standings.</p>
+            <p>If only some time slots are affected &mdash; for example, 5:30 PM matches are completed but 7:00 PM matches are canceled &mdash; only the completed matches will count. Standings will be based on the percentage of possible points earned from matches played.</p>
+
             <h2>League Dues</h2>
             <p>Dues are <strong>$25 for the season</strong>, due by the 2nd week of play. Please pay your captain who will pass it on to a Coordinator.</p>
 

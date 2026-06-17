@@ -29,6 +29,8 @@ test('generateEmailTemplate should return a string containing team details', (t)
   assert.ok(html.includes('RealFeel'), 'Should include heat rule');
   assert.ok(html.includes('crossover championship'), 'Should include championship details');
   assert.ok(html.includes('href="https://couleeregiontennis.org"'), 'Should include website domain');
+  assert.ok(html.includes('Weather Cancellations / Rainouts'), 'Should include weather cancellations heading');
+  assert.ok(html.includes('percentage of possible points earned from matches played'), 'Should include partial cancellation details');
 });
 
 test('generateEmailTemplate should handle Wednesday teams', (t) => {
