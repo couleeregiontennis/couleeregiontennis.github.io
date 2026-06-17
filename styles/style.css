@@ -482,3 +482,65 @@ img {
   border: 1px solid var(--active-match-border);
   white-space: nowrap;
 }
+
+/* Cancelled day card styling */
+.day-card.cancelled {
+  border: 1.5px solid var(--border-color);
+  background: rgba(220, 53, 69, 0.05);
+  position: relative;
+}
+
+[data-theme='dark'] .day-card.cancelled {
+  background: rgba(220, 53, 69, 0.1);
+  border-color: rgba(220, 53, 69, 0.3);
+}
+
+.day-card.cancelled .day-header {
+  color: #dc3545;
+  border-bottom-color: rgba(220, 53, 69, 0.3);
+}
+
+[data-theme='dark'] .day-card.cancelled .day-header {
+  color: #e74c3c;
+}
+
+.day-card.cancelled .match-row {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+[data-theme='dark'] .day-card.cancelled .card-cancellation-notice {
+  color: #e74c3c !important;
+  border-color: rgba(231, 76, 60, 0.3) !important;
+  background: rgba(231, 76, 60, 0.1) !important;
+}
+
+/* Cancelled match rows in schedule tables */
+.cancelled-match-row {
+  text-decoration: line-through;
+  opacity: 0.6;
+  background-color: rgba(220, 53, 69, 0.04) !important;
+}
+
+[data-theme='dark'] .cancelled-match-row {
+  background-color: rgba(220, 53, 69, 0.08) !important;
+}
+
+.cancelled-badge {
+  color: #dc3545;
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin-left: 6px;
+  background: rgba(220, 53, 69, 0.1);
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(220, 53, 69, 0.2);
+  white-space: nowrap;
+  display: inline-block;
+}
+
+[data-theme='dark'] .cancelled-badge {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.15);
+  border-color: rgba(231, 76, 60, 0.3);
+}

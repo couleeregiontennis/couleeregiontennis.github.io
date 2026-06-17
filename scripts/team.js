@@ -46,10 +46,17 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
     // Populate matches table
     tableBody.innerHTML = "";
     (scheduleData.schedule || []).forEach(match => {
+      const isCancelled = match.date === '2026-06-17';
       const icsLink = match.ics
         ? `<a href="${sanitizeUrl(match.ics)}?v=2026" download="LTTA-Match-Week${escapeHTML(match.week)}.ics" title="Add to calendar">📅</a>`
         : '';
       const tr = document.createElement("tr");
+      if (isCancelled) {
+        tr.classList.add("cancelled-match-row");
+      }
+      const courtContent = isCancelled 
+        ? `${escapeHTML(match.courts)} <span class="cancelled-badge">🌧️ Canceled</span>`
+        : escapeHTML(match.courts);
       tr.innerHTML = `
         <td>${escapeHTML(match.week)}</td>
         <td>${escapeHTML(formatDateUS(match.date))}</td>
@@ -58,7 +65,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
         <td>
           <a href="${sanitizeUrl(match.opponent.file)}" class="team-link">${escapeHTML(match.opponent.name || "Team " + match.opponent.number)}</a>
         </td>
-        <td>${escapeHTML(match.courts)}</td>
+        <td>${courtContent}</td>
         <td style="text-align:center">${icsLink}</td>
       `;
       tableBody.appendChild(tr);

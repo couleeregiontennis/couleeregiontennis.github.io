@@ -285,3 +285,65 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+/* Announcement Banner */
+.announcement-banner {
+  background: linear-gradient(135deg, #d32f2f, #c62828);
+  color: #ffffff;
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.4s ease-out;
+}
+
+[data-theme='dark'] .announcement-banner {
+  background: linear-gradient(135deg, #b71c1c, #880e4f);
+}
+
+.announcement-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.announcement-badge {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 600px) {
+  .announcement-banner {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+  .announcement-badge {
+    font-size: 0.7rem;
+    padding: 1px 6px;
+  }
+}
