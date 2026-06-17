@@ -14,7 +14,7 @@ async function loadNav() {
   try {
     // Determine path based on current location
     const isRoot = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
-    const navPath = isRoot ? 'partials/nav.html?v=2026.3' : '../partials/nav.html?v=2026.3';
+    const navPath = (isRoot ? 'partials/nav.html' : '../partials/nav.html') + '?v=' + Date.now();
 
     const response = await fetch(navPath);
     const html = await response.text();
