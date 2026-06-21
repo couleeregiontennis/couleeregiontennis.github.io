@@ -111,7 +111,7 @@ function generatePlainText(team) {
     "Hello " + team.teamName + " players,\n\n" +
     scheduleNoticeText +
     "We hope everyone is enjoying the start of the 2026 LTTA summer season! Please review these important reminders:\n\n" +
-    "1. Weather & Cancellations: Cancellation decisions will be made by 4:30 PM. Heat rule: RealFeel > 95°F is optional 2-2 start; > 104°F is automatic cancellation. If play is officially cancelled by the league due to weather, no match results are recorded (even if players choose to hit).\n\n" +
+    "1. Weather & Cancellations: Cancellation decisions will be made by 4:30 PM. Heat rule: RealFeel > 95°F is optional 2-2 start; > 104°F is automatic cancellation. If play is officially cancelled by the league due to weather, no match results are recorded (even if players choose to hit), which means this missed day will not count against your team in the standings.\n\n" +
     "2. Scoring Refresher: Earn 1 point per set won (including tiebreakers) + 1 participation point (lost only for forfeits). Matches use No-Ad scoring.\n\n" +
     "3. Write Down Points: The players on each individual line are responsible for writing down their set scores AND calculated league points (e.g., Home 3, Away 1) on the scoresheet.\n\n" +
     "4. League Fees: Dues of $25 per player are now overdue (deadline was Week 2). Please pay your captain as soon as possible.\n\n" +
@@ -165,7 +165,7 @@ function generateEmailHtml(team) {
     '<li><strong>Over 104&deg;F:</strong> Play is automatically canceled.</li>' +
     '</ul>' +
     '</li>' +
-    '<li style="margin-bottom: 10px;"><strong style="color: #d32f2f;">' + warningIcon + ' Weather Cancellations / Rainouts:</strong> If play is officially canceled by the league due to weather, <strong>no match results are recorded</strong>. While players are welcome to use the courts for practice hits at their own discretion, any sets played will be completely unofficial and will not count toward league standings.</li>' +
+    '<li style="margin-bottom: 10px;"><strong style="color: #d32f2f;">' + warningIcon + ' Weather Cancellations / Rainouts:</strong> If play is officially canceled by the league due to weather, <strong>no match results are recorded</strong> (meaning this missed day will not count against your team in the standings). While players are welcome to use the courts for practice hits at their own discretion, any sets played will be completely unofficial and will not count toward league standings.</li>' +
     '</ul>' +
 
     '<h2 style="color: #1b5e20; border-bottom: 1px solid #eeeeee; padding-bottom: 5px; margin-top: 30px;">' + trophyIcon + ' How Scoring Works</h2>' +
