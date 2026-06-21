@@ -192,12 +192,12 @@ function generateEmailHtml(team) {
   var coCapHtml = team.coCaptain ? '<p style="margin: 5px 0;"><strong>Co-Captain:</strong> ' + escapeHTML(team.coCaptain) + '</p>' : '';
 
   // HTML Entities for icons to prevent bad emoji rendering in Sheets/Gmail:
-  var racketIcon = '&#127934;';   // 🎾
-  var clipboardIcon = '&#128203;';// 📋
-  var sunIcon = '&#9728;';        // ☀️
-  var trophyIcon = '&#127942;';    // 🏆
-  var warningIcon = '&#9888;';     // ⚠️
-  var moneyIcon = '&#128176;';     // 💰
+  var racketIcon = '&#127934;';   // Tennis racket
+  var clipboardIcon = '&#128203;';// Clipboard
+  var sunIcon = '&#9728;';        // Sun
+  var trophyIcon = '&#127942;';    // Trophy
+  var warningIcon = '&#9888;';     // Warning sign
+  var moneyIcon = '&#128176;';     // Money bag
 
   var scheduleNoticeHtml = '';
   if (isTues) {
@@ -295,7 +295,7 @@ function generateEmailHtml(team) {
       matchInfoHtml +
       '<p style="margin: 10px 0 0 0; font-size: 13px;">' +
       '<a href="' + icsLink + '" target="_blank" style="color: #c62828; font-weight: bold; text-decoration: underline;">' +
-      '📥 Download Updated Calendar (.ics File) for Team ' + teamNumStr +
+      '&#128229; Download Updated Calendar (.ics File) for Team ' + teamNumStr +
       '</a>' +
       '</p>' +
       '</div>';
