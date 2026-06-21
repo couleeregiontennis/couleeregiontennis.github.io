@@ -103,9 +103,72 @@ function escapeHTML(str) {
 function generatePlainText(team) {
   var night = team.night;
   var isTues = (String(night).toLowerCase().indexOf('tue') !== -1);
-  var scheduleNoticeText = isTues 
-    ? "IMPORTANT SCHEDULE UPDATE (Tuesday Teams Only):\nDue to a schedule conflict, the Tuesday night match schedules for Week 5 (June 23rd) and Week 10 (July 28th) have been swapped. Please double-check your schedule page on the website and redownload any calendar (ICS) files to ensure you have the correct match times.\n\n" 
-    : "";
+  var scheduleNoticeText = '';
+  if (isTues) {
+    var teamNumStr = String(team.teamNumber).trim();
+    var tuesdayMatchLookup = {
+      '1': {
+        w5: { opp: 'Herons (Team 3)', time: '7:00 PM', courts: 'Courts 10–13' },
+        w10: { opp: 'Return to Sender with Love (Team 8)', time: '5:30 PM', courts: 'Courts 6–9' }
+      },
+      '2': {
+        w5: { opp: 'Approach Shots (Team 4)', time: '7:00 PM', courts: 'Courts 6–9' },
+        w10: { opp: 'Herons (Team 3)', time: '5:30 PM', courts: 'Courts 10–13' }
+      },
+      '3': {
+        w5: { opp: 'Spin Doctors (Team 1)', time: '7:00 PM', courts: 'Courts 10–13' },
+        w10: { opp: 'Subs (Team 2)', time: '5:30 PM', courts: 'Courts 10–13' }
+      },
+      '4': {
+        w5: { opp: 'Subs (Team 2)', time: '7:00 PM', courts: 'Courts 6–9' },
+        w10: { opp: 'Easy Overhead (Team 12)', time: '7:00 PM', courts: 'Courts 10–13' }
+      },
+      '5': {
+        w5: { opp: 'Easy Overhead (Team 12)', time: '7:00 PM', courts: 'Courts 1–5' },
+        w10: { opp: 'Full Metal Racquet (Team 11)', time: '7:00 PM', courts: 'Courts 6–9' }
+      },
+      '6': {
+        w5: { opp: 'Full Metal Racquet (Team 11)', time: '5:30 PM', courts: 'Courts 1–5' },
+        w10: { opp: 'Jetsetters (Team 10)', time: '7:00 PM', courts: 'Courts 1–5' }
+      },
+      '7': {
+        w5: { opp: 'Jetsetters (Team 10)', time: '5:30 PM', courts: 'Courts 6–9' },
+        w10: { opp: 'Bounce It (Team 9)', time: '5:30 PM', courts: 'Courts 1–5' }
+      },
+      '8': {
+        w5: { opp: 'Bounce It (Team 9)', time: '5:30 PM', courts: 'Courts 10–13' },
+        w10: { opp: 'Spin Doctors (Team 1)', time: '5:30 PM', courts: 'Courts 6–9' }
+      },
+      '9': {
+        w5: { opp: 'Return to Sender with Love (Team 8)', time: '5:30 PM', courts: 'Courts 10–13' },
+        w10: { opp: 'Good Ol\' Boys (Team 7)', time: '5:30 PM', courts: 'Courts 1–5' }
+      },
+      '10': {
+        w5: { opp: 'Good Ol\' Boys (Team 7)', time: '5:30 PM', courts: 'Courts 6–9' },
+        w10: { opp: 'Rascals (Team 6)', time: '7:00 PM', courts: 'Courts 1–5' }
+      },
+      '11': {
+        w5: { opp: 'Rascals (Team 6)', time: '5:30 PM', courts: 'Courts 1–5' },
+        w10: { opp: 'Racquet Scientists (Team 5)', time: '7:00 PM', courts: 'Courts 6–9' }
+      },
+      '12': {
+        w5: { opp: 'Racquet Scientists (Team 5)', time: '7:00 PM', courts: 'Courts 1–5' },
+        w10: { opp: 'Approach Shots (Team 4)', time: '7:00 PM', courts: 'Courts 10–13' }
+      }
+    };
+
+    var matchData = tuesdayMatchLookup[teamNumStr];
+    var icsLink = 'https://couleeregiontennis.org/teams/tuesday/ics/' + teamNumStr + '/team.ics?v=2026.8';
+
+    scheduleNoticeText = 
+      "IMPORTANT SCHEDULE UPDATE (Tuesday Teams Only):\n" +
+      "Due to a schedule conflict, the Tuesday night match schedules for Week 5 (June 23rd) and Week 10 (July 28th) have been swapped.\n\n" +
+      "Your Swapped Match Details:\n" +
+      "- Week 5 (June 23rd): vs " + matchData.w5.opp + " at " + matchData.w5.time + " on " + matchData.w5.courts + "\n" +
+      "- Week 10 (July 28th): vs " + matchData.w10.opp + " at " + matchData.w10.time + " on " + matchData.w10.courts + "\n\n" +
+      "Download your updated team calendar (.ics file):\n" +
+      icsLink + "\n\n";
+  }
 
   return "LTTA Rules, Scoring, & Fees Update\n\n" +
     "Hello " + team.teamName + " players,\n\n" +
@@ -138,11 +201,103 @@ function generateEmailHtml(team) {
 
   var scheduleNoticeHtml = '';
   if (isTues) {
+    var teamNumStr = String(team.teamNumber).trim();
+    var tuesdayMatchLookup = {
+      '1': {
+        w5: { opp: 'Herons (Team 3)', time: '7:00 PM', courts: 'Courts 10–13' },
+        w10: { opp: 'Return to Sender with Love (Team 8)', time: '5:30 PM', courts: 'Courts 6–9' }
+      },
+      '2': {
+        w5: { opp: 'Approach Shots (Team 4)', time: '7:00 PM', courts: 'Courts 6–9' },
+        w10: { opp: 'Herons (Team 3)', time: '5:30 PM', courts: 'Courts 10–13' }
+      },
+      '3': {
+        w5: { opp: 'Spin Doctors (Team 1)', time: '7:00 PM', courts: 'Courts 10–13' },
+        w10: { opp: 'Subs (Team 2)', time: '5:30 PM', courts: 'Courts 10–13' }
+      },
+      '4': {
+        w5: { opp: 'Subs (Team 2)', time: '7:00 PM', courts: 'Courts 6–9' },
+        w10: { opp: 'Easy Overhead (Team 12)', time: '7:00 PM', courts: 'Courts 10–13' }
+      },
+      '5': {
+        w5: { opp: 'Easy Overhead (Team 12)', time: '7:00 PM', courts: 'Courts 1–5' },
+        w10: { opp: 'Full Metal Racquet (Team 11)', time: '7:00 PM', courts: 'Courts 6–9' }
+      },
+      '6': {
+        w5: { opp: 'Full Metal Racquet (Team 11)', time: '5:30 PM', courts: 'Courts 1–5' },
+        w10: { opp: 'Jetsetters (Team 10)', time: '7:00 PM', courts: 'Courts 1–5' }
+      },
+      '7': {
+        w5: { opp: 'Jetsetters (Team 10)', time: '5:30 PM', courts: 'Courts 6–9' },
+        w10: { opp: 'Bounce It (Team 9)', time: '5:30 PM', courts: 'Courts 1–5' }
+      },
+      '8': {
+        w5: { opp: 'Bounce It (Team 9)', time: '5:30 PM', courts: 'Courts 10–13' },
+        w10: { opp: 'Spin Doctors (Team 1)', time: '5:30 PM', courts: 'Courts 6–9' }
+      },
+      '9': {
+        w5: { opp: 'Return to Sender with Love (Team 8)', time: '5:30 PM', courts: 'Courts 10–13' },
+        w10: { opp: 'Good Ol\' Boys (Team 7)', time: '5:30 PM', courts: 'Courts 1–5' }
+      },
+      '10': {
+        w5: { opp: 'Good Ol\' Boys (Team 7)', time: '5:30 PM', courts: 'Courts 6–9' },
+        w10: { opp: 'Rascals (Team 6)', time: '7:00 PM', courts: 'Courts 1–5' }
+      },
+      '11': {
+        w5: { opp: 'Rascals (Team 6)', time: '5:30 PM', courts: 'Courts 1–5' },
+        w10: { opp: 'Racquet Scientists (Team 5)', time: '7:00 PM', courts: 'Courts 6–9' }
+      },
+      '12': {
+        w5: { opp: 'Racquet Scientists (Team 5)', time: '7:00 PM', courts: 'Courts 1–5' },
+        w10: { opp: 'Approach Shots (Team 4)', time: '7:00 PM', courts: 'Courts 10–13' }
+      }
+    };
+
+    var matchData = tuesdayMatchLookup[teamNumStr];
+    var matchInfoHtml = '';
+    if (matchData) {
+      matchInfoHtml = 
+        '<div style="background-color: #ffffff; border: 1px solid #ffcdd2; padding: 12px; border-radius: 6px; margin: 15px 0 10px 0;">' +
+        '<p style="margin: 0 0 8px 0; font-weight: bold; color: #b71c1c;">Your Swapped Match Details:</p>' +
+        '<table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">' +
+        '<thead>' +
+        '<tr style="border-bottom: 1px solid #ffcdd2; color: #757575;">' +
+        '<th style="padding: 4px 8px;">Week / Date</th>' +
+        '<th style="padding: 4px 8px;">Opponent</th>' +
+        '<th style="padding: 4px 8px;">Time</th>' +
+        '<th style="padding: 4px 8px;">Courts</th>' +
+        '</tr>' +
+        '</thead>' +
+        '<tbody>' +
+        '<tr style="border-bottom: 1px solid #ffebee;">' +
+        '<td style="padding: 6px 8px;"><strong>Week 5</strong> (June 23)</td>' +
+        '<td style="padding: 6px 8px;">' + matchData.w5.opp + '</td>' +
+        '<td style="padding: 6px 8px;">' + matchData.w5.time + '</td>' +
+        '<td style="padding: 6px 8px;">' + matchData.w5.courts + '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td style="padding: 6px 8px;"><strong>Week 10</strong> (July 28)</td>' +
+        '<td style="padding: 6px 8px;">' + matchData.w10.opp + '</td>' +
+        '<td style="padding: 6px 8px;">' + matchData.w10.time + '</td>' +
+        '<td style="padding: 6px 8px;">' + matchData.w10.courts + '</td>' +
+        '</tr>' +
+        '</tbody>' +
+        '</table>' +
+        '</div>';
+    }
+
+    var icsLink = 'https://couleeregiontennis.org/teams/tuesday/ics/' + teamNumStr + '/team.ics?v=2026.8';
+
     scheduleNoticeHtml = 
       '<div style="background-color: #ffebee; border-left: 5px solid #d32f2f; padding: 15px; margin: 25px 0; border-radius: 0 4px 4px 0;">' +
       '<h3 style="margin-top: 0; color: #c62828;">' + warningIcon + ' Important: Tuesday Schedule Swap</h3>' +
-      '<p>Due to a schedule conflict, the Tuesday night match schedules for <strong>Week 5 (June 23rd)</strong> and <strong>Week 10 (July 28th)</strong> have been swapped.</p>' +
-      '<p>Please double-check your schedule page on the website and redownload any calendar (ICS) files to ensure you have the correct match times.</p>' +
+      '<p style="margin: 0 0 10px 0;">Due to a schedule conflict, the Tuesday night match schedules for <strong>Week 5 (June 23rd)</strong> and <strong>Week 10 (July 28th)</strong> have been swapped to ensure correct matchups.</p>' +
+      matchInfoHtml +
+      '<p style="margin: 10px 0 0 0; font-size: 13px;">' +
+      '<a href="' + icsLink + '" target="_blank" style="color: #c62828; font-weight: bold; text-decoration: underline;">' +
+      '📥 Download Updated Calendar (.ics File) for Team ' + teamNumStr +
+      '</a>' +
+      '</p>' +
       '</div>';
   }
 
