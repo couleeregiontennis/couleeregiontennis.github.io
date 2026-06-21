@@ -32,9 +32,11 @@ function generateEmailHtml(team) {
   var scheduleNoticeHtml = '';
   if (isTues) {
     scheduleNoticeHtml = 
-      '<li style="margin-bottom: 12px; color: #b71c1c; background-color: #ffebee; padding: 10px; border-radius: 4px; border-left: 5px solid #d32f2f; list-style-type: none; margin-left: -20px;">' +
-      '<strong>' + warningIcon + ' Schedule Update (Tuesday Teams Only):</strong> Due to a schedule conflict, the Tuesday night match schedules for <strong>Week 5 (June 23rd)</strong> and <strong>Week 10 (July 28th)</strong> have been swapped. Please double-check your schedule page on the website and redownload any calendar (ICS) files to ensure you have the correct match times.' +
-      '</li>';
+      '<div style="background-color: #ffebee; border-left: 5px solid #d32f2f; padding: 15px; margin: 25px 0; border-radius: 0 4px 4px 0;">' +
+      '<h3 style="margin-top: 0; color: #c62828;">' + warningIcon + ' Important: Tuesday Schedule Swap</h3>' +
+      '<p>Due to a schedule conflict, the Tuesday night match schedules for <strong>Week 5 (June 23rd)</strong> and <strong>Week 10 (July 28th)</strong> have been swapped.</p>' +
+      '<p>Please double-check your schedule page on the website and redownload any calendar (ICS) files to ensure you have the correct match times.</p>' +
+      '</div>';
   }
 
   return '<div style="font-family: Arial, sans-serif; color: #333333; line-height: 1.6; max-width: 650px; margin: 0 auto; border: 1px solid #eeeeee; border-radius: 8px; overflow: hidden; background-color: #ffffff;">' +
@@ -44,11 +46,11 @@ function generateEmailHtml(team) {
     '<div style="padding: 20px 30px;">' +
     '<p>Hello ' + escapeHTML(team.teamName) + ' players,</p>' +
     '<p>We hope everyone is enjoying the start of the 2026 La Crosse Team Tennis Association (LTTA) summer season! To keep our league running smoothly, fair, and fun for everyone, we want to share some important reminders regarding weather rules, match scoring, and league fees.</p>' +
+    scheduleNoticeHtml +
 
     '<h2 style="color: #1b5e20; border-bottom: 1px solid #eeeeee; padding-bottom: 5px; margin-top: 30px;">' + sunIcon + ' Weather & Play Cancellation Rules</h2>' +
     '<p>Weather in Wisconsin can be unpredictable. Here is how cancellations and heat rules work:</p>' +
     '<ul style="padding-left: 20px;">' +
-    scheduleNoticeHtml +
     '<li style="margin-bottom: 10px;"><strong>Cancellations:</strong> The On-Site Coordinator will make any cancellation decision (for rain, storms, or heat) by <strong>4:30 PM</strong> on match day. Captains will be notified directly.</li>' +
     '<li style="margin-bottom: 10px;"><strong>Heat Rule ("RealFeel"):</strong> We monitor the "RealFeel" temperature on <a href="https://www.accuweather.com" target="_blank" style="color: #2e7d32;">accuweather.com</a>:' +
     '<ul>' +
