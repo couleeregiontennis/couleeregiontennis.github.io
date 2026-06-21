@@ -14,7 +14,7 @@ async function loadNav() {
   try {
     // Determine path based on current location
     const isRoot = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
-    const navPath = isRoot ? 'partials/nav.html?v=2026.3' : '../partials/nav.html?v=2026.3';
+    const navPath = (isRoot ? 'partials/nav.html' : '../partials/nav.html') + '?v=' + Date.now();
 
     const response = await fetch(navPath);
     const html = await response.text();
@@ -22,6 +22,42 @@ async function loadNav() {
     if (placeholder) {
       placeholder.innerHTML = html;
       
+      // Hide rain cancellation banner if not active or if expired
+      const banner = placeholder.querySelector('.announcement-banner');
+      if (banner) {
+        try {
+          const cancelPath = isRoot ? 'assets/cancellations.json' : '../assets/cancellations.json';
+          const cancelRes = await fetch(`${cancelPath}?v=${Date.now()}`);
+          if (cancelRes.ok) {
+            const cancelData = await cancelRes.json();
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const localTodayStr = `${year}-${month}-${day}`;
+            
+            if (cancelData.cancelledDate && localTodayStr <= cancelData.cancelledDate) {
+              // Banner is active! Update text dynamic reason
+              const textSpan = banner.querySelector('.announcement-text');
+              if (textSpan) {
+                const dateObj = new Date(cancelData.cancelledDate + 'T12:00:00');
+                const formattedDate = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+                const reasonText = cancelData.reason === 'heat' ? 'extreme heat' : 'rain';
+                const emoji = cancelData.reason === 'heat' ? '🔥' : '🌧️';
+                textSpan.innerHTML = `${emoji} All matches tonight (${formattedDate}) are cancelled due to ${reasonText}.`;
+              }
+            } else {
+              banner.remove();
+            }
+          } else {
+            banner.remove();
+          }
+        } catch (err) {
+          console.error('Error loading cancellation banner state:', err);
+          banner.remove();
+        }
+      }
+
       // Fix paths if not at root
       if (!isRoot) {
         const logo = placeholder.querySelector('.navbar-logo');

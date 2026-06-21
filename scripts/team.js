@@ -30,15 +30,26 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
   if (!tableBody || !rosterBody) return;
 
   try {
-    // ⚡ Bolt: Parallelize schedule and roster data fetches to reduce wait time
-    const [scheduleResponse, rosterResponse] = await Promise.all([
+    // ⚡ Bolt: Parallelize schedule, roster, and cancellation data fetches to reduce wait time
+    const [scheduleResponse, rosterResponse, cancelResponse] = await Promise.all([
       fetch(scheduleUrl),
-      fetch(rosterUrl)
+      fetch(rosterUrl),
+      fetch('../assets/cancellations.json?v=' + Date.now()).catch(() => null)
     ]);
     const [scheduleData, rosterData] = await Promise.all([
       scheduleResponse.json(),
       rosterResponse.json()
     ]);
+    let cancellationData = { cancelledDate: '', reason: '' };
+    if (cancelResponse && cancelResponse.ok) {
+      cancellationData = await cancelResponse.json();
+    }
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const localTodayStr = `${year}-${month}-${day}`;
 
     // Update header with team name if available
     if (header && rosterData.teamName) header.textContent = rosterData.teamName;
@@ -46,7 +57,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
     // Populate matches table
     tableBody.innerHTML = "";
     (scheduleData.schedule || []).forEach(match => {
-      const isCancelled = match.date === '2026-06-17';
+      const isCancelled = cancellationData.cancelledDate && match.date === cancellationData.cancelledDate && localTodayStr <= cancellationData.cancelledDate;
       const icsLink = match.ics
         ? `<a href="${sanitizeUrl(match.ics)}?v=2026" download="LTTA-Match-Week${escapeHTML(match.week)}.ics" title="Add to calendar">📅</a>`
         : '';
@@ -54,8 +65,10 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
       if (isCancelled) {
         tr.classList.add("cancelled-match-row");
       }
+      const reasonLabel = cancellationData.reason === 'heat' ? 'Canceled (Heat)' : 'Canceled (Rain)';
+      const emoji = cancellationData.reason === 'heat' ? '🔥' : '🌧️';
       const courtContent = isCancelled 
-        ? `${escapeHTML(match.courts)} <span class="cancelled-badge">🌧️ Canceled</span>`
+        ? `${escapeHTML(match.courts)} <span class="cancelled-badge">${emoji} ${reasonLabel}</span>`
         : escapeHTML(match.courts);
       tr.innerHTML = `
         <td>${escapeHTML(match.week)}</td>
