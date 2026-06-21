@@ -122,7 +122,7 @@ function generateEmailHtml(team) {
       '<div style="background-color: #ffebee; border-left: 5px solid #d32f2f; padding: 15px; margin: 25px 0; border-radius: 0 4px 4px 0;">' +
       '<h3 style="margin-top: 0; color: #c62828;">' + warningIcon + ' Important: Tuesday Schedule Swap</h3>' +
       '<p style="margin: 0 0 10px 0;">Due to a schedule conflict, the Tuesday night match schedules for <strong>Week 5 (June 23rd)</strong> and <strong>Week 10 (July 28th)</strong> have been swapped to ensure correct matchups.</p>' +
-      '<p style="margin: 0 0 12px 0; font-size: 13px; color: #555555; line-height: 1.5;"><em><strong>Note on Calendars:</strong> If you imported the team calendar (.ics file) or printed/saved your schedule prior to June 21st, your calendar will show the incorrect match times. Please download the updated calendar file below (or check the website) to ensure you have the correct match times and courts.</em></p>' +
+      '<p style="margin: 0 0 12px 0; font-size: 13px; color: #555555; line-height: 1.5;"><em><strong>Note on Calendars:</strong> If you imported the team calendar (.ics file) or printed/saved your schedule when the website had the incorrect schedule (between May 23rd and June 21st), your calendar will show the incorrect match times. Please download the updated calendar file below (or check the website) to ensure you have the correct match times and courts.</em></p>' +
       matchInfoHtml +
       '<p style="margin: 10px 0 0 0; font-size: 13px;">' +
       '<a href="' + icsLink + '" target="_blank" style="color: #c62828; font-weight: bold; text-decoration: underline;">' +
