@@ -58,12 +58,12 @@
       "week": 5,
       "date": "2026-06-23",
       "time": "7:00pm",
-      "courts": "Courts 10–13",
-      "homeAway": "Home",
+      "courts": "Courts 1–5",
+      "homeAway": "Away",
       "opponent": {
-        "name": "Approach Shots",
-        "number": "4",
-        "file": "/pages/team.html?day=tuesday&team=4"
+        "name": "Racquet Scientists",
+        "number": "5",
+        "file": "/pages/team.html?day=tuesday&team=5"
       },
       "ics": "/teams/tuesday/ics/12/week5.ics"
     },
@@ -123,12 +123,12 @@
       "week": 10,
       "date": "2026-07-28",
       "time": "7:00pm",
-      "courts": "Courts 1–5",
-      "homeAway": "Away",
+      "courts": "Courts 10–13",
+      "homeAway": "Home",
       "opponent": {
-        "name": "Racquet Scientists",
-        "number": "5",
-        "file": "/pages/team.html?day=tuesday&team=5"
+        "name": "Approach Shots",
+        "number": "4",
+        "file": "/pages/team.html?day=tuesday&team=4"
       },
       "ics": "/teams/tuesday/ics/12/week10.ics"
     },

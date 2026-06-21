@@ -57,13 +57,13 @@
     {
       "week": 5,
       "date": "2026-06-23",
-      "time": "5:30pm",
+      "time": "7:00pm",
       "courts": "Courts 10–13",
-      "homeAway": "Away",
+      "homeAway": "Home",
       "opponent": {
-        "name": "Subs",
-        "number": "2",
-        "file": "/pages/team.html?day=tuesday&team=2"
+        "name": "Spin Doctors",
+        "number": "1",
+        "file": "/pages/team.html?day=tuesday&team=1"
       },
       "ics": "/teams/tuesday/ics/3/week5.ics"
     },
@@ -122,13 +122,13 @@
     {
       "week": 10,
       "date": "2026-07-28",
-      "time": "7:00pm",
+      "time": "5:30pm",
       "courts": "Courts 10–13",
-      "homeAway": "Home",
+      "homeAway": "Away",
       "opponent": {
-        "name": "Spin Doctors",
-        "number": "1",
-        "file": "/pages/team.html?day=tuesday&team=1"
+        "name": "Subs",
+        "number": "2",
+        "file": "/pages/team.html?day=tuesday&team=2"
       },
       "ics": "/teams/tuesday/ics/3/week10.ics"
     },

@@ -288,11 +288,13 @@ async function main() {
 
       const rosterDir = path.join(OUTPUT_DIR, night, "rosters");
       const rosters = {};
+      const teamNames = {};
       if (fs.existsSync(rosterDir)) {
         fs.readdirSync(rosterDir).forEach(file => {
           const teamNum = file.replace(/\.json$/, '');
           const data = JSON.parse(fs.readFileSync(path.join(rosterDir, file)));
           rosters[teamNum] = data.roster || [];
+          teamNames[teamNum] = data.teamName;
         });
       }
 
@@ -311,6 +313,14 @@ async function main() {
       });
 
       const weekAssignments = assignSlotsToMatches(matchesByWeek, teams);
+
+      // NOTE: This swap is specific to the 2026 season to resolve a Tuesday night Subs team conflict. Remove or update this for future seasons.
+      if (night === 'tuesday') {
+        console.log("Swapping Week 5 and Week 10 schedules for Tuesday...");
+        const temp = weekAssignments[4];
+        weekAssignments[4] = weekAssignments[9];
+        weekAssignments[9] = temp;
+      }
 
       // Set start date based on night
       let startDate = START_DATE;
@@ -334,11 +344,11 @@ async function main() {
         const dateStr = weekDates[weekIdx];
         matches.forEach(match => {
 
-          }
-
           // Find team objects for A and B
           const teamA = teams.find(t => t.number === match.teamA.number);
           const teamB = teams.find(t => t.number === match.teamB.number);
+          const teamAName = teamNames[teamA.number] || teamA.name;
+          const teamBName = teamNames[teamB.number] || teamB.name;
           const entry = {
             week: weekIdx + 1,
             date: weekDates[weekIdx],
@@ -346,7 +356,7 @@ async function main() {
             courts: match.court,
             homeAway: "Home",
             opponent: {
-              name: teamB.name,
+              name: teamBName,
               number: teamB.number,
               file: `/pages/team.html?day=${night}&team=${teamB.number}`
             }
@@ -358,7 +368,7 @@ async function main() {
             courts: match.court,
             homeAway: "Away",
             opponent: {
-              name: teamA.name,
+              name: teamAName,
               number: teamA.number,
               file: `/pages/team.html?day=${night}&team=${teamA.number}`
             }
@@ -481,13 +491,21 @@ async function main() {
       const masterSchedule = [];
       weekAssignments.forEach((matches, weekIdx) => {
         matches.forEach(match => {
+          const nameA = teamNames[match.teamA.number] || match.teamA.name;
+          const nameB = teamNames[match.teamB.number] || match.teamB.name;
           masterSchedule.push({
             week: weekIdx + 1,
             date: weekDates[weekIdx],
             time: match.time,
             courts: match.court,
-            teamA: match.teamA,
-            teamB: match.teamB
+            teamA: {
+              number: match.teamA.number,
+              name: nameA
+            },
+            teamB: {
+              number: match.teamB.number,
+              name: nameB
+            }
           });
         });
       });

@@ -338,11 +338,11 @@
   {
     "week": 5,
     "date": "2026-06-23",
-    "time": "5:30pm",
-    "courts": "Courts 6–9",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
     "teamA": {
-      "number": "8",
-      "name": "Return to Sender with Love"
+      "number": "3",
+      "name": "Herons"
     },
     "teamB": {
       "number": "1",
@@ -352,15 +352,15 @@
   {
     "week": 5,
     "date": "2026-06-23",
-    "time": "5:30pm",
-    "courts": "Courts 1–5",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
     "teamA": {
-      "number": "9",
-      "name": "Bounce It"
+      "number": "4",
+      "name": "Approach Shots"
     },
     "teamB": {
-      "number": "7",
-      "name": "Good Ol' Boys"
+      "number": "2",
+      "name": "Subs"
     }
   },
   {
@@ -369,54 +369,54 @@
     "time": "7:00pm",
     "courts": "Courts 1–5",
     "teamA": {
-      "number": "10",
-      "name": "Jetsetters"
-    },
-    "teamB": {
-      "number": "6",
-      "name": "Rascals"
-    }
-  },
-  {
-    "week": 5,
-    "date": "2026-06-23",
-    "time": "7:00pm",
-    "courts": "Courts 6–9",
-    "teamA": {
-      "number": "11",
-      "name": "Full Metal Racquet"
-    },
-    "teamB": {
       "number": "5",
       "name": "Racquet Scientists"
-    }
-  },
-  {
-    "week": 5,
-    "date": "2026-06-23",
-    "time": "7:00pm",
-    "courts": "Courts 10–13",
-    "teamA": {
-      "number": "12",
-      "name": "Easy Overhead"
     },
     "teamB": {
-      "number": "4",
-      "name": "Approach Shots"
+      "number": "12",
+      "name": "Easy Overhead"
     }
   },
   {
     "week": 5,
     "date": "2026-06-23",
     "time": "5:30pm",
-    "courts": "Courts 10–13",
+    "courts": "Courts 1–5",
     "teamA": {
-      "number": "2",
-      "name": "Subs"
+      "number": "6",
+      "name": "Rascals"
     },
     "teamB": {
-      "number": "3",
-      "name": "Herons"
+      "number": "11",
+      "name": "Full Metal Racquet"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2026-06-23",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "7",
+      "name": "Good Ol' Boys"
+    },
+    "teamB": {
+      "number": "10",
+      "name": "Jetsetters"
+    }
+  },
+  {
+    "week": 5,
+    "date": "2026-06-23",
+    "time": "5:30pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "8",
+      "name": "Return to Sender with Love"
+    },
+    "teamB": {
+      "number": "9",
+      "name": "Bounce It"
     }
   },
   {
@@ -758,11 +758,11 @@
   {
     "week": 10,
     "date": "2026-07-28",
-    "time": "7:00pm",
-    "courts": "Courts 10–13",
+    "time": "5:30pm",
+    "courts": "Courts 6–9",
     "teamA": {
-      "number": "3",
-      "name": "Herons"
+      "number": "8",
+      "name": "Return to Sender with Love"
     },
     "teamB": {
       "number": "1",
@@ -772,57 +772,57 @@
   {
     "week": 10,
     "date": "2026-07-28",
-    "time": "7:00pm",
-    "courts": "Courts 6–9",
-    "teamA": {
-      "number": "4",
-      "name": "Approach Shots"
-    },
-    "teamB": {
-      "number": "2",
-      "name": "Subs"
-    }
-  },
-  {
-    "week": 10,
-    "date": "2026-07-28",
-    "time": "7:00pm",
-    "courts": "Courts 1–5",
-    "teamA": {
-      "number": "5",
-      "name": "Racquet Scientists"
-    },
-    "teamB": {
-      "number": "12",
-      "name": "Easy Overhead"
-    }
-  },
-  {
-    "week": 10,
-    "date": "2026-07-28",
     "time": "5:30pm",
     "courts": "Courts 1–5",
     "teamA": {
-      "number": "6",
-      "name": "Rascals"
+      "number": "9",
+      "name": "Bounce It"
     },
     "teamB": {
-      "number": "11",
-      "name": "Full Metal Racquet"
-    }
-  },
-  {
-    "week": 10,
-    "date": "2026-07-28",
-    "time": "5:30pm",
-    "courts": "Courts 6–9",
-    "teamA": {
       "number": "7",
       "name": "Good Ol' Boys"
-    },
-    "teamB": {
+    }
+  },
+  {
+    "week": 10,
+    "date": "2026-07-28",
+    "time": "7:00pm",
+    "courts": "Courts 1–5",
+    "teamA": {
       "number": "10",
       "name": "Jetsetters"
+    },
+    "teamB": {
+      "number": "6",
+      "name": "Rascals"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2026-07-28",
+    "time": "7:00pm",
+    "courts": "Courts 6–9",
+    "teamA": {
+      "number": "11",
+      "name": "Full Metal Racquet"
+    },
+    "teamB": {
+      "number": "5",
+      "name": "Racquet Scientists"
+    }
+  },
+  {
+    "week": 10,
+    "date": "2026-07-28",
+    "time": "7:00pm",
+    "courts": "Courts 10–13",
+    "teamA": {
+      "number": "12",
+      "name": "Easy Overhead"
+    },
+    "teamB": {
+      "number": "4",
+      "name": "Approach Shots"
     }
   },
   {
@@ -831,12 +831,12 @@
     "time": "5:30pm",
     "courts": "Courts 10–13",
     "teamA": {
-      "number": "8",
-      "name": "Return to Sender with Love"
+      "number": "2",
+      "name": "Subs"
     },
     "teamB": {
-      "number": "9",
-      "name": "Bounce It"
+      "number": "3",
+      "name": "Herons"
     }
   },
   {

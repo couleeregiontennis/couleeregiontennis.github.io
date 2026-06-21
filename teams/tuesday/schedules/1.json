@@ -57,13 +57,13 @@
     {
       "week": 5,
       "date": "2026-06-23",
-      "time": "5:30pm",
-      "courts": "Courts 6–9",
+      "time": "7:00pm",
+      "courts": "Courts 10–13",
       "homeAway": "Away",
       "opponent": {
-        "name": "Return to Sender with Love",
-        "number": "8",
-        "file": "/pages/team.html?day=tuesday&team=8"
+        "name": "Herons",
+        "number": "3",
+        "file": "/pages/team.html?day=tuesday&team=3"
       },
       "ics": "/teams/tuesday/ics/1/week5.ics"
     },
@@ -122,13 +122,13 @@
     {
       "week": 10,
       "date": "2026-07-28",
-      "time": "7:00pm",
-      "courts": "Courts 10–13",
+      "time": "5:30pm",
+      "courts": "Courts 6–9",
       "homeAway": "Away",
       "opponent": {
-        "name": "Herons",
-        "number": "3",
-        "file": "/pages/team.html?day=tuesday&team=3"
+        "name": "Return to Sender with Love",
+        "number": "8",
+        "file": "/pages/team.html?day=tuesday&team=8"
       },
       "ics": "/teams/tuesday/ics/1/week10.ics"
     },

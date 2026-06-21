@@ -57,13 +57,13 @@
     {
       "week": 5,
       "date": "2026-06-23",
-      "time": "7:00pm",
+      "time": "5:30pm",
       "courts": "Courts 1–5",
-      "homeAway": "Away",
+      "homeAway": "Home",
       "opponent": {
-        "name": "Jetsetters",
-        "number": "10",
-        "file": "/pages/team.html?day=tuesday&team=10"
+        "name": "Full Metal Racquet",
+        "number": "11",
+        "file": "/pages/team.html?day=tuesday&team=11"
       },
       "ics": "/teams/tuesday/ics/6/week5.ics"
     },
@@ -122,13 +122,13 @@
     {
       "week": 10,
       "date": "2026-07-28",
-      "time": "5:30pm",
+      "time": "7:00pm",
       "courts": "Courts 1–5",
-      "homeAway": "Home",
+      "homeAway": "Away",
       "opponent": {
-        "name": "Full Metal Racquet",
-        "number": "11",
-        "file": "/pages/team.html?day=tuesday&team=11"
+        "name": "Jetsetters",
+        "number": "10",
+        "file": "/pages/team.html?day=tuesday&team=10"
       },
       "ics": "/teams/tuesday/ics/6/week10.ics"
     },
