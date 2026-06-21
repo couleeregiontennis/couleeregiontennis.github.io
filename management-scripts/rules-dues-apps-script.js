@@ -114,7 +114,7 @@ function generatePlainText(team) {
     "1. Weather & Cancellations: Cancellation decisions will be made by 4:30 PM. Heat rule: RealFeel > 95°F is optional 2-2 start; > 104°F is automatic cancellation. If play is officially cancelled by the league due to weather, no match results are recorded (even if players choose to hit).\n\n" +
     "2. Scoring Refresher: Earn 1 point per set won (including tiebreakers) + 1 participation point (lost only for forfeits). Matches use No-Ad scoring.\n\n" +
     "3. Write Down Points: The players on each individual line are responsible for writing down their set scores AND calculated league points (e.g., Home 3, Away 1) on the scoresheet.\n\n" +
-    "4. League Fees: Dues of $25 per player are due by Week 2. Please pay your captain as soon as possible.\n\n" +
+    "4. League Fees: Dues of $25 per player are now overdue (deadline was Week 2). Please pay your captain as soon as possible.\n\n" +
     "Read the full rules here: https://couleeregiontennis.org/pages/ltta-rules.html\n\n" +
     "Best regards,\nThe LTTA League Committee";
 }
@@ -158,7 +158,7 @@ function generateEmailHtml(team) {
     '<h2 style="color: #1b5e20; border-bottom: 1px solid #eeeeee; padding-bottom: 5px; margin-top: 30px;">' + sunIcon + ' Weather & Play Cancellation Rules</h2>' +
     '<p>Weather in Wisconsin can be unpredictable. Here is how cancellations and heat rules work:</p>' +
     '<ul style="padding-left: 20px;">' +
-    '<li style="margin-bottom: 10px;"><strong>Cancellations:</strong> The On-Site Coordinator will make any cancellation decision (for rain, storms, or heat) by <strong>4:30 PM</strong> on match day. Captains will be notified directly.</li>' +
+    '<li style="margin-bottom: 10px;"><strong>Cancellations:</strong> The LTTA Committee will make any cancellation decision (for rain, storms, or heat) by <strong>4:30 PM</strong> on match day. Captains will be notified directly.</li>' +
     '<li style="margin-bottom: 10px;"><strong>Heat Rule ("RealFeel"):</strong> We monitor the "RealFeel" temperature on <a href="https://www.accuweather.com" target="_blank" style="color: #2e7d32;">accuweather.com</a>:' +
     '<ul>' +
     '<li><strong>Above 95&deg;F:</strong> Matches may start at 2-2 in each set (optional, if both captains agree or coordinator directs).</li>' +
@@ -190,9 +190,9 @@ function generateEmailHtml(team) {
     '<p>Without the points explicitly written down, it is not clear which team won the match/tiebreaker or if participation points are correctly applied, making it difficult for the League Coordinator to input accurate standings. Please double-check this before signing off on the sheet!</p>' +
     '</div>' +
 
-    '<h2 style="color: #1b5e20; border-bottom: 1px solid #eeeeee; padding-bottom: 5px; margin-top: 30px;">' + moneyIcon + ' League Fees ($25) Due Soon</h2>' +
-    '<p>If you have not already paid, please get your <strong>$25 league fee</strong> to your team captain as soon as possible. Dues are due by the <strong>second week of play</strong>.</p>' +
-    '<p>These dues are vital as they cover the cost of league tennis balls and court reservations. Captains, please collect these fees from your players and turn them in to the On-Site Coordinator at the courts.</p>' +
+    '<h2 style="color: #1b5e20; border-bottom: 1px solid #eeeeee; padding-bottom: 5px; margin-top: 30px;">' + moneyIcon + ' League Fees ($25) Overdue</h2>' +
+    '<p>If you have not already paid, please get your <strong>$25 league fee</strong> to your team captain as soon as possible. Dues are now <strong>overdue</strong> (deadline was the second week of play).</p>' +
+    '<p>These dues are vital as they cover the cost of league tennis balls and court reservations. Captains, please collect these fees from your players and turn them in to the LTTA Committee at the courts.</p>' +
 
     '<p style="margin-top: 30px;">If you have any questions about these rules or scoring, please read the full rules on our website at <a href="https://couleeregiontennis.org/pages/ltta-rules.html" target="_blank" style="color: #2e7d32;">couleeregiontennis.org/pages/ltta-rules.html</a> or reach out to your Night Coordinator.</p>' +
     '<p>Thank you for your cooperation, and good luck with your matches!</p>' +
