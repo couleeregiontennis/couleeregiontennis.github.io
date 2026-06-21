@@ -7,6 +7,8 @@
     "dotenv": "^17.4.2"
   },
   "scripts": {
+    "prepare": "node management-scripts/install-hook.js",
+    "bump-version": "node management-scripts/bump-version.js",
     "test": "npx playwright test",
     "test:unit": "node management-scripts/generate-scoresheet.js && node --test tests/email-template.test.js tests/schedule-alignment.test.js"
   }

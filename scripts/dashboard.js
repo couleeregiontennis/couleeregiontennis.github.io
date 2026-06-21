@@ -191,8 +191,8 @@ async function loadDashboard() {
 
   try {
     const [tueRes, wedRes, cancelRes] = await Promise.all([
-      fetch('teams/tuesday/schedules/master_schedule.json?v=2026'),
-      fetch('teams/wednesday/schedules/master_schedule.json?v=2026'),
+      fetch('teams/tuesday/schedules/master_schedule.json?v=2026.8'),
+      fetch('teams/wednesday/schedules/master_schedule.json?v=2026.8'),
       fetch('assets/cancellations.json?v=' + Date.now()).catch(() => null)
     ]);
 

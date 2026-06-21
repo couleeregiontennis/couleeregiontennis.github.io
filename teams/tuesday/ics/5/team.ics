@@ -49,8 +49,7 @@ DTSTAMP:20260616T190000Z
 DTSTART;TZID=America/Chicago:20260616T190000
 DTEND;TZID=America/Chicago:20260616T203000
 SUMMARY:LTTA Tennis: vs Subs
-DESCRIPTION:LTTA Tennis match: 5 vs Subs at Green Island Park - Courts 1–5\nOpponent Roster: Sawyer Kuck (1); Dave Wissink (2); Dave Mills (3); Amanda Arneson                       
-Kirk Arneson                kirk.arneson@gmail.com        608 397 4536 (3); Kirk Arneson (3); Raj Remnarace (3); Laura Prosperi (5)
+DESCRIPTION:LTTA Tennis match: 5 vs Subs at Green Island Park - Courts 1–5\nOpponent Roster: Sawyer Kuck (1); Dave Wissink (2); Dave Mills (3); Amanda Arneson (3); Kirk Arneson (3)
 LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT11H
@@ -63,9 +62,9 @@ UID:ltta-tuesday-5-week5@couleeregiontennis.org
 DTSTAMP:20260623T190000Z
 DTSTART;TZID=America/Chicago:20260623T190000
 DTEND;TZID=America/Chicago:20260623T203000
-SUMMARY:LTTA Tennis: vs Full Metal Racquet
-DESCRIPTION:LTTA Tennis match: 5 vs Full Metal Racquet at Green Island Park - Courts 6–9\nOpponent Roster: Jeff Herde (1); Cole Lapp (2); Bill Lapp (3); Regina Jones (3); Sam Schmidt (3); Hannah Exner (3); Sarah Gang (4); Morgan Brazil (5)
-LOCATION:Green Island Park - Courts 6–9
+SUMMARY:LTTA Tennis: vs Easy Overhead
+DESCRIPTION:LTTA Tennis match: 5 vs Easy Overhead at Green Island Park - Courts 1–5\nOpponent Roster: Brian Mansky (1); Ryan Mullaney (2); Heidi Barreyro (3); Shanon Torgerud (3); Odessa Barreyro (3); Katie Johnson (3); Amit Mishra (4); Dwight Mills (5)
+LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT11H
 ACTION:DISPLAY
@@ -133,9 +132,9 @@ UID:ltta-tuesday-5-week10@couleeregiontennis.org
 DTSTAMP:20260728T190000Z
 DTSTART;TZID=America/Chicago:20260728T190000
 DTEND;TZID=America/Chicago:20260728T203000
-SUMMARY:LTTA Tennis: vs Easy Overhead
-DESCRIPTION:LTTA Tennis match: 5 vs Easy Overhead at Green Island Park - Courts 1–5\nOpponent Roster: Brian Mansky (1); Ryan Mullaney (2); Heidi Barreyro (3); Shanon Torgerud (3); Odessa Barreyro (3); Katie Johnson (3); Amit Mishra (4); Dwight Mills (5)
-LOCATION:Green Island Park - Courts 1–5
+SUMMARY:LTTA Tennis: vs Full Metal Racquet
+DESCRIPTION:LTTA Tennis match: 5 vs Full Metal Racquet at Green Island Park - Courts 6–9\nOpponent Roster: Jeff Herde (1); Cole Lapp (2); Bill Lapp (3); Regina Jones (3); Sam Schmidt (3); Hannah Exner (3); Sarah Gang (4); Morgan Brazil (5)
+LOCATION:Green Island Park - Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H
 ACTION:DISPLAY
@@ -148,7 +147,7 @@ DTSTAMP:20260804T190000Z
 DTSTART;TZID=America/Chicago:20260804T190000
 DTEND;TZID=America/Chicago:20260804T203000
 SUMMARY:LTTA Tennis: vs Jetsetters
-DESCRIPTION:LTTA Tennis match: 5 vs Jetsetters at Green Island Park - Courts 10–13\nOpponent Roster: Drake Wonderling (1); Corey Stauner (2); Jada Brunkow (3); Dan Petersen (3); Shirley Yuan (3); Tyler Benson (3); Aaron Olson (4); Anna Olson (5)
+DESCRIPTION:LTTA Tennis match: 5 vs Jetsetters at Green Island Park - Courts 10–13\nOpponent Roster: Drake Wonderling (1); Corey Stauner (2); Dan Petersen (3); Shirley Yuan (3); Tyler Benson (3)
 LOCATION:Green Island Park - Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT11H

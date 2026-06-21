@@ -57,13 +57,13 @@
     {
       "week": 5,
       "date": "2026-06-23",
-      "time": "7:00pm",
-      "courts": "Courts 6–9",
-      "homeAway": "Home",
+      "time": "5:30pm",
+      "courts": "Courts 1–5",
+      "homeAway": "Away",
       "opponent": {
-        "name": "Racquet Scientists",
-        "number": "5",
-        "file": "/pages/team.html?day=tuesday&team=5"
+        "name": "Rascals",
+        "number": "6",
+        "file": "/pages/team.html?day=tuesday&team=6"
       },
       "ics": "/teams/tuesday/ics/11/week5.ics"
     },
@@ -122,13 +122,13 @@
     {
       "week": 10,
       "date": "2026-07-28",
-      "time": "5:30pm",
-      "courts": "Courts 1–5",
-      "homeAway": "Away",
+      "time": "7:00pm",
+      "courts": "Courts 6–9",
+      "homeAway": "Home",
       "opponent": {
-        "name": "Rascals",
-        "number": "6",
-        "file": "/pages/team.html?day=tuesday&team=6"
+        "name": "Racquet Scientists",
+        "number": "5",
+        "file": "/pages/team.html?day=tuesday&team=5"
       },
       "ics": "/teams/tuesday/ics/11/week10.ics"
     },

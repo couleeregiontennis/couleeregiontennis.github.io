@@ -58,12 +58,12 @@
       "week": 5,
       "date": "2026-06-23",
       "time": "7:00pm",
-      "courts": "Courts 6–9",
-      "homeAway": "Away",
+      "courts": "Courts 1–5",
+      "homeAway": "Home",
       "opponent": {
-        "name": "Full Metal Racquet",
-        "number": "11",
-        "file": "/pages/team.html?day=tuesday&team=11"
+        "name": "Easy Overhead",
+        "number": "12",
+        "file": "/pages/team.html?day=tuesday&team=12"
       },
       "ics": "/teams/tuesday/ics/5/week5.ics"
     },
@@ -123,12 +123,12 @@
       "week": 10,
       "date": "2026-07-28",
       "time": "7:00pm",
-      "courts": "Courts 1–5",
-      "homeAway": "Home",
+      "courts": "Courts 6–9",
+      "homeAway": "Away",
       "opponent": {
-        "name": "Easy Overhead",
-        "number": "12",
-        "file": "/pages/team.html?day=tuesday&team=12"
+        "name": "Full Metal Racquet",
+        "number": "11",
+        "file": "/pages/team.html?day=tuesday&team=11"
       },
       "ics": "/teams/tuesday/ics/5/week10.ics"
     },

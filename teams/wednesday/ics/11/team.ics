@@ -7,7 +7,7 @@ DTSTAMP:20260527T190000Z
 DTSTART;TZID=America/Chicago:20260527T190000
 DTEND;TZID=America/Chicago:20260527T203000
 SUMMARY:LTTA Tennis: vs Rally Monkeys
-DESCRIPTION:LTTA Tennis match: 11 vs Rally Monkeys at Green Island Park - Courts 1–5\nOpponent Roster: Brett Meddaugh (1); Meredith Holt (2); Ronghui Chen (3); Kayla Holman/Kelly Gorres (3); Mason Engebretsen (3); Isaiah Dahman (3); Sam Hinton (4); Andrew Horton (5)
+DESCRIPTION:LTTA Tennis match: 11 vs Rally Monkeys at Green Island Park - Courts 1–5\nOpponent Roster: Brett Meddaugh (1); Meredith Holt (2); Ronghui Chen (3); Kayla Holman/Kelly Gorres (3); Mason Engebretsen (3); Isaiah Dahman (3); Sam Hinton (4); Caleb McClung (5)
 LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT11H
@@ -147,7 +147,7 @@ DTSTAMP:20260805T173000Z
 DTSTART;TZID=America/Chicago:20260805T173000
 DTEND;TZID=America/Chicago:20260805T190000
 SUMMARY:LTTA Tennis: vs Hot Shots
-DESCRIPTION:LTTA Tennis match: 11 vs Hot Shots at Green Island Park - Courts 10–13\nOpponent Roster: Laura Reutlinger (1); Roxie Anderson (2); Chris Kahlow (3); Taylor Nelson (3); Payton Demeyer (3); Jenna Helminski Juve (3); Mike Leonard (4); John Noble (5)
+DESCRIPTION:LTTA Tennis match: 11 vs Hot Shots at Green Island Park - Courts 10–13\nOpponent Roster: Laura Reutlinger (1); Roxie Anderson (2); Chris Kahlow (3); Taylor Nelson (3); Payton Demeyer (3); Tia Leen (3); Mike Leonard (4); John Noble (5)
 LOCATION:Green Island Park - Courts 10–13
 BEGIN:VALARM
 TRIGGER:-PT9H30M

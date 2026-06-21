@@ -25,7 +25,7 @@ DTSTAMP:20260722T190000Z
 DTSTART;TZID=America/Chicago:20260722T190000
 DTEND;TZID=America/Chicago:20260722T203000
 SUMMARY:LTTA Tennis: vs Rally Monkeys (Home)
-DESCRIPTION:LTTA Tennis match: 6 vs Rally Monkeys at Green Island Park - Courts 6–9\nOpponent Roster: Brett Meddaugh (1); Meredith Holt (2); Ronghui Chen (3); Kayla Holman/Kelly Gorres (3); Mason Engebretsen (3); Isaiah Dahman (3); Sam Hinton (4); Andrew Horton (5)
+DESCRIPTION:LTTA Tennis match: 6 vs Rally Monkeys at Green Island Park - Courts 6–9\nOpponent Roster: Brett Meddaugh (1); Meredith Holt (2); Ronghui Chen (3); Kayla Holman/Kelly Gorres (3); Mason Engebretsen (3); Isaiah Dahman (3); Sam Hinton (4); Caleb McClung (5)
 LOCATION:Green Island Park - Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT11H

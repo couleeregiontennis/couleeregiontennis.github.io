@@ -59,14 +59,14 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ltta-tuesday-2-week5@couleeregiontennis.org
-DTSTAMP:20260623T173000Z
-DTSTART;TZID=America/Chicago:20260623T173000
-DTEND;TZID=America/Chicago:20260623T190000
-SUMMARY:LTTA Tennis: vs Herons
-DESCRIPTION:LTTA Tennis match: 2 vs Herons at Green Island Park - Courts 10–13\nOpponent Roster: Stephan Brettfeld (1); Joe Gregas (2); Madeline Loh (3); Adrienne Loh (3); Stanton Loh (3); Malakai Berget (3); Kaitlyn Northrup (4); Steve Mydy (5)
-LOCATION:Green Island Park - Courts 10–13
+DTSTAMP:20260623T190000Z
+DTSTART;TZID=America/Chicago:20260623T190000
+DTEND;TZID=America/Chicago:20260623T203000
+SUMMARY:LTTA Tennis: vs Approach Shots
+DESCRIPTION:LTTA Tennis match: 2 vs Approach Shots at Green Island Park - Courts 6–9\nOpponent Roster: Greg Schibbelhut (1); Dillon Eddingsaas (2); Matthew Isaacson (3); Mary Aschenbrenner (3); Dale Barclay (3); Rich Levinger (3); Judith Engen (4); Amanda Wilke (5)
+LOCATION:Green Island Park - Courts 6–9
 BEGIN:VALARM
-TRIGGER:-PT9H30M
+TRIGGER:-PT11H
 ACTION:DISPLAY
 DESCRIPTION:LTTA Tennis Match Reminder
 END:VALARM
@@ -91,7 +91,7 @@ DTSTAMP:20260707T173000Z
 DTSTART;TZID=America/Chicago:20260707T173000
 DTEND;TZID=America/Chicago:20260707T190000
 SUMMARY:LTTA Tennis: vs Jetsetters
-DESCRIPTION:LTTA Tennis match: 2 vs Jetsetters at Green Island Park - Courts 1–5\nOpponent Roster: Drake Wonderling (1); Corey Stauner (2); Jada Brunkow (3); Dan Petersen (3); Shirley Yuan (3); Tyler Benson (3); Aaron Olson (4); Anna Olson (5)
+DESCRIPTION:LTTA Tennis match: 2 vs Jetsetters at Green Island Park - Courts 1–5\nOpponent Roster: Drake Wonderling (1); Corey Stauner (2); Dan Petersen (3); Shirley Yuan (3); Tyler Benson (3)
 LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -129,14 +129,14 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ltta-tuesday-2-week10@couleeregiontennis.org
-DTSTAMP:20260728T190000Z
-DTSTART;TZID=America/Chicago:20260728T190000
-DTEND;TZID=America/Chicago:20260728T203000
-SUMMARY:LTTA Tennis: vs Approach Shots
-DESCRIPTION:LTTA Tennis match: 2 vs Approach Shots at Green Island Park - Courts 6–9\nOpponent Roster: Greg Schibbelhut (1); Dillon Eddingsaas (2); Matthew Isaacson (3); Mary Aschenbrenner (3); Dale Barclay (3); Rich Levinger (3); Judith Engen (4); Amanda Wilke (5)
-LOCATION:Green Island Park - Courts 6–9
+DTSTAMP:20260728T173000Z
+DTSTART;TZID=America/Chicago:20260728T173000
+DTEND;TZID=America/Chicago:20260728T190000
+SUMMARY:LTTA Tennis: vs Herons
+DESCRIPTION:LTTA Tennis match: 2 vs Herons at Green Island Park - Courts 10–13\nOpponent Roster: Stephan Brettfeld (1); Joe Gregas (2); Madeline Loh (3); Adrienne Loh (3); Stanton Loh (3); Malakai Berget (3); Kaitlyn Northrup (4); Steve Mydy (5)
+LOCATION:Green Island Park - Courts 10–13
 BEGIN:VALARM
-TRIGGER:-PT11H
+TRIGGER:-PT9H30M
 ACTION:DISPLAY
 DESCRIPTION:LTTA Tennis Match Reminder
 END:VALARM

@@ -35,7 +35,7 @@ DTSTAMP:20260609T173000Z
 DTSTART;TZID=America/Chicago:20260609T173000
 DTEND;TZID=America/Chicago:20260609T190000
 SUMMARY:LTTA Tennis: vs Jetsetters
-DESCRIPTION:LTTA Tennis match: 1 vs Jetsetters at Green Island Park - Courts 1–5\nOpponent Roster: Drake Wonderling (1); Corey Stauner (2); Jada Brunkow (3); Dan Petersen (3); Shirley Yuan (3); Tyler Benson (3); Aaron Olson (4); Anna Olson (5)
+DESCRIPTION:LTTA Tennis match: 1 vs Jetsetters at Green Island Park - Courts 1–5\nOpponent Roster: Drake Wonderling (1); Corey Stauner (2); Dan Petersen (3); Shirley Yuan (3); Tyler Benson (3)
 LOCATION:Green Island Park - Courts 1–5
 BEGIN:VALARM
 TRIGGER:-PT9H30M
@@ -59,14 +59,14 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ltta-tuesday-1-week5@couleeregiontennis.org
-DTSTAMP:20260623T173000Z
-DTSTART;TZID=America/Chicago:20260623T173000
-DTEND;TZID=America/Chicago:20260623T190000
-SUMMARY:LTTA Tennis: vs Return to Sender with Love
-DESCRIPTION:LTTA Tennis match: 1 vs Return to Sender with Love at Green Island Park - Courts 6–9\nOpponent Roster: Denny Kreuser (1); Paul Leithold (2); Sara Bieneman (3); Missy Marcus (3); Julie Kamla (3); Asher Helgerson (3); Catherine Roraff (4); Mary Leithold (5)
-LOCATION:Green Island Park - Courts 6–9
+DTSTAMP:20260623T190000Z
+DTSTART;TZID=America/Chicago:20260623T190000
+DTEND;TZID=America/Chicago:20260623T203000
+SUMMARY:LTTA Tennis: vs Herons
+DESCRIPTION:LTTA Tennis match: 1 vs Herons at Green Island Park - Courts 10–13\nOpponent Roster: Stephan Brettfeld (1); Joe Gregas (2); Madeline Loh (3); Adrienne Loh (3); Stanton Loh (3); Malakai Berget (3); Kaitlyn Northrup (4); Steve Mydy (5)
+LOCATION:Green Island Park - Courts 10–13
 BEGIN:VALARM
-TRIGGER:-PT9H30M
+TRIGGER:-PT11H
 ACTION:DISPLAY
 DESCRIPTION:LTTA Tennis Match Reminder
 END:VALARM
@@ -129,14 +129,14 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ltta-tuesday-1-week10@couleeregiontennis.org
-DTSTAMP:20260728T190000Z
-DTSTART;TZID=America/Chicago:20260728T190000
-DTEND;TZID=America/Chicago:20260728T203000
-SUMMARY:LTTA Tennis: vs Herons
-DESCRIPTION:LTTA Tennis match: 1 vs Herons at Green Island Park - Courts 10–13\nOpponent Roster: Stephan Brettfeld (1); Joe Gregas (2); Madeline Loh (3); Adrienne Loh (3); Stanton Loh (3); Malakai Berget (3); Kaitlyn Northrup (4); Steve Mydy (5)
-LOCATION:Green Island Park - Courts 10–13
+DTSTAMP:20260728T173000Z
+DTSTART;TZID=America/Chicago:20260728T173000
+DTEND;TZID=America/Chicago:20260728T190000
+SUMMARY:LTTA Tennis: vs Return to Sender with Love
+DESCRIPTION:LTTA Tennis match: 1 vs Return to Sender with Love at Green Island Park - Courts 6–9\nOpponent Roster: Denny Kreuser (1); Paul Leithold (2); Sara Bieneman (3); Missy Marcus (3); Julie Kamla (3); Asher Helgerson (3); Catherine Roraff (4); Mary Leithold (5)
+LOCATION:Green Island Park - Courts 6–9
 BEGIN:VALARM
-TRIGGER:-PT11H
+TRIGGER:-PT9H30M
 ACTION:DISPLAY
 DESCRIPTION:LTTA Tennis Match Reminder
 END:VALARM
@@ -147,8 +147,7 @@ DTSTAMP:20260804T173000Z
 DTSTART;TZID=America/Chicago:20260804T173000
 DTEND;TZID=America/Chicago:20260804T190000
 SUMMARY:LTTA Tennis: vs Subs
-DESCRIPTION:LTTA Tennis match: 1 vs Subs at Green Island Park - Courts 6–9\nOpponent Roster: Sawyer Kuck (1); Dave Wissink (2); Dave Mills (3); Amanda Arneson                       
-Kirk Arneson                kirk.arneson@gmail.com        608 397 4536 (3); Kirk Arneson (3); Raj Remnarace (3); Laura Prosperi (5)
+DESCRIPTION:LTTA Tennis match: 1 vs Subs at Green Island Park - Courts 6–9\nOpponent Roster: Sawyer Kuck (1); Dave Wissink (2); Dave Mills (3); Amanda Arneson (3); Kirk Arneson (3)
 LOCATION:Green Island Park - Courts 6–9
 BEGIN:VALARM
 TRIGGER:-PT9H30M

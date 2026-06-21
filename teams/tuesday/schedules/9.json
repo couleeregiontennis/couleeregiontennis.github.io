@@ -58,12 +58,12 @@
       "week": 5,
       "date": "2026-06-23",
       "time": "5:30pm",
-      "courts": "Courts 1–5",
-      "homeAway": "Home",
+      "courts": "Courts 10–13",
+      "homeAway": "Away",
       "opponent": {
-        "name": "Good Ol' Boys",
-        "number": "7",
-        "file": "/pages/team.html?day=tuesday&team=7"
+        "name": "Return to Sender with Love",
+        "number": "8",
+        "file": "/pages/team.html?day=tuesday&team=8"
       },
       "ics": "/teams/tuesday/ics/9/week5.ics"
     },
@@ -123,12 +123,12 @@
       "week": 10,
       "date": "2026-07-28",
       "time": "5:30pm",
-      "courts": "Courts 10–13",
-      "homeAway": "Away",
+      "courts": "Courts 1–5",
+      "homeAway": "Home",
       "opponent": {
-        "name": "Return to Sender with Love",
-        "number": "8",
-        "file": "/pages/team.html?day=tuesday&team=8"
+        "name": "Good Ol' Boys",
+        "number": "7",
+        "file": "/pages/team.html?day=tuesday&team=7"
       },
       "ics": "/teams/tuesday/ics/9/week10.ics"
     },
