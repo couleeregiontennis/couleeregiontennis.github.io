@@ -34,52 +34,52 @@ function generateEmailHtml(team) {
     var teamNumStr = String(team.teamNumber).trim();
     var tuesdayMatchLookup = {
       '1': {
-        w5: { opp: 'Herons (Team 3)', time: '7:00 PM', courts: 'Courts 10–13' },
-        w10: { opp: 'Return to Sender with Love (Team 8)', time: '5:30 PM', courts: 'Courts 6–9' }
+        w5: { opp: 'Herons (Team 3)', time: '7:00 PM', courts: 'Courts 10-13' },
+        w10: { opp: 'Return to Sender with Love (Team 8)', time: '5:30 PM', courts: 'Courts 6-9' }
       },
       '2': {
-        w5: { opp: 'Approach Shots (Team 4)', time: '7:00 PM', courts: 'Courts 6–9' },
-        w10: { opp: 'Herons (Team 3)', time: '5:30 PM', courts: 'Courts 10–13' }
+        w5: { opp: 'Approach Shots (Team 4)', time: '7:00 PM', courts: 'Courts 6-9' },
+        w10: { opp: 'Herons (Team 3)', time: '5:30 PM', courts: 'Courts 10-13' }
       },
       '3': {
-        w5: { opp: 'Spin Doctors (Team 1)', time: '7:00 PM', courts: 'Courts 10–13' },
-        w10: { opp: 'Subs (Team 2)', time: '5:30 PM', courts: 'Courts 10–13' }
+        w5: { opp: 'Spin Doctors (Team 1)', time: '7:00 PM', courts: 'Courts 10-13' },
+        w10: { opp: 'Subs (Team 2)', time: '5:30 PM', courts: 'Courts 10-13' }
       },
       '4': {
-        w5: { opp: 'Subs (Team 2)', time: '7:00 PM', courts: 'Courts 6–9' },
-        w10: { opp: 'Easy Overhead (Team 12)', time: '7:00 PM', courts: 'Courts 10–13' }
+        w5: { opp: 'Subs (Team 2)', time: '7:00 PM', courts: 'Courts 6-9' },
+        w10: { opp: 'Easy Overhead (Team 12)', time: '7:00 PM', courts: 'Courts 10-13' }
       },
       '5': {
-        w5: { opp: 'Easy Overhead (Team 12)', time: '7:00 PM', courts: 'Courts 1–5' },
-        w10: { opp: 'Full Metal Racquet (Team 11)', time: '7:00 PM', courts: 'Courts 6–9' }
+        w5: { opp: 'Easy Overhead (Team 12)', time: '7:00 PM', courts: 'Courts 1-5' },
+        w10: { opp: 'Full Metal Racquet (Team 11)', time: '7:00 PM', courts: 'Courts 6-9' }
       },
       '6': {
-        w5: { opp: 'Full Metal Racquet (Team 11)', time: '5:30 PM', courts: 'Courts 1–5' },
-        w10: { opp: 'Jetsetters (Team 10)', time: '7:00 PM', courts: 'Courts 1–5' }
+        w5: { opp: 'Full Metal Racquet (Team 11)', time: '5:30 PM', courts: 'Courts 1-5' },
+        w10: { opp: 'Jetsetters (Team 10)', time: '7:00 PM', courts: 'Courts 1-5' }
       },
       '7': {
-        w5: { opp: 'Jetsetters (Team 10)', time: '5:30 PM', courts: 'Courts 6–9' },
-        w10: { opp: 'Bounce It (Team 9)', time: '5:30 PM', courts: 'Courts 1–5' }
+        w5: { opp: 'Jetsetters (Team 10)', time: '5:30 PM', courts: 'Courts 6-9' },
+        w10: { opp: 'Bounce It (Team 9)', time: '5:30 PM', courts: 'Courts 1-5' }
       },
       '8': {
-        w5: { opp: 'Bounce It (Team 9)', time: '5:30 PM', courts: 'Courts 10–13' },
-        w10: { opp: 'Spin Doctors (Team 1)', time: '5:30 PM', courts: 'Courts 6–9' }
+        w5: { opp: 'Bounce It (Team 9)', time: '5:30 PM', courts: 'Courts 10-13' },
+        w10: { opp: 'Spin Doctors (Team 1)', time: '5:30 PM', courts: 'Courts 6-9' }
       },
       '9': {
-        w5: { opp: 'Return to Sender with Love (Team 8)', time: '5:30 PM', courts: 'Courts 10–13' },
-        w10: { opp: 'Good Ol\' Boys (Team 7)', time: '5:30 PM', courts: 'Courts 1–5' }
+        w5: { opp: 'Return to Sender with Love (Team 8)', time: '5:30 PM', courts: 'Courts 10-13' },
+        w10: { opp: 'Good Ol\' Boys (Team 7)', time: '5:30 PM', courts: 'Courts 1-5' }
       },
       '10': {
-        w5: { opp: 'Good Ol\' Boys (Team 7)', time: '5:30 PM', courts: 'Courts 6–9' },
-        w10: { opp: 'Rascals (Team 6)', time: '7:00 PM', courts: 'Courts 1–5' }
+        w5: { opp: 'Good Ol\' Boys (Team 7)', time: '5:30 PM', courts: 'Courts 6-9' },
+        w10: { opp: 'Rascals (Team 6)', time: '7:00 PM', courts: 'Courts 1-5' }
       },
       '11': {
-        w5: { opp: 'Rascals (Team 6)', time: '5:30 PM', courts: 'Courts 1–5' },
-        w10: { opp: 'Racquet Scientists (Team 5)', time: '7:00 PM', courts: 'Courts 6–9' }
+        w5: { opp: 'Rascals (Team 6)', time: '5:30 PM', courts: 'Courts 1-5' },
+        w10: { opp: 'Racquet Scientists (Team 5)', time: '7:00 PM', courts: 'Courts 6-9' }
       },
       '12': {
-        w5: { opp: 'Racquet Scientists (Team 5)', time: '7:00 PM', courts: 'Courts 1–5' },
-        w10: { opp: 'Approach Shots (Team 4)', time: '7:00 PM', courts: 'Courts 10–13' }
+        w5: { opp: 'Racquet Scientists (Team 5)', time: '7:00 PM', courts: 'Courts 1-5' },
+        w10: { opp: 'Approach Shots (Team 4)', time: '7:00 PM', courts: 'Courts 10-13' }
       }
     };
 
@@ -88,7 +88,7 @@ function generateEmailHtml(team) {
     if (matchData) {
       matchInfoHtml = 
         '<div style="background-color: #ffffff; border: 1px solid #ffcdd2; padding: 12px; border-radius: 6px; margin: 15px 0 10px 0;">' +
-        '<p style="margin: 0 0 8px 0; font-weight: bold; color: #b71c1c;">Your Swapped Match Details:</p>' +
+        '<p style="margin: 0 0 8px 0; font-weight: bold; color: #b71c1c;">Your Correct Match Details:</p>' +
         '<table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">' +
         '<thead>' +
         '<tr style="border-bottom: 1px solid #ffcdd2; color: #757575;">' +
@@ -122,6 +122,7 @@ function generateEmailHtml(team) {
       '<div style="background-color: #ffebee; border-left: 5px solid #d32f2f; padding: 15px; margin: 25px 0; border-radius: 0 4px 4px 0;">' +
       '<h3 style="margin-top: 0; color: #c62828;">' + warningIcon + ' Important: Tuesday Schedule Swap</h3>' +
       '<p style="margin: 0 0 10px 0;">Due to a schedule conflict, the Tuesday night match schedules for <strong>Week 5 (June 23rd)</strong> and <strong>Week 10 (July 28th)</strong> have been swapped to ensure correct matchups.</p>' +
+      '<p style="margin: 0 0 12px 0; font-size: 13px; color: #555555; line-height: 1.5;"><em><strong>Note on Calendars:</strong> If you imported the team calendar (.ics file) or printed/saved your schedule prior to June 21st, your calendar will show the incorrect match times. Please download the updated calendar file below (or check the website) to ensure you have the correct match times and courts.</em></p>' +
       matchInfoHtml +
       '<p style="margin: 10px 0 0 0; font-size: 13px;">' +
       '<a href="' + icsLink + '" target="_blank" style="color: #c62828; font-weight: bold; text-decoration: underline;">' +
