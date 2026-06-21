@@ -59,7 +59,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
     (scheduleData.schedule || []).forEach(match => {
       const isCancelled = cancellationData.cancelledDate && match.date === cancellationData.cancelledDate && localTodayStr <= cancellationData.cancelledDate;
       const icsLink = match.ics
-        ? `<a href="${sanitizeUrl(match.ics)}?v=2026" download="LTTA-Match-Week${escapeHTML(match.week)}.ics" title="Add to calendar">📅</a>`
+        ? `<a href="${sanitizeUrl(match.ics)}?v=2026.8" download="LTTA-Match-Week${escapeHTML(match.week)}.ics" title="Add to calendar">📅</a>`
         : '';
       const tr = document.createElement("tr");
       if (isCancelled) {
@@ -100,7 +100,7 @@ async function loadTeamData(scheduleUrl, rosterUrl) {
     const teamIcsLink = document.getElementById('add-all-ics');
     if (teamIcsLink) {
       const baseIcsUrl = scheduleData.teamIcsPath || `/teams/${scheduleData.night}/ics/${scheduleData.team.replace(/\s+/g, '_')}/team.ics`;
-      teamIcsLink.href = sanitizeUrl(`${baseIcsUrl}?v=2026`);
+      teamIcsLink.href = sanitizeUrl(`${baseIcsUrl}?v=2026.8`);
     }
 
     highlightNextMatch();
@@ -159,6 +159,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const day = getDayFromUrl();
   if (team && day) {
     // Adjust path as needed for your structure
-    loadTeamData(`../teams/${day}/schedules/${team}.json`, `../teams/${day}/rosters/${team}.json`);
+    loadTeamData(`../teams/${day}/schedules/${team}.json?v=2026.8`, `../teams/${day}/rosters/${team}.json?v=2026.8`);
   }
 });
