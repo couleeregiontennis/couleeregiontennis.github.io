@@ -162,8 +162,8 @@ function generatePlainText(team) {
 
     scheduleNoticeText = 
       "IMPORTANT SCHEDULE CORRECTION (Tuesday Teams Only):\n" +
-      "Due to a schedule conflict, the Tuesday night match schedules for Week 5 (June 23rd) and Week 10 (July 28th) have been swapped.\n\n" +
-      "Note: If you grabbed the calendar (.ics) or printed your schedule between May 23rd and June 21st, it has the wrong matches. Please grab the updated calendar below (or check the site) to get the right times and courts!\n\n" +
+      "Due to a schedule conflict, the Tuesday night match schedules for Week 5 (June 23rd) and Week 10 (July 28th) have been corrected to ensure proper matchups.\n\n" +
+      "Note: Most players already have the correct matches on their calendar. However, if you grabbed the calendar (.ics) or printed your schedule between May 23rd and June 21st, your copy is incorrect. Please grab the updated calendar below (or check the site) to get the right times and courts!\n\n" +
       "Your Correct Match Details:\n" +
       "- Week 5 (June 23rd): vs " + matchData.w5.opp + " at " + matchData.w5.time + " on " + matchData.w5.courts + "\n" +
       "- Week 10 (July 28th): vs " + matchData.w10.opp + " at " + matchData.w10.time + " on " + matchData.w10.courts + "\n\n" +
@@ -290,8 +290,8 @@ function generateEmailHtml(team) {
     var icsLink = 'https://couleeregiontennis.org/teams/tuesday/ics/' + teamNumStr + '/team.ics?v=2026.8';    scheduleNoticeHtml = 
       '<div style="background-color: #ffebee; border-left: 5px solid #d32f2f; padding: 15px; margin: 25px 0; border-radius: 0 4px 4px 0;">' +
       '<h3 style="margin-top: 0; color: #c62828;">' + warningIcon + ' Important: Tuesday Schedule Correction</h3>' +
-      '<p style="margin: 0 0 10px 0;">Due to a schedule conflict, the Tuesday night match schedules for <strong>Week 5 (June 23rd)</strong> and <strong>Week 10 (July 28th)</strong> have been swapped to ensure correct matchups.</p>' +
-      '<p style="margin: 0 0 12px 0; font-size: 13px; color: #555555; line-height: 1.5;"><em><strong>Note on Calendars:</strong> If you grabbed the calendar (.ics) or printed your schedule between May 23rd and June 21st, it has the wrong matches. Please grab the updated calendar below (or check the site) to get the right times and courts!</em></p>' +
+      '<p style="margin: 0 0 10px 0;">Due to a schedule conflict, the Tuesday night match schedules for <strong>Week 5 (June 23rd)</strong> and <strong>Week 10 (July 28th)</strong> have been corrected to ensure proper matchups.</p>' +
+      '<p style="margin: 0 0 12px 0; font-size: 13px; color: #555555; line-height: 1.5;"><em><strong>Note on Calendars:</strong> Most players already have the correct matches on their calendar. However, if you grabbed the calendar (.ics) or printed your schedule between May 23rd and June 21st, your copy is incorrect. Please grab the updated calendar below (or check the site) to get the right times and courts!</em></p>' +
       matchInfoHtml +
       '<p style="margin: 10px 0 0 0; font-size: 13px;">' +
       '<a href="' + icsLink + '" target="_blank" style="color: #c62828; font-weight: bold; text-decoration: underline;">' +
