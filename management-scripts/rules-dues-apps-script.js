@@ -176,9 +176,8 @@ function generatePlainText(team) {
     scheduleNoticeText +
     "Please review these important reminders:\n\n" +
     "1. Weather Cancellation Scoring: Since we've had so many cancellations lately, here's a quick refresh on how we handle scoring: If play is officially canceled by the league due to weather, no match results are recorded (even if players choose to hit), which means this missed day will not count against your team in the standings.\n\n" +
-    "2. Scoring Refresher: Earn 1 point per set won (including tiebreakers) + 1 participation point (lost only for forfeits). Matches use No-Ad scoring.\n\n" +
-    "3. Write Down Points: The players on each individual line are responsible for writing down their set scores AND calculated league points (e.g., Home 3, Away 1) on the scoresheet.\n\n" +
-    "4. League Fees: Dues of $25 per player are now overdue (deadline was Week 2). Please pay your captain as soon as possible.\n\n" +
+    "2. Write Down Points: The players on each individual line are responsible for writing down their set scores AND calculated league points (e.g., Home 3, Away 1) on the scoresheet.\n\n" +
+    "3. League Fees: Dues of $25 per player are now overdue (deadline was Week 2). Please pay your captain as soon as possible.\n\n" +
     "Read the full rules here: https://couleeregiontennis.org/pages/ltta-rules.html\n\n" +
     "Best regards,\nThe LTTA League Committee";
 }
@@ -315,20 +314,6 @@ function generateEmailHtml(team) {
     '<li style="margin-bottom: 10px;"><strong style="color: #d32f2f;">' + warningIcon + ' Weather Cancellations / Rainouts:</strong> If play is officially canceled by the league due to weather, <strong>no match results are recorded</strong> (meaning this missed day will not count against your team in the standings). While players are welcome to use the courts for practice hits at their own discretion, any sets played will be completely unofficial and will not count toward league standings.</li>' +
     '</ul>' +
 
-    '<h2 style="color: #1b5e20; border-bottom: 1px solid #eeeeee; padding-bottom: 5px; margin-top: 30px;">' + trophyIcon + ' How Scoring Works</h2>' +
-    '<p>A quick refresher on how league standings points are calculated for each line:</p>' +
-    '<ul style="padding-left: 20px;">' +
-    '<li style="margin-bottom: 10px;"><strong>Set Points:</strong> You earn <strong>1 point for each set won</strong> (including third-set tiebreakers).</li>' +
-    '<li style="margin-bottom: 10px;"><strong>Participation Point:</strong> You earn <strong>1 point for participation</strong> (showing up on time, lost only in the case of a forfeit/default).</li>' +
-    '<li style="margin-bottom: 10px;"><strong>Match Format:</strong> We play best-of-three sets using <strong>No-Ad scoring</strong> (at deuce, the receiving team chooses the side, and the next point wins the game).</li>' +
-    '<li style="margin-bottom: 10px;"><strong>Example Totals:</strong>' +
-    '<ul>' +
-    '<li>A 2-0 set victory gives the winner <strong>3 points</strong> (2 sets + 1 participation) and the loser <strong>1 point</strong> (0 sets + 1 participation).</li>' +
-    '<li>A 2-1 set victory gives the winner <strong>3 points</strong> (2 sets + 1 participation) and the loser <strong>2 points</strong> (1 set + 1 participation).</li>' +
-    '<li>In the event of a <strong>forfeit/default</strong>, the winning team gets <strong>3 points</strong> and the defaulting team gets <strong>0 points</strong>.</li>' +
-    '</ul>' +
-    '</li>' +
-    '</ul>' +
 
     '<div style="background-color: #fff3e0; border-left: 5px solid #ef6c00; padding: 15px; margin: 25px 0; border-radius: 0 4px 4px 0;">' +
     '<h3 style="margin-top: 0; color: #ef6c00;">' + warningIcon + ' Players: Record Your Line\'s Scores & Points!</h3>' +
