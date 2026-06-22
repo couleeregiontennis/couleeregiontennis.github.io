@@ -77,7 +77,7 @@ function createLTTARulesDrafts() {
     if (String(team.teamName).toUpperCase() === 'BYE') continue;
     if (team.emails.length === 0) continue;
 
-    const subject = "LTTA Rules, Scoring, & Fees Update - " + team.night + " Team " + team.teamNumber;
+    const subject = "Quick LTTA Reminders - " + team.night + " Team " + team.teamNumber;
     const bodyHtml = generateEmailHtml(team);
     const bodyPlain = generatePlainText(team);
 
@@ -171,10 +171,10 @@ function generatePlainText(team) {
       icsLink + "\n\n";
   }
 
-  return "LTTA Rules, Scoring, & Fees Update\n\n" +
-    "Hello " + team.teamName + " players,\n\n" +
+  return "Quick LTTA Reminders\n\n" +
+    "Hey " + team.teamName + "!\n\n" +
+    "Hope you're having a great season so far. Just wanted to share a few quick updates and reminders before our next matches:\n\n" +
     scheduleNoticeText +
-    "Please review these important reminders:\n\n" +
     "1. Weather Cancellation Scoring: Since we've had so many cancellations lately, here's a quick refresh on how we handle scoring: If play is officially canceled by the league due to weather, no match results are recorded (even if players choose to hit), which means this missed day will not count against your team in the standings.\n\n" +
     "2. Write Down Points: The players on each individual line are responsible for writing down their set scores AND calculated league points (e.g., Home 3, Away 1) on the scoresheet.\n\n" +
     "3. League Fees: Dues of $25 per player are now overdue (deadline was Week 2). Please pay your captain as soon as possible.\n\n" +
@@ -302,10 +302,10 @@ function generateEmailHtml(team) {
 
   return '<div style="font-family: Arial, sans-serif; color: #333333; line-height: 1.6; max-width: 650px; margin: 0 auto; border: 1px solid #eeeeee; border-radius: 8px; overflow: hidden; background-color: #ffffff;">' +
     '<div style="background-color: #1b5e20; color: #ffffff; padding: 20px; text-align: center;">' +
-    '<h1 style="margin: 0; font-size: 24px;">LTTA Rules, Scoring, & Fees Update ' + racketIcon + '</h1>' +
+    '<h1 style="margin: 0; font-size: 24px;">Quick LTTA Reminders ' + racketIcon + '</h1>' +
     '</div>' +
     '<div style="padding: 20px 30px;">' +
-    '<p>Hello ' + escapeHTML(team.teamName) + ' players,</p>' +
+    '<p>Hey ' + escapeHTML(team.teamName) + '! Hope you\'re having a great season so far. Just wanted to share a few quick updates and reminders before our next matches:</p>' +
     scheduleNoticeHtml +
 
     '<h2 style="color: #1b5e20; border-bottom: 1px solid #eeeeee; padding-bottom: 5px; margin-top: 30px;">' + sunIcon + ' Weather & Cancellation Scoring</h2>' +

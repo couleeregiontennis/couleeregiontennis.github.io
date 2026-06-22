@@ -134,10 +134,10 @@ function generateEmailHtml(team) {
 
   return '<div style="font-family: Arial, sans-serif; color: #333333; line-height: 1.6; max-width: 650px; margin: 0 auto; border: 1px solid #eeeeee; border-radius: 8px; overflow: hidden; background-color: #ffffff;">' +
     '<div style="background-color: #1b5e20; color: #ffffff; padding: 20px; text-align: center;">' +
-    '<h1 style="margin: 0; font-size: 24px;">LTTA Rules, Scoring, & Fees Update ' + racketIcon + '</h1>' +
+    '<h1 style="margin: 0; font-size: 24px;">Quick LTTA Reminders ' + racketIcon + '</h1>' +
     '</div>' +
     '<div style="padding: 20px 30px;">' +
-    '<p>Hello ' + escapeHTML(team.teamName) + ' players,</p>' +
+    '<p>Hey ' + escapeHTML(team.teamName) + '! Hope you\'re having a great season so far. Just wanted to share a few quick updates and reminders before our next matches:</p>' +
     scheduleNoticeHtml +
 
     '<h2 style="color: #1b5e20; border-bottom: 1px solid #eeeeee; padding-bottom: 5px; margin-top: 30px;">' + sunIcon + ' Weather & Cancellation Scoring</h2>' +
