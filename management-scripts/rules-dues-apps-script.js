@@ -161,7 +161,7 @@ function generatePlainText(team) {
     var icsLink = 'https://couleeregiontennis.org/teams/tuesday/ics/' + teamNumStr + '/team.ics?v=2026.8';
 
     scheduleNoticeText = 
-      "IMPORTANT SCHEDULE UPDATE (Tuesday Teams Only):\n" +
+      "IMPORTANT SCHEDULE CORRECTION (Tuesday Teams Only):\n" +
       "Due to a schedule conflict, the Tuesday night match schedules for Week 5 (June 23rd) and Week 10 (July 28th) have been swapped.\n\n" +
       "Note: If you grabbed the calendar (.ics) or printed your schedule between May 23rd and June 21st, it has the wrong matches. Please grab the updated calendar below (or check the site) to get the right times and courts!\n\n" +
       "Your Correct Match Details:\n" +
@@ -174,8 +174,8 @@ function generatePlainText(team) {
   return "LTTA Rules, Scoring, & Fees Update\n\n" +
     "Hello " + team.teamName + " players,\n\n" +
     scheduleNoticeText +
-    "We hope everyone is enjoying the start of the 2026 LTTA summer season! Please review these important reminders:\n\n" +
-    "1. Weather & Cancellations: Cancellation decisions will be made by 4:30 PM. Heat rule: RealFeel > 95°F is optional 2-2 start; > 104°F is automatic cancellation. If play is officially cancelled by the league due to weather, no match results are recorded (even if players choose to hit), which means this missed day will not count against your team in the standings.\n\n" +
+    "Please review these important reminders:\n\n" +
+    "1. Weather Cancellation Scoring: Since we've had so many cancellations lately, here's a quick refresh on how we handle scoring: If play is officially canceled by the league due to weather, no match results are recorded (even if players choose to hit), which means this missed day will not count against your team in the standings.\n\n" +
     "2. Scoring Refresher: Earn 1 point per set won (including tiebreakers) + 1 participation point (lost only for forfeits). Matches use No-Ad scoring.\n\n" +
     "3. Write Down Points: The players on each individual line are responsible for writing down their set scores AND calculated league points (e.g., Home 3, Away 1) on the scoresheet.\n\n" +
     "4. League Fees: Dues of $25 per player are now overdue (deadline was Week 2). Please pay your captain as soon as possible.\n\n" +
@@ -287,11 +287,9 @@ function generateEmailHtml(team) {
         '</div>';
     }
 
-    var icsLink = 'https://couleeregiontennis.org/teams/tuesday/ics/' + teamNumStr + '/team.ics?v=2026.8';
-
-    scheduleNoticeHtml = 
+    var icsLink = 'https://couleeregiontennis.org/teams/tuesday/ics/' + teamNumStr + '/team.ics?v=2026.8';    scheduleNoticeHtml = 
       '<div style="background-color: #ffebee; border-left: 5px solid #d32f2f; padding: 15px; margin: 25px 0; border-radius: 0 4px 4px 0;">' +
-      '<h3 style="margin-top: 0; color: #c62828;">' + warningIcon + ' Important: Tuesday Schedule Swap</h3>' +
+      '<h3 style="margin-top: 0; color: #c62828;">' + warningIcon + ' Important: Tuesday Schedule Correction</h3>' +
       '<p style="margin: 0 0 10px 0;">Due to a schedule conflict, the Tuesday night match schedules for <strong>Week 5 (June 23rd)</strong> and <strong>Week 10 (July 28th)</strong> have been swapped to ensure correct matchups.</p>' +
       '<p style="margin: 0 0 12px 0; font-size: 13px; color: #555555; line-height: 1.5;"><em><strong>Note on Calendars:</strong> If you grabbed the calendar (.ics) or printed your schedule between May 23rd and June 21st, it has the wrong matches. Please grab the updated calendar below (or check the site) to get the right times and courts!</em></p>' +
       matchInfoHtml +
@@ -309,19 +307,11 @@ function generateEmailHtml(team) {
     '</div>' +
     '<div style="padding: 20px 30px;">' +
     '<p>Hello ' + escapeHTML(team.teamName) + ' players,</p>' +
-    '<p>We hope everyone is enjoying the start of the 2026 La Crosse Team Tennis Association (LTTA) summer season! To keep our league running smoothly, fair, and fun for everyone, we want to share some important reminders regarding weather rules, match scoring, and league fees.</p>' +
     scheduleNoticeHtml +
 
-    '<h2 style="color: #1b5e20; border-bottom: 1px solid #eeeeee; padding-bottom: 5px; margin-top: 30px;">' + sunIcon + ' Weather & Play Cancellation Rules</h2>' +
-    '<p>Weather in Wisconsin can be unpredictable. Here is how cancellations and heat rules work:</p>' +
+    '<h2 style="color: #1b5e20; border-bottom: 1px solid #eeeeee; padding-bottom: 5px; margin-top: 30px;">' + sunIcon + ' Weather & Cancellation Scoring</h2>' +
+    '<p>Since we\'ve had so many cancellations lately, here\'s a quick refresh on how we handle scoring for them:</p>' +
     '<ul style="padding-left: 20px;">' +
-    '<li style="margin-bottom: 10px;"><strong>Cancellations:</strong> The LTTA Committee will make any cancellation decision (for rain, storms, or heat) by <strong>4:30 PM</strong> on match day. Captains will be notified directly.</li>' +
-    '<li style="margin-bottom: 10px;"><strong>Heat Rule ("RealFeel"):</strong> We monitor the "RealFeel" temperature on <a href="https://www.accuweather.com" target="_blank" style="color: #2e7d32;">accuweather.com</a>:' +
-    '<ul>' +
-    '<li><strong>Above 95&deg;F:</strong> Matches may start at 2-2 in each set (optional, if both captains agree or coordinator directs).</li>' +
-    '<li><strong>Over 104&deg;F:</strong> Play is automatically canceled.</li>' +
-    '</ul>' +
-    '</li>' +
     '<li style="margin-bottom: 10px;"><strong style="color: #d32f2f;">' + warningIcon + ' Weather Cancellations / Rainouts:</strong> If play is officially canceled by the league due to weather, <strong>no match results are recorded</strong> (meaning this missed day will not count against your team in the standings). While players are welcome to use the courts for practice hits at their own discretion, any sets played will be completely unofficial and will not count toward league standings.</li>' +
     '</ul>' +
 
