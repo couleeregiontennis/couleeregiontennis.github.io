@@ -25,7 +25,10 @@ test('parse-score strips markdown code fences from AI responses', () => {
   assert.ok(content.includes('```$'), 'should strip trailing code fences');
 });
 
-test('parse-score allows the model name to be configured via env', () => {
-  assert.ok(content.includes('GEMINI_MODEL_NAME'), 'should read GEMINI_MODEL_NAME env var');
-  assert.ok(content.includes('gemini-2.5-flash-lite'), 'should default to a stable model name');
+test('parse-score allows the DeepSeek endpoint/model to be configured via env', () => {
+  assert.ok(content.includes('DEEPSEEK_API_KEY_SCORE_PARSING'), 'should read DEEPSEEK_API_KEY_SCORE_PARSING env var');
+  assert.ok(content.includes('DEEPSEEK_API_URL'), 'should read DEEPSEEK_API_URL env var');
+  assert.ok(content.includes('DEEPSEEK_MODEL'), 'should read DEEPSEEK_MODEL env var');
+  assert.ok(content.includes('deepseek-chat'), 'should default to deepseek-chat model');
+  assert.ok(content.includes('/chat/completions'), 'should call DeepSeek chat completions endpoint');
 });
