@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { supabase } from '../scripts/supabaseClient';
 import { useVoiceScoreInput } from '../hooks/useVoiceScoreInput';
 import { LoadingSpinner } from './LoadingSpinner';
@@ -20,6 +20,7 @@ const isStandardSetValid = (home, away) => {
   if (!Number.isInteger(home) || !Number.isInteger(away)) return false;
   if (home < 0 || away < 0) return false;
   if (home === away) return false;
+  if (home <= away) return false;
 
   const winner = Math.max(home, away);
   const loser = Math.min(home, away);
@@ -58,6 +59,7 @@ const isMatchTiebreakValid = (home, away) => {
   if (!Number.isInteger(home) || !Number.isInteger(away)) return false;
   if (home < 0 || away < 0) return false;
   if (home === away) return false;
+  if (home <= away) return false;
 
   const winner = Math.max(home, away);
   const loser = Math.min(home, away);
