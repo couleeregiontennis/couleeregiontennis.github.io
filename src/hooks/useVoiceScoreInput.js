@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { supabase } from '../scripts/supabaseClient'; // Assuming supabaseClient.js is in scripts
+import { supabase, supabaseConfig } from '../scripts/supabaseClient';
+import { getActionableErrorMessage } from './voiceErrorUtils';
 
 export const useVoiceScoreInput = (onScoreParsed) => {
   const [isListening, setIsListening] = useState(false);
@@ -11,107 +12,156 @@ export const useVoiceScoreInput = (onScoreParsed) => {
 
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const recognitionRef = useRef(null);
+  const finalTranscriptRef = useRef('');
+  const interimTranscriptRef = useRef('');
+  const onScoreParsedRef = useRef(onScoreParsed);
+  onScoreParsedRef.current = onScoreParsed;
+
+  useEffect(() => {
+    if (!SpeechRecognition) {
+      setRecognitionError('Speech recognition is not supported in this browser. Please use Chrome, Edge, or Safari, or type the score manually.');
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+
+    recognition.onstart = () => {
+      setIsListening(true);
+      setRecognitionError('');
+      setAiSuccess('');
+      setAiError('');
+      setTranscript('');
+      finalTranscriptRef.current = '';
+      interimTranscriptRef.current = '';
+    };
+
+    recognition.onresult = (event) => {
+      let interim = '';
+      let final = '';
+
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        const piece = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          final += piece;
+        } else {
+          interim += piece;
+        }
+      }
+
+      finalTranscriptRef.current = final;
+      interimTranscriptRef.current = interim;
+      setTranscript(final || interim);
+    };
+
+    recognition.onerror = (event) => {
+      setRecognitionError(`Speech recognition error: ${event.error}. Please try again or type the score manually.`);
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+      const text = (finalTranscriptRef.current || interimTranscriptRef.current).trim();
+      if (text) {
+        parseTranscriptWithAI(text);
+      } else {
+        setRecognitionError('No speech was heard. Please try again or type the score manually.');
+      }
+    };
+
+    recognitionRef.current = recognition;
+
+    return () => {
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.stop();
+        } catch {
+          // Already stopped; ignore.
+        }
+      }
+    };
+  }, []); // intentionally empty: recognition instance is created once per mount
 
   const parseTranscriptWithAI = async (text) => {
     setAiProcessing(true);
     setAiError('');
     setAiSuccess('');
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
 
+    let statusCode = null;
+    try {
+      const trimmed = text.trim();
+      if (!trimmed) {
+        throw new Error('No speech was detected. Please try again.');
+      }
+
+      const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         throw new Error('User not authenticated.');
       }
 
-      const response = await fetch(`${supabase.supabaseUrl}/functions/v1/parse-score`, {
+      const baseUrl = supabaseConfig.url || supabase.supabaseUrl;
+      if (!baseUrl) {
+        throw new Error('Supabase URL is not configured.');
+      }
+
+      const response = await fetch(`${baseUrl}/functions/v1/parse-score`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${session.access_token}`,
         },
-        body: JSON.stringify({ transcript: text }),
+        body: JSON.stringify({ transcript: trimmed }),
       });
 
+      statusCode = response.status;
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `AI parsing failed with status: ${response.status}`);
+        let errorMessage = `AI parsing failed with status: ${statusCode}`;
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorData.message || errorMessage;
+        } catch {
+          // Response body was not valid JSON; use the status message above.
+        }
+        throw new Error(errorMessage);
       }
 
       const parsedData = await response.json();
-
       setAiSuccess('Transcript parsed successfully by AI!');
-      if (onScoreParsed) {
-        onScoreParsed(parsedData);
+      if (onScoreParsedRef.current) {
+        onScoreParsedRef.current(parsedData);
       }
       return parsedData;
     } catch (err) {
-      setAiError('Error parsing score with AI: ' + err.message);
+      setAiError(getActionableErrorMessage(err, statusCode));
       return null;
     } finally {
       setAiProcessing(false);
     }
   };
 
-  useEffect(() => {
-    if (SpeechRecognition) {
-      recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = false;
-      recognitionRef.current.interimResults = true;
-      recognitionRef.current.lang = 'en-US';
-
-      recognitionRef.current.onstart = () => {
-        setIsListening(true);
-        setRecognitionError('');
-        setAiSuccess('');
-        setAiError('');
-        setTranscript('');
-      };
-
-      recognitionRef.current.onresult = (event) => {
-        let interimTranscript = '';
-        let finalTranscript = '';
-
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-          if (event.results[i].isFinal) {
-            finalTranscript += event.results[i][0].transcript;
-          } else {
-            interimTranscript += event.results[i][0].transcript;
-          }
-        }
-        setTranscript(finalTranscript || interimTranscript);
-      };
-
-      recognitionRef.current.onerror = (event) => {
-        setRecognitionError(`Speech recognition error: ${event.error}`);
-        setIsListening(false);
-      };
-
-      recognitionRef.current.onend = () => {
-        setIsListening(false);
-        if (transcript) {
-          parseTranscriptWithAI(transcript);
-        }
-      };
-    } else {
-      setRecognitionError('Speech Recognition not supported in this browser.');
-    }
-
-    return () => {
-      if (recognitionRef.current) {
-        recognitionRef.current.stop();
-      }
-    };
-  }, [SpeechRecognition, transcript, onScoreParsed]); // Add onScoreParsed to dependencies
-
   const startListening = () => {
     if (recognitionRef.current && !isListening) {
-      recognitionRef.current.start();
+      setRecognitionError('');
+      setAiError('');
+      setAiSuccess('');
+      try {
+        recognitionRef.current.start();
+      } catch (err) {
+        setRecognitionError(`Could not start speech recognition: ${err.message}. Please try again.`);
+      }
     }
   };
 
   const stopListening = () => {
     if (recognitionRef.current && isListening) {
-      recognitionRef.current.stop();
+      try {
+        recognitionRef.current.stop();
+      } catch (err) {
+        // Already stopped; ignore.
+      }
     }
   };
 
@@ -124,6 +174,6 @@ export const useVoiceScoreInput = (onScoreParsed) => {
     aiError,
     startListening,
     stopListening,
-    isSpeechRecognitionSupported: !!SpeechRecognition
+    isSpeechRecognitionSupported: !!SpeechRecognition,
   };
 };

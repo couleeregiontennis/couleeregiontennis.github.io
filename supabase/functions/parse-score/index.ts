@@ -1,54 +1,67 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { GoogleGenerativeAI } from 'https://esm.sh/@google/generative-ai@0.14.0';
 
-console.log('Hello from Functions! (Google SDK Version)');
+console.log('Hello from Functions! (DeepSeek Version)');
+
+// CORS headers must be present on every response so the browser can read it
+// when the frontend calls this function from GitHub Pages / the deployed app.
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+};
+
+const jsonResponse = (body: object, status = 200) =>
+  new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      ...corsHeaders,
+      'Content-Type': 'application/json',
+    },
+  });
+
+const MAX_TRANSCRIPT_LENGTH = 500;
+
+const DEEPSEEK_API_URL = Deno.env.get('DEEPSEEK_API_URL') || 'https://api.deepseek.com';
+const DEEPSEEK_MODEL = Deno.env.get('DEEPSEEK_MODEL') || 'deepseek-v4-flash';
 
 serve(async (req) => {
-  if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method Not Allowed' }), {
-      headers: { 'Content-Type': 'application/json' },
-      status: 405,
-    });
+  // Respond to browser preflight requests before the rest of the handler.
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: corsHeaders });
   }
 
-  const { transcript } = await req.json();
+  if (req.method !== 'POST') {
+    return jsonResponse({ error: 'Method Not Allowed. Use POST.' }, 405);
+  }
+
+  let transcript: unknown;
+  try {
+    const body = await req.json();
+    transcript = body.transcript;
+  } catch {
+    return jsonResponse({ error: 'Invalid JSON in request body' }, 400);
+  }
 
   if (!transcript) {
-    return new Response(JSON.stringify({ error: 'Missing transcript in request body' }), {
-      headers: { 'Content-Type': 'application/json' },
-      status: 400,
-    });
+    return jsonResponse({ error: 'Missing transcript in request body' }, 400);
   }
 
   const normalizedTranscript = typeof transcript === 'string' ? transcript.trim() : '';
   if (!normalizedTranscript) {
-    return new Response(JSON.stringify({ error: 'Transcript must be a non-empty string' }), {
-      headers: { 'Content-Type': 'application/json' },
-      status: 400,
-    });
+    return jsonResponse({ error: 'Transcript must be a non-empty string' }, 400);
   }
 
-  if (normalizedTranscript.length > 500) {
-    return new Response(JSON.stringify({ error: 'Transcript too long (max 500 characters)' }), {
-      headers: { 'Content-Type': 'application/json' },
-      status: 400,
-    });
+  if (normalizedTranscript.length > MAX_TRANSCRIPT_LENGTH) {
+    return jsonResponse({ error: `Transcript too long (max ${MAX_TRANSCRIPT_LENGTH} characters)` }, 400);
   }
 
-  const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY_SCORE_PARSING');
+  const apiKey = Deno.env.get('DEEPSEEK_API_KEY_SCORE_PARSING');
 
-  if (!GEMINI_API_KEY) {
-    return new Response(JSON.stringify({ error: 'GEMINI_API_KEY_SCORE_PARSING not set in environment variables' }), {
-      headers: { 'Content-Type': 'application/json' },
-      status: 500,
-    });
+  if (!apiKey) {
+    return jsonResponse({ error: 'DEEPSEEK_API_KEY_SCORE_PARSING not set in environment variables' }, 500);
   }
 
-  const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-  // Using gemini-2.5-flash-lite for maximum cost efficiency as requested
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
-
-  const prompt = `You are a tennis score parsing assistant. Your task is to extract information from a user's spoken transcript of a tennis match score.
+  const systemPrompt = `You are a tennis score parsing assistant. Your task is to extract information from a user's spoken transcript of a tennis match score.
   The output should be a JSON object with the following structure:
   {
     "lineNumber": number, // Optional, defaults to 1 if not specified, but try to infer from "line one", "line two" etc.
@@ -89,37 +102,60 @@ serve(async (req) => {
   - "I lost the first set six two, then won the second six four"
     { "lineNumber": 1, "matchType": "singles", "homeSet1": 2, "awaySet1": 6, "homeSet2": 6, "awaySet2": 4, "homeSet3": null, "awaySet3": null, "notes": "" }
 
-  Always respond with ONLY the JSON object. Do not include any other text or explanation.
-
-  Transcript: "${transcript}"
-  `;
+  Always respond with ONLY the JSON object. Do not include any other text or explanation.`;
 
   try {
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+    const result = await fetch(`${DEEPSEEK_API_URL}/chat/completions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: DEEPSEEK_MODEL,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: `Transcript: "${normalizedTranscript}"` },
+        ],
+        response_format: { type: 'json_object' },
+      }),
+    });
 
-    // Attempt to parse the text as JSON
-    let parsedResponse;
-    try {
-      parsedResponse = JSON.parse(text);
-    } catch (parseError) {
-      console.error('Error parsing Gemini response as JSON:', parseError);
-      return new Response(JSON.stringify({ error: 'Invalid JSON response from AI', rawResponse: text }), {
-        headers: { 'Content-Type': 'application/json' },
-        status: 500,
-      });
+    if (!result.ok) {
+      const errorText = await result.text();
+      console.error('DeepSeek API error:', result.status, errorText);
+      return jsonResponse({ error: 'DeepSeek API request failed', status: result.status, details: errorText }, 500);
     }
 
-    return new Response(JSON.stringify(parsedResponse), {
-      headers: { 'Content-Type': 'application/json' },
-      status: 200,
-    });
+    const data = await result.json();
+    const text = data.choices?.[0]?.message?.content || '';
+
+    if (!text) {
+      return jsonResponse({ error: 'Empty response from DeepSeek API' }, 500);
+    }
+
+    // Models sometimes wrap JSON in markdown code fences; strip them before parsing.
+    const cleanText = text
+      .trim()
+      .replace(/^```json\s*/i, '')
+      .replace(/^```/, '')
+      .replace(/```$/, '')
+      .trim();
+
+    let parsedResponse;
+    try {
+      parsedResponse = JSON.parse(cleanText);
+    } catch (parseError) {
+      console.error('Error parsing DeepSeek response as JSON:', parseError);
+      return jsonResponse({ error: 'Invalid JSON response from AI', rawResponse: text }, 500);
+    }
+
+    return jsonResponse(parsedResponse, 200);
   } catch (error) {
-    console.error('Error calling Gemini API:', error);
-    return new Response(JSON.stringify({ error: 'Failed to process transcript with AI', details: error.message }), {
-      headers: { 'Content-Type': 'application/json' },
-      status: 500,
-    });
+    console.error('Error calling DeepSeek API:', error);
+    return jsonResponse(
+      { error: 'Failed to process transcript with AI', details: error?.message || 'Unknown error' },
+      500,
+    );
   }
 });
