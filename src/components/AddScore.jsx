@@ -1161,6 +1161,32 @@ export const AddScore = () => {
         </div>
         <div className="score-section card card--interactive">
           <h2>Match Scores</h2>
+
+          <div className="speech-input-area">
+            <button
+              type="button"
+              className={`microphone-button ${isListening ? 'listening' : ''}`}
+              onClick={isListening ? stopListening : startListening}
+              disabled={aiProcessing}
+              aria-label={isListening ? 'Stop listening' : 'Record score by voice'}
+            >
+              {isListening ? '⏹ Stop Listening' : '🎤 Record Score by Voice'}
+            </button>
+            {isListening && (
+              <div className="transcript-display">Listening... speak now</div>
+            )}
+            {!isListening && transcript && (
+              <div className="transcript-display">Heard: &ldquo;{transcript}&rdquo;</div>
+            )}
+            {aiProcessing && <div className="loading-message">AI is parsing your score...</div>}
+            {aiSuccess && <div className="success-message">{aiSuccess}</div>}
+            {aiError && <div className="error-message">{aiError}</div>}
+            {recognitionError && <div className="error-message">{recognitionError}</div>}
+            {!isSpeechRecognitionSupported && (
+              <div className="error-message">Voice scoring is not supported in this browser. Please type the score manually.</div>
+            )}
+          </div>
+
           {(() => {
             const { homeNames, awayNames } = getPlayerDisplayNames();
             const winner = calculateMatchWinner();
