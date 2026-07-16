@@ -22,7 +22,7 @@ const jsonResponse = (body: object, status = 200) =>
 const MAX_TRANSCRIPT_LENGTH = 500;
 
 const DEEPSEEK_API_URL = Deno.env.get('DEEPSEEK_API_URL') || 'https://api.deepseek.com';
-const DEEPSEEK_MODEL = Deno.env.get('DEEPSEEK_MODEL') || 'deepseek-chat';
+const DEEPSEEK_MODEL = Deno.env.get('DEEPSEEK_MODEL') || 'deepseek-v4-flash';
 
 serve(async (req) => {
   // Respond to browser preflight requests before the rest of the handler.

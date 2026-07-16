@@ -29,6 +29,6 @@ test('parse-score allows the DeepSeek endpoint/model to be configured via env', 
   assert.ok(content.includes('DEEPSEEK_API_KEY_SCORE_PARSING'), 'should read DEEPSEEK_API_KEY_SCORE_PARSING env var');
   assert.ok(content.includes('DEEPSEEK_API_URL'), 'should read DEEPSEEK_API_URL env var');
   assert.ok(content.includes('DEEPSEEK_MODEL'), 'should read DEEPSEEK_MODEL env var');
-  assert.ok(content.includes('deepseek-chat'), 'should default to deepseek-chat model');
+  assert.ok(content.includes('deepseek-v4-flash'), 'should default to deepseek-v4-flash model');
   assert.ok(content.includes('/chat/completions'), 'should call DeepSeek chat completions endpoint');
 });
