@@ -21,6 +21,7 @@ import { MySchedule } from './components/MySchedule';
 import { CourtsLocations } from './components/CourtsLocations';
 import { PlayerResources } from './components/PlayerResources';
 import { SuggestionBox } from './components/SuggestionBox';
+import { Scores } from './components/Scores';
 import { AskTheUmpire } from './components/AskTheUmpire';
 import { AuthProvider } from './context/AuthProvider';
 import './styles/colors.css';
@@ -77,6 +78,7 @@ function App() {
               <Route path="/player-resources" element={<PlayerResources />} />
               <Route path="/feedback" element={<SuggestionBox />} />
               <Route path="/rules" element={<Rules />} />
+              <Route path="/scores" element={<Scores />} />
               <Route path="/standings" element={<Standings />} />
               <Route path="/player-rankings" element={<PlayerRankings />} />
               <Route path="/courts-locations" element={<CourtsLocations />} />
