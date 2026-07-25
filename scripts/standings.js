@@ -90,13 +90,7 @@
     ctrl.innerHTML = html;
     root.appendChild(ctrl);
 
-    // Legend
-    var lg = document.createElement('div');
-    lg.className = 'legend';
-    lg.innerHTML = '<span class="legend-item"><span class="legend-badge badge-weather">WEATHER</span> Postponed</span>' +
-      '<span class="legend-item"><span class="legend-badge badge-unknown">?</span> Not yet reported</span>' +
-      '<span class="legend-item"><span class="legend-badge badge-empty">\u2014</span> No data</span>';
-    root.appendChild(lg);
+
 
     // Tables
     keys.forEach(function(k) {
@@ -106,7 +100,7 @@
       sec.innerHTML = '<h2>' + esc(g.night) + ' League</h2>';
 
       var t = '<div class="table-responsive"><table><thead><tr><th class="col-rank">#</th><th class="col-team">Team</th>';
-      weeks.forEach(function(w) { t += '<th>' + esc(w) + '</th>'; });
+      weeks.forEach(function(w) { t += '<th>' + esc(w.replace(/^Week\s+/i, 'W')) + '</th>'; });
       t += '<th class="col-total">Total</th><th class="col-pct">Win %</th></tr></thead><tbody>';
 
       g.teams.forEach(function(tm, i) {
