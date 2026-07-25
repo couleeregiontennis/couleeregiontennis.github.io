@@ -45,7 +45,7 @@
       var k = n.toLowerCase();
       if (!groups[k]) groups[k] = { night: n, teams: [] };
 
-      // Calculate weeks played and total points dynamically (each played match has 30 points available)
+      // Calculate weeks played and total points dynamically (each played match has 12 points available)
       var totalPoints = 0;
       var weeksPlayed = 0;
       weeks.forEach(function(w) {
@@ -57,7 +57,7 @@
       });
       r._totalPoints = totalPoints;
       r._weeksPlayed = weeksPlayed;
-      r._winPct = weeksPlayed > 0 ? (totalPoints / (weeksPlayed * 30)) * 100 : 0;
+      r._winPct = weeksPlayed > 0 ? (totalPoints / (weeksPlayed * 12)) * 100 : 0;
 
       groups[k].teams.push(r);
     });
