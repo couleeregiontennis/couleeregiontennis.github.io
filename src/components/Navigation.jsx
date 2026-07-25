@@ -90,7 +90,6 @@ export const Navigation = ({ theme = 'light', onToggleTheme = () => { } }) => {
                 </button>
                 <ul className={`dropdown-menu ${openDropdown === 'league' ? 'show' : ''}`} role="menu">
                   <li><Link to="/standings" onClick={closeMenu}>Standings</Link></li>
-                  <li><Link to="/scores" onClick={closeMenu}>Scores</Link></li>
                   <li><Link to="/player-rankings" onClick={closeMenu}>Player Rankings</Link></li>
                   <li>
                     <a
