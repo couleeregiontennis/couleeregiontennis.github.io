@@ -44,15 +44,29 @@
       if (!n) return;
       var k = n.toLowerCase();
       if (!groups[k]) groups[k] = { night: n, teams: [] };
+
+      // Calculate weeks played and total points dynamically (each played match has 30 points available)
+      var totalPoints = 0;
+      var weeksPlayed = 0;
+      weeks.forEach(function(w) {
+        var val = r[w];
+        if (val && val !== '' && val !== '?' && val.toUpperCase() !== 'WEATHER' && !isNaN(Number(val))) {
+          totalPoints += Number(val);
+          weeksPlayed++;
+        }
+      });
+      r._totalPoints = totalPoints;
+      r._weeksPlayed = weeksPlayed;
+      r._winPct = weeksPlayed > 0 ? (totalPoints / (weeksPlayed * 30)) * 100 : 0;
+
       groups[k].teams.push(r);
     });
 
-    // Sort teams by Total Points desc
+    // Sort teams by Win % desc, fallback to Total Points, then name
     Object.values(groups).forEach(function(g) {
       g.teams.sort(function(a, b) {
-        var pa = parseInt(a['Total Points'], 10) || 0;
-        var pb = parseInt(b['Total Points'], 10) || 0;
-        if (pb !== pa) return pb - pa;
+        if (b._winPct !== a._winPct) return b._winPct - a._winPct;
+        if (b._totalPoints !== a._totalPoints) return b._totalPoints - a._totalPoints;
         return (a['Team Name'] || '').localeCompare(b['Team Name'] || '');
       });
     });
@@ -93,7 +107,7 @@
 
       var t = '<div class="table-responsive"><table><thead><tr><th class="col-rank">#</th><th class="col-team">Team</th>';
       weeks.forEach(function(w) { t += '<th>' + esc(w) + '</th>'; });
-      t += '<th class="col-total">Total</th></tr></thead><tbody>';
+      t += '<th class="col-total">Total</th><th class="col-pct">Win %</th></tr></thead><tbody>';
 
       g.teams.forEach(function(tm, i) {
         var rc = i === 0 ? ' row-leader' : '';
@@ -102,7 +116,8 @@
           var c = fmt(tm[w]);
           t += '<td class="' + c.c + '"' + (c.ti ? ' title="' + esc(c.ti) + '"' : '') + '>' + esc(c.t) + '</td>';
         });
-        t += '<td class="col-total">' + esc(tm['Total Points'] || '\u2014') + '</td></tr>';
+        t += '<td class="col-total">' + esc(tm._totalPoints || '0') + '</td>';
+        t += '<td class="col-pct" style="font-weight: 700;">' + tm._winPct.toFixed(1) + '%</td></tr>';
       });
 
       t += '</tbody></table></div>';
