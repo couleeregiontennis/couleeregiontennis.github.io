@@ -100,7 +100,7 @@
       sec.innerHTML = '<h2>' + esc(g.night) + ' League</h2>';
 
       var t = '<div class="table-responsive"><table><thead><tr><th class="col-rank">#</th><th class="col-team">Team</th>';
-      weeks.forEach(function(w) { t += '<th>' + esc(w) + '</th>'; });
+      weeks.forEach(function(w) { t += '<th>' + esc(w.replace(/^Week\s+/i, 'W')) + '</th>'; });
       t += '<th class="col-total">Total</th><th class="col-pct">Win %</th></tr></thead><tbody>';
 
       g.teams.forEach(function(tm, i) {
