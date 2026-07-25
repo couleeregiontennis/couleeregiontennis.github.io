@@ -57,6 +57,8 @@
       });
     });
 
+    var allNights = ['tuesday', 'wednesday'].filter(function(k) { return groups[k]; }).map(function(k) { return groups[k].night; });
+
     var keys = ['tuesday', 'wednesday'].filter(function(k) { return groups[k]; });
     if (night && night !== 'All') {
       keys = keys.filter(function(k) { return k === night.toLowerCase(); });
@@ -65,7 +67,7 @@
     // Filter buttons
     var ctrl = document.createElement('div');
     ctrl.className = 'controls-bar';
-    var btns = ['All'].concat(keys.map(function(k) { return groups[k].night; }));
+    var btns = ['All'].concat(allNights);
     var html = '<div>';
     btns.forEach(function(n) {
       html += '<button class="night-filter' + ((night || 'All') === n ? ' active' : '') + '">' + esc(n) + '</button>';
