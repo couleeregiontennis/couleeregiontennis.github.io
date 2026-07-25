@@ -90,13 +90,7 @@
     ctrl.innerHTML = html;
     root.appendChild(ctrl);
 
-    // Legend
-    var lg = document.createElement('div');
-    lg.className = 'legend';
-    lg.innerHTML = '<span class="legend-item"><span class="legend-badge badge-weather">WEATHER</span> Postponed</span>' +
-      '<span class="legend-item"><span class="legend-badge badge-unknown">?</span> Not yet reported</span>' +
-      '<span class="legend-item"><span class="legend-badge badge-empty">\u2014</span> No data</span>';
-    root.appendChild(lg);
+
 
     // Tables
     keys.forEach(function(k) {
