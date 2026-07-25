@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>LTTA Team Scores</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../assets/logo192.png" />
+    <link rel="apple-touch-icon" href="../assets/logo192.png" />
+    <link rel="stylesheet" href="../styles/style.css?v=2026.9" />
+    <link rel="stylesheet" href="../styles/nav.css?v=2026.9" />
+    <style>
+      .scores-header { text-align: center; margin-bottom: 1.5rem; }
+      .scores-header h1 { color: var(--primary-color); }
+      .scores-header p { color: var(--text-color); opacity: 0.7; }
+
+      .controls-bar {
+        display: flex; justify-content: space-between; align-items: center;
+        flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;
+      }
+      .night-filter {
+        margin: 0 0.2em; padding: 0.4em 1em;
+        border: 1px solid var(--primary-color); background: #eaf2fa;
+        color: var(--primary-color); cursor: pointer; font-weight: 600;
+        border-radius: 4px; font-size: 0.9em;
+      }
+      .night-filter:hover { background: #d2e6fa; }
+      .night-filter.active { background: var(--primary-color); color: #fff; }
+      .refresh-btn {
+        background: var(--primary-color); color: #fff; border: none;
+        padding: 0.5em 1.2em; border-radius: 4px; cursor: pointer;
+        font-weight: 600; font-size: 0.9em;
+      }
+      .refresh-btn:hover { opacity: 0.85; }
+
+      .legend { display: flex; gap: 1.5rem; margin-bottom: 1rem; flex-wrap: wrap;
+        padding: 0.5em 1em; background: var(--surface-color); border-radius: 6px;
+        border: 1px solid var(--border-color); font-size: 0.85em; color: var(--text-color);
+      }
+      .legend-item { display: flex; align-items: center; gap: 0.3em; }
+      .legend-badge { display: inline-block; padding: 1px 6px; border-radius: 3px;
+        font-weight: 700; font-size: 0.8em; }
+      .badge-weather { color: #d97706; background: #fef3c7; }
+      .badge-unknown { color: #6b7280; background: #f3f4f6; }
+      .badge-empty  { color: #9ca3af; background: #f9fafb; }
+
+      .night-section { margin-bottom: 2rem; }
+      .night-section h2 { color: var(--primary-color); margin-bottom: 0.5rem; }
+
+      .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      table { width: 100%; border-collapse: collapse; min-width: 700px;
+        background: var(--surface-color); border-radius: 8px; overflow: hidden;
+        box-shadow: 0 2px 8px var(--shadow-color); }
+      th, td { border: 1px solid var(--border-color); padding: 0.5em 0.6em;
+        text-align: center; font-size: 0.9em; white-space: nowrap; }
+      th { background: var(--primary-color); color: #fff; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.04em; }
+      tr:nth-child(even) td { background: #f8faff; }
+      [data-theme='dark'] tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+      .col-rank { width: 3em; }
+      .col-team { text-align: left; min-width: 200px; font-weight: 600; }
+      .col-total { font-weight: 700; color: var(--primary-color); }
+      td.col-total { font-size: 1.05em; }
+      .cell-weather { color: #d97706; font-weight: 600; font-size: 0.8em; }
+      .cell-unknown { color: #6b7280; }
+      .cell-empty  { color: #9ca3af; opacity: 0.5; }
+      .row-leader td { background: #e7f3ff !important; font-weight: 700; }
+      [data-theme='dark'] .row-leader td { background: #1a2733 !important; }
+
+      .loading, .error-msg, .empty-msg {
+        text-align: center; padding: 3rem 1rem; color: var(--text-color);
+        background: var(--surface-color); border-radius: 8px;
+        box-shadow: 0 2px 8px var(--shadow-color); max-width: 500px; margin: 0 auto;
+      }
+      .error-msg { color: #d32f2f; }
+    </style>
+  </head>
+  <body>
+    <div id="nav-placeholder"></div>
+    <main>
+      <div class="scores-header">
+        <h1>Team Scores</h1>
+        <p>Weekly points from the league spreadsheet</p>
+      </div>
+      <div id="scores-root">
+        <div class="loading">Loading scores&hellip;</div>
+    <script>
+(function() {
+  var CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTRXXJgqymosDbuyhAHCpHHUqQsNxRk0B-3kBGWr7CuPymhKUpT83JKyN7DxkCiaPdKsZEeBaA3GDjH/pub?gid=1910758219&single=true&output=csv';
+
+  function esc(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function parseCSV(text) {
+    var lines = text.trim().split('\n');
+    if (lines.length < 2) return { headers: [], rows: [] };
+    var headers = lines[0].split(',').map(function(h) { return h.trim(); });
+    var rows = [];
+    for (var i = 1; i < lines.length; i++) {
+      var vals = lines[i].split(',');
+      var obj = {};
+      for (var j = 0; j < headers.length; j++) {
+        obj[headers[j]] = (vals[j] || '').trim();
+      }
+      rows.push(obj);
+    }
+    return { headers: headers, rows: rows };
+  }
+
+  function getWeeks(h) {
+    return h.filter(function(x) { return /^Week\s+\d+$/i.test(x); });
+  }
+
+  function fmt(v) {
+    if (!v || v === '') return { t: '\u2014', c: 'cell-empty' };
+    if (v.toUpperCase() === 'WEATHER') return { t: 'WEATHER', c: 'cell-weather', ti: 'Postponed due to weather' };
+    if (v === '?') return { t: '?', c: 'cell-unknown', ti: 'Not yet reported' };
+    if (!isNaN(Number(v))) return { t: v, c: '' };
+    return { t: v, c: '' };
+  }
+
+  function render(rows, weeks, night) {
+    var root = document.getElementById('scores-root');
+    if (!root) return;
+    root.innerHTML = '';
+
+    var groups = {};
+    rows.forEach(function(r) {
+      var n = (r.Night || '').trim();
+      if (!n) return;
+      var k = n.toLowerCase();
+      if (!groups[k]) groups[k] = { night: n, teams: [] };
+      groups[k].teams.push(r);
+    });
+
+    // Sort teams by Total Points desc
+    Object.values(groups).forEach(function(g) {
+      g.teams.sort(function(a, b) {
+        var pa = parseInt(a['Total Points'], 10) || 0;
+        var pb = parseInt(b['Total Points'], 10) || 0;
+        if (pb !== pa) return pb - pa;
+        return (a['Team Name'] || '').localeCompare(b['Team Name'] || '');
+      });
+    });
+
+    var keys = ['tuesday', 'wednesday'].filter(function(k) { return groups[k]; });
+    if (night && night !== 'All') {
+      keys = keys.filter(function(k) { return k === night.toLowerCase(); });
+    }
+
+    // Filter buttons
+    var ctrl = document.createElement('div');
+    ctrl.className = 'controls-bar';
+    var btns = ['All'].concat(keys.map(function(k) { return groups[k].night; }));
+    var html = '<div>';
+    btns.forEach(function(n) {
+      html += '<button class="night-filter' + ((night || 'All') === n ? ' active' : '') + '">' + esc(n) + '</button>';
+    });
+    html += '</div><button class="refresh-btn" onclick="location.reload()">Refresh</button>';
+    ctrl.innerHTML = html;
+    root.appendChild(ctrl);
+
+    // Legend
+    var lg = document.createElement('div');
+    lg.className = 'legend';
+    lg.innerHTML = '<span class="legend-item"><span class="legend-badge badge-weather">WEATHER</span> Postponed</span>' +
+      '<span class="legend-item"><span class="legend-badge badge-unknown">?</span> Not yet reported</span>' +
+      '<span class="legend-item"><span class="legend-badge badge-empty">\u2014</span> No data</span>';
+    root.appendChild(lg);
+
+    // Tables
+    keys.forEach(function(k) {
+      var g = groups[k];
+      var sec = document.createElement('div');
+      sec.className = 'night-section';
+      sec.innerHTML = '<h2>' + esc(g.night) + ' League</h2>';
+
+      var t = '<div class="table-responsive"><table><thead><tr><th class="col-rank">#</th><th class="col-team">Team</th>';
+      weeks.forEach(function(w) { t += '<th>' + esc(w) + '</th>'; });
+      t += '<th class="col-total">Total</th></tr></thead><tbody>';
+
+      g.teams.forEach(function(tm, i) {
+        var rc = i === 0 ? ' row-leader' : '';
+        t += '<tr class="' + rc + '"><td>' + (i + 1) + '</td><td class="col-team">' + esc(tm['Team Name']) + '</td>';
+        weeks.forEach(function(w) {
+          var c = fmt(tm[w]);
+          t += '<td class="' + c.c + '"' + (c.ti ? ' title="' + esc(c.ti) + '"' : '') + '>' + esc(c.t) + '</td>';
+        });
+        t += '<td class="col-total">' + esc(tm['Total Points'] || '\u2014') + '</td></tr>';
+      });
+
+      t += '</tbody></table></div>';
+      sec.innerHTML += t;
+      root.appendChild(sec);
+    });
+
+    // Filter click
+    root.querySelectorAll('.night-filter').forEach(function(b) {
+      b.addEventListener('click', function() { render(rows, weeks, b.textContent); });
+    });
+  }
+
+  // Fetch
+  fetch(CSV_URL)
+    .then(function(r) {
+      if (!r.ok) throw new Error('Failed to fetch (HTTP ' + r.status + ')');
+      return r.text();
+    })
+    .then(function(t) {
+
+      if (!t || !t.trim()) throw new Error('Empty response');
+      if (t.trim().charAt(0) === '<') throw new Error('Received HTML instead of CSV');
+      var p = parseCSV(t);
+      if (!p.rows.length) {
+        document.getElementById('scores-root').innerHTML = '<div class="empty-msg">No score data available yet.</div>';
+        return;
+      }
+      render(p.rows, getWeeks(p.headers), 'All');
+    })
+    .catch(function(e) {
+      document.getElementById('scores-root').innerHTML =
+        '<div class="error-msg">' + esc(e.message) + '<br><br><button class="refresh-btn" onclick="location.reload()">Try Again</button></div>';
+    });
+})();
+    </script>
+
+
+
+      </div>
+    </main>
+    <script src="../scripts/nav.js?v=2026.9"></script>
+  </body>
+</html>
+
