@@ -45,6 +45,9 @@ jobs:
       - name: Fetch Weather Fallback Data
         run: node scripts/fetch-fallback-weather.js
 
+      - name: Auto-increment cache buster
+        run: node management-scripts/bump-version.js 2026.${{ github.run_number }}
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
