@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 test('Capture Rules page state', async ({ page }) => {
-  await page.goto('http://localhost:8080/pages/ltta-rules.html');
+  await page.goto('/pages/ltta-rules.html');
   await page.waitForSelector('nav.toc');
   
   // Take screenshot of the top half of the rules page
