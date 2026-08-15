@@ -9,7 +9,8 @@ test('Check mobile nav dropdown', async ({ page }) => {
   
   // Wait for menu to appear
   await page.waitForSelector('.navbar-menu.active');
-  
+  await expect(page.locator('.navbar-menu')).toHaveClass(/active/);
+
   // Check dropdown
   const dropdown = await page.locator('.dropdown-menu');
   const display = await dropdown.evaluate(el => window.getComputedStyle(el).display);
