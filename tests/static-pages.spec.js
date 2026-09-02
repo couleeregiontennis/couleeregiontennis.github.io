@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 test.describe('Static Pages', () => {
     test('Standings page renders correctly', async ({ page }) => {
         const mockCsvData = "Rank,Night,Team\n1,Tuesday,Team A\n2,Wednesday,Team B\n3,Tuesday,Team C";
-        await page.route('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ09FIuDMkX5mmdp9e-szR15pWx2cp-YyqsYxoNBL4FM0y8v3Q_LKboCjAEcUyobbgwCCGQpSMT3bXh/pub?output=csv', async route => {
+        await page.route('https://docs.google.com/spreadsheets/d/e/2PACX-1vTRXXJgqymosDbuyhAHCpHHUqQsNxRk0B-3kBGWr7CuPymhKUpT83JKyN7DxkCiaPdKsZEeBaA3GDjH/pub?gid=1910758219&single=true&output=csv', async route => {
             await route.fulfill({
                 status: 200,
                 contentType: 'text/csv',
@@ -12,10 +12,8 @@ test.describe('Static Pages', () => {
         });
 
         await page.goto('/pages/standings.html');
-        await expect(page.getByRole('heading', { level: 1, name: 'Standings' })).toBeVisible();
-
-        // Verify placeholder message is displayed
-        await expect(page.locator('#standings-table')).toContainText('2026 Standings will be updated once the season begins!');
+        await expect(page.getByRole('heading', { level: 1, name: '2026 Standings' })).toBeVisible();
+        await expect(page.locator('#standings-root')).toBeVisible();
     });
 
     test('Subs page renders correctly', async ({ page }) => {

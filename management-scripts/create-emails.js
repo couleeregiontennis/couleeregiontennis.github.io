@@ -106,8 +106,8 @@ function generateEmailTemplate(team) {
             <h2>League Dues</h2>
             <p>Dues are <strong>$25 for the season</strong>, due by the 2nd week of play. Please pay your captain who will pass it on to a Coordinator.</p>
 
-            <h2>Year-End Picnic & Championship</h2>
-            <p>The season wraps up with our picnic and a new crossover championship! The top teams from Tuesday will face off against the top teams from Wednesday to determine the overall league champion. Additionally, the 'winningest lines' will be invited to play in this event.</p>
+            <h2>Year-End Picnic & Championship Playoffs</h2>
+            <p>The season wraps up on picnic night with an expanded <strong>4-team crossover playoff tournament</strong>! The top 2 teams from Tuesday and Wednesday night will battle in a 2-match schedule (Semi-Finals followed by the Championship Final & 3rd Place Match). Additionally, 'winningest lines' will be invited to participate in crossover exhibition play!</p>
 
             <p>Best regards,<br>
                 <strong>The LTTA League Committee</strong>
